@@ -1,0 +1,160 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.bg-holder{
+    position: absolute;
+    min-height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.wrapper{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    background: linear-gradient(to left bottom,rgb(117, 192, 235) ,white );
+}
+
+.wrapper form h1{
+    text-align: center;
+}
+
+.input-place{
+   width: 100%;
+   height: 50px;
+   margin: 20px 0;
+   position: relative;
+   
+}
+
+.input-place input:hover {
+   box-shadow: 0 0 10px 5px white;
+}
+
+.input-place input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+    outline:none;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 40px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 40px;
+    color: rgb(0, 0, 0);
+}
+
+.input-place input::placeholder{
+    color: rgb(0, 0, 0);
+}
+
+.input-place i {
+    position: absolute;
+    
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.check-link{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-size: 14px;
+}
+
+.check-link a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.check-link a:hover{
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+}
+
+.b-login button {
+    width: 100%;
+    padding: 0;
+    border-radius: 25px;
+    margin-top: 10px;
+    border: 0;
+    background-color: rgb(249, 249, 249);
+}
+
+.b-login button:hover{
+    background-color: black;
+    color: azure;
+}
+
+.b-login button p{
+    width: 100%;
+    height: 30px;
+    padding: 0;
+    padding-top: 10px;
+    font-weight: 600;
+}
+
+.R-account{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;;
+}
+
+.R-account a{ 
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.R-account a:hover{ 
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+}
+
+.L-google{
+    width: 100%;
+    height: 45px;
+    background-color: transparent;
+
+}
+
+.L-google button {
+    position: relative;  
+    background-color: rgb(249, 249, 249);
+    border-radius: 25px;
+    width: 100%;
+    height: 45px;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+.L-google button p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.L-google button i {
+    position: absolute;
+    right: 55px;
+    top: 50%;
+    transform: translateY(-46%);
+}
+
+.L-google button:hover{
+    background-color: black;
+    color: azure;
+}
