@@ -1,0 +1,15 @@
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\bin\Debug\net8.0\EShopBusinessObject.deps.json
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\bin\Debug\net8.0\EShopBusinessObject.runtimeconfig.json
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\bin\Debug\net8.0\EShopBusinessObject.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\bin\Debug\net8.0\EShopBusinessObject.pdb
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.csproj.AssemblyReference.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.AssemblyInfoInputs.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.AssemblyInfo.cs
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.csproj.CoreCompileInputs.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.sourcelink.json
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\refint\EShopBusinessObject.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.pdb
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\EShopBusinessObject.genruntimeconfig.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Object\obj\Debug\net8.0\ref\EShopBusinessObject.dll

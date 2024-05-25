@@ -1,6 +1,0 @@
-@SWPSolution.WebApi_HostAddress = http://localhost:5104
-
-GET {{SWPSolution.WebApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
