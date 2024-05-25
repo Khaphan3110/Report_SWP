@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Code_BackEnd.Controllers
+namespace SWPSolution.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

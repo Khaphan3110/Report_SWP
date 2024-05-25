@@ -1,4 +1,4 @@
-namespace Code_BackEnd
+namespace SWPSolution.WebApi
 {
     public class WeatherForecast
     {
