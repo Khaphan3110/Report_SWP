@@ -2,11 +2,15 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SWPSolution.Data.Configuration;
+using SWPSolution.Data.Extension;
 
 namespace SWPSolution.Data.Entities;
 
-public partial class SWPSolutionDBContext : DbContext
+public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
     public SWPSolutionDBContext()
     {
@@ -43,7 +47,7 @@ public partial class SWPSolutionDBContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-KTRKQV7\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-KTRKQV7\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -75,6 +79,19 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasForeignKey(d => d.MemberId)
                 .HasConstraintName("fk_Address");
         });
+
+        modelBuilder.ApplyConfiguration(new AppUserConfig());
+        modelBuilder.ApplyConfiguration(new AppRoleConfig());
+
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
+        {
+            x.UserId, x.RoleId
+        });
+            ;
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x =>x.UserId);
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x=> x.UserId);
 
         modelBuilder.Entity<Blog>(entity =>
         {
@@ -442,7 +459,9 @@ public partial class SWPSolutionDBContext : DbContext
             .IsCyclic();
 
         OnModelCreatingPartial(modelBuilder);
+        modelBuilder.Seed();
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
 }
