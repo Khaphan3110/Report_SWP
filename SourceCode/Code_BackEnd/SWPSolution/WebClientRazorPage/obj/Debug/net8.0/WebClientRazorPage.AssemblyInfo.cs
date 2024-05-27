@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebClientRazorPage")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a07d3b43236ac59b2c9c06fc58e8d11f821d8eb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3ff6d84685664fd17a87ca1e116b122df67c935")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebClientRazorPage")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebClientRazorPage")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

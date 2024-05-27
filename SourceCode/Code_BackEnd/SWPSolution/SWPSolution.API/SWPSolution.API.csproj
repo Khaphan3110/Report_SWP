@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EShopServices\EShopServices.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Views\" />
   </ItemGroup>
 
