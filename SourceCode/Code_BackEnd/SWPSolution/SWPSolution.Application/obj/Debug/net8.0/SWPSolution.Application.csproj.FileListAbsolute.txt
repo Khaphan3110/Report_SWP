@@ -10,3 +10,4 @@ C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\refint\SWPSolution.Application.dll
 C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.pdb
 C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\ref\SWPSolution.Application.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.csproj.AssemblyReference.cache
