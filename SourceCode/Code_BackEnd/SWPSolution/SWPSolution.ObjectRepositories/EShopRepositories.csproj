@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SWPSolution.ObjectDAOs\EShopDAOs.csproj" />
-  </ItemGroup>
-
 </Project>
