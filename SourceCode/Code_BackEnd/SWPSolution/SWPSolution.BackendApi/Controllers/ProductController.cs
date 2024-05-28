@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Drawing.Text;
+using Microsoft.AspNetCore.Mvc;
+using SWPSolution.Application.Catalog.Product;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -6,10 +8,16 @@ namespace SWPSolution.BackendApi.Controllers
     [ApiController]
     public class ProductController : Controller
     {
+        private readonly IPublicProductService _publicProductService;
+        public ProductController(IPublicProductService publicProductService)
+        {
+            _publicProductService = publicProductService;
+        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok("Test ok");
+            var products =await _publicProductService.GetAll();
+            return Ok(products);
         }
     }
 }

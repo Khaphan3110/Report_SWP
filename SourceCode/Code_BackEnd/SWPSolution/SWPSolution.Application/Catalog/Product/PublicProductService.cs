@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
+using Azure.Core;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -12,6 +14,26 @@ namespace SWPSolution.Application.Catalog.Product
         {
             _context = context;
         }
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join c in _context.Categories on p.CategoriesId equals c.CategoriesId
+                        join r in _context.Reviews on p.ProductId equals r.ProductId
+                        select new { p, r, c };
+
+            int totalRow = await query.CountAsync();
+            var data = await query.Select(x => new ProductViewModel()
+                {
+                    CategoriesId = x.p.CategoriesId,
+                    ProductName = x.p.ProductName,
+                    Description = x.p.Description,
+                    Price = x.p.Price,
+                    Quantity = x.p.Quantity,
+                }).ToListAsync();
+            return data;
+        }
+
         public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             //1. Request Join
