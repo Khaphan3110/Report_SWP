@@ -1,0 +1,312 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.Header-login{
+    text-align: center;
+}
+
+.Header-login a{
+    text-decoration: none;
+    color: #F05A72;
+}
+
+.Header-login a:hover{
+    text-decoration: underline;
+}
+
+/* .wraper-form .L-form{
+    display: none;
+} */
+
+.wraper-form .Forgot-form{
+    display: none;
+}
+
+.wraper-form .Change-password-form{
+    display: none;
+}
+
+.L-form form{
+    padding: 7px;
+    margin-top: 20px;
+}
+
+
+.L-form form p{
+    margin: 0;
+}
+
+.L-input-place{
+    position: relative;
+    margin: 20px 0;
+    margin: 0;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #F0F0F0;
+    position: relative;
+
+}
+
+.L-input-place i{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.L-input-place input{
+    height: 45px;
+    width: 100%;
+    border: 0;
+    background-color: transparent;
+    padding: 7px 0;
+    padding-right: 35px;
+    padding-left: 15px;
+    font-size: 16px;
+    outline: none;
+
+}
+
+.L-input-place input::placeholder{
+    color:  #dadada;
+}
+
+.L-input-place input:focus{
+    box-shadow: 0 0 20px 5px #E1E1E1;
+}
+
+.link-Fogot-password{
+    display: flex;
+}
+
+.link-Fogot-password p{
+    padding-right: 4px;
+}
+
+.link-Fogot-password a{
+    color: #F05A72;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link-Fogot-password a:focus{
+    text-decoration: underline;
+}
+
+.b-form-login  {
+    text-align: center;
+    background-color: #FBD947;
+    border-radius: 25px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.b-form-login button {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    
+}
+
+.b-form-login button  p{
+    padding: 12px;   
+}
+
+.b-form-login:hover{
+    background-color: #F05A72;
+    button{
+        color: white;
+    }
+}
+
+.b-form-login-google  {
+    text-align: center;
+    background-color: #FBD947;
+    border-radius: 25px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.b-form-login-google button {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    
+}
+
+.b-form-login-google button  p{
+    padding: 12px;   
+}
+
+.b-form-login-google:hover{
+    background-color: #F05A72;
+    button{
+        color: white;
+    }
+}
+
+.Forgot-form {
+    margin: 40px 0;
+    
+}
+
+.Forgot-form h2{
+    text-align: center;
+    margin: 0;
+}
+
+.Forgot-form h6{
+    margin: 20px;
+}
+
+.Forgot-input-place {
+   margin: 15px 0;
+   border-radius: 5px;
+   border: 1px solid #E1E1E1;
+}
+
+.Forgot-input-place input{
+     height: 45px;
+     width: 100%;
+     padding: 5px 20px;
+     font-size: 16px;
+     background-color: transparent;
+     border: 0;
+     border-radius: 0;
+     outline: none;
+}
+.Forgot-input-place input:focus{
+        box-shadow: 0 0 20px 5px #E1E1E1;  
+}
+.b-forgot-login{
+    background-color: #FBD947;
+    text-align: center;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.b-forgot-login:hover{
+    background-color: #F05A72;
+    button{
+        color: white;
+    }
+}
+
+.b-forgot-login button{
+    border: 0;
+    background-color: transparent;
+}
+
+.b-forgot-login button p{
+    padding: 12px;
+    margin: 0;
+}
+
+.link-quaylai{
+    text-align: center;
+}
+
+.link-quaylai p{
+    font-size: 17px;
+    
+}
+
+.link-quaylai p a{
+    text-decoration: none;
+    color: #F05A72;
+}
+
+.link-quaylai p a:hover{
+    color: #F05A72;
+    text-decoration: underline;
+}
+
+.charactor-num-from-email p {
+    margin: 0;
+}
+
+.charactor-new-password p{
+    margin: 0;
+}
+
+.num-from-Email {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #E1E1E1;
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+
+.num-from-Email input:focus{
+    box-shadow: 0 0 20px 5px #E1E1E1;
+}
+
+.num-from-Email input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 20px 0;
+    padding-left: 15px;
+    padding-right: 30px;
+    font-size: 16px;
+}
+
+.num-from-Email input::placeholder{
+    color: #E1E1E1
+}
+
+.Change-password-form{
+    margin: 20px 0;
+}
+
+
+
+.Change-password-form form {
+    padding: 7px;
+}
+
+.Change-password-form form fieldset h2{
+    text-align: center;
+}
+
+
+.Change-password-input-place{
+    height: 50px;
+    margin-bottom: 15px;
+    margin-top: 4px;
+    border: 1px solid #E1E1E1;
+    position: relative;
+}
+
+.Change-password-input-place i{
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.Change-password-input-place input{
+    height: 100%;
+    width: 100%;
+    padding: 10px 0;
+    padding-left: 15px;
+    padding-right: 30px;
+    outline: none;
+    border: 0;
+    background-color: transparent;
+}
+
+.Change-password-input-place input::placeholder{
+    color:  #dadada;
+}
+
+.Change-password-input-place input:focus{
+    box-shadow: 0 0 20px 5px #E1E1E1;
+}
+
+
+

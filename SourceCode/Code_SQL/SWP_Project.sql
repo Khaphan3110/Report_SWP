@@ -25,46 +25,24 @@ CREATE TABLE Member (
 );
 GO
 
-CREATE OR ALTER FUNCTION generate_member_id()
-RETURNS VARCHAR(10)
-AS
-BEGIN
-    DECLARE @month CHAR(2) = '01'; -- Tháng tạo
-    DECLARE @year CHAR(2) = '24'; -- Năm tạo
-    DECLARE @auto_increment INT;
-
-    -- Tìm giá trị tự động tăng lớn nhất hiện có trong bảng Member
-    SELECT @auto_increment = MAX(CAST(SUBSTRING(member_ID, 7, 3) AS INT))
-    FROM Member
-    WHERE SUBSTRING(member_ID, 3, 2) = @month
-    AND SUBSTRING(member_ID, 5, 2) = @year;
-
-    -- Nếu không tìm thấy giá trị tự động tăng, gán giá trị ban đầu là 0
-    IF @auto_increment IS NULL
-        SET @auto_increment = 0;
-
-    -- Tăng giá trị tự động lên 1
-    SET @auto_increment = @auto_increment + 1;
-
-    -- Format lại giá trị tự động tăng thành 3 ký tự, bắt đầu từ 000
-    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-
-    -- Kết hợp các phần để tạo mã số thành viên
-    DECLARE @generated_member_id VARCHAR(10) = CONCAT('MB', @month, @year, @formatted_auto_increment);
-
-    RETURN @generated_member_id;
-END;
-GO
-
--- Tạo trigger để thiết lập giá trị cho member_ID trước khi chèn
-CREATE TRIGGER trg_generate_member_id
+CREATE OR ALTER TRIGGER trg_generate_member_id
 ON Member
 INSTEAD OF INSERT
 AS
 BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @seq_value INT = NEXT VALUE FOR member_id_seq; -- Lấy giá trị tiếp theo từ sequence
+
+    -- Định dạng giá trị sequence thành số 3 chữ số
+    DECLARE @formatted_seq_value VARCHAR(3) = RIGHT('000' + CAST(@seq_value AS VARCHAR(3)), 3);
+
+    -- Kết hợp các phần để tạo member ID
+    DECLARE @generated_member_id VARCHAR(10) = CONCAT('MB', @month, @year, @formatted_seq_value);
+
     INSERT INTO Member (member_ID, FirstName, LastName, Email, PhoneNumber, LoyaltyPoints, RegistrationDate, UserName, PassWord)
     SELECT 
-        ISNULL(member_ID, dbo.generate_member_id()),
+        ISNULL(@generated_member_id, 'MB' + @month + @year + '001'), -- Nếu không có giá trị từ sequence, sử dụng giá trị mặc định
         FirstName,
         LastName,
         Email,
@@ -75,58 +53,15 @@ BEGIN
         PassWord
     FROM inserted;
 END;
-GO
-
 --  ràng buộc check đảm bảo rằng Email chứa ký tự @
 ALTER TABLE Member
 ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
 GO
 
-INSERT INTO Member (
-    FirstName, 
-    LastName, 
-    Email, 
-    PhoneNumber, 
-    LoyaltyPoints, 
-    RegistrationDate, 
-    UserName, 
-    PassWord
-) 
-VALUES (
-    'Phan',              -- FirstName
-    'Kha',               -- LastName
-    'Khaphan@gmail.com', -- Email
-    '0915123584',      -- PhoneNumber
-    20,              -- LoyaltyPoints
-    '2024-05-21',        -- RegistrationDate
-    'Khaphan2003',           -- UserName
-    'kp123'        -- PassWord
-);
-GO
- 
-INSERT INTO Member (
-    FirstName, 
-    LastName, 
-    Email, 
-    PhoneNumber, 
-    LoyaltyPoints, 
-    RegistrationDate, 
-    UserName, 
-    PassWord
-) 
-VALUES (
-    'John',              -- FirstName
-    'Doe',               -- LastName
-    'john.doe@example.com', -- Email
-    '0913013787',      -- PhoneNumber
-    30,              -- LoyaltyPoints
-    '2024-05-21',        -- RegistrationDate
-    'johndoe',           -- UserName
-    'password123'        -- PassWord
-);
-GO
 select * from Member;
+ALTER SEQUENCE address_id_seq RESTART WITH 1;
 
+-- Tạo sequence cho address_ID
 CREATE SEQUENCE address_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -134,6 +69,10 @@ CREATE SEQUENCE address_id_seq
     MAXVALUE 999
     CYCLE;
 GO
+ALTER SEQUENCE member_id_seq RESTART WITH 1;
+
+
+-- Tạo bảng Address
 CREATE TABLE Address (
     address_ID VARCHAR(10) PRIMARY KEY NOT NULL,
     member_ID VARCHAR(10),
@@ -147,43 +86,26 @@ CREATE TABLE Address (
 GO
 
 
--- Hàm generate_Address_id
-CREATE OR ALTER FUNCTION generate_Address_id()
-RETURNS VARCHAR(10)
-AS
-BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
-    DECLARE @auto_increment INT;
 
-    SELECT @auto_increment = MAX(CAST(SUBSTRING(address_ID, 7, 3) AS INT))
-    FROM Address
-    WHERE SUBSTRING(address_ID, 3, 2) = @month
-    AND SUBSTRING(address_ID, 5, 2) = @year;
-
-    IF @auto_increment IS NULL
-        SET @auto_increment = 0;
-
-    SET @auto_increment = @auto_increment + 1;
-
-    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_address_id VARCHAR(10) = CONCAT('AMM', @month, @year, @formatted_auto_increment);
-
-    RETURN @generated_address_id;
-END;
-GO
-DROP TABLE Address ;
-GO
-
--- Tạo trigger trg_generate_address_id
-CREATE TRIGGER trg_generate_address_id
+-- Sửa trigger để sinh address_ID trực tiếp
+CREATE OR ALTER TRIGGER trg_generate_address_id
 ON Address
 INSTEAD OF INSERT
 AS
 BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @seq_value INT = NEXT VALUE FOR address_id_seq; -- Lấy giá trị tiếp theo từ sequence
+
+    -- Định dạng giá trị sequence thành số 3 chữ số
+    DECLARE @formatted_seq_value VARCHAR(3) = RIGHT('000' + CAST(@seq_value AS VARCHAR(3)), 3);
+
+    -- Kết hợp các phần để tạo address ID
+    DECLARE @generated_address_id VARCHAR(10) = CONCAT('AMM', @month, @year, @formatted_seq_value);
+
     INSERT INTO Address (address_ID, member_ID, HouseNumber, Street, district, City, Region)
     SELECT 
-        ISNULL(address_ID, dbo.generate_Address_id()),
+        ISNULL(@generated_address_id, 'AMM' + @month + @year + '001'), -- Nếu không có giá trị từ sequence, sử dụng giá trị mặc định
         member_ID,
         HouseNumber,
         Street,
@@ -194,41 +116,15 @@ BEGIN
 END;
 GO
 
--- Thêm dữ liệu vào bảng Address
-INSERT INTO Address (
-	member_ID,
-    HouseNumber,
-    Street,
-    district,
-    City,
-    Region
-) 
-VALUES (
-     'MB0124001','123', 'Nguyen Trai', '1', 'HCM', 'South'
-);
-GO
-INSERT INTO Address (
-	member_ID,
-    HouseNumber,
-    Street,
-    district,
-    City,
-    Region
-) 
-VALUES (
-     'MB0124002','124', N'Nguyễn Huệ ', '1', 'HCM', 'South'
-);
-GO
-
 
 SELECT * 
 FROM Address a
 JOIN Member m ON a.member_ID = m.member_ID;
 Go
 select * from Member;
-select * from address;
-DELETE FROM Address WHERE address_ID = 'AD0124003';
-DELETE FROM Address WHERE address_ID = 'AD0124004';
+select * from Address;
+
+ALTER SEQUENCE address_id_seq RESTART WITH 1;
 
 
 
@@ -248,71 +144,42 @@ CREATE TABLE Promotion (
 	EndDate date,
 );
 GO
-CREATE OR ALTER FUNCTION generate_promotion_id()
-RETURNS VARCHAR(10)
-AS
-BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
-    DECLARE @auto_increment INT;
-
-    SELECT @auto_increment = MAX(CAST(SUBSTRING(promotion_ID, 7, 3) AS INT))
-    FROM Promotion
-    WHERE SUBSTRING(promotion_ID, 3, 2) = @month
-    AND SUBSTRING(promotion_ID, 5, 2) = @year;
-
-    IF @auto_increment IS NULL
-        SET @auto_increment = 0;
-
-    SET @auto_increment = @auto_increment + 1;
-
-    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_address_id VARCHAR(10) = CONCAT('RM', @month, @year, @formatted_auto_increment);
-
-    RETURN @generated_address_id;
-END;
-GO
-
--- Tạo trigger trg_generate_address_id
-CREATE TRIGGER trg_generate_promotion_id
+CREATE OR ALTER TRIGGER trg_generate_promotion_id
 ON Promotion
 INSTEAD OF INSERT
 AS
 BEGIN
-    INSERT INTO Promotion(promotion_ID, Name, DiscountType, DiscountValue, StartDate, EndDate)
+    DECLARE @generated_promotion_id VARCHAR(10);
+
+    IF EXISTS (SELECT * FROM deleted)
+    BEGIN
+        -- Nếu có dữ liệu bị xóa, đặt lại giá trị của sequence về 1
+        ALTER SEQUENCE promotion_id_seq RESTART WITH 1;
+    END
+    ELSE
+    BEGIN
+        DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+        DECLARE @seq_value INT = NEXT VALUE FOR promotion_id_seq; -- Lấy giá trị tiếp theo từ sequence
+
+        -- Định dạng giá trị sequence thành số 3 chữ số
+        DECLARE @formatted_seq_value VARCHAR(3) = RIGHT('000' + CAST(@seq_value AS VARCHAR(3)), 3);
+
+        -- Kết hợp các phần để tạo promotion ID
+        SET @generated_promotion_id = CONCAT('PR', @month, @year, @formatted_seq_value);
+    END
+
+    INSERT INTO Promotion (promotion_ID, Name, DiscountType, DiscountValue, StartDate, EndDate)
     SELECT 
-        ISNULL(promotion_ID, dbo.generate_promotion_id()),
-        Name,
-        DiscountType,
-        DiscountValue,
-        StartDate,
-        EndDate
+        @generated_promotion_id, 
+        Name, 
+        DiscountType, 
+        DiscountValue, 
+        StartDate, 
+        EndDate 
     FROM inserted;
 END;
-GO
-INSERT INTO Promotion (
-    Name, 
-    DiscountType, 
-    DiscountValue, 
-    StartDate, 
-    EndDate
-) 
-VALUES (
-    'Summer Sale', 'Percentage', 20, '2024-06-01', '2024-06-30'
-);
-GO
-INSERT INTO Promotion (
-    Name, 
-    DiscountType, 
-    DiscountValue, 
-    StartDate, 
-    EndDate
-) 
-VALUES (
-    'Spring Sale', 'Percentage', 35, '2024-07-01', '2024-06-15'
-);
-GO
-select * from Promotion;
+ALTER SEQUENCE promotion_id_seq RESTART WITH 1;
 
 
 CREATE SEQUENCE order_id_seq
@@ -322,6 +189,69 @@ CREATE SEQUENCE order_id_seq
     MAXVALUE 999
     CYCLE;
 GO
+
+CREATE TABLE [Order] (
+    order_ID VARCHAR(10) PRIMARY KEY NOT NULL,
+    member_id  VARCHAR(10),
+	Promotion_ID  VARCHAR(10),
+    ShippingAddress  NVARCHAR(50),
+    TotalAmount  float,
+    orderStatus  bit,
+    orderDate date,
+	    CONSTRAINT fk_order_member FOREIGN KEY (member_ID) REFERENCES Member(member_ID),
+			    CONSTRAINT fk_order_promotion FOREIGN KEY (promotion_ID) REFERENCES promotion(promotion_ID)
+
+				
+);
+GO
+
+CREATE OR ALTER FUNCTION generate_order_id()
+RETURNS VARCHAR(10)
+AS
+BEGIN
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @auto_increment INT;
+
+    SELECT @auto_increment = MAX(CAST(SUBSTRING(order_ID, 7, 3) AS INT))
+    FROM [Order]
+    WHERE SUBSTRING(order_ID, 3, 2) = @month
+    AND SUBSTRING(order_ID, 5, 2) = @year;
+
+    IF @auto_increment IS NULL
+        SET @auto_increment = 0;
+
+    SET @auto_increment = @auto_increment + 1;
+
+    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
+    DECLARE @generated_order_id VARCHAR(10) = CONCAT('OR', @month, @year, @formatted_auto_increment);
+
+    RETURN @generated_order_id;
+END;
+GO
+
+
+CREATE TRIGGER trg_generate_order_id
+ON [order]
+INSTEAD OF INSERT
+AS
+BEGIN
+    INSERT INTO [Order] (order_ID, member_id, Promotion_ID, ShippingAddress, TotalAmount, orderStatus, orderDate)
+    SELECT 
+        ISNULL(order_ID, dbo.generate_order_id()),
+        member_id,
+        Promotion_ID,
+        ShippingAddress,
+        TotalAmount,
+        orderStatus,
+        orderDate
+    FROM inserted;
+END;
+GO
+
+select * from [Order];
+ALTER SEQUENCE order_id_seq RESTART WITH 1;
+
 
 CREATE SEQUENCE categories_id_seq
     START WITH 1
@@ -341,14 +271,14 @@ CREATE TABLE Categories (
 );
 GO
 
-DROP TRIGGER IF EXISTS trg_generate_categories_id;
-GO
+
+
 CREATE OR ALTER FUNCTION generate_categories_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(categories_ID, 7, 3) AS INT))
@@ -368,6 +298,8 @@ BEGIN
 END;
 GO
 
+
+
 CREATE TRIGGER trg_generate_categories_id
 ON Categories
 INSTEAD OF INSERT
@@ -384,12 +316,8 @@ BEGIN
     FROM inserted;
 END;
 GO
-INSERT INTO Categories (categories_ID, brandName, AgeRange, SubCategories, packageType, source)
-VALUES ('MM0124001', 'Brand A', 'Adults', 'Clothing', 'Box', 'Local');
-
-INSERT INTO Categories (categories_ID, brandName, AgeRange, SubCategories, packageType, source)
-VALUES ('MM0124002', 'Brand B', 'Kids', 'Toys', 'Bag', 'International');
-
+select * from Categories;
+ALTER SEQUENCE categories_id_seq RESTART WITH 1;
 
 
 CREATE SEQUENCE product_id_seq
@@ -417,8 +345,8 @@ CREATE OR ALTER FUNCTION generate_product_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(product_ID, 7, 3) AS INT))
@@ -432,11 +360,12 @@ BEGIN
     SET @auto_increment = @auto_increment + 1;
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_product_id VARCHAR(10) = CONCAT('PM', @month, @year, @formatted_auto_increment);
+    DECLARE @generated_product_id VARCHAR(10) = CONCAT('MM', @month, @year, @formatted_auto_increment);
 
     RETURN @generated_product_id;
 END;
 GO
+
 
 CREATE TRIGGER trg_generate_product_id
 ON Product
@@ -457,14 +386,12 @@ BEGIN
 END;
 GO
 
-INSERT INTO Product ( categories_ID, ProductName, Quantity, Price, Description, statusDescription, image)
-VALUES ( 'MM0124001', N'Túi xách thời trang', 50, 120000, N'Túi xách da cao cấp', 'Available', 'image_path_here');
-
 select * from Product;
 SELECT * 
 FROM Product pr
 JOIN Categories c ON pr.categories_ID = c.categories_ID;
 Go
+ALTER SEQUENCE product_id_seq RESTART WITH 1;
 
 CREATE SEQUENCE preorder_id_seq
     START WITH 1
@@ -490,8 +417,8 @@ CREATE OR ALTER FUNCTION generate_preorder_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(preorder_ID, 7, 3) AS INT))
@@ -505,11 +432,12 @@ BEGIN
     SET @auto_increment = @auto_increment + 1;
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_preorder_ID VARCHAR(10) = CONCAT('PP', @month, @year, @formatted_auto_increment);
+    DECLARE @generated_preorder_id VARCHAR(10) = CONCAT('MM', @month, @year, @formatted_auto_increment);
 
-    RETURN @generated_preorder_ID;
+    RETURN @generated_preorder_id;
 END;
 GO
+
 
 CREATE TRIGGER trg_generate_preorder_ID
 ON Preorder
@@ -528,12 +456,12 @@ BEGIN
 END;
 GO
 
-INSERT INTO PreOrder (product_ID, member_ID, Quantity, preorderDate, price)
-VALUES ('PM0124001', 'MB0124001', 2, '2024-05-24', 25.99);
+
 
 select * from Product;
 select * from Member;
 select * from PreOrder;
+
 
 SELECT * 
 FROM PreOrder po
@@ -544,6 +472,8 @@ SELECT *
 FROM PreOrder pa
 JOIN Member r ON pa.member_ID = r.member_ID;
 Go
+ALTER SEQUENCE preorder_id_seq RESTART WITH 1;
+
 
 CREATE SEQUENCE review_id_seq
     START WITH 1
@@ -569,8 +499,8 @@ CREATE OR ALTER FUNCTION generate_review_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(review_ID, 7, 3) AS INT))
@@ -584,9 +514,9 @@ BEGIN
     SET @auto_increment = @auto_increment + 1;
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_review_ID VARCHAR(10) = CONCAT('RW', @month, @year, @formatted_auto_increment);
+    DECLARE @generated_review_id VARCHAR(10) = CONCAT('MM', @month, @year, @formatted_auto_increment);
 
-    RETURN @generated_review_ID;
+    RETURN @generated_review_id;
 END;
 GO
 
@@ -606,9 +536,6 @@ BEGIN
     FROM inserted;
 END;
 GO
-
-INSERT INTO Review ( product_ID, member_ID, dataReview, Grade, comment)
-VALUES ( 'PM0124001', 'MB0124001', '2024-05-25', 5, 'This product is amazing!');
 
 select * from Member;
 select * from Product;
@@ -635,6 +562,7 @@ CREATE TABLE [Order_detail] (
 		CONSTRAINT fk_orderdetail_order FOREIGN KEY (order_ID) REFERENCES [Order](order_ID)
 );
 GO
+ALTER SEQUENCE review_id_seq RESTART WITH 1;
 
 
 
@@ -663,8 +591,8 @@ CREATE OR ALTER FUNCTION generate_payment_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(payment_ID, 7, 3) AS INT))
@@ -678,12 +606,11 @@ BEGIN
     SET @auto_increment = @auto_increment + 1;
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_payment_ID VARCHAR(10) = CONCAT('PM', @month, @year, @formatted_auto_increment);
+    DECLARE @generated_payment_id VARCHAR(10) = CONCAT('PM', @month, @year, @formatted_auto_increment);
 
-    RETURN @generated_payment_ID;
+    RETURN @generated_payment_id;
 END;
 GO
-
 CREATE TRIGGER trg_generate_payment_ID
 ON payment
 INSTEAD OF INSERT
@@ -702,9 +629,8 @@ BEGIN
 END;
 GO
 
-INSERT INTO Payment (payment_ID, order_ID, amount, discountValue, paymentStatus, PaymentMethod, PaymentDate)
-VALUES ('PM012401', 'OM0124001', '100.00', 10.00, 1, 'Credit Card', '2024-05-24');
 
+ALTER SEQUENCE payment_id_seq RESTART WITH 1;
 
 SELECT * 
 FROM Payment p
@@ -721,34 +647,33 @@ CREATE SEQUENCE staff_id_seq
     CYCLE;
 GO
 
-
 CREATE TABLE staff (
-    staff_ID VARCHAR(10) NOT NULL,
+    staff_ID VARCHAR(10) PRIMARY KEY NOT NULL,
     role VARCHAR(20) NOT NULL,
     username VARCHAR(50),
     password VARCHAR(50),
     fullName NVARCHAR(50),
     Email VARCHAR(255),
-    phone TEXT,
-    Address NVARCHAR(255),
-    PRIMARY KEY (staff_ID)
+    phone TEXT
 );
+GO
+
+ALTER TABLE Staff 
+ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
 GO
 
 CREATE OR ALTER FUNCTION generate_staff_id(@role VARCHAR(20))
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
-
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(staff_ID, 7, 3) AS INT))
     FROM staff
     WHERE SUBSTRING(staff_ID, 3, 2) = @month
-    AND SUBSTRING(staff_ID, 5, 2) = @year
-    AND role = @role;
+    AND SUBSTRING(staff_ID, 5, 2) = @year;
 
     IF @auto_increment IS NULL
         SET @auto_increment = 0;
@@ -757,7 +682,7 @@ BEGIN
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
 
-    DECLARE @generated_staff_id VARCHAR(10) = CONCAT(CASE WHEN @role = 'staffmember' THEN 'SM' ELSE 'SA' END, @month, @year, @formatted_auto_increment);
+    DECLARE @generated_staff_id VARCHAR(10) = CONCAT(CASE WHEN @role = 'SM' THEN 'SM' ELSE 'SA' END, @month, @year, @formatted_auto_increment);
 
     RETURN @generated_staff_id;
 END;
@@ -770,46 +695,29 @@ AS
 BEGIN
     DECLARE @new_staff_ID VARCHAR(10);
 
-    INSERT INTO staff (staff_ID, role, username, password, fullName, Email, phone, Address)
+    -- Tạo ID cho từng bản ghi được chèn vào
+    INSERT INTO staff (staff_ID, role, username, password, fullName, Email, phone)
     SELECT 
-        CASE WHEN role = 'staffmember' THEN dbo.generate_staff_id('staffmember') ELSE dbo.generate_staff_id('staffadmin') END,
+        CASE 
+            WHEN role = 'staffmember' THEN dbo.generate_staff_id('staffmember') 
+            ELSE dbo.generate_staff_id('staffadmin') 
+        END,
         role,
         username,
         password,
         fullName,
         Email,
-        phone,
-        Address
+        phone
     FROM inserted;
-
-    -- Lấy giá trị mới được sinh ra cho staff_ID
-    SELECT @new_staff_ID = staff_ID FROM inserted;
-
-    -- Cập nhật lại staff_ID cho các bản ghi đã chèn
-    UPDATE staff
-    SET staff_ID = @new_staff_ID
-    WHERE staff_ID IS NULL;
 END;
 GO
-ALTER TABLE Staff 
-ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
-GO
 
-INSERT INTO staff (role, username, password, fullName, Email, phone, Address)
-VALUES ('staffmember', 'jdoe', 'password123', 'John Doe', 'jdoe@example.com', '123-456-7890', '123 Main St');
+-- Chèn dữ liệu cho staffmember
 
--- Chèn dữ liệu cho staffadmin
-INSERT INTO staff (role, username, password, fullName, Email, phone, Address)
-VALUES ('staffadmin', 'asmith', 'password456', 'Alice Smith', 'asmith@example.com', '987-654-3210', '456 Elm St');
-
-INSERT INTO staff (role, username, password, fullName, Email, phone, Address)
-VALUES ('staffmember', 'snguyen', 'pass123', 'Sarah Nguyen', 'snguyen@example.com', '111-222-3333', '789 Oak St');
-
--- Chèn dữ liệu cho staffadmin
-INSERT INTO staff (role, username, password, fullName, Email, phone, Address)
-VALUES ('staffadmin', 'dsmith', 'admin456', 'David Smith', 'dsmith@example.com', '444-555-6666', '321 Maple St');
+ALTER SEQUENCE staff_id_seq RESTART WITH 1;
 
 select * from staff;
+
 
 
 CREATE SEQUENCE blog_id_seq
@@ -835,8 +743,8 @@ CREATE OR ALTER FUNCTION generate_blog_id()
 RETURNS VARCHAR(10)
 AS
 BEGIN
-    DECLARE @month CHAR(2) = '01';
-    DECLARE @year CHAR(2) = '24';
+     DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+        DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
     DECLARE @auto_increment INT;
 
     SELECT @auto_increment = MAX(CAST(SUBSTRING(blog_ID, 7, 3) AS INT))
@@ -850,9 +758,9 @@ BEGIN
     SET @auto_increment = @auto_increment + 1;
 
     DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
-    DECLARE @generated_blog_ID VARCHAR(10) = CONCAT('PM', @month, @year, @formatted_auto_increment);
+    DECLARE @generated_blog_id VARCHAR(10) = CONCAT('BL', @month, @year, @formatted_auto_increment);
 
-    RETURN @generated_blog_ID;
+    RETURN @generated_blog_id;
 END;
 GO
 
@@ -873,15 +781,11 @@ BEGIN
 END;
 GO
 
-INSERT INTO Blog (staff_ID, title, content, categories, dataCreate)
-VALUES ( 'SA0124001', 'How to Cook Pasta', 'Learn how to cook delicious pasta in just a few easy steps.', 'Cooking, Recipes', '2024-05-24');
 
-INSERT INTO Blog ( staff_ID, title, content, categories, dataCreate)
-VALUES ( 'SM0124001', '10 Tips for Healthy Living', 'Discover 10 simple tips to improve your health and well-being.', 'Health, Lifestyle', '2024-05-25');
+ALTER SEQUENCE blog_id_seq RESTART WITH 1;
 
 select * from staff;
 select * from Blog;
-
 SELECT * 
 FROM Blog bl
 JOIN staff st ON bl.staff_ID = st.staff_ID;

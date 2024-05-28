@@ -26,6 +26,12 @@
     background: linear-gradient(to left bottom,rgb(117, 192, 235) ,white );
 }
 
+.wrapper form {
+    border: 1px solid white;
+    box-shadow: 0 0 20px 5px rgb(255, 255, 255);
+    padding: 40px;
+}
+
 .wrapper form h1{
     text-align: center;
 }

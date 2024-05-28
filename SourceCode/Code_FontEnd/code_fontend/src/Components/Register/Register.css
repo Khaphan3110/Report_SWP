@@ -1,0 +1,106 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.R-picture{
+   position: absolute;
+   width: 100%;
+   height: 100vh;
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   top: 0;
+   left: 0;
+}
+
+.R-input{
+    background: linear-gradient(to left bottom,rgb(117, 192, 235) ,white );
+}
+
+.R-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.R-input form h1{
+    text-align: center;
+}
+
+.R-input form{
+    background-color: transparent;
+    border: 3px solid white;
+    padding: 20px 50px;
+    box-shadow: 0 0 10px 5px white;
+}
+
+.R_input-place{
+    position: relative;
+    margin: 20px 0;
+    background-color: transparent;
+}
+
+.R_input-place input{
+    width: 100%;
+    height: 45px;
+    outline: 0;
+    border: 0;
+    border-radius: 25px;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-right: 30px;
+    font-size: 16px;
+    border: 2px solid white;
+}
+
+.R_input-place input:hover{
+      box-shadow: 0 0 10px 5px white;
+}
+
+.R_input-place input::placeholder{
+      color: black;
+}
+
+.R_input-place i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+}
+
+.R-button button {
+   width: 100%;
+   height: 40px;
+   border: 0;
+   outline: 0;
+   background-color: aliceblue;
+   border-radius: 25px;
+}
+
+.R-button button:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.R-button button p{
+    padding-top: 8px;
+ }
+
+ .Return-login{
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .Return-login a{
+    text-decoration: none;
+    color: black;
+ }
+
+ .Return-login a:hover{
+    text-decoration: underline;
+    color: white;
+ }
