@@ -340,7 +340,7 @@ namespace SWPSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9e6013f6-56f6-4b42-9ee1-51fbb0c1879a",
+                            ConcurrencyStamp = "8ee02dfe-fda5-4368-bc8f-b3a186a13b6f",
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Toan",
@@ -348,7 +348,7 @@ namespace SWPSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMyTx6Hi8UhpnmlgNca3HM4hnwh7yORnqnXw+m1D1uokKn07uN5s/ToUKQUQEe2yDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMWLDnITiMsZMAldmsCcWiPMCiS7Gj4YahMESN8OQ5QvLnAejxt+MNuGC+vln45H8w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -735,6 +735,44 @@ namespace SWPSolution.Data.Migrations
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
+            modelBuilder.Entity("SWPSolution.Data.Entities.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Caption")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages", (string)null);
+                });
+
             modelBuilder.Entity("SWPSolution.Data.Entities.Promotion", b =>
                 {
                     b.Property<string>("PromotionId")
@@ -985,6 +1023,17 @@ namespace SWPSolution.Data.Migrations
                     b.Navigation("Categories");
                 });
 
+            modelBuilder.Entity("SWPSolution.Data.Entities.ProductImage", b =>
+                {
+                    b.HasOne("SWPSolution.Data.Entities.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("SWPSolution.Data.Entities.Review", b =>
                 {
                     b.HasOne("SWPSolution.Data.Entities.AppUser", "AppUser")
@@ -1047,6 +1096,8 @@ namespace SWPSolution.Data.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("PreOrders");
+
+                    b.Navigation("ProductImages");
 
                     b.Navigation("Reviews");
                 });
