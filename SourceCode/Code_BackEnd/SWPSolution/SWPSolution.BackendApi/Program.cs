@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SWPSolution.Application.Catalog.Product;
+using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
 
 namespace SWPSolution.BackendApi
@@ -14,8 +16,15 @@ namespace SWPSolution.BackendApi
             var builder = WebApplication.CreateBuilder(args);
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
+            builder.Services.AddIdentity<AppUser, AppRole>()
+                .AddEntityFrameworkStores<SWPSolutionDBContext>()
+                .AddDefaultTokenProviders();
             //Declare DI 
             builder.Services.AddTransient<IPublicProductService, PublicProductService>();
+            builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            builder.Services.AddTransient<IUserService, UserService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
