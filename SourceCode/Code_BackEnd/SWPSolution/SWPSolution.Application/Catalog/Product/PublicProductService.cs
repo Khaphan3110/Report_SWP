@@ -1,6 +1,5 @@
 ﻿using SWPSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using SWPSolution.ViewModels.Catalog.Product.Public;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
 
@@ -13,7 +12,7 @@ namespace SWPSolution.Application.Catalog.Product
         {
             _context = context;
         }
-        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
+        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             //1. Request Join
             var query = from p in _context.Products
@@ -21,9 +20,9 @@ namespace SWPSolution.Application.Catalog.Product
                         join r in _context.Reviews on p.ProductId equals r.ProductId
                         select new { p, r, c };
             //2. Filter
-            if (!string.IsNullOrEmpty(request.categoryId) && request.categoryId.Length > 0)
+            if (!string.IsNullOrEmpty(request.CategoryId) && request.CategoryId.Length > 0)
             {
-                query = query.Where(p => p.c.CategoriesId == request.categoryId);
+                query = query.Where(p => p.c.CategoriesId == request.CategoryId);
             }
             //3. Paging
             int totalRow = await query.CountAsync();
