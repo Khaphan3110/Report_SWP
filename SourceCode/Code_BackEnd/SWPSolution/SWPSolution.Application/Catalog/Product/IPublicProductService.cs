@@ -1,15 +1,12 @@
-﻿using SWPSolution.Application.Catalog.Product.Dtos;
-using SWPSolution.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.Product.Public;
+using SWPSolution.ViewModels.Common;
 
 namespace SWPSolution.Application.Catalog.Product
 {
     public interface IPublicProductService
     {
-        PagedViewModel<ProductViewModel> GetAllByCategoryId(int categoryId, int pageIndex, int pageSize);
+        Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request);
     }
 }

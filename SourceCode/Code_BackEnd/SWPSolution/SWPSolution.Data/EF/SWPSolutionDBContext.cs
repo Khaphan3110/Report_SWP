@@ -82,6 +82,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
 
         modelBuilder.ApplyConfiguration(new AppUserConfig());
         modelBuilder.ApplyConfiguration(new AppRoleConfig());
+        modelBuilder.ApplyConfiguration(new ProductImageConfig());
 
         modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
         modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
@@ -92,6 +93,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x =>x.UserId);
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
         modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x=> x.UserId);
+        
 
         modelBuilder.Entity<Blog>(entity =>
         {

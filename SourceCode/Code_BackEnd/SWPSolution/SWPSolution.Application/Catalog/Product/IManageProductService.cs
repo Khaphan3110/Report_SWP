@@ -1,10 +1,6 @@
-﻿using SWPSolution.Application.Catalog.Product.Dtos;
-using SWPSolution.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.Product.Manage;
+using SWPSolution.ViewModels.Common;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -12,12 +8,16 @@ namespace SWPSolution.Application.Catalog.Product
     {
         Task<int> Create(ProductCreateRequest request);
 
-        Task<int> Update(UpdateProductEditRequest request);
+        Task<int> Update(ProductUpdateRequest request);
 
         Task<int> Delete(int productId);
 
-        Task<List<ProductViewModel>> GetAll();
+        Task<bool> UpdatePrice(int productId, float newPrice);
 
-        Task<PagedViewModel<ProductViewModel>> GetAllPagning(string keyword, int pageIndex, int pageSize);
+        Task<bool> UpdateQuantity(int productId, int addedQuantity);
+
+  
+
+        Task<PageResult<ProductViewModel>> GetAllPagning(GetProductPagingRequest request);
     }
 }

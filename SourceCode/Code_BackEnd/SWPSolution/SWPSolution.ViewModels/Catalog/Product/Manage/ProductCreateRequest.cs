@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace SWPSolution.Application.Catalog.Product.Dtos
+namespace SWPSolution.ViewModels.Catalog.Product.Manage
 {
     public class ProductCreateRequest
     {
@@ -12,5 +8,7 @@ namespace SWPSolution.Application.Catalog.Product.Dtos
         public int Quantity { get; set; }
         public float Price { get; set; }
         public string Description { get; set; }
+
+        public IFormFile ThumbnailImage { get; set; }
     }
 }
