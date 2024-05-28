@@ -9,8 +9,7 @@
       "SWPSolution.Application/1.0.0": {
         "dependencies": {
           "SWPSolution.Data": "1.0.0",
-          "SWPSolution.Utilities": "1.0.0",
-          "SWPSolution.ViewModels": "1.0.0"
+          "SWPSolution.Utilities": "1.0.0"
         },
         "runtime": {
           "SWPSolution.Application.dll": {}
@@ -674,7 +673,8 @@
         "dependencies": {
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.5",
-          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.5"
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.5",
+          "SWPSolution.ViewModels": "1.0.0"
         },
         "runtime": {
           "SWPSolution.Data.dll": {}

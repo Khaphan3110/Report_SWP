@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWPSolution.Data", "SWPSolu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWPSolution.Utilities", "SWPSolution.Utilities\SWPSolution.Utilities.csproj", "{E377E0B8-7C0C-4B36-8B2C-024B56C2778C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWPSolution.ViewModels", "SWPSolution.ViewModels\SWPSolution.ViewModels.csproj", "{B252FFBD-F182-4541-8115-6B9BB9651BF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWPSolution.ViewModels", "SWPSolution.ViewModels\SWPSolution.ViewModels.csproj", "{B252FFBD-F182-4541-8115-6B9BB9651BF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWPSolution.BackendApi", "SWPSolution.BackendApi\SWPSolution.BackendApi.csproj", "{863A6393-19AC-4B3A-8DE1-1005565A8C0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{B252FFBD-F182-4541-8115-6B9BB9651BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B252FFBD-F182-4541-8115-6B9BB9651BF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B252FFBD-F182-4541-8115-6B9BB9651BF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

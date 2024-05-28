@@ -99,7 +99,6 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolut.178F3EF7.Up2Date
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\EntityFramework.SqlServer.dll
@@ -151,3 +150,6 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\SWPSolution.Data.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\SWPSolution.Data.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.AssemblyReference.cache
+C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.CopyComplete
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\SWPSolution.ViewModels.pdb

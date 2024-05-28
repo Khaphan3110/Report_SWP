@@ -1,8 +1,9 @@
 ﻿using SWPSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using SWPSolution.ViewModels.Catalog.Product.Public;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
+using Azure.Core;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -13,7 +14,27 @@ namespace SWPSolution.Application.Catalog.Product
         {
             _context = context;
         }
-        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join c in _context.Categories on p.CategoriesId equals c.CategoriesId
+                        join r in _context.Reviews on p.ProductId equals r.ProductId
+                        select new { p, r, c };
+
+            int totalRow = await query.CountAsync();
+            var data = await query.Select(x => new ProductViewModel()
+                {
+                    CategoriesId = x.p.CategoriesId,
+                    ProductName = x.p.ProductName,
+                    Description = x.p.Description,
+                    Price = x.p.Price,
+                    Quantity = x.p.Quantity,
+                }).ToListAsync();
+            return data;
+        }
+
+        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
             //1. Request Join
             var query = from p in _context.Products
@@ -21,9 +42,9 @@ namespace SWPSolution.Application.Catalog.Product
                         join r in _context.Reviews on p.ProductId equals r.ProductId
                         select new { p, r, c };
             //2. Filter
-            if (!string.IsNullOrEmpty(request.categoryId) && request.categoryId.Length > 0)
+            if (!string.IsNullOrEmpty(request.CategoryId) && request.CategoryId.Length > 0)
             {
-                query = query.Where(p => p.c.CategoriesId == request.categoryId);
+                query = query.Where(p => p.c.CategoriesId == request.CategoryId);
             }
             //3. Paging
             int totalRow = await query.CountAsync();
