@@ -15,6 +15,7 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> Register(RegisterRequest request);
 
+        
 
         Task<bool> TestEmail(string emailAddress);
 

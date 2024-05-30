@@ -86,6 +86,7 @@ namespace SWPSolution.Application.System.User
             {
                 var member = new Member()
                 {
+                    MemberId = "",
                     FirstName = request.FirstName,
                     LastName = request.LastName,
                     PhoneNumber = request.PhoneNumber,
@@ -102,6 +103,8 @@ namespace SWPSolution.Application.System.User
             }
             return false;
         }
+
+        
 
         public Task<bool> TestEmail(string emailAddress)
         {

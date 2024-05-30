@@ -340,7 +340,7 @@ namespace SWPSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "774d79ee-9dc7-434c-8147-db8450a380a3",
+                            ConcurrencyStamp = "9d3b599b-af06-4e4f-804d-60c57eb6edd7",
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Toan",
@@ -348,7 +348,7 @@ namespace SWPSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAED++TtEwOD9Pmx0oyUBgL9TjfPFw5v5AuzBvCedl9oodz85HjOTNSs0KiHCRTzSfRw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMRgu/ua9jdDKFcoAncfTrH6iF+oKkeXQ9X5YbojfBQ3xEBRe+QZ/uCbBomlwhLDYA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
