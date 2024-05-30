@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
@@ -19,6 +21,7 @@ namespace SWPSolution.BackendApi.Controllers
 
         [HttpPost("authenticate")]
         [AllowAnonymous]
+
         public async Task<IActionResult> Authenticate([FromForm]LoginRequest request)
         {
             if(!ModelState.IsValid)
@@ -47,6 +50,25 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest("Register failed.");
             }
             return Ok();
+        }
+
+        
+        [HttpGet("emailtest")]
+        public async Task<IActionResult> TestEmail(string emailAddress)
+        {
+            if (string.IsNullOrEmpty(emailAddress))
+            {
+                return BadRequest("Email address is required.");
+            }
+
+            var result = await _userService.TestEmail(emailAddress);
+            if (!result)
+            {
+                return BadRequest("Email send failed.");
+            }
+
+            return Ok("Email sent successfully.");
+
         }
     }
 }

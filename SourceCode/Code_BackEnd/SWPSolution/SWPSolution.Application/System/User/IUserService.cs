@@ -14,6 +14,9 @@ namespace SWPSolution.Application.System.User
         Task<string> Authencate(LoginRequest request);
 
         Task<bool> Register(RegisterRequest request);
- 
+
+
+        Task<bool> TestEmail(string emailAddress);
+
     }
 }

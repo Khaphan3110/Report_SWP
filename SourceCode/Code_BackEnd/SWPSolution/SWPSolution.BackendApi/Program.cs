@@ -1,11 +1,16 @@
+using System.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
+using SWPSolution.ViewModels.System.Users;
+using EmailService = SWPSolution.Application.System.User.EmailService;
+using IEmailService = SWPSolution.Application.System.User.IEmailService;
 
 namespace SWPSolution.BackendApi
 {
@@ -19,12 +24,20 @@ namespace SWPSolution.BackendApi
             builder.Services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<SWPSolutionDBContext>()
                 .AddDefaultTokenProviders();
+            builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(1));
             //Declare DI 
             builder.Services.AddTransient<IPublicProductService, PublicProductService>();
             builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             builder.Services.AddTransient<IUserService, UserService>();
+            
+
+
+            //Add email configs
+            var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
+            builder.Services.AddSingleton(emailConfig);
+            builder.Services.AddScoped<IEmailService, EmailService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
