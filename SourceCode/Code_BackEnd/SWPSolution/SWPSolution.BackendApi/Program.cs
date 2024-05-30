@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Product;
+using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.System.Users;
@@ -38,17 +40,40 @@ namespace SWPSolution.BackendApi
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             // Add Swagger services
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
+            builder.Services.AddSwaggerGen(option =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                option.MapType<string>(() => new OpenApiSchema { Type = "" });
+                option.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth API", Version = "v1" });
+
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Title = "My API",
-                    Version = "v1"
+
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
                 });
             });
 
@@ -78,6 +103,7 @@ namespace SWPSolution.BackendApi
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
