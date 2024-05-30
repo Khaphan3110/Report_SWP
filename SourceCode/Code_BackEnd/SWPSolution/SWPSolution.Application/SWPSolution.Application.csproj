@@ -8,11 +8,13 @@
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.AspNetCore.App" />
+	  <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SWPSolution.Data\SWPSolution.Data.csproj" />
     <ProjectReference Include="..\SWPSolution.Utilities\SWPSolution.Utilities.csproj" />
+    <ProjectReference Include="..\SWPSolution.ViewModels\SWPSolution.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
