@@ -52,7 +52,13 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok();
         }
 
-        
+        [HttpPost]
+        [AllowAnonymous]
+
+        public async Task<IActionResult> ForgotPassword([Required]string email)
+        {
+            throw new NotImplementedException();
+        }
 
 
         [HttpGet("emailtest")]

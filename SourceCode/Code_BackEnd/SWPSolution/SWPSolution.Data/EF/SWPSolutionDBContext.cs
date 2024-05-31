@@ -312,7 +312,8 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("product_ID");
+                .HasColumnName("product_ID")
+                .ValueGeneratedOnAdd();
             entity.Property(e => e.CategoriesId)
                 .HasMaxLength(10)
                 .IsUnicode(false)

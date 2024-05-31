@@ -3,6 +3,7 @@ using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> Register(RegisterRequest request);
 
-        
+       // Task<bool> ForgotPassword([Required]string email);
 
         Task<bool> TestEmail(string emailAddress);
 

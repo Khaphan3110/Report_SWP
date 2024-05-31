@@ -1,14 +1,19 @@
 ﻿
+using Azure.Core;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Asn1.Ocsp;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -16,10 +21,12 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SWPSolution.Application.System.User
 {
     public class UserService : IUserService
     {
+        //private readonly IUrlHelper _urlHelper;
         private readonly SWPSolutionDBContext _context; 
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
@@ -34,6 +41,7 @@ namespace SWPSolution.Application.System.User
             _config = config;
             _context = context;
             _emailService = emailService;
+          //  _urlHelper = url;
         }
 
         public async Task<string> Authencate(LoginRequest request)
@@ -66,7 +74,15 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        
+       // public async Task<bool> ForgotPassword([Required] string email)
+       // {
+        //    var user = await _userManager.FindByEmailAsync(email);
+        //    if (user!=null)
+       //     {
+       //         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+       //         var link = _urlHelper.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
+       //     }
+       // }
 
         public async Task<bool> Register(RegisterRequest request)
         {

@@ -12,7 +12,7 @@ using SWPSolution.Data.Entities;
 namespace SWPSolution.Data.Migrations
 {
     [DbContext(typeof(SWPSolutionDBContext))]
-    [Migration("20240530184630_createDB")]
+    [Migration("20240531082800_createDB")]
     partial class createDB
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SWPSolution.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.5")
+                .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -196,9 +196,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("address_ID");
 
-                    b.Property<Guid?>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("City")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -229,8 +226,6 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("AddressId")
                         .HasName("PK__Address__CAA543F0AA445DBA");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("MemberId");
 
@@ -343,7 +338,7 @@ namespace SWPSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9d3b599b-af06-4e4f-804d-60c57eb6edd7",
+                            ConcurrencyStamp = "533ba7f8-8e95-4273-8c65-8abb80a239d7",
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Toan",
@@ -351,7 +346,7 @@ namespace SWPSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMRgu/ua9jdDKFcoAncfTrH6iF+oKkeXQ9X5YbojfBQ3xEBRe+QZ/uCbBomlwhLDYA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEENsnF6LZD2inuJPrRTXtETeWbJoXa/MLEsYKnU8aOQd+ngE/FayMgsteyyiGDpDsg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -508,9 +503,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("order_ID");
 
-                    b.Property<Guid?>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("MemberId")
                         .HasMaxLength(10)
                         .IsUnicode(false)
@@ -540,8 +532,6 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("OrderId")
                         .HasName("PK__Order__464665E13F0051AC");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("MemberId");
 
@@ -644,9 +634,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("preorder_ID");
 
-                    b.Property<Guid?>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("MemberId")
                         .HasMaxLength(10)
                         .IsUnicode(false)
@@ -673,8 +660,6 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PreorderId")
                         .HasName("PK__PreOrder__C55D7EA295C14F89");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("MemberId");
 
                     b.HasIndex("ProductId");
@@ -690,6 +675,7 @@ namespace SWPSolution.Data.Migrations
             modelBuilder.Entity("SWPSolution.Data.Entities.Product", b =>
                 {
                     b.Property<string>("ProductId")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(10)
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)")
@@ -821,9 +807,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("review_ID");
 
-                    b.Property<Guid?>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Comment")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)")
@@ -850,8 +833,6 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("ReviewId")
                         .HasName("PK__Review__608B39D8185D9A34");
-
-                    b.HasIndex("AppUserId");
 
                     b.HasIndex("MemberId");
 
@@ -919,16 +900,10 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Address", b =>
                 {
-                    b.HasOne("SWPSolution.Data.Entities.AppUser", "AppUser")
-                        .WithMany("Addresses")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("SWPSolution.Data.Entities.Member", "Member")
                         .WithMany("Addresses")
                         .HasForeignKey("MemberId")
                         .HasConstraintName("fk_Address");
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Member");
                 });
@@ -945,10 +920,6 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Order", b =>
                 {
-                    b.HasOne("SWPSolution.Data.Entities.AppUser", "AppUser")
-                        .WithMany("Orders")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("SWPSolution.Data.Entities.Member", "Member")
                         .WithMany("Orders")
                         .HasForeignKey("MemberId")
@@ -958,8 +929,6 @@ namespace SWPSolution.Data.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("PromotionId")
                         .HasConstraintName("fk_order_promotion");
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Member");
 
@@ -995,10 +964,6 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.PreOrder", b =>
                 {
-                    b.HasOne("SWPSolution.Data.Entities.AppUser", "AppUser")
-                        .WithMany("PreOrders")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("SWPSolution.Data.Entities.Member", "Member")
                         .WithMany("PreOrders")
                         .HasForeignKey("MemberId")
@@ -1008,8 +973,6 @@ namespace SWPSolution.Data.Migrations
                         .WithMany("PreOrders")
                         .HasForeignKey("ProductId")
                         .HasConstraintName("fk_PreOrder_Product");
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Member");
 
@@ -1039,10 +1002,6 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Review", b =>
                 {
-                    b.HasOne("SWPSolution.Data.Entities.AppUser", "AppUser")
-                        .WithMany("Reviews")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("SWPSolution.Data.Entities.Member", "Member")
                         .WithMany("Reviews")
                         .HasForeignKey("MemberId")
@@ -1053,22 +1012,9 @@ namespace SWPSolution.Data.Migrations
                         .HasForeignKey("ProductId")
                         .HasConstraintName("fk_review_Product");
 
-                    b.Navigation("AppUser");
-
                     b.Navigation("Member");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("SWPSolution.Data.Entities.AppUser", b =>
-                {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("Orders");
-
-                    b.Navigation("PreOrders");
-
-                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Category", b =>

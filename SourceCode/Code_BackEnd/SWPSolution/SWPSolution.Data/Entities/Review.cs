@@ -22,6 +22,4 @@ public partial class Review
     public virtual Member Member { get; set; }
 
     public virtual Product Product { get; set; }
-
-    public AppUser AppUser { get; set; }
 }

@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SWPSolution.Application.Common
@@ -16,10 +14,11 @@ namespace SWPSolution.Application.Common
         {
             _userContentFolder = Path.Combine(webHostEnvironment.WebRootPath, USER_CONTENT_FOLDER_NAME);
         }
+
         public async Task DeleteFileAsync(string fileName)
         {
             var filePath = Path.Combine(_userContentFolder, fileName);
-            if(File.Exists(filePath))
+            if (File.Exists(filePath))
             {
                 await Task.Run(() => File.Delete(filePath));
             }
@@ -33,6 +32,13 @@ namespace SWPSolution.Application.Common
         public async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)
         {
             var filePath = Path.Combine(_userContentFolder, fileName);
+
+            // Ensure the directory exists
+            if (!Directory.Exists(_userContentFolder))
+            {
+                Directory.CreateDirectory(_userContentFolder);
+            }
+
             using var output = new FileStream(filePath, FileMode.Create);
             await mediaBinaryStream.CopyToAsync(output);
         }

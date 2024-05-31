@@ -22,6 +22,4 @@ public partial class Address
     public string Region { get; set; }
 
     public virtual Member Member { get; set; }
-
-    public AppUser AppUser { get; set; }
 }
