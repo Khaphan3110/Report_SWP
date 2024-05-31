@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,16 +20,20 @@ namespace SWPSolution.Application.System.User
 {
     public class UserService : IUserService
     {
+        private readonly SWPSolutionDBContext _context; 
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config)
+        private readonly IEmailService _emailService;
+        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, SWPSolutionDBContext context, IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
+            _context = context;
+            _emailService = emailService;
         }
 
         public async Task<string> Authencate(LoginRequest request)
@@ -60,8 +66,11 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        
+
         public async Task<bool> Register(RegisterRequest request)
         {
+            var transaction = await _context.Database.BeginTransactionAsync();
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -72,11 +81,47 @@ namespace SWPSolution.Application.System.User
 
             };
             var result = await _userManager.CreateAsync(user, request.Password);
+            
             if(result.Succeeded)
             {
+                var member = new Member()
+                {
+                    MemberId = "",
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    PhoneNumber = request.PhoneNumber,
+                    Email = request.Email,
+                    UserName = request.UserName,
+                    PassWord = request.Password,
+                    RegistrationDate = DateTime.Now,
+                };
+                _context.Members.Add(member);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                
                 return true;
             }
             return false;
+        }
+
+        
+
+        public Task<bool> TestEmail(string emailAddress)
+        {
+            var message =
+                new MessageVM(
+                    new string[] { emailAddress }, "Test", "<h1>Adu Vip</h1>");
+            
+
+            try
+            {
+                _emailService.SendEmail(message);
+                return Task.FromResult(true); // Assume success if no exception is thrown
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false); // Return false if an exception is thrown
+            }
         }
     }
 }
