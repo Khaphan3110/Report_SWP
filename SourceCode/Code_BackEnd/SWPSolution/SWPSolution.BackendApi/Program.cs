@@ -1,4 +1,5 @@
 using System.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +7,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Core;
+using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
+using SWPSolution.Application.Common;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -33,7 +36,10 @@ namespace SWPSolution.BackendApi
             builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
             builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             builder.Services.AddTransient<IUserService, UserService>();
-            
+            builder.Services.AddTransient<IManageProductService, ManageProductService>();
+            builder.Services.AddSingleton<IStorageService, FileStorageService>();
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
+
 
 
             //Add email configs
@@ -41,6 +47,19 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+
+
+            //Add config for required email
+            builder.Services.Configure<IdentityOptions>(opts =>
+                opts.SignIn.RequireConfirmedEmail = true
+            );
+            //Add Authentication
+            builder.Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            });
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();

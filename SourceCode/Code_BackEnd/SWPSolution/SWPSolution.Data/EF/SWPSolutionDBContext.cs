@@ -49,10 +49,31 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-KTRKQV7\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=NORMAN-LAPTOP\\NORMAN;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AppUser>()
+            .Property(u => u.EmailVerificationCode)
+            .IsRequired(false);
+
+        modelBuilder.Entity<AppUser>()
+            .Property(u => u.EmailVerificationExpiry)
+            .IsRequired(false);
+
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
+        {
+            x.UserId,
+            x.RoleId
+        });
+        ;
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+
+
+
         modelBuilder.Entity<Address>(entity =>
         {
             entity.HasKey(e => e.AddressId).HasName("PK__Address__CAA543F0AA445DBA");
@@ -86,15 +107,6 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         modelBuilder.ApplyConfiguration(new AppRoleConfig());
         modelBuilder.ApplyConfiguration(new ProductImageConfig());
 
-        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
-        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
-        {
-            x.UserId, x.RoleId
-        });
-            ;
-        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x =>x.UserId);
-        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
-        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x=> x.UserId);
         
 
         modelBuilder.Entity<Blog>(entity =>
@@ -312,7 +324,8 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("product_ID");
+                .HasColumnName("product_ID")
+                .ValueGeneratedOnAdd();
             entity.Property(e => e.CategoriesId)
                 .HasMaxLength(10)
                 .IsUnicode(false)

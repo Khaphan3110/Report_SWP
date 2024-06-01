@@ -22,15 +22,18 @@ namespace SWPSolution.Application.Catalog.Product
             _storageService = storageService;
         }
 
-        public Task<int> AddImages(int productId, List<FormFile> files)
+        public async Task<string> AddImages(string productId, List<FormFile> files)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(productId);
+            return product.ToString();
         }
 
-        public async Task<int> Create(ProductCreateRequest request)
+        public async Task<string> Create(ProductCreateRequest request)
         {
-            var product = new Data.Entities.Product
+            var product = new Data.Entities.Product()
             {
+                ProductId = "",
+                CategoriesId = request.CategoryId,
                 ProductName = request.ProductName,
                 Quantity = request.Quantity,
                 Price = request.Price,
@@ -53,7 +56,8 @@ namespace SWPSolution.Application.Catalog.Product
                 };
             }
             _context.Products.Add(product);
-            return await _context.SaveChangesAsync();
+             await _context.SaveChangesAsync();
+            return product.ProductId;
         }
 
         public async Task<int> Delete(string productId)
@@ -112,6 +116,12 @@ namespace SWPSolution.Application.Catalog.Product
             };
             return pageResult;
         }
+
+        public Task<ProductViewModel> GetById(string productId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<List<ProductImageViewModel>> GetListImage(int productId)
         {
             throw new NotImplementedException();
@@ -127,6 +137,9 @@ namespace SWPSolution.Application.Catalog.Product
             var product = await _context.Products.FindAsync(request.ProductId);
             if (product == null) throw new SWPException($"Cannot find product with id: {request.ProductId}");
 
+
+            product.ProductId = "";
+            product.CategoriesId = request.CategoriesId;
             product.ProductName = request.ProductName;
             product.Description = request.Description;
             product.CategoriesId = request.CategoriesId;
@@ -151,7 +164,7 @@ namespace SWPSolution.Application.Catalog.Product
             throw new NotImplementedException();
         }
 
-        public async Task<bool> UpdatePrice(int productId, float newPrice)
+        public async Task<bool> UpdatePrice(string productId, float newPrice)
         {
             var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new SWPException($"Cannot find product with id: {productId}");

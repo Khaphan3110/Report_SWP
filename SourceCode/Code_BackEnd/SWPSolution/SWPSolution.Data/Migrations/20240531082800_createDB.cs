@@ -290,8 +290,7 @@ namespace SWPSolution.Data.Migrations
                     Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     district = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Region = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Region = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -313,13 +312,11 @@ namespace SWPSolution.Data.Migrations
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     TotalAmount = table.Column<double>(type: "float", nullable: true),
                     orderStatus = table.Column<bool>(type: "bit", nullable: true),
-                    orderDate = table.Column<DateTime>(type: "date", nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    orderDate = table.Column<DateTime>(type: "date", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Order__464665E13F0051AC", x => x.order_ID);
-                    
                     table.ForeignKey(
                         name: "fk_order_member",
                         column: x => x.member_id,
@@ -362,13 +359,11 @@ namespace SWPSolution.Data.Migrations
                     member_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     preorderDate = table.Column<DateTime>(type: "date", nullable: true),
-                    price = table.Column<double>(type: "float", nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    price = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__PreOrder__C55D7EA295C14F89", x => x.preorder_ID);
-                    
                     table.ForeignKey(
                         name: "fk_PreOrder_Product",
                         column: x => x.product_ID,
@@ -414,13 +409,11 @@ namespace SWPSolution.Data.Migrations
                     member_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     dataReview = table.Column<DateTime>(type: "date", nullable: true),
                     Grade = table.Column<int>(type: "int", nullable: true),
-                    comment = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    comment = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Review__608B39D8185D9A34", x => x.review_ID);
-                    
                     table.ForeignKey(
                         name: "fk_review_Product",
                         column: x => x.product_ID,
@@ -492,12 +485,7 @@ namespace SWPSolution.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AppUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "9d3b599b-af06-4e4f-804d-60c57eb6edd7", "tedu.international@gmail.com", true, "Toan", "Bach", false, null, "tedu.international@gmail.com", "admin", "AQAAAAIAAYagAAAAEMRgu/ua9jdDKFcoAncfTrH6iF+oKkeXQ9X5YbojfBQ3xEBRe+QZ/uCbBomlwhLDYA==", null, false, "", false, "admin" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Address_AppUserId",
-                table: "Address",
-                column: "AppUserId");
+                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "533ba7f8-8e95-4273-8c65-8abb80a239d7", "tedu.international@gmail.com", true, "Toan", "Bach", false, null, "tedu.international@gmail.com", "admin", "AQAAAAIAAYagAAAAEENsnF6LZD2inuJPrRTXtETeWbJoXa/MLEsYKnU8aOQd+ngE/FayMgsteyyiGDpDsg==", null, false, "", false, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_member_ID",
@@ -508,11 +496,6 @@ namespace SWPSolution.Data.Migrations
                 name: "IX_Blog_staff_ID",
                 table: "Blog",
                 column: "staff_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Order_AppUserId",
-                table: "Order",
-                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_member_id",
@@ -540,11 +523,6 @@ namespace SWPSolution.Data.Migrations
                 column: "order_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PreOrder_AppUserId",
-                table: "PreOrder",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PreOrder_member_ID",
                 table: "PreOrder",
                 column: "member_ID");
@@ -563,11 +541,6 @@ namespace SWPSolution.Data.Migrations
                 name: "IX_ProductImages_ProductId",
                 table: "ProductImages",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Review_AppUserId",
-                table: "Review",
-                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Review_member_ID",
@@ -602,6 +575,9 @@ namespace SWPSolution.Data.Migrations
                 name: "AppUserRoles");
 
             migrationBuilder.DropTable(
+                name: "AppUsers");
+
+            migrationBuilder.DropTable(
                 name: "AppUserTokens");
 
             migrationBuilder.DropTable(
@@ -630,9 +606,6 @@ namespace SWPSolution.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Member");

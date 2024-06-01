@@ -11,13 +11,7 @@ namespace SWPSolution.Data.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        public List<Address> Addresses { get; set; }
-
-        public List<Order> Orders { get; set; }
-
-        public List<PreOrder> PreOrders { get; set; }
-
-        public List<Review> Reviews { get; set; }
+        public string EmailVerificationCode { get; set; }
+        public DateTime? EmailVerificationExpiry { get; set; }
     }
 }

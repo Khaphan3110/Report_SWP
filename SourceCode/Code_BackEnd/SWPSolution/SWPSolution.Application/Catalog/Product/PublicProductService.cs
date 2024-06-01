@@ -19,8 +19,8 @@ namespace SWPSolution.Application.Catalog.Product
         {
             var query = from p in _context.Products
                         join c in _context.Categories on p.CategoriesId equals c.CategoriesId
-                        join r in _context.Reviews on p.ProductId equals r.ProductId
-                        select new { p, r, c };
+                        //join r in _context.Reviews on p.ProductId equals r.ProductId
+                        select new { p, c };
 
             int totalRow = await query.CountAsync();
             var data = await query.Select(x => new ProductViewModel()

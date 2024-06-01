@@ -35,7 +35,9 @@ namespace SWPSolution.Data.Extension
                 PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
                 SecurityStamp = string.Empty,
                 FirstName = "Toan",
-                LastName = "Bach"
+                LastName = "Bach",
+                EmailVerificationCode = null,
+                EmailVerificationExpiry = null
             });
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>

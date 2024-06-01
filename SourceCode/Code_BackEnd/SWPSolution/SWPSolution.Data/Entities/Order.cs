@@ -29,5 +29,4 @@ public partial class Order
 
     public virtual Promotion Promotion { get; set; }
 
-    public AppUser AppUser { get; set; }
 }
