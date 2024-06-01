@@ -6,8 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
-import ForgotPasswordForm from "../ForgotPassword/ForgotPasswordForm";
-import SendEmailForm from "../ForgotPassword/SendEmailForm";
 
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
@@ -128,7 +126,6 @@ export default function LoginForm() {
                   ></img>
                 </div>
               </div>
-              <ForgotPasswordForm/>
             </div>
           </div>
         </div>

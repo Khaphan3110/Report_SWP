@@ -3,15 +3,15 @@ import Footer from "./Components/Footer/Footer";
 import ForgotPasswordForm from "./Components/ForgotPassword/ForgotPasswordForm";
 
 import SendEmailForm from "./Components/ForgotPassword/SendEmailForm";
-import Header from "./Components/Header/Header";
 import HomePage from "./Components/HomePage/HomePage";
 import LoginForm from "./Components/Login/LoginForm";
 import RegisterForm from "./Components/Register/RegisterForm";
+import Header from "./Components/Header/Header";
 
 function App() {
   return (
     <>
-      <Header />
+      <Header/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Header" element={<Header />} />

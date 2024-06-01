@@ -20,13 +20,13 @@
     display: none;
 } */
 
-.wraper-form .Forgot-form{
+/* .wraper-form .Forgot-form{
     display: none;
 }
 
 .wraper-form .Change-password-form{
     display: none;
-}
+} */
 
 .L-form form{
     padding: 7px;
@@ -214,6 +214,8 @@
 }
 
 .b-forgot-login button{
+    width: 100%;
+    height: 100%;
     border: 0;
     background-color: transparent;
 }

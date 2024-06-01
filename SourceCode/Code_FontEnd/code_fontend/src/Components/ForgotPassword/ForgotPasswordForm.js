@@ -48,55 +48,74 @@ export default function ForgotPasswordForm() {
   });
 
   return (
-    <div className="Change-password-form">
-      <form onSubmit={formik.handleChange}>
-        <fieldset>
-          <h2>Thay Đổi Mật Khẩu</h2>
+    <section className="L-seccion">
+      <div className="container mx-auto">
+        <div className="wraper-login-page">
+          <div className="Header-login">
+            <h1>Đăng Nhập</h1>
+            <span>Bạn chưa có tài khoảng đăng nhập Đăng ký ?</span>
+            <Link to={"/register"}>tại đây</Link>
+          </div>
+          <div className="row">
+            <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
+              <div className="Change-password-form">
+                <form onSubmit={formik.handleChange}>
+                  <fieldset>
+                    <h2>Thay Đổi Mật Khẩu</h2>
 
-          <div className="charactor-new-password">
-            <p>Password</p>
+                    <div className="charactor-new-password">
+                      <p>Password</p>
+                    </div>
+                    <div className="Change-password-input-place">
+                      <input
+                        type={typeInputForm}
+                        name="inputNewPassword"
+                        placeholder="new password"
+                        value={formik.values.inputNewPassword}
+                        onChange={formik.handleChange}
+                      ></input>
+                      <i className={iconShow} onClick={handlerOnclickIcon}></i>
+                      {formik.errors.inputNewPassword && (
+                        <p className="errorMsg">
+                          {formik.errors.inputNewPassword}
+                        </p>
+                      )}
+                    </div>
+                    <div className="charactor-new-password">
+                      <p>Confirm Password</p>
+                    </div>
+                    <div className="Change-password-input-place">
+                      <input
+                        type={typeInputForm}
+                        name="inputComfirmPassword"
+                        placeholder="mật khẩu mới"
+                        value={formik.values.inputComfirmPassword}
+                        onChange={formik.handleChange}
+                      ></input>
+                      <i className={iconShow} onClick={handlerOnclickIcon}></i>
+                      {formik.errors.inputComfirmPassword && (
+                        <p className="errorMsg">
+                          {formik.errors.inputComfirmPassword}
+                        </p>
+                      )}
+                    </div>
+                    <div className="b-forgot-login">
+                      <button>
+                        <p>Đổi Mật Khẩu</p>
+                      </button>
+                    </div>
+                    <div className="link-quaylai">
+                      <p>
+                        <Link to={"/login"}>Quay Lai</Link>
+                      </p>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
           </div>
-          <div className="Change-password-input-place">
-            <input
-              type={typeInputForm}
-              name="inputNewPassword"
-              placeholder="new password"
-              value={formik.values.inputNewPassword}
-              onChange={formik.handleChange}
-            ></input>
-            <i className={iconShow} onClick={handlerOnclickIcon}></i>
-            {formik.errors.inputNewPassword && (
-              <p className="errorMsg">{formik.errors.inputNewPassword}</p>
-            )}
-          </div>
-          <div className="charactor-new-password">
-            <p>Confirm Password</p>
-          </div>
-          <div className="Change-password-input-place">
-            <input
-              type={typeInputForm}
-              name="inputComfirmPassword"
-              placeholder="mật khẩu mới"
-              value={formik.values.inputComfirmPassword}
-              onChange={formik.handleChange}
-            ></input>
-            <i className={iconShow} onClick={handlerOnclickIcon}></i>
-            {formik.errors.inputComfirmPassword && (
-              <p className="errorMsg">{formik.errors.inputComfirmPassword}</p>
-            )}
-          </div>
-          <div className="b-forgot-login">
-            <button>
-              <p>Đổi Mật Khẩu</p>
-            </button>
-          </div>
-          <div className="link-quaylai">
-            <p>
-                <Link to={"/login"}>Quay Lai</Link>
-            </p>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }
