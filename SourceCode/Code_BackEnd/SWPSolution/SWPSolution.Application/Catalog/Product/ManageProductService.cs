@@ -37,28 +37,34 @@ namespace SWPSolution.Application.Catalog.Product
                 ProductName = request.ProductName,
                 Quantity = request.Quantity,
                 Price = request.Price,
-                Description = request.Description,
-
+                Description = request.Description
             };
-            //Save image
+
+            // Save image
             if (request.ThumbnailImage != null)
             {
                 product.ProductImages = new List<ProductImage>()
-                {
-                    new ProductImage()
-                    {
-                        Caption = "Thumbnail image",
-                        DateCreated = DateTime.Now,
-                        FileSize = request.ThumbnailImage.Length,
-                        ImagePath =await this.SaveFile(request.ThumbnailImage),
-                        SortOrder = 1
-                    }
-                };
+        {
+            new ProductImage()
+            {
+                Caption = "Thumbnail image",
+                DateCreated = DateTime.Now,
+                FileSize = request.ThumbnailImage.Length,
+                ImagePath = await this.SaveFile(request.ThumbnailImage),
+                SortOrder = 1
             }
+        };
+            }
+
             _context.Products.Add(product);
-             await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+            // Reload the entity to get the generated ProductId
+            await _context.Entry(product).ReloadAsync();
+
             return product.ProductId;
         }
+
 
         public async Task<int> Delete(string productId)
         {

@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SWPSolution",
+    "\\SWPSolution\\SWPSolution.Data",
+    "\\SWPSolution\\SWPSolution.Data\\Migrations"
   ],
+  "SelectedNode": "\\SWPSolution\\SWPSolution.Data\\Migrations\\20240531082800_createDB.cs",
   "PreviewInSolutionExplorer": false
 }

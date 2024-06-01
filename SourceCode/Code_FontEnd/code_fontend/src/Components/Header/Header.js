@@ -8,6 +8,8 @@ import shipIcon from "../../assets/images/shippingIcon.png";
 import memberIconDiscount from "../../assets/images/forMember.png";
 import blogImage from "../../assets/images/blogImage.png";
 export default function Header() {
+
+  const userInfor = JSON.parse(localStorage.getItem("userValue"))
   return (
     <>
       <header className="header-menu">
@@ -65,7 +67,7 @@ export default function Header() {
                   </li>
                   <li className="user d-block d-flex">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBhalCi2dSDyJpsj770IdKJ_-jF3jEPsZw7zSLadRYsiivvOOBZClrqkL7kcKnfWvGbQ&usqp=CAU"
+                      src={memberIconDiscount}
                       alt="hình ảnh user"
                       width={32}
                       height={32}
