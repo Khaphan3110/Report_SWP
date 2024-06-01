@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Core;
+using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
 using SWPSolution.Application.System.Admin;
@@ -37,6 +38,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddTransient<IUserService, UserService>();
             builder.Services.AddTransient<IManageProductService, ManageProductService>();
             builder.Services.AddSingleton<IStorageService, FileStorageService>();
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 
 
@@ -45,6 +47,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+
 
             //Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>

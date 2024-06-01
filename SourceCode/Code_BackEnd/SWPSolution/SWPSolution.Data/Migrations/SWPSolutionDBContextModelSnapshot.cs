@@ -286,6 +286,12 @@ namespace SWPSolution.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("EmailVerificationCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EmailVerificationExpiry")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -335,7 +341,7 @@ namespace SWPSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "533ba7f8-8e95-4273-8c65-8abb80a239d7",
+                            ConcurrencyStamp = "ce70be9a-d6b1-427a-be54-6a5a0d9c3b39",
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Toan",
@@ -343,7 +349,7 @@ namespace SWPSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEENsnF6LZD2inuJPrRTXtETeWbJoXa/MLEsYKnU8aOQd+ngE/FayMgsteyyiGDpDsg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJDFXAAe2e7gu3fRtTrTTOFwURBzAnp4JGNwVPTKZnNfk6QeHYwJv9qw1K0gQE4tig==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

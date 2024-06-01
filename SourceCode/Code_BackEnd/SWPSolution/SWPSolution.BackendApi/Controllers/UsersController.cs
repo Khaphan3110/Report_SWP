@@ -51,6 +51,22 @@ namespace SWPSolution.BackendApi.Controllers
             }
             return Ok();
         }
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+            {
+                return BadRequest(new { message = "Token and email must be provided" });
+            }
+
+            var result = await _userService.ConfirmEmail(token, email);
+            if (result)
+            {
+                return Ok(new { message = "Email confirmed successfully" });
+            }
+
+            return BadRequest(new { message = "Email confirmation failed" });
+        }
 
         [HttpPost]
         [AllowAnonymous]

@@ -18,6 +18,8 @@ namespace SWPSolution.Application.System.User
 
        // Task<bool> ForgotPassword([Required]string email);
 
+        Task<bool> ConfirmEmail(string token, string email);
+
         Task<bool> TestEmail(string emailAddress);
 
     }
