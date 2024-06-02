@@ -1,6 +1,7 @@
 // src/components/Footer.js
 import React from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 const Footer = () => {
   return (
     <footer className="bg-light text-center text-lg-start">

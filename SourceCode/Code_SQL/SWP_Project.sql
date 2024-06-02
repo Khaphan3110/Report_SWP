@@ -789,3 +789,91 @@ select * from Blog;
 SELECT * 
 FROM Blog bl
 JOIN staff st ON bl.staff_ID = st.staff_ID;
+
+CREATE TABLE staff (
+    staff_ID VARCHAR(10) PRIMARY KEY NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    username VARCHAR(50),
+    password VARCHAR(50),
+    fullName NVARCHAR(50),
+    Email VARCHAR(255),
+    phone TEXT
+);
+GO
+
+CREATE OR ALTER PROCEDURE generate_staff_id
+    @role VARCHAR(20),
+    @generated_staff_id VARCHAR(10) OUTPUT
+AS
+BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @auto_increment INT;
+
+    BEGIN TRANSACTION;
+
+    SELECT @auto_increment = ISNULL(MAX(CAST(RIGHT(staff_ID, 3) AS INT)), 0)
+    FROM staff
+    WHERE role = @role
+    AND SUBSTRING(staff_ID, 4, 2) = @month
+    AND SUBSTRING(staff_ID, 6, 2) = @year;
+
+    SET @auto_increment = @auto_increment + 1;
+
+    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
+
+    SET @generated_staff_id = CONCAT(CASE WHEN @role = 'staffmember' THEN 'SM' ELSE 'SA' END, @month, @year, @formatted_auto_increment);
+
+    COMMIT TRANSACTION;
+END;
+GO
+
+CREATE OR ALTER TRIGGER trg_generate_staff_id
+ON staff
+INSTEAD OF INSERT
+AS
+BEGIN
+    CREATE TABLE #TempStaff (
+        staff_ID VARCHAR(10),
+        role VARCHAR(20),
+        username VARCHAR(50),
+        password VARCHAR(50),
+        fullName NVARCHAR(50),
+        Email VARCHAR(255),
+        phone TEXT
+    );
+
+    DECLARE @new_staff_ID VARCHAR(10);
+    DECLARE @role VARCHAR(20);
+
+    INSERT INTO #TempStaff (staff_ID, role, username, password, fullName, Email, phone)
+    SELECT
+        CASE 
+            WHEN i.role = 'staffmember' THEN 'SM' 
+            ELSE 'SA' 
+        END + FORMAT(GETDATE(), 'MMyy') + RIGHT('000' + CAST(ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS VARCHAR(3)), 3),
+        i.role,
+        i.username,
+        i.password,
+        i.fullName,
+        i.Email,
+        i.phone
+    FROM inserted i;
+
+    INSERT INTO staff (staff_ID, role, username, password, fullName, Email, phone)
+    SELECT staff_ID, role, username, password, fullName, Email, phone FROM #TempStaff;
+
+    DROP TABLE #TempStaff;
+END;
+GO
+
+select * from staff
+INSERT INTO staff (role, username, password, fullName, Email, phone) VALUES
+('staffmember', 'jdoe', 'password123', 'John Doe', 'jdoe@example.com', '123-456-7890'),
+('staffmember', 'bwilliams', 'password789', 'Bob Williams', 'bwilliams@example.com', '345-678-9012'),
+('staffmember', 'dlee', 'password202', 'David Lee', 'dlee@example.com', '567-890-1234');
+
+INSERT INTO staff (role, username, password, fullName, Email, phone) VALUES
+('staffadmin', 'asmith', 'password456', 'Alice Smith', 'asmith@example.com', '678-901-2345'),
+('staffadmin', 'jjones', 'password789', 'Jack Jones', 'jjones@example.com', '890-123-4567');
+select * from staff;

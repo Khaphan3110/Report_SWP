@@ -7,6 +7,8 @@ import HomePage from "./Components/HomePage/HomePage";
 import LoginForm from "./Components/Login/LoginForm";
 import RegisterForm from "./Components/Register/RegisterForm";
 import Header from "./Components/Header/Header";
+import AuthenEmail from "./Components/Authen/AuthenEmail";
+import Content from "./Components/Content/Content";
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/Header" element={<Header />} />
         <Route path="/Footer" element={<Footer />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/Content" element={<Content/>}/>
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} />
