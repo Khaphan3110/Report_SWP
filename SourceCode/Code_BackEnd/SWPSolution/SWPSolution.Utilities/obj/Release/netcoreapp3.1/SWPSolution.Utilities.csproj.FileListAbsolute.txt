@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.deps.json
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.pdb
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfoInputs.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfo.cs
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.sourcelink.json
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.pdb
+=======
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.deps.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.dll
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Release\netcoreapp3.1\SWPSolution.Utilities.pdb
@@ -8,3 +20,4 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utili
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.sourcelink.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.dll
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Release\netcoreapp3.1\SWPSolution.Utilities.pdb
+>>>>>>> 2d040d2f4948dfd4051e2de1269ea426d931231c

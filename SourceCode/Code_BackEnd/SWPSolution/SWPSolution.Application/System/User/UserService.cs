@@ -83,12 +83,51 @@ namespace SWPSolution.Application.System.User
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
             if (user == null) return false;
 
+<<<<<<< HEAD
             user.EmailConfirmed = true;
             user.EmailVerificationCode = null;
             user.EmailVerificationExpiry = null;
             var result = await _userManager.UpdateAsync(user);
 
             return result.Succeeded;
+=======
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                user.EmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.EmailVerificationExpiry = null;
+                var result = await _userManager.UpdateAsync(user);
+
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+
+                var member = new Member()
+                {
+                    MemberId = "", // Assign a valid MemberId
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    PassWord = user.TemporaryPassword, // Assuming PasswordHash is stored in AppUser
+                    RegistrationDate = DateTime.Now,
+                };
+                _context.Members.Add(member);
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+>>>>>>> a10698748190bff25b31c3beefc383314d59336b
         }
 
 
@@ -104,7 +143,6 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            var transaction = await _context.Database.BeginTransactionAsync();
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -112,48 +150,36 @@ namespace SWPSolution.Application.System.User
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
+                TemporaryPassword = request.Password,
+                EmailConfirmed = false, // Ensure the email is marked as not confirmed
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 
+            return result.Succeeded;
+        }
+
+        public async Task<bool> SendOtp(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return false;
+
+            // Generate OTP
+            var otp = new Random().Next(100000, 999999).ToString();
+
+            // Save OTP and expiration to database
+            user.EmailVerificationCode = otp;
+            user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
+            var result = await _userManager.UpdateAsync(user);
+
             if (result.Succeeded)
             {
-                var member = new Member()
-                {
-                    MemberId = "",
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    PhoneNumber = request.PhoneNumber,
-                    Email = request.Email,
-                    UserName = request.UserName,
-                    PassWord = request.Password,
-                    RegistrationDate = DateTime.Now,
-                };
-                _context.Members.Add(member);
-                await _context.SaveChangesAsync();
-
-                // Generate OTP
-                var otp = new Random().Next(100000, 999999).ToString();
-
-                // Save OTP and expiration to database
-                user.EmailVerificationCode = otp;
-                user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
-                await _userManager.UpdateAsync(user);
-
                 // Send OTP via email
                 var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
                 _emailService.SendEmail(message);
-
-                await transaction.CommitAsync();
-                return true;
             }
 
-            return false;
+            return result.Succeeded;
         }
-
-
-
-
-
         public Task<bool> TestEmail(string emailAddress)
         {
             var message =

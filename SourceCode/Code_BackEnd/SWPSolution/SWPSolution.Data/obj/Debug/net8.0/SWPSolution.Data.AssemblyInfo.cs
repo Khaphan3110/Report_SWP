@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1da6e2b561039044e5a7e62193bfc86b23803127")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5a4ad0bb2b5fb12ef539fd935a44b5fff718ec4")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
