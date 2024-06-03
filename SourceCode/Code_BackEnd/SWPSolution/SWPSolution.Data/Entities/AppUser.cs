@@ -13,5 +13,6 @@ namespace SWPSolution.Data.Entities
         public string LastName { get; set; }
         public string EmailVerificationCode { get; set; }
         public DateTime? EmailVerificationExpiry { get; set; }
+        public string TemporaryPassword { get; set; }
     }
 }
