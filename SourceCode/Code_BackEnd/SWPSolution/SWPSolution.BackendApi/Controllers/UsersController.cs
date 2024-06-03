@@ -14,7 +14,7 @@ namespace SWPSolution.BackendApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService) 
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
@@ -22,18 +22,18 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
 
-        public async Task<IActionResult> Authenticate([FromForm]LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromForm] LoginRequest request)
         {
-            if(!ModelState.IsValid)
-            { 
+            if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
             }
             var resultToken = await _userService.Authencate(request);
-            if(string.IsNullOrEmpty(resultToken))
-                {
+            if (string.IsNullOrEmpty(resultToken))
+            {
                 return BadRequest("Username or password is incorrect.");
-                }
-            return Ok(new {token  = resultToken});
+            }
+            return Ok(new { token = resultToken });
         }
 
         [HttpPost("register")]
@@ -45,33 +45,61 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _userService.Register(request);
-            if (!result )
-            {
-                return BadRequest("Register failed.");
-            }
-            return Ok();
-        }
-        [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string token, string email)
-        {
-            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
-            {
-                return BadRequest(new { message = "Token and email must be provided" });
-            }
-
-            var result = await _userService.ConfirmEmail(token, email);
             if (result)
             {
-                return Ok(new { message = "Email confirmed successfully" });
+                var otpResult = await _userService.SendOtp(request.Email);
+                if (otpResult)
+                {
+                    return Ok("Registration successful. OTP sent to your email.");
+                }
+                else
+                {
+                    return StatusCode(500, "Registration successful, but failed to send OTP.");
+                }
+            }
+            else
+            {
+                return BadRequest("Registration failed.");
+            }
+        }
+
+        [HttpPost("SendOTP")]
+        public async Task<IActionResult> SendOTP(string email)
+        {
+            var otpResult = await _userService.SendOtp(email);
+            if(otpResult)
+            {
+                return Ok("OTP sent to your email.");
+            }
+            else
+            {
+                return BadRequest("Failed to send OTP.");
+            }
+        }
+
+
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(string otp)
+        {
+            if (string.IsNullOrEmpty(otp))
+            {
+                return BadRequest(new { message = "OTP must be provided" });
             }
 
-            return BadRequest(new { message = "Email confirmation failed" });
+            var result = await _userService.ConfirmEmail(otp);
+            if (result)
+            {
+                return Ok(new { success = true, message = "Email confirmed successfully" });
+            }
+
+            return BadRequest(new { success = false, message = "Email confirmation failed" });
         }
 
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<IActionResult> ForgotPassword([Required]string email)
+        public async Task<IActionResult> ForgotPassword([Required] string email)
         {
             throw new NotImplementedException();
         }
