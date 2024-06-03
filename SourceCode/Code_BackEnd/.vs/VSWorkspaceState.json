@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SWPSolution",
+    "\\SWPSolution\\SWPSolution.Data",
+    "\\SWPSolution\\SWPSolution.Data\\Migrations"
   ],
+  "SelectedNode": "\\SWPSolution\\SWPSolution.Data\\Migrations\\20240601030025_AddEmailVerificationCodeAndExpiry.Designer.cs",
   "PreviewInSolutionExplorer": false
 }
