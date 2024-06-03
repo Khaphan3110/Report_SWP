@@ -13,14 +13,22 @@ import Content from "./Components/Content/Content";
 function App() {
   return (
     <>
-      <Header/>
+      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Header" element={<Header />} />
         <Route path="/Footer" element={<Footer />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/Content" element={<Content/>}/>
+        <Route path="/authenticate" element={<LoginForm />} />
+        <Route path="/Content" element={<Content />} />
         <Route path="/register" element={<RegisterForm />} />
+        <Route
+          path="/authenOTP"
+          element={
+            <RegisterForm>
+              <AuthenEmail />
+            </RegisterForm> 
+          }
+        />
         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} />
         {/* <Route path="/FAQ" element={<FAQ />} /> */}

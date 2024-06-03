@@ -45,7 +45,7 @@ export default function Header() {
                   <input type="hidden" name="type" value={"???"}></input>
                   <span className="icon-search">
                     <button>
-                      <i class="fa-solid fa-magnifying-glass"></i>
+                      <i className="fa-solid fa-magnifying-glass"></i>
                     </button>
                   </span>
                 </form>

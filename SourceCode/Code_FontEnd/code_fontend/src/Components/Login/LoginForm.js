@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
+import { userLogin } from "../../Service/UserService/UserService";
 
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
@@ -24,20 +25,23 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      UserEmail: "",
+      UserName: "",
+      Password: "",
     },
 
     validationSchema: Yup.object({
-      UserEmail: Yup.string()
+      UserName: Yup.string()
         .required("nhập email để đăng nhập!")
-        .matches(
-          /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-          "vd: blabla@gmail.com"
-        ),
+        .matches(/^\S+$/, "Không có khoảng trắng"),
     }),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      let userLoginInfor = await userLogin(values.UserName, values.Password);
+      console.log(userLoginInfor.data);
+      if (userLoginInfor.data) {
+        navigate("/");
+      }
     },
   });
 
@@ -73,32 +77,34 @@ export default function LoginForm() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="L-form">
-                <form method="post" onChange={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit}>
                   <div>
                     <p>
-                      Email <span>*</span>
+                      Tên đăng nhập <span>*</span>
                     </p>
                     <div className="L-input-place">
                       <input
                         type="text"
-                        name="UserEmail"
+                        name="UserName"
                         placeholder="Input your email"
-                        value={formik.values.UserEmail}
+                        value={formik.values.UserName}
                         onChange={formik.handleChange}
                       ></input>
-                      {formik.errors.UserEmail && (
-                        <p className="errorMsg">{formik.errors.UserEmail}</p>
-                      )}
                     </div>
+                    {formik.errors.UserName && (
+                      <p className="errorMsg">{formik.errors.UserName}</p>
+                    )}
                   </div>
                   <p>
-                    password <span>*</span>
+                    Mật Khẩu <span>*</span>
                   </p>
                   <div className="L-input-place">
                     <input
                       type={typeInputForm}
-                      name="password"
-                      placeholder="Input your password"
+                      name="Password"
+                      placeholder="nhập mật khẩu của bạn"
+                      value={formik.values.Password}
+                      onChange={formik.handleChange}
                     ></input>
                     <i className={iconShow} onClick={handlerOnclickIcon}></i>
                   </div>

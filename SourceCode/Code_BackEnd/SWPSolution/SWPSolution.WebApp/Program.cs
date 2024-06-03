@@ -13,7 +13,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2_NET1811", build =>
+{
+    build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+}));
+
 app.UseHttpsRedirection();
+app.UseCors("SWP_GROUP2_NET1811");
 app.UseStaticFiles();
 
 app.UseRouting();

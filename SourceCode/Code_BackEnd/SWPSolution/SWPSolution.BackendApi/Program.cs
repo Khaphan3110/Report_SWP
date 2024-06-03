@@ -24,6 +24,9 @@ namespace SWPSolution.BackendApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddControllers();
+
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
             builder.Services.AddIdentity<AppUser, AppRole>()
@@ -47,6 +50,12 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+
+            //Cross policy
+            builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2_NET1811", build =>
+            {
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }));
 
 
             //Add config for required email
@@ -118,7 +127,11 @@ namespace SWPSolution.BackendApi
                 app.UseHsts();
             }
 
+            
+
+
             app.UseHttpsRedirection();
+            app.UseCors("SWP_GROUP2_NET1811");
             app.UseStaticFiles();
 
             app.UseRouting();

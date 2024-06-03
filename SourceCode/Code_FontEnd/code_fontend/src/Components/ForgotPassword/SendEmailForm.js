@@ -4,9 +4,9 @@ import "../Login/LoginForm.css";
 import { Link } from "react-router-dom";
 import { formik, useFormik } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 export default function SendEmailForm() {
-  const navigator = useNavigate()
+  const navigator = useNavigate();
   const formik = useFormik({
     initialValues: {
       inputEmailForgot: "",
@@ -23,13 +23,12 @@ export default function SendEmailForm() {
 
     onSubmit: (values) => {
       console.log(values);
-      
     },
   });
 
   const handleForgotPassword = () => {
     navigator("/ForgotPassword");
-  }
+  };
 
   return (
     <section className="L-seccion">
@@ -58,10 +57,13 @@ export default function SendEmailForm() {
                         value={formik.values.inputEmailForgot}
                         onChange={formik.handleChange}
                       ></input>
-                      {formik.errors.UserEmail && (
-                        <p className="errorMsg">{formik.errors.UserEmail}</p>
-                      )}
+                      {formik.errors.inputEmailForgot && (
+                      <p className="errorMsg">
+                        {formik.errors.inputEmailForgot}
+                      </p>
+                    )}
                     </div>
+                    
                     <div className="charactor-num-from-email">
                       <p>
                         Nhấn vào link này để gửi code? <a href="#">Gửi Code</a>

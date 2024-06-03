@@ -8,14 +8,15 @@ import {
   useNavigate
 } from "react-router-dom";
 import * as Yup from "yup";
+
 import "./RegisterForm.css";
-import axious from "axios"
+import { userRegister } from "../../Service/UserService/UserService";
 export default function RegisterForm() {
-  const [selectDate, setSelectDate] = useState(null); //dùng cho ngày tháng
+  // const [selectDate, setSelectDate] = useState(null); //dùng cho ngày tháng
   const [typeInputForm, setTypeInputForm] = useState("password"); // dùng để thay đổi type của input pasword
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"]; //icon eyeoff eye
   const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]); //set lại icon
-  const navigateHome = useNavigate();
+  const navigate = useNavigate();
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -37,7 +38,7 @@ export default function RegisterForm() {
       FirstName: "",
       Email: "",
       Password: "",
-      UserName: "",
+      UserName : "",
       ConfirmPassword: "",
       PhoneNumber: "",
       // newSelectDate: selectDate,
@@ -55,33 +56,34 @@ export default function RegisterForm() {
           /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           "vd: blabla@gmail.com"
         ),
-      UserName: Yup.string().required("Không được bỏ trống tên đăng nhập!"),
+        UserName : Yup.string().required("Không được bỏ trống tên đăng nhập!").matches(/^\S{8,}$/,"lơn hơn 7 ký tự,không có khoảng cách"),
       Password: Yup.string()
         .required("không được bỏ trống mật khẩu!")
         .matches(
-          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,$/,
-          "Phải lớn hơn 7 lý tự và có 1 chữ cái in hoa và 1 ký tự đặt biệt và 1 chữ số"
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[^\s]{8,}$/,
+          "lớn hơn 7 ký tự ,1 chữ cái in hoa, 1 thường và 1 ký tự đặt biệt và 1 chữ số"
         ),
       ConfirmPassword: Yup.string()
         .required("không được bỏ trống xác nhận mật khẩu!")
-        .oneOf([Yup.ref("password"), null], "mật khẩu không trùng khớp"),
+        .oneOf([Yup.ref("Password"), null], "mật khẩu không trùng khớp"),
       PhoneNumber: Yup.string()
         .required("không được bỏ trống số điện thoại!")
         .matches(/^\d{10,}$/, "phải nhập chữ số kh được nhập ký tự"),
     }),
 
-    onSubmit: (values) => {
-      axious.post(("https://localhost:44319/api/Users/register")).then((res) => {
-        if(res) {
-          navigateHome("/");
-        }
-      }).catch((error) => {
-          console.log("There have something wrong when post data!",error);
-      })
+    onSubmit: async (values) => {
+      //  let userInfor = JSON.parse(values)
+      alert("Tao")
+       let userRegit = await userRegister(values.FirstName,values.LastName,values.Email,values.PhoneNumber,values.UserName,values.Password ,values.ConfirmPassword);
+       console.log(values)
+       if(userRegit){
+         navigate("/authenOTP");
+       } else {
+         console.log(userRegit.errors)
+       }
     },
   });
 
-  console.log(formik.values);
   return (
     <section>
       <div className="container mx-auto">
@@ -148,11 +150,11 @@ export default function RegisterForm() {
                     type="text"
                     name="UserName"
                     placeholder="tên đăng nhâp "
-                    value={formik.values.UserName}
+                    value={formik.values.UserName }
                     onChange={formik.handleChange}
                   ></input>
-                  {formik.errors.UserName && (
-                    <p className="errosMsg">{formik.errors.UserName}</p>
+                  {formik.errors.UserName  && (
+                    <p className="errosMsg">{formik.errors.UserName }</p>
                   )}
                 </div>
                 <div className="R-name">
@@ -167,7 +169,7 @@ export default function RegisterForm() {
                     onChange={formik.handleChange}
                   ></input>
                   {formik.errors.Password && (
-                    <p className="errosMsg">{formik.errors.Password}</p>
+                    <p className="errosMsg" >{formik.errors.Password}</p>
                   )}
                   <i className={iconShow} onClick={handlerOnclickIcon}></i>
                 </div>

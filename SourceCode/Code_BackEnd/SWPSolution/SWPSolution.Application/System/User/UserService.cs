@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -77,20 +78,17 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<bool> ConfirmEmail(string otp, string email)
+        public async Task<bool> ConfirmEmail(string otp)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
             if (user == null) return false;
 
-            if (user.EmailVerificationCode == otp && user.EmailVerificationExpiry > DateTime.Now)
-            {
-                user.EmailConfirmed = true;
-                user.EmailVerificationCode = null;
-                user.EmailVerificationExpiry = null;
-                var result = await _userManager.UpdateAsync(user);
-                return result.Succeeded;
-            }
-            return false;
+            user.EmailConfirmed = true;
+            user.EmailVerificationCode = null;
+            user.EmailVerificationExpiry = null;
+            var result = await _userManager.UpdateAsync(user);
+
+            return result.Succeeded;
         }
 
 
