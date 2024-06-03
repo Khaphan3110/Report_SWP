@@ -5,6 +5,14 @@
     "\\SWPSolution\\SWPSolution.Data",
     "\\SWPSolution\\SWPSolution.Data\\Migrations"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\SWPSolution\\SWPSolution.Data\\Migrations\\20240601030025_AddEmailVerificationCodeAndExpiry.Designer.cs",
+=======
+<<<<<<< HEAD
+  "SelectedNode": "\\SWPSolution\\SWPSolution.Data\\Migrations\\20240531082800_createDB.cs",
+=======
+  "SelectedNode": "\\SWPSolution\\SWPSolution.Data\\Migrations\\20240601030025_AddEmailVerificationCodeAndExpiry.Designer.cs",
+>>>>>>> feature/smtp_contact
+>>>>>>> 2d040d2f4948dfd4051e2de1269ea426d931231c
   "PreviewInSolutionExplorer": false
 }

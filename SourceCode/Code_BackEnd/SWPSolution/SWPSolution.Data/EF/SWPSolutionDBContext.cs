@@ -324,8 +324,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("product_ID")
-                .ValueGeneratedOnAdd();
+                .HasColumnName("product_ID");
             entity.Property(e => e.CategoriesId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -344,6 +343,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasForeignKey(d => d.CategoriesId)
                 .HasConstraintName("fk_Product_categories");
         });
+
 
         modelBuilder.Entity<Promotion>(entity =>
         {

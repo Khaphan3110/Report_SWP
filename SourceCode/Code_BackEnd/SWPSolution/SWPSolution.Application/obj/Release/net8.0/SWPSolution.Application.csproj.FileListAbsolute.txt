@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.deps.json
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.runtimeconfig.json
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.dll
@@ -20,3 +21,27 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\ref\SWPSolution.Application.dll
+=======
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.deps.json
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.runtimeconfig.json
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Application.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Data.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Utilities.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.ViewModels.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Data.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.Utilities.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Release\net8.0\SWPSolution.ViewModels.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.csproj.AssemblyReference.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.GeneratedMSBuildEditorConfig.editorconfig
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.AssemblyInfoInputs.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.AssemblyInfo.cs
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.csproj.CoreCompileInputs.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.sourcelink.json
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolut.868DFB74.Up2Date
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\refint\SWPSolution.Application.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\SWPSolution.Application.genruntimeconfig.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Release\net8.0\ref\SWPSolution.Application.dll
+>>>>>>> 2d040d2f4948dfd4051e2de1269ea426d931231c

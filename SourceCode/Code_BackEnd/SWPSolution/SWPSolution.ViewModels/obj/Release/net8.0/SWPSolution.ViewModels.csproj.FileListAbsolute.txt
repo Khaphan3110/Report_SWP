@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.deps.json
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.pdb
@@ -11,3 +12,18 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\refint\SWPSolution.ViewModels.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\ref\SWPSolution.ViewModels.dll
+=======
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.deps.json
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Release\net8.0\SWPSolution.ViewModels.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.csproj.AssemblyReference.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.AssemblyInfoInputs.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.AssemblyInfo.cs
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.csproj.CoreCompileInputs.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.sourcelink.json
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\refint\SWPSolution.ViewModels.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\SWPSolution.ViewModels.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Release\net8.0\ref\SWPSolution.ViewModels.dll
+>>>>>>> 2d040d2f4948dfd4051e2de1269ea426d931231c

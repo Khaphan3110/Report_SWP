@@ -20,13 +20,13 @@
     display: none;
 } */
 
-.wraper-form .Forgot-form{
+/* .wraper-form .Forgot-form{
     display: none;
 }
 
 .wraper-form .Change-password-form{
     display: none;
-}
+} */
 
 .L-form form{
     padding: 7px;
@@ -70,15 +70,16 @@
 }
 
 .L-input-place input::placeholder{
-    color:  #dadada;
+    color:  #E1E1E1;
 }
 
 .L-input-place input:focus{
-    box-shadow: 0 0 20px 5px #E1E1E1;
+    box-shadow: 0 0 10px 5px #E1E1E1;
 }
 
 .link-Fogot-password{
     display: flex;
+    justify-content: space-between;
 }
 
 .link-Fogot-password p{
@@ -91,7 +92,7 @@
     cursor: pointer;
 }
 
-.link-Fogot-password a:focus{
+.link-Fogot-password a:hover{
     text-decoration: underline;
 }
 
@@ -123,13 +124,19 @@
 
 .b-form-login-google  {
     text-align: center;
-    background-color: #FBD947;
+    height: 48px;
+    /* background-color: #FBD947; */
     border-radius: 25px;
-    margin: 10px 0;
     cursor: pointer;
+    border: 1px solid #cac8c8;
+    border-radius: 25px;
+    position: relative;
+    margin-bottom: 15px;
 }
 
 .b-form-login-google button {
+    width: 100%;
+    height: 100%;
     padding: 0;
     background-color: transparent;
     border: 0;
@@ -145,6 +152,18 @@
     button{
         color: white;
     }
+}
+
+.hr{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.b-form-login-google img{
+    position: absolute;
+    right: 30%;
+    top: 8px;
 }
 
 .Forgot-form {
@@ -178,7 +197,7 @@
      outline: none;
 }
 .Forgot-input-place input:focus{
-        box-shadow: 0 0 20px 5px #E1E1E1;  
+        box-shadow: 0 0 10px 5px #E1E1E1;  
 }
 .b-forgot-login{
     background-color: #FBD947;
@@ -195,6 +214,8 @@
 }
 
 .b-forgot-login button{
+    width: 100%;
+    height: 100%;
     border: 0;
     background-color: transparent;
 }
@@ -223,24 +244,32 @@
     text-decoration: underline;
 }
 
-.charactor-num-from-email p {
-    margin: 0;
+
+.charactor-num-from-email p a {
+    color: #F05A72;
+    text-decoration: none;
 }
+
+.charactor-num-from-email p a:hover {
+    text-decoration: underline;
+}
+
 
 .charactor-new-password p{
     margin: 0;
 }
 
 .num-from-Email {
-    height: 50px;
+    height: 45px;
     width: 100%;
     border: 1px solid #E1E1E1;
     margin-top: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 .num-from-Email input:focus{
-    box-shadow: 0 0 20px 5px #E1E1E1;
+    box-shadow: 0 0 10px 5px #E1E1E1;
 }
 
 .num-from-Email input{
@@ -275,11 +304,13 @@
 
 
 .Change-password-input-place{
-    height: 50px;
-    margin-bottom: 15px;
+    height: 45px;
+    margin-bottom: 30px;
     margin-top: 4px;
     border: 1px solid #E1E1E1;
     position: relative;
+    border-radius: 5px;
+
 }
 
 .Change-password-input-place i{
@@ -305,8 +336,20 @@
 }
 
 .Change-password-input-place input:focus{
-    box-shadow: 0 0 20px 5px #E1E1E1;
+    box-shadow: 0 0 10px 5px #E1E1E1;
 }
 
 
+.errorMsg{
+    color: red;
+}
 
+.remmberME{
+    position: relative;
+}
+
+.remmberME input{
+    position:absolute;
+    right: -20px;
+    top: 7px;
+}

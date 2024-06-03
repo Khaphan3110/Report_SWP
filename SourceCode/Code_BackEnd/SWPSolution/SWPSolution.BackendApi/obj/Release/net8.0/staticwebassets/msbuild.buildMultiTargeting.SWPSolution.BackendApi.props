@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SWPSolution.BackendApi.props" />
+</Project>
