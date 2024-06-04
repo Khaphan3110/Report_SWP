@@ -18,20 +18,29 @@ namespace SWPSolution.Application.Catalog.Categories
             _context = context;
            
         }
-        public async Task<string> Create(CategoryCreateRequest request)
+        public async Task<bool> Create(CategoryCreateRequest request)
         {
-            var category = new Data.Entities.Category()
+            try
             {
-                CategoriesId = request.CategoriesId,
-                BrandName = request.BrandName,
-                AgeRange = request.AgeRange,
-                SubCategories = request.SubCategories,
-                PackageType = request.PackageType,
-                Source = request.Source
-            };
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
-            return category.CategoriesId;
+                var category = new Data.Entities.Category()
+                {
+                    CategoriesId = "",
+                    BrandName = request.BrandName,
+                    AgeRange = request.AgeRange,
+                    SubCategories = request.SubCategories,
+                    PackageType = request.PackageType,
+                    Source = request.Source
+                };
+
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex) here as needed
+                return false;
+            }
         }
     }
 }

@@ -19,10 +19,9 @@ namespace SWPSolution.Application.System.User
        // Task<bool> ForgotPassword([Required]string email);
 
         Task<bool> ConfirmEmail(string otp);
-<<<<<<< HEAD
-=======
+
         Task<bool> SendOtp(string email);
->>>>>>> a10698748190bff25b31c3beefc383314d59336b
+
 
         Task<bool> TestEmail(string emailAddress);
 

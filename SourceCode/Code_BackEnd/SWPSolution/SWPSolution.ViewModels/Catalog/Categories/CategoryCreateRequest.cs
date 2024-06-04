@@ -8,8 +8,6 @@ namespace SWPSolution.ViewModels.Catalog.Categories
 {
     public class CategoryCreateRequest
     {
-        public string CategoriesId { get; set; }
-
         public string BrandName { get; set; }
 
         public string AgeRange { get; set; }

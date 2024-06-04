@@ -45,47 +45,13 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _userService.Register(request);
-<<<<<<< HEAD
+
             if (!result )
             {
                 return BadRequest("Register failed.");
             }
             return Ok();
         }
-
-        [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string otp)
-        {
-            if (string.IsNullOrEmpty(otp))
-            {
-                return BadRequest(new { message = "OTP must be provided" });
-            }
-
-            var result = await _userService.ConfirmEmail(otp);
-            if (result)
-            {
-                return Ok(new { success = true, message = "Email confirmed successfully" });
-            }
-
-=======
-            if (result)
-            {
-                var otpResult = await _userService.SendOtp(request.Email);
-                if (otpResult)
-                {
-                    return Ok("Registration successful. OTP sent to your email.");
-                }
-                else
-                {
-                    return StatusCode(500, "Registration successful, but failed to send OTP.");
-                }
-            }
-            else
-            {
-                return BadRequest("Registration failed.");
-            }
-        }
-
         [HttpPost("SendOTP")]
         public async Task<IActionResult> SendOTP(string email)
         {
@@ -100,8 +66,6 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-
-
         [HttpGet("ConfirmEmail")]
         public async Task<IActionResult> ConfirmEmail(string otp)
         {
@@ -116,7 +80,6 @@ namespace SWPSolution.BackendApi.Controllers
                 return Ok(new { success = true, message = "Email confirmed successfully" });
             }
 
->>>>>>> a10698748190bff25b31c3beefc383314d59336b
             return BadRequest(new { success = false, message = "Email confirmation failed" });
         }
 
