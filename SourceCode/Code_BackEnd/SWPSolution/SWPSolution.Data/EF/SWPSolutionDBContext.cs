@@ -49,7 +49,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=NORMAN-LAPTOP\\NORMAN;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-KTRKQV7\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -107,7 +107,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         modelBuilder.ApplyConfiguration(new AppRoleConfig());
         modelBuilder.ApplyConfiguration(new ProductImageConfig());
 
-        
+
 
         modelBuilder.Entity<Blog>(entity =>
         {
@@ -145,12 +145,11 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.CategoriesId).HasName("PK__Categori__92BFEBD24C3D480D");
 
-            entity.ToTable(tb => tb.HasTrigger("trg_generate_categories_id"));
-
             entity.Property(e => e.CategoriesId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("categories_ID");
+            .HasMaxLength(50) // Adjust the maximum length as needed
+            .IsUnicode(false)
+            .HasColumnName("categories_ID");
+            entity.ToTable(tb => tb.HasTrigger("trg_generate_categories_id"));
             entity.Property(e => e.AgeRange).HasMaxLength(50);
             entity.Property(e => e.BrandName)
                 .HasMaxLength(50)
@@ -326,7 +325,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .IsUnicode(false)
                 .HasColumnName("product_ID");
             entity.Property(e => e.CategoriesId)
-                .HasMaxLength(10)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("categories_ID");
             entity.Property(e => e.Description).HasMaxLength(255);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ynnk+64r14Ol3Spgu1gQUKzAB8yMAcHEAkssBLERMLYOAFERlzFnhQGgz8F3/XYMfqgA1GwtyrBIeU7tF/4PDg==",
+  "dgSpecHash": "GW23KKvWffrMLQEp2+l4b7A6MiLpolaz6nXQczh/UKf4Vv4lm+jvdh44993aOah935p/9YvBm93eXMlaLe+9dQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
+  "projectFilePath": "C:\\Users\\khanh\\Source\\Repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\khanh\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\khanh\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

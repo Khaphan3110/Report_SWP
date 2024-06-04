@@ -83,14 +83,6 @@ namespace SWPSolution.Application.System.User
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
             if (user == null) return false;
 
-<<<<<<< HEAD
-            user.EmailConfirmed = true;
-            user.EmailVerificationCode = null;
-            user.EmailVerificationExpiry = null;
-            var result = await _userManager.UpdateAsync(user);
-
-            return result.Succeeded;
-=======
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
@@ -127,7 +119,6 @@ namespace SWPSolution.Application.System.User
                 await transaction.RollbackAsync();
                 throw;
             }
->>>>>>> a10698748190bff25b31c3beefc383314d59336b
         }
 
 

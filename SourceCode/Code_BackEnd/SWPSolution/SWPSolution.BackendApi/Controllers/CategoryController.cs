@@ -24,7 +24,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             var categoryId = await _categoryService.Create(request);
 
-            if (string.IsNullOrEmpty(categoryId))
+            if (false)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the category.");
             }

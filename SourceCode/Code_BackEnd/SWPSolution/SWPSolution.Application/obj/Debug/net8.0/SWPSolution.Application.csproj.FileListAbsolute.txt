@@ -19,7 +19,6 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.ViewModels.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.csproj.CopyComplete
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.deps.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.runtimeconfig.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.dll
@@ -42,3 +41,4 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Appli
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\ref\SWPSolution.Application.dll
+C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolut.868DFB74.Up2Date

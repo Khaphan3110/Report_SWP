@@ -10,6 +10,6 @@ namespace SWPSolution.Application.Catalog.Categories
 {
     public interface ICategoryService
     {
-        Task<string> Create(CategoryCreateRequest request);
+        Task<bool> Create(CategoryCreateRequest request);
     }
 }
