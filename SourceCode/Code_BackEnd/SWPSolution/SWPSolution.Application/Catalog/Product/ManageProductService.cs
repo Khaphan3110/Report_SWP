@@ -4,9 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using SWPSolution.Application.Common;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
 using System;
+using System.CodeDom;
 using System.Data.Entity;
 using System.Net.Http.Headers;
 
@@ -22,10 +25,26 @@ namespace SWPSolution.Application.Catalog.Product
             _storageService = storageService;
         }
 
-        public async Task<string> AddImages(string productId, List<FormFile> files)
+        public async Task<string> AddImage(string productId, ProductImageCreateRequest request)
         {
-            var product = await _context.Products.FindAsync(productId);
-            return product.ToString();
+            var productImage = new ProductImage()
+            {
+                Caption = request.Caption,
+                DateCreated = DateTime.Now,
+                ProductId = productId,
+                SortOrder = request.SortOrder,
+
+            };
+            if (request.ImageFile != null)
+            {
+
+                productImage.ImagePath = await this.SaveFile(request.ImageFile);
+                productImage.FileSize = request.ImageFile.Length;
+
+            }
+            _context.ProductImages.Add(productImage);
+            await _context.SaveChangesAsync();
+            return productImage.Id.ToString();
         }
 
         public async Task<string> Create(ProductCreateRequest request)
@@ -135,12 +154,21 @@ namespace SWPSolution.Application.Catalog.Product
             throw new NotImplementedException();
         }
 
-        public Task<List<ProductImageViewModel>> GetListImage(int productId)
-        {
-            throw new NotImplementedException();
-        }
+      //  public async Task<List<ProductImageViewModel>> GetListImage(string productId)
+      //  {
+       //     return await _context.ProductImages.Where(x => x.ProductId == productId).Select(i => new ProductImageViewModel()
+       //     {
+       //         Caption = i.Caption,
+       //         DateCreated = i.DateCreated,
+       //         FileSize = i.FileSize,
+       //         Id = i.Id,
+       //         ImagePath = i.ImagePath,
+       //         ProductId = i.ProductId,
+       //         SortOrder = i.SortOrder
+       //     }).ToListAsync();
+       // }
 
-        public Task<int> RemoveImages(string imageId, List<FormFile> files)
+        public Task<int> RemoveImage(string productId, int imageId)
         {
             throw new NotImplementedException();
         }
@@ -172,9 +200,20 @@ namespace SWPSolution.Application.Catalog.Product
 
         }
 
-        public Task<int> UpdateImages(string imageId, string caption)
+        public async Task<int> UpdateImage(string productId, int imageId, ProductImageUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var productImage = await _context.ProductImages.FindAsync(imageId);
+            if (productImage == null)
+                throw new SWPException($"Cannot find an image with id {imageId}");
+            if (request.ImageFile != null)
+            {
+
+                productImage.ImagePath = await this.SaveFile(request.ImageFile);
+                productImage.FileSize = request.ImageFile.Length;
+
+            }
+            _context.ProductImages.Update(productImage);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<bool> UpdatePrice(string productId, float newPrice)

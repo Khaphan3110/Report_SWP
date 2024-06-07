@@ -135,15 +135,22 @@ namespace SWPSolution.Application.System.User
         public async Task<bool> Register(RegisterRequest request)
         {
             // Check if a user with the same username and password exists
-            var existingUser = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == request.UserName && u.TemporaryPassword == request.Password);
+            var existingUsers = await _userManager.Users
+    .Where(u => u.UserName == request.UserName &&
+                u.TemporaryPassword == request.Password &&
+                u.EmailConfirmed == false)
+    .ToListAsync();
 
-            if (existingUser != null)
+            if (existingUsers.Any())
             {
-                // If found, delete the existing user
-                var deleteResult = await _userManager.DeleteAsync(existingUser);
-                if (!deleteResult.Succeeded)
+                // If found, delete the existing users
+                foreach (var existingUser in existingUsers)
                 {
-                    return false; // If deletion fails, return false
+                    var deleteResult = await _userManager.DeleteAsync(existingUser);
+                    if (!deleteResult.Succeeded)
+                    {
+                        return false; // If deletion fails, return false
+                    }
                 }
             }
 
@@ -160,7 +167,14 @@ namespace SWPSolution.Application.System.User
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                return false; // If registration fails, return false
+            }
+            var otpSent = await SendOtp(request.Email);
+
+
+            return true;
         }
 
         public async Task<bool> SendOtp(string email)
