@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.Utilities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6d265cb7fcbe9c91c17033938c828a8c0f5b5cf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d73addb95343f6f87d923a8b3f31915030e81f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.Utilities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.Utilities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

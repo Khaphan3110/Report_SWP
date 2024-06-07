@@ -9,19 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SWPSolution.BackendApi
 build_property.RootNamespace = SWPSolution.BackendApi
-<<<<<<< HEAD
-build_property.ProjectDir = G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\
-=======
-build_property.ProjectDir = C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\
->>>>>>> 0fa7b6dd04af31370d44064f6381bf7136f43560
+build_property.ProjectDir = D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
-build_property.MSBuildProjectDirectory = G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi
-=======
-build_property.MSBuildProjectDirectory = C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi
->>>>>>> 0fa7b6dd04af31370d44064f6381bf7136f43560
+build_property.MSBuildProjectDirectory = D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi
 build_property._RazorSourceGeneratorDebug = 

@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Policy;
 using System.Text;
@@ -78,47 +79,20 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<bool> ConfirmEmail(string otp)
+        public async Task<bool> ConfirmEmail(string otp, string email)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return false;
 
-            using var transaction = await _context.Database.BeginTransactionAsync();
-            try
+            if (user.EmailVerificationCode == otp && user.EmailVerificationExpiry > DateTime.Now)
             {
                 user.EmailConfirmed = true;
                 user.EmailVerificationCode = null;
                 user.EmailVerificationExpiry = null;
                 var result = await _userManager.UpdateAsync(user);
-
-                if (!result.Succeeded)
-                {
-                    await transaction.RollbackAsync();
-                    return false;
-                }
-
-                var member = new Member()
-                {
-                    MemberId = "", // Assign a valid MemberId
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    PhoneNumber = user.PhoneNumber,
-                    Email = user.Email,
-                    UserName = user.UserName,
-                    PassWord = user.TemporaryPassword, // Assuming PasswordHash is stored in AppUser
-                    RegistrationDate = DateTime.Now,
-                };
-                _context.Members.Add(member);
-                await _context.SaveChangesAsync();
-
-                await transaction.CommitAsync();
-                return true;
+                return result.Succeeded;
             }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
+            return false;
         }
 
 
@@ -134,27 +108,7 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            // Check if a user with the same username and password exists
-            var existingUsers = await _userManager.Users
-    .Where(u => u.UserName == request.UserName &&
-                u.TemporaryPassword == request.Password &&
-                u.EmailConfirmed == false)
-    .ToListAsync();
-
-            if (existingUsers.Any())
-            {
-                // If found, delete the existing users
-                foreach (var existingUser in existingUsers)
-                {
-                    var deleteResult = await _userManager.DeleteAsync(existingUser);
-                    if (!deleteResult.Succeeded)
-                    {
-                        return false; // If deletion fails, return false
-                    }
-                }
-            }
-
-            // Proceed with registration of the new user
+            var transaction = await _context.Database.BeginTransactionAsync();
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -162,53 +116,55 @@ namespace SWPSolution.Application.System.User
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
-                TemporaryPassword = request.Password,
-                EmailConfirmed = false, // Ensure the email is marked as not confirmed
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (!result.Succeeded)
+            if (result.Succeeded)
             {
-                return false; // If registration fails, return false
-            }
-            var otpSent = await SendOtp(request.Email);
+                var member = new Member()
+                {
+                    MemberId = "",
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    PhoneNumber = request.PhoneNumber,
+                    Email = request.Email,
+                    UserName = request.UserName,
+                    PassWord = request.Password,
+                    RegistrationDate = DateTime.Now,
+                };
+                _context.Members.Add(member);
+                await _context.SaveChangesAsync();
 
+                // Generate OTP
+                var otp = new Random().Next(100000, 999999).ToString();
+
+                // Save OTP and expiration to database
+                user.EmailVerificationCode = otp;
+                user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
+                await _userManager.UpdateAsync(user);
+
+                // Send OTP via email
+                var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
+                _emailService.SendEmail(message);
+
+                await transaction.CommitAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> DeleteUserAsync(string memberId)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return false;
+
+            _context.Members.Remove(member);
+            await _context.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> SendOtp(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null) return false;
-
-            // Generate OTP
-            var otp = new Random().Next(100000, 999999).ToString();
-
-            // Save OTP and expiration to database
-            user.EmailVerificationCode = otp;
-            user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
-            var result = await _userManager.UpdateAsync(user);
-
-            if (!result.Succeeded)
-            {
-                return false;
-            }
-
-            try
-            {
-                // Send OTP via email
-                var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
-                _emailService.SendEmail(message);
-                return true;
-            }
-            catch (Exception)
-            {
-                // If email sending fails, remove the user
-                await _userManager.DeleteAsync(user);
-                return false;
-            }
-        }
         public Task<bool> TestEmail(string emailAddress)
         {
             var message =
@@ -225,6 +181,128 @@ namespace SWPSolution.Application.System.User
             {
                 return Task.FromResult(false); // Return false if an exception is thrown
             }
+        }
+
+        public async Task<List<MemberInfoVM>> GetAllMembersAsync()
+        {
+            var members = await _context.Members
+                                        .Select(m => new MemberInfoVM
+                                        {
+                                            UserName = m.UserName,
+                                            Email = m.Email
+                                        })
+                                        .ToListAsync();
+            return members;
+        }
+
+        public async Task<MemberInfoVM> GetMemberByIdAsync(string memberId)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return null;
+
+            return new MemberInfoVM
+            {
+                UserName = member.UserName,
+                Email = member.Email,
+                FirstName = member.FirstName,
+                LastName = member.LastName,
+                PhoneNumber = member.PhoneNumber
+            };
+        }
+
+        public async Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return false;
+
+            if (!string.IsNullOrEmpty(request.FirstName))
+                member.FirstName = request.FirstName;
+
+            if (!string.IsNullOrEmpty(request.LastName))
+                member.LastName = request.LastName;
+
+            if (!string.IsNullOrEmpty(request.PhoneNumber))
+                member.PhoneNumber = request.PhoneNumber;
+
+            _context.Members.Update(member);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<MemberAddressVM> GetMemberAddressByIdAsync(string memberId)
+        {
+            var address = await _context.Addresses.FindAsync(memberId);
+            if (address == null) return null;
+
+            return new MemberAddressVM
+            {
+                House_Number = address.HouseNumber,
+                Street_Name = address.Street,
+                District_Name = address.District,
+                City = address.City,
+                Region = address.Region
+            };
+        }
+
+        public async Task<bool> UpdateMemberAddressAsync(string memberId, UpdateAddressRequest request)
+        {
+            var address = await _context.Addresses.FindAsync(memberId);
+            if (address == null) return false;
+
+            if (!string.IsNullOrEmpty(request.House_Numbers))
+                address.HouseNumber = request.House_Numbers;
+
+            if (!string.IsNullOrEmpty(request.Street_Name))
+                address.Street = request.Street_Name;
+
+            if (!string.IsNullOrEmpty(request.District_Name))
+                address.District = request.District_Name;
+
+            if (!string.IsNullOrEmpty(request.City))
+                address.City = request.City;
+
+            if (!string.IsNullOrEmpty(request.Region))
+                address.Region = request.Region;
+
+            _context.Addresses.Update(address);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> AddMemberAddressAsync(string memberId, AddAddressRequest request)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return false;
+
+            var address = new Address
+            {
+                AddressId = "",
+                MemberId = memberId,
+                HouseNumber = request.House_Numbers,
+                Street = request.Street_Name,
+                District = request.District_Name,
+                City = request.City,
+                Region = request.Region
+            };
+
+            _context.Addresses.Add(address);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteMemberAddressAsync(string id)
+        {
+            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.MemberId == id || a.AddressId == id);
+            if (address == null)
+                return false;
+
+            _context.Addresses.Remove(address);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }
