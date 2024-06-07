@@ -7,12 +7,12 @@ import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
 import { userLogin } from "../../Service/UserService/UserService";
-
+import { Alert } from "@mui/material";
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
   const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]);
-
+  const navigator = useNavigate();
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -27,6 +27,7 @@ export default function LoginForm() {
     initialValues: {
       UserName: "",
       Password: "",
+      RememberMe: false,
     },
 
     validationSchema: Yup.object({
@@ -36,11 +37,17 @@ export default function LoginForm() {
     }),
 
     onSubmit: async (values) => {
-      console.log(values);
-      let userLoginInfor = await userLogin(values.UserName, values.Password);
-      console.log(userLoginInfor.data);
-      if (userLoginInfor.data) {
-        navigate("/");
+      const formData = new FormData();
+      formData.append("UserName", values.UserName);
+      formData.append("Password", values.Password);
+      formData.append("RememberMe", values.RememberMe);
+      const res = await userLogin(formData);
+
+      if (res.data.token) {
+        // console.log("đây là login",res.data.token
+        navigator("/");
+      } else {
+        alert("login false!");
       }
     },
   });
@@ -58,7 +65,7 @@ export default function LoginForm() {
           userID: result.user.uid,
         };
         localStorage.setItem("userName", JSON.stringify(userValue));
-        navigate("/");
+        navigate("/register");
       })
       .catch((error) => {
         console.log(error);
@@ -107,6 +114,16 @@ export default function LoginForm() {
                       onChange={formik.handleChange}
                     ></input>
                     <i className={iconShow} onClick={handlerOnclickIcon}></i>
+                  </div>
+                  <div className="button-rememberme">
+                    <input
+                      type="checkbox"
+                      name="RememberMe"
+                      id="RememberMe"
+                      value={formik.values.RememberMe}
+                      onChange={formik.handleChange}
+                    />
+                    <label htmlFor="RememberMe">Remember me</label>
                   </div>
                   <div className="link-Fogot-password">
                     <p>

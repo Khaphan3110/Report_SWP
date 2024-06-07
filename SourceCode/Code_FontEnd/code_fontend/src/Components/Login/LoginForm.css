@@ -104,6 +104,7 @@
 }
 
 .b-form-login button {
+  width: 100%;
   padding: 0;
   background-color: transparent;
   border: 0;
@@ -138,6 +139,10 @@
   padding: 0;
   background-color: transparent;
   border: 0;
+}
+
+.b-form-login-google button{
+  width: 100%;
 }
 
 .b-form-login-google button p {
@@ -357,4 +362,11 @@
   position: absolute;
   right: -20px;
   top: 7px;
+}
+
+.button-rememberme{
+  margin-bottom: 10px;
+}
+.button-rememberme input{
+ margin-right: 5px;
 }

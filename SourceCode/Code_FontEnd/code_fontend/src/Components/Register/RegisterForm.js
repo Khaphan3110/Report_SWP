@@ -1,22 +1,24 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ReactDatePicker from "react-datepicker";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import {
-  Link,
-  useNavigate
-} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import {
+  userRegister,
+  authenEmailRegister,
+} from "../../Service/UserService/UserService";
 
 import "./RegisterForm.css";
-import { userRegister } from "../../Service/UserService/UserService";
 export default function RegisterForm() {
   // const [selectDate, setSelectDate] = useState(null); //dùng cho ngày tháng
   const [typeInputForm, setTypeInputForm] = useState("password"); // dùng để thay đổi type của input pasword
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"]; //icon eyeoff eye
   const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]); //set lại icon
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -38,7 +40,7 @@ export default function RegisterForm() {
       FirstName: "",
       Email: "",
       Password: "",
-      UserName : "",
+      UserName: "",
       ConfirmPassword: "",
       PhoneNumber: "",
       // newSelectDate: selectDate,
@@ -56,7 +58,9 @@ export default function RegisterForm() {
           /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           "vd: blabla@gmail.com"
         ),
-        UserName : Yup.string().required("Không được bỏ trống tên đăng nhập!").matches(/^\S{8,}$/,"lơn hơn 7 ký tự,không có khoảng cách"),
+      UserName: Yup.string()
+        .required("Không được bỏ trống tên đăng nhập!")
+        .matches(/^(?!.*\d)(?!.*\s)[A-Za-z]{7,}$/, "lơn hơn 7 ký tự,không có khoảng cách,kh chữ số"),
       Password: Yup.string()
         .required("không được bỏ trống mật khẩu!")
         .matches(
@@ -72,17 +76,27 @@ export default function RegisterForm() {
     }),
 
     onSubmit: async (values) => {
-      //  let userInfor = JSON.parse(values)
-      alert("Tao")
-       let userRegit = await userRegister(values.FirstName,values.LastName,values.Email,values.PhoneNumber,values.UserName,values.Password ,values.ConfirmPassword);
-       console.log(values)
-       if(userRegit){
-         navigate("/authenOTP");
-       } else {
-         console.log(userRegit.errors)
-       }
+      const formdata = new FormData();
+      formdata.append("FirstName", values.FirstName);
+      formdata.append("LastName", values.LastName);
+      formdata.append("Email", values.Email);
+      formdata.append("PhoneNumber", values.PhoneNumber);
+      formdata.append("UserName", values.UserName);
+      formdata.append("Password", values.Password);
+      formdata.append("ConfirmPassword", values.ConfirmPassword);
+      alert("Tao");   
+       const reUserRegit = await userRegister( formdata); 
+       navigate(`/authenOTP/${formik.values.Email}`);   
     },
-  });
+  }); 
+  const handleSendEmailRegister = () => {
+   
+  }
+  // const sendEmailToGetOTP = async () => {
+  //
+  //   navigate("/authenOTP");
+  // }
+  // sendEmailToGetOTP();
 
   return (
     <section>
@@ -96,7 +110,11 @@ export default function RegisterForm() {
           <div className="row">
             <div className="wrapper-form-register col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <h4>Thông Tin Cá Nhân</h4>
-              <form onSubmit={formik.handleSubmit} className="formRegister" method="post">
+              <form
+                onSubmit={formik.handleSubmit}
+                className="formRegister"
+                method="post"
+              >
                 <div className="R-name">
                   <p>Họ</p>
                 </div>
@@ -150,11 +168,11 @@ export default function RegisterForm() {
                     type="text"
                     name="UserName"
                     placeholder="tên đăng nhâp "
-                    value={formik.values.UserName }
+                    value={formik.values.UserName}
                     onChange={formik.handleChange}
                   ></input>
-                  {formik.errors.UserName  && (
-                    <p className="errosMsg">{formik.errors.UserName }</p>
+                  {formik.errors.UserName && (
+                    <p className="errosMsg">{formik.errors.UserName}</p>
                   )}
                 </div>
                 <div className="R-name">
@@ -169,7 +187,7 @@ export default function RegisterForm() {
                     onChange={formik.handleChange}
                   ></input>
                   {formik.errors.Password && (
-                    <p className="errosMsg" >{formik.errors.Password}</p>
+                    <p className="errosMsg">{formik.errors.Password}</p>
                   )}
                   <i className={iconShow} onClick={handlerOnclickIcon}></i>
                 </div>
@@ -222,7 +240,7 @@ export default function RegisterForm() {
                   }
                 </div> */}
                 <div className="b-Register">
-                  <button type="submit">
+                  <button type="submit" onClick={handleSendEmailRegister}>
                     <p>Đăng Ký</p>
                   </button>
                 </div>

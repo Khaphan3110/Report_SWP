@@ -1,33 +1,50 @@
-import axios from "../customAxios/CustomAxios";
 
+import * as request from "../../utility/CustomAxios";
 //Register user
-const userRegister = (
-  FirstName,
-  LastName,
-  Email,
-  PhoneNumber,
-  UserName,
-  Password,
-  ConfirmPassword
-) => {
-  return axios.post("/api/Users/register", {
-    FirstName,
-    LastName,
-    Email,
-    PhoneNumber,
-    UserName,
-    Password,
-    ConfirmPassword,
-  });
+export const userRegister = async (bodyInfor) => {
+  try {
+    const res = await request.Post("Users/register", bodyInfor, {
+      headers: {
+        "Content-Type": "multipart/form-data",    
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("Error register", error);
+  }
 };
 
-//user login
-const userLogin = () => {
-  return axios.post("/api/Users/authenticate", {
-    UserName:"haphong",
-    Password:"Aa@12345",
-    RememberMe: "true",
-  });
+export const authenEmailRegister = async ( email ) => {
+    try {
+      const res = await request.Post(`Users/SendOTP?email=${email}`);
+      return res;
+    } catch (error) {
+      console.log("lỗi send email",error);
+    }
 };
 
-export { userRegister, userLogin };
+ 
+export const authenCodeOTP = async ( otp ) => {
+  try {
+    const res = await request.Post(`Users/ConfirmEmail?otp=${otp}`);
+    return res;
+  } catch (error) {
+    console.log("lỗi authenOTP",error);
+  }
+};
+
+export const userLogin = async ( UserLoginInfor ) => {
+  
+  try {
+    const res = await request.Post("Users/authenticate", UserLoginInfor, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+      },
+    })
+    return res;
+  } catch (error) {
+    console.log("lỗi login",error);
+  }
+}
+

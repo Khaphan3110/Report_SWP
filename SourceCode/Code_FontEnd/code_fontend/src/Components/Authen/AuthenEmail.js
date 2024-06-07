@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useFormik } from "formik";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import "../Login/LoginForm.css";
+import { authenCodeOTP, authenEmailRegister } from "../../Service/UserService/UserService"; 
 export default function AuthenEmail() {
   const navigator = useNavigate();
-  const [codeEmail, setcodeEmail] = useState("");
+  const emailUser = useParams();
   const formik = useFormik({
     initialValues: {
       codeGetFormEmail: "",
@@ -19,16 +20,19 @@ export default function AuthenEmail() {
     }),
 
     onSubmit: async (values) => {
-      // setcodeEmail(values.codeGetFormEmail);
-      // let resStatusOTP = UserCodeFromEmail(codeEmail);
-      // if (resStatusOTP) {
-      //   alert("Chúc mừng Đăng ký thành công");
-      //   navigator("/");
-      // } else {
-      //   alert("sai otp! nhập lại");
-      // }
+      const resUserOTP = await authenCodeOTP(values.codeGetFormEmail);
+      console.log("OTP",resUserOTP)
     },
   });
+  useEffect(() => {
+    async function fetchData() {
+      const reSendEmail = await authenEmailRegister(emailUser);
+      if (reSendEmail) {
+        console.log(reSendEmail);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <section className="L-seccion">

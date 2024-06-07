@@ -127,9 +127,13 @@ namespace SWPSolution.BackendApi
                 app.UseHsts();
             }
 
-            
 
 
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("Content-Security-Policy", "script-src 'self' https://trusted.cdn.com");
+                await next();
+            });
             app.UseHttpsRedirection();
             app.UseCors("SWP_GROUP2_NET1811");
             app.UseStaticFiles();

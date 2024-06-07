@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { authenCodeOTP, authenEmailRegister } from "../../Service/UserService/UserService";
 export default function SendEmailForm() {
   const navigator = useNavigate();
   const formik = useFormik({
     initialValues: {
       inputEmailForgot: "",
+      codeGetFormEmail:"",
     },
 
     validationSchema: Yup.object({
@@ -19,16 +21,29 @@ export default function SendEmailForm() {
           /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
           "vd: blabla@gmail.com"
         ),
+        codeGetFormEmail: Yup.string().required("không được bỏ trống!").matches(/^\d{6}$/,"6 chữ số kh có khoảng trắng và kh có chữ cái"
+        )
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit:async (values) => {
+       const res = await authenCodeOTP(values.codeGetFormEmail)
+       if(res.data.data){
+        navigator("/ForgotPassword");
+       } else {
+        alert("email not exit!!");
+       }
     },
   });
 
-  const handleForgotPassword = () => {
-    navigator("/ForgotPassword");
-  };
+  const handleSendOTP = async () => {
+    const res = await authenEmailRegister(formik.values.inputEmailForgot);
+       if(res.data.data){
+        alert("đã gửi mail")
+        console.log(res.data)
+       } else {
+        alert("email not exit!!");
+       }
+  }
 
   return (
     <section className="L-seccion">
@@ -42,7 +57,7 @@ export default function SendEmailForm() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="Forgot-form">
-                <form method="get" onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit}>
                   <fieldset>
                     <h2>Đặt Lại Mật Khẩu</h2>
                     <h6>
@@ -65,7 +80,7 @@ export default function SendEmailForm() {
                     </div>
                     
                     <div className="charactor-num-from-email">
-                      <p>
+                      <p onClick={handleSendOTP}>
                         Nhấn vào link này để gửi code? <a href="#">Gửi Code</a>
                       </p>
                     </div>
@@ -77,7 +92,7 @@ export default function SendEmailForm() {
                       ></input>
                     </div>
                     <div className="b-forgot-login">
-                      <button type="submit" onClick={handleForgotPassword}>
+                      <button type="submit">
                         <p>Lấy Lại Mật Khẩu</p>
                       </button>
                     </div>

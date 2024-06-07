@@ -18,15 +18,13 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/Header" element={<Header />} />
         <Route path="/Footer" element={<Footer />} />
-        <Route path="/authenticate" element={<LoginForm />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/Content" element={<Content />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route
           path="/authenOTP"
           element={
-            <RegisterForm>
               <AuthenEmail />
-            </RegisterForm> 
           }
         />
         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
