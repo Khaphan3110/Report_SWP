@@ -33,4 +33,4 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\ref\SWPSolution.Data.dll
-C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolut.420EFE51.Up2Date
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.csproj.CopyComplete

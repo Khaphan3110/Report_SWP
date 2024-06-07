@@ -134,6 +134,27 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> Register(RegisterRequest request)
         {
+            // Check if a user with the same username and password exists
+            var existingUsers = await _userManager.Users
+    .Where(u => u.UserName == request.UserName &&
+                u.TemporaryPassword == request.Password &&
+                u.EmailConfirmed == false)
+    .ToListAsync();
+
+            if (existingUsers.Any())
+            {
+                // If found, delete the existing users
+                foreach (var existingUser in existingUsers)
+                {
+                    var deleteResult = await _userManager.DeleteAsync(existingUser);
+                    if (!deleteResult.Succeeded)
+                    {
+                        return false; // If deletion fails, return false
+                    }
+                }
+            }
+
+            // Proceed with registration of the new user
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -146,7 +167,14 @@ namespace SWPSolution.Application.System.User
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            return result.Succeeded;
+            if (!result.Succeeded)
+            {
+                return false; // If registration fails, return false
+            }
+            var otpSent = await SendOtp(request.Email);
+
+
+            return true;
         }
 
         public async Task<bool> SendOtp(string email)
@@ -162,14 +190,24 @@ namespace SWPSolution.Application.System.User
             user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
             var result = await _userManager.UpdateAsync(user);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+
+            try
             {
                 // Send OTP via email
                 var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
                 _emailService.SendEmail(message);
+                return true;
             }
-
-            return result.Succeeded;
+            catch (Exception)
+            {
+                // If email sending fails, remove the user
+                await _userManager.DeleteAsync(user);
+                return false;
+            }
         }
         public Task<bool> TestEmail(string emailAddress)
         {

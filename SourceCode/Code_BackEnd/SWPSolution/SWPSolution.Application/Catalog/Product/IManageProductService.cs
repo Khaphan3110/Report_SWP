@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
 
 namespace SWPSolution.Application.Catalog.Product
@@ -18,13 +20,15 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<bool> UpdateQuantity(int productId, int addedQuantity);
 
-        Task<string> AddImages(string productId, List<FormFile> files);
-
-        Task<int> RemoveImages(string imageId, List<FormFile> files);
-
-        Task<int> UpdateImages(string imageId, string caption);
         
-        Task<List<ProductImageViewModel>> GetListImage(int productId);
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
+
+        Task<string> AddImage(string productId, ProductImageCreateRequest request);
+
+        Task<int> RemoveImage(string productId, int imageId);
+
+        Task<int> UpdateImage(string productId, int imageId, ProductImageUpdateRequest request);
+
+     //   Task<List<ProductImageViewModel>> GetListImage(string productId);
     }
 }
