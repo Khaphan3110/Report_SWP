@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.BackendApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6d265cb7fcbe9c91c17033938c828a8c0f5b5cf")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+708317692ef95785168b39c09a1690273c173d6d")]
->>>>>>> 0fa7b6dd04af31370d44064f6381bf7136f43560
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+849cafb698ec219a769f181358f3668214ac4b45")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.BackendApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.BackendApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
