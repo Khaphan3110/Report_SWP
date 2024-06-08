@@ -97,3 +97,4 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
