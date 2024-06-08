@@ -36,9 +36,10 @@ namespace SWPSolution.Data.Extension
                 SecurityStamp = string.Empty,
                 FirstName = "Toan",
                 LastName = "Bach",
+                TemporaryPassword = "Abcd1234$",
                 EmailVerificationCode = null,
                 EmailVerificationExpiry = null
-            });
+            }) ;
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
             {

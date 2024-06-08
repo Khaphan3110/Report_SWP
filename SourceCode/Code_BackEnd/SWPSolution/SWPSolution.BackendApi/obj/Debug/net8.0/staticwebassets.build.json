@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7Iey2kv261KrMwu44cA+Y4tdD4Mh+LMlwAbOOx2yvB8=",
+  "Hash": "4U83llVBR3rx9c4U9bL+UptdEFuINSNBF9nBx62qSxU=",
   "Source": "SWPSolution.BackendApi",
   "BasePath": "_content/SWPSolution.BackendApi",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SWPSolution.BackendApi\\wwwroot",
       "Source": "SWPSolution.BackendApi",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\css\\site.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "css/site.css",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\favicon.ico",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\js\\site.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\js\\site.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "js/site.js",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
       "AssetKind": "All",
@@ -264,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
       "AssetKind": "All",
@@ -283,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
       "AssetKind": "All",
@@ -302,10 +302,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
       "AssetKind": "All",
@@ -321,10 +321,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
       "AssetKind": "All",
@@ -359,10 +359,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
       "AssetKind": "All",
@@ -378,10 +378,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
       "AssetKind": "All",
@@ -397,10 +397,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
       "AssetKind": "All",
@@ -416,10 +416,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
       "AssetKind": "All",
@@ -435,10 +435,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
       "AssetKind": "All",
@@ -454,10 +454,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
       "AssetKind": "All",
@@ -473,10 +473,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
       "AssetKind": "All",
@@ -492,10 +492,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
       "AssetKind": "All",
@@ -511,10 +511,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
       "AssetKind": "All",
@@ -530,10 +530,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
       "AssetKind": "All",
@@ -549,10 +549,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
       "AssetKind": "All",
@@ -568,10 +568,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
       "AssetKind": "All",
@@ -587,10 +587,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
       "AssetKind": "All",
@@ -606,10 +606,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
       "AssetKind": "All",
@@ -625,10 +625,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
       "AssetKind": "All",
@@ -644,10 +644,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
       "AssetKind": "All",
@@ -663,10 +663,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
       "AssetKind": "All",
@@ -682,10 +682,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
       "AssetKind": "All",
@@ -701,10 +701,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
       "AssetKind": "All",
@@ -720,10 +720,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "AssetKind": "All",
@@ -739,10 +739,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
       "AssetKind": "All",
@@ -758,10 +758,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
       "AssetKind": "All",
@@ -777,10 +777,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
       "AssetKind": "All",
@@ -796,10 +796,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
       "AssetKind": "All",
@@ -815,10 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
       "AssetKind": "All",
@@ -834,10 +834,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
       "AssetKind": "All",
@@ -853,10 +853,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
       "AssetKind": "All",
@@ -872,10 +872,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
       "AssetKind": "All",
@@ -891,10 +891,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
       "AssetKind": "All",
@@ -910,10 +910,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/bootstrap/LICENSE",
       "AssetKind": "All",
@@ -929,10 +929,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery/dist/jquery.js",
       "AssetKind": "All",
@@ -948,10 +948,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery/dist/jquery.min.js",
       "AssetKind": "All",
@@ -967,10 +967,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery/dist/jquery.min.map",
       "AssetKind": "All",
@@ -986,10 +986,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery/LICENSE.txt",
       "AssetKind": "All",
@@ -1005,10 +1005,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
       "AssetKind": "All",
@@ -1024,10 +1024,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
       "AssetKind": "All",
@@ -1043,10 +1043,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
       "AssetKind": "All",
@@ -1062,10 +1062,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
       "AssetKind": "All",
@@ -1081,10 +1081,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation/LICENSE.md",
       "AssetKind": "All",
@@ -1100,10 +1100,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
       "AssetKind": "All",
@@ -1119,10 +1119,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
       "AssetKind": "All",
@@ -1138,10 +1138,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
       "AssetKind": "All",
@@ -1157,10 +1157,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0454bb64-dea8-49fd-be2e-41fabe64bdde.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0454bb64-dea8-49fd-be2e-41fabe64bdde.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/0454bb64-dea8-49fd-be2e-41fabe64bdde.png",
       "AssetKind": "All",
@@ -1176,10 +1176,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\0454bb64-dea8-49fd-be2e-41fabe64bdde.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\077dcbc7-d231-41b6-be1f-241ae91771cb.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\077dcbc7-d231-41b6-be1f-241ae91771cb.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/077dcbc7-d231-41b6-be1f-241ae91771cb.png",
       "AssetKind": "All",
@@ -1195,10 +1195,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\077dcbc7-d231-41b6-be1f-241ae91771cb.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0cc55a3b-4cc5-492b-8d0d-d96a04547c08.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0cc55a3b-4cc5-492b-8d0d-d96a04547c08.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/0cc55a3b-4cc5-492b-8d0d-d96a04547c08.png",
       "AssetKind": "All",
@@ -1214,10 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\0cc55a3b-4cc5-492b-8d0d-d96a04547c08.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0f77a8f6-e8e2-43ff-a3ba-9e2651488ccc.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0f77a8f6-e8e2-43ff-a3ba-9e2651488ccc.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/0f77a8f6-e8e2-43ff-a3ba-9e2651488ccc.jpg",
       "AssetKind": "All",
@@ -1233,10 +1233,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\0f77a8f6-e8e2-43ff-a3ba-9e2651488ccc.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\11104bd0-57e4-405c-b05e-a5c889c78dd8.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\11104bd0-57e4-405c-b05e-a5c889c78dd8.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/11104bd0-57e4-405c-b05e-a5c889c78dd8.png",
       "AssetKind": "All",
@@ -1252,10 +1252,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\11104bd0-57e4-405c-b05e-a5c889c78dd8.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\20293e59-538c-4900-8d93-6ecb5986a8bb.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\20293e59-538c-4900-8d93-6ecb5986a8bb.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/20293e59-538c-4900-8d93-6ecb5986a8bb.png",
       "AssetKind": "All",
@@ -1271,10 +1271,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\20293e59-538c-4900-8d93-6ecb5986a8bb.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\204caf7c-c5a5-41a5-897e-87c508eda3d6.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\204caf7c-c5a5-41a5-897e-87c508eda3d6.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/204caf7c-c5a5-41a5-897e-87c508eda3d6.png",
       "AssetKind": "All",
@@ -1290,10 +1290,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\204caf7c-c5a5-41a5-897e-87c508eda3d6.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\2699bcc8-922c-4906-bc6f-85d60bee533f.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\2699bcc8-922c-4906-bc6f-85d60bee533f.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/2699bcc8-922c-4906-bc6f-85d60bee533f.png",
       "AssetKind": "All",
@@ -1309,10 +1309,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\2699bcc8-922c-4906-bc6f-85d60bee533f.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\27a69af4-1cfa-4d04-9fbb-61ebc8a70219.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\27a69af4-1cfa-4d04-9fbb-61ebc8a70219.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/27a69af4-1cfa-4d04-9fbb-61ebc8a70219.png",
       "AssetKind": "All",
@@ -1328,10 +1328,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\27a69af4-1cfa-4d04-9fbb-61ebc8a70219.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\391bd4cc-b98e-4548-bfef-f0fe6641219c.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\391bd4cc-b98e-4548-bfef-f0fe6641219c.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/391bd4cc-b98e-4548-bfef-f0fe6641219c.png",
       "AssetKind": "All",
@@ -1347,10 +1347,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\391bd4cc-b98e-4548-bfef-f0fe6641219c.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\4ec17b06-b60d-484b-8539-cd65837be917.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\4ec17b06-b60d-484b-8539-cd65837be917.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/4ec17b06-b60d-484b-8539-cd65837be917.png",
       "AssetKind": "All",
@@ -1366,10 +1366,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\4ec17b06-b60d-484b-8539-cd65837be917.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5106e813-522f-485c-ace5-bff9519232a5.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5106e813-522f-485c-ace5-bff9519232a5.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/5106e813-522f-485c-ace5-bff9519232a5.png",
       "AssetKind": "All",
@@ -1385,10 +1385,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\5106e813-522f-485c-ace5-bff9519232a5.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\594b21c3-0bb0-40a7-998e-52b8cb830101.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\594b21c3-0bb0-40a7-998e-52b8cb830101.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/594b21c3-0bb0-40a7-998e-52b8cb830101.png",
       "AssetKind": "All",
@@ -1404,10 +1404,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\594b21c3-0bb0-40a7-998e-52b8cb830101.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\59ee0fa2-6619-41d1-8f04-ebc510e34443.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\59ee0fa2-6619-41d1-8f04-ebc510e34443.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/59ee0fa2-6619-41d1-8f04-ebc510e34443.png",
       "AssetKind": "All",
@@ -1423,10 +1423,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\59ee0fa2-6619-41d1-8f04-ebc510e34443.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5a9c4675-9d56-4d95-9fcf-ae454f5c049f.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5a9c4675-9d56-4d95-9fcf-ae454f5c049f.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/5a9c4675-9d56-4d95-9fcf-ae454f5c049f.png",
       "AssetKind": "All",
@@ -1442,10 +1442,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\5a9c4675-9d56-4d95-9fcf-ae454f5c049f.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6330c019-3ec6-4dc4-8c45-92beaeb748b9.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6330c019-3ec6-4dc4-8c45-92beaeb748b9.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/6330c019-3ec6-4dc4-8c45-92beaeb748b9.png",
       "AssetKind": "All",
@@ -1461,10 +1461,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\6330c019-3ec6-4dc4-8c45-92beaeb748b9.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\68524732-c7cf-4af5-970e-3de19004d0bd.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\68524732-c7cf-4af5-970e-3de19004d0bd.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/68524732-c7cf-4af5-970e-3de19004d0bd.png",
       "AssetKind": "All",
@@ -1480,10 +1480,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\68524732-c7cf-4af5-970e-3de19004d0bd.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6ee0fa47-fd58-4319-b86b-9467f896f1d5.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6ee0fa47-fd58-4319-b86b-9467f896f1d5.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/6ee0fa47-fd58-4319-b86b-9467f896f1d5.jpg",
       "AssetKind": "All",
@@ -1499,10 +1499,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\6ee0fa47-fd58-4319-b86b-9467f896f1d5.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6f3e226b-6d9e-43f0-9579-5df733aa714b.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6f3e226b-6d9e-43f0-9579-5df733aa714b.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/6f3e226b-6d9e-43f0-9579-5df733aa714b.png",
       "AssetKind": "All",
@@ -1518,10 +1518,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\6f3e226b-6d9e-43f0-9579-5df733aa714b.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\72cee5ba-b5c0-4d9d-b576-a3329c57a55f.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\72cee5ba-b5c0-4d9d-b576-a3329c57a55f.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/72cee5ba-b5c0-4d9d-b576-a3329c57a55f.png",
       "AssetKind": "All",
@@ -1537,10 +1537,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\72cee5ba-b5c0-4d9d-b576-a3329c57a55f.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\78a3478e-1220-4f13-9c06-fb2f9c4da41d.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\78a3478e-1220-4f13-9c06-fb2f9c4da41d.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/78a3478e-1220-4f13-9c06-fb2f9c4da41d.png",
       "AssetKind": "All",
@@ -1556,10 +1556,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\78a3478e-1220-4f13-9c06-fb2f9c4da41d.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\797afb30-7d4d-497e-b36c-aa51f427fbd2.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\797afb30-7d4d-497e-b36c-aa51f427fbd2.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/797afb30-7d4d-497e-b36c-aa51f427fbd2.png",
       "AssetKind": "All",
@@ -1575,10 +1575,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\797afb30-7d4d-497e-b36c-aa51f427fbd2.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\81b645e5-ef0c-4049-b227-07ad997e9bce.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\81b645e5-ef0c-4049-b227-07ad997e9bce.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/81b645e5-ef0c-4049-b227-07ad997e9bce.jpg",
       "AssetKind": "All",
@@ -1594,10 +1594,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\81b645e5-ef0c-4049-b227-07ad997e9bce.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\8ccb1e47-c25a-45be-8b6c-f210e2e593ac.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\8ccb1e47-c25a-45be-8b6c-f210e2e593ac.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/8ccb1e47-c25a-45be-8b6c-f210e2e593ac.jpg",
       "AssetKind": "All",
@@ -1613,10 +1613,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\8ccb1e47-c25a-45be-8b6c-f210e2e593ac.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\91c7a4d6-d462-42c1-b6ab-8873f9b8e6c0.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\91c7a4d6-d462-42c1-b6ab-8873f9b8e6c0.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/91c7a4d6-d462-42c1-b6ab-8873f9b8e6c0.png",
       "AssetKind": "All",
@@ -1632,10 +1632,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\91c7a4d6-d462-42c1-b6ab-8873f9b8e6c0.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9aca0cd3-1cf8-48cc-a352-e1f5dc0df235.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9aca0cd3-1cf8-48cc-a352-e1f5dc0df235.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/9aca0cd3-1cf8-48cc-a352-e1f5dc0df235.png",
       "AssetKind": "All",
@@ -1651,10 +1651,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\9aca0cd3-1cf8-48cc-a352-e1f5dc0df235.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\aa27b50e-b106-49a4-b0b8-608dec8f07fa.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\aa27b50e-b106-49a4-b0b8-608dec8f07fa.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/aa27b50e-b106-49a4-b0b8-608dec8f07fa.png",
       "AssetKind": "All",
@@ -1670,10 +1670,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\aa27b50e-b106-49a4-b0b8-608dec8f07fa.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ab06c719-d97d-4046-a989-4636009c87ac.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ab06c719-d97d-4046-a989-4636009c87ac.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/ab06c719-d97d-4046-a989-4636009c87ac.jpg",
       "AssetKind": "All",
@@ -1689,10 +1689,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\ab06c719-d97d-4046-a989-4636009c87ac.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\b1107d8f-a5be-4d70-b4c0-14dd25767109.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\b1107d8f-a5be-4d70-b4c0-14dd25767109.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/b1107d8f-a5be-4d70-b4c0-14dd25767109.jpg",
       "AssetKind": "All",
@@ -1708,10 +1708,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\b1107d8f-a5be-4d70-b4c0-14dd25767109.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c33f8f1a-4b1e-42c7-8aa3-6e46dc8c6cda.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c33f8f1a-4b1e-42c7-8aa3-6e46dc8c6cda.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/c33f8f1a-4b1e-42c7-8aa3-6e46dc8c6cda.png",
       "AssetKind": "All",
@@ -1727,10 +1727,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\c33f8f1a-4b1e-42c7-8aa3-6e46dc8c6cda.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c6f978c8-068b-446a-ab0d-28b5ea868a3a.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c6f978c8-068b-446a-ab0d-28b5ea868a3a.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/c6f978c8-068b-446a-ab0d-28b5ea868a3a.png",
       "AssetKind": "All",
@@ -1746,10 +1746,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\c6f978c8-068b-446a-ab0d-28b5ea868a3a.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d4cfc9b6-5a77-4388-9578-9ccd1ebf8149.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d4cfc9b6-5a77-4388-9578-9ccd1ebf8149.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/d4cfc9b6-5a77-4388-9578-9ccd1ebf8149.png",
       "AssetKind": "All",
@@ -1765,10 +1765,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\d4cfc9b6-5a77-4388-9578-9ccd1ebf8149.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e4247e58-18ee-4851-8a4d-839e96e218b7.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e4247e58-18ee-4851-8a4d-839e96e218b7.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/e4247e58-18ee-4851-8a4d-839e96e218b7.png",
       "AssetKind": "All",
@@ -1784,10 +1784,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\e4247e58-18ee-4851-8a4d-839e96e218b7.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ea7f2b41-f111-4f6e-90fd-bb0ef7802d11.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ea7f2b41-f111-4f6e-90fd-bb0ef7802d11.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/ea7f2b41-f111-4f6e-90fd-bb0ef7802d11.png",
       "AssetKind": "All",
@@ -1803,10 +1803,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\ea7f2b41-f111-4f6e-90fd-bb0ef7802d11.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ec68cf98-8102-44bb-8ad0-25111606d137.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ec68cf98-8102-44bb-8ad0-25111606d137.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/ec68cf98-8102-44bb-8ad0-25111606d137.jpg",
       "AssetKind": "All",
@@ -1822,10 +1822,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\ec68cf98-8102-44bb-8ad0-25111606d137.jpg"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f295364d-623e-4444-9a13-c9b7b0c42211.png",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f295364d-623e-4444-9a13-c9b7b0c42211.png",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/f295364d-623e-4444-9a13-c9b7b0c42211.png",
       "AssetKind": "All",
@@ -1841,10 +1841,10 @@
       "OriginalItemSpec": "wwwroot\\user-content\\f295364d-623e-4444-9a13-c9b7b0c42211.png"
     },
     {
-      "Identity": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f4627631-16a8-41b3-9932-e6b1f63b3560.jpg",
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f4627631-16a8-41b3-9932-e6b1f63b3560.jpg",
       "SourceId": "SWPSolution.BackendApi",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
       "BasePath": "_content/SWPSolution.BackendApi",
       "RelativePath": "user-content/f4627631-16a8-41b3-9932-e6b1f63b3560.jpg",
       "AssetKind": "All",
