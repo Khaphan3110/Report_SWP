@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Blog;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -149,6 +151,82 @@ namespace SWPSolution.Application.System.Admin
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<bool> AddOrder(string memberId, AddOrderRequest request)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return false;
+
+            var order = new Order
+            {
+                OrderId = "",
+                MemberId = memberId,
+                PromotionId = request.PromotionId,
+                ShippingAddress = request.ShippingAddress,
+                TotalAmount = request.TotalAmount,
+                OrderStatus = request.OrderStatus,
+                OrderDate = DateTime.Now,
+            };
+
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        public async Task<bool> UpdateOrder(string id, OrderUpdateRequest request)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null) return false;
+
+                order.OrderStatus = request.orderStatus;
+
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteOrder(string id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null) return false;
+
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<OrderVM> GetOrderById(string id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null) return null;
+
+            return new OrderVM
+            {
+                OrderId = order.OrderId,
+                MemberId = order.MemberId,
+                PromotionId = order.PromotionId,
+                ShippingAddress = order.ShippingAddress,
+                TotalAmount = order.TotalAmount,
+                OrderStatus = order.OrderStatus,
+                OrderDate = order.OrderDate,
+            };
+        }
+
+        public async Task<List<OrderVM>> GetAllOrder()
+        {
+            return await _context.Orders
+                .Select(order => new OrderVM
+                {
+                    OrderId = order.OrderId,
+                    MemberId = order.MemberId,
+                    PromotionId = order.PromotionId,
+                    ShippingAddress = order.ShippingAddress,
+                    TotalAmount = order.TotalAmount,
+                    OrderStatus = order.OrderStatus,
+                    OrderDate = order.OrderDate,
+                })
+                .ToListAsync();
         }
     }
 }

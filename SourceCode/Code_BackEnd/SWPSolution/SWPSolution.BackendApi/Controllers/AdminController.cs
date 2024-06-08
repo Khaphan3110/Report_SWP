@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SWPSolution.Application.System.User;
 using System.Data.Entity;
+using SWPSolution.ViewModels.Catalog.Categories;
 namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
@@ -107,6 +108,76 @@ namespace SWPSolution.BackendApi.Controllers
             }
 
             return Ok(new { message = "Blog deleted successfully" });
+        }
+
+        [HttpPost("AddOrder/{memberId}/order")]
+        public async Task<IActionResult> AddOrder(string memberId, [FromBody] AddOrderRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _adminService.AddOrder(memberId, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+
+            return Ok(new { message = "Order added successfully" });
+        }
+
+        [HttpPut("UpdateOrder/{id}/order")]
+        public async Task<IActionResult> UpdateOrder(string id, OrderUpdateRequest request)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _adminService.UpdateOrder(id, request);
+            if (!result)
+            {
+                return NotFound(new { Message = "Order not found." });
+            }
+
+            return Ok(new { Message = "Order updated successfully." });
+        }
+
+        [HttpDelete("DeleteOrder/{id}/order")]
+        public async Task<IActionResult> DeleteOrder(string id)
+        {
+            var result = await _adminService.DeleteOrder(id);
+            if (!result)
+            {
+                return NotFound(new { Message = "Order not found." });
+            }
+
+            return Ok(new { Message = "Order deleted successfully." });
+        }
+
+        [HttpGet("GetOrder/{id}/order")]
+        public async Task<IActionResult> GetOrderById(string id)
+        {
+            var order = await _adminService.GetOrderById(id);
+            if (order == null)
+            {
+                return NotFound(new { Message = "Order not found." });
+            }
+
+            return Ok(order);
+        }
+
+        [HttpGet("GetAllOrder")]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var order = await _adminService.GetAllOrder();
+            if (order == null)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(order);
         }
     }
 }

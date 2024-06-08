@@ -1,5 +1,7 @@
-﻿using SWPSolution.Data.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Blog;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -22,5 +24,15 @@ namespace SWPSolution.Application.System.Admin
         Task<bool> UpdateBlogAsync(string staffId, UpdateBlogRequest request);
 
         Task<bool> DeleteBlogAsync(string blogId);
+
+        Task<bool> AddOrder(string memberId, AddOrderRequest request);
+
+        Task<bool> UpdateOrder(string id, OrderUpdateRequest request);
+
+        Task<bool> DeleteOrder(string id);
+
+        Task<OrderVM> GetOrderById(string id);
+
+        Task<List<OrderVM>> GetAllOrder();
     }
 }

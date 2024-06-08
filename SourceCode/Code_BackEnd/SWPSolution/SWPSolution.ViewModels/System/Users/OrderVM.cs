@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.System.Users
 {
-    public class AddOrderRequest
+    public class OrderVM
     {
+        public string OrderId { get; set; }
+
+        public string MemberId { get; set; }
+
         public string PromotionId { get; set; }
 
         public string ShippingAddress { get; set; }

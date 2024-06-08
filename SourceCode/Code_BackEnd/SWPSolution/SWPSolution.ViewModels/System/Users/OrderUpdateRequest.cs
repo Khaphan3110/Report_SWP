@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.System.Users
 {
-    internal class OrderUpdateRequest
+    public class OrderUpdateRequest
     {
+        public bool? orderStatus { get; set; }
     }
 }
