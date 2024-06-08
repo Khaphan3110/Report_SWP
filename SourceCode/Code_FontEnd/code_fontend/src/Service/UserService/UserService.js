@@ -26,7 +26,8 @@ export const authenEmailRegister = async ( email ) => {
  
 export const authenCodeOTP = async ( otp ) => {
   try {
-    const res = await request.Post(`Users/ConfirmEmail?otp=${otp}`);
+    console.log(otp);
+    const res = await request.Get(`Users/ConfirmEmail?otp=${otp}`);
     return res;
   } catch (error) {
     console.log("lỗi authenOTP",error);

@@ -6,6 +6,7 @@ import { formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { authenCodeOTP, authenEmailRegister } from "../../Service/UserService/UserService";
+import { Alert } from "bootstrap";
 export default function SendEmailForm() {
   const navigator = useNavigate();
   const formik = useFormik({
@@ -26,8 +27,9 @@ export default function SendEmailForm() {
     }),
 
     onSubmit:async (values) => {
+     alert("vô vô");
        const res = await authenCodeOTP(values.codeGetFormEmail)
-       if(res.data.data){
+       if(res.data){
         navigator("/ForgotPassword");
        } else {
         alert("email not exit!!");
@@ -37,7 +39,7 @@ export default function SendEmailForm() {
 
   const handleSendOTP = async () => {
     const res = await authenEmailRegister(formik.values.inputEmailForgot);
-       if(res.data.data){
+       if(res){
         alert("đã gửi mail")
         console.log(res.data)
        } else {
@@ -57,7 +59,7 @@ export default function SendEmailForm() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="Forgot-form">
-                <form onSubmit={formik.handleSubmit}>
+                <form  onSubmit={formik.handleSubmit}>
                   <fieldset>
                     <h2>Đặt Lại Mật Khẩu</h2>
                     <h6>
@@ -89,7 +91,14 @@ export default function SendEmailForm() {
                         type="text"
                         placeholder="code number"
                         name="codeGetFormEmail"
+                        value={formik.values.codeGetFormEmail}
+                        onChange={formik.handleChange}
                       ></input>
+                      {formik.errors.codeGetFormEmail && (
+                      <p className="errorMsg">
+                        {formik.errors.codeGetFormEmail}
+                      </p>
+                    )}
                     </div>
                     <div className="b-forgot-login">
                       <button type="submit">

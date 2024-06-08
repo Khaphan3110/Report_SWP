@@ -78,6 +78,10 @@
     margin-left: 5px;
 }
 
+.userAcount {
+    padding-right: 5px;
+}
+
 .userAcount a{
     text-decoration: none;
     color: #F05A72;

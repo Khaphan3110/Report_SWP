@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import "../Login/LoginForm.css";
-import { authenCodeOTP, authenEmailRegister } from "../../Service/UserService/UserService"; 
+import { authenCodeOTP } from "../../Service/UserService/UserService"; 
 export default function AuthenEmail() {
   const navigator = useNavigate();
-  const emailUser = useParams();
+
   const formik = useFormik({
     initialValues: {
       codeGetFormEmail: "",
@@ -20,19 +20,16 @@ export default function AuthenEmail() {
     }),
 
     onSubmit: async (values) => {
+    alert("tao")
       const resUserOTP = await authenCodeOTP(values.codeGetFormEmail);
-      console.log("OTP",resUserOTP)
+      if(resUserOTP.data.success){
+        alert("Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào");
+        navigator("/login");
+      } else {
+        alert("mạng yếu đợi xíu");
+      }
     },
   });
-  useEffect(() => {
-    async function fetchData() {
-      const reSendEmail = await authenEmailRegister(emailUser);
-      if (reSendEmail) {
-        console.log(reSendEmail);
-      }
-    }
-    fetchData();
-  }, []);
 
   return (
     <section className="L-seccion">
@@ -46,7 +43,7 @@ export default function AuthenEmail() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="Forgot-form">
-                <form method="get" onSubmit={formik.handleSubmit}>
+                <form  onSubmit={formik.handleSubmit}>
                   <fieldset>
                     <h2>Nhập OPT nhận từ email để hoàn tất đăng ký</h2>
                     <h6>
@@ -58,7 +55,12 @@ export default function AuthenEmail() {
                         type="text"
                         placeholder="code number"
                         name="codeGetFormEmail"
+                        id="codeGetFormEmail"
+                        value={formik.values.codeGetFormEmail} 
+                        onChange={formik.handleChange}         
                       ></input>
+                      {formik.errors.codeGetFormEmail && 
+                      <p style={{color:"red"}}>{formik.errors.codeGetFormEmail}</p> }
                     </div>
                     <div className="b-forgot-login">
                       <button type="submit">

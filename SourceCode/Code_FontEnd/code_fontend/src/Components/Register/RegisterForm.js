@@ -60,7 +60,10 @@ export default function RegisterForm() {
         ),
       UserName: Yup.string()
         .required("Không được bỏ trống tên đăng nhập!")
-        .matches(/^(?!.*\d)(?!.*\s)[A-Za-z]{7,}$/, "lơn hơn 7 ký tự,không có khoảng cách,kh chữ số"),
+        .matches(
+          /^(?!.*\d)(?!.*\s)[A-Za-z]{7,}$/,
+          "lơn hơn 7 ký tự,không có khoảng cách,kh chữ số"
+        ),
       Password: Yup.string()
         .required("không được bỏ trống mật khẩu!")
         .matches(
@@ -84,14 +87,12 @@ export default function RegisterForm() {
       formdata.append("UserName", values.UserName);
       formdata.append("Password", values.Password);
       formdata.append("ConfirmPassword", values.ConfirmPassword);
-      alert("Tao");   
-       const reUserRegit = await userRegister( formdata); 
-       navigate(`/authenOTP/${formik.values.Email}`);   
+      alert("Tao");
+      const reUserRegit = await userRegister(formdata);
+      navigate("/authenOTP")
     },
-  }); 
-  const handleSendEmailRegister = () => {
-   
-  }
+  });
+
   // const sendEmailToGetOTP = async () => {
   //
   //   navigate("/authenOTP");
@@ -240,7 +241,7 @@ export default function RegisterForm() {
                   }
                 </div> */}
                 <div className="b-Register">
-                  <button type="submit" onClick={handleSendEmailRegister}>
+                  <button type="submit">
                     <p>Đăng Ký</p>
                   </button>
                 </div>
