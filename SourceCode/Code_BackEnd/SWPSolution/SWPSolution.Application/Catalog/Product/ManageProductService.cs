@@ -24,6 +24,11 @@ namespace SWPSolution.Application.Catalog.Product
             _storageService = storageService;
         }
 
+        public Task<string> AddImage(string productId, ViewModels.Catalog.ProductImage.ProductImageCreateRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<string> AddImages(string productId, List<FormFile> files)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -129,6 +134,11 @@ namespace SWPSolution.Application.Catalog.Product
             throw new NotImplementedException();
         }
 
+        public Task<int> RemoveImage(string productId, int imageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> RemoveImages(string imageId, List<FormFile> files)
         {
             throw new NotImplementedException();
@@ -159,6 +169,11 @@ namespace SWPSolution.Application.Catalog.Product
             }
             return await _context.SaveChangesAsync();
 
+        }
+
+        public Task<int> UpdateImage(string productId, int imageId, ViewModels.Catalog.ProductImage.ProductImageUpdateRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<int> UpdateImages(string imageId, string caption)

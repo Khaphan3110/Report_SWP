@@ -17,7 +17,9 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> Register(RegisterRequest request);
 
-       // Task<bool> ForgotPassword([Required]string email);
+        Task<bool> ForgotPassword([Required]string email);
+
+        Task<bool> ResetPassword(ResetPasswordVM model);
 
         Task<bool> ConfirmEmail(string token, string email);
 

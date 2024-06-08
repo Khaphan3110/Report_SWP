@@ -1,0 +1,159 @@
+.cart-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #333;
+}
+
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  flex: 2;
+  margin-right: 20px;
+}
+
+.cart-content h2 {
+  font-size: 24px;
+  color: #e74c3c;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+
+.cart-item h3 {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+.cart-item-price {
+  font-size: 16px;
+  color: #e74c3c;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-controls button {
+  background-color: #ff6f61;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.quantity-controls input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  margin: 0 5px;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.payment-info {
+  flex: 1;
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.invoice-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.invoice-option input {
+  margin-right: 10px;
+}
+
+.total-price {
+  text-align: right;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.discount-code {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.discount-code span {
+  font-size: 16px;
+}
+
+.discount-code a {
+  color: #ff6f61;
+  text-decoration: none;
+}
+
+.discount-code a:hover {
+  text-decoration: underline;
+}
+
+.checkout-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #ff6f61;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.checkout-button:hover {
+  background-color: #ff5a4d;
+}
+
+.payment-methods {
+  text-align: center;
+}
+
+.payment-methods img {
+  width: 100%;
+  max-width: 200px;
+}

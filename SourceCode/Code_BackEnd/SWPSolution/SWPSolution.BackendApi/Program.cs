@@ -2,6 +2,7 @@ using System.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -39,7 +40,8 @@ namespace SWPSolution.BackendApi
             builder.Services.AddTransient<IManageProductService, ManageProductService>();
             builder.Services.AddSingleton<IStorageService, FileStorageService>();
             builder.Services.AddTransient<ICategoryService, CategoryService>();
-
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
 
 
             //Add email configs

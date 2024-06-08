@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Login/LoginForm.css";
 import { Link } from "react-router-dom";
-import { formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 export default function ForgotPasswordForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
-  const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]);
+  const [iconShow, setIconShow] = useState(listIcon[0]);
 
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
@@ -44,6 +44,7 @@ export default function ForgotPasswordForm() {
 
     onSubmit: (values) => {
       console.log(values);
+      // Add logic to handle password reset here, such as calling an API
     },
   });
 
@@ -59,7 +60,7 @@ export default function ForgotPasswordForm() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="Change-password-form">
-                <form onSubmit={formik.handleChange}>
+                <form onSubmit={formik.handleSubmit}>
                   <fieldset>
                     <h2>Thay Đổi Mật Khẩu</h2>
 
@@ -73,12 +74,11 @@ export default function ForgotPasswordForm() {
                         placeholder="new password"
                         value={formik.values.inputNewPassword}
                         onChange={formik.handleChange}
-                      ></input>
+                        onBlur={formik.handleBlur}
+                      />
                       <i className={iconShow} onClick={handlerOnclickIcon}></i>
-                      {formik.errors.inputNewPassword && (
-                        <p className="errorMsg">
-                          {formik.errors.inputNewPassword}
-                        </p>
+                      {formik.touched.inputNewPassword && formik.errors.inputNewPassword && (
+                        <p className="errorMsg">{formik.errors.inputNewPassword}</p>
                       )}
                     </div>
                     <div className="charactor-new-password">
@@ -91,16 +91,15 @@ export default function ForgotPasswordForm() {
                         placeholder="mật khẩu mới"
                         value={formik.values.inputComfirmPassword}
                         onChange={formik.handleChange}
-                      ></input>
+                        onBlur={formik.handleBlur}
+                      />
                       <i className={iconShow} onClick={handlerOnclickIcon}></i>
-                      {formik.errors.inputComfirmPassword && (
-                        <p className="errorMsg">
-                          {formik.errors.inputComfirmPassword}
-                        </p>
+                      {formik.touched.inputComfirmPassword && formik.errors.inputComfirmPassword && (
+                        <p className="errorMsg">{formik.errors.inputComfirmPassword}</p>
                       )}
                     </div>
                     <div className="b-forgot-login">
-                      <button>
+                      <button type="submit">
                         <p>Đổi Mật Khẩu</p>
                       </button>
                     </div>

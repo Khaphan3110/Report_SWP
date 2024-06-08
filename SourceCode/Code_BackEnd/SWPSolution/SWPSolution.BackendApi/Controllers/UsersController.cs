@@ -71,12 +71,52 @@ namespace SWPSolution.BackendApi.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [Route("ForgotPassword")]
 
-        public async Task<IActionResult> ForgotPassword([Required]string email)
+        public async Task<IActionResult> ForgotPassword([FromForm][Required] ForgotPasswordRequest request)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.ForgotPassword(request.email);
+            if (result)
+            {
+                return Ok(new { Message = "Password reset link has been sent to your email." });
+            }
+
+            return NotFound(new { Message = "User not found." });
         }
 
+        [HttpGet("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(string token, string email)
+        {
+            var model = new ResetPasswordVM {Token = token, Email = email };
+            return Ok(new
+            {
+                model
+            });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromForm][Required] ResetPasswordVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.ResetPassword(model);
+            if (result)
+            {
+                return Ok(new { Message = "Password has been reset successfully." });
+            }
+
+            return BadRequest(new { Message = "Error resetting password." });
+        }
 
         [HttpGet("emailtest")]
         public async Task<IActionResult> TestEmail(string emailAddress)

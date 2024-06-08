@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SWPSolution.BackendApi\SWPSolution.BackendApi.csproj" />
     <ProjectReference Include="..\SWPSolution.Data\SWPSolution.Data.csproj" />
   </ItemGroup>
 
