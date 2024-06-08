@@ -2,6 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using SWPSolution.Data.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SWPSolution.Data.Extension
 {
@@ -33,8 +37,7 @@ namespace SWPSolution.Data.Extension
                 FirstName = "Toan",
                 LastName = "Bach",
                 EmailVerificationCode = null,
-                EmailVerificationExpiry = null,
-                TemporaryPassword = "", // Ensure it is explicitly set to null
+                EmailVerificationExpiry = null
             });
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>

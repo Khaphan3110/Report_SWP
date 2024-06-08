@@ -16,9 +16,10 @@ namespace SWPSolution.Data.Configuration
             builder.ToTable("ProductImages");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.Id).HasMaxLength(200).IsRequired(true);
 
             builder.Property(x => x.ImagePath).HasMaxLength(200).IsRequired(true);
+
             builder.Property(x => x.Caption).HasMaxLength(200);
 
 

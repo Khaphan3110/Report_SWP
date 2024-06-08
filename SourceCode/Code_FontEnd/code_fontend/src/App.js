@@ -9,6 +9,9 @@ import RegisterForm from "./Components/Register/RegisterForm";
 import Header from "./Components/Header/Header";
 import AuthenEmail from "./Components/Authen/AuthenEmail";
 import Content from "./Components/Content/Content";
+import AccountPage from "./Components/AccountPage/AccountPage";
+import AddressPage from "./Components/AddressPage/AddressPage";
+import CartPage from "./Components/CartPage/CartPage";
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
         <Route path="/Header" element={<Header />} />
         <Route path="/Footer" element={<Footer />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/account" element={<AccountPage />} />
+          <Route path="/addresses" element={<AddressPage />} />
+          <Route path="/cart" element={<CartPage />} />
         <Route path="/Content" element={<Content />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route

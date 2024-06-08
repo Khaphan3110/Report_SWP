@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-light text-center text-lg-start">
       <div className="container p-4">
         <div className="row">
-          <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <div className="footer col-lg-4 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">Hà Nội</h5>
             <p>
               <strong>Showroom:</strong> 21 Phan Chu Trinh - 17 Lý Thường Kiệt,

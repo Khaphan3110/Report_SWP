@@ -49,11 +49,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-<<<<<<< HEAD
-        => optionsBuilder.UseSqlServer("Data Source=113.173.196.176;Initial Catalog=SWP_Project;User ID=sa; Password=Thomas1910@;Trust Server Certificate=True");
-=======
-        => optionsBuilder.UseSqlServer("Data Source=NORMAN-LAPTOP\\NORMAN;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
->>>>>>> 0fa7b6dd04af31370d44064f6381bf7136f43560
+        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-HPHD1ML\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -111,7 +107,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         modelBuilder.ApplyConfiguration(new AppRoleConfig());
         modelBuilder.ApplyConfiguration(new ProductImageConfig());
 
-
+        
 
         modelBuilder.Entity<Blog>(entity =>
         {
@@ -129,9 +125,9 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.Content)
                 .HasMaxLength(255)
                 .HasColumnName("content");
-            entity.Property(e => e.DataCreate)
+            entity.Property(e => e.DateCreate)
                 .HasColumnType("date")
-                .HasColumnName("dataCreate");
+                .HasColumnName("dateCreate");
             entity.Property(e => e.StaffId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -149,11 +145,12 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.CategoriesId).HasName("PK__Categori__92BFEBD24C3D480D");
 
-            entity.Property(e => e.CategoriesId)
-            .HasMaxLength(50) // Adjust the maximum length as needed
-            .IsUnicode(false)
-            .HasColumnName("categories_ID");
             entity.ToTable(tb => tb.HasTrigger("trg_generate_categories_id"));
+
+            entity.Property(e => e.CategoriesId)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("categories_ID");
             entity.Property(e => e.AgeRange).HasMaxLength(50);
             entity.Property(e => e.BrandName)
                 .HasMaxLength(50)
@@ -327,9 +324,10 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("product_ID");
+                .HasColumnName("product_ID")
+                .ValueGeneratedOnAdd();
             entity.Property(e => e.CategoriesId)
-                .HasMaxLength(50)
+                .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("categories_ID");
             entity.Property(e => e.Description).HasMaxLength(255);
@@ -346,7 +344,6 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasForeignKey(d => d.CategoriesId)
                 .HasConstraintName("fk_Product_categories");
         });
-
 
         modelBuilder.Entity<Promotion>(entity =>
         {

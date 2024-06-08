@@ -14,7 +14,7 @@ namespace SWPSolution.BackendApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService) 
         {
             _userService = userService;
         }
@@ -22,18 +22,18 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
 
-        public async Task<IActionResult> Authenticate([FromForm] LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromForm]LoginRequest request)
         {
-            if (!ModelState.IsValid)
-            {
+            if(!ModelState.IsValid)
+            { 
                 return BadRequest(ModelState);
             }
             var resultToken = await _userService.Authencate(request);
-            if (string.IsNullOrEmpty(resultToken))
-            {
+            if(string.IsNullOrEmpty(resultToken))
+                {
                 return BadRequest("Username or password is incorrect.");
-            }
-            return Ok(new { token = resultToken });
+                }
+            return Ok(new {token  = resultToken});
         }
 
         [HttpPost("register")]
@@ -45,48 +45,33 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _userService.Register(request);
-
             if (!result )
             {
                 return BadRequest("Register failed.");
             }
             return Ok();
         }
-        [HttpPost("SendOTP")]
-        public async Task<IActionResult> SendOTP(string email)
-        {
-            var otpResult = await _userService.SendOtp(email);
-            if(otpResult)
-            {
-                return Ok("OTP sent to your email.");
-            }
-            else
-            {
-                return BadRequest("Failed to send OTP.");
-            }
-        }
-
         [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string otp)
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
-            if (string.IsNullOrEmpty(otp))
+            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
             {
-                return BadRequest(new { message = "OTP must be provided" });
+                return BadRequest(new { message = "Token and email must be provided" });
             }
 
-            var result = await _userService.ConfirmEmail(otp);
+            var result = await _userService.ConfirmEmail(token, email);
             if (result)
             {
-                return Ok(new { success = true, message = "Email confirmed successfully" });
+                return Ok(new { message = "Email confirmed successfully" });
             }
 
-            return BadRequest(new { success = false, message = "Email confirmation failed" });
+            return BadRequest(new { message = "Email confirmation failed" });
         }
 
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<IActionResult> ForgotPassword([Required] string email)
+        public async Task<IActionResult> ForgotPassword([Required]string email)
         {
             throw new NotImplementedException();
         }
@@ -108,6 +93,110 @@ namespace SWPSolution.BackendApi.Controllers
 
             return Ok("Email sent successfully.");
 
+        }
+
+        [HttpGet("members")]
+        public async Task<IActionResult> GetAllMembers()
+        {
+            var members = await _userService.GetAllMembersAsync();
+            return Ok(members);
+        }
+
+        [HttpGet("GetMember/{id}")]
+        public async Task<IActionResult> GetMemberById(string id)
+        {
+            var member = await _userService.GetMemberByIdAsync(id);
+            if (member == null)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+            return Ok(member);
+        }
+
+        [HttpPut("UpdateMember/{id}")]
+        public async Task<IActionResult> UpdateMember(string id, [FromBody] UpdateMemberRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.UpdateMemberAsync(id, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+
+            return Ok(new { message = "Member updated successfully" });
+        }
+
+        [HttpGet("GetAddress/{id}/address")]
+        public async Task<IActionResult> GetMemberAddressById(string id)
+        {
+            var address = await _userService.GetMemberAddressByIdAsync(id);
+            if (address == null)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+            return Ok(address);
+        }
+
+        [HttpPut("UpdateAddress/{id}/address")]
+        public async Task<IActionResult> UpdateMemberAddress(string id, [FromBody] UpdateAddressRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.UpdateMemberAddressAsync(id, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+
+            return Ok(new { message = "Address updated successfully" });
+        }
+
+        [HttpPost("AddAddress/{id}/address")]
+        public async Task<IActionResult> AddMemberAddress(string id, [FromBody] AddAddressRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.AddMemberAddressAsync(id, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+
+            return Ok(new { message = "Address added successfully" });
+        }
+
+        [HttpDelete("DeleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var result = await _userService.DeleteUserAsync(id);
+            if (!result)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            return Ok(new { message = "User deleted successfully" });
+        }
+
+        [HttpDelete("DeleteAddress/{id}/address")]
+        public async Task<IActionResult> DeleteMemberAddress(string id)
+        {
+            var result = await _userService.DeleteMemberAddressAsync(id);
+            if (!result)
+            {
+                return NotFound(new { message = "Address not found" });
+            }
+
+            return Ok(new { message = "Address deleted successfully" });
         }
     }
 }

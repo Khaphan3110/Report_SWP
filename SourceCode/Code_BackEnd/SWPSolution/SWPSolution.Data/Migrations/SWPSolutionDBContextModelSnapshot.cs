@@ -326,10 +326,6 @@ namespace SWPSolution.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TemporaryPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -345,11 +341,7 @@ namespace SWPSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-
-                            ConcurrencyStamp = "5b1ba429-121e-494f-afc0-7b7f0f9c557e",
-
-
-
+                            ConcurrencyStamp = "ce70be9a-d6b1-427a-be54-6a5a0d9c3b39",
                             Email = "tedu.international@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Toan",
@@ -357,13 +349,9 @@ namespace SWPSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "tedu.international@gmail.com",
                             NormalizedUserName = "admin",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEAU489HC5zCpLuu3qIQWCOQ6CB/K5dCkXeqnwrn0UYgRPk2BWVDmcOE+ZpFM8cuNvg==",
-
-
+                            PasswordHash = "AQAAAAIAAYagAAAAEJDFXAAe2e7gu3fRtTrTTOFwURBzAnp4JGNwVPTKZnNfk6QeHYwJv9qw1K0gQE4tig==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
-                            TemporaryPassword = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "6M2/CFzxN5M=",
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
-=======
-  "dgSpecHash": "LW4JHNd9uuPjLWFBmRf8b5TOTmMArxUI71sKF123LY1WP2lP9u09jllVBYzCSS++/Z/iLPaFcKIZrammWXVrsA==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
->>>>>>> 0fa7b6dd04af31370d44064f6381bf7136f43560
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

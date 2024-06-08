@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.Catalog.Categories
 {
-    public class CategoryCreateRequest
+    public class CategoryCreateRequest 
     {
+
         public string BrandName { get; set; }
 
         public string AgeRange { get; set; }

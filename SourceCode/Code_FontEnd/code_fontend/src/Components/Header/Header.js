@@ -81,7 +81,7 @@ export default function Header() {
                   </li>
                   <li className="cart">
                     <div>
-                      <a href="#" className="cart-link">
+                      <Link to={"/Cart"}  className="cart-link">
                         <img
                           src={cartIcon}
                           alt="cartImge"
@@ -90,7 +90,7 @@ export default function Header() {
                         ></img>
                         <span className="cart-name">Giỏ Hàng</span>
                         <span className="cart-quantity">2</span>
-                      </a>
+                      </Link>
                     </div>
                   </li>
                 </ul>

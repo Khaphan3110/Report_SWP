@@ -8,13 +8,31 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.sourcelink.json
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.deps.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.GeneratedMSBuildEditorConfig.editorconfig
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfoInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfo.cs
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.csproj.CoreCompileInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.sourcelink.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.deps.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfoInputs.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfo.cs
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.deps.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfoInputs.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfo.cs
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.deps.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\bin\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfoInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.AssemblyInfo.cs
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.csproj.CoreCompileInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.sourcelink.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\obj\Debug\netcoreapp3.1\SWPSolution.Utilities.pdb

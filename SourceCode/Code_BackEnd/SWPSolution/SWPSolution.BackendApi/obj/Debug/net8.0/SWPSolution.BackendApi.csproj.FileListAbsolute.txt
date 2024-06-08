@@ -96,105 +96,302 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\NETCore.MailKit.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\BouncyCastle.Crypto.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.Development.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.staticwebassets.runtime.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.exe
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.deps.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.runtimeconfig.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Core.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Identity.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.SqlServer.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MailKit.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MimeKit.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\NETCore.MailKit.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\BouncyCastle.Crypto.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.CodeDom.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Drawing.Common.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Memory.Data.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Runtime.Caching.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Permissions.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Windows.Extensions.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.sourcelink.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.build.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.development.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.build.SWPSolution.BackendApi.props
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWPSolution.BackendApi.props
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWPSolution.BackendApi.props
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.pack.json
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.BackendApi.styles.css
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\refint\SWPSolution.BackendApi.dll
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CopyComplete
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.staticwebassets.runtime.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.exe
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.deps.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.runtimeconfig.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MailKit.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MimeKit.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\NETCore.MailKit.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.CodeDom.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Runtime.Caching.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.build.SWPSolution.BackendApi.props
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWPSolution.BackendApi.props
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWPSolution.BackendApi.props
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.BackendApi.styles.css
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\refint\SWPSolution.BackendApi.dll
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
+C:\Users\Nghe\Downloads\Report_SWP-main\Report_SWP-main\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.staticwebassets.runtime.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.exe
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.deps.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.runtimeconfig.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\MailKit.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\MimeKit.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\NETCore.MailKit.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.CodeDom.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Runtime.Caching.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.build.SWPSolution.BackendApi.props
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWPSolution.BackendApi.props
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWPSolution.BackendApi.props
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.BackendApi.styles.css
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\refint\SWPSolution.BackendApi.dll
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
+C:\Users\Nghe\OneDrive\Máy tính\SWPSolution2\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.Development.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.staticwebassets.runtime.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.exe
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.deps.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.runtimeconfig.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.BackendApi.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Core.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Azure.Identity.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.SqlServer.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\EntityFramework.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MailKit.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\MimeKit.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\NETCore.MailKit.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.CodeDom.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Memory.Data.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Application.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.sourcelink.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.build.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.development.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.build.SWPSolution.BackendApi.props
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.SWPSolution.BackendApi.props
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWPSolution.BackendApi.props
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.pack.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.BackendApi.styles.css
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\refint\SWPSolution.BackendApi.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
