@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Catalog.Product;
 
 namespace SWPSolution.BackendApi.Controllers
@@ -77,10 +78,10 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpPut("price/{id}/{newPrice}")]
-        public async Task<IActionResult> UpdatePrice([FromQuery]string id, float newPrice)
+        public async Task<IActionResult> UpdatePrice([FromQuery] string id, float newPrice)
 
         {
-            var isSuccessfull = await _manageProductService.UpdatePrice(id,newPrice);
+            var isSuccessfull = await _manageProductService.UpdatePrice(id, newPrice);
             if (isSuccessfull)
                 return Ok();
 

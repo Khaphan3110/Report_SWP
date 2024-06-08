@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.System.Users;
 
 namespace SWPSolution.BackendApi.Controllers
@@ -197,6 +198,76 @@ namespace SWPSolution.BackendApi.Controllers
             }
 
             return Ok(new { message = "Address deleted successfully" });
+        }
+
+        [HttpPost("AddAddress/{id}/address")]
+        public async Task<IActionResult> AddMemberAddress(string id, [FromBody] AddAddressRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.AddMemberAddressAsync(id, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+
+            return Ok(new { message = "Address added successfully" });
+        }
+
+        [HttpPut("UpdateCategory/{id}/category")]
+        public async Task<IActionResult> UpdateCategory(string id, CategoryUpdateRequest request)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _categoryService.Update(id, request);
+            if (!result)
+            {
+                return NotFound(new { Message = "Category not found." });
+            }
+
+            return Ok(new { Message = "Category updated successfully." });
+        }
+
+        [HttpDelete("DeleteCategory/{id}/category")]
+        public async Task<IActionResult> DeleteCategory(string id)
+        {
+            var result = await _categoryService.Delete(id);
+            if (!result)
+            {
+                return NotFound(new { Message = "Category not found." });
+            }
+
+            return Ok(new { Message = "Category deleted successfully." });
+        }
+
+        [HttpGet("GetCategory/{id}/category")]
+        public async Task<IActionResult> GetCategoryById(string id)
+        {
+            var category = await _categoryService.GetById(id);
+            if (category == null)
+            {
+                return NotFound(new { Message = "Category not found." });
+            }
+
+            return Ok(category);
+        }
+
+        [HttpGet("GetAllCategory")]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            var categories = await _categoryService.GetAll();
+            if (categories == null)
+            {
+                return NotFound(new { message = "No categories were found" });
+            }
+            return Ok(categories);
         }
     }
 }
