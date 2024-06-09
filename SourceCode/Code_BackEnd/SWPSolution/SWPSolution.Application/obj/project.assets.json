@@ -1802,6 +1802,7 @@
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.5",
+          "SWPSolution.Utilities": "1.0.0",
           "SWPSolution.ViewModels": "1.0.0"
         },
         "compile": {

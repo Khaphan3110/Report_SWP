@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "HQL8/K9Vq78=",
+=======
+  "dgSpecHash": "Ep6ch/eGGFGzteaMmijCHtAgIv03V6tXzggpK4oOL3x7y5GONJYXooRoTxmlxVSX504ifIHnEHYsj5LfPiYYTQ==",
+>>>>>>> 04ff60237be4902456299e49d52f8fd3a97cd4e2
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
   "expectedPackageFiles": [

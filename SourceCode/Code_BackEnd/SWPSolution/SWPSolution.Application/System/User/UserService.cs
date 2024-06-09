@@ -1,44 +1,51 @@
-﻿
-using Azure.Core;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Org.BouncyCastle.Asn1.Ocsp;
 using SWPSolution.Data.Entities;
+<<<<<<< HEAD
 using SWPSolution.Data.Enum;
 using SWPSolution.Utilities.Exceptions;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Common;
+=======
+>>>>>>> aa110568d0d05b8c265855872fefb4ca1c9014c0
 using SWPSolution.ViewModels.System.Users;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Reflection;
 using System.Security.Claims;
-using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
+using LoginRequest = SWPSolution.ViewModels.System.Users.LoginRequest;
+using RegisterRequest = SWPSolution.ViewModels.System.Users.RegisterRequest;
 
 
 namespace SWPSolution.Application.System.User
 {
     public class UserService : IUserService
     {
-        //private readonly IUrlHelper _urlHelper;
-        private readonly SWPSolutionDBContext _context; 
+        private readonly SWPSolutionDBContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly IConfiguration _config;
         private readonly IEmailService _emailService;
-        
-        public UserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, SWPSolutionDBContext context, IEmailService emailService)
+        private readonly IUrlHelperFactory _urlHelperFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public UserService(UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            RoleManager<AppRole> roleManager,
+            IConfiguration config,
+            SWPSolutionDBContext context,
+            IEmailService emailService,
+            IUrlHelperFactory urlHelperFactory,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -46,7 +53,8 @@ namespace SWPSolution.Application.System.User
             _config = config;
             _context = context;
             _emailService = emailService;
-            
+            _urlHelperFactory = urlHelperFactory;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<string> Authencate(LoginRequest request)
@@ -96,19 +104,83 @@ namespace SWPSolution.Application.System.User
         }
 
 
-        // public async Task<bool> ForgotPassword([Required] string email)
-        // {
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user!=null)
-        //     {
-        //         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-        //         var link = _urlHelper.Action("ResetPassword", "Authentication", new { token, email = user.Email }, Request.Scheme);
-        //     }
-        // }
+         public async Task<bool> ForgotPassword([Required] string email)
+         {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var request = _httpContextAccessor.HttpContext.Request;
+                var actionContext = new ActionContext(_httpContextAccessor.HttpContext, _httpContextAccessor.HttpContext.GetRouteData(), new Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor());
+                var urlHelper = _urlHelperFactory.GetUrlHelper(actionContext);
+
+                // Replace the base URL with your custom website domain
+                var baseUrl = _config["Website"];
+
+                // Generate the action URL
+             //   var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
+
+
+               // var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
+
+                var forgotPasswordLink = urlHelper.Action(nameof(ResetPassword), "Users", new { token, email = user.Email }, request.Scheme);
+                var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", forgotPasswordLink!);
+                _emailService.SendEmail(message);
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> ResetPassword(ResetPasswordVM model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                return false; // Handle user not found
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+            if (result.Succeeded)
+            {
+                // Assuming you have a DbContext or a repository to handle database operations
+                var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);   
+                var member = await _context.Members.FirstOrDefaultAsync(m => m.Email == model.Email);
+
+                if (appUser != null)
+                {
+                    appUser.TemporaryPassword = model.Password; // Or however you want to store it
+                }
+
+                if (member != null)
+                {
+                    member.PassWord = model.Password; // Or however you want to store it
+                }
+
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            var transaction = await _context.Database.BeginTransactionAsync();
+            var existingUsers = await _userManager.Users.Where(u => u.UserName == request.UserName &&
+                u.TemporaryPassword == request.Password &&
+                u.EmailConfirmed == false)
+    .ToListAsync();
+            if (existingUsers.Any())
+            {
+                foreach (var existingUser in existingUsers)
+                {
+                    var deleteResult = await _userManager.DeleteAsync(existingUser);
+                    if (!deleteResult.Succeeded)
+                    {
+                        return false;
+                    }
+                }
+            }
+            // Proceed with registration of the new user
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -116,44 +188,48 @@ namespace SWPSolution.Application.System.User
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
+                TemporaryPassword = request.Password,
+                EmailConfirmed = false, // Ensure the email is marked as not confirmed
             };
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                var member = new Member()
-                {
-                    MemberId = "",
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    PhoneNumber = request.PhoneNumber,
-                    Email = request.Email,
-                    UserName = request.UserName,
-                    PassWord = request.Password,
-                    RegistrationDate = DateTime.Now,
-                };
-                _context.Members.Add(member);
-                await _context.SaveChangesAsync();
+                return false; // If registration fails, return false
+            }
+            var otpSent = await SendOtp(request.Email);
 
-                // Generate OTP
-                var otp = new Random().Next(100000, 999999).ToString();
 
-                // Save OTP and expiration to database
-                user.EmailVerificationCode = otp;
-                user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
-                await _userManager.UpdateAsync(user);
-
+            return true;
+        }
+        public async Task<bool> SendOtp(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return false;
+            // Generate OTP
+            var otp = new Random().Next(100000, 999999).ToString();
+            // Save OTP and expiration to database
+            user.EmailVerificationCode = otp;
+            user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+            try
+            {
                 // Send OTP via email
                 var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
                 _emailService.SendEmail(message);
-
-                await transaction.CommitAsync();
                 return true;
             }
-
-            return false;
+            catch (Exception)
+            {
+                // If email sending fails, remove the user
+                await _userManager.DeleteAsync(user);
+                return false;
+            }
         }
-
         public async Task<bool> DeleteUserAsync(string memberId)
         {
             var member = await _context.Members.FindAsync(memberId);

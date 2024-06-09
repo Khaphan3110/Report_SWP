@@ -23,7 +23,6 @@ namespace SWPSolution.Application.Catalog.Product
         Task<int> RemoveImages(string imageId, List<FormFile> files);
 
         Task<int> UpdateImages(string imageId, string caption);
-        
         Task<List<ProductImageViewModel>> GetListImage(int productId);
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
     }

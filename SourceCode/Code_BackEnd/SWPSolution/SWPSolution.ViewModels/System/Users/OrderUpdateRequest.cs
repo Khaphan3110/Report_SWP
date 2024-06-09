@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.System.Users
 {
-    public class ForgotPasswordRequest
+    public class OrderUpdateRequest
     {
-        [Required]
-        [EmailAddress]
-        public string email {  get; set; }
+        public bool? orderStatus { get; set; }
     }
 }

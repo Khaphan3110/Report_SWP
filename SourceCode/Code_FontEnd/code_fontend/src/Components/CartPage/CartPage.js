@@ -27,10 +27,10 @@ const CartPage = () => {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="cart-page">
-      <div className="breadcrumb">
+    <div className="cart-page container">
+      {/* <div className="breadcrumb">
         <Link to="/">Trang chủ</Link> / Giỏ hàng 
-      </div>
+      </div> */}
       <div className="cart-container">
         <div className="cart-content">
           <h2>Giỏ hàng</h2>

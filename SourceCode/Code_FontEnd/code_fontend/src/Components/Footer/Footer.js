@@ -2,24 +2,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="bg-light text-center text-lg-start">
+      <div className="footer">
+        <h5 className="text-uppercase">Hà Nội</h5>
+        <p>
+          <strong>Showroom:</strong> 21 Phan Chu Trinh - 17 Lý Thường Kiệt,
+          phường Phan Chu Trinh, quận Hoàn Kiếm, Hà Nội.
+          <br /> Tel: 024 39 335 388 / 0969 96 466
+          <br /> Thời gian mở cửa: 8:30 - 21:30 (Kể cả T7, CN)
+          <br /> Đặt hàng: 1900 86 6606
+          <br /> Email: online@snb.com.vn
+        </p>
+      </div>
       <div className="container p-4">
         <div className="row">
-          <div className="footer col-lg-4 col-md-6 mb-4 mb-md-0">
-            <h5 className="text-uppercase">Hà Nội</h5>
-            <p>
-              <strong>Showroom:</strong> 21 Phan Chu Trinh - 17 Lý Thường Kiệt,
-              phường Phan Chu Trinh, quận Hoàn Kiếm, Hà Nội.
-              <br /> Tel: 024 39 335 388 / 0969 96 466
-              <br /> Thời gian mở cửa: 8:30 - 21:30 (Kể cả T7, CN)
-              <br /> Đặt hàng: 1900 86 6606
-              <br /> Email: online@snb.com.vn
-            </p>
-          </div>
-
-          <div className="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <div className="footer-sub col-lg-3 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">Giới Thiệu</h5>
             <ul className="list-unstyled mb-0">
               <li>
@@ -30,7 +30,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <div className="footer-sub col-lg-3 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">Hướng Dẫn</h5>
             <ul className="list-unstyled mb-0">
               <li>
@@ -46,7 +46,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <div className="footer-sub col-lg-3 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">Chính Sách</h5>
             <ul className="list-unstyled mb-0">
               <li>
@@ -77,9 +77,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <div className="footer-sub col-lg-3 col-md-6 mb-4 mb-md-0">
             <h5 className="text-uppercase">FAQ</h5>
-            <Link to={"/FQA"} className="text-dark">Các câu hỏi thường gặp khi sử dụng web</Link>
+            <Link to={"/FQA"} className="text-dark">
+              Các câu hỏi thường gặp khi sử dụng web
+            </Link>
             {/* <form>
               <div className="form-outline mb-4">
                 <input
@@ -100,7 +102,7 @@ const Footer = () => {
 
       <div
         className="text-center p-3"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+        // style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
       >
         <div className="d-flex justify-content-center align-items-center">
           <a href="#!" className="text-dark me-4">

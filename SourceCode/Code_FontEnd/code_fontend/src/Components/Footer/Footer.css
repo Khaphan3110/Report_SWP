@@ -4,10 +4,27 @@
     box-sizing: border-box;
 }
 
-.Footer {
-    background-color: aquamarine;
-}
 
-.footer{
-    color: #000000;
-}
+.footer {
+    background-color: #ff6666;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-sub {
+    color: black;
+  }
+  
+  .bg-light{
+    background-color: #FFFFFF !important;
+  }
+
+  .text-center{
+    color: black;
+  }

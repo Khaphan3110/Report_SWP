@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using SWPSolution.Application.Common;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Data.Entity;
 using System.Net.Http.Headers;
@@ -20,6 +22,11 @@ namespace SWPSolution.Application.Catalog.Product
         {
             _context = context;
             _storageService = storageService;
+        }
+
+        public Task<string> AddImage(string productId, ViewModels.Catalog.ProductImage.ProductImageCreateRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<string> AddImages(string productId, List<FormFile> files)
@@ -127,6 +134,11 @@ namespace SWPSolution.Application.Catalog.Product
             throw new NotImplementedException();
         }
 
+        public Task<int> RemoveImage(string productId, int imageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<int> RemoveImages(string imageId, List<FormFile> files)
         {
             throw new NotImplementedException();
@@ -157,6 +169,11 @@ namespace SWPSolution.Application.Catalog.Product
             }
             return await _context.SaveChangesAsync();
 
+        }
+
+        public Task<int> UpdateImage(string productId, int imageId, ViewModels.Catalog.ProductImage.ProductImageUpdateRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<int> UpdateImages(string imageId, string caption)
