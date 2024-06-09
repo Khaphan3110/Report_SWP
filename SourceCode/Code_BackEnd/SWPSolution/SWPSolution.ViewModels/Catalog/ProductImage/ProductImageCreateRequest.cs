@@ -9,7 +9,6 @@ namespace SWPSolution.ViewModels.Catalog.ProductImage
 {
     public class ProductImageCreateRequest
     {
-        public string ProductId { get; set; }
 
 
         public string Caption { get; set; }

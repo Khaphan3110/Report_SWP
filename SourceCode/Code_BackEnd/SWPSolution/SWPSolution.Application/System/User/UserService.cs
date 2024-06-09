@@ -108,16 +108,16 @@ namespace SWPSolution.Application.System.User
                 var urlHelper = _urlHelperFactory.GetUrlHelper(actionContext);
 
                 // Replace the base URL with your custom website domain
-                var baseUrl = _config["Website"];
+                var baseUrl = _config["AppUrl"];
 
                 // Generate the action URL
-             //   var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
+                var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
 
 
-               // var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
+                var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
 
-                var forgotPasswordLink = urlHelper.Action(nameof(ResetPassword), "Users", new { token, email = user.Email }, request.Scheme);
-                var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", forgotPasswordLink!);
+                //var forgotPasswordLink = urlHelper.Action(nameof(ResetPassword), "Users", new { token, email = user.Email }, request.Scheme);
+               // var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", forgotPasswordLink!);
                 _emailService.SendEmail(message);
                 return true;
             }

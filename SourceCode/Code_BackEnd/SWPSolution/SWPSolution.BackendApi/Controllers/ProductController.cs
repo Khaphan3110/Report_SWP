@@ -3,7 +3,9 @@ using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Catalog.Product;
+using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.ProductImage;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -76,7 +78,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok();
         }
 
-        [HttpPut("price/{id}/{newPrice}")]
+        [HttpPatch  ("price/{id}/{newPrice}")]
         public async Task<IActionResult> UpdatePrice([FromQuery]string id, float newPrice)
 
         {
@@ -85,6 +87,67 @@ namespace SWPSolution.BackendApi.Controllers
                 return Ok();
 
             return BadRequest();
+        }
+
+        //Images
+        [HttpPost("{productId}/images")]
+        public async Task<IActionResult> CreateImage(string productId, [FromForm] ProductImageCreateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var imageId = await _manageProductService.AddImage(productId,request);
+            if(imageId == 0)
+            {
+                throw new SWPException("Cannot create images");
+            }
+            var image = await _manageProductService.GetImageById(imageId);
+
+            return CreatedAtAction(nameof(GetImageById), new {id = imageId}, image);
+
+        }
+        [HttpPut("{productId}/images/{imageId}")]
+        public async Task<IActionResult> UpdateImage(string imageId, [FromForm] ProductImageUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _manageProductService.UpdateImage(imageId, request);
+            if (result == 0)
+            {
+                throw new SWPException("Cannot update images");
+            }
+
+            return Ok();
+
+        }
+
+        [HttpDelete("{productId}/images/{imageId}")]
+        public async Task<IActionResult> RemoveImage(string imageId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _manageProductService.RemoveImage(imageId);
+            if (result == 0)
+            {
+                throw new SWPException("Cannot remove images");
+            }
+
+            return Ok();
+
+        }
+
+        [HttpGet("{productId}/images/{imageId}")]
+        public async Task<IActionResult> GetImageById(string productId, int imageId)
+        {
+            var image = await _manageProductService.GetImageById(imageId);
+            if (image == null)
+                return BadRequest("Cannot find image");
+            return Ok(image);
         }
     }
 }
