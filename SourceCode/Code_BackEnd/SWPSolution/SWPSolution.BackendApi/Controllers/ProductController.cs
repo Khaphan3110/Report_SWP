@@ -81,8 +81,9 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpPatch  ("price/{id}/{newPrice}")]
         public async Task<IActionResult> UpdatePrice([FromQuery]string id, float newPrice)
 
+
         {
-            var isSuccessfull = await _manageProductService.UpdatePrice(id,newPrice);
+            var isSuccessfull = await _manageProductService.UpdatePrice(id, newPrice);
             if (isSuccessfull)
                 return Ok();
 

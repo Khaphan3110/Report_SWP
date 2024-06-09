@@ -9,6 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
+<<<<<<< HEAD
+using SWPSolution.Data.Enum;
+using SWPSolution.Utilities.Exceptions;
+using SWPSolution.ViewModels.Catalog.Categories;
+using SWPSolution.ViewModels.Common;
+=======
+>>>>>>> aa110568d0d05b8c265855872fefb4ca1c9014c0
 using SWPSolution.ViewModels.System.Users;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;

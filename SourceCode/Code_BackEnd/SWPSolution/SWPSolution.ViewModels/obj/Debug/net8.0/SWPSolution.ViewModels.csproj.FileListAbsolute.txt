@@ -11,3 +11,16 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\refint\SWPSolution.ViewModels.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\ref\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Debug\net8.0\SWPSolution.ViewModels.deps.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.csproj.AssemblyReference.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.AssemblyInfoInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.AssemblyInfo.cs
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.csproj.CoreCompileInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.sourcelink.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\refint\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\SWPSolution.ViewModels.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.ViewModels\obj\Debug\net8.0\ref\SWPSolution.ViewModels.dll

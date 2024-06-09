@@ -29,6 +29,7 @@ namespace SWPSolution.Application.Catalog.Product
         Task<ProductImageViewModel> GetImageById(int imageId);
         
         Task<List<ProductImageViewModel>> GetListImages(string productId);
+
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
     }
 }
