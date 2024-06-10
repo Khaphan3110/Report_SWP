@@ -1,5 +1,6 @@
 ﻿using System.Drawing.Text;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Catalog.Product;
@@ -11,6 +12,7 @@ namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IPublicProductService _publicProductService;

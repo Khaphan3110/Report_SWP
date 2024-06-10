@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
@@ -9,13 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
-<<<<<<< HEAD
-using SWPSolution.Data.Enum;
-using SWPSolution.Utilities.Exceptions;
-using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Common;
-=======
->>>>>>> aa110568d0d05b8c265855872fefb4ca1c9014c0
 using SWPSolution.ViewModels.System.Users;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
@@ -87,24 +79,47 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<bool> ConfirmEmail(string otp, string email)
+        public async Task<bool> ConfirmEmail(string otp)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
             if (user == null) return false;
-
-            if (user.EmailVerificationCode == otp && user.EmailVerificationExpiry > DateTime.Now)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
                 user.EmailConfirmed = true;
                 user.EmailVerificationCode = null;
                 user.EmailVerificationExpiry = null;
                 var result = await _userManager.UpdateAsync(user);
-                return result.Succeeded;
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+                var member = new Member()
+                {
+                    MemberId = "", // Assign a valid MemberId
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    PhoneNumber = user.PhoneNumber,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    PassWord = user.TemporaryPassword, // Assuming PasswordHash is stored in AppUser
+                    RegistrationDate = DateTime.Now,
+                };
+                _context.Members.Add(member);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
             }
-            return false;
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
 
-         public async Task<bool> ForgotPassword([Required] string email)
+        public async Task<bool> ForgotPassword([Required] string email)
          {
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
@@ -379,6 +394,27 @@ namespace SWPSolution.Application.System.User
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>("Tài khoản không tồn tại");
+            }
+            var removedRoles = request.Roles.Where(x=> x.Selected == false).Select(x => x.Name).ToList();
+            await _userManager.RemoveFromRolesAsync(user, removedRoles);
+
+            var addedRoles = request.Roles.Where(x => x.Selected == true).Select(x => x.Name).ToList();
+            foreach(var roleName in addedRoles) 
+            {
+                if(await _userManager.IsInRoleAsync(user, roleName) == false)
+                {
+                    await _userManager.AddToRolesAsync(user, addedRoles);
+                }
+            }
+            return new ApiSuccessResult<bool>();
         }
     }
 }

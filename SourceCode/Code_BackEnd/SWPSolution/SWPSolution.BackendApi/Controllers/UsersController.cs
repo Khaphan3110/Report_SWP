@@ -53,14 +53,14 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok();
         }
         [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        public async Task<IActionResult> ConfirmEmail(string otp)
         {
-            if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(otp))
             {
-                return BadRequest(new { message = "Token and email must be provided" });
+                return BadRequest(new { message = "OTP must be provied" });
             }
 
-            var result = await _userService.ConfirmEmail(token, email);
+            var result = await _userService.ConfirmEmail(otp);
             if (result)
             {
                 return Ok(new { message = "Email confirmed successfully" });
