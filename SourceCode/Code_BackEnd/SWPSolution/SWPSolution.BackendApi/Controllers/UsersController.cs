@@ -37,6 +37,25 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new {token  = resultToken});
         }
 
+        [HttpPost("google-login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GoogleLogin([FromBody] GoogleLoginRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.HandleGoogleLoginAsync(request);
+            if (result == null)
+            {
+                return BadRequest("Login failed.");
+            }
+
+            return Ok(result);
+        }
+
+
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterRequest request)

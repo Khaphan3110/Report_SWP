@@ -15,6 +15,8 @@ namespace SWPSolution.Application.System.User
     {
         Task<string> Authencate(LoginRequest request);
 
+        Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request);
+
         Task<bool> Register(RegisterRequest request);
 
         Task<bool> ForgotPassword([Required]string email);

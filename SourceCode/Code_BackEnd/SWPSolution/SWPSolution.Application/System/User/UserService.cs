@@ -79,6 +79,70 @@ namespace SWPSolution.Application.System.User
            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public async Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
+            if (user != null)
+            {
+                // User exists, generate token
+                var roles = await _userManager.GetRolesAsync(user);
+                var claims = new[]
+                {
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.GivenName, user.FirstName),
+            new Claim(ClaimTypes.Role, string.Join(";", roles))
+        };
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(_config["JWT:Issuer"],
+                    _config["JWT:Issuer"],
+                    claims,
+                    expires: DateTime.Now.AddHours(3),
+                    signingCredentials: creds);
+
+                return new { token = new JwtSecurityTokenHandler().WriteToken(token) };
+            }
+            else
+            {
+                // User does not exist, register user
+                var password = PasswordGenerator.GeneratePassword(); // Generate a secure password
+                var registerRequest = new RegisterRequest
+                {
+                    Email = request.Email,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    UserName = request.Email, // Assuming email as username
+                    Password = password // Use the generated secure password
+                };
+                var registerResult = await Register(registerRequest);
+                if (!registerResult)
+                {
+                    return null;
+                }
+
+                var newUser = await _userManager.FindByEmailAsync(request.Email);
+                var roles = await _userManager.GetRolesAsync(newUser);
+                var claims = new[]
+                {
+            new Claim(ClaimTypes.Email, newUser.Email),
+            new Claim(ClaimTypes.GivenName, newUser.FirstName),
+            new Claim(ClaimTypes.Role, string.Join(";", roles))
+        };
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(_config["JWT:Issuer"],
+                    _config["JWT:Issuer"],
+                    claims,
+                    expires: DateTime.Now.AddHours(3),
+                    signingCredentials: creds);
+
+                return new { token = new JwtSecurityTokenHandler().WriteToken(token) };
+            }
+        }
+
+
         public async Task<bool> ConfirmEmail(string otp)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
