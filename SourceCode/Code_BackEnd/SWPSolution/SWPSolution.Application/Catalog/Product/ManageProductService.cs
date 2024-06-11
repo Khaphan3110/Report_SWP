@@ -30,29 +30,41 @@ namespace SWPSolution.Application.Catalog.Product
                 Quantity = request.Quantity,
                 Price = request.Price,
                 Description = request.Description,
+                Image = request.ThumbnailImage.ToString()
 
             };
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            // Fetch the newly inserted product from the database
+            var insertedProduct = _context.Products.FirstOrDefault(p => p.ProductName == request.ProductName && p.Quantity == request.Quantity && p.Price == request.Price && p.Description == request.Description);
+
+            // Check if insertedProduct is null or ProductId is empty
+            if (insertedProduct == null || string.IsNullOrEmpty(insertedProduct.ProductId))
+            {
+                throw new Exception("Failed to retrieve the newly inserted product from the database.");
+            }
             //Save image
             if (request.ThumbnailImage != null)
             {
-                product.ProductImages = new List<ProductImage>()
-                {
-                    new ProductImage()
-                    {
-                        Caption = "Thumbnail image",
-                        DateCreated = DateTime.Now,
-                        FileSize = request.ThumbnailImage.Length,
-                        ImagePath =await this.SaveFile(request.ThumbnailImage),
-                        SortOrder = 1
-                    }
-                };
-            }
-            _context.Products.Add(product);
-             await _context.SaveChangesAsync();
-            return product.ProductId;
-        }
+                var productId = insertedProduct.ProductId;
 
-        public async Task<int> Delete(string productId)
+                var productImage = new ProductImage()
+                {
+                    ProductId = productId,
+                    Caption = "Thumbnail image",
+                    DateCreated = DateTime.Now,
+                    FileSize = request.ThumbnailImage.Length,
+                    ImagePath = await this.SaveFile(request.ThumbnailImage),
+                    SortOrder = 1
+                };
+
+                _context.ProductImages.Add(productImage);
+                await _context.SaveChangesAsync(); // Save changes for ProductImage entity
+            }
+            return insertedProduct.ProductId;
+    }
+
+            public async Task<int> Delete(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new SWPException($"Cannot find product:{productId}");
