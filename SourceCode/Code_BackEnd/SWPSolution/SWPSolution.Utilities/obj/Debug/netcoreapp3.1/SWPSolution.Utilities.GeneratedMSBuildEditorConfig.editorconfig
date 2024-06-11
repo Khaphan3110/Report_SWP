@@ -1,9 +1,0 @@
-is_global = true
-build_property.RootNamespace = SWPSolution.Utilities
-<<<<<<< HEAD
-build_property.ProjectDir = G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\
-=======
-build_property.ProjectDir = C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Utilities\
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 

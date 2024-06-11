@@ -1,15 +1,10 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
 using SWPSolution.Application.Common;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
-using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
-using SWPSolution.ViewModels.System.Users;
-using System;
 using System.Data.Entity;
 using System.Net.Http.Headers;
 
@@ -114,28 +109,6 @@ namespace SWPSolution.Application.Catalog.Product
             return pageResult;
         }
 
-<<<<<<< HEAD
-        public Task<ProductViewModel> GetById(string productId)
-        {
-            throw new NotImplementedException();
-        }
-
-       // public Task<List<ProductImageViewModel>> GetListImage(int productId)
-       // {
-       ////     throw new NotImplementedException();
-       //  }
-
-        public Task<int> RemoveImage(string productId, int imageId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemoveImages(string imageId, List<FormFile> files)
-        {
-            throw new NotImplementedException();
-        }
-=======
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
 
         public async Task<int> Update(ProductUpdateRequest request)
         {

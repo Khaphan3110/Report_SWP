@@ -128,11 +128,7 @@ namespace SWPSolution.BackendApi
                 });
             });
 
-<<<<<<< HEAD
-           
-=======
-            
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
+
 
             var app = builder.Build();
 

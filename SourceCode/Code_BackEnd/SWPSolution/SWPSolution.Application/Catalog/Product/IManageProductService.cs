@@ -30,11 +30,6 @@ namespace SWPSolution.Application.Catalog.Product
         
         Task<List<ProductImageViewModel>> GetListImages(string productId);
 
-<<<<<<< HEAD
-        Task<int> UpdateImages(string imageId, string caption);
-       // Task<List<ProductImageViewModel>> GetListImage(int productId);
-=======
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
     }
 }
