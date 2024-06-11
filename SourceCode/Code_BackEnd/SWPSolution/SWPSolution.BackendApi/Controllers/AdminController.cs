@@ -1,29 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.System.Users;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using SWPSolution.Application.System.User;
-using System.Data.Entity;
-using SWPSolution.ViewModels.Catalog.Categories;
 namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AdminController : ControllerBase
     {
+
         private readonly IAdminService _adminService;
+        
         public AdminController(IAdminService adminService) 
         {
             _adminService = adminService;
+            
         }
 
-        [Authorize]
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterAdmin([FromForm] RegisterRequest request)
@@ -38,6 +34,12 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest("Register failed.");
             }
             return Ok();
+        }
+
+        [HttpPost("RoleAssign")]
+        public async Task<IActionResult> RoleAssign(Guid id, string memberId)
+        {
+            return null;
         }
 
         [HttpPost("CreateBlog/{id}/createBlog")]

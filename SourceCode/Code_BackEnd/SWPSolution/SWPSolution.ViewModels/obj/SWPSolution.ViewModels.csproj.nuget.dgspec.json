@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj": {}
   },
   "projects": {
@@ -12,9 +13,30 @@
         "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
         "outputPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\obj\\",
+=======
+    "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
+        "projectName": "SWPSolution.ViewModels",
+        "projectPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
+        "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\obj\\",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

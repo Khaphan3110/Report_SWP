@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.System.Users
 {
-    public class RoleAssignRequest
+    public class GetUserPagingRequest : PagingRequestBase
     {
-        public string memberId {  get; set; }
-        public Guid Id { get; set; }
-        public SelectItem[] Roles { get; set; }
+        public string Keyword { get; set; }
     }
 }

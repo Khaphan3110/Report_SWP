@@ -8,19 +8,40 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\khanh\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
       "projectName": "SWPSolution.Utilities",
       "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
       "outputPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\khanh\\Source\\Repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
+      "projectName": "SWPSolution.Utilities",
+      "projectPath": "C:\\Users\\khanh\\Source\\Repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
+      "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\khanh\\Source\\Repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\obj\\",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+        "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -91,7 +91,6 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.SWPSolution.BackendApi.props
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.BackendApi.styles.css
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CopyComplete
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\refint\SWPSolution.BackendApi.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.pdb
@@ -198,6 +197,7 @@ D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Backend
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
+<<<<<<< HEAD
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
@@ -298,3 +298,9 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Backe
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\ref\SWPSolution.BackendApi.dll
+=======
+C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725

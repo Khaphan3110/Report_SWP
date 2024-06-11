@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
@@ -244,6 +245,37 @@
     {
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\catalog\\categories\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\categories\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+  "WorkspaceRootPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.viewmodels\\common\\passwordgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\common\\passwordgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.viewmodels\\system\\users\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\system\\users\\googleloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\entities\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
     }
   ],
   "DocumentGroupContainers": [
@@ -252,8 +284,13 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedHeight": 376,
           "SelectedChildIndex": 12,
+=======
+          "DockedWidth": 1097,
+          "SelectedChildIndex": 14,
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
           "Children": [
             {
               "$type": "Bookmark",
@@ -280,6 +317,7 @@
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+<<<<<<< HEAD
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "README.md",
@@ -290,10 +328,45 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
               "WhenOpened": "2024-06-10T09:32:28.401Z"
+=======
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PasswordGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\PasswordGenerator.cs",
+              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Common\\PasswordGenerator.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\PasswordGenerator.cs",
+              "RelativeToolTip": "SWPSolution.ViewModels\\Common\\PasswordGenerator.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAADwvyYAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T21:01:27.77Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Member.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Member.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\Member.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAAACIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T20:44:52.778Z",
+              "EditorCaption": ""
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+<<<<<<< HEAD
               "Title": "ApiResult.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\ApiResult.cs",
               "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Common\\ApiResult.cs",
@@ -302,10 +375,22 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T09:32:16.755Z"
+=======
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppUser.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\AppUser.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppUser.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\AppUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T20:44:42.257Z",
+              "EditorCaption": ""
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+<<<<<<< HEAD
               "Title": "PageResult.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\PageResult.cs",
               "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Common\\PageResult.cs",
@@ -362,10 +447,34 @@
               "ViewState": "AQIAABMAAAAAAAAAAAAAACsAAABZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-09T06:07:42.881Z",
+=======
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\IUserService.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\System\\User\\IUserService.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T19:40:35.475Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GoogleLoginRequest.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\GoogleLoginRequest.cs",
+              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\GoogleLoginRequest.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\GoogleLoginRequest.cs",
+              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\GoogleLoginRequest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T20:42:52.773Z",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 8,
               "Title": "SelectItem.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\SelectItem.cs",
@@ -1008,6 +1117,31 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-09T06:08:09.637Z"
+=======
+              "DocumentIndex": 1,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\UserService.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\System\\User\\UserService.cs",
+              "ViewState": "AQIAAHkAAAAAAAAAAAAAAI4AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T20:41:52.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAUwCoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-10T19:37:18.639Z",
+              "EditorCaption": ""
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
             }
           ]
         },
@@ -1027,10 +1161,21 @@
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+<<<<<<< HEAD
+=======
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]

@@ -12,7 +12,6 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.ViewModels.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.Utilities.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.csproj.CopyComplete
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\refint\SWPSolution.Data.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.pdb
@@ -38,6 +37,7 @@ D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\ob
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.pdb
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.genruntimeconfig.cache
 D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\ref\SWPSolution.Data.dll
+<<<<<<< HEAD
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.Data.deps.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.Data.runtimeconfig.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\bin\Debug\net8.0\SWPSolution.Data.dll
@@ -58,3 +58,6 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\ref\SWPSolution.Data.dll
+=======
+C:\Users\khanh\Source\Repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolut.420EFE51.Up2Date
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725

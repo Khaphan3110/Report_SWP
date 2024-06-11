@@ -167,12 +167,12 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.WebApp.styles.css
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\projectbundle\SWPSolution.WebApp.bundle.scp.css
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.CopyComplete
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\refint\SWPSolution.WebApp.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\ref\SWPSolution.WebApp.dll
+<<<<<<< HEAD
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.AssemblyReference.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.GeneratedMSBuildEditorConfig.editorconfig
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.AssemblyInfoInputs.cache
@@ -348,3 +348,9 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebAp
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolut.178F3EF7.Up2Date
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\ref\SWPSolution.WebApp.dll
+=======
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\FluentValidation.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolut.178F3EF7.Up2Date
+>>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
