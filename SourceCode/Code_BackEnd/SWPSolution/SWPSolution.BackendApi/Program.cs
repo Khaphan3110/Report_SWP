@@ -24,7 +24,16 @@ namespace SWPSolution.BackendApi
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddControllers();
+
+            //Add cros 
+            builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
+            {
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }));
+             
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
             builder.Services.AddIdentity<AppUser, AppRole>()
@@ -98,6 +107,8 @@ namespace SWPSolution.BackendApi
                 });
             });
 
+           
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -121,8 +132,8 @@ namespace SWPSolution.BackendApi
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("SWP_GROUP2");
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
 

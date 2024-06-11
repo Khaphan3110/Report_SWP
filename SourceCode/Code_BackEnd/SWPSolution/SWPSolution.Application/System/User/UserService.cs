@@ -9,13 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
-<<<<<<< HEAD
-using SWPSolution.Data.Enum;
-using SWPSolution.Utilities.Exceptions;
-using SWPSolution.ViewModels.Catalog.Categories;
-using SWPSolution.ViewModels.Common;
-=======
->>>>>>> aa110568d0d05b8c265855872fefb4ca1c9014c0
 using SWPSolution.ViewModels.System.Users;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
@@ -115,16 +108,16 @@ namespace SWPSolution.Application.System.User
                 var urlHelper = _urlHelperFactory.GetUrlHelper(actionContext);
 
                 // Replace the base URL with your custom website domain
-                var baseUrl = _config["Website"];
+                var baseUrl = _config["AppUrl"];
 
                 // Generate the action URL
-             //   var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
+                var resetPasswordUrl = $"{baseUrl}?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
 
 
-               // var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
+                var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
 
-                var forgotPasswordLink = urlHelper.Action(nameof(ResetPassword), "Users", new { token, email = user.Email }, request.Scheme);
-                var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", forgotPasswordLink!);
+                //var forgotPasswordLink = urlHelper.Action(nameof(ResetPassword), "Users", new { token, email = user.Email }, request.Scheme);
+               // var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", forgotPasswordLink!);
                 _emailService.SendEmail(message);
                 return true;
             }

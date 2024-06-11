@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Content.css";
-import  iconSubmenu  from "../../assets/images/iconSub.png";
+import  iconSubmenu  from "../../../assets/images/iconSub.png";
 
 export default function Content() {
   return (

@@ -1,12 +1,12 @@
-import React from "react";
-import "./Header.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
 import { Link } from "react-router-dom";
-import cartIcon from "../../assets/images/carticon.png";
-import phoneIcon from "../../assets/images/phoneicon.jpg";
-import shipIcon from "../../assets/images/shippingIcon.png";
-import memberIconDiscount from "../../assets/images/forMember.png";
-import blogImage from "../../assets/images/blogImage.png";
+import blogImage from "../../../assets/images/blogImage.png";
+import cartIcon from "../../../assets/images/carticon.png";
+import memberIconDiscount from "../../../assets/images/forMember.png";
+import phoneIcon from "../../../assets/images/phoneicon.jpg";
+import shipIcon from "../../../assets/images/shippingIcon.png";
+import "./Header.css";
 export default function Header() {
 
   const userInfor = JSON.parse(localStorage.getItem("userValue"))
@@ -73,7 +73,7 @@ export default function Header() {
                       height={32}
                     ></img>
                     <div className="userAcount d-md-flex flex-column d-none ">
-                      <a href="/account">Tài Khoản</a>
+                      <Link to={"/account"}>Tài Khoản</Link>
                       <small>
                         <a href="/account/logout">Đăng xuất</a>
                       </small>

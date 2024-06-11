@@ -129,10 +129,10 @@ namespace SWPSolution.Application.Catalog.Product
             throw new NotImplementedException();
         }
 
-        public Task<List<ProductImageViewModel>> GetListImage(int productId)
-        {
-            throw new NotImplementedException();
-        }
+       // public Task<List<ProductImageViewModel>> GetListImage(int productId)
+       // {
+       ////     throw new NotImplementedException();
+       //  }
 
         public Task<int> RemoveImage(string productId, int imageId)
         {

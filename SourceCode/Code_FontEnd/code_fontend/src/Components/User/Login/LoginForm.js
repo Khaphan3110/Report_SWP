@@ -6,8 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
-import { userLogin } from "../../Service/UserService/UserService";
-import { Alert } from "@mui/material";
+import { userLogin } from "../../../Service/UserService/UserService";
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
@@ -52,7 +51,6 @@ export default function LoginForm() {
     },
   });
 
-  const HandleShowEmailForm = () => {};
 
   const navigate = useNavigate(); //sử dựng để điều hướng trang
   const handleLoginGoogle = async () => {
@@ -64,6 +62,7 @@ export default function LoginForm() {
           image: result.user.photoURL,
           userID: result.user.uid,
         };
+        console.log(result);
         localStorage.setItem("userName", JSON.stringify(userValue));
         navigate("/register");
       })

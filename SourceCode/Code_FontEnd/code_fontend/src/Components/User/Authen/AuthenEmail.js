@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import "../Login/LoginForm.css";
-import { authenCodeOTP } from "../../Service/UserService/UserService"; 
+import { authenCodeOTP } from "../../../Service/UserService/UserService";
+
 export default function AuthenEmail() {
   const navigator = useNavigate();
 

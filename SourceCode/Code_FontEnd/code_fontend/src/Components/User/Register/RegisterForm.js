@@ -1,15 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 // import ReactDatePicker from "react-datepicker";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import {
-  userRegister,
-  authenEmailRegister,
-} from "../../Service/UserService/UserService";
 
+
+import { userRegister } from "../../../Service/UserService/UserService";
 import "./RegisterForm.css";
 export default function RegisterForm() {
   // const [selectDate, setSelectDate] = useState(null); //dùng cho ngày tháng

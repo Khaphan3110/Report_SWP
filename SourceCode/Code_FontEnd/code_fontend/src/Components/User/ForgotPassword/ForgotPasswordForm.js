@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Login/LoginForm.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { userFogotPassword } from "../../../Service/UserService/UserService";
+
 
 export default function ForgotPasswordForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
   const [iconShow, setIconShow] = useState(listIcon[0]);
+   
+  const query = useQuery();
+  const token = query.get('token');
+  const email = query.get('email');
 
+  const navigator = useNavigate();
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -42,9 +49,22 @@ export default function ForgotPasswordForm() {
         ),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
-      // Add logic to handle password reset here, such as calling an API
+    onSubmit: async (values) => {
+      alert(" da vo");
+      const formdata = new FormData();
+      formdata.append("Password",values.inputNewPassword);
+      formdata.append("ConfirmPassword",values.inputComfirmPassword);
+      formdata.append("Email",email);
+      formdata.append("Token",token);
+ 
+      const resUserForogt = await userFogotPassword(formdata);
+      if(resUserForogt.data){
+         alert("đã đổi mật khẩu thành công! đăng nhập thôi nào")
+         navigator("/login");
+      } else {
+        alert("đổi mật khẩu <h2>Không</h2> thành công")
+      }
+      
     },
   });
 
@@ -117,4 +137,9 @@ export default function ForgotPasswordForm() {
       </div>
     </section>
   );
+}
+
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);//return current url
 }

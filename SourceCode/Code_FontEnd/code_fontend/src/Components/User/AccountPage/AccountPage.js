@@ -17,6 +17,8 @@ const AccountPage = () => {
     handleAddressModalClose();
   };
 
+
+  
   const handleLogout = () => {
     // Xử lý việc đăng xuất tại đây
     alert('Đăng xuất thành công!');

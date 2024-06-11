@@ -1,11 +1,10 @@
-
 import * as request from "../../utility/CustomAxios";
 //Register user
 export const userRegister = async (bodyInfor) => {
   try {
     const res = await request.Post("Users/register", bodyInfor, {
       headers: {
-        "Content-Type": "multipart/form-data",    
+        "Content-Type": "multipart/form-data",
       },
     });
     return res;
@@ -14,38 +13,56 @@ export const userRegister = async (bodyInfor) => {
   }
 };
 
-export const authenEmailRegister = async ( email ) => {
-    try {
-      const res = await request.Post(`Users/SendOTP?email=${email}`);
-      return res;
-    } catch (error) {
-      console.log("lỗi send email",error);
-    }
+export const authenEmailForgotPassword = async ( emailForgot ) => {
+  try {
+    console.log(emailForgot.get("email"));
+    const res = await request.Post("Users/ForgotPassword", emailForgot, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi send email", error);
+  }
 };
 
- 
-export const authenCodeOTP = async ( otp ) => {
+export const authenCodeOTP = async (otp) => {
   try {
     console.log(otp);
     const res = await request.Get(`Users/ConfirmEmail?otp=${otp}`);
     return res;
   } catch (error) {
-    console.log("lỗi authenOTP",error);
+    console.log("lỗi authenOTP", error);
   }
 };
 
-export const userLogin = async ( UserLoginInfor ) => {
-  
+export const userLogin = async (UserLoginInfor) => {
   try {
     const res = await request.Post("Users/authenticate", UserLoginInfor, {
       headers: {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
+        "Content-Type": "multipart/form-data",
+        Accept: "application/json",
       },
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi login", error);
+  }
+};
+
+export const userFogotPassword = async ( PasswordReset ) => {
+  try {
+    const res = await request.Post("Users/ResetPassword",PasswordReset, {
+      headers:{
+        'Content-Type': 'multipart/form-data',
+      }
     })
     return res;
   } catch (error) {
-    console.log("lỗi login",error);
+    console.log("lỗi quên mật khẩu " + error)
   }
 }
+
+
 
