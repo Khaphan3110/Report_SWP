@@ -12,7 +12,7 @@ namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductController : Controller
     {
         private readonly IPublicProductService _publicProductService;

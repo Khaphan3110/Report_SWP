@@ -1,0 +1,19 @@
+.side-navbar{
+  background-color: #F591A1;
+}
+
+.side-navbar-admin{
+   margin-top: 10px;
+}
+
+.side-navbar-admin a{
+    text-decoration: none;
+    color: black;
+}
+
+.categories-word {
+   list-style-type: none;
+   color: black;
+   padding: 10px;
+   border: 1px solid black;
+}

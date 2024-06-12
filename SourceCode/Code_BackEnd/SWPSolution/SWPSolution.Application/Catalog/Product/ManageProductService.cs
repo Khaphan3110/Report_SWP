@@ -121,6 +121,10 @@ namespace SWPSolution.Application.Catalog.Product
             return pageResult;
         }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
 
         public async Task<int> Update(ProductUpdateRequest request)
         {
@@ -196,6 +200,7 @@ namespace SWPSolution.Application.Catalog.Product
             return productImage.Id; 
         }
 
+        //Task<ProductViewModel> GetById(string productId);
         public async Task<ProductViewModel> GetById(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
