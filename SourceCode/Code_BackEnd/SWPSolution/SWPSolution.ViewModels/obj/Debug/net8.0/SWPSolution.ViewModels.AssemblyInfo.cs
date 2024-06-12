@@ -14,11 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.ViewModels")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2de607ddc42f41edcfb6470c6261a952ac7cfdc")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+464ee9c8eed3b5a9730ba57d08e7a6ab64d26c0c")]
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66e730f910ff5de5143e9fedd69fddd2da702715")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.ViewModels")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.ViewModels")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

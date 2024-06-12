@@ -6,7 +6,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-
 import { userRegister } from "../../../Service/UserService/UserService";
 import "./RegisterForm.css";
 export default function RegisterForm() {
@@ -87,7 +86,7 @@ export default function RegisterForm() {
       formdata.append("ConfirmPassword", values.ConfirmPassword);
       alert("Tao");
       const reUserRegit = await userRegister(formdata);
-      navigate("/authenOTP")
+      navigate("/authenOTP");
     },
   });
 

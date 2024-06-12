@@ -64,5 +64,18 @@ export const userFogotPassword = async ( PasswordReset ) => {
   }
 }
 
+export const useLoginGoogle = async ( useGoogleLogin ) => {
+  try {
+    const res = await request.Post("Users/google-login",useGoogleLogin, {
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    })
+    return res;
+  } catch (error) {
+    console.log("lỗi đăng nhập google " + error)
+  }
+}
+
 
 

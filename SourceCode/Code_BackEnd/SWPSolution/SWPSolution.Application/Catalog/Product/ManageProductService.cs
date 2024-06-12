@@ -114,28 +114,7 @@ namespace SWPSolution.Application.Catalog.Product
             return pageResult;
         }
 
-<<<<<<< HEAD
-        public Task<ProductViewModel> GetById(string productId)
-        {
-            throw new NotImplementedException();
-        }
 
-       // public Task<List<ProductImageViewModel>> GetListImage(int productId)
-       // {
-       ////     throw new NotImplementedException();
-       //  }
-
-        public Task<int> RemoveImage(string productId, int imageId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> RemoveImages(string imageId, List<FormFile> files)
-        {
-            throw new NotImplementedException();
-        }
-=======
->>>>>>> 461c2e2220bdec885e82d1d2587f10511aa56725
 
         public async Task<int> Update(ProductUpdateRequest request)
         {
@@ -211,6 +190,7 @@ namespace SWPSolution.Application.Catalog.Product
             return productImage.Id; 
         }
 
+        //Task<ProductViewModel> GetById(string productId);
         public async Task<ProductViewModel> GetById(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
