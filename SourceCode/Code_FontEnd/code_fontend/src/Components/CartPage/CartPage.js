@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CartPage.css';
 
@@ -10,9 +10,20 @@ const CartPage = () => {
       price: 900000,
       quantity: 1,
       image: 'https://tse4.mm.bing.net/th?id=OIP.E1DyiEUNLJcx-UvjKKdNkwHaHa&pid=Api&P=0&h=180'
+    },
+    {
+      id: 2,
+      name: 'Sữa bột Abbott Grow Gold số 4 900g cho trẻ 2-6 tuổi',
+      price: 500000,
+      quantity: 1,
+      image: 'https://bizweb.dktcdn.net/100/172/234/products/sua-bot-abbott-grow-gold-3-huong-vani-400g-1502939576-4289062-1559d640cd84f525e2cec0a2981a2b4a.jpg?v=1514607202967'
     }
   ]);
-  
+
+  useEffect(() => {
+    // Save cart items to localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const handleQuantityChange = (itemId, delta) => {
     setCartItems(cartItems.map(item =>
@@ -56,7 +67,7 @@ const CartPage = () => {
             <label htmlFor="invoice">Xuất hóa đơn công ty</label>
           </div>
           <div className="total-price">
-            <span>TỔNG CỘNG </span>
+            <span>TỔNG CỘNG: </span>
             <span>{total.toLocaleString()}₫</span>
             <span>(Đã bao gồm VAT nếu có)</span>
           </div>

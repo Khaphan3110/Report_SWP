@@ -11,8 +11,9 @@ import Content from "./Components/Content/Content";
 import AccountPage from "./Components/AccountPage/AccountPage";
 import AddressPage from "./Components/AddressPage/AddressPage";
 import CartPage from "./Components/CartPage/CartPage";
-import ResetPasswordPage from "./Components/ForgotPassword/ResetPasswordPage";// Import the ResetPasswordPage component
-
+import ResetPasswordPage from "./Components/ForgotPassword/ResetPasswordPage";
+import CheckoutPage from "./Components/CheckoutPage/CheckoutPage";
+import PaymentPage from "./Components/PaymentPage/PaymentPage";
 function App() {
   return (
     <>
@@ -25,14 +26,14 @@ function App() {
         <Route path="/account" element={<AccountPage />} />
         <Route path="/addresses" element={<AddressPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} /> 
+        <Route path="/payment" element={<PaymentPage />} />
         <Route path="/Content" element={<Content />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/authenOTP" element={<AuthenEmail />} />
         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} />
-        {/* Add the route for ResetPasswordPage */}
         <Route path="/reset-password/:token/:email" element={<ResetPasswordPage />} />
-        {/* <Route path="/FAQ" element={<FAQ />} /> */}
       </Routes>
       <Footer />
     </>

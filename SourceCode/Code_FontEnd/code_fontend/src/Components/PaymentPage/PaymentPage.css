@@ -1,0 +1,104 @@
+.payment-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.breadcrumb {
+  margin: 20px;
+}
+
+.payment-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left-section {
+  width: 65%;
+}
+
+.right-section {
+  width: 30%;
+}
+
+.shipping-method-section,
+.payment-method-section,
+.order-summary-section {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+.shipping-method-section h2,
+.payment-method-section h2,
+.order-summary-section h2 {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.shipping-method label,
+.payment-method label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.shipping-method input,
+.payment-method input {
+  margin-right: 10px;
+}
+
+.product-summary {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.product-summary img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.product-info p {
+  margin: 0;
+}
+
+.promo-code {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.promo-code input {
+  flex: 1;
+  padding: 5px;
+}
+
+.promo-code button {
+  padding: 5px 10px;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.final-total {
+  font-weight: bold;
+}
+
+.complete-order-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px 0;
+}
