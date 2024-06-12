@@ -35,7 +35,8 @@ namespace SWPSolution.Application.System.Admin
         }
         public async Task<bool> RegisterAdmin(RegisterRequest request)
         {
-            var transaction = await _context.Database.BeginTransactionAsync();
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
             var user = new AppUser()
             {
                 Email = request.Email,
@@ -43,31 +44,45 @@ namespace SWPSolution.Application.System.Admin
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
-                
-
+                TemporaryPassword = request.Password
             };
+
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
             {
+                // Ensure the admin role exists
+                if (!await _roleManager.RoleExistsAsync("Admin"))
+                {
+                    var adminRole = new AppRole { Name = "Admin", Description = "Administrator role with full permissions" };
+                    await _roleManager.CreateAsync(adminRole);
+                }
+
+                // Assign the admin role to the user
+                await _userManager.AddToRoleAsync(user, "Admin");
+
                 var admin = new Staff()
                 {
-                    StaffId = "",
-                    FullName = request.FirstName + request.LastName,
+                    StaffId = Guid.NewGuid().ToString(), // Generate a new unique ID
+                    FullName = $"{request.FirstName} {request.LastName}",
                     Username = request.UserName,
                     Password = request.Password,
                     Email = request.Email,
                     Phone = request.PhoneNumber,
-                    Role = "staffmember"
+                    Role = "Admin"
                 };
+
                 _context.Staff.Add(admin);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
                 return true;
             }
+
+            await transaction.RollbackAsync();
             return false;
         }
+
 
         public async Task<bool> CreateBlogAsync(string staffId, BlogCreateRequest request)
         {

@@ -1,0 +1,169 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header-menu {
+  margin: 10px 0;
+}
+
+.header-center form {
+  display: flex;
+  position: relative;
+}
+
+.header-center input {
+  background-color: #f1f1f1;
+
+  height: 45px;
+  width: 100%;
+  border-radius: 25px;
+  padding: 5px 0;
+  padding-left: 15px;
+  padding-right: 30px;
+  border: 0;
+  outline: none;
+}
+
+.header-center span button {
+  height: 100%;
+  width: 100%;
+  background-color: #fbd947;
+}
+
+.header-center span button i {
+  position: absolute;
+  right: 12px;
+  top: 16px;
+}
+
+.header-right {
+  height: 60px;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.header-right li {
+  /* margin: 0 15px; */
+}
+
+.contact {
+  display: flex;
+}
+
+.contact img {
+  align-self: center;
+  margin-right: 5px;
+}
+
+.contact .std {
+  font-weight: bold;
+}
+
+.contact-infor span {
+  display: inline-block;
+}
+
+.user {
+  position: relative;
+  border: 1px dashed #f05a72;
+}
+
+.user img {
+  display: block;
+  align-self: center;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.userAcount {
+  padding-right: 5px;
+}
+
+.userAcount a {
+  text-decoration: none;
+  color: #f05a72;
+}
+
+.userAcount a:hover {
+  text-decoration: underline;
+}
+
+.cart {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cart-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  height: 30px;
+  text-decoration: none;
+  border: 1px solid #f05a72;
+  height: 100%;
+  padding: 7px;
+}
+
+.cart-link img {
+  align-self: center;
+}
+
+.cart-link .cart-quantity {
+  align-self: center;
+  background-color: #fbd947;
+}
+
+.cart-name {
+  display: block;
+  align-self: center;
+  color: black;
+}
+
+.subHeader {
+  /* padding-top: 10px; */
+  background-color: #f05a72;
+}
+
+.wrapper-subHeader {
+  height: 48px;
+  display: flex;
+  width: 100%;
+
+  padding: 0;
+}
+
+.toogle-nav-wrapper {
+  flex: 20%;
+}
+
+.shop-policy {
+  display: flex;
+  justify-content: space-around;
+  flex: 80%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.shop-policy li {
+  height: 40px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.shop-policy li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.shop-policy li div {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.shop-policy li div img {
+}

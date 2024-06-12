@@ -1,11 +1,14 @@
 using System.Configuration;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
@@ -24,7 +27,16 @@ namespace SWPSolution.BackendApi
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddControllers();
+
+            //Add cros 
+            builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
+            {
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }));
+             
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
             builder.Services.AddIdentity<AppUser, AppRole>()
@@ -56,15 +68,33 @@ namespace SWPSolution.BackendApi
                 opts.SignIn.RequireConfirmedEmail = true
             );
             //Add Authentication
+
+
+            string signingKey = builder.Configuration.GetValue<string>("JWT:SigningKey");
+            byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes( signingKey );
             builder.Services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false; 
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+                };
             });
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddFluentValidation();
             // Add Swagger services
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
@@ -98,6 +128,8 @@ namespace SWPSolution.BackendApi
                 });
             });
 
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -121,8 +153,8 @@ namespace SWPSolution.BackendApi
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("SWP_GROUP2");
             app.UseStaticFiles();
-
             app.UseRouting();
             app.UseAuthentication();
 

@@ -13,6 +13,7 @@ namespace SWPSolution.Application.System.Admin
 {
     public interface IAdminService
     {
+
         Task<bool> RegisterAdmin(RegisterRequest request); 
 
         Task<bool> CreateBlogAsync(string staffId, BlogCreateRequest request);

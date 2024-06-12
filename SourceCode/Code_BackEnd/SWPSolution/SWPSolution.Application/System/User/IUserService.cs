@@ -15,17 +15,21 @@ namespace SWPSolution.Application.System.User
     {
         Task<string> Authencate(LoginRequest request);
 
+        Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request);
+
         Task<bool> Register(RegisterRequest request);
 
         Task<bool> ForgotPassword([Required]string email);
 
         Task<bool> ResetPassword(ResetPasswordVM model);
 
-        Task<bool> ConfirmEmail(string token, string email);
+        Task<bool> ConfirmEmail(string otp);
 
         Task<bool> TestEmail(string emailAddress);
 
         Task<List<MemberInfoVM>> GetAllMembersAsync();
+
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
 
         Task<MemberInfoVM> GetMemberByIdAsync(string memberId);
 
