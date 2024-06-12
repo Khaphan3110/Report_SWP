@@ -128,6 +128,11 @@ namespace SWPSolution.BackendApi
                 });
             });
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
