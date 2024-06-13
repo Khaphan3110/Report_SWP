@@ -14,6 +14,7 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
+using SWPSolution.Application.Sales;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -54,6 +55,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddTransient<ICategoryService, CategoryService>();
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
 
 
             //Add email configs
@@ -127,12 +129,6 @@ namespace SWPSolution.BackendApi
                     }
                 });
             });
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

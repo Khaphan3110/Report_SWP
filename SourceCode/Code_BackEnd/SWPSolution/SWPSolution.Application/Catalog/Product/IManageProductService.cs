@@ -10,6 +10,9 @@ namespace SWPSolution.Application.Catalog.Product
     {
         Task<string> Create(ProductCreateRequest request);
 
+        Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests);
+
+
         Task<int> Update(ProductUpdateRequest request);
 
         Task<int> Delete(string productId);
@@ -22,6 +25,8 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<int> AddImage(string productId, ProductImageCreateRequest request);
 
+        Task<int> AddMultipleImages(string productId, List<ProductImageCreateRequest> requests);
+
         Task<int> RemoveImage(string imageId);
 
         Task<int> UpdateImage(string imageId, ProductImageUpdateRequest request);
@@ -30,10 +35,6 @@ namespace SWPSolution.Application.Catalog.Product
         
         Task<List<ProductImageViewModel>> GetListImages(string productId);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
     }
 }

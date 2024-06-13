@@ -57,7 +57,72 @@ namespace SWPSolution.BackendApi.Controllers
             var product = await _manageProductService.GetById(productId);
             return CreatedAtAction(nameof(GetById), new { id = productId }, product);
         }
+        [HttpPost("createmultiple")]
+        public async Task<IActionResult> CreateMultiple([FromBody] List<ListProductCreateRequest> requests)
+        {
+            if (!ModelState.IsValid || requests == null || requests.Count == 0)
+            {
+                return BadRequest(ModelState);
+            }
 
+            try
+            {
+                var productIds = await _manageProductService.CreateMultipleProducts(requests);
+
+                if (productIds == null || productIds.Count == 0)
+                {
+                    return BadRequest("Failed to create any products.");
+                }
+
+                var products = new List<ProductViewModel>();
+                foreach (var productId in productIds)
+                {
+                    var product = await _manageProductService.GetById(productId);
+                    if (product != null)
+                    {
+                        products.Add(product);
+                    }
+                }
+
+                if (products.Count == 0)
+                {
+                    return NotFound("No products found after creation.");
+                }
+
+                return CreatedAtAction(nameof(GetById), new { id = productIds }, products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to create products: {ex.Message}");
+            }
+        }
+
+        [HttpPost("{productId}/uploadmultipleimages")]
+        public async Task<IActionResult> UploadMultipleProductImages(string productId, List<IFormFile> imageFiles)
+        {
+            if (imageFiles == null || imageFiles.Count == 0)
+            {
+                return BadRequest("No images uploaded.");
+            }
+
+            var productImageRequests = imageFiles.Select(file => new ProductImageCreateRequest
+            {
+                ImageFile = file,
+                Caption = "Uploaded Image",
+                SortOrder = 1 // Set a default sort order or adjust as needed
+            }).ToList();
+
+            try
+            {
+                await _manageProductService.AddMultipleImages(productId, productImageRequests);
+
+                return Ok("Images uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Failed to upload images: {ex.Message}");
+            }
+        }
         [HttpPut]
         public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
 

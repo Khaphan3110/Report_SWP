@@ -7,15 +7,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
-<<<<<<< HEAD
-
+using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
-
-=======
-using SWPSolution.ViewModels.Common;
->>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
 using SWPSolution.ViewModels.System.Users;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -55,35 +51,67 @@ namespace SWPSolution.Application.System.User
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> Authencate(LoginRequest request)
+        public async Task<string> Authenticate(LoginRequest request)
         {
+            // Find the user by username
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) return null;
-
-            var result =await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
-            if (!result.Succeeded)
+            if (user == null)
             {
-                return null;
+                return null; // User not found
             }
 
-            var roles =await _userManager.GetRolesAsync(user);
-            var claims = new[]
+            // Check if the provided password is correct
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            if (!result.Succeeded)
             {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Role, string.Join(";", roles))
-            };
+                return null; // Invalid password
+            }
+
+            // Retrieve member_id from your member table based on the username
+            string memberId = await GetMemberIdByUsername(request.UserName);
+
+            // Get user roles
+            var roles = await _userManager.GetRolesAsync(user);
+
+            // Create claims for the token
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim(ClaimTypes.GivenName, user.FirstName),
+        new Claim(ClaimTypes.Role, string.Join(";", roles)),
+        new Claim("member_id", memberId.ToString())  // Add member_id as a custom claim
+    };
+
+            // Generate JWT token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(_config["JWT:Issuer"],
+            var token = new JwtSecurityToken(
+                _config["JWT:Issuer"],
                 _config["JWT:Issuer"],
                 claims,
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
 
-           return new JwtSecurityTokenHandler().WriteToken(token);
+            // Write and return the token
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        // Method to retrieve member_id from the member table
+        private async Task<string> GetMemberIdByUsername(string username)
+        {
+            // Assuming you have access to your database context
+            var member = _context.Members.FirstOrDefault(m => m.UserName == username);
+            if (member != null)
+            {
+                return member.MemberId;
+            }
+            else
+            {
+                // Handle case where member is not found (optional)
+                throw new SWPException("Error getting Member ID"); // or throw an exception or handle as appropriate
+            }
+        }
+
 
         public async Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request)
         {
@@ -203,12 +231,6 @@ namespace SWPSolution.Application.System.User
                 var baseUrl = _config["AppUrl"];
 
                 // Generate the action URL
-<<<<<<< HEAD
-
-                var resetPasswordUrl = $"{baseUrl}?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
-
-=======
->>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
 
                 var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
 
