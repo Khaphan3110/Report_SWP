@@ -7,6 +7,7 @@ import memberIconDiscount from "../../../assets/images/forMember.png";
 import phoneIcon from "../../../assets/images/phoneicon.jpg";
 import shipIcon from "../../../assets/images/shippingIcon.png";
 import "./Header.css";
+import accountIcon from "../../../assets/images/account-icon.png"
 export default function Header() {
 
   const userInfor = JSON.parse(localStorage.getItem("userValue"))
@@ -23,7 +24,7 @@ export default function Header() {
                   <span>Bar</span>
                 </div>
               </div>
-              <div className="col-6 col-xl-3 col-lg-3 header-left">
+              <div className="col-6 col-xl-3 col-lg-3 header-left-homepage">
                 <Link to={"/"}>
                   <img
                     src="https://theme.hstatic.net/1000186075/1000909086/14/logo.png?v=4468"
@@ -67,7 +68,7 @@ export default function Header() {
                   </li>
                   <li className="user d-block d-flex">
                     <img
-                      src={memberIconDiscount}
+                      src={accountIcon}
                       alt="hình ảnh user"
                       width={32}
                       height={32}
@@ -75,7 +76,7 @@ export default function Header() {
                     <div className="userAcount d-md-flex flex-column d-none ">
                       <Link to={"/account"}>Tài Khoản</Link>
                       <small>
-                        <a href="/account/logout">Đăng xuất</a>
+                        <Link to={"/logout"}>Đăng xuất</Link>
                       </small>
                     </div>
                   </li>
@@ -99,7 +100,7 @@ export default function Header() {
           </div>
         </div>
       </header>
-      <div className="subHeader">
+      <div className="sub-Header-homepage">
         <div className="container wrapper-subHeader">
           <div className="toogle-nav-wrapper">
             <div className="icon-bar btn menu-bar mr-2  p-0 d-inline-flex">

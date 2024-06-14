@@ -1,18 +1,18 @@
 import Categories from "../Components/Amind/Categories/Categories";
-import AccountPage from "../Components/User/AccountPage/AccountPage";
 import AddressPage from "../Components/User/AddressPage/AddressPage";
 import AuthenEmail from "../Components/User/Authen/AuthenEmail";
 import CartPage from "../Components/User/CartPage/CartPage";
+import CheckoutPage from "../Components/User/CheckoutPage/CheckoutPage";
 import Content from "../Components/User/Content/Content";
 import ForgotPasswordForm from "../Components/User/ForgotPassword/ForgotPasswordForm";
 import SendEmailForm from "../Components/User/ForgotPassword/SendEmailForm";
+import AccountPage from "../Components/User/AccountPage/AccountPage"
 import LoginForm from "../Components/User/Login/LoginForm";
 import Logout from "../Components/User/Logout/Logout";
+import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 import RegisterForm from "../Components/User/Register/RegisterForm";
 import RouteAdminLayout from "../Layouts/AdminLayout/RouteAdminLayout";
 import HomePage from "../Pages/HomePage/HomePage";
-import CheckoutPage from "../Components/User/CheckoutPage/CheckoutPage";
-import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -39,6 +39,7 @@ const publicRoutes = [
   { path: "/payment", component: PaymentPage },
   { path: "/authenOTP", component: AuthenEmail },
   { path: "/addresses", component: AddressPage },
+  { path: "/account", component: AccountPage },
   { path: "/cart", component: CartPage },
   { path: "/content", component: Content },
 ];

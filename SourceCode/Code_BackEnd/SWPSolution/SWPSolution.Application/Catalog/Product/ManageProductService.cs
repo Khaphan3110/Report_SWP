@@ -121,10 +121,6 @@ namespace SWPSolution.Application.Catalog.Product
             return pageResult;
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0b12b4dbed67dd702b6eb0c910472ad9af2f5de0
 
         public async Task<int> Update(ProductUpdateRequest request)
         {

@@ -5,19 +5,29 @@ import { Link } from "react-router-dom";
 import "./SideBarAdmin.css";
 export default function SideBarAdmin() {
   return (
-      <ul className="side-navbar-admin">
-        <Link to={"/dashboard"}>
-          <li className="categories-word">Dashboard</li>
+    <ul className="side-navbar-admin">
+      <div className="main-link-sidebar-admin">
+        <Link to={"/admin"} className="link-sidebar-admin">
+          <li className="categories-word">
+            <i className="fa-solid fa-chart-simple"></i> Dashboard
+          </li>
         </Link>
-        <Link to={"/categories"}>
-          <li className="categories-word">Product</li>
+        <Link to={"/categories"} className="link-sidebar-admin">
+          <li className="categories-word">
+            <i className="fa-brands fa-product-hunt"></i> Categories
+          </li>
         </Link>
-        <Link to={"/categories"}>
-          <li className="categories-word">Staff</li>
+        <Link to={"/categories"} className="link-sidebar-admin">
+          <li className="categories-word">
+            <i className="fa-solid fa-layer-group"></i> Product
+          </li>
         </Link>
-        <Link to={"/categories"}>
-          <li className="categories-word"></li>
+      </div>
+      <div className="logout-link-sidebar-admin">
+        <Link to={"/logout"} className="link-sidebar-admin">
+          <li className="categories-word">Logout</li>
         </Link>
-      </ul>
+      </div>
+    </ul>
   );
 }

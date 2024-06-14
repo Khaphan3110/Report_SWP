@@ -4,7 +4,7 @@
   /* background-color: aquamarine; */
 }
 
-.sub-button {
+.sub-button-categories {
   position: relative;
   margin: 0 10px;
  
@@ -20,8 +20,8 @@
   display: flex;
 }
 
-.search {
-  height: 45px;
+.search-categories {
+  height: 50px;
   margin: 5px 0;
   width: 30%;
   border: 1px solid black;
@@ -29,18 +29,34 @@
   position: relative;
 }
 
-.search input {
+.search-categories input {
   height: 100%;
   width: 100%;
-  padding:5px 20px;
-  
+  padding:0 20px;
+  padding-bottom: 5px;
   outline: none;
   border: 0;
+
 }
 
-.search i{
+.search-categories i{
     position: absolute;
     right: 5px;
     top: 15px;
     z-index: 100;
+}
+
+
+.table-categories{
+    margin:20px 0;
+}
+
+.action-button{
+  margin-left: 10px;
+}
+
+.pagination{
+  padding: 0 30px;
+  display: flex;
+  justify-content: end;
 }

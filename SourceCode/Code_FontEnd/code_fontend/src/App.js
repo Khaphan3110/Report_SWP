@@ -1,11 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import RouteAdminLayout from "./Layouts/AdminLayout/RouteAdminLayout";
 import DefaultLayout from "./Layouts/DefualtLayout/DefaultLayout";
 import { privateRoutes, publicRoutes } from "./Routes/Route";
-import RouteAdminLayout from "./Layouts/AdminLayout/RouteAdminLayout";
-import RouteUserLayout from "./Layouts/UserLayouts/RouteUserLayout";
-import LoginForm from "./Components/User/Login/LoginForm";
-import Header from "./Components/User/Header/Header";
-
 
 
 function App() {

@@ -132,14 +132,15 @@ export default function LoginForm() {
                     <i className={iconShow} onClick={handlerOnclickIcon}></i>
                   </div>
                   <div className="button-rememberme">
+                  <label htmlFor="RememberMe">
                     <input
                       type="checkbox"
                       name="RememberMe"
                       id="RememberMe"
                       value={formik.values.RememberMe}
                       onChange={formik.handleChange}
-                    />
-                    <label htmlFor="RememberMe">Remember me</label>
+                    />  Remember me
+                  </label>
                   </div>
                   <div className="link-Fogot-password">
                     <p>
