@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
+using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.System.Users;
 
@@ -23,7 +27,7 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
 
-        public async Task<IActionResult> Authenticate([FromForm]LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromBody]LoginRequest request)
         {
             if(!ModelState.IsValid)
             { 
@@ -34,7 +38,7 @@ namespace SWPSolution.BackendApi.Controllers
                 {
                 return BadRequest("Username or password is incorrect.");
                 }
-            return Ok(new {token  = resultToken});
+            return Ok(resultToken);
         }
 
         [HttpPost("google-login")]
@@ -58,7 +62,7 @@ namespace SWPSolution.BackendApi.Controllers
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -137,7 +141,7 @@ namespace SWPSolution.BackendApi.Controllers
             return BadRequest(new { Message = "Error resetting password." });
         }
 
-        [HttpGet("emailtest")]
+        [HttpGet("EmailTest")]
         public async Task<IActionResult> TestEmail(string emailAddress)
         {
             if (string.IsNullOrEmpty(emailAddress))
@@ -155,13 +159,15 @@ namespace SWPSolution.BackendApi.Controllers
 
         }
 
-        [HttpGet("members")]
+        [Authorize]
+        [HttpGet("GetAllMembers")]
         public async Task<IActionResult> GetAllMembers()
         {
             var members = await _userService.GetAllMembersAsync();
             return Ok(members);
         }
 
+        [Authorize]
         [HttpGet("GetMember/{id}")]
         public async Task<IActionResult> GetMemberById(string id)
         {
@@ -173,6 +179,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(member);
         }
 
+        [Authorize]
         [HttpPut("UpdateMember/{id}")]
         public async Task<IActionResult> UpdateMember(string id, [FromBody] UpdateMemberRequest request)
         {
@@ -190,6 +197,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { message = "Member updated successfully" });
         }
 
+        [Authorize]
         [HttpGet("GetAddress/{id}/address")]
         public async Task<IActionResult> GetMemberAddressById(string id)
         {
@@ -201,6 +209,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(address);
         }
 
+        [Authorize]
         [HttpPut("UpdateAddress/{id}/address")]
         public async Task<IActionResult> UpdateMemberAddress(string id, [FromBody] UpdateAddressRequest request)
         {
@@ -235,6 +244,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { message = "Address added successfully" });
         }
 
+        [Authorize]
         [HttpDelete("DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(string id)
         {
@@ -247,6 +257,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { message = "User deleted successfully" });
         }
 
+        [Authorize]
         [HttpDelete("DeleteAddress/{id}/address")]
         public async Task<IActionResult> DeleteMemberAddress(string id)
         {
@@ -257,6 +268,31 @@ namespace SWPSolution.BackendApi.Controllers
             }
 
             return Ok(new { message = "Address deleted successfully" });
+        }
+
+        [HttpPost("GetUserByToken")]
+        public async Task<IActionResult> ExtractToken([FromForm] TokenRequest tokenRequest)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(tokenRequest.Token);
+
+            if (jwtToken == null)
+                return BadRequest("Invalid token");
+
+            var claim = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+
+            if (claim == null)
+                return BadRequest("Token does not contain required claims");
+
+            var user = await _userService.GetMemberByTokenAsync(claim.Value);
+            if (user == null)
+                return BadRequest(user);
+
+            if (user == null)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+            return Ok(user);
         }
     }
 }

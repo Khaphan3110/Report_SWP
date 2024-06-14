@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domain", "2. Domain", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{992259FB-0A00-412A-A88C-0B674CFD18D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWPSolution.AdminApp", "SWPSolution.AdminApp\SWPSolution.AdminApp.csproj", "{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{863A6393-19AC-4B3A-8DE1-1005565A8C0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{E377E0B8-7C0C-4B36-8B2C-024B56C2778C} = {695094D3-68AB-47A0-B9C8-8E607A45F025}
 		{B252FFBD-F182-4541-8115-6B9BB9651BF5} = {695094D3-68AB-47A0-B9C8-8E607A45F025}
 		{863A6393-19AC-4B3A-8DE1-1005565A8C0A} = {992259FB-0A00-412A-A88C-0B674CFD18D4}
+		{9CE41C67-BB67-43C3-8DC7-369DA9E166BC} = {992259FB-0A00-412A-A88C-0B674CFD18D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34059E95-9C76-4139-BE44-8714A2A57B9E}

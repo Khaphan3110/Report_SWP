@@ -1,4 +1,5 @@
 ﻿
+using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;
@@ -44,5 +45,7 @@ namespace SWPSolution.Application.System.User
         Task<bool> DeleteUserAsync(string memberId);
 
         Task<bool> DeleteMemberAddressAsync(string id);
+
+        Task<Member> GetMemberByTokenAsync(string email);
     }
 }

@@ -65,7 +65,8 @@ namespace SWPSolution.Application.System.User
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Role, string.Join(";", roles))
+                new Claim(ClaimTypes.Role, string.Join(";", roles)),
+                new Claim(ClaimTypes.Name, request.UserName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -365,6 +366,21 @@ namespace SWPSolution.Application.System.User
             };
         }
 
+        public async Task<MemberInfoVM> GetMemberByMailAsync(string email)
+        {
+            var member = await _context.Members.FindAsync(email);
+            if (member == null) return null;
+
+            return new MemberInfoVM
+            {
+                UserName = member.UserName,
+                Email = member.Email,
+                FirstName = member.FirstName,
+                LastName = member.LastName,
+                PhoneNumber = member.PhoneNumber
+            };
+        }
+
         public async Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request)
         {
             var member = await _context.Members.FindAsync(memberId);
@@ -479,6 +495,11 @@ namespace SWPSolution.Application.System.User
                 }
             }
             return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<Member> GetMemberByTokenAsync(string email)
+        {
+            return await _context.Members.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }
