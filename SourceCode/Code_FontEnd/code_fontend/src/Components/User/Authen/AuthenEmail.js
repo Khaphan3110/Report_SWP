@@ -23,7 +23,7 @@ export default function AuthenEmail() {
     onSubmit: async (values) => {
     alert("tao")
       const resUserOTP = await authenCodeOTP(values.codeGetFormEmail);
-      if(resUserOTP.data.success){
+      if(resUserOTP.data.message == "Email confirmed successfully"){
         alert("Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào");
         navigator("/login");
       } else {

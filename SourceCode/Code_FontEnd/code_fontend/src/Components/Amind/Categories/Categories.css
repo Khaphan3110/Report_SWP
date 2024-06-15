@@ -1,0 +1,46 @@
+.header-categories {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: aquamarine; */
+}
+
+.sub-button {
+  position: relative;
+  margin: 0 10px;
+ 
+  /* i{
+        position: absolute;
+        z-index: 10;
+        left: -3px;
+        top: 12px;
+    } */
+}
+
+.button-categories {
+  display: flex;
+}
+
+.search {
+  height: 45px;
+  margin: 5px 0;
+  width: 30%;
+  border: 1px solid black;
+  border-radius: 3px;
+  position: relative;
+}
+
+.search input {
+  height: 100%;
+  width: 100%;
+  padding:5px 20px;
+  
+  outline: none;
+  border: 0;
+}
+
+.search i{
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    z-index: 100;
+}

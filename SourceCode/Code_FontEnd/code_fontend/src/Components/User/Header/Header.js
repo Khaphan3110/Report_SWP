@@ -26,7 +26,7 @@ export default function Header() {
               <div className="col-6 col-xl-3 col-lg-3 header-left">
                 <Link to={"/"}>
                   <img
-                    src=""
+                    src="https://theme.hstatic.net/1000186075/1000909086/14/logo.png?v=4468"
                     alt="logoMilkStore"
                     width={248}
                     height={53}

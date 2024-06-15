@@ -41,11 +41,21 @@ namespace SWPSolution.AdminApp.Controllers
             var token = await _userApiClient.Authenticate(request);
 
             var userPrincipal = this.ValidateToken(token);
+
+            var userRole = userPrincipal.FindFirst(ClaimTypes.Role)?.Value;
+            if (userRole != "Admin" && userRole != "Staff")
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            ViewData["UserRole"] = userRole;
+
             var authProperties = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = true
             };
+
             await HttpContext.SignInAsync
             (
                 CookieAuthenticationDefaults.AuthenticationScheme,

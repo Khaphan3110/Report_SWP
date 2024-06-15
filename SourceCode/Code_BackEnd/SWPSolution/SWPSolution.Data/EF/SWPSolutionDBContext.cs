@@ -53,6 +53,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-HPHD1ML\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AppUser>()
@@ -147,22 +148,19 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.CategoriesId).HasName("PK__Categori__92BFEBD24C3D480D");
 
-            entity.ToTable(tb => tb.HasTrigger("trg_generate_categories_id"));
+            entity.ToTable("Categories"); // Adjust table name if necessary
 
+            // Configure categories_ID property
             entity.Property(e => e.CategoriesId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("categories_ID");
+                .HasColumnName("categories_ID");// Allow nulls
+
+            // Other properties
             entity.Property(e => e.AgeRange).HasMaxLength(50);
-            entity.Property(e => e.BrandName)
-                .HasMaxLength(50)
-                .HasColumnName("brandName");
-            entity.Property(e => e.PackageType)
-                .HasMaxLength(50)
-                .HasColumnName("packageType");
-            entity.Property(e => e.Source)
-                .HasMaxLength(50)
-                .HasColumnName("source");
+            entity.Property(e => e.BrandName).HasMaxLength(50).HasColumnName("brandName");
+            entity.Property(e => e.PackageType).HasMaxLength(50).HasColumnName("packageType");
+            entity.Property(e => e.Source).HasMaxLength(50).HasColumnName("source");
             entity.Property(e => e.SubCategories).HasMaxLength(50);
         });
 

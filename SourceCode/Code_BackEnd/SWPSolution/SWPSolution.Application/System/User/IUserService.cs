@@ -14,7 +14,7 @@ namespace SWPSolution.Application.System.User
 {
     public interface IUserService
     {
-        Task<string> Authencate(LoginRequest request);
+        Task<string> Authenticate(LoginRequest request);
 
         Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request);
 
@@ -45,7 +45,5 @@ namespace SWPSolution.Application.System.User
         Task<bool> DeleteUserAsync(string memberId);
 
         Task<bool> DeleteMemberAddressAsync(string id);
-
-        Task<Member> GetMemberByTokenAsync(string email);
     }
 }

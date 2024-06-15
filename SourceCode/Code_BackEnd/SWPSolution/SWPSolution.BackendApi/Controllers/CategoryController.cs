@@ -9,7 +9,7 @@ namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -27,6 +27,18 @@ namespace SWPSolution.BackendApi.Controllers
             }
             var result = await _categoryService.Create(request);
             return Ok(new { message = "New Category created successfully." });
+        }
+        [HttpPost("CreateMultiple")]
+        public async Task<IActionResult> CreateMultiple([FromBody] List<CategoryCreateRequest> requests)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _categoryService.CreateMultiple(requests);
+            if (!result)
+                return StatusCode(500, "A problem happened while handling your request.");
+
+            return Ok();
         }
 
         [HttpPut("UpdateCategory/{id}/category")]

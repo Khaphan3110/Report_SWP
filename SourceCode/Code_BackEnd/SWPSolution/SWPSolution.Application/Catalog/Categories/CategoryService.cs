@@ -22,9 +22,10 @@ namespace SWPSolution.Application.Catalog.Categories
         }
         public async Task<bool> Create(CategoryCreateRequest request)
         {
+            string generatedId = GenerateCategoriesId();
             var category = new Category
             {
-                CategoriesId = "",
+                CategoriesId = generatedId,
                 BrandName = request.BrandName,
                 AgeRange = request.AgeRange,
                 SubCategories = request.SubCategories,
@@ -33,6 +34,27 @@ namespace SWPSolution.Application.Catalog.Categories
             };
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> CreateMultiple(List<CategoryCreateRequest> requests)
+        {
+            foreach (var request in requests)
+            {
+                string generatedId = GenerateCategoriesId();
+                var category = new Category
+                {
+                    CategoriesId = generatedId,
+                    BrandName = request.BrandName,
+                    AgeRange = request.AgeRange,
+                    SubCategories = request.SubCategories,
+                    PackageType = request.PackageType,
+                    Source = request.Source
+                };
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+            }
+            
             return true;
         }
 
@@ -100,6 +122,35 @@ namespace SWPSolution.Application.Catalog.Categories
                     Source = c.Source
                 })
                 .ToListAsync();
+        }
+        private string GenerateCategoriesId()
+        {
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"CM{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for categories_ID to match in SQL query
+            string pattern = $"CM{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing categories for the given month and year
+            var maxAutoIncrement = _context.Categories
+                .Where(c => c.CategoriesId.StartsWith(pattern))
+                .Select(c => c.CategoriesId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
     }
 }

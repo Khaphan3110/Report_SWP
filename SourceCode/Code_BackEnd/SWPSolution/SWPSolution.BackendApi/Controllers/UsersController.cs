@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -19,9 +21,11 @@ namespace SWPSolution.BackendApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService) 
+        private readonly IConfiguration _configuration;
+        public UsersController(IUserService userService, IConfiguration configuration) 
         {
             _userService = userService;
+            _configuration = configuration;
         }
 
         [HttpPost("authenticate")]
@@ -33,7 +37,7 @@ namespace SWPSolution.BackendApi.Controllers
             { 
                 return BadRequest(ModelState);
             }
-            var resultToken = await _userService.Authencate(request);
+            var resultToken = await _userService.Authenticate(request);
             if(string.IsNullOrEmpty(resultToken))
                 {
                 return BadRequest("Username or password is incorrect.");
@@ -270,29 +274,58 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { message = "Address deleted successfully" });
         }
 
-        [HttpPost("GetUserByToken")]
-        public async Task<IActionResult> ExtractToken([FromForm] TokenRequest tokenRequest)
+        [HttpPost("GetMemberByToken")]
+        public async Task<IActionResult> GetMemberFromToken([FromBody] string token)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var jwtToken = handler.ReadJwtToken(tokenRequest.Token);
-
-            if (jwtToken == null)
-                return BadRequest("Invalid token");
-
-            var claim = jwtToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
-
-            if (claim == null)
-                return BadRequest("Token does not contain required claims");
-
-            var user = await _userService.GetMemberByTokenAsync(claim.Value);
-            if (user == null)
-                return BadRequest(user);
-
-            if (user == null)
+            if (string.IsNullOrEmpty(token))
             {
-                return NotFound(new { message = "Member not found" });
+                return BadRequest(new { message = "Token is required." });
             }
-            return Ok(user);
+
+            try
+            {
+                var claimsPrincipal = ValidateToken(token);
+                var memberIdClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "member_id");
+                var roleClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
+
+                if (memberIdClaim == null)
+                {
+                    return BadRequest(new { message = "Invalid token. Member ID not found." });
+                }
+
+                var memberId = memberIdClaim.Value;
+                var role = roleClaim?.Value ?? "Role not found";
+                var member = await _userService.GetMemberByIdAsync(memberId);
+
+                if (member == null)
+                {
+                    return NotFound(new { message = "Member not found." });
+                }
+
+                return Ok(new { member, Role = role });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while processing your request.", detail = ex.Message });
+            }
+        }
+        private ClaimsPrincipal ValidateToken(string jwtToken)
+        {
+            IdentityModelEventSource.ShowPII = true;
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidAudience = _configuration["JWT:Issuer"],
+                ValidIssuer = _configuration["JWT:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
+            };
+
+            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
     }
 }

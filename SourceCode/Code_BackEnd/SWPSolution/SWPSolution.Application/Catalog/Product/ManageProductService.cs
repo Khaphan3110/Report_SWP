@@ -22,37 +22,50 @@ namespace SWPSolution.Application.Catalog.Product
 
         public async Task<string> Create(ProductCreateRequest request)
         {
+            string generatedId = GenerateCategoriesId();
             var product = new Data.Entities.Product()
             {
-                ProductId = "",
+                ProductId = generatedId,
                 CategoriesId = request.CategoryId,
                 ProductName = request.ProductName,
                 Quantity = request.Quantity,
                 Price = request.Price,
                 Description = request.Description,
+                Image = request.ThumbnailImage.ToString()
 
             };
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+            // Fetch the newly inserted product from the database
+            var insertedProduct = _context.Products.FirstOrDefault(p => p.ProductName == request.ProductName && p.Quantity == request.Quantity && p.Price == request.Price && p.Description == request.Description);
+
+            // Check if insertedProduct is null or ProductId is empty
+            if (insertedProduct == null || string.IsNullOrEmpty(insertedProduct.ProductId))
+            {
+                throw new Exception("Failed to retrieve the newly inserted product from the database.");
+            }
             //Save image
             if (request.ThumbnailImage != null)
             {
-                product.ProductImages = new List<ProductImage>()
-                {
-                    new ProductImage()
-                    {
-                        Caption = "Thumbnail image",
-                        DateCreated = DateTime.Now,
-                        FileSize = request.ThumbnailImage.Length,
-                        ImagePath =await this.SaveFile(request.ThumbnailImage),
-                        SortOrder = 1
-                    }
-                };
-            }
-            _context.Products.Add(product);
-             await _context.SaveChangesAsync();
-            return product.ProductId;
-        }
+                var productId = insertedProduct.ProductId;
 
-        public async Task<int> Delete(string productId)
+                var productImage = new ProductImage()
+                {
+                    ProductId = productId,
+                    Caption = "Thumbnail image",
+                    DateCreated = DateTime.Now,
+                    FileSize = request.ThumbnailImage.Length,
+                    ImagePath = await this.SaveFile(request.ThumbnailImage),
+                    SortOrder = 1
+                };
+
+                _context.ProductImages.Add(productImage);
+                await _context.SaveChangesAsync(); // Save changes for ProductImage entity
+            }
+            return insertedProduct.ProductId;
+    }
+
+            public async Task<int> Delete(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new SWPException($"Cannot find product:{productId}");
@@ -109,14 +122,13 @@ namespace SWPSolution.Application.Catalog.Product
             return pageResult;
         }
 
-
         public async Task<int> Update(ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(request.ProductId);
             if (product == null) throw new SWPException($"Cannot find product with id: {request.ProductId}");
 
 
-            product.ProductId = "";
+           
             product.CategoriesId = request.CategoriesId;
             product.ProductName = request.ProductName;
             product.Description = request.Description;
@@ -136,7 +148,42 @@ namespace SWPSolution.Application.Catalog.Product
             return await _context.SaveChangesAsync();
 
         }
+        public async Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests)
+        {
+            var productIds = new List<string>();
 
+            foreach (var request in requests)
+            {
+                string generatedId = GenerateCategoriesId();
+                var product = new Data.Entities.Product()
+                {
+                    ProductId = generatedId,
+                    CategoriesId = request.CategoriesId,
+                    ProductName = request.ProductName,
+                    Quantity = request.Quantity,
+                    Price = request.Price,
+                    Description = request.Description,
+                    StatusDescription = request.StatusDescription,
+                };
+
+                _context.Products.Add(product);
+                await _context.SaveChangesAsync(); // Use async SaveChanges method
+
+                // Fetch the newly inserted product from the database asynchronously
+                var insertedProduct =  _context.Products.FirstOrDefault(p => p.ProductId == generatedId);
+
+                if (insertedProduct == null)
+                {
+                    throw new InvalidOperationException("Failed to retrieve inserted product.");
+                }
+
+                productIds.Add(insertedProduct.ProductId);
+            }
+
+            return productIds;
+        }
+
+        
         public async Task<bool> UpdatePrice(string productId, float newPrice)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -183,7 +230,31 @@ namespace SWPSolution.Application.Catalog.Product
             await _context.SaveChangesAsync();
             return productImage.Id; 
         }
+        public async Task<int> AddMultipleImages(string productId, List<ProductImageCreateRequest> requests)
+        {
+            foreach (var request in requests)
+            {
+                var productImage = new ProductImage()
+                {
+                    ProductId = productId,
+                    Caption = request.Caption,
+                    DateCreated = DateTime.Now,
+                    SortOrder = request.SortOrder,
+                };
 
+                if (request.ImageFile != null)
+                {
+                    productImage.ImagePath = await SaveFile(request.ImageFile);
+                    productImage.FileSize = request.ImageFile.Length;
+                }
+
+                _context.ProductImages.Add(productImage);
+            }
+
+            return await _context.SaveChangesAsync();
+        }
+
+        //Task<ProductViewModel> GetById(string productId);
         public async Task<ProductViewModel> GetById(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
@@ -259,6 +330,35 @@ namespace SWPSolution.Application.Catalog.Product
 
             };
             return viewModel;
+        }
+        private string GenerateCategoriesId()
+        {
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"PM{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for categories_ID to match in SQL query
+            string pattern = $"PM{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing categories for the given month and year
+            var maxAutoIncrement = _context.Products
+                .Where(c => c.ProductId.StartsWith(pattern))
+                .Select(c => c.ProductId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
     }
 }

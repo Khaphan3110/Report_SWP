@@ -7,15 +7,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
+using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using LoginRequest = SWPSolution.ViewModels.System.Users.LoginRequest;
-using RegisterRequest = SWPSolution.ViewModels.System.Users.RegisterRequest;
-
+using System.Threading.Tasks;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SWPSolution.Application.System.User
 {
@@ -49,36 +56,73 @@ namespace SWPSolution.Application.System.User
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<string> Authencate(LoginRequest request)
+        public async Task<string> Authenticate(LoginRequest request)
         {
+            // Find the user by username
             var user = await _userManager.FindByNameAsync(request.UserName);
-            if (user == null) return null;
-
-            var result =await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
-            if (!result.Succeeded)
+            if (user == null)
             {
-                return null;
+                return null; // User not found
             }
 
-            var roles =await _userManager.GetRolesAsync(user);
-            var claims = new[]
+            // Check if the provided password is correct
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            if (!result.Succeeded)
+            {
+                return null; // Invalid password
+            }
+
+            // Retrieve member_id from your member table based on the username
+            string memberId = await GetMemberIdByUsername(request.UserName);
+
+            // Get user roles
+            var getRoles = await _userManager.GetRolesAsync(user);
+
+            // Create claims for the token
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Role, string.Join(";", roles)),
-                new Claim(ClaimTypes.Name, request.UserName)
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim("member_id", memberId.ToString())  // Add member_id as a custom claim
             };
+
+            // Add roles to claims
+            foreach (var role in getRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            // Generate JWT token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(_config["JWT:Issuer"],
+            var token = new JwtSecurityToken(
+                _config["JWT:Issuer"],
                 _config["JWT:Issuer"],
                 claims,
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
 
-           return new JwtSecurityTokenHandler().WriteToken(token);
+            // Write and return the token
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        // Method to retrieve member_id from the member table
+        private async Task<string> GetMemberIdByUsername(string username)
+        {
+            // Assuming you have access to your database context
+            var member = _context.Members.FirstOrDefault(m => m.UserName == username);
+            if (member != null)
+            {
+                return member.MemberId;
+            }
+            else
+            {
+                // Handle case where member is not found (optional)
+                throw new SWPException("Error getting Member ID"); // or throw an exception or handle as appropriate
+            }
+        }
+
 
         public async Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request)
         {
@@ -495,11 +539,6 @@ namespace SWPSolution.Application.System.User
                 }
             }
             return new ApiSuccessResult<bool>();
-        }
-
-        public async Task<Member> GetMemberByTokenAsync(string email)
-        {
-            return await _context.Members.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

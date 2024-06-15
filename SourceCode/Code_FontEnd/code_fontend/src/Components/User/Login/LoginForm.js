@@ -1,12 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { signInWithPopup } from "firebase/auth";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
-import { userLogin } from "../../../Service/UserService/UserService";
+import {
+  useLoginGoogle,
+  userLogin,
+} from "../../../Service/UserService/UserService";
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
@@ -43,6 +46,7 @@ export default function LoginForm() {
       const res = await userLogin(formData);
 
       if (res.data.token) {
+        localStorage.setItem("userToken", JSON.stringify(res.data.token));
         // console.log("đây là login",res.data.token
         navigator("/");
       } else {
@@ -51,25 +55,38 @@ export default function LoginForm() {
     },
   });
 
-
+  const [userValueGoogle, setuserValueGoogle] = useState({});
   const navigate = useNavigate(); //sử dựng để điều hướng trang
   const handleLoginGoogle = async () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         const userValue = {
           email: result.user.email,
-          userName: result.user.displayName,
-          image: result.user.photoURL,
-          userID: result.user.uid,
+          firstName: result._tokenResponse.firstName,
+          lastName: result._tokenResponse.lastName,
         };
         console.log(result);
-        localStorage.setItem("userName", JSON.stringify(userValue));
-        navigate("/register");
+        setuserValueGoogle(userValue);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  // useEffect(() => {
+  //   if (userValueGoogle.length !== 0) {
+  //     alert("me");
+  //     const LoginGoogle = async () => {
+  //       const res = await useLoginGoogle(userValueGoogle);
+  //       if (res) {
+  //         localStorage.setItem("userToken", res.data.token);
+  //         navigate("/");
+  //       } else {
+  //         alert("login failed!!!");
+  //       }
+  //     };
+  //     LoginGoogle();
+  //   }
+  // }, [userValueGoogle]);
 
   return (
     <section className="L-seccion">
