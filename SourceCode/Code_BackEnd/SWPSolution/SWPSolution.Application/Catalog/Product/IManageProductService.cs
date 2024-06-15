@@ -10,6 +10,9 @@ namespace SWPSolution.Application.Catalog.Product
     {
         Task<string> Create(ProductCreateRequest request);
 
+        Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests);
+
+
         Task<int> Update(ProductUpdateRequest request);
 
         Task<int> Delete(string productId);
@@ -21,6 +24,8 @@ namespace SWPSolution.Application.Catalog.Product
         Task<bool> UpdateQuantity(int productId, int addedQuantity);
 
         Task<int> AddImage(string productId, ProductImageCreateRequest request);
+
+        Task<int> AddMultipleImages(string productId, List<ProductImageCreateRequest> requests);
 
         Task<int> RemoveImage(string imageId);
 

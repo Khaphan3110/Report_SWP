@@ -12,14 +12,14 @@ export default function SideBarAdmin() {
             <i className="fa-solid fa-chart-simple"></i> Dashboard
           </li>
         </Link>
-        <Link to={"/categories"} className="link-sidebar-admin">
+        <Link to={"/product"} className="link-sidebar-admin">
           <li className="categories-word">
-            <i className="fa-brands fa-product-hunt"></i> Categories
+            <i className="fa-brands fa-product-hunt"></i> Product
           </li>
         </Link>
         <Link to={"/categories"} className="link-sidebar-admin">
           <li className="categories-word">
-            <i className="fa-solid fa-layer-group"></i> Product
+            <i className="fa-solid fa-layer-group"></i> Categories
           </li>
         </Link>
       </div>

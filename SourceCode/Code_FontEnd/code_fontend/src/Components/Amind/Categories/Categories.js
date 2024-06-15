@@ -3,27 +3,31 @@ import { Button, Form, Modal, Table } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-toastify/dist/ReactToastify.css";
+
+import Papa from "papaparse";
+import ReactPaginate from "react-paginate";
 import {
   cateGetAll,
   importCateGories,
 } from "../../../Service/CateService/CateService";
 import "./Categories.css";
-import Papa from "papaparse";
-import ReactPaginate from "react-paginate";
 export default function Categories() {
   const [listCategories, setListCategoreis] = useState([]);
+  const [listCategoriesExport, setListCategoreisExport] = useState([]);
   const [listCategoriesImport, setListCategoreisImport] = useState([]);
   const [stateCate, setSateCate] = useState(false);
   const [show, setShow] = useState(false);
+  const [stateImportCate, setStateImportCate] = useState(false);
 
   useEffect(() => {
     const categet = async () => {
       const res = await cateGetAll();
       setListCategoreis(res.data);
+      setStateImportCate(false);
     };
     categet();
-  }, []);
+  }, [stateImportCate]);
+
   const getCategoriesExport = async (event, done) => {
     const result = [];
     if (listCategories && listCategories.length > 0) {
@@ -43,7 +47,7 @@ export default function Categories() {
         arr[4] = cate.packageType;
         result.push(arr);
       });
-      setListCategoreis(result);
+      setListCategoreisExport(result);
       done();
     }
   };
@@ -83,6 +87,7 @@ export default function Categories() {
                   result.push(cateObj);
                 }
                 setListCategoreisImport(result);
+                setSateCate(true);
               });
             }
           }
@@ -92,46 +97,28 @@ export default function Categories() {
   };
 
   useEffect(() => {
-    setSateCate(true);
-    console.log("vovo");
-    console.log(listCategoriesImport);
-    const formData = new FormData();
-    listCategoriesImport.map(
-      async (cate, index) => {
-        console.log("cate", cate);
-
-        formData.append("BrandName", cate.brandName);
-        formData.append("AgeRange", cate.ageRange);
-        formData.append("SubCategories", cate.subCategories);
-        formData.append("PackageType", cate.packageType);
-        formData.append("Source", cate.source);
-        const resImport = await importCateGories(formData);
-        console.log("nhap", resImport);
-        console.log("form data", formData);
-      },
-      [stateCate]
-    );
-  });
+    const res = async () => {
+      await importCateGories(listCategoriesImport);
+    };
+    res();
+    setStateImportCate(true);
+  }, [listCategoriesImport]);
 
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + 11;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = listCategories.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(listCategories.length / 11);
   // const [ endOffset, pageCount, listOfSet ] = usePagination(listOrchil,8)
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 11) % listCategories.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
     setItemOffset(newOffset);
   };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handDeleteButton = () => {
-    alert("bạn có chắc là muốn xóa không ???")
+    alert("bạn có chắc là muốn xóa không ???");
   };
   return (
     <>
@@ -157,7 +144,7 @@ export default function Categories() {
           </div>
           <div className="sub-button-categories">
             <CSVLink
-              data={listCategories}
+              data={listCategoriesExport}
               filename={"Categories.csv"}
               className="btn btn-secondary"
               asyncOnClick={true}
@@ -179,7 +166,7 @@ export default function Categories() {
         <i className="fa-solid fa-magnifying-glass"></i>
       </div>
 
-      <div className="table-categories">
+      <div className="stateImportCate">
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -224,26 +211,26 @@ export default function Categories() {
               })}
           </tbody>
         </Table>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="sau >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< trước"
-          renderOnZeroPageCount={null}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-        />
       </div>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="sau >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< trước"
+        renderOnZeroPageCount={null}
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+      />
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

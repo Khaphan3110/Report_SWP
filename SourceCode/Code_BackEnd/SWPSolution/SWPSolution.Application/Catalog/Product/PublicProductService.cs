@@ -25,6 +25,7 @@ namespace SWPSolution.Application.Catalog.Product
             int totalRow = await query.CountAsync();
             var data = await query.Select(x => new ProductViewModel()
                 {
+                    ProductId = x.p.ProductId,
                     CategoriesId = x.p.CategoriesId,
                     ProductName = x.p.ProductName,
                     Description = x.p.Description,

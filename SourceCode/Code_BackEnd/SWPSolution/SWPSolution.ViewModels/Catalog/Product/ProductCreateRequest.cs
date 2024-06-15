@@ -12,6 +12,6 @@ namespace SWPSolution.ViewModels.Catalog.Product
         public float Price { get; set; }
         public string Description { get; set; }
 
-        public IFormFile ThumbnailImage { get; set; }
+        public IFormFile? ThumbnailImage { get; set; }
     }
 }

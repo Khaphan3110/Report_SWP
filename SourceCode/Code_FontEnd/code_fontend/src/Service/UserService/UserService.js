@@ -77,5 +77,10 @@ export const useLoginGoogle = async ( useGoogleLogin ) => {
   }
 }
 
-
-
+export const getUserInfor = async () => {
+  try {
+    const res = await request.Post()
+  } catch (error) {
+    console.log("lỗi lấy thông tin  ng  dùng",error)
+  }
+}

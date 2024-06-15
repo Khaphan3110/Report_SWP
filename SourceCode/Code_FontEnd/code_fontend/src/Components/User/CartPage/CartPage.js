@@ -51,7 +51,7 @@ const CartPage = () => {
               <div className="cart-item-details">
                 <h3>{item.name}</h3>
                 <p className="cart-item-price">{item.price.toLocaleString()}₫</p>
-                <div className="quantity-controls">
+                <div className="quantity-controls-cartPage">
                   <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
                   <input type="text" value={item.quantity} readOnly />
                   <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>

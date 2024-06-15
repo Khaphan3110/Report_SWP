@@ -10,6 +10,8 @@ import {
   useLoginGoogle,
   userLogin,
 } from "../../../Service/UserService/UserService";
+import { ToastContainer, toast } from "react-toastify";
+
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
@@ -65,31 +67,21 @@ export default function LoginForm() {
           firstName: result._tokenResponse.firstName,
           lastName: result._tokenResponse.lastName,
         };
-        console.log(result);
+        
         setuserValueGoogle(userValue);
+        toast.success("đăng nhập  thành công")
+        navigate("/")
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  // useEffect(() => {
-  //   if (userValueGoogle.length !== 0) {
-  //     alert("me");
-  //     const LoginGoogle = async () => {
-  //       const res = await useLoginGoogle(userValueGoogle);
-  //       if (res) {
-  //         localStorage.setItem("userToken", res.data.token);
-  //         navigate("/");
-  //       } else {
-  //         alert("login failed!!!");
-  //       }
-  //     };
-  //     LoginGoogle();
-  //   }
-  // }, [userValueGoogle]);
+
+  
 
   return (
     <section className="L-seccion">
+      <ToastContainer/>
       <div className="container mx-auto">
         <div className="wraper-login-page">
           <div className="Header-login">

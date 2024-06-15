@@ -28,6 +28,18 @@ namespace SWPSolution.BackendApi.Controllers
             var result = await _categoryService.Create(request);
             return Ok(new { message = "New Category created successfully." });
         }
+        [HttpPost("CreateMultiple")]
+        public async Task<IActionResult> CreateMultiple([FromBody] List<CategoryCreateRequest> requests)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _categoryService.CreateMultiple(requests);
+            if (!result)
+                return StatusCode(500, "A problem happened while handling your request.");
+
+            return Ok();
+        }
 
         [HttpPut("UpdateCategory/{id}/category")]
         public async Task<IActionResult> UpdateCategory(string id, CategoryUpdateRequest request)

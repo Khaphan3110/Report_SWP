@@ -13,9 +13,9 @@ export const cateGetAll = async () => {
 export const importCateGories = async (categories) => {
     console.log(categories)
   try {
-    const res = await request.Post("Category/CreateCategory", categories, {
+    const res = await request.Post("Category/CreateMultiple", categories, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'application/json',
       },
     });
     return res;

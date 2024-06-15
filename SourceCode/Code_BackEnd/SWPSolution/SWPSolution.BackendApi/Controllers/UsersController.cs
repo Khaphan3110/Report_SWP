@@ -29,7 +29,7 @@ namespace SWPSolution.BackendApi.Controllers
             { 
                 return BadRequest(ModelState);
             }
-            var resultToken = await _userService.Authencate(request);
+            var resultToken = await _userService.Authenticate(request);
             if(string.IsNullOrEmpty(resultToken))
                 {
                 return BadRequest("Username or password is incorrect.");
