@@ -22,57 +22,7 @@ namespace SWPSolution.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.HasSequence("address_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("blog_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("categories_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
             modelBuilder.HasSequence("member_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("order_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("payment_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("preorder_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("product_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("promotion_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("review_id_seq")
-                .HasMin(1L)
-                .HasMax(999L)
-                .IsCyclic();
-
-            modelBuilder.HasSequence("staff_id_seq")
                 .HasMin(1L)
                 .HasMax(999L)
                 .IsCyclic();
@@ -154,13 +104,6 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            RoleId = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -226,18 +169,12 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("Address", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_address_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.AppRole", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -256,22 +193,12 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            Description = "Administrator role",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        });
+                    b.ToTable("AppRoles");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
@@ -326,6 +253,10 @@ namespace SWPSolution.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TemporaryPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -334,27 +265,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AppUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce70be9a-d6b1-427a-be54-6a5a0d9c3b39",
-                            Email = "tedu.international@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Toan",
-                            LastName = "Bach",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "tedu.international@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJDFXAAe2e7gu3fRtTrTTOFwURBzAnp4JGNwVPTKZnNfk6QeHYwJv9qw1K0gQE4tig==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
+                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Blog", b =>
@@ -375,7 +286,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("content");
 
-                    b.Property<DateTime?>("DataCreate")
+                    b.Property<DateTime?>("DateCreate")
                         .HasColumnType("date")
                         .HasColumnName("dataCreate");
 
@@ -395,20 +306,15 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("StaffId");
 
-                    b.ToTable("Blog", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_blog_ID");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Blog", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Category", b =>
                 {
                     b.Property<string>("CategoriesId")
-                        .HasMaxLength(10)
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("categories_ID");
 
                     b.Property<string>("AgeRange")
@@ -437,12 +343,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("CategoriesId")
                         .HasName("PK__Categori__92BFEBD24C3D480D");
 
-                    b.ToTable("Categories", t =>
-                        {
-                            t.HasTrigger("trg_generate_categories_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Member", b =>
@@ -516,8 +417,10 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("date")
                         .HasColumnName("orderDate");
 
-                    b.Property<bool?>("OrderStatus")
-                        .HasColumnType("bit")
+                    b.Property<int>("OrderStatus")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("int")
                         .HasColumnName("orderStatus");
 
                     b.Property<string>("PromotionId")
@@ -540,12 +443,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("Order", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_order_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.OrderDetail", b =>
@@ -621,12 +519,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Payment", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_payment_ID");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.PreOrder", b =>
@@ -667,27 +560,21 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("PreOrder", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_preorder_ID");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("PreOrder", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Product", b =>
                 {
                     b.Property<string>("ProductId")
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(10)
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)")
                         .HasColumnName("product_ID");
 
                     b.Property<string>("CategoriesId")
-                        .HasMaxLength(10)
+                        .HasMaxLength(50)
                         .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("categories_ID");
 
                     b.Property<string>("Description")
@@ -719,12 +606,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("CategoriesId");
 
-                    b.ToTable("Product", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_product_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.ProductImage", b =>
@@ -753,6 +635,8 @@ namespace SWPSolution.Data.Migrations
 
                     b.Property<string>("ProductId")
                         .IsRequired()
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
                         .HasColumnType("varchar(10)");
 
                     b.Property<int>("SortOrder")
@@ -762,7 +646,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Promotion", b =>
@@ -794,12 +678,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PromotionId")
                         .HasName("PK__Promotio__2C45E8433ED651C3");
 
-                    b.ToTable("Promotion", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_promotion_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Promotion", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Review", b =>
@@ -841,12 +720,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Review", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_review_ID");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Review", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Staff", b =>
@@ -893,12 +767,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("StaffId")
                         .HasName("PK__staff__196CD194F520350A");
 
-                    b.ToTable("staff", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_staff_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("staff", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Address", b =>

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWPSolution.ViewModels.System.Users
+namespace SWPSolution.ViewModels.Sales
 {
-    public class OrderUpdateRequest
+    public class UpdateOrderStatusRequest
     {
-        public OrderStatus orderStatus { get; set; }
+        public OrderStatus NewStatus { get; set; }
     }
 }

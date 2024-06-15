@@ -6,91 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWPSolution.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class createDB : Migration
+    public partial class fixedDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateSequence(
-                name: "address_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "blog_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "categories_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
                 name: "member_id_seq",
                 minValue: 1L,
                 maxValue: 999L,
                 cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "order_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "payment_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "preorder_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "product_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "promotion_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "review_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateSequence(
-                name: "staff_id_seq",
-                minValue: 1L,
-                maxValue: 999L,
-                cyclic: true);
-
-            migrationBuilder.CreateTable(
-                name: "AppRoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppRoleClaims", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "AppRoles",
@@ -108,53 +33,15 @@ namespace SWPSolution.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserClaims", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppUserLogins",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AppUsers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    TemporaryPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailVerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailVerificationExpiry = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -176,24 +63,10 @@ namespace SWPSolution.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserTokens", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
-                    categories_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    categories_ID = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: false),
                     brandName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     AgeRange = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     SubCategories = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -262,7 +135,7 @@ namespace SWPSolution.Data.Migrations
                 columns: table => new
                 {
                     product_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    categories_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
+                    categories_ID = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
@@ -311,7 +184,7 @@ namespace SWPSolution.Data.Migrations
                     Promotion_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     TotalAmount = table.Column<double>(type: "float", nullable: true),
-                    orderStatus = table.Column<bool>(type: "bit", nullable: true),
+                    orderStatus = table.Column<int>(type: "int", unicode: false, maxLength: 10, nullable: false),
                     orderDate = table.Column<DateTime>(type: "date", nullable: true)
                 },
                 constraints: table =>
@@ -382,7 +255,7 @@ namespace SWPSolution.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
+                    ProductId = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Caption = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -472,21 +345,6 @@ namespace SWPSolution.Data.Migrations
                         principalColumn: "order_ID");
                 });
 
-            migrationBuilder.InsertData(
-                table: "AppRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
-                values: new object[] { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), null, "Administrator role", "admin", "admin" });
-
-            migrationBuilder.InsertData(
-                table: "AppUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), new Guid("69bd714f-9576-45ba-b5b7-f00649be00de") });
-
-            migrationBuilder.InsertData(
-                table: "AppUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, "533ba7f8-8e95-4273-8c65-8abb80a239d7", "tedu.international@gmail.com", true, "Toan", "Bach", false, null, "tedu.international@gmail.com", "admin", "AQAAAAIAAYagAAAAEENsnF6LZD2inuJPrRTXtETeWbJoXa/MLEsYKnU8aOQd+ngE/FayMgsteyyiGDpDsg==", null, false, "", false, "admin" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Address_member_ID",
                 table: "Address",
@@ -560,25 +418,10 @@ namespace SWPSolution.Data.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "AppRoleClaims");
-
-            migrationBuilder.DropTable(
                 name: "AppRoles");
 
             migrationBuilder.DropTable(
-                name: "AppUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AppUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AppUserRoles");
-
-            migrationBuilder.DropTable(
                 name: "AppUsers");
-
-            migrationBuilder.DropTable(
-                name: "AppUserTokens");
 
             migrationBuilder.DropTable(
                 name: "Blog");
@@ -617,37 +460,7 @@ namespace SWPSolution.Data.Migrations
                 name: "Categories");
 
             migrationBuilder.DropSequence(
-                name: "address_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "blog_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "categories_id_seq");
-
-            migrationBuilder.DropSequence(
                 name: "member_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "order_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "payment_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "preorder_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "product_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "promotion_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "review_id_seq");
-
-            migrationBuilder.DropSequence(
-                name: "staff_id_seq");
         }
     }
 }

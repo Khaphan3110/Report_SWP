@@ -180,7 +180,7 @@ namespace SWPSolution.Application.System.Admin
                 PromotionId = request.PromotionId,
                 ShippingAddress = request.ShippingAddress,
                 TotalAmount = request.TotalAmount,
-                OrderStatus = request.OrderStatus,
+                //OrderStatus = request.OrderStatus,
                 OrderDate = DateTime.Now,
             };
 
@@ -194,7 +194,7 @@ namespace SWPSolution.Application.System.Admin
             var order = await _context.Orders.FindAsync(id);
             if (order == null) return false;
 
-                order.OrderStatus = request.orderStatus;
+             //   order.OrderStatus = request.orderStatus;
 
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
@@ -223,7 +223,7 @@ namespace SWPSolution.Application.System.Admin
                 PromotionId = order.PromotionId,
                 ShippingAddress = order.ShippingAddress,
                 TotalAmount = order.TotalAmount,
-                OrderStatus = order.OrderStatus,
+            //    OrderStatus = order.OrderStatus,
                 OrderDate = order.OrderDate,
             };
         }
@@ -238,7 +238,7 @@ namespace SWPSolution.Application.System.Admin
                     PromotionId = order.PromotionId,
                     ShippingAddress = order.ShippingAddress,
                     TotalAmount = order.TotalAmount,
-                    OrderStatus = order.OrderStatus,
+                //    OrderStatus = order.OrderStatus,
                     OrderDate = order.OrderDate,
                 })
                 .ToListAsync();

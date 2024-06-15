@@ -13,13 +13,22 @@ namespace SWPSolution.ViewModels.Sales
         [Required]
         public string Token { get; set; }
 
+
+        [Required]
+        public string PromotionId { get; set; }
+
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
+
         [Required]
         public string ShippingAddress { get; set; }
 
         [Required]
-        public decimal TotalAmount { get; set; }
+        public List<OrderDetailRequest> OrderDetails { get; set; }
 
         [Required]
-        public List<OrderDetailVM> OrderDetails { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Total amount must be a positive value.")]
+        public float TotalAmount { get; set; }
     }
 }
