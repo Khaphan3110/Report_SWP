@@ -273,18 +273,19 @@ namespace SWPSolution.Application.Catalog.Product
 
         public async Task<List<ProductImageViewModel>> GetListImages(string productId)
         {
-            return await _context.ProductImages.Where(x => x.ProductId == productId)
-                .Select(i => new ProductImageViewModel()
-            {
-                Caption=i.Caption,
-                DateCreated = i.DateCreated,
-                FileSize = i.FileSize,
-                Id = i.Id,
-                ImagePath = i.ImagePath,
-                ProductId = i.ProductId,
-                SortOrder=i.SortOrder
-
-            }).ToListAsync();
+            return  _context.ProductImages
+                .Where(x => x.ProductId == productId)
+                .Select(i => new ProductImageViewModel
+                {
+                    Caption = i.Caption,
+                    DateCreated = i.DateCreated,
+                    FileSize = i.FileSize,
+                    Id = i.Id,
+                    ImagePath = i.ImagePath,
+                    ProductId = i.ProductId,
+                    SortOrder = i.SortOrder
+                })
+                .ToList();
         }
 
         public async Task<int> RemoveImage(string imageId)

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/0rrPXn9o8UliKjAyQL/lrPsc4Musmgom2JFU4tAb5E=",
+  "Hash": "Xy+xQ5CRXwtYF2Eg5YkqUoKCU9kcEXlq2puDiTPaBFU=",
   "Source": "SWPSolution.BackendApi",
   "BasePath": "_content/SWPSolution.BackendApi",
   "Mode": "Default",
@@ -1174,6 +1174,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\user-content\\14d16c83-5851-4fdd-b71b-88184e2809bf.png"
+    },
+    {
+      "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\3d01b279-6ba3-495f-9541-045527c12726.png",
+      "SourceId": "SWPSolution.BackendApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\",
+      "BasePath": "_content/SWPSolution.BackendApi",
+      "RelativePath": "user-content/3d01b279-6ba3-495f-9541-045527c12726.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\user-content\\3d01b279-6ba3-495f-9541-045527c12726.png"
     },
     {
       "Identity": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\3e4750ff-09a1-40e6-ad83-9138d4ce0453.png",

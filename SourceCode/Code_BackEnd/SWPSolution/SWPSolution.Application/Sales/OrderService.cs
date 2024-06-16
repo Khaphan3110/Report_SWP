@@ -64,8 +64,12 @@ namespace SWPSolution.Application.Sales
         public async Task<string> ExtractMemberIdFromTokenAsync(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtTokenBytes = Convert.FromBase64String(token.Split('.')[1]);
-            var jwtPayload = Encoding.UTF8.GetString(jwtTokenBytes);
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
             var jwtSecret = _config["JWT:SigningKey"];
 
             var tokenValidationParameters = new TokenValidationParameters
@@ -83,6 +87,7 @@ namespace SWPSolution.Application.Sales
 
             return memberId;
         }
+
 
         public async Task<Order> GetOrderById(string orderId)
         {
