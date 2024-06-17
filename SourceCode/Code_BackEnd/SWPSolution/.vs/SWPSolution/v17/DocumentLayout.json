@@ -3,8 +3,13 @@
   "WorkspaceRootPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.adminapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+=======
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
@@ -14,6 +19,7 @@
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\system\\user\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -367,6 +373,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{2C2B8AB5-263D-4C63-8D4F-AFC94D2F074E}|SWPSolution.WebApp\\SWPSolution.WebApp.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.webapp\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{2C2B8AB5-263D-4C63-8D4F-AFC94D2F074E}|SWPSolution.WebApp\\SWPSolution.WebApp.csproj|solutionrelative:swpsolution.webapp\\libman.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+=======
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\jwt\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\jwt\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
     }
   ],
   "DocumentGroupContainers": [
@@ -375,8 +389,13 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedHeight": 376,
           "SelectedChildIndex": 12,
+=======
+          "DockedWidth": 1097,
+          "SelectedChildIndex": 11,
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
           "Children": [
             {
               "$type": "Bookmark",
@@ -404,6 +423,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 3,
               "Title": "TokenService.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\TokenService.cs",
@@ -471,10 +491,35 @@
               "ViewState": "AQIAAHcWAAAAAAAAAAAMwIEWAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
               "WhenOpened": "2024-06-11T06:42:30.784Z"
+=======
+              "DocumentIndex": 2,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\IUserService.cs",
+              "ToolTip": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\System\\User\\IUserService.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAswC4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T13:47:10.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JwtHelper.cs",
+              "DocumentMoniker": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\JWT\\JwtHelper.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\JWT\\JwtHelper.cs",
+              "ToolTip": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\JWT\\JwtHelper.cs",
+              "RelativeToolTip": "SWPSolution.Application\\JWT\\JwtHelper.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T13:45:08.697Z"
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
@@ -483,10 +528,21 @@
               "ViewState": "AQIAABUAAAAAAAAAAAAtwCMAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-06-15T09:38:46.442Z",
+=======
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAJEBAAAAAAAAAAAlwIMBAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-15T04:55:08.584Z",
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 8,
               "Title": "IAdminService.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\Admin\\IAdminService.cs",
@@ -1503,6 +1559,18 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-09T06:08:55.607Z"
+=======
+              "DocumentIndex": 1,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\UserService.cs",
+              "ToolTip": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\System\\User\\UserService.cs",
+              "ViewState": "AQIAAMABAAAAAAAAAAAmwMgBAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-15T12:36:00.962Z",
+              "EditorCaption": ""
+>>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
             }
           ]
         },

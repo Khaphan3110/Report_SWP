@@ -24,6 +24,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Logging;
+using System.Configuration;
+
 
 namespace SWPSolution.Application.System.User
 {
@@ -37,6 +40,7 @@ namespace SWPSolution.Application.System.User
         private readonly IEmailService _emailService;
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
 
         public UserService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
@@ -45,7 +49,8 @@ namespace SWPSolution.Application.System.User
             SWPSolutionDBContext context,
             IEmailService emailService,
             IUrlHelperFactory urlHelperFactory,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -55,6 +60,7 @@ namespace SWPSolution.Application.System.User
             _emailService = emailService;
             _urlHelperFactory = urlHelperFactory;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
 
         public async Task<string> Authenticate(LoginRequest request)
@@ -447,11 +453,9 @@ namespace SWPSolution.Application.System.User
             return true;
         }
 
-        public async Task<MemberAddressVM> GetMemberAddressByIdAsync(string memberId)
+        public async Task<MemberAddressVM> GetMemberAddressById(string memberId)
         {
-            var address = await _context.Addresses.FindAsync(memberId);
-            if (address == null) return null;
-
+            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
             return new MemberAddressVM
             {
                 House_Number = address.HouseNumber,
@@ -462,9 +466,9 @@ namespace SWPSolution.Application.System.User
             };
         }
 
-        public async Task<bool> UpdateMemberAddressAsync(string memberId, UpdateAddressRequest request)
+        public async Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request)
         {
-            var address = await _context.Addresses.FindAsync(memberId);
+            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
             if (address == null) return false;
 
             if (!string.IsNullOrEmpty(request.House_Numbers))
@@ -510,9 +514,9 @@ namespace SWPSolution.Application.System.User
             return true;
         }
 
-        public async Task<bool> DeleteMemberAddressAsync(string id)
+        public async Task<bool> DeleteMemberAddress(string id)
         {
-            var address = await _context.Addresses.FirstOrDefaultAsync(a => a.MemberId == id || a.AddressId == id);
+            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == id);
             if (address == null)
                 return false;
 
@@ -541,6 +545,48 @@ namespace SWPSolution.Application.System.User
                 }
             }
             return new ApiSuccessResult<bool>();
+        }
+
+        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
+            var jwtSecret = _config["JWT:SigningKey"];
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+            var memberId = principal.FindFirst("member_id")?.Value;
+
+            return memberId;
+        }
+
+        public ClaimsPrincipal ValidateToken(string jwtToken)
+        {
+            IdentityModelEventSource.ShowPII = true;
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidAudience = _configuration["JWT:Issuer"],
+                ValidIssuer = _configuration["JWT:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
+            };
+
+            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
     }
 }

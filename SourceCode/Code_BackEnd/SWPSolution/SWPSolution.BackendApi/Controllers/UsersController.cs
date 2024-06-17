@@ -21,11 +21,9 @@ namespace SWPSolution.BackendApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
-        public UsersController(IUserService userService, IConfiguration configuration) 
+        public UsersController(IUserService userService) 
         {
             _userService = userService;
-            _configuration = configuration;
         }
 
         [HttpPost("authenticate")]
@@ -205,7 +203,7 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpGet("GetAddress/{id}/address")]
         public async Task<IActionResult> GetMemberAddressById(string id)
         {
-            var address = await _userService.GetMemberAddressByIdAsync(id);
+            var address = await _userService.GetMemberAddressById(id);
             if (address == null)
             {
                 return NotFound(new { message = "Member not found" });
@@ -222,7 +220,7 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _userService.UpdateMemberAddressAsync(id, request);
+            var result = await _userService.UpdateMemberAddress(id, request);
             if (!result)
             {
                 return NotFound(new { message = "Member not found" });
@@ -265,7 +263,7 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpDelete("DeleteAddress/{id}/address")]
         public async Task<IActionResult> DeleteMemberAddress(string id)
         {
-            var result = await _userService.DeleteMemberAddressAsync(id);
+            var result = await _userService.DeleteMemberAddress(id);
             if (!result)
             {
                 return NotFound(new { message = "Address not found" });
@@ -284,7 +282,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             try
             {
-                var claimsPrincipal = ValidateToken(token);
+                var claimsPrincipal = _userService.ValidateToken(token);
                 var memberIdClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "member_id");
                 var roleClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
 
@@ -308,24 +306,151 @@ namespace SWPSolution.BackendApi.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
-            catch (Exception ex)
+        }
+
+        [HttpPut("UpdateMemberByToken")]
+        public async Task<IActionResult> UpdateMemberByToken([FromQuery] string jwtToken, [FromBody] UpdateMemberRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
             {
-                return StatusCode(500, new { message = "An error occurred while processing your request.", detail = ex.Message });
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.UpdateMemberAsync(memberId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Member not found" });
+                }
+
+                return Ok(new { message = "Member updated successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
             }
         }
-        private ClaimsPrincipal ValidateToken(string jwtToken)
+
+        [Authorize]
+        [HttpDelete("DeleteMemberByToken")]
+        public async Task<IActionResult> DeleteMemberByToken([FromQuery] string jwtToken)
         {
-            IdentityModelEventSource.ShowPII = true;
-
-            var validationParameters = new TokenValidationParameters
+            if (string.IsNullOrEmpty(jwtToken))
             {
-                ValidateLifetime = true,
-                ValidAudience = _configuration["JWT:Issuer"],
-                ValidIssuer = _configuration["JWT:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
-            };
+                return BadRequest(new { message = "Token is required." });
+            }
 
-            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.DeleteUserAsync(memberId);
+                if (!result)
+                {
+                    return NotFound(new { message = "User not found" });
+                }
+
+                return Ok(new { message = "User deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
+
+        [Authorize]
+        [HttpGet("GetAddressByToken")]
+        public async Task<IActionResult> GetAddressByToken([FromQuery] string jwtToken)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var address = await _userService.GetMemberAddressById(memberId);
+                if (address == null)
+                {
+                    return NotFound(new { message = "Address not found" });
+                }
+
+                return Ok(address);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPut("UpdateAddressByToken")]
+        public async Task<IActionResult> UpdateAddressByToken([FromQuery] string jwtToken, [FromBody] UpdateAddressRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.UpdateMemberAddress(memberId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Address not found" });
+                }
+
+                return Ok(new { message = "Address updated successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteAddressByToken")]
+        public async Task<IActionResult> DeleteAddressByToken([FromQuery] string jwtToken)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.DeleteMemberAddress(memberId);
+                if (!result)
+                {
+                    return NotFound(new { message = "Address not found" });
+                }
+
+                return Ok(new { message = "Address deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
     }
 }
