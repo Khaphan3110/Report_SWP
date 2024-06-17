@@ -11,14 +11,19 @@ using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using LoginRequest = SWPSolution.ViewModels.System.Users.LoginRequest;
-using RegisterRequest = SWPSolution.ViewModels.System.Users.RegisterRequest;
-
+using System.Threading.Tasks;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SWPSolution.Application.System.User
 {
@@ -72,16 +77,22 @@ namespace SWPSolution.Application.System.User
             string memberId = await GetMemberIdByUsername(request.UserName);
 
             // Get user roles
-            var roles = await _userManager.GetRolesAsync(user);
+            var getRoles = await _userManager.GetRolesAsync(user);
 
             // Create claims for the token
             var claims = new List<Claim>
-    {
-        new Claim(ClaimTypes.Email, user.Email),
-        new Claim(ClaimTypes.GivenName, user.FirstName),
-        new Claim(ClaimTypes.Role, string.Join(";", roles)),
-        new Claim("member_id", memberId.ToString())  // Add member_id as a custom claim
-    };
+            {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim("member_id", memberId.ToString())  // Add member_id as a custom claim
+            };
+
+            // Add roles to claims
+            foreach (var role in getRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             // Generate JWT token
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
@@ -389,6 +400,21 @@ namespace SWPSolution.Application.System.User
         public async Task<MemberInfoVM> GetMemberByIdAsync(string memberId)
         {
             var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return null;
+
+            return new MemberInfoVM
+            {
+                UserName = member.UserName,
+                Email = member.Email,
+                FirstName = member.FirstName,
+                LastName = member.LastName,
+                PhoneNumber = member.PhoneNumber
+            };
+        }
+
+        public async Task<MemberInfoVM> GetMemberByMailAsync(string email)
+        {
+            var member = await _context.Members.FindAsync(email);
             if (member == null) return null;
 
             return new MemberInfoVM

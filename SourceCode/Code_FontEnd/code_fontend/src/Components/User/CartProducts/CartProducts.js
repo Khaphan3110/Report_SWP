@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./CartProducts.css";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { productGetAll } from "../../../Service/ProductService/ProductService";
+
+import { Actions } from "../../../Store";
+import { useStore } from "../../../Store";
 export default function CartProducts() {
   const [listProduct, setListProduct] = useState([]);
   const [listProductImage, setListProductImage] = useState([]);
-
+  const [state,dispatch] = useStore();
   useEffect(() => {
     const resProduct = async () => {
       const getProduct = await productGetAll();
@@ -13,6 +16,9 @@ export default function CartProducts() {
     };
     resProduct();
   }, []);
+
+ 
+  console.log("lisst carrt",state)
   return (
     <Container>
       <Row>
@@ -24,7 +30,7 @@ export default function CartProducts() {
                 <Card.Body>
                   <Card.Title>{product.productName}</Card.Title>
                   <Card.Text>{product.price}đ</Card.Text>
-                  <Button variant="primary">Add To cart</Button>
+                  <Button variant="primary" onClick={() => dispatch(Actions.addListToCart(product))}>Add To cart</Button>
                 </Card.Body>
               </Card>
             </Col>

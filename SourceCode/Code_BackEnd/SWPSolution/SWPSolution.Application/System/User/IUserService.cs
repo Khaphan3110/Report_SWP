@@ -1,4 +1,5 @@
 ﻿
+using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;

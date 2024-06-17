@@ -120,7 +120,9 @@
 
 .cart-link .cart-quantity {
   align-self: center;
+  text-align: center;
   background-color: #fbd947;
+  width: 24px;
 }
 
 .cart-name {
@@ -173,4 +175,15 @@
 }
 
 .shop-policy li div img {
+
 }
+
+/* .custom-tooltip{
+  background-color: #fbd947;
+} */
+
+.toolip-cart{
+  background-color: #fbd947 !important;
+  color: black !important;
+}
+
