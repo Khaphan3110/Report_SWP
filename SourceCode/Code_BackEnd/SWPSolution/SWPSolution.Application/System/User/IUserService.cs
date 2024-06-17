@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,14 +37,18 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request);
 
-        Task<MemberAddressVM> GetMemberAddressByIdAsync(string memberId);
+        Task<MemberAddressVM> GetMemberAddressById(string memberId);
 
-        Task<bool> UpdateMemberAddressAsync(string memberId, UpdateAddressRequest request);
+        Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request);
 
         Task<bool> AddMemberAddressAsync(string memberId, AddAddressRequest request);
 
         Task<bool> DeleteUserAsync(string memberId);
 
-        Task<bool> DeleteMemberAddressAsync(string id);
+        Task<bool> DeleteMemberAddress(string id);
+
+        Task<string> ExtractMemberIdFromTokenAsync(string token);
+
+        ClaimsPrincipal ValidateToken(string jwtToken);
     }
 }
