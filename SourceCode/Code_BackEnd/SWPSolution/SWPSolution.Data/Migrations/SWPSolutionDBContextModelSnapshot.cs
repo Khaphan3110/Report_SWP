@@ -448,36 +448,30 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.OrderDetail", b =>
                 {
-                    b.Property<string>("OrderdetailId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("orderdetail_ID");
+                    b.Property<string>("OrderDetailId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OrderId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("order_ID");
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<string>("ProductId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("product_ID");
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderdetailId")
-                        .HasName("PK__Order_de__59AD78598BE8175A");
+                    b.HasKey("OrderDetailId");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Order_detail", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Payment", b =>
@@ -812,12 +806,14 @@ namespace SWPSolution.Data.Migrations
                     b.HasOne("SWPSolution.Data.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .HasConstraintName("fk_orderdetail_order");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SWPSolution.Data.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
-                        .HasConstraintName("fk_orderdetail_product");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 

@@ -12,8 +12,8 @@ using SWPSolution.Data.Entities;
 namespace SWPSolution.Data.Migrations
 {
     [DbContext(typeof(SWPSolutionDBContext))]
-    [Migration("20240615204047_fixedDB")]
-    partial class fixedDB
+    [Migration("20240617163320_createDB")]
+    partial class createDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,107 @@ namespace SWPSolution.Data.Migrations
                 .HasMin(1L)
                 .HasMax(999L)
                 .IsCyclic();
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("AppUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserTokens", (string)null);
+                });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Address", b =>
                 {
@@ -116,7 +217,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("EmailVerificationCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("EmailVerificationExpiry")
@@ -351,36 +451,30 @@ namespace SWPSolution.Data.Migrations
 
             modelBuilder.Entity("SWPSolution.Data.Entities.OrderDetail", b =>
                 {
-                    b.Property<string>("OrderdetailId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("orderdetail_ID");
+                    b.Property<string>("OrderDetailId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OrderId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("order_ID");
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<string>("ProductId")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(10)")
-                        .HasColumnName("product_ID");
+                        .IsRequired()
+                        .HasColumnType("varchar(10)");
 
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderdetailId")
-                        .HasName("PK__Order_de__59AD78598BE8175A");
+                    b.HasKey("OrderDetailId");
 
                     b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Order_detail", (string)null);
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Payment", b =>
@@ -715,12 +809,14 @@ namespace SWPSolution.Data.Migrations
                     b.HasOne("SWPSolution.Data.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .HasConstraintName("fk_orderdetail_order");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SWPSolution.Data.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
-                        .HasConstraintName("fk_orderdetail_product");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 

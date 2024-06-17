@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SWPSolution.Data.Enum;
 
 namespace SWPSolution.Data.Entities;
 
@@ -239,34 +240,6 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasConstraintName("fk_order_promotion");
         });
 
-        modelBuilder.Entity<OrderDetail>(entity =>
-        {
-            entity.HasKey(e => e.OrderdetailId).HasName("PK__Order_de__59AD78598BE8175A");
-
-            entity.ToTable("Order_detail");
-
-            entity.Property(e => e.OrderdetailId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("orderdetail_ID");
-            entity.Property(e => e.OrderId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("order_ID");
-            entity.Property(e => e.ProductId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("product_ID");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("fk_orderdetail_order");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("fk_orderdetail_product");
-        });
 
         modelBuilder.Entity<Payment>(entity =>
         {

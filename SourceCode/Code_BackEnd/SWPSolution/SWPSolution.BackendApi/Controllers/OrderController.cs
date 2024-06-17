@@ -27,15 +27,27 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var success = await _orderService.PlaceOrderAsync(request);
-            if (!success)
+            var result = await _orderService.PlaceOrderAsync(request);
+            if (!result.Success)
             {
-                return Unauthorized();
+                return BadRequest(new { error = result.ErrorMessage });
             }
 
-            return Ok();
+            return Ok(result.Order);
         }
-        [HttpGet("{orderId}")]
+
+        [HttpGet("GetAllOrders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var orders = await _orderService.GetAll();
+            if (orders == null)
+            {
+                return NotFound(new { message = "No categories were found" });
+            }
+            return Ok(orders);
+        }
+
+        [HttpGet("GetOrderById")]
         public async Task<IActionResult> GetOrderById(string orderId)
         {
             var order = await _orderService.GetOrderById(orderId);

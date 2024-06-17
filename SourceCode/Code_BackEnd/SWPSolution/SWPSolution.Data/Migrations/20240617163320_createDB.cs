@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWPSolution.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class fixedDB : Migration
+    public partial class createDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,6 +16,21 @@ namespace SWPSolution.Data.Migrations
                 minValue: 1L,
                 maxValue: 999L,
                 cyclic: true);
+
+            migrationBuilder.CreateTable(
+                name: "AppRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoleClaims", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "AppRoles",
@@ -33,6 +48,47 @@ namespace SWPSolution.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserLogins",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppUsers",
                 columns: table => new
                 {
@@ -40,7 +96,7 @@ namespace SWPSolution.Data.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     TemporaryPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmailVerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailVerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmailVerificationExpiry = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -60,6 +116,20 @@ namespace SWPSolution.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserTokens", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,7 +254,7 @@ namespace SWPSolution.Data.Migrations
                     Promotion_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     TotalAmount = table.Column<double>(type: "float", nullable: true),
-                    orderStatus = table.Column<int>(type: "int", unicode: false, maxLength: 10, nullable: false),
+                    orderStatus = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     orderDate = table.Column<DateTime>(type: "date", nullable: true)
                 },
                 constraints: table =>
@@ -300,27 +370,30 @@ namespace SWPSolution.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order_detail",
+                name: "OrderDetails",
                 columns: table => new
                 {
-                    orderdetail_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
-                    product_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
-                    order_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
-                    quantity = table.Column<int>(type: "int", nullable: true)
+                    OrderDetailId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderId = table.Column<string>(type: "varchar(10)", nullable: false),
+                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK__Order_de__59AD78598BE8175A", x => x.orderdetail_ID);
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
                     table.ForeignKey(
-                        name: "fk_orderdetail_order",
-                        column: x => x.order_ID,
+                        name: "FK_OrderDetails_Order_OrderId",
+                        column: x => x.OrderId,
                         principalTable: "Order",
-                        principalColumn: "order_ID");
+                        principalColumn: "order_ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_orderdetail_product",
-                        column: x => x.product_ID,
+                        name: "FK_OrderDetails_Product_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "product_ID");
+                        principalColumn: "product_ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,14 +439,14 @@ namespace SWPSolution.Data.Migrations
                 column: "Promotion_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_detail_order_ID",
-                table: "Order_detail",
-                column: "order_ID");
+                name: "IX_OrderDetails_OrderId",
+                table: "OrderDetails",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_detail_product_ID",
-                table: "Order_detail",
-                column: "product_ID");
+                name: "IX_OrderDetails_ProductId",
+                table: "OrderDetails",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payment_order_ID",
@@ -418,16 +491,31 @@ namespace SWPSolution.Data.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
+                name: "AppRoleClaims");
+
+            migrationBuilder.DropTable(
                 name: "AppRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AppUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AppUserRoles");
 
             migrationBuilder.DropTable(
                 name: "AppUsers");
 
             migrationBuilder.DropTable(
+                name: "AppUserTokens");
+
+            migrationBuilder.DropTable(
                 name: "Blog");
 
             migrationBuilder.DropTable(
-                name: "Order_detail");
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
                 name: "Payment");

@@ -9,14 +9,14 @@ namespace SWPSolution.ViewModels.Sales
 {
     public class OrderDetailRequest
     {
+        [Required]
         public string ProductId { get; set; }
 
-        public string OrderId { get; set; }
-
         [Required]
-        [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]
         public int Quantity { get; set; }
 
+        [Required]
 
+        public float Price { get; set; }
     }
 }

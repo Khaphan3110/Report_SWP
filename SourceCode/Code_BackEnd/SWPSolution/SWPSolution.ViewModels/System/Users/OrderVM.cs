@@ -22,5 +22,6 @@ namespace SWPSolution.ViewModels.System.Users
         public OrderStatus OrderStatus { get; set; }
 
         public DateTime? OrderDate { get; set; }
+
     }
 }

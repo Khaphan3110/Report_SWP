@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
 using SWPSolution.Utilities.Exceptions;
-using SWPSolution.ViewModels.Catalog.Sales;
+using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Sales;
+using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SWPSolution.Application.Sales
 {
@@ -30,36 +33,52 @@ namespace SWPSolution.Application.Sales
         public async Task<Order> CreateOrder(OrderRequest orderRequest)
         {
             string orderId = GenerateOrderId();
-            string orderDetailId = GenerateOrderId();
             var order = new Order
             {
                 OrderId = orderId,
                 MemberId = await ExtractMemberIdFromTokenAsync(orderRequest.Token),
                 PromotionId = orderRequest.PromotionId,
-                ShippingAddress = orderRequest.ShippingAddress,
+                ShippingAddress = orderRequest.AddressId,
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
                 OrderDate = DateTime.UtcNow,
+                OrderDetails = new List<OrderDetail>(),
+                
             };
 
+            // Add the order to the context but do not save changes immediately
+            _context.Orders.Add(order);
+
+            // Save the order without waiting for it to complete
+            await _context.SaveChangesAsync();
+
+            // Now add order details
             foreach (var product in orderRequest.OrderDetails)
             {
                 var orderDetail = new OrderDetail
                 {
                     OrderId = orderId,
-                    OrderdetailId = "OR191004", // Ensure this generates unique IDs
+                    OrderDetailId = GenerateOrderDetailId(),
                     ProductId = product.ProductId,
+                    Price = product.Price,
                     Quantity = product.Quantity,
+                    
                 };
 
+                // Add orderDetail to the order's collection
                 order.OrderDetails.Add(orderDetail);
+
+                // Add orderDetail to the context but do not save changes immediately
+                _context.OrderDetails.Add(orderDetail);
+                await _context.SaveChangesAsync();
             }
 
-            _context.Orders.Add(order);
+            // Save all order details
             await _context.SaveChangesAsync();
 
             return order;
         }
+
 
         public async Task<string> ExtractMemberIdFromTokenAsync(string token)
         {
@@ -88,39 +107,78 @@ namespace SWPSolution.Application.Sales
             return memberId;
         }
 
-
-        public async Task<Order> GetOrderById(string orderId)
-        {
-            return await _context.Orders
-                .Include(o => o.OrderDetails)
-                .Include(o => o.Payments)
-                .Include(o => o.Promotion)
-                .FirstOrDefaultAsync(o => o.OrderId == orderId);
-        }
-
-        public IEnumerable<Order> GetOrdersByMemberId(string memberId)
+        public async Task<List<Order>> GetAll()
         {
             return _context.Orders
-                .Include(o => o.OrderDetails)
-                .Include(o => o.Payments)
-                .Include(o => o.Promotion)
-                .Where(o => o.MemberId == memberId)
+                .Select(c => new Order
+                {
+                    OrderId = c.OrderId,
+                    MemberId = c.MemberId,
+                    PromotionId = c.PromotionId,
+                    ShippingAddress = c.ShippingAddress,
+                    TotalAmount = c.TotalAmount,
+                    OrderStatus = c.OrderStatus,
+                    OrderDate = c.OrderDate,
+
+                })
                 .ToList();
         }
 
-        public async Task<bool> PlaceOrderAsync(OrderRequest orderRequest)
+
+        public async Task<OrderVM> GetOrderById(string orderId)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order == null)
+            {
+                return null;
+            }
+            return new OrderVM
+            {
+                OrderId = order.OrderId,
+                MemberId = order.MemberId,
+                PromotionId = order.PromotionId,
+                ShippingAddress =   order.ShippingAddress,
+                TotalAmount = order.TotalAmount,
+                OrderStatus = order.OrderStatus,
+                OrderDate  = order.OrderDate,
+                
+            };
+        }
+
+        public  IEnumerable<Order> GetOrdersByMemberId(string memberId)
+        {
+
+
+            return null;
+        }
+
+        public class PlaceOrderResult
+        {
+            public bool Success { get; set; }
+            public string ErrorMessage { get; set; }
+            public Order Order { get; set; }
+        }
+
+        public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
         {
             try
             {
                 var order = await CreateOrder(orderRequest);
-                return order != null;
+                return new PlaceOrderResult
+                {
+                    Success = order != null,
+                    Order = order
+                };
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return new PlaceOrderResult
+                {
+                    Success = false,
+                    ErrorMessage = ex.Message
+                };
             }
         }
-
         public async Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
@@ -137,14 +195,47 @@ namespace SWPSolution.Application.Sales
             string month = DateTime.Now.ToString("MM");
             string year = DateTime.Now.ToString("yy");
 
-            int autoIncrement = GetNextAutoIncrement(month, year);
+            int autoIncrement = GetNextOrderIdAutoIncrement(month, year);
 
             string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
 
             return $"OR{month}{year}{formattedAutoIncrement}";
         }
 
-        private int GetNextAutoIncrement(string month, string year)
+
+
+        private string GenerateOrderDetailId()
+        {
+            // Generate order_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextOrderDetailIdAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"OD{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextOrderDetailIdAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for order_ID to match in SQL query
+            string pattern = $"OD{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing order details for the given month and year
+            var maxAutoIncrement = _context.OrderDetails
+                .Where(o => o.OrderDetailId.StartsWith(pattern))
+                .Select(o => o.OrderDetailId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
+        }
+
+
+        private int GetNextOrderIdAutoIncrement(string month, string year)
         {
             // Generate the pattern for order_ID to match in SQL query
             string pattern = $"OR{month}{year}";
