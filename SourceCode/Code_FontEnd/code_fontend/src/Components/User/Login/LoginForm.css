@@ -38,8 +38,8 @@
 }
 
 .L-input-place {
-  height: 45px;
-  width: 100%;
+  height: 45px !important;
+  width: 100% !important;
   position: relative;
   margin: 20px 0;
   margin: 0;
@@ -58,14 +58,15 @@
 
 .L-input-place input {
   height: 100%;
-  width: 100%;
+  width: 100% !important;
   border: 0;
   background-color: transparent;
   padding: 7px 0;
   padding-right: 35px;
   padding-left: 15px;
   font-size: 16px;
-  outline: none;
+  border: none !important;
+  outline: none !important;
 }
 
 .L-input-place input::placeholder {
@@ -123,7 +124,7 @@
 
 .b-form-login-google {
   text-align: center;
-  height: 48px;
+  height: 48px !important;
   /* background-color: #FBD947; */
   border-radius: 25px;
   cursor: pointer;
@@ -134,8 +135,8 @@
 }
 
 .b-form-login-google button {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
   padding: 0;
   background-color: transparent;
   border: 0;
@@ -182,8 +183,8 @@
 }
 
 .Forgot-input-place {
-  height: 45px;
-  width: 100%;
+  height: 45px !important;
+  width: 100% !important;
   margin: 15px 0;
   border-radius: 5px;
   border: 1px solid #f0f0f0;
@@ -191,13 +192,14 @@
 
 .Forgot-input-place input {
   height: 100%;
-  width: 100%;
+  width: 100% !important;
   padding: 5px 20px;
   font-size: 16px;
   background-color: transparent;
-  border: 0;
+  border: none !important;
   border-radius: 0;
   outline: none;
+  margin: 0 !important;
 }
 
 .Forgot-input-place input::placeholder{
@@ -327,7 +329,7 @@
 
 .Change-password-input-place i {
   position: absolute;
-  top: 18px;
+  top: 15px;
   right: 10px;
   cursor: pointer;
 }
@@ -366,9 +368,19 @@
   top: 7px;
 }
 
-.button-rememberme{
+.button-rememberme {
   margin-bottom: 10px;
 }
+
+.button-rememberme label{
+  font-weight: normal;
+}
+
 .button-rememberme input{
  margin-right: 5px;
+ align-items: end;
+}
+
+.register_input_place input{
+  margin: 0 !important;
 }

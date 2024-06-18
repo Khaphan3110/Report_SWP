@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CartPage.css';
+import { Actions } from '../../../Store';
+import { useStore } from '../../../Store';
 
 const CartPage = () => {
+  const [state,dispatch] = useStore();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -20,24 +23,27 @@ const CartPage = () => {
     }
   ]);
 
-  useEffect(() => {
-    // Save cart items to localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
+
+  
+  // useEffect(() => {
+  //   // Save cart items to localStorage
+  //   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  // }, [cartItems]);
 
   const handleQuantityChange = (itemId, delta) => {
-    setCartItems(cartItems.map(item =>
-      item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-    ));
+    // setCartItems(cartItems.map(item =>
+    //   item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+    // ));
   };
 
   const handleRemoveItem = (itemId) => {
-    setCartItems(cartItems.filter(item => item.id !== itemId));
+    // setCartItems(cartItems.filter(item => item.id !== itemId));
   };
 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
+    
     <div className="cart-page container">
       {/* <div className="breadcrumb">
         <Link to="/">Trang chủ</Link> / Giỏ hàng 
@@ -45,19 +51,19 @@ const CartPage = () => {
       <div className="cart-container">
         <div className="cart-content">
           <h2>Giỏ hàng</h2>
-          {cartItems.map(item => (
-            <div className="cart-item" key={item.id}>
+          {state.cartItems.map((item,index) => (
+            <div className="cart-item" key={index}>
               <img src={item.image} alt={item.name} />
               <div className="cart-item-details">
                 <h3>{item.name}</h3>
                 <p className="cart-item-price">{item.price.toLocaleString()}₫</p>
-                <div className="quantity-controls">
+                <div className="quantity-controls-cartPage">
                   <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
                   <input type="text" value={item.quantity} readOnly />
                   <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
                 </div>
               </div>
-              <button className="remove-button" onClick={() => handleRemoveItem(item.id)}>X</button>
+              <button className="remove-button" onClick={() => dispatch(Actions.removeProductToCart(item))}>X</button>
             </div>
           ))}
         </div>

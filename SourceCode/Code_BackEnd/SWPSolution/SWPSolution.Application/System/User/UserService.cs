@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
+
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
@@ -249,7 +250,8 @@ namespace SWPSolution.Application.System.User
 
                 // Generate the action URL
 
-                var resetPasswordUrl = $"{baseUrl}/reset-password?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
+                var resetPasswordUrl = $"{baseUrl}?token={Uri.EscapeDataString(token)}&email={Uri.EscapeDataString(email)}";
+
 
                 var message = new MessageVM(new string[] { user.Email! }, "Forgot Password link", resetPasswordUrl);
 

@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, ListGroup, Button, Modal, Form } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
-import './AccountPage.css';
-
+import React, { useState } from "react";
+import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./AccountPage.css";
 const AccountPage = () => {
   const [showAddressModal, setShowAddressModal] = useState(false);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const location = useLocation();
 
   const handleAddressModalClose = () => setShowAddressModal(false);
@@ -17,15 +18,13 @@ const AccountPage = () => {
     handleAddressModalClose();
   };
 
-
-  
   const handleLogout = () => {
-    // Xử lý việc đăng xuất tại đây
-    alert('Đăng xuất thành công!');
+    
   };
 
   return (
     <Container className="mt-5">
+      <ToastContainer />
       <Row>
         <Col md={3}>
           <Card>
@@ -33,14 +32,15 @@ const AccountPage = () => {
             <ListGroup variant="flush">
               <ListGroup.Item>Xin chào, Phan Kha!</ListGroup.Item>
               <ListGroup.Item>
-                {location.pathname === '/account' ? (
-                  'Thông tin tài khoản'
+                {location.pathname === "/account" ? (
+                  "Thông tin tài khoản"
                 ) : (
                   <Link to="/account">Thông tin tài khoản</Link>
                 )}
               </ListGroup.Item>
               <ListGroup.Item>
-                <Link to="/addresses">Số địa chỉ</Link> {/* Use Link to navigate to addresses page */}
+                <Link to="/addresses">Số địa chỉ</Link>{" "}
+                {/* Use Link to navigate to addresses page */}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button variant="link" onClick={handleLogout}>
@@ -55,9 +55,12 @@ const AccountPage = () => {
             <Card.Header>TÀI KHOẢN</Card.Header>
             <Card.Body>
               <Card.Text>
-                <strong>Tên tài khoản:</strong> Phan Kha<br />
-                <strong>Địa chỉ:</strong> , Vietnam<br />
-                <strong>Điện thoại:</strong> 0913676651<br />
+                <strong>Tên tài khoản:</strong> Phan Kha
+                <br />
+                <strong>Địa chỉ:</strong> , Vietnam
+                <br />
+                <strong>Điện thoại:</strong> 0913676651
+                <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>
               <table className="table">

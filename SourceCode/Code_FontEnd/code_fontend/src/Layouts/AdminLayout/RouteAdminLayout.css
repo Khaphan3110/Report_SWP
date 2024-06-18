@@ -1,0 +1,16 @@
+*{
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+.body-layout-admin{
+    padding: 15px 0;
+    padding-top: 20px;
+}
+
+.body-sidebar-admin{
+    padding: 0;
+    background-color: #F05A72;
+
+}

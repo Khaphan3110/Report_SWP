@@ -1,9 +1,17 @@
 .side-navbar{
-  background-color: #F591A1;
+  background-color: #dedede;
 }
 
 .side-navbar-admin{
-   margin-top: 10px;
+   padding: 0;
+   margin: 0;
+   padding: 4% 10%;
+   padding-bottom: 20%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   /* border: 1px solid black; */
 }
 
 .side-navbar-admin a{
@@ -11,9 +19,22 @@
     color: black;
 }
 
+.side-navbar-admin a li {
+   color: aliceblue;
+}
+
 .categories-word {
    list-style-type: none;
    color: black;
    padding: 10px;
-   border: 1px solid black;
 }
+
+.link-sidebar-admin{
+   padding: 20px 0;
+
+}
+
+.link-sidebar-admin li:hover{
+   text-shadow: 0px 0px 20px  #ffffff
+}
+

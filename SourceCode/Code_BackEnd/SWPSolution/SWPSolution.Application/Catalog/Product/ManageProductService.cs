@@ -106,6 +106,7 @@ namespace SWPSolution.Application.Catalog.Product
                 .Take(request.PageSize)
                 .Select(x => new ProductViewModel()
                 {
+                    
                     CategoriesId = x.p.CategoriesId,
                     ProductName = x.p.ProductName,
                     Description = x.p.Description,
@@ -121,6 +122,7 @@ namespace SWPSolution.Application.Catalog.Product
             };
             return pageResult;
         }
+
 
         public async Task<int> Update(ProductUpdateRequest request)
         {

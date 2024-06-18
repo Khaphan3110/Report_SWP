@@ -1,18 +1,19 @@
 import Categories from "../Components/Amind/Categories/Categories";
+import Product from "../Components/Amind/Products/Product";
 import AccountPage from "../Components/User/AccountPage/AccountPage";
 import AddressPage from "../Components/User/AddressPage/AddressPage";
 import AuthenEmail from "../Components/User/Authen/AuthenEmail";
 import CartPage from "../Components/User/CartPage/CartPage";
+import CartProductPage from "../Components/User/CartProducts/CartProducts";
+import CheckoutPage from "../Components/User/CheckoutPage/CheckoutPage";
 import Content from "../Components/User/Content/Content";
 import ForgotPasswordForm from "../Components/User/ForgotPassword/ForgotPasswordForm";
 import SendEmailForm from "../Components/User/ForgotPassword/SendEmailForm";
 import LoginForm from "../Components/User/Login/LoginForm";
 import Logout from "../Components/User/Logout/Logout";
+import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 import RegisterForm from "../Components/User/Register/RegisterForm";
 import RouteAdminLayout from "../Layouts/AdminLayout/RouteAdminLayout";
-import HomePage from "../Pages/HomePage/HomePage";
-import CheckoutPage from "../Components/User/CheckoutPage/CheckoutPage";
-import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -28,7 +29,7 @@ import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 //         <Route path="/CategoriesType" element={<ImportCategories/>} />
 
 const publicRoutes = [
-  { path: "/", component: HomePage },
+  { path: "/", component: CartProductPage },
   { path: "/login", component: LoginForm },
   { path: "/logout", component: Logout },
   { path: "/register", component: RegisterForm },
@@ -39,12 +40,15 @@ const publicRoutes = [
   { path: "/payment", component: PaymentPage },
   { path: "/authenOTP", component: AuthenEmail },
   { path: "/addresses", component: AddressPage },
+  { path: "/account", component: AccountPage },
   { path: "/cart", component: CartPage },
   { path: "/content", component: Content },
+  
 ];
 const privateRoutes = [
   { path: "/admin", component: RouteAdminLayout },
   { path: "/categories", component: Categories },
+  { path: "/product", component: Product },
   // { path: "/sideBar", component: SideBarAdmin },
 ];
 

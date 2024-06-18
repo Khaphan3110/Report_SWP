@@ -60,13 +60,13 @@
   color: #e74c3c;
 }
 
-.quantity-controls {
+.quantity-controls-cartPage {
   display: flex;
   align-items: center;
   margin-top: 10px;
 }
 
-.quantity-controls button {
+.quantity-controls-cartPage button {
   background-color: #ff6f61;
   color: #fff;
   border: none;
@@ -74,11 +74,14 @@
   cursor: pointer;
 }
 
-.quantity-controls input {
-  width: 40px;
+.quantity-controls-cartPage input {
+  width: 40px !important;
+  height: 34px;
   text-align: center;
   border: 1px solid #ddd;
+  margin: 0 !important;
   margin: 0 5px;
+  
 }
 
 .remove-button {

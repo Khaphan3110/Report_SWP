@@ -39,7 +39,7 @@ const CheckoutPage = () => {
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
-    <div className="checkout-page">
+    <div className="checkout-page" >
       <div className="breadcrumb">
         <a href="/">Trang chủ</a> / <a href="/cart">Giỏ hàng</a> / Thông tin giao hàng
       </div>

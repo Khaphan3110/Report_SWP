@@ -41,8 +41,7 @@ export const userLogin = async (UserLoginInfor) => {
   try {
     const res = await request.Post("Users/authenticate", UserLoginInfor, {
       headers: {
-        "Content-Type": "multipart/form-data",
-        Accept: "application/json",
+       'Content-Type': 'application/json',
       },
     });
     return res;
@@ -77,5 +76,10 @@ export const useLoginGoogle = async ( useGoogleLogin ) => {
   }
 }
 
-
-
+// export const getUserInfor = async () => {
+//   try {
+//     const res = await request.Post()
+//   } catch (error) {
+//     console.log("lỗi lấy thông tin  ng  dùng",error)
+//   }
+// }
