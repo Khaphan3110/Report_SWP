@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SWPSolution.Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace SWPSolution.ViewModels.System.Users
 {
     public class OrderUpdateRequest
     {
-        public bool? orderStatus { get; set; }
+        public OrderStatus orderStatus { get; set; }
     }
 }

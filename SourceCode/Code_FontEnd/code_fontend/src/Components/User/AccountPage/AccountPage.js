@@ -16,10 +16,12 @@ const AccountPage = () => {
   useEffect(() => {
     const resUser = async () => {
       const resUserInfor = await getUserInfor(userToken);
-      setUserInfor(resUserInfor.data);
+      if (resUserInfor) {
+        setUserInfor(resUserInfor.data);
+      }
     };
     resUser();
-  }, [userToken]);
+  }, []);
 
   const handleAddressModalClose = () => setShowAddressModal(false);
   const handleAddressModalShow = () => setShowAddressModal(true);
@@ -44,8 +46,8 @@ const AccountPage = () => {
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                Xin chào, {userInfor.member.lastName}{" "}
-                {userInfor.member.firstName}!
+                Xin chào, {userInfor && userInfor.member.lastName}{" "}
+                {userInfor && userInfor.member.firstName}!
               </ListGroup.Item>
               <ListGroup.Item>
                 {location.pathname === "/account" ? (
@@ -71,11 +73,13 @@ const AccountPage = () => {
             <Card.Header>TÀI KHOẢN</Card.Header>
             <Card.Body>
               <Card.Text>
-                <strong>Tên tài khoản:</strong> {userInfor.member.userName}
+                <strong>Tên tài khoản:</strong>{" "}
+                {userInfor && userInfor.member.userName}
                 <br />
                 <strong>Địa chỉ:</strong> , Vietnam
                 <br />
-                <strong>Điện thoại:</strong> {userInfor.member.phoneNumber}
+                <strong>Điện thoại:</strong>{" "}
+                {userInfor && userInfor.member.phoneNumber}
                 <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>

@@ -6,7 +6,7 @@
    "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Entities",
+   "OutputPath": "Entities2",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "SWPSolution.Data",
    "Schemas": null,
@@ -16,6 +16,14 @@
    "Tables": [
       {
          "Name": "[dbo].[Address]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUsers]",
          "ObjectType": 0
       },
       {
@@ -48,6 +56,10 @@
       },
       {
          "Name": "[dbo].[Product]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductImages]",
          "ObjectType": 0
       },
       {

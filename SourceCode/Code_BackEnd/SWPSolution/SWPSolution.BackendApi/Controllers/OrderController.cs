@@ -11,36 +11,62 @@ namespace SWPSolution.BackendApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IConfiguration _config;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IConfiguration config)
         {
             _orderService = orderService;
+            _config = config;
         }
 
-        [HttpPost("place-order")]
-        [AllowAnonymous]
-        public async Task<IActionResult> PlaceOrder([FromBody] OrderRequest orderRequest)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateOrder([FromBody] OrderRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var memberId = await _orderService.ExtractMemberIdFromTokenAsync(orderRequest.Token);
-            if (string.IsNullOrEmpty(memberId))
+            var result = await _orderService.PlaceOrderAsync(request);
+            if (!result.Success)
             {
-                return BadRequest("Invalid token or member not found.");
+                return BadRequest(new { error = result.ErrorMessage });
             }
 
-            // Additional validation and processing can be added here
+            return Ok(result.Order);
+        }
 
-            var success = await _orderService.PlaceOrderAsync(orderRequest);
-            if (!success)
+        [HttpGet("GetAllOrders")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var orders = await _orderService.GetAll();
+            if (orders == null)
             {
-                return BadRequest("Failed to place order.");
+                return NotFound(new { message = "No categories were found" });
             }
+            return Ok(orders);
+        }
 
-            return Ok(new { message = "Order placed successfully" });
+        [HttpGet("GetOrderById")]
+        public async Task<IActionResult> GetOrderById(string orderId)
+        {
+            var order = await _orderService.GetOrderById(orderId);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
+
+        [HttpGet("member/{memberId}")]
+        public IActionResult GetOrdersByMemberId(string memberId)
+        {
+            var orders = _orderService.GetOrdersByMemberId(memberId);
+            return Ok(orders);
+        }
+
+        [HttpPut("{orderId}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(string orderId, [FromBody] UpdateOrderStatusRequest request)
+        {
+            await _orderService.UpdateOrderStatus(orderId, request.NewStatus);
+            return NoContent();
         }
     }
 }

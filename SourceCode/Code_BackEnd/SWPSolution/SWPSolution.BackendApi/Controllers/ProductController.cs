@@ -217,5 +217,19 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest("Cannot find image");
             return Ok(image);
         }
+
+        [HttpGet("{productId}/images")]
+        
+        public async Task<ActionResult> GetImageByProductId(string productId)
+        {
+            var images = await _manageProductService.GetListImages(productId);
+
+            if (images == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(images);
+        }
     }
 }

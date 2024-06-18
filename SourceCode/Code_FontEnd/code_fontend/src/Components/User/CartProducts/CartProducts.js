@@ -5,10 +5,12 @@ import { productGetAll } from "../../../Service/ProductService/ProductService";
 
 import { Actions } from "../../../Store";
 import { useStore } from "../../../Store";
+import { imageGetAll } from "../../../Service/ProductService/imageService";
 export default function CartProducts() {
   const [listProduct, setListProduct] = useState([]);
   const [listProductImage, setListProductImage] = useState([]);
   const [state,dispatch] = useStore();
+  const [productID,setProductID] = useState('');
   useEffect(() => {
     const resProduct = async () => {
       const getProduct = await productGetAll();
@@ -17,15 +19,22 @@ export default function CartProducts() {
     resProduct();
   }, []);
 
+  useEffect(() => {
+    const resImageProduct = async () => {
+      const getProduct = await imageGetAll();
+      setListProduct(getProduct.data);
+    };
+    resImageProduct();
+  }, []);
+  console.log("liaat hình ảnh",listProductImage)
  
-  console.log("lisst carrt",state)
   return (
     <Container>
-      <Row>
+      <Row >
         {listProduct.map((product, index) => {
           return (
-            <Col xl={3} key={index}>
-              <Card style={{ width: "18rem" }}>
+            <Col xl={3} key={index} className="row-product-cart">
+              <Card style={{ width: "18rem" }} className="cart-product-page">
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>{product.productName}</Card.Title>

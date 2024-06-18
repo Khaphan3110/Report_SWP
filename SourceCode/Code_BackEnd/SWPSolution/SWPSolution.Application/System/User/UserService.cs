@@ -41,6 +41,7 @@ namespace SWPSolution.Application.System.User
         private readonly IUrlHelperFactory _urlHelperFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
+       
 
         public UserService(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
@@ -129,6 +130,20 @@ namespace SWPSolution.Application.System.User
                 throw new SWPException("Error getting Member ID"); // or throw an exception or handle as appropriate
             }
         }
+        private async Task<string> GetMemberIdByEmail(string email)
+        {
+            // Assuming you have access to your database context
+            var member = _context.Members.FirstOrDefault(m => m.Email == email);
+            if (member != null)
+            {
+                return member.MemberId;
+            }
+            else
+            {
+                // Handle case where member is not found (optional)
+                throw new SWPException("Error getting Member ID"); // or throw an exception or handle as appropriate
+            }
+        }
 
 
         public async Task<object> HandleGoogleLoginAsync(GoogleLoginRequest request)
@@ -137,23 +152,11 @@ namespace SWPSolution.Application.System.User
             if (user != null)
             {
                 // User exists, generate token
+                string memberId = await GetMemberIdByEmail(request.Email);
                 var roles = await _userManager.GetRolesAsync(user);
-                var claims = new[]
-                {
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim(ClaimTypes.GivenName, user.FirstName),
-            new Claim(ClaimTypes.Role, string.Join(";", roles))
-        };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var token = GenerateJwtToken(user, roles, memberId);
 
-                var token = new JwtSecurityToken(_config["JWT:Issuer"],
-                    _config["JWT:Issuer"],
-                    claims,
-                    expires: DateTime.Now.AddHours(3),
-                    signingCredentials: creds);
-
-                return new { token = new JwtSecurityTokenHandler().WriteToken(token) };
+                return new { token };
             }
             else
             {
@@ -168,31 +171,46 @@ namespace SWPSolution.Application.System.User
                     Password = password // Use the generated secure password
                 };
                 var registerResult = await Register(registerRequest);
-                if (!registerResult)
+                if (registerResult)
                 {
-                    return null;
+                    var member = new Member()
+                    {
+                        MemberId = "",
+                        FirstName = request.FirstName,
+                        LastName = request.LastName,
+                        Email = request.Email,
+                        UserName = request.Email,
+                        PassWord = password, // Store securely, hash if using Identity
+                        RegistrationDate = DateTime.Now,
+                    };
+                    _context.Members.Add(member);
                 }
-
-                var newUser = await _userManager.FindByEmailAsync(request.Email);
-                var roles = await _userManager.GetRolesAsync(newUser);
-                var claims = new[]
+                try
                 {
-            new Claim(ClaimTypes.Email, newUser.Email),
-            new Claim(ClaimTypes.GivenName, newUser.FirstName),
-            new Claim(ClaimTypes.Role, string.Join(";", roles))
-        };
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                    await _context.SaveChangesAsync();
 
-                var token = new JwtSecurityToken(_config["JWT:Issuer"],
-                    _config["JWT:Issuer"],
-                    claims,
-                    expires: DateTime.Now.AddHours(3),
-                    signingCredentials: creds);
+                    // Retrieve newly registered user
+                    var newUser = await _userManager.FindByEmailAsync(request.Email);
+                    var roles = await _userManager.GetRolesAsync(newUser);
 
-                return new { token = new JwtSecurityTokenHandler().WriteToken(token) };
+                    // Set EmailConfirmed = true
+                    newUser.EmailConfirmed = true;
+                    await _userManager.UpdateAsync(newUser);
+
+                    string memberId = await GetMemberIdByEmail(request.Email); // Use newly generated memberId
+                    var token = GenerateJwtToken(newUser, roles, memberId);
+
+                    return new { token };
+                }
+                catch (Exception ex)
+                {
+                    // Handle database save error appropriately (log, return error response, etc.)
+                    Console.WriteLine($"Error saving member: {ex.Message}");
+                    throw; // Rethrow or handle as appropriate
+                }
             }
         }
+
 
 
         public async Task<bool> ConfirmEmail(string otp)
@@ -274,7 +292,7 @@ namespace SWPSolution.Application.System.User
             if (result.Succeeded)
             {
                 // Assuming you have a DbContext or a repository to handle database operations
-                var appUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);   
+                var appUser = await _context.AppUsers.FirstOrDefaultAsync(u => u.Email == model.Email);   
                 var member = await _context.Members.FirstOrDefaultAsync(m => m.Email == model.Email);
 
                 if (appUser != null)
@@ -297,10 +315,10 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> Register(RegisterRequest request)
         {
-            var existingUsers = await _userManager.Users.Where(u => u.UserName == request.UserName &&
+            var existingUsers = _userManager.Users.Where(u => u.UserName == request.UserName &&
                 u.TemporaryPassword == request.Password &&
                 u.EmailConfirmed == false)
-    .ToListAsync();
+    .ToList();
             if (existingUsers.Any())
             {
                 foreach (var existingUser in existingUsers)
@@ -323,7 +341,7 @@ namespace SWPSolution.Application.System.User
                 TemporaryPassword = request.Password,
                 EmailConfirmed = false, // Ensure the email is marked as not confirmed
             };
-            var result = await _userManager.CreateAsync(user, request.Password);
+             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
             {
@@ -547,6 +565,47 @@ namespace SWPSolution.Application.System.User
             return new ApiSuccessResult<bool>();
         }
 
+
+        private string GenerateJwtToken(AppUser user, IList<string> roles, string memberId)
+        {
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Email, user.Email),
+        new Claim(ClaimTypes.GivenName, user.FirstName),
+        new Claim(ClaimTypes.Role, string.Join(";", roles)),
+        new Claim("member_id", memberId)
+    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                _config["JWT:Issuer"],
+                _config["JWT:Issuer"],
+                claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+
+         public ClaimsPrincipal ValidateToken(string jwtToken)
+        {
+            IdentityModelEventSource.ShowPII = true;
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidAudience = _configuration["JWT:Issuer"],
+                ValidIssuer = _configuration["JWT:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
+            };
+
+            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
+        }
+
+
         public async Task<string> ExtractMemberIdFromTokenAsync(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -572,21 +631,6 @@ namespace SWPSolution.Application.System.User
             var memberId = principal.FindFirst("member_id")?.Value;
 
             return memberId;
-        }
-
-        public ClaimsPrincipal ValidateToken(string jwtToken)
-        {
-            IdentityModelEventSource.ShowPII = true;
-
-            var validationParameters = new TokenValidationParameters
-            {
-                ValidateLifetime = true,
-                ValidAudience = _configuration["JWT:Issuer"],
-                ValidIssuer = _configuration["JWT:Issuer"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
-            };
-
-            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
     }
 }

@@ -3,14 +3,12 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SWPSolution.Data.Configuration;
-using SWPSolution.Data.Extension;
+using SWPSolution.Data.Enum;
 
 namespace SWPSolution.Data.Entities;
 
-public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, Guid>
+public partial class SWPSolutionDBContext : DbContext
 {
     public SWPSolutionDBContext()
     {
@@ -22,6 +20,10 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
     }
 
     public virtual DbSet<Address> Addresses { get; set; }
+
+    public virtual DbSet<AppRole> AppRoles { get; set; }
+
+    public virtual DbSet<AppUser> AppUsers { get; set; }
 
     public virtual DbSet<Blog> Blogs { get; set; }
 
@@ -39,22 +41,21 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<ProductImage> ProductImages { get; set; }
+
     public virtual DbSet<Promotion> Promotions { get; set; }
 
     public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<Staff> Staff { get; set; }
 
-    public virtual DbSet<ProductImage> ProductImages { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 
 
+
         => optionsBuilder.UseSqlServer("Data Source=mssql.recs.site;Initial Catalog=SWP_Project;User ID=sa;Password=Thomas1910@;Encrypt=True;Trust Server Certificate=True");
-
-
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -78,13 +79,11 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
         modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
-
-
         modelBuilder.Entity<Address>(entity =>
         {
             entity.HasKey(e => e.AddressId).HasName("PK__Address__CAA543F0AA445DBA");
 
-            entity.ToTable("Address", tb => tb.HasTrigger("trg_generate_address_id"));
+            entity.ToTable("Address");
 
             entity.Property(e => e.AddressId)
                 .HasMaxLength(10)
@@ -109,17 +108,31 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasConstraintName("fk_Address");
         });
 
-        modelBuilder.ApplyConfiguration(new AppUserConfig());
-        modelBuilder.ApplyConfiguration(new AppRoleConfig());
-        modelBuilder.ApplyConfiguration(new ProductImageConfig());
+        modelBuilder.Entity<AppRole>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Description)
+                .IsRequired()
+                .HasMaxLength(200);
+        });
 
-        
+        modelBuilder.Entity<AppUser>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.TemporaryPassword).IsRequired();
+        });
 
         modelBuilder.Entity<Blog>(entity =>
         {
             entity.HasKey(e => e.BlogId).HasName("PK__Blog__298A9610ECF917C0");
 
-            entity.ToTable("Blog", tb => tb.HasTrigger("trg_generate_blog_ID"));
+            entity.ToTable("Blog");
 
             entity.Property(e => e.BlogId)
                 .HasMaxLength(10)
@@ -133,7 +146,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasColumnName("content");
             entity.Property(e => e.DateCreate)
                 .HasColumnType("date")
-                .HasColumnName("dateCreate");
+                .HasColumnName("dataCreate");
             entity.Property(e => e.StaffId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -151,19 +164,20 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.CategoriesId).HasName("PK__Categori__92BFEBD24C3D480D");
 
-            entity.ToTable("Categories"); // Adjust table name if necessary
-
-            // Configure categories_ID property
             entity.Property(e => e.CategoriesId)
-                .HasMaxLength(10)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasColumnName("categories_ID");// Allow nulls
-
-            // Other properties
+                .HasColumnName("categories_ID");
             entity.Property(e => e.AgeRange).HasMaxLength(50);
-            entity.Property(e => e.BrandName).HasMaxLength(50).HasColumnName("brandName");
-            entity.Property(e => e.PackageType).HasMaxLength(50).HasColumnName("packageType");
-            entity.Property(e => e.Source).HasMaxLength(50).HasColumnName("source");
+            entity.Property(e => e.BrandName)
+                .HasMaxLength(50)
+                .HasColumnName("brandName");
+            entity.Property(e => e.PackageType)
+                .HasMaxLength(50)
+                .HasColumnName("packageType");
+            entity.Property(e => e.Source)
+                .HasMaxLength(50)
+                .HasColumnName("source");
             entity.Property(e => e.SubCategories).HasMaxLength(50);
         });
 
@@ -199,7 +213,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.OrderId).HasName("PK__Order__464665E13F0051AC");
 
-            entity.ToTable("Order", tb => tb.HasTrigger("trg_generate_order_id"));
+            entity.ToTable("Order");
 
             entity.Property(e => e.OrderId)
                 .HasMaxLength(10)
@@ -212,7 +226,10 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
             entity.Property(e => e.OrderDate)
                 .HasColumnType("date")
                 .HasColumnName("orderDate");
-            entity.Property(e => e.OrderStatus).HasColumnName("orderStatus");
+            entity.Property(e => e.OrderStatus)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("orderStatus");
             entity.Property(e => e.PromotionId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -228,40 +245,12 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasConstraintName("fk_order_promotion");
         });
 
-        modelBuilder.Entity<OrderDetail>(entity =>
-        {
-            entity.HasKey(e => e.OrderdetailId).HasName("PK__Order_de__59AD78598BE8175A");
-
-            entity.ToTable("Order_detail");
-
-            entity.Property(e => e.OrderdetailId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("orderdetail_ID");
-            entity.Property(e => e.OrderId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("order_ID");
-            entity.Property(e => e.ProductId)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("product_ID");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.OrderId)
-                .HasConstraintName("fk_orderdetail_order");
-
-            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("fk_orderdetail_product");
-        });
 
         modelBuilder.Entity<Payment>(entity =>
         {
             entity.HasKey(e => e.PaymentId).HasName("PK__Payment__ED10C4420D3DCCF4");
 
-            entity.ToTable("Payment", tb => tb.HasTrigger("trg_generate_payment_ID"));
+            entity.ToTable("Payment");
 
             entity.Property(e => e.PaymentId)
                 .HasMaxLength(10)
@@ -290,7 +279,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.PreorderId).HasName("PK__PreOrder__C55D7EA295C14F89");
 
-            entity.ToTable("PreOrder", tb => tb.HasTrigger("trg_generate_preorder_ID"));
+            entity.ToTable("PreOrder");
 
             entity.Property(e => e.PreorderId)
                 .HasMaxLength(10)
@@ -322,15 +311,14 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.ProductId).HasName("PK__Product__470175FDED17C147");
 
-            entity.ToTable("Product", tb => tb.HasTrigger("trg_generate_product_id"));
+            entity.ToTable("Product");
 
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
-                .HasColumnName("product_ID")
-                .ValueGeneratedOnAdd();
+                .HasColumnName("product_ID");
             entity.Property(e => e.CategoriesId)
-                .HasMaxLength(10)
+                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("categories_ID");
             entity.Property(e => e.Description).HasMaxLength(255);
@@ -348,11 +336,27 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .HasConstraintName("fk_Product_categories");
         });
 
+        modelBuilder.Entity<ProductImage>(entity =>
+        {
+            entity.Property(e => e.Caption)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.ImagePath)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.ProductId)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Product).WithMany(p => p.ProductImages).HasForeignKey(d => d.ProductId);
+        });
+
         modelBuilder.Entity<Promotion>(entity =>
         {
             entity.HasKey(e => e.PromotionId).HasName("PK__Promotio__2C45E8433ED651C3");
 
-            entity.ToTable("Promotion", tb => tb.HasTrigger("trg_generate_promotion_id"));
+            entity.ToTable("Promotion");
 
             entity.Property(e => e.PromotionId)
                 .HasMaxLength(10)
@@ -370,7 +374,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.ReviewId).HasName("PK__Review__608B39D8185D9A34");
 
-            entity.ToTable("Review", tb => tb.HasTrigger("trg_generate_review_ID"));
+            entity.ToTable("Review");
 
             entity.Property(e => e.ReviewId)
                 .HasMaxLength(10)
@@ -404,7 +408,7 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
         {
             entity.HasKey(e => e.StaffId).HasName("PK__staff__196CD194F520350A");
 
-            entity.ToTable("staff", tb => tb.HasTrigger("trg_generate_staff_id"));
+            entity.ToTable("staff");
 
             entity.Property(e => e.StaffId)
                 .HasMaxLength(10)
@@ -433,55 +437,13 @@ public partial class SWPSolutionDBContext : IdentityDbContext<AppUser, AppRole, 
                 .IsUnicode(false)
                 .HasColumnName("username");
         });
-        modelBuilder.HasSequence("address_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("blog_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("categories_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
         modelBuilder.HasSequence("member_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("order_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("payment_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("preorder_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("product_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("promotion_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("review_id_seq")
-            .HasMin(1L)
-            .HasMax(999L)
-            .IsCyclic();
-        modelBuilder.HasSequence("staff_id_seq")
             .HasMin(1L)
             .HasMax(999L)
             .IsCyclic();
 
         OnModelCreatingPartial(modelBuilder);
-        modelBuilder.Seed();
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
 }

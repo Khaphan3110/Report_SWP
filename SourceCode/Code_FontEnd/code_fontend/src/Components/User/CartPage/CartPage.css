@@ -160,3 +160,25 @@
   width: 100%;
   max-width: 200px;
 }
+
+.cart-blank{
+  text-align: center;
+}
+
+.button-cart-empty{
+  background-color: transparent;
+  border: 1px solid #ff6f61;
+  border-radius: 25px;
+  height: 45px;
+  width: 200px;
+}
+
+.button-cart-empty a button {
+   background-color: transparent;
+  
+}
+
+.button-cart-empty:hover{
+  background-color: #ff6f61;
+  color: #f9f9f9;
+}

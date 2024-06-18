@@ -65,7 +65,7 @@ const AddressPage = () => {
               <Card.Text>Xin chào, Phan Kha</Card.Text>
               <Card.Link as={Link} to="/account">Thông tin tài khoản</Card.Link>
               <Card.Link as={Link} to="/addresses">Số địa chỉ</Card.Link>
-              <Card.Link href="#">Đăng xuất</Card.Link>
+              <Link to={"/logout"}>Đăng xuất</Link>
             </Card.Body>
           </Card>
         </Col>

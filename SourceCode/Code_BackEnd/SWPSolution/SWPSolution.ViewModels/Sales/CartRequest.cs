@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWPSolution.ViewModels.Catalog.Sales
+namespace SWPSolution.ViewModels.Sales
 {
-    public class CheckoutVM
+    public class CartRequest
     {
-       
+
     }
 }

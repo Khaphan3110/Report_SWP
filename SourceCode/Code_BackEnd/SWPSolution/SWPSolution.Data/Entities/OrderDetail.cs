@@ -2,20 +2,32 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
 public partial class OrderDetail
 {
-    public string OrderdetailId { get; set; }
+    [Required]
+    public string OrderDetailId { get; set; }
 
-    public string ProductId { get; set; }
-
+    [Required]
     public string OrderId { get; set; }
 
-    public int? Quantity { get; set; }
+    [Required]
+    public string ProductId { get; set; }
 
-    public virtual Order Order { get; set; }
+    [Required]
+    [Range(1, int.MaxValue, ErrorMessage = "Quantity must be at least 1.")]
+
+    public int Quantity { get; set; }
+
+    public float Price { get; set; }
+
+    
 
     public virtual Product Product { get; set; }
+    [JsonIgnore]
+    public virtual Order Order { get; set; }
 }
