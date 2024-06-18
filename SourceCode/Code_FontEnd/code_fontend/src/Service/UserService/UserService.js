@@ -76,10 +76,15 @@ export const useLoginGoogle = async ( useGoogleLogin ) => {
   }
 }
 
-// export const getUserInfor = async () => {
-//   try {
-//     const res = await request.Post()
-//   } catch (error) {
-//     console.log("lỗi lấy thông tin  ng  dùng",error)
-//   }
-// }
+export const getUserInfor = async (TokenUser) => {
+  try {
+    const res = await request.Post("Users/GetMemberByToken",TokenUser,{
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
+    return res
+  } catch (error) {
+    console.log("lỗi lấy thông tin người dùng",error)
+  }
+}

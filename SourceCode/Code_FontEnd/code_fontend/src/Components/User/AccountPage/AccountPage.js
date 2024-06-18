@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./AccountPage.css";
+import { getUserInfor } from "../../../Service/UserService/UserService";
 const AccountPage = () => {
+  const navigator = useNavigate();
+  const [userInfor, setUserInfor] = useState("");
+  const [userToken, setuserToken] = useState(localStorage.getItem("userToken"));
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [address, setAddress] = useState("");
   const location = useLocation();
 
+  useEffect(() => {
+    const resUser = async () => {
+      const resUserInfor = await getUserInfor(userToken);
+      setUserInfor(resUserInfor.data);
+    };
+    resUser();
+  }, [userToken]);
+
   const handleAddressModalClose = () => setShowAddressModal(false);
   const handleAddressModalShow = () => setShowAddressModal(true);
+
   const handleAddressSubmit = (event) => {
     event.preventDefault();
     // Xử lý việc nhập địa chỉ tại đây
@@ -19,7 +32,7 @@ const AccountPage = () => {
   };
 
   const handleLogout = () => {
-    
+    navigator("/logout");
   };
 
   return (
@@ -30,7 +43,10 @@ const AccountPage = () => {
           <Card>
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <ListGroup variant="flush">
-              <ListGroup.Item>Xin chào, Phan Kha!</ListGroup.Item>
+              <ListGroup.Item>
+                Xin chào, {userInfor.member.lastName}{" "}
+                {userInfor.member.firstName}!
+              </ListGroup.Item>
               <ListGroup.Item>
                 {location.pathname === "/account" ? (
                   "Thông tin tài khoản"
@@ -55,11 +71,11 @@ const AccountPage = () => {
             <Card.Header>TÀI KHOẢN</Card.Header>
             <Card.Body>
               <Card.Text>
-                <strong>Tên tài khoản:</strong> Phan Kha
+                <strong>Tên tài khoản:</strong> {userInfor.member.userName}
                 <br />
                 <strong>Địa chỉ:</strong> , Vietnam
                 <br />
-                <strong>Điện thoại:</strong> 0913676651
+                <strong>Điện thoại:</strong> {userInfor.member.phoneNumber}
                 <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>
