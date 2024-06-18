@@ -39,6 +39,8 @@ namespace SWPSolution.Application.System.User
 
         Task<MemberAddressVM> GetMemberAddressById(string memberId);
 
+        Task<List<MemberAddressVM>> GetAllAddresses();
+
         Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request);
 
         Task<bool> AddMemberAddressAsync(string memberId, AddAddressRequest request);
@@ -51,12 +53,12 @@ namespace SWPSolution.Application.System.User
 
         ClaimsPrincipal ValidateToken(string jwtToken);
 
-       // Task<StaffInfoVM> GetStaffByIdAsync(string staffId);
+        //Task<StaffInfoVM> GetStaffById(string staffId);
 
-       //Task<List<StaffInfoVM>> GetAllStaffsAsync();
+        //Task<List<StaffInfoVM>> GetAllStaffs();
 
-       //Task<bool> UpdateStaffAsync(string staffId, UpdateStaffRequest request);
+        //Task<bool> UpdateStaff(string staffId, UpdateStaffRequest request);
 
-       //Task<bool> DeleteStaffAsync(string staffId);
+        //Task<bool> DeleteStaff(string staffId);
     }
 }
