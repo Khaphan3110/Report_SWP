@@ -1,23 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./PaymentPage.css";
+import { useStore } from "../../../Store";
 
 const PaymentPage = () => {
-  const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-    if (storedCartItems) {
-      setCartItems(storedCartItems);
-    }
-  }, []);
+  const [state] = useStore();
+  const [statePaymentMethod,setstatePaymentMethod] = useState(null);
+  
+ 
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-  const finalTotal = totalPrice;
+  const handPaymentOCD = (event) => {
+    setstatePaymentMethod(event.target.value)
+  }
 
+  const handPaymentVNP = (event) => {
+    setstatePaymentMethod(event.target.value)
+  }
+
+  const handlePayment  = async () => {
+    //  if(statePaymentMethod === "cod" ){
+    //     //  const payMentOCD = await  
+    //  } else if(statePaymentMethod === "vnpay"){
+
+    //  }
+  }
   return (
     <div className="payment-page container">
       <div className="breadcrumb">
@@ -30,11 +37,11 @@ const PaymentPage = () => {
             <h2>Phương thức thanh toán</h2>
             <div className="payment-method">
               <label>
-                <input type="radio" name="payment" value="cod" />
+                <input type="radio" name="payment" value="cod" onClick={handPaymentOCD} />
                 Thanh toán khi giao hàng (COD)
               </label>
               <label>
-                <input type="radio" name="payment" value="vnpay" />
+                <input type="radio" name="payment" value="vnpay" onClick={handPaymentVNP}/>
                 Thẻ ATM/Visa/Master/JCB/QR Pay qua cổng VNPAY
               </label>
               <img
@@ -48,11 +55,11 @@ const PaymentPage = () => {
         </div>
         <div className="right-section">
           <h2>Tóm tắt đơn hàng</h2>
-          {cartItems.map((item) => (
-            <div className="product-summary" key={item.id}>
-              <img src={item.image} alt={item.name} />
+          {state.cartItems.map((item,index) => (
+            <div className="product-summary" key={index}>
+              <img src={item.image} alt={item.productName} />
               <div className="product-info">
-                <p>{item.name}</p>
+                <p>{item.productName}</p>
                 <p>
                   {item.price.toLocaleString()}₫ x {item.quantity}
                 </p>
@@ -65,14 +72,14 @@ const PaymentPage = () => {
           </div>
           <div className="total-price">
             <span>Tạm tính:</span>
-            <span>{totalPrice.toLocaleString()}₫</span>
+            <span>{state.total.toLocaleString()}₫</span>
           </div>
 
           <div className="total-price final-total">
-            <span>Tổng cộng:</span>
-            <span>{finalTotal.toLocaleString()}₫</span>
+            <span>Tổng cộng: </span>
+            <span>{state.total.toLocaleString()} ₫</span>
           </div>
-          <button className="complete-order-button">Hoàn tất đơn hàng</button>
+          <button className="complete-order-button" onClick={handlePayment}>Hoàn tất đơn hàng</button>
         </div>
       </div>
     </div>

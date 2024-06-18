@@ -19,6 +19,7 @@ export const authenEmailForgotPassword = async ( emailForgot ) => {
     const res = await request.Post("Users/ForgotPassword", emailForgot, {
       headers: {
         "Content-Type": "multipart/form-data",
+         
       },
     });
     return res;
@@ -90,16 +91,51 @@ export const getUserInfor = async (TokenUser) => {
   
 }
 
-export const userAddAdress = async (TokenUser) => {
+export const userAddAdress = async (TokenUser,userAdress) => {
+  const token = TokenUser.slice(1,-1);
   try {
-    const res = await request.Post("Users/GetMemberByToken",TokenUser,{
+    const res = await request.Post(`Users/AddAddressByToken?jwtToken=${token}`,userAdress,{
       headers:{
-        'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
       }
     })
     return res
   } catch (error) {
-    console.log("lỗi lấy thông tin người dùng",error)
+    console.log("lỗi nhập address  người dùng",error)
+  }
+  
+}
+
+
+export const getUserAddAdress = async (TokenUser) => {
+  const token = TokenUser.slice(1,-1);
+  try {
+    const res = await request.Get(`Users/GetAddressByToken?jwtToken=${token}`,{
+      headers:{
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    return res
+  } catch (error) {
+    console.log("lỗi lấy adress  người dùng",error)
+  }
+  
+}
+
+export const updateUserAdress = async (TokenUser,userAdress) => {
+  const token = TokenUser.slice(1,-1);
+  try {
+    const res = await request.Get(`Users/UpdateAddressByToken?jwtToken=${token}`,userAdress,{
+      headers:{
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    return res
+  } catch (error) {
+    console.log("lỗi update adress  người dùng",error)
   }
   
 }

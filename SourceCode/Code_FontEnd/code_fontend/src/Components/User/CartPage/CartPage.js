@@ -58,11 +58,11 @@ const CartPage = () => {
                 <h2>Giỏ hàng</h2>
                 {state.cartItems.map((item, index) => (
                   <div className="cart-item" key={index}>
-                    <img src={item.image} alt={item.name} />
+                    <img src={item.image} alt={item.productName} />
                     <div className="cart-item-details">
-                      <h3>{item.name}</h3>
+                      <h3>{item.productName}</h3>
                       <p className="cart-item-price">
-                        {item.price}₫
+                        {item.price.toLocaleString()}₫
                       </p>
                       <div className="quantity-controls-cartPage">
                         <button
@@ -96,8 +96,8 @@ const CartPage = () => {
                 </div>
                 <div className="total-price">
                   <span>TỔNG CỘNG: </span>
-                  <span>{total.toLocaleString()}₫</span>
-                  <span>(Đã bao gồm VAT nếu có)</span>
+                  <span>{state.total.toLocaleString()} ₫</span>
+                  <p>(Đã bao gồm VAT nếu có)</p>
                 </div>
                 <div className="discount-code">
                   <span>Mã giảm giá</span>

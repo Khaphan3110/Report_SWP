@@ -1,8 +1,8 @@
 import * as request from "../../utility/CustomAxios";
 //Cate get all
-export const imageGetAll = async () => {
+export const imageGetAll = async (productID) => {
   try {
-    const res = await request.Get("Product/PM0624001/images");
+    const res = await request.Get(`Product/${productID}/images`);
     return res;
   } catch (error) {
     console.log("Error product get all", error);
