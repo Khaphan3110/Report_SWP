@@ -454,6 +454,12 @@ namespace SWPSolution.Application.System.User
         public async Task<MemberAddressVM> GetMemberAddressById(string memberId)
         {
             var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
+
+            if (address == null)
+            {
+                throw new KeyNotFoundException($"Address for member ID {memberId} not found.");
+            }
+
             return new MemberAddressVM
             {
                 House_Number = address.HouseNumber,
@@ -586,5 +592,59 @@ namespace SWPSolution.Application.System.User
 
             return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
+
+        //public async Task<StaffInfoVM> GetStaffByIdAsync(string staffId)
+        //{
+        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    if (staff == null) return null;
+
+        //    return new StaffInfoVM
+        //    {
+        //        Role = staff.Role,
+        //        UserName = staff.Username,
+        //        Email = staff.Email,
+        //        FullName = staff.FullName,
+        //        PhoneNumber = staff.Phone
+        //    };
+        //}
+
+        //public async Task<List<StaffInfoVM>> GetAllStaffsAsync()
+        //{
+        //    var staff = await _context.Staff
+        //                                .Select(m => new StaffInfoVM
+        //                                {
+        //                                    Role = m.Role,
+        //                                    UserName = m.Username,
+        //                                    Email = m.Email,
+        //                                    FullName = m.FullName,
+        //                                    PhoneNumber = m.Phone
+        //                                })
+        //                                .ToListAsync();
+        //    return staff;
+        //}
+
+        //public async Task<bool> UpdateStaffAsync(string staffId, UpdateStaffRequest request)
+        //{
+        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    if (staff == null) return false;
+
+        //    if (!string.IsNullOrEmpty(request.Password))
+        //        staff.Password = request.Password;
+
+        //    _context.Staff.Update(staff);
+        //    await _context.SaveChangesAsync();
+
+        //    return true;
+        //}
+        //public async Task<bool> DeleteStaffAsync(string staffId)
+        //{
+        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    if (staff == null) return false;
+
+        //    _context.Staff.Remove(staff);
+        //    await _context.SaveChangesAsync();
+
+        //    return true;
+        //}
     }
 }

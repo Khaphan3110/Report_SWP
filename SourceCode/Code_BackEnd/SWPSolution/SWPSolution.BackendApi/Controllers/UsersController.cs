@@ -200,6 +200,19 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
+        [HttpDelete("DeleteMember/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var result = await _userService.DeleteUserAsync(id);
+            if (!result)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            return Ok(new { message = "User deleted successfully" });
+        }
+
+        [Authorize]
         [HttpGet("GetAddress/{id}/address")]
         public async Task<IActionResult> GetMemberAddressById(string id)
         {
@@ -244,19 +257,6 @@ namespace SWPSolution.BackendApi.Controllers
             }
 
             return Ok(new { message = "Address added successfully" });
-        }
-
-        [Authorize]
-        [HttpDelete("DeleteUser/{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
-        {
-            var result = await _userService.DeleteUserAsync(id);
-            if (!result)
-            {
-                return NotFound(new { message = "User not found" });
-            }
-
-            return Ok(new { message = "User deleted successfully" });
         }
 
         [Authorize]
@@ -307,6 +307,7 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         [HttpPut("UpdateMemberByToken")]
         public async Task<IActionResult> UpdateMemberByToken([FromQuery] string jwtToken, [FromBody] UpdateMemberRequest request)
@@ -359,6 +360,37 @@ namespace SWPSolution.BackendApi.Controllers
                 }
 
                 return Ok(new { message = "User deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPost("AddAddressByToken")]
+        public async Task<IActionResult> AddAddressByToken([FromQuery] string jwtToken, [FromBody] AddAddressRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+                if (memberId == null)
+                {
+                    return BadRequest(new { message = "Invalid token." });
+                }
+
+                var result = await _userService.AddMemberAddressAsync(memberId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Member not found" });
+                }
+
+                return Ok(new { message = "Address added successfully" });
             }
             catch (SecurityTokenException ex)
             {
@@ -452,5 +484,68 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
+        //[Authorize]
+        //[HttpGet("GetAllStaffs")]
+        //public async Task<IActionResult> GetAllStaffs()
+        //{
+        //    var staff = await _userService.GetAllStaffsAsync();
+        //    return Ok(staff);
+        //}
+
+        //[Authorize]
+        //[HttpGet("GetStaffs/{id}")]
+        //public async Task<IActionResult> GetStaffById(string id)
+        //{
+        //    var staff = await _userService.GetStaffByIdAsync(id);
+        //    if (staff == null)
+        //    {
+        //        return NotFound(new { message = "Staff not found" });
+        //    }
+        //    return Ok(staff);
+        //}
+
+        //[HttpPut("UpdateStaff")]
+        //public async Task<IActionResult> UpdateStaff([FromQuery] string jwtToken, [FromBody] UpdateMemberRequest request)
+        //{
+        //    if (string.IsNullOrEmpty(jwtToken))
+        //    {
+        //        return BadRequest(new { message = "Token is required." });
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    try
+        //    {
+        //        var staffId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+        //        var result = await _userService.UpdateMemberAsync(staffId, request);
+        //        if (!result)
+        //        {
+        //            return NotFound(new { message = "Staff not found" });
+        //        }
+
+        //        return Ok(new { message = "Staff updated successfully" });
+        //    }
+        //    catch (SecurityTokenException ex)
+        //    {
+        //        return BadRequest(new { message = ex.Message });
+        //    }
+        //}
+
+        //[Authorize]
+        //[HttpDelete("DeleteStaff/{id}")]
+        //public async Task<IActionResult> DeleteStaff(string id)
+        //{
+        //    var result = await _userService.DeleteStaffAsync(id);
+        //    if (!result)
+        //    {
+        //        return NotFound(new { message = "Staff not found" });
+        //    }
+
+        //    return Ok(new { message = "Staff deleted successfully" });
+        //}
     }
 }

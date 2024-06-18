@@ -50,5 +50,13 @@ namespace SWPSolution.Application.System.User
         Task<string> ExtractMemberIdFromTokenAsync(string token);
 
         ClaimsPrincipal ValidateToken(string jwtToken);
+
+       // Task<StaffInfoVM> GetStaffByIdAsync(string staffId);
+
+       //Task<List<StaffInfoVM>> GetAllStaffsAsync();
+
+       //Task<bool> UpdateStaffAsync(string staffId, UpdateStaffRequest request);
+
+       //Task<bool> DeleteStaffAsync(string staffId);
     }
 }
