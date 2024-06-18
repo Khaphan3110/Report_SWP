@@ -14,6 +14,7 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
+using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
@@ -67,6 +68,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
 
 
             //Add config for required email
