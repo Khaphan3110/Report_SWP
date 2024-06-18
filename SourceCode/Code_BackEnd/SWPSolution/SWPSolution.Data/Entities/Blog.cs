@@ -15,7 +15,7 @@ public partial class Blog
 
     public string Categories { get; set; }
 
-    public DateTime? DateCreate { get; set; }
+    public DateTime? DataCreate { get; set; }
 
     public string StaffId { get; set; }
 

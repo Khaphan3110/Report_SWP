@@ -119,6 +119,7 @@ namespace SWPSolution.Application.Sales
                     TotalAmount = c.TotalAmount,
                     OrderStatus = c.OrderStatus,
                     OrderDate = c.OrderDate,
+                    OrderDetails = c.OrderDetails,
 
                 })
                 .ToList();

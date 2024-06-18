@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SWPSolution.Data.Enum;
 
 namespace SWPSolution.Data.Entities;
 
@@ -52,9 +51,10 @@ public partial class SWPSolutionDBContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-KTRKQV7\\SQLEXPRESS;Initial Catalog=SWP_Project;Integrated Security=True;Trust Server Certificate=True");
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<AppUser>()
             .Property(u => u.EmailVerificationCode)
             .IsRequired(false);
@@ -78,7 +78,9 @@ public partial class SWPSolutionDBContext : DbContext
         {
             entity.HasKey(e => e.AddressId).HasName("PK__Address__CAA543F0AA445DBA");
 
-            entity.ToTable("Address");
+            entity.ToTable("Address", tb => tb.HasTrigger("trg_generate_address_id"));
+
+            entity.HasIndex(e => e.MemberId, "IX_Address_member_ID");
 
             entity.Property(e => e.AddressId)
                 .HasMaxLength(10)
@@ -129,6 +131,8 @@ public partial class SWPSolutionDBContext : DbContext
 
             entity.ToTable("Blog");
 
+            entity.HasIndex(e => e.StaffId, "IX_Blog_staff_ID");
+
             entity.Property(e => e.BlogId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -139,7 +143,7 @@ public partial class SWPSolutionDBContext : DbContext
             entity.Property(e => e.Content)
                 .HasMaxLength(255)
                 .HasColumnName("content");
-            entity.Property(e => e.DateCreate)
+            entity.Property(e => e.DataCreate)
                 .HasColumnType("date")
                 .HasColumnName("dataCreate");
             entity.Property(e => e.StaffId)
@@ -210,6 +214,10 @@ public partial class SWPSolutionDBContext : DbContext
 
             entity.ToTable("Order");
 
+            entity.HasIndex(e => e.PromotionId, "IX_Order_Promotion_ID");
+
+            entity.HasIndex(e => e.MemberId, "IX_Order_member_id");
+
             entity.Property(e => e.OrderId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -222,6 +230,7 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("orderDate");
             entity.Property(e => e.OrderStatus)
+                .IsRequired()
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("orderStatus");
@@ -240,12 +249,46 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasConstraintName("fk_order_promotion");
         });
 
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.HasIndex(e => e.OrderId, "IX_OrderDetails_OrderId");
+
+            entity.HasIndex(e => e.ProductId, "IX_OrderDetails_ProductId");
+
+            entity.Property(e => e.OrderId)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("order_ID");
+            entity.Property(e => e.ProductId)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("product_ID");
+            entity.Property(e => e.OrderDetailId)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("orderdetail_ID");
+            entity.Property(e => e.Price)
+            .IsRequired()
+            .HasColumnName("Price");
+            entity.Property(e => e.Quantity)
+            .IsRequired()
+            .HasColumnName("Quantity");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails).HasForeignKey(d => d.OrderId);
+
+            entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails).HasForeignKey(d => d.ProductId);
+        });
 
         modelBuilder.Entity<Payment>(entity =>
         {
             entity.HasKey(e => e.PaymentId).HasName("PK__Payment__ED10C4420D3DCCF4");
 
             entity.ToTable("Payment");
+
+            entity.HasIndex(e => e.OrderId, "IX_Payment_order_ID");
 
             entity.Property(e => e.PaymentId)
                 .HasMaxLength(10)
@@ -275,6 +318,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.PreorderId).HasName("PK__PreOrder__C55D7EA295C14F89");
 
             entity.ToTable("PreOrder");
+
+            entity.HasIndex(e => e.MemberId, "IX_PreOrder_member_ID");
+
+            entity.HasIndex(e => e.ProductId, "IX_PreOrder_product_ID");
 
             entity.Property(e => e.PreorderId)
                 .HasMaxLength(10)
@@ -308,6 +355,8 @@ public partial class SWPSolutionDBContext : DbContext
 
             entity.ToTable("Product");
 
+            entity.HasIndex(e => e.CategoriesId, "IX_Product_categories_ID");
+
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -333,6 +382,8 @@ public partial class SWPSolutionDBContext : DbContext
 
         modelBuilder.Entity<ProductImage>(entity =>
         {
+            entity.HasIndex(e => e.ProductId, "IX_ProductImages_ProductId");
+
             entity.Property(e => e.Caption)
                 .IsRequired()
                 .HasMaxLength(200);
@@ -351,7 +402,7 @@ public partial class SWPSolutionDBContext : DbContext
         {
             entity.HasKey(e => e.PromotionId).HasName("PK__Promotio__2C45E8433ED651C3");
 
-            entity.ToTable("Promotion");
+            entity.ToTable("Promotion", tb => tb.HasTrigger("trg_generate_promotion_id"));
 
             entity.Property(e => e.PromotionId)
                 .HasMaxLength(10)
@@ -370,6 +421,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.ReviewId).HasName("PK__Review__608B39D8185D9A34");
 
             entity.ToTable("Review");
+
+            entity.HasIndex(e => e.MemberId, "IX_Review_member_ID");
+
+            entity.HasIndex(e => e.ProductId, "IX_Review_product_ID");
 
             entity.Property(e => e.ReviewId)
                 .HasMaxLength(10)

@@ -3,36 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\sales\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\catalog\\categories\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\categories\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\sales\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\enum\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\enum\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\catalog\\categories\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\categories\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\migrations\\20240617163320_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\migrations\\20240617163320_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\migrations\\swpsolutiondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\migrations\\swpsolutiondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\entities\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,111 +27,48 @@
       "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\entities\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\approle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\system\\admin\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\admin\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\migrations\\20240618095135_fixappuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\migrations\\20240618095135_fixappuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\system\\admin\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\admin\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.viewmodels\\system\\users\\ordervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\system\\users\\ordervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\catalog\\sales\\orderdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\catalog\\sales\\orderdetailvm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\sales\\orderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\sales\\orderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\entities\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\catalog\\product\\manageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\product\\manageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\enum\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\enum\\orderstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\sales\\orderdetailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\sales\\orderdetailrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\sales\\cartrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\sales\\cartrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\sales\\updateorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\sales\\updateorderstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\jwt\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\jwt\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\khanh\\AppData\\Local\\SourceServer\\4440f69d54a11e6be7404582b500de3c5f0c6a9704620a27cf25cd2cb5ec3edd\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\system\\users\\addorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\system\\users\\addorderrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\system\\users\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\system\\users\\orderupdaterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\migrations\\20240618094659_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\migrations\\20240618094659_createdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.data\\entities\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\entities\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\catalog\\product\\publicproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\product\\publicproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\system\\user\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.viewmodels\\sales\\checkoutrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|solutionrelative:swpsolution.viewmodels\\sales\\checkoutrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618094043_createDB.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:SWPSolution.Data\\Migrations\\20240618094043_createDB.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -193,94 +114,79 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\CategoryController.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\CategoryController.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAmwF4AAAAJAAAA",
+              "DocumentIndex": 3,
+              "Title": "OrderDetail.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\OrderDetail.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\OrderDetail.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\OrderDetail.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\OrderDetail.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAAABcAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:35:17.602Z",
+              "WhenOpened": "2024-06-18T10:11:19.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\ProductController.cs",
+              "ViewState": "AQIAADIAAAAAAAAAAAA0wD0AAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:53:00.854Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "SWPSolutionDBContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\SWPSolutionDBContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\SWPSolutionDBContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\SWPSolutionDBContextModelSnapshot.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Migrations\\SWPSolutionDBContextModelSnapshot.cs",
-              "ViewState": "AQIAAK8BAAAAAAAAAAAjwJMBAAAhAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Program.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Program.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Program.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Program.cs",
+              "ViewState": "AQIAAH8AAAAAAAAAAAAcwIcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:30:56.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CategoryService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Categories\\CategoryService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Categories\\CategoryService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Categories\\CategoryService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Catalog\\Categories\\CategoryService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T10:13:20.642Z",
+              "WhenOpened": "2024-06-18T10:02:49.536Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\OrderService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Sales\\OrderService.cs",
-              "ViewState": "AQIAAGgAAAAAAAAAAAAwwG0AAAAUAAAA",
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\UserService.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs*",
+              "RelativeToolTip": "SWPSolution.Application\\System\\User\\UserService.cs*",
+              "ViewState": "AQIAAA0CAAAAAAAAAAAowDMCAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:37:27.257Z",
+              "WhenOpened": "2024-06-18T09:53:00.864Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IOrderService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IOrderService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\IOrderService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IOrderService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Sales\\IOrderService.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAWwBEAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:36:28.528Z",
-              "EditorCaption": ""
+              "DocumentIndex": 14,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
+              "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAACYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-18T09:41:07.985Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ManageProductService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
-              "ViewState": "AQIAAC0BAAAAAAAAAAAUwBkBAAAqAAAA",
+              "DocumentIndex": 16,
+              "Title": "20240618094043_createDB.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618094043_createDB.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\20240618094043_createDB.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618094043_createDB.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Migrations\\20240618094043_createDB.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T19:35:53.19Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Order.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Order.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Order.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Entities\\Order.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAgAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:23:59.766Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T09:40:43.549Z"
             },
             {
               "$type": "Document",
@@ -290,373 +196,137 @@
               "RelativeDocumentMoniker": "SWPSolution.Application\\System\\Admin\\AdminService.cs",
               "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\Admin\\AdminService.cs",
               "RelativeToolTip": "SWPSolution.Application\\System\\Admin\\AdminService.cs",
-              "ViewState": "AQIAAMkAAAAAAAAAAAAjwNIAAAAYAAAA",
+              "ViewState": "AQIAAIMAAAAAAAAAAAAjwIYAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:36:59.975Z",
+              "WhenOpened": "2024-06-18T09:39:10.898Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAcwCsAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:02:15.362Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ICategoryService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Categories\\ICategoryService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Categories\\ICategoryService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Categories\\ICategoryService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Catalog\\Categories\\ICategoryService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:36:42.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "20240617163320_createDB.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240617163320_createDB.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\20240617163320_createDB.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240617163320_createDB.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Migrations\\20240617163320_createDB.cs",
-              "ViewState": "AQIAAOwAAAAAAAAAAAAjwPsAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T16:33:20.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\ProductController.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\ProductController.cs",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAIwD0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T10:14:15.83Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\AdminController.cs",
-              "ViewState": "AQIAAJkAAAAAAAAAAAAWwKQAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:28:05.963Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SWPSolutionDBContext.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAIA2wCEAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T20:34:46.962Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "IAdminService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\Admin\\IAdminService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\Admin\\IAdminService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\Admin\\IAdminService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\System\\Admin\\IAdminService.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAIA6wCEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:28:23.511Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "OrderDetail.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\OrderDetail.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\OrderDetail.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\OrderDetail.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Entities\\OrderDetail.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAwwB0AAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:19:24.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\UserService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\System\\User\\UserService.cs",
-              "ViewState": "AQIAAHIAAAAAAAAAAAAcwH0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T19:25:43.585Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "OrderDetailVM.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Catalog\\Sales\\OrderDetailVM.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Catalog\\Sales\\OrderDetailVM.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Catalog\\Sales\\OrderDetailVM.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Catalog\\Sales\\OrderDetailVM.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:18:50.514Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "OrderVM.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\OrderVM.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\OrderVM.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\OrderVM.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\OrderVM.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAkwBgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:04:46.018Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "OrderRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\OrderRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\OrderRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\OrderRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\OrderRequest.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:35:05.73Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Category.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Category.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Category.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Entities\\Category.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T18:05:06.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "UpdateOrderStatusRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\UpdateOrderStatusRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\UpdateOrderStatusRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\UpdateOrderStatusRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\UpdateOrderStatusRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:42:26.753Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 2,
               "Title": "OrderStatus.cs",
               "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Enum\\OrderStatus.cs",
               "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Enum\\OrderStatus.cs",
               "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Enum\\OrderStatus.cs",
               "RelativeToolTip": "SWPSolution.ViewModels\\Enum\\OrderStatus.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T17:15:01.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "OrderDetailRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\OrderDetailRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\OrderDetailRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\OrderDetailRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\OrderDetailRequest.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAuwBEAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:11:40.957Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAcwD8AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T19:48:29.06Z",
+              "WhenOpened": "2024-06-18T09:39:01.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "CartRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\CartRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\CartRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\CartRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\CartRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\OrderService.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\Sales\\OrderService.cs",
+              "ViewState": "AQIAAGkAAAAAAAAAAAAswHkAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T14:34:46.322Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "JwtHelper.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\JWT\\JwtHelper.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\JWT\\JwtHelper.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\JWT\\JwtHelper.cs",
-              "RelativeToolTip": "SWPSolution.Application\\JWT\\JwtHelper.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAcwCQAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:32:06.606Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\AppData\\Local\\SourceServer\\4440f69d54a11e6be7404582b500de3c5f0c6a9704620a27cf25cd2cb5ec3edd\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\4440f69d54a11e6be7404582b500de3c5f0c6a9704620a27cf25cd2cb5ec3edd\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "ToolTip": "C:\\Users\\khanh\\AppData\\Local\\SourceServer\\4440f69d54a11e6be7404582b500de3c5f0c6a9704620a27cf25cd2cb5ec3edd\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\AppData\\Local\\SourceServer\\4440f69d54a11e6be7404582b500de3c5f0c6a9704620a27cf25cd2cb5ec3edd\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\UserService.cs",
-              "ViewState": "AQIAACgBAAAAAAAAAAAcwDMBAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T20:46:26.847Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "SWPSolution.AdminApp\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAABMAAAAAAAAAAAAAAB8AAABZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-15T18:36:56.139Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "AddOrderRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\AddOrderRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\AddOrderRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\AddOrderRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\AddOrderRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:37:56.417Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "OrderUpdateRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\OrderUpdateRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\OrderUpdateRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\OrderUpdateRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\OrderUpdateRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-15T18:38:55.45Z",
+              "WhenOpened": "2024-06-18T09:38:18.673Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
-              "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAClAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-15T18:43:46Z"
+              "DocumentIndex": 5,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Order.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Order.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\Order.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAgwB4AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:38:28.794Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\appsettings.json",
-              "RelativeDocumentMoniker": "SWPSolution.AdminApp\\appsettings.json",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\appsettings.json",
-              "RelativeToolTip": "SWPSolution.AdminApp\\appsettings.json",
+              "DocumentIndex": 4,
+              "Title": "SWPSolutionDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAowBIAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:37:42.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppUser.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\AppUser.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppUser.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\AppUser.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAoAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:44:19.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AppRole.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppRole.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\AppRole.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\AppRole.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\AppRole.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAoAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:44:34.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Member.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Member.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\Member.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-15T18:43:35.315Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-18T09:44:36.899Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "PublicProductService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABsAAAAAAAAA",
+              "DocumentIndex": 11,
+              "Title": "20240618095135_fixAppUser.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618095135_fixAppUser.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\20240618095135_fixAppUser.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618095135_fixAppUser.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Migrations\\20240618095135_fixAppUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T10:14:06.788Z"
+              "WhenOpened": "2024-06-18T09:51:35.979Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\System\\User\\IUserService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\System\\User\\IUserService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\System\\User\\IUserService.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAjwA8AAAA4AAAA",
+              "DocumentIndex": 13,
+              "Title": "20240618094659_createDB.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618094659_createDB.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\20240618094659_createDB.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618094659_createDB.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Migrations\\20240618094659_createDB.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:59:54.999Z"
+              "WhenOpened": "2024-06-18T09:46:59.584Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Program.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Program.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Program.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Program.cs",
-              "ViewState": "AQIAACYAAAAAAAAAAAAgwDkAAABGAAAA",
+              "DocumentIndex": 12,
+              "Title": "20240618095024_fixAppUser.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Migrations\\20240618095024_fixAppUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:38:01.938Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "CheckoutRequest.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\CheckoutRequest.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\CheckoutRequest.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\CheckoutRequest.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\CheckoutRequest.cs",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAAABAAAABaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T20:01:10.991Z"
+              "WhenOpened": "2024-06-18T09:50:24.465Z"
             }
           ]
         },
@@ -670,19 +340,25 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 724,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             }
           ]
         }
