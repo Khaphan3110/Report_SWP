@@ -42,11 +42,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -94,7 +89,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/order_controller
         }
       }
     },
@@ -129,11 +128,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -155,7 +149,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/order_controller
         }
       }
     },
@@ -190,11 +188,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -230,7 +223,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
+>>>>>>> feature/order_controller
         }
       }
     }

@@ -63,13 +63,21 @@ namespace SWPSolution.BackendApi
     .AddEntityFrameworkStores<SWPSolutionDBContext>()
     .AddDefaultTokenProviders();
 
+            builder.Services.AddDistributedMemoryCache(); // Use in-memory cache for session storage (can be replaced with other providers)
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+                options.Cookie.HttpOnly = true; // Prevent client-side JavaScript from accessing the cookie
+                options.Cookie.IsEssential = true; // Ensure the cookie is sent even if the user has not consented to cookies
+            });
+
             //Add email configs
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
-
+            
 
             //Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>
@@ -165,6 +173,7 @@ namespace SWPSolution.BackendApi
             app.UseAuthentication();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

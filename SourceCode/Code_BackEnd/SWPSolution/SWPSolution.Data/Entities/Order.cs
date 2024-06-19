@@ -16,11 +16,11 @@ public partial class Order
 
     public string ShippingAddress { get; set; }
 
-    public double? TotalAmount { get; set; }
+    public double TotalAmount { get; set; }
 
     public OrderStatus OrderStatus { get; set; }
 
-    public DateTime? OrderDate { get; set; }
+    public DateTime OrderDate { get; set; }
 
     public virtual Member Member { get; set; }
 

@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "l7zhc2owBVI=",
+=======
+  "dgSpecHash": "1SxG+PM2Kur0SZtCSLBRjFUjNkPXtC+8RkYBTpyy3q8lIDuBp3Qm+h3mueYHzqA+xgQAQzSFEQkbU1ifGqvylA==",
+>>>>>>> feature/order_controller
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
   "expectedPackageFiles": [

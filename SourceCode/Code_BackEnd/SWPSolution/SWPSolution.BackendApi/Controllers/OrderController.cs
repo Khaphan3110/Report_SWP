@@ -75,6 +75,7 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
+<<<<<<< HEAD
         public IActionResult PaymentCallBack()
         {
             return null;
@@ -94,6 +95,45 @@ namespace SWPSolution.BackendApi.Controllers
               //  };
            //     return Redirect(_vnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
             //}
+=======
+        [HttpPost]
+        public IActionResult CheckoutVNPay([FromBody] OrderVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var vnPayModel = new VnPaymentRequestModel
+                {
+                    Amount = model.TotalAmount,
+                    CreatedDate = model.OrderDate,
+                    Description = $"{model.MemberId}",
+                    FullName = model.MemberId,
+                    OrderId = model.OrderId
+                };
+
+                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
+                return Ok(new { PaymentUrl = paymentUrl });
+            }
+
+            return BadRequest(ModelState);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> PaymentCallBack([FromQuery] Dictionary<string, string> responseData)
+        {
+            using (StreamReader reader = new StreamReader(Request.Body))
+            {
+                
+                var response = _vnPayService.PaymentExecute(responseData);
+
+                if (response == null || response.VnPayResponseCode != "00")
+                {
+                    return BadRequest(new { Message = "Payment failed" });
+                }
+
+                return Ok(response);
+            }
+>>>>>>> feature/order_controller
         }
     }
 

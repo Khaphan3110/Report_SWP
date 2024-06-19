@@ -14,7 +14,7 @@ namespace SWPSolution.ViewModels.Sales
         public string Token { get; set; }
 
         [Required]
-        public string AddressId { get; set; }
+        public string ShippingAddress { get; set; }
 
         [Required]
         public string PromotionId { get; set; }
