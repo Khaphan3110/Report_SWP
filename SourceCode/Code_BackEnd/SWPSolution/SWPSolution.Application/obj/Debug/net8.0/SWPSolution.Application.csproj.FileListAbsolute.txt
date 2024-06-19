@@ -20,3 +20,25 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Appli
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.genruntimeconfig.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\ref\SWPSolution.Application.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.csproj.AssemblyReference.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.AssemblyInfoInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.AssemblyInfo.cs
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.csproj.CoreCompileInputs.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.sourcelink.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\refint\SWPSolution.Application.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.deps.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.runtimeconfig.json
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Application.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Data.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Utilities.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.ViewModels.dll
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Data.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.Utilities.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolut.868DFB74.Up2Date
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\SWPSolution.Application.genruntimeconfig.cache
+D:\University\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\obj\Debug\net8.0\ref\SWPSolution.Application.dll

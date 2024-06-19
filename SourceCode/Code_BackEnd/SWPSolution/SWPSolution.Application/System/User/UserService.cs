@@ -490,6 +490,21 @@ namespace SWPSolution.Application.System.User
             };
         }
 
+        public async Task<List<MemberAddressVM>> GetAllAddresses()
+        {
+            var address = _context.Addresses
+                                        .Select(m => new MemberAddressVM
+                                        {
+                                            House_Number = m.HouseNumber,
+                                            Street_Name = m.Street,
+                                            District_Name = m.District,
+                                            City = m.City,
+                                            Region = m.Region
+                                        })
+                                        .ToList();
+            return address;
+        }
+
         public async Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request)
         {
             var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
@@ -654,9 +669,58 @@ namespace SWPSolution.Application.System.User
         //    return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         //}
 
-        //public async Task<StaffInfoVM> GetStaffByIdAsync(string staffId)
+        //public async Task<bool> RegisterStaff(RegisterRequest request)
         //{
-        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    var existingUsers = await _userManager.Users.Where(u => u.UserName == request.UserName &&
+        //        u.TemporaryPassword == request.Password)
+        //        .ToListAsync();
+        //    if (existingUsers.Any())
+        //    {
+        //        foreach (var existingUser in existingUsers)
+        //        {
+        //            var deleteResult = await _userManager.DeleteAsync(existingUser);
+        //            if (!deleteResult.Succeeded)
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    // Proceed with registration of the new user
+        //    var user = new AppUser()
+        //    {
+        //        Email = request.Email,
+        //        FirstName = request.FirstName,
+        //        LastName = request.LastName,
+        //        PhoneNumber = request.PhoneNumber,
+        //        UserName = request.UserName,
+        //        TemporaryPassword = request.Password,
+        //    };
+        //    var result = await _userManager.CreateAsync(user, request.Password);
+
+        //    if (!result.Succeeded)
+        //    {
+        //        return false; // If registration fails, return false
+        //    }
+
+        //    // Insert the Staff record
+        //    var staff = new Staff()
+        //    {
+        //        StaffId = "", // Assign a valid MemberId
+        //        Role = "",
+        //        Email = user.Email,
+        //        FullName = $"{request.LastName}, {request.FirstName}",
+        //        Phone = user.PhoneNumber,
+        //    };
+                
+        //    _context.Staff.Add(staff);
+        //    await _context.SaveChangesAsync();
+
+        //    return true;
+        //}
+
+        //public async Task<StaffInfoVM> GetStaffById(string staffId)
+        //{
+        //    var staff = _context.Staff.Find(staffId);
         //    if (staff == null) return null;
 
         //    return new StaffInfoVM
@@ -669,9 +733,9 @@ namespace SWPSolution.Application.System.User
         //    };
         //}
 
-        //public async Task<List<StaffInfoVM>> GetAllStaffsAsync()
+        //public async Task<List<StaffInfoVM>> GetAllStaffs()
         //{
-        //    var staff = await _context.Staff
+        //    var staff = _context.Staff
         //                                .Select(m => new StaffInfoVM
         //                                {
         //                                    Role = m.Role,
@@ -680,13 +744,13 @@ namespace SWPSolution.Application.System.User
         //                                    FullName = m.FullName,
         //                                    PhoneNumber = m.Phone
         //                                })
-        //                                .ToListAsync();
+        //                                .ToList();
         //    return staff;
         //}
 
-        //public async Task<bool> UpdateStaffAsync(string staffId, UpdateStaffRequest request)
+        //public async Task<bool> UpdateStaff(string staffId, UpdateStaffRequest request)
         //{
-        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    var staff = _context.Staff.Find(staffId);
         //    if (staff == null) return false;
 
         //    if (!string.IsNullOrEmpty(request.Password))
@@ -697,9 +761,9 @@ namespace SWPSolution.Application.System.User
 
         //    return true;
         //}
-        //public async Task<bool> DeleteStaffAsync(string staffId)
+        //public async Task<bool> DeleteStaff(string staffId)
         //{
-        //    var staff = await _context.Staff.FindAsync(staffId);
+        //    var staff = _context.Staff.Find(staffId);
         //    if (staff == null) return false;
 
         //    _context.Staff.Remove(staff);

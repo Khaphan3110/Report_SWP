@@ -33,19 +33,21 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <!--<li><a class="dropdown-item" href="/Profile/Index">User.Idesntity.Name</a></li>-->
 =======
                         <li><a class="dropdown-item" href="/Profile/Index">@User.Identity.Name</a></li>
 >>>>>>> feature/order_controller
                         <li><a class="dropdown-item">Role: @ViewData["UserRole"]</a></li>
 =======
+=======
+>>>>>>> ddb43305142ed8a491a3e2bf7e8baacd98d7139e
                         <li><a class="dropdown-item" href="/Profile/Index">@User.Identity.Name</a>
                         @foreach (var role in User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))
                         {
                                     <a class="dropdown-item" href="#">Role: @role</a>
                         }    
                         </li>
->>>>>>> f5ce3b747b3ad26ec860f330dcc34b05b933cd4c
                         <li><hr class="dropdown-divider" /></li>
                         <form method="post" asp-controller="User" asp-action="Logout">
                             <button type="submit" class="dropdown-item">Logout</button>
