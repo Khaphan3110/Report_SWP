@@ -103,14 +103,12 @@ namespace SWPSolution.BackendApi.Controllers
             return BadRequest(ModelState);
         }
 
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> PaymentCallBack([FromQuery] Dictionary<string, string> responseData)
+        [HttpGet("PaymentCallBack")]
+        public IActionResult PaymentCallBack()
         {
-            using (StreamReader reader = new StreamReader(Request.Body))
             {
                 
-                var response = _vnPayService.PaymentExecute(responseData);
+                var response = _vnPayService.PaymentExecute(Request.Query);
 
                 if (response == null || response.VnPayResponseCode != "00")
                 {

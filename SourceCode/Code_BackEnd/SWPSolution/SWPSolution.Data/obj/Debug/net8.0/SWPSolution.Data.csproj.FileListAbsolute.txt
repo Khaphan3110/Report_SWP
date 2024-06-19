@@ -52,9 +52,9 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.AssemblyInfo.cs
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.csproj.CoreCompileInputs.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.sourcelink.json
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.csproj.CopyComplete
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\refint\SWPSolution.Data.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolution.Data.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\ref\SWPSolution.Data.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Data\obj\Debug\net8.0\SWPSolut.420EFE51.Up2Date
