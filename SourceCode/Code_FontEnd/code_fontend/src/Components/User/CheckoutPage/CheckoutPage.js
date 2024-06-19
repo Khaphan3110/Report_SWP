@@ -14,7 +14,7 @@ const CheckoutPage = () => {
   const [userInfor, setUserInfor] = useState();
   const [addressCheckoutPay, setaddressCheckoutPay] = useState();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const getUserInforToCheckoutPay = async () => {
       const resUserInfor = await getUserInfor(userToken);
@@ -30,6 +30,7 @@ const CheckoutPage = () => {
       const resAddress = await getUserAddAdress(userToken);
       if (resAddress) {
         setaddressCheckoutPay(resAddress.data);
+        localStorage.setItem('shippingAdress',JSON.stringify(resAddress.data.house_Number+ "," +resAddress.data.street_Name+","+resAddress.data.district_Name + "," +resAddress.data.city+ "," +resAddress.data.region))
       }
     };
     resUserAdress();

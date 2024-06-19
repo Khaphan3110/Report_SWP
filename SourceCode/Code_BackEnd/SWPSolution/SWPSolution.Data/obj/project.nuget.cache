@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "dex9AJlg5lM=",
-=======
-  "dgSpecHash": "WqsDAeZZqRcckRXanJe8rkpKO1Lnlyy0JeDXlVBcMDxtBFW2VU8dZi7FSimDYSpLhjY6pCWdcCGcUSq5iizsrQ==",
->>>>>>> feature/order_controller
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj",
   "expectedPackageFiles": [

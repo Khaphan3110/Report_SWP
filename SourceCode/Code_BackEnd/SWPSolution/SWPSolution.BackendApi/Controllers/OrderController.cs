@@ -75,27 +75,6 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
-<<<<<<< HEAD
-        public IActionResult PaymentCallBack()
-        {
-            return null;
-        }
-
-        //[HttpPost]
-        //public IActionResult Checkout(OrderVM model)
-        //{
-          //  if (ModelState.IsValid)
-            //{
-                //var vnPayModel = new VnPaymentRequestModel
-                //{
-                    //Amount = model.TotalAmount,
-                    //CreatedDate = model.OrderDate,
-                  //  Description = $"{model.MemberId}",
-                //    FullName = 
-              //  };
-           //     return Redirect(_vnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
-            //}
-=======
         [HttpPost]
         public IActionResult CheckoutVNPay([FromBody] OrderVM model)
         {
@@ -123,7 +102,7 @@ namespace SWPSolution.BackendApi.Controllers
         {
             using (StreamReader reader = new StreamReader(Request.Body))
             {
-                
+
                 var response = _vnPayService.PaymentExecute(responseData);
 
                 if (response == null || response.VnPayResponseCode != "00")
@@ -133,7 +112,8 @@ namespace SWPSolution.BackendApi.Controllers
 
                 return Ok(response);
             }
->>>>>>> feature/order_controller
         }
     }
+
+}
 

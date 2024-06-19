@@ -11,11 +11,8 @@ namespace SWPSolution.Application.Payment.VNPay
 {
     public interface IVnPayService
     {
-<<<<<<< HEAD
-       // string CreatePaymentUrl(HttpContext context, VnPaymentResponseModel model);
-=======
+
         string CreatePaymentUrl(HttpContext context, VnPaymentRequestModel model);
->>>>>>> feature/order_controller
 
         VnPaymentResponseModel PaymentExecute([FromQuery] Dictionary<string, string> responseData);
     }
