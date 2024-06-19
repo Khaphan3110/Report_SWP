@@ -38,7 +38,7 @@ namespace SWPSolution.Application.Sales
                 OrderId = orderId,
                 MemberId = await ExtractMemberIdFromTokenAsync(orderRequest.Token),
                 PromotionId = orderRequest.PromotionId,
-                ShippingAddress = orderRequest.AddressId,
+                ShippingAddress = orderRequest.ShippingAddress,
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
                 OrderDate = DateTime.UtcNow,
