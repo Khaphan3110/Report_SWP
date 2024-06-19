@@ -167,9 +167,14 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("AddressId")
                         .HasName("PK__Address__CAA543F0AA445DBA");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex(new[] { "MemberId" }, "IX_Address_member_ID");
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address", null, t =>
+                        {
+                            t.HasTrigger("trg_generate_address_id");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.AppRole", b =>
@@ -286,7 +291,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("content");
 
-                    b.Property<DateTime?>("DateCreate")
+                    b.Property<DateTime?>("DataCreate")
                         .HasColumnType("date")
                         .HasColumnName("dataCreate");
 
@@ -304,7 +309,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("BlogId")
                         .HasName("PK__Blog__298A9610ECF917C0");
 
-                    b.HasIndex("StaffId");
+                    b.HasIndex(new[] { "StaffId" }, "IX_Blog_staff_ID");
 
                     b.ToTable("Blog", (string)null);
                 });
@@ -439,9 +444,9 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("OrderId")
                         .HasName("PK__Order__464665E13F0051AC");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex(new[] { "PromotionId" }, "IX_Order_Promotion_ID");
 
-                    b.HasIndex("PromotionId");
+                    b.HasIndex(new[] { "MemberId" }, "IX_Order_member_id");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -449,27 +454,38 @@ namespace SWPSolution.Data.Migrations
             modelBuilder.Entity("SWPSolution.Data.Entities.OrderDetail", b =>
                 {
                     b.Property<string>("OrderDetailId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("orderdetail_ID");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
-                        .HasColumnType("varchar(10)");
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("order_ID");
 
                     b.Property<float>("Price")
-                        .HasColumnType("real");
+                        .HasColumnType("real")
+                        .HasColumnName("Price");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
-                        .HasColumnType("varchar(10)");
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("product_ID");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Quantity");
 
                     b.HasKey("OrderDetailId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex(new[] { "OrderId" }, "IX_OrderDetails_OrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex(new[] { "ProductId" }, "IX_OrderDetails_ProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -511,7 +527,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PaymentId")
                         .HasName("PK__Payment__ED10C4420D3DCCF4");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex(new[] { "OrderId" }, "IX_Payment_order_ID");
 
                     b.ToTable("Payment", (string)null);
                 });
@@ -550,9 +566,9 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PreorderId")
                         .HasName("PK__PreOrder__C55D7EA295C14F89");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex(new[] { "MemberId" }, "IX_PreOrder_member_ID");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex(new[] { "ProductId" }, "IX_PreOrder_product_ID");
 
                     b.ToTable("PreOrder", (string)null);
                 });
@@ -598,7 +614,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("ProductId")
                         .HasName("PK__Product__470175FDED17C147");
 
-                    b.HasIndex("CategoriesId");
+                    b.HasIndex(new[] { "CategoriesId" }, "IX_Product_categories_ID");
 
                     b.ToTable("Product", (string)null);
                 });
@@ -638,7 +654,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex(new[] { "ProductId" }, "IX_ProductImages_ProductId");
 
                     b.ToTable("ProductImages");
                 });
@@ -672,7 +688,12 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PromotionId")
                         .HasName("PK__Promotio__2C45E8433ED651C3");
 
-                    b.ToTable("Promotion", (string)null);
+                    b.ToTable("Promotion", null, t =>
+                        {
+                            t.HasTrigger("trg_generate_promotion_id");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Review", b =>
@@ -710,9 +731,9 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("ReviewId")
                         .HasName("PK__Review__608B39D8185D9A34");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex(new[] { "MemberId" }, "IX_Review_member_ID");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex(new[] { "ProductId" }, "IX_Review_product_ID");
 
                     b.ToTable("Review", (string)null);
                 });

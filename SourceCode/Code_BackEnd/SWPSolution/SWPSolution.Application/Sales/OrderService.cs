@@ -119,6 +119,7 @@ namespace SWPSolution.Application.Sales
                     TotalAmount = c.TotalAmount,
                     OrderStatus = c.OrderStatus,
                     OrderDate = c.OrderDate,
+                    OrderDetails = c.OrderDetails,
 
                 })
                 .ToList();
@@ -138,9 +139,9 @@ namespace SWPSolution.Application.Sales
                 MemberId = order.MemberId,
                 PromotionId = order.PromotionId,
                 ShippingAddress =   order.ShippingAddress,
-                TotalAmount = order.TotalAmount,
+                TotalAmount = (double)order.TotalAmount,
                 OrderStatus = order.OrderStatus,
-                OrderDate  = order.OrderDate,
+                OrderDate  = (DateTime)order.OrderDate,
                 
             };
         }

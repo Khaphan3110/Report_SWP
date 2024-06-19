@@ -95,7 +95,7 @@ namespace SWPSolution.Application.System.Admin
                 Title = request.Title,
                 Content = request.Content,
                 Categories = request.Categories,
-                DateCreate = DateTime.Now,
+                DataCreate = DateTime.Now,
                 StaffId = staffId
             };
 
@@ -115,7 +115,7 @@ namespace SWPSolution.Application.System.Admin
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
-                DateCreate = blog.DateCreate,
+                DataCreate = blog.DataCreate,
                 StaffId = blog.StaffId
             }).ToList();
 
@@ -132,7 +132,7 @@ namespace SWPSolution.Application.System.Admin
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
-                DateCreate = blog.DateCreate,
+                DateCreate = blog.DataCreate,
             };
         }
 
@@ -222,9 +222,9 @@ namespace SWPSolution.Application.System.Admin
                 MemberId = order.MemberId,
                 PromotionId = order.PromotionId,
                 ShippingAddress = order.ShippingAddress,
-                TotalAmount = order.TotalAmount,
+                TotalAmount = (double)order.TotalAmount,
             //    OrderStatus = order.OrderStatus,
-                OrderDate = order.OrderDate,
+                OrderDate = (DateTime)order.OrderDate,
             };
         }
 
@@ -237,9 +237,9 @@ namespace SWPSolution.Application.System.Admin
                     MemberId = order.MemberId,
                     PromotionId = order.PromotionId,
                     ShippingAddress = order.ShippingAddress,
-                    TotalAmount = order.TotalAmount,
+                    TotalAmount = (double)order.TotalAmount,
                 //    OrderStatus = order.OrderStatus,
-                    OrderDate = order.OrderDate,
+                    OrderDate = (DateTime)order.OrderDate,
                 })
                 .ToListAsync();
         }

@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
+using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
+using SWPSolution.ViewModels.System.Users;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -12,11 +15,13 @@ namespace SWPSolution.BackendApi.Controllers
     {
         private readonly IOrderService _orderService;
         private readonly IConfiguration _config;
+        private readonly IVnPayService _vnPayService;
 
-        public OrderController(IOrderService orderService, IConfiguration config)
+        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService)
         {
             _orderService = orderService;
             _config = config;
+            _vnPayService = vnPayService;
         }
 
         [HttpPost("create")]
@@ -68,5 +73,27 @@ namespace SWPSolution.BackendApi.Controllers
             await _orderService.UpdateOrderStatus(orderId, request.NewStatus);
             return NoContent();
         }
+
+        [Authorize]
+        public IActionResult PaymentCallBack()
+        {
+            return null;
+        }
+
+        //[HttpPost]
+        //public IActionResult Checkout(OrderVM model)
+        //{
+          //  if (ModelState.IsValid)
+            //{
+                //var vnPayModel = new VnPaymentRequestModel
+                //{
+                    //Amount = model.TotalAmount,
+                    //CreatedDate = model.OrderDate,
+                  //  Description = $"{model.MemberId}",
+                //    FullName = 
+              //  };
+           //     return Redirect(_vnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
+            //}
+        }
     }
-}
+

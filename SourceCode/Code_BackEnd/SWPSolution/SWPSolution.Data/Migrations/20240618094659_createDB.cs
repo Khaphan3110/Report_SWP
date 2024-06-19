@@ -254,7 +254,7 @@ namespace SWPSolution.Data.Migrations
                     Promotion_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     TotalAmount = table.Column<double>(type: "float", nullable: true),
-                    orderStatus = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    orderStatus = table.Column<int>(type: "int", unicode: false, maxLength: 10, nullable: false),
                     orderDate = table.Column<DateTime>(type: "date", nullable: true)
                 },
                 constraints: table =>
@@ -373,24 +373,24 @@ namespace SWPSolution.Data.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    OrderDetailId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderId = table.Column<string>(type: "varchar(10)", nullable: false),
-                    ProductId = table.Column<string>(type: "varchar(10)", nullable: false),
+                    orderdetail_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    order_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
+                    product_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
+                    table.PrimaryKey("PK_OrderDetails", x => x.orderdetail_ID);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Order_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_OrderDetails_Order_order_ID",
+                        column: x => x.order_ID,
                         principalTable: "Order",
                         principalColumn: "order_ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Product_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_OrderDetails_Product_product_ID",
+                        column: x => x.product_ID,
                         principalTable: "Product",
                         principalColumn: "product_ID",
                         onDelete: ReferentialAction.Cascade);
@@ -441,12 +441,12 @@ namespace SWPSolution.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderId",
                 table: "OrderDetails",
-                column: "OrderId");
+                column: "order_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ProductId",
                 table: "OrderDetails",
-                column: "ProductId");
+                column: "product_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payment_order_ID",

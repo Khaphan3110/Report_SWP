@@ -1076,6 +1076,7 @@
       "SWPSolution.ViewModels/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.5",
           "NETCore.MailKit": "2.1.0"
         },
         "runtime": {

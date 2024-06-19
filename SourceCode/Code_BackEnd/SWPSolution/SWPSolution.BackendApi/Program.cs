@@ -14,6 +14,7 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
+using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
@@ -40,9 +41,6 @@ namespace SWPSolution.BackendApi
              
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
-            builder.Services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<SWPSolutionDBContext>()
-                .AddDefaultTokenProviders();
             builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(1));
             //Declare DI 
             builder.Services.AddTransient<IPublicProductService, PublicProductService>();
@@ -56,13 +54,21 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
-
+            builder.Services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            })
+    .AddEntityFrameworkStores<SWPSolutionDBContext>()
+    .AddDefaultTokenProviders();
 
             //Add email configs
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
 
 
             //Add config for required email
