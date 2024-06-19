@@ -324,6 +324,7 @@ namespace SWPSolution.Application.System.User
             // Proceed with registration of the new user
             var user = new AppUser()
             {
+                Id = Guid.NewGuid(),
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
