@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
+using SWPSolution.Application.Session;
+using SWPSolution.Data.Enum;
 using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
 using SWPSolution.ViewModels.System.Users;
@@ -16,12 +20,14 @@ namespace SWPSolution.BackendApi.Controllers
         private readonly IOrderService _orderService;
         private readonly IConfiguration _config;
         private readonly IVnPayService _vnPayService;
+        private readonly ISessionService _sessionService;
 
-        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService)
+        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService, ISessionService sessionService)
         {
             _orderService = orderService;
             _config = config;
             _vnPayService = vnPayService;
+            _sessionService = sessionService;
         }
 
         [HttpPost("create")]
@@ -90,6 +96,7 @@ namespace SWPSolution.BackendApi.Controllers
                 };
 
                 var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
+
                 return Ok(new { PaymentUrl = paymentUrl });
             }
 
@@ -113,6 +120,44 @@ namespace SWPSolution.BackendApi.Controllers
                 return Ok(response);
             }
         }
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> Callback()
+        //{
+        //    // Get the full URL including query parameters
+        //    string returnUrl = HttpContext.Request.GetDisplayUrl();
+
+        //    // Parse the query string
+        //    var queryDictionary = HttpUtility.ParseQueryString(new Uri(returnUrl).Query);
+
+        //    // Create your VnPayCallbackData object
+        //    var callbackData = new VnPayCallbackData
+        //    {
+        //        vnp_Amount = long.Parse(queryDictionary["vnp_Amount"]),
+        //        vnp_BankCode = queryDictionary["vnp_BankCode"],
+        //        vnp_CardType = queryDictionary["vnp_CardType"],
+        //        vnp_OrderInfo = queryDictionary["vnp_OrderInfo"],
+        //        vnp_PayDate = DateTime.ParseExact(queryDictionary["vnp_PayDate"], "yyyyMMddHHmmss", null), // Convert to DateTime
+        //        vnp_ResponseCode = queryDictionary["vnp_ResponseCode"],
+        //        vnp_SecureHash = queryDictionary["vnp_SecureHash"],
+        //        vnp_TmnCode = queryDictionary["vnp_TmnCode"],
+        //        vnp_TransactionNo = long.Parse(queryDictionary["vnp_TransactionNo"]),
+        //        vnp_TransactionStatus = queryDictionary["vnp_TransactionStatus"],
+        //        vnp_TxnRef = queryDictionary["vnp_TxnRef"]
+        //    };
+
+        //    if (callbackData.vnp_ResponseCode == "24") // Cancellation code
+        //    {
+        //        // 1. Retrieve order details (you'll need to find a way to identify the order)
+        //        var order = await _orderService.GetOrderById(callbackData.vnp_TxnRef);
+
+        //        // 2. Update order status to "Cancelled"
+        //        await _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.Canceled);
+
+        //        // 3. (Optional) Log the cancellation event
+        //    }
+        //    return Ok();
+        //}
     }
 
 }

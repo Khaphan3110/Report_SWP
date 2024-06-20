@@ -215,7 +215,7 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> ConfirmEmail(string otp)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            var user =  _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
             if (user == null) return false;
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -333,6 +333,7 @@ namespace SWPSolution.Application.System.User
             // Proceed with registration of the new user
             var user = new AppUser()
             {
+                Id = Guid.NewGuid(),
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,

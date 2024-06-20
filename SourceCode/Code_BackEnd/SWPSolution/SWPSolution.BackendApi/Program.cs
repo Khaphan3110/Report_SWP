@@ -16,6 +16,7 @@ using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
 using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
+using SWPSolution.Application.Session;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -36,7 +37,7 @@ namespace SWPSolution.BackendApi
             //Add cros 
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
-                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                build.WithOrigins("https://localhost:44358/index.html").AllowAnyMethod().AllowAnyHeader();
             }));
              
             //Add DbContext
@@ -66,10 +67,11 @@ namespace SWPSolution.BackendApi
             builder.Services.AddDistributedMemoryCache(); // Use in-memory cache for session storage (can be replaced with other providers)
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
-                options.Cookie.HttpOnly = true; // Prevent client-side JavaScript from accessing the cookie
-                options.Cookie.IsEssential = true; // Ensure the cookie is sent even if the user has not consented to cookies
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
             });
+            builder.Services.AddScoped<ISessionService, SessionService>();
 
             //Add email configs
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
@@ -166,12 +168,10 @@ namespace SWPSolution.BackendApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseCors("SWP_GROUP2");
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
-
             app.UseAuthorization();
             app.UseSession();
 

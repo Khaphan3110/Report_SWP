@@ -3,6 +3,7 @@ import axios from "axios";
   
  const instance = axios.create({
   baseURL: "https://localhost:44358/api/",
+  
 });
 
 export const Post = ( path,param = {},header = {}) => {

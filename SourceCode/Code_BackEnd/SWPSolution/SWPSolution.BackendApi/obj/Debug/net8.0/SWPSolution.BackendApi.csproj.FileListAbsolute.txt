@@ -3,7 +3,6 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Backe
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.sourcelink.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\appsettings.Development.json
@@ -88,6 +87,7 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Backe
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Data.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.Utilities.pdb
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\SWPSolution.ViewModels.pdb
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.build.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets.development.json
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\staticwebassets\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props
