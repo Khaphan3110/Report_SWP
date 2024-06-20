@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "LU7TIx641GA=",
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
@@ -100,6 +101,9 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
 =======
   "dgSpecHash": "QiSEsSsFGaUCuDGzy8ovclUVgY4S+0eQaFVIROpSDJur1/Ux6D/gMRsskJ/zGkjTvhCFZmmgk87pbE6gwFh8aQ==",
+=======
+  "dgSpecHash": "N9Do+n64unlb3yZBpkec5MLkNF5IbSrW4BQzEP6Sq1XnediDiCj9oZXSUUtiC+1zcnKaEwQiJbY1wPiJsO6VTw==",
+>>>>>>> feature/order_controller
   "success": true,
   "projectFilePath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
   "expectedPackageFiles": [

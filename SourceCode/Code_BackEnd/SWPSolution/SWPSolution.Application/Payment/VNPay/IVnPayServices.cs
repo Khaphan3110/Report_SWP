@@ -14,6 +14,6 @@ namespace SWPSolution.Application.Payment.VNPay
 
         string CreatePaymentUrl(HttpContext context, VnPaymentRequestModel model);
 
-        VnPaymentResponseModel PaymentExecute([FromQuery] Dictionary<string, string> responseData);
+        public VnPaymentResponseModel PaymentExecute(IQueryCollection collections);
     }
 }

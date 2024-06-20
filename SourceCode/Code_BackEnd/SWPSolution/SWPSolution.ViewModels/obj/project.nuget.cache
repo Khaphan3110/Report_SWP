@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "l7zhc2owBVI=",
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
@@ -69,6 +70,9 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
 =======
   "dgSpecHash": "LW4JHNd9uuPjLWFBmRf8b5TOTmMArxUI71sKF123LY1WP2lP9u09jllVBYzCSS++/Z/iLPaFcKIZrammWXVrsA==",
+=======
+  "dgSpecHash": "U0j9w4vGVon50N9PhdlNqDNRIIe/YPTf1MlV4sOWf+2pFl7aUVtR5w9TbsMqmgdL+0EMMgEK8EwkWPspiy8POw==",
+>>>>>>> feature/order_controller
   "success": true,
   "projectFilePath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
   "expectedPackageFiles": [

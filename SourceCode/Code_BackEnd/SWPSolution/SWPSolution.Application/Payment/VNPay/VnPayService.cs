@@ -40,19 +40,23 @@ namespace SWPSolution.Application.Payment.VNPay
 
             vnpay.AddRequestData("vnp_OrderInfo", "Thanh toán cho đơn hàng: "+ model.OrderId);
             vnpay.AddRequestData("vnp_OrderType", "other");
-            vnpay.AddRequestData("vnp_ReturnUrl", _config["VnPay:BaseUrl"]);
+            vnpay.AddRequestData("vnp_ReturnUrl", _config["VnPay:PaymentBackReturnUrl"]);
 
-            vnpay.AddRequestData("vnp_TxnRef", $"{model.OrderId}_{tick}");// Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
+            vnpay.AddRequestData("vnp_TxnRef", tick);// Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
 
         var paymentUrl = vnpay.CreateRequestUrl(_config["VnPay:BaseUrl"], _config["VnPay:HashSecret"]);
 
            return paymentUrl;
         }
 
+<<<<<<< HEAD
     public VnPaymentResponseModel PaymentExecute([FromQuery] Dictionary<string, string> responseData)
+=======
+        public VnPaymentResponseModel PaymentExecute(IQueryCollection collections)
+>>>>>>> feature/order_controller
         {
             var vnpay = new VnPayLibrary();
-            foreach (var (key, value) in responseData)
+            foreach (var (key, value) in collections)
             {
                 if (!string.IsNullOrEmpty(key) && key.StartsWith("vnp_"))
                 {
@@ -62,7 +66,7 @@ namespace SWPSolution.Application.Payment.VNPay
 
             var vnp_orderId = Convert.ToInt64(vnpay.GetResponseData("vnp_TxnRef"));
             var vnp_TransactionId = Convert.ToInt64(vnpay.GetResponseData("vnp_TransactionNo"));
-            var vnp_SecureHash = responseData.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
+            var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
 
