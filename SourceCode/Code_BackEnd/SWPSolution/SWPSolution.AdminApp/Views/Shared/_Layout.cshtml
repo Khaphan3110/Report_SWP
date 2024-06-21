@@ -31,17 +31,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     <!--<li><a class="dropdown-item" href="/Profile/Index">User.Idesntity.Name</a></li>-->
-=======
-                        <li><a class="dropdown-item" href="/Profile/Index">@User.Identity.Name</a></li>
->>>>>>> feature/order_controller
+
                         <li><a class="dropdown-item">Role: @ViewData["UserRole"]</a></li>
-=======
-=======
->>>>>>> ddb43305142ed8a491a3e2bf7e8baacd98d7139e
+
                         <li><a class="dropdown-item" href="/Profile/Index">@User.Identity.Name</a>
                         @foreach (var role in User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))
                         {
