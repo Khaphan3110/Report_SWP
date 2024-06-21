@@ -14,15 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb53104d41553b049390e66c5fdfe6702a8ca045")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddb43305142ed8a491a3e2bf7e8baacd98d7139e")]
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07ef97cbcba364e052099b9f88d5879111edba23")]
->>>>>>> feature/order_controller
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39d2f856562a7ffb34da8252b342e455711d6416")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

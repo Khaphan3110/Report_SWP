@@ -8,10 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SWPSolution.Application
-<<<<<<< HEAD
-build_property.ProjectDir = G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\
-=======
 build_property.ProjectDir = C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.Application\
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
