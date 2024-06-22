@@ -9,7 +9,7 @@ using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using System.Data.Entity;
 
-namespace SWPSolution.Application.Payment
+namespace SWPSolution.Application.AppPayment
 {
     public class PaymentService : IPaymentService
     {
@@ -27,14 +27,15 @@ namespace SWPSolution.Application.Payment
                 OrderId = request.OrderId,
                 Amount = request.Amount,
                 DiscountValue = request.DiscountValue,
-                PaymentStatus   = request.PaymentStatus,
+                PaymentStatus = request.PaymentStatus,
                 PaymentMethod = request.PaymentMethod,
                 PaymentDate = request.PaymentDate,
             };
+
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            var insertedPayment = _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
+            var insertedPayment =  _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
             return insertedPayment.PaymentId;
         }
 
@@ -48,12 +49,12 @@ namespace SWPSolution.Application.Payment
             return true;
         }
 
-        public async Task<List<PaymentVM>> GetAll()
+        public async Task<List<Payment>> GetAll()
         {
-            return await _context.Payments
-                .Select(p => new PaymentVM
+            var payments = _context.Payments
+                .Select(p => new Payment
                 {
-                    PaymentId = p.PaymentId,    
+                    PaymentId = p.PaymentId,
                     OrderId = p.OrderId,
                     Amount = p.Amount,
                     DiscountValue = p.DiscountValue,
@@ -61,15 +62,17 @@ namespace SWPSolution.Application.Payment
                     PaymentMethod = p.PaymentMethod,
                     PaymentDate = p.PaymentDate,
                 })
-                .ToListAsync();
+                .ToList();
+
+            return payments;
         }
 
-        public async Task<PaymentRequest> GetById(string id)
+        public async Task<Payment> GetById(string id)
         {
             var payment = await _context.Payments.FindAsync(id);
             if (payment == null) return null;
 
-            return new PaymentRequest
+            return new Payment
             {
                 OrderId = payment.OrderId,
                 Amount = payment.Amount,

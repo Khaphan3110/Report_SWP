@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SWPSolution.Application.Payment.VNPay
+namespace SWPSolution.Application.AppPayment.VNPay
 {
     public interface IVnPayService
     {

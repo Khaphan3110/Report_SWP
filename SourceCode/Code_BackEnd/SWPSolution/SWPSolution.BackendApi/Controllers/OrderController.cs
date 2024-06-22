@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using SWPSolution.Application.Payment.VNPay;
+using SWPSolution.Application.AppPayment;
+using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.Session;
+using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
 using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
@@ -21,13 +23,17 @@ namespace SWPSolution.BackendApi.Controllers
         private readonly IConfiguration _config;
         private readonly IVnPayService _vnPayService;
         private readonly ISessionService _sessionService;
+        private readonly IPaymentService _paymentService;
+        private readonly SWPSolutionDBContext _context;
 
-        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService, ISessionService sessionService)
+        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService, ISessionService sessionService, IPaymentService paymentService, SWPSolutionDBContext context)
         {
             _orderService = orderService;
             _config = config;
             _vnPayService = vnPayService;
             _sessionService = sessionService;
+            _paymentService = paymentService;
+            _context = context;
         }
 
         [HttpPost("create")]
@@ -44,7 +50,24 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { error = result.ErrorMessage });
             }
 
-            return Ok(result.Order);
+            var payment = new PaymentRequest
+            {
+                OrderId = result.Order.OrderId,
+                Amount = result.Order.TotalAmount,
+                DiscountValue = 20,
+                PaymentStatus = false
+            };
+            var paymentResult = await _paymentService.Create(payment);
+            if (paymentResult == null)
+            {
+                return BadRequest(new { message = "Cannot create payment" });
+            }
+
+            return Ok(new
+            {
+                Order = result.Order,
+                Payment = paymentResult
+            });
         }
 
         [HttpGet("GetAllOrders")]
@@ -81,80 +104,78 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
-        [HttpPost]
-        public IActionResult CheckoutVNPay([FromBody] OrderVM model)
+        [HttpPost("CheckoutVNPay")]
+        public async Task<IActionResult> CheckoutVNPay([FromBody] OrderVM model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var vnPayModel = new VnPaymentRequestModel
-                {
-                    Amount = model.TotalAmount,
-                    CreatedDate = model.OrderDate,
-                    Description = $"{model.MemberId}",
-                    FullName = model.MemberId,
-                    OrderId = model.OrderId
-                };
-
-                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
-
-                return Ok(new { PaymentUrl = paymentUrl });
+                return BadRequest(ModelState);
             }
 
-            return BadRequest(ModelState);
+            var vnPayModel = new VnPaymentRequestModel
+            {
+                Amount = model.TotalAmount,
+                CreatedDate = model.OrderDate,
+                Description = $"{model.MemberId}",
+                FullName = model.MemberId,
+                OrderId = model.OrderId
+            };
+
+            // Create or update payment
+            var paymentRequest = new PaymentRequest
+            {
+                OrderId = model.OrderId,
+                Amount = model.TotalAmount,
+                PaymentMethod = "VNPay", // Assuming VNPay as default or model.PaymentMethod
+                PaymentStatus = false, // Example status, adjust as per your needs
+                PaymentDate = DateTime.UtcNow // Example payment date, adjust as per your needs
+            };
+
+            // Check if payment already exists
+            var existingPayment = await _context.Payments.FindAsync(model.OrderId);
+            if (existingPayment != null)
+            {
+                // Update payment details
+                await _paymentService.Update(model.OrderId, paymentRequest);
+            }
+            else
+            {
+                // Create new payment
+                await _paymentService.Create(paymentRequest);
+            }
+
+            // Generate payment URL
+            var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
+
+            return Ok(new { PaymentUrl = paymentUrl });
         }
 
         [HttpGet("PaymentCallBack")]
-        public IActionResult PaymentCallBack()
+        public async Task<IActionResult> PaymentCallBack()
         {
+            var response = _vnPayService.PaymentExecute(Request.Query);
+
+            if (response == null || response.VnPayResponseCode != "00")
             {
-                
-                var response = _vnPayService.PaymentExecute(Request.Query);
-
-                if (response == null || response.VnPayResponseCode != "00")
-                {
-                    return BadRequest(new { Message = "Payment failed" });
-                }
-
-                return Ok(response);
+                return BadRequest(new { Message = "Payment failed" });
             }
+
+            // Payment succeeded, update payment status
+            var paymentId = response.PaymentId; // Adjust based on your response model
+            var payment = await _context.Payments.FindAsync(paymentId);
+
+            if (payment == null)
+            {
+                return BadRequest(new { Message = $"Payment with id {paymentId} not found" });
+            }
+
+            // Update payment status (assuming PaymentStatus is a boolean flag)
+            payment.PaymentStatus = true; // Adjust based on your payment entity structure
+
+            _context.Payments.Update(payment);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { Message = "Payment status updated successfully" });
         }
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> Callback()
-        //{
-        //    // Get the full URL including query parameters
-        //    string returnUrl = HttpContext.Request.GetDisplayUrl();
-
-        //    // Parse the query string
-        //    var queryDictionary = HttpUtility.ParseQueryString(new Uri(returnUrl).Query);
-
-        //    // Create your VnPayCallbackData object
-        //    var callbackData = new VnPayCallbackData
-        //    {
-        //        vnp_Amount = long.Parse(queryDictionary["vnp_Amount"]),
-        //        vnp_BankCode = queryDictionary["vnp_BankCode"],
-        //        vnp_CardType = queryDictionary["vnp_CardType"],
-        //        vnp_OrderInfo = queryDictionary["vnp_OrderInfo"],
-        //        vnp_PayDate = DateTime.ParseExact(queryDictionary["vnp_PayDate"], "yyyyMMddHHmmss", null), // Convert to DateTime
-        //        vnp_ResponseCode = queryDictionary["vnp_ResponseCode"],
-        //        vnp_SecureHash = queryDictionary["vnp_SecureHash"],
-        //        vnp_TmnCode = queryDictionary["vnp_TmnCode"],
-        //        vnp_TransactionNo = long.Parse(queryDictionary["vnp_TransactionNo"]),
-        //        vnp_TransactionStatus = queryDictionary["vnp_TransactionStatus"],
-        //        vnp_TxnRef = queryDictionary["vnp_TxnRef"]
-        //    };
-
-        //    if (callbackData.vnp_ResponseCode == "24") // Cancellation code
-        //    {
-        //        // 1. Retrieve order details (you'll need to find a way to identify the order)
-        //        var order = await _orderService.GetOrderById(callbackData.vnp_TxnRef);
-
-        //        // 2. Update order status to "Cancelled"
-        //        await _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.Canceled);
-
-        //        // 3. (Optional) Log the cancellation event
-        //    }
-        //    return Ok();
-        //}
     }
 }

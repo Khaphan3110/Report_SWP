@@ -12,7 +12,7 @@ namespace SWPSolution.ViewModels.Payment
 
         public string OrderId { get; set; }
 
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
 
         public double DiscountValue { get; set; }
 
