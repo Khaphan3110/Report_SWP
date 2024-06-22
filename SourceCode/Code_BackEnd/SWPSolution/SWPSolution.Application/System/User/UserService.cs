@@ -610,107 +610,236 @@ namespace SWPSolution.Application.System.User
             return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
 
-        //public async Task<bool> RegisterStaff(RegisterRequest request)
-        //{
-        //    var existingUsers = await _userManager.Users.Where(u => u.UserName == request.UserName &&
-        //        u.TemporaryPassword == request.Password)
-        //        .ToListAsync();
-        //    if (existingUsers.Any())
-        //    {
-        //        foreach (var existingUser in existingUsers)
-        //        {
-        //            var deleteResult = await _userManager.DeleteAsync(existingUser);
-        //            if (!deleteResult.Succeeded)
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //    }
-        //    // Proceed with registration of the new user
-        //    var user = new AppUser()
-        //    {
-        //        Email = request.Email,
-        //        FirstName = request.FirstName,
-        //        LastName = request.LastName,
-        //        PhoneNumber = request.PhoneNumber,
-        //        UserName = request.UserName,
-        //        TemporaryPassword = request.Password,
-        //    };
-        //    var result = await _userManager.CreateAsync(user, request.Password);
+        //Staff stuffs
+        public async Task<string> AuthenticateStaff(LoginRequest request)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user == null)
+            {
+                return null; 
+            }
 
-        //    if (!result.Succeeded)
-        //    {
-        //        return false; // If registration fails, return false
-        //    }
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            if (!result.Succeeded)
+            {
+                return null;
+            }
 
-        //    // Insert the Staff record
-        //    var staff = new Staff()
-        //    {
-        //        StaffId = "", // Assign a valid MemberId
-        //        Role = "",
-        //        Email = user.Email,
-        //        FullName = $"{request.LastName}, {request.FirstName}",
-        //        Phone = user.PhoneNumber,
-        //    };
-                
-        //    _context.Staff.Add(staff);
-        //    await _context.SaveChangesAsync();
+            string staffId = await GetStaffIdByUsername(request.UserName);
 
-        //    return true;
-        //}
+            var getRoles = await _userManager.GetRolesAsync(user);
 
-        //public async Task<StaffInfoVM> GetStaffById(string staffId)
-        //{
-        //    var staff = _context.Staff.Find(staffId);
-        //    if (staff == null) return null;
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim("staff_id", staffId.ToString())  
+            };
 
-        //    return new StaffInfoVM
-        //    {
-        //        Role = staff.Role,
-        //        UserName = staff.Username,
-        //        Email = staff.Email,
-        //        FullName = staff.FullName,
-        //        PhoneNumber = staff.Phone
-        //    };
-        //}
+            foreach (var role in getRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
-        //public async Task<List<StaffInfoVM>> GetAllStaffs()
-        //{
-        //    var staff = _context.Staff
-        //                                .Select(m => new StaffInfoVM
-        //                                {
-        //                                    Role = m.Role,
-        //                                    UserName = m.Username,
-        //                                    Email = m.Email,
-        //                                    FullName = m.FullName,
-        //                                    PhoneNumber = m.Phone
-        //                                })
-        //                                .ToList();
-        //    return staff;
-        //}
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["JWT:Issuer"],
+                _config["JWT:Issuer"],
+                claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: creds);
 
-        //public async Task<bool> UpdateStaff(string staffId, UpdateStaffRequest request)
-        //{
-        //    var staff = _context.Staff.Find(staffId);
-        //    if (staff == null) return false;
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
 
-        //    if (!string.IsNullOrEmpty(request.Password))
-        //        staff.Password = request.Password;
+        public async Task<string> ExtractStaffIdFromTokenAsync(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
+            var jwtSecret = _config["JWT:SigningKey"];
 
-        //    _context.Staff.Update(staff);
-        //    await _context.SaveChangesAsync();
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
 
-        //    return true;
-        //}
-        //public async Task<bool> DeleteStaff(string staffId)
-        //{
-        //    var staff = _context.Staff.Find(staffId);
-        //    if (staff == null) return false;
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+            var staffId = principal.FindFirst("staff_id")?.Value;
 
-        //    _context.Staff.Remove(staff);
-        //    await _context.SaveChangesAsync();
+            return staffId;
+        }
 
-        //    return true;
-        //}
+        private async Task<string> GetStaffIdByUsername(string username)
+        {
+            var staff = _context.Staff.FirstOrDefault(m => m.Username == username);
+            if (staff != null)
+            {
+                return staff.StaffId;
+            }
+            else
+            {
+                throw new SWPException("Error getting Staff ID");
+            }
+        }
+
+        public async Task<bool> RegisterStaff(List<RegisterRequest> requests)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            foreach (var request in requests)
+            {
+                var user = new AppUser()
+                {
+                    Email = request.Email,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    PhoneNumber = request.PhoneNumber,
+                    UserName = request.UserName,
+                    TemporaryPassword = request.Password,
+                    EmailConfirmed = true,
+                };
+
+                var result = await _userManager.CreateAsync(user, request.Password);
+
+                if (result.Succeeded)
+                {
+                    // Ensure the admin role exists
+                    if (!await _roleManager.RoleExistsAsync("Staff"))
+                    {
+                        var staffRole = new AppRole { Name = "Staff", Description = "Staff role with many permissions" };
+                        await _roleManager.CreateAsync(staffRole);
+                    }
+
+                    // Assign the admin role to the user
+                    await _userManager.AddToRoleAsync(user, "Staff");
+
+                    // Generate staff ID
+                    var staff = new Staff()
+                    {
+                        StaffId = "",
+                        FullName = $"{request.FirstName} {request.LastName}",
+                        Username = request.UserName,
+                        Password = request.Password,
+                        Email = request.Email,
+                        Phone = request.PhoneNumber,
+                        Role = "staffmember"
+                    };
+
+                    _context.Staff.Add(staff);
+                }
+                else
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+            }
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return true;
+        }
+
+        public async Task<StaffInfoVM> GetStaffById(string staffId)
+        {
+            var staff = _context.Staff.Find(staffId);
+            if (staff == null) return null;
+
+            return new StaffInfoVM
+            {
+                Role = staff.Role,
+                UserName = staff.Username,
+                Email = staff.Email,
+                FullName = staff.FullName,
+                PhoneNumber = staff.Phone
+            };
+        }
+
+        public async Task<List<StaffInfoVM>> GetAllStaffs()
+        {
+            var staff = _context.Staff
+                                        .Select(m => new StaffInfoVM
+                                        {
+                                            Role = m.Role,
+                                            UserName = m.Username,
+                                            Email = m.Email,
+                                            FullName = m.FullName,
+                                            PhoneNumber = m.Phone
+                                        })
+                                        .ToList();
+            return staff;
+        }
+
+        public async Task<bool> UpdateStaff(string id, UpdateStaffRequest request)
+        {
+            // Find the user by id
+            var staff = _context.Staff.Find(id);
+            if (staff == null)
+            {
+                return false; 
+            }
+
+            // Update staff password 
+            if (!string.IsNullOrEmpty(request.Password))
+            {
+                staff.Password = request.Password;
+            }
+            _context.Staff.Update(staff);
+
+            // Update AppUser
+            var user = await _userManager.FindByNameAsync(staff.Username);
+            if (user != null && !string.IsNullOrEmpty(request.Password))
+            {
+                // Reset the user's password using the provided password
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    var result = await _userManager.RemovePasswordAsync(user);
+                    if (result.Succeeded)
+                    {
+                        result = await _userManager.AddPasswordAsync(user, request.Password);
+                        if (!result.Succeeded)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    user.TemporaryPassword = request.Password;
+                }
+                var userUpdateResult = await _userManager.UpdateAsync(user);
+                if (!userUpdateResult.Succeeded)
+                {
+                    return false;
+                }
+            }
+
+            // Save all changes in one transaction
+            await _context.SaveChangesAsync();
+
+            return true; 
+        }
+        public async Task<bool> DeleteStaff(string staffId)
+        {
+            var staff = _context.Staff.Find(staffId);
+            if (staff == null) return false;
+
+            _context.Staff.Remove(staff);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

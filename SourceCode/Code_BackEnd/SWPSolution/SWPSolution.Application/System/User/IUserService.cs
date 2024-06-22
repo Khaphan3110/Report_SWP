@@ -53,12 +53,18 @@ namespace SWPSolution.Application.System.User
 
         ClaimsPrincipal ValidateToken(string jwtToken);
 
-        //Task<StaffInfoVM> GetStaffById(string staffId);
+        Task<StaffInfoVM> GetStaffById(string staffId);
 
-        //Task<List<StaffInfoVM>> GetAllStaffs();
+        Task<List<StaffInfoVM>> GetAllStaffs();
 
-        //Task<bool> UpdateStaff(string staffId, UpdateStaffRequest request);
+        Task<bool> UpdateStaff(string id, UpdateStaffRequest request);
 
-        //Task<bool> DeleteStaff(string staffId);
+        Task<bool> DeleteStaff(string staffId);
+
+        Task<bool> RegisterStaff(List<RegisterRequest> requests);
+
+        Task<string> AuthenticateStaff(LoginRequest request);
+
+        Task<string> ExtractStaffIdFromTokenAsync(string token);
     }
 }

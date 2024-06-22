@@ -1,4 +1,5 @@
 ﻿using SWPSolution.ViewModels.Sales;
+using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace SWPSolution.Application.Sales
     {
         Task<string> ExtractMemberIdFromTokenAsync(string token);
         Task<bool> PlaceOrderAsync(OrderRequest orderRequest);
+        Task<bool> AddReview(string memberId, AddReviewRequest request);
+        Task<bool> DeleteReview(string memberId, string productId);
     }
 }
