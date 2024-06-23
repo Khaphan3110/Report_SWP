@@ -5475,43 +5475,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\khanh\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
       "projectName": "SWPSolution.WebApp",
       "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
       "outputPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
-      "projectName": "SWPSolution.WebApp",
-      "projectPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
-      "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\obj\\",
-<<<<<<< HEAD
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
-=======
->>>>>>> feature/order_controller
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5526,19 +5502,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-<<<<<<< HEAD
             "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj": {
               "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj"
             },
             "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj": {
               "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj"
-=======
-            "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj": {
-              "projectPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj"
-            },
-            "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj": {
-              "projectPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj"
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
             }
           }
         }
@@ -5584,15 +5552,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
->>>>>>> 78a1a4028342f998a712803a80d17a3d55ea03f2
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205/PortableRuntimeIdentifierGraph.json"
->>>>>>> feature/order_controller
       }
     }
   }

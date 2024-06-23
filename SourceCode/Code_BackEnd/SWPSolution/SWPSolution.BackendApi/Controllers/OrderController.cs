@@ -107,13 +107,10 @@ namespace SWPSolution.BackendApi.Controllers
         public IActionResult PaymentCallBack()
         {
             {
-<<<<<<< HEAD
 
-                var response = _vnPayService.PaymentExecute(responseData);
-=======
                 
                 var response = _vnPayService.PaymentExecute(Request.Query);
->>>>>>> feature/order_controller
+
 
                 if (response == null || response.VnPayResponseCode != "00")
                 {

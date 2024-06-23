@@ -49,11 +49,9 @@ namespace SWPSolution.Application.Payment.VNPay
            return paymentUrl;
         }
 
-<<<<<<< HEAD
-    public VnPaymentResponseModel PaymentExecute([FromQuery] Dictionary<string, string> responseData)
-=======
+
         public VnPaymentResponseModel PaymentExecute(IQueryCollection collections)
->>>>>>> feature/order_controller
+
         {
             var vnpay = new VnPayLibrary();
             foreach (var (key, value) in collections)
