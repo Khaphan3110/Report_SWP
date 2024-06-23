@@ -49,7 +49,7 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> DeleteMemberAddress(string id);
 
-        Task<string> ExtractMemberIdFromTokenAsync(string token);
+       Task<string> ExtractMemberIdFromTokenAsync(string token);
 
         ClaimsPrincipal ValidateToken(string jwtToken);
 

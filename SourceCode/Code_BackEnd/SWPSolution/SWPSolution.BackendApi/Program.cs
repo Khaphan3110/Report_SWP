@@ -14,7 +14,9 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
+using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
+using SWPSolution.Application.Session;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -35,14 +37,11 @@ namespace SWPSolution.BackendApi
             //Add cros 
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
-                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                build.WithOrigins("https://localhost:44358/index.html").AllowAnyMethod().AllowAnyHeader();
             }));
              
             //Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
-            builder.Services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<SWPSolutionDBContext>()
-                .AddDefaultTokenProviders();
             builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(1));
             //Declare DI 
             builder.Services.AddTransient<IPublicProductService, PublicProductService>();
@@ -56,14 +55,31 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddIdentity<AppUser, AppRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+            })
+    .AddEntityFrameworkStores<SWPSolutionDBContext>()
+    .AddDefaultTokenProviders();
 
+            builder.Services.AddDistributedMemoryCache(); // Use in-memory cache for session storage (can be replaced with other providers)
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                options.Cookie.SameSite = SameSiteMode.Strict;
+            });
+            builder.Services.AddScoped<ISessionService, SessionService>();
 
             //Add email configs
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
-
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
+            
 
             //Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>
@@ -152,13 +168,12 @@ namespace SWPSolution.BackendApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseCors("SWP_GROUP2");
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
-
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

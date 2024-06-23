@@ -1,12 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Common;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.System.Users;
 using System.Data.Entity;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
+using System.Text;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -14,9 +20,11 @@ namespace SWPSolution.Application.Catalog.Product
     {
         private readonly SWPSolutionDBContext _context;
         private readonly IStorageService _storageService;
-        public ManageProductService(SWPSolutionDBContext context, IStorageService storageService)
+        private readonly IConfiguration _config;
+        public ManageProductService(SWPSolutionDBContext context, IStorageService storageService, IConfiguration config)
         {
             _context = context;
+            _config = config;
             _storageService = storageService;
         }
 
@@ -275,18 +283,19 @@ namespace SWPSolution.Application.Catalog.Product
 
         public async Task<List<ProductImageViewModel>> GetListImages(string productId)
         {
-            return await _context.ProductImages.Where(x => x.ProductId == productId)
-                .Select(i => new ProductImageViewModel()
-            {
-                Caption=i.Caption,
-                DateCreated = i.DateCreated,
-                FileSize = i.FileSize,
-                Id = i.Id,
-                ImagePath = i.ImagePath,
-                ProductId = i.ProductId,
-                SortOrder=i.SortOrder
-
-            }).ToListAsync();
+            return  _context.ProductImages
+                .Where(x => x.ProductId == productId)
+                .Select(i => new ProductImageViewModel
+                {
+                    Caption = i.Caption,
+                    DateCreated = i.DateCreated,
+                    FileSize = i.FileSize,
+                    Id = i.Id,
+                    ImagePath = i.ImagePath,
+                    ProductId = i.ProductId,
+                    SortOrder = i.SortOrder
+                })
+                .ToList();
         }
 
         public async Task<int> RemoveImage(string imageId)
@@ -361,6 +370,69 @@ namespace SWPSolution.Application.Catalog.Product
                 .Max();
 
             return maxAutoIncrement + 1;
+        }
+
+        public async Task<bool> AddReview(string memberId, AddReviewRequest request)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null) return false;
+
+            var product = await _context.Products.FindAsync(request.ProductId);
+            if (product == null) return false;
+
+            var review = new Review
+            {
+                ReviewId = "",
+                ProductId = request.ProductId,
+                MemberId = memberId,
+                DataReview = DateTime.Now,
+                Grade = request.Grade,
+                Comment = request.Comment,
+            };
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> DeleteReview(string memberId, string productId)
+        {
+            var review = _context.Reviews.FirstOrDefault(r => r.MemberId == memberId && r.ProductId == productId);
+            if (review == null)
+                return false;
+
+            _context.Reviews.Remove(review);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
+            var jwtSecret = _config["JWT:SigningKey"];
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+            var memberId = principal.FindFirst("member_id")?.Value;
+
+            return memberId;
         }
     }
 }

@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
+using SWPSolution.Application.Session;
+using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
 using SWPSolution.ViewModels.System.Users;
 
@@ -13,92 +19,145 @@ namespace SWPSolution.BackendApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IVnPayService _vnPayService;
+        private readonly ISessionService _sessionService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IVnPayService vnPayService, ISessionService sessionService)
         {
             _orderService = orderService;
+            _vnPayService = vnPayService;
+            _sessionService = sessionService;
         }
 
-        [HttpPost("place-order")]
-        [AllowAnonymous]
-        public async Task<IActionResult> PlaceOrder([FromBody] OrderRequest orderRequest)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateOrder([FromBody] OrderRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var memberId = await _orderService.ExtractMemberIdFromTokenAsync(orderRequest.Token);
-            if (string.IsNullOrEmpty(memberId))
+            var result = await _orderService.PlaceOrderAsync(request);
+            if (!result.Success)
             {
-                return BadRequest("Invalid token or member not found.");
+                return BadRequest(new { error = result.ErrorMessage });
             }
 
-            // Additional validation and processing can be added here
-
-            var success = await _orderService.PlaceOrderAsync(orderRequest);
-            if (!success)
-            {
-                return BadRequest("Failed to place order.");
-            }
-
-            return Ok(new { message = "Order placed successfully" });
+            return Ok(result.Order);
         }
 
-        [HttpPost("AddReview")]
-        public async Task<IActionResult> AddReview([FromQuery] string jwtToken, [FromBody] AddReviewRequest request)
+        [HttpGet("GetAllOrders")]
+        public async Task<IActionResult> GetAllOrders()
         {
-            if (string.IsNullOrEmpty(jwtToken))
+            var orders = await _orderService.GetAll();
+            if (orders == null)
             {
-                return BadRequest(new { message = "Token is required." });
+                return NotFound(new { message = "No categories were found" });
             }
-
-            try
-            {
-                var memberId = await _orderService.ExtractMemberIdFromTokenAsync(jwtToken);
-                if (memberId == null)
-                {
-                    return BadRequest(new { message = "Invalid token." });
-                }
-
-                var result = await _orderService.AddReview(memberId, request);
-                if (!result)
-                {
-                    return NotFound(new { message = "Member or Product not found" });
-                }
-
-                return Ok(new { message = "Review added successfully" });
-            }
-            catch (SecurityTokenException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
+            return Ok(orders);
         }
 
-        [HttpDelete("DeleteReview")]
-        public async Task<IActionResult> DeleteReview([FromBody] string jwtToken, string productId)
+        [HttpGet("GetOrderById")]
+        public async Task<IActionResult> GetOrderById(string orderId)
         {
-            if (string.IsNullOrEmpty(jwtToken))
+            var order = await _orderService.GetOrderById(orderId);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
+
+        [HttpGet("member/{memberId}")]
+        public IActionResult GetOrdersByMemberId(string memberId)
+        {
+            var orders = _orderService.GetOrdersByMemberId(memberId);
+            return Ok(orders);
+        }
+
+        [HttpPut("{orderId}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(string orderId, [FromBody] UpdateOrderStatusRequest request)
+        {
+            await _orderService.UpdateOrderStatus(orderId, request.NewStatus);
+            return NoContent();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult CheckoutVNPay([FromBody] OrderVM model)
+        {
+            if (ModelState.IsValid)
             {
-                return BadRequest(new { message = "Token is required." });
+                var vnPayModel = new VnPaymentRequestModel
+                {
+                    Amount = model.TotalAmount,
+                    CreatedDate = model.OrderDate,
+                    Description = $"{model.MemberId}",
+                    FullName = model.MemberId,
+                    OrderId = model.OrderId
+                };
+
+                var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
+
+                return Ok(new { PaymentUrl = paymentUrl });
             }
 
-            try
-            {
-                var memberId = await _orderService.ExtractMemberIdFromTokenAsync(jwtToken);
+            return BadRequest(ModelState);
+        }
 
-                var result = await _orderService.DeleteReview(memberId, productId);
-                if (!result)
+        [HttpGet("PaymentCallBack")]
+        public IActionResult PaymentCallBack()
+        {
+            {
+
+                
+                var response = _vnPayService.PaymentExecute(Request.Query);
+
+
+                if (response == null || response.VnPayResponseCode != "00")
                 {
-                    return NotFound(new { message = "Review not found" });
+                    return BadRequest(new { Message = "Payment failed" });
                 }
 
-                return Ok(new { message = "Review deleted successfully" });
-            }
-            catch (SecurityTokenException ex)
-            {
-                return BadRequest(new { message = ex.Message });
+                return Ok(response);
             }
         }
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> Callback()
+        //{
+        //    // Get the full URL including query parameters
+        //    string returnUrl = HttpContext.Request.GetDisplayUrl();
+
+        //    // Parse the query string
+        //    var queryDictionary = HttpUtility.ParseQueryString(new Uri(returnUrl).Query);
+
+        //    // Create your VnPayCallbackData object
+        //    var callbackData = new VnPayCallbackData
+        //    {
+        //        vnp_Amount = long.Parse(queryDictionary["vnp_Amount"]),
+        //        vnp_BankCode = queryDictionary["vnp_BankCode"],
+        //        vnp_CardType = queryDictionary["vnp_CardType"],
+        //        vnp_OrderInfo = queryDictionary["vnp_OrderInfo"],
+        //        vnp_PayDate = DateTime.ParseExact(queryDictionary["vnp_PayDate"], "yyyyMMddHHmmss", null), // Convert to DateTime
+        //        vnp_ResponseCode = queryDictionary["vnp_ResponseCode"],
+        //        vnp_SecureHash = queryDictionary["vnp_SecureHash"],
+        //        vnp_TmnCode = queryDictionary["vnp_TmnCode"],
+        //        vnp_TransactionNo = long.Parse(queryDictionary["vnp_TransactionNo"]),
+        //        vnp_TransactionStatus = queryDictionary["vnp_TransactionStatus"],
+        //        vnp_TxnRef = queryDictionary["vnp_TxnRef"]
+        //    };
+
+        //    if (callbackData.vnp_ResponseCode == "24") // Cancellation code
+        //    {
+        //        // 1. Retrieve order details (you'll need to find a way to identify the order)
+        //        var order = await _orderService.GetOrderById(callbackData.vnp_TxnRef);
+
+        //        // 2. Update order status to "Cancelled"
+        //        await _orderService.UpdateOrderStatus(order.OrderId, OrderStatus.Canceled);
+
+        //        // 3. (Optional) Log the cancellation event
+        //    }
+        //    return Ok();
+        //}
     }
+
 }
+

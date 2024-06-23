@@ -7,6 +7,8 @@ using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Catalog.ProductImage;
+using SWPSolution.ViewModels.System.Users;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -21,6 +23,7 @@ namespace SWPSolution.BackendApi.Controllers
         {
             _publicProductService = publicProductService;
             _manageProductService = manageProductService;
+
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -216,6 +219,76 @@ namespace SWPSolution.BackendApi.Controllers
             if (image == null)
                 return BadRequest("Cannot find image");
             return Ok(image);
+        }
+
+        [HttpGet("{productId}/images")]
+        
+        public async Task<ActionResult> GetImageByProductId(string productId)
+        {
+            var images = await _manageProductService.GetListImages(productId);
+
+            if (images == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(images);
+        }
+
+        [HttpPost("AddReview")]
+        public async Task<IActionResult> AddReview([FromQuery] string jwtToken, [FromBody] AddReviewRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _manageProductService.ExtractMemberIdFromTokenAsync(jwtToken);
+                if (memberId == null)
+                {
+                    return BadRequest(new { message = "Invalid token." });
+                }
+
+                var result = await _manageProductService.AddReview(memberId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Member or Product not found" });
+                }
+
+                return Ok(new { message = "Review added successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("DeleteReview")]
+        public async Task<IActionResult> DeleteReview([FromQuery] string jwtToken, string productId)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _manageProductService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var result = await _manageProductService.DeleteReview(memberId, productId);
+                if (!result)
+                {
+                    return NotFound(new { message = "Review not found" });
+                }
+
+                return Ok(new { message = "Review deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

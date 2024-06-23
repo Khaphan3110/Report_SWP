@@ -2,19 +2,23 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
 public partial class OrderDetail
 {
-    public string OrderdetailId { get; set; }
-
-    public string ProductId { get; set; }
+    public string OrderDetailId { get; set; }
 
     public string OrderId { get; set; }
 
-    public int? Quantity { get; set; }
+    public string ProductId { get; set; }
 
+    public int Quantity { get; set; }
+
+    public float Price { get; set; }
+
+    [JsonIgnore]
     public virtual Order Order { get; set; }
 
     public virtual Product Product { get; set; }

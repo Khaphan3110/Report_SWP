@@ -279,10 +279,10 @@ namespace SWPSolution.Application.System.Admin
             return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
         }
 
-        public async Task<bool> CreateBlogAsync(string adminId, BlogCreateRequest request)
+        public async Task<bool> CreateBlogAsync(string staffId, BlogCreateRequest request)
         {
-            var admin = await _context.Staff.FindAsync(adminId);
-            if (admin == null) return false;
+            var staff = await _context.Staff.FindAsync(staffId);
+            if (staff == null) return false;
 
             var blog = new Blog
             {
@@ -290,8 +290,8 @@ namespace SWPSolution.Application.System.Admin
                 Title = request.Title,
                 Content = request.Content,
                 Categories = request.Categories,
-                DateCreate = DateTime.Now,
-                StaffId = adminId,
+                DataCreate = DateTime.Now,
+                StaffId = staffId
             };
 
             _context.Blogs.Add(blog);
@@ -310,7 +310,7 @@ namespace SWPSolution.Application.System.Admin
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
-                DateCreate = blog.DateCreate,
+                DataCreate = blog.DataCreate,
                 StaffId = blog.StaffId
             }).ToList();
 
@@ -327,13 +327,13 @@ namespace SWPSolution.Application.System.Admin
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
-                DateCreate = blog.DateCreate,
+                DateCreate = blog.DataCreate,
             };
         }
 
-        public async Task<bool> UpdateBlogAsync(string adminId, UpdateBlogRequest request)
+        public async Task<bool> UpdateBlogAsync(string staffId, UpdateBlogRequest request)
         {
-            var blog = await _context.Blogs.FindAsync(adminId);
+            var blog = await _context.Blogs.FindAsync(staffId);
             if (blog == null) return false;
 
             if (!string.IsNullOrEmpty(request.Title))
@@ -375,7 +375,7 @@ namespace SWPSolution.Application.System.Admin
                 PromotionId = request.PromotionId,
                 ShippingAddress = request.ShippingAddress,
                 TotalAmount = request.TotalAmount,
-                OrderStatus = request.OrderStatus,
+                //OrderStatus = request.OrderStatus,
                 OrderDate = DateTime.Now,
             };
 
@@ -389,7 +389,7 @@ namespace SWPSolution.Application.System.Admin
             var order = await _context.Orders.FindAsync(id);
             if (order == null) return false;
 
-                order.OrderStatus = request.orderStatus;
+             //   order.OrderStatus = request.orderStatus;
 
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
@@ -417,9 +417,9 @@ namespace SWPSolution.Application.System.Admin
                 MemberId = order.MemberId,
                 PromotionId = order.PromotionId,
                 ShippingAddress = order.ShippingAddress,
-                TotalAmount = order.TotalAmount,
-                OrderStatus = order.OrderStatus,
-                OrderDate = order.OrderDate,
+                TotalAmount = (double)order.TotalAmount,
+            //    OrderStatus = order.OrderStatus,
+                OrderDate = (DateTime)order.OrderDate,
             };
         }
 
@@ -432,9 +432,9 @@ namespace SWPSolution.Application.System.Admin
                     MemberId = order.MemberId,
                     PromotionId = order.PromotionId,
                     ShippingAddress = order.ShippingAddress,
-                    TotalAmount = order.TotalAmount,
-                    OrderStatus = order.OrderStatus,
-                    OrderDate = order.OrderDate,
+                    TotalAmount = (double)order.TotalAmount,
+                //    OrderStatus = order.OrderStatus,
+                    OrderDate = (DateTime)order.OrderDate,
                 })
                 .ToListAsync();
         }

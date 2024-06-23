@@ -3,6 +3,7 @@ using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.System.Users;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -36,5 +37,11 @@ namespace SWPSolution.Application.Catalog.Product
         Task<List<ProductImageViewModel>> GetListImages(string productId);
 
         Task<PageResult<ProductViewModel>> GetAllPagning(GetManageProductPagingRequest request);
+
+        Task<bool> AddReview(string memberId, AddReviewRequest request);
+
+        Task<bool> DeleteReview(string memberId, string productId);
+
+        Task<string> ExtractMemberIdFromTokenAsync(string token);
     }
 }

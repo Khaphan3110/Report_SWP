@@ -18,6 +18,7 @@ export default function Categories() {
   const [listProductImport, setListProductImport] = useState([]);
   const [listCategories, setListCategoreis] = useState([]);
   const [cateGoriesID, setCateGoriesID] = useState("");
+  const [productID, setproductID] = useState("");
   const [show, setShow] = useState(false);
   const [stateImportProduct, setStateImportProduct] = useState(false);
   const [imageFile, setImageFile] = useState([]);
@@ -146,7 +147,9 @@ export default function Categories() {
       formData.append("imageFiles", image);
     });
     const resImage = await importImageProduct(productID, formData);
-    toast.success("lưu hỉnh ảnh thành công")
+    toast.success("lưu hỉnh ảnh thành công", {
+      autoClose: 1000,
+    });
     // 'imageFiles=@download.png;type=image/png'
   };
 
@@ -262,7 +265,7 @@ export default function Categories() {
                       </Button>
 
                       <div className="sub-button-Product-importImage">
-                        <label htmlFor="UpImage" className="btn btn-info">
+                        <label htmlFor={`UpImage-${product.productId}`} className="btn btn-info">
                           <i className="fa-solid fa-file-import"></i> UpImage
                         </label>
                         <input
@@ -270,7 +273,7 @@ export default function Categories() {
                           hidden
                           accept="image/png"
                           multiple
-                          id="UpImage"
+                          id={`UpImage-${product.productId}`}
                           onChange={(event) =>
                             handleImportFileImage(event, product.productId)
                           }
