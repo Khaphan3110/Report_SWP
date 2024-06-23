@@ -428,11 +428,15 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
+                MemberId = member.MemberId,
                 UserName = member.UserName,
+                PassWord = member.PassWord,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                PhoneNumber = member.PhoneNumber
+                PhoneNumber = member.PhoneNumber,
+                LoyaltyPoints = member.LoyaltyPoints,
+                RegistrationDate = member.RegistrationDate,
             };
         }
 
