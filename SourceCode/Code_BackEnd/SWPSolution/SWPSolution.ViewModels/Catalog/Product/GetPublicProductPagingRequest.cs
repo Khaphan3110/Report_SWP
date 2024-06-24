@@ -9,7 +9,7 @@ namespace SWPSolution.ViewModels.Catalog.Product
 {
     public class GetPublicProductPagingRequest : PagingRequestBase
     {
-        public string CategoryId { get; set; }
+        
 
 
     }

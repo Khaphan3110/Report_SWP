@@ -34,18 +34,13 @@ namespace SWPSolution.Application.Catalog.Product
             return data;
         }
 
-        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request)
         {
             //1. Request Join
             var query = from p in _context.Products
                         join c in _context.Categories on p.CategoriesId equals c.CategoriesId
                         join r in _context.Reviews on p.ProductId equals r.ProductId
                         select new { p, r, c };
-            //2. Filter
-            if (!string.IsNullOrEmpty(request.CategoryId) && request.CategoryId.Length > 0)
-            {
-                query = query.Where(p => p.c.CategoriesId == request.CategoryId);
-            }
             //3. Paging
             int totalRow = await query.CountAsync();
 
