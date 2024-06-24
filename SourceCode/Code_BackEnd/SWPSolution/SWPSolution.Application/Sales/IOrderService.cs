@@ -21,5 +21,7 @@ namespace SWPSolution.Application.Sales
         Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus);
         Task<string> ExtractMemberIdFromTokenAsync(string token);
        Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
+
+        Task SendReceiptEmailAsync(string recipientEmail, Order order);
     }
 }

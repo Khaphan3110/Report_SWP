@@ -160,7 +160,6 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { Message = "Payment failed" });
             }
 
-            // Payment succeeded, update payment status
             var paymentId = response.PaymentId; // Adjust based on your response model
             var payment = await _context.Payments.FindAsync(paymentId);
 
@@ -169,11 +168,21 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { Message = $"Payment with id {paymentId} not found" });
             }
 
-            // Update payment status (assuming PaymentStatus is a boolean flag)
-            payment.PaymentStatus = true; // Adjust based on your payment entity structure
+            payment.PaymentStatus = true;
 
+            // Fetch the order associated with the payment
+            var order = await _context.Orders.FindAsync(payment.OrderId);
+            if (order == null)
+            {
+                return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
+            }
+
+            // Update payment status and save changes
             _context.Payments.Update(payment);
             await _context.SaveChangesAsync();
+
+            // Send the email using the _orderService (you'll need to implement this method in your OrderService)
+            await _orderService.SendReceiptEmailAsync(order.MemberId, order); // Pass the member ID and order
 
             return Ok(new { Message = "Payment status updated successfully" });
         }
