@@ -4,6 +4,7 @@ using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
 using Azure.Core;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -36,37 +37,48 @@ namespace SWPSolution.Application.Catalog.Product
 
         public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
-            //1. Request Join
-            var query = from p in _context.Products
-                        join c in _context.Categories on p.CategoriesId equals c.CategoriesId
-                        join r in _context.Reviews on p.ProductId equals r.ProductId
-                        select new { p, r, c };
-            //2. Filter
-            if (!string.IsNullOrEmpty(request.CategoryId) && request.CategoryId.Length > 0)
-            {
-                query = query.Where(p => p.c.CategoriesId == request.CategoryId);
-            }
-            //3. Paging
-            int totalRow = await query.CountAsync();
+            // 1. Query with Filtering & Category Check (Optional)
+            var query = _context.Products.AsQueryable();
 
-            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .Select(x => new ProductViewModel()
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(p => p.ProductName.Contains(request.Keyword));
+            }
+
+            if (!string.IsNullOrEmpty(request.CategoryId))
+            {
+                query = query.Where(p => p.CategoriesId == request.CategoryId);
+            }
+
+            // 2. Optimized Join & Grouping (Avoid N+1 Issue)
+            var productData = await query
+                .GroupJoin(_context.Reviews, p => p.ProductId, r => r.ProductId, (p, reviews) => new { p, reviews })
+                .Select(x => new ProductViewModel
                 {
+                    ProductId = x.p.ProductId,  // Add for later reference
                     CategoriesId = x.p.CategoriesId,
                     ProductName = x.p.ProductName,
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
-                }).ToListAsync();
-            //4. Select and projection
-            var pageResult = new PageResult<ProductViewModel>()
+                    
+                })
+                .ToListAsync();
+
+            // 3. Paging
+            int totalRow = productData.Count;
+
+            var pagedData = productData
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList(); // ToList after paging for efficiency
+
+            // 4. Result
+            return new PageResult<ProductViewModel>
             {
                 TotalRecord = totalRow,
-                Items = data
-
+                Items = pagedData
             };
-            return pageResult;
         }
     }
 }
