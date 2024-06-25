@@ -8,37 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\khanh\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
->>>>>>> deca45cfcc4a05a2c915003a6986d586e508ec0c
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
       "projectName": "SWPSolution.Utilities",
       "projectPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
       "outputPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
-      "projectName": "SWPSolution.Utilities",
-      "projectPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
-      "packagesPath": "C:\\Users\\khanh\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\obj\\",
->>>>>>> deca45cfcc4a05a2c915003a6986d586e508ec0c
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\khanh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
->>>>>>> deca45cfcc4a05a2c915003a6986d586e508ec0c
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -46,6 +28,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -58,6 +41,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -79,11 +67,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
->>>>>>> deca45cfcc4a05a2c915003a6986d586e508ec0c
       }
     }
   }

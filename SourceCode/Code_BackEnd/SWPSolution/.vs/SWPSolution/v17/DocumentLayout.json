@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\sales\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -16,14 +24,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|g:\\project alll\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -433,30 +433,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AQIAAHQWAAAAAAAAAAAkwIEWAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2024-06-11T06:42:30.784Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "VnPayService.cs",
-              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
-              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAMwDoAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-19T02:57:38.407Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "OrderController.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
@@ -464,8 +440,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
               "ViewState": "AQIAAGEAAAAAAAAAAAAMwGwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T07:06:35.679Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T07:06:35.679Z"
             },
             {
               "$type": "Document",
@@ -507,33 +482,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "OrderService.cs",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\OrderService.cs",
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
               "RelativeToolTip": "SWPSolution.Application\\Sales\\OrderService.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAowCEAAAAIAAAA",
+              "ViewState": "AQIAABMAAAAAAAAAAAAowCAAAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-15T09:44:57.178Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SWPSolutionDBContext.cs",
-              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAAAEUAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-09T06:08:20.083Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
@@ -543,6 +505,41 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-06-09T06:14:37.929Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SWPSolutionDBContext.cs",
+              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAEMAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-09T06:08:20.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VnPayService.cs",
+              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
+              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\Payment\\VNPay\\VnPayService.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAMwDoAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-19T02:57:38.407Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AQIAAHQWAAAAAAAAAAAkwIEWAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2024-06-11T06:42:30.784Z"
             },
             {
               "$type": "Document",
@@ -887,8 +884,7 @@
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\SWPSolution.Application.csproj",
               "RelativeToolTip": "SWPSolution.Application\\SWPSolution.Application.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-10T09:31:54.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T09:31:54.604Z"
             },
             {
               "$type": "Document",
@@ -920,8 +916,7 @@
               "RelativeToolTip": "SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-09T06:07:51.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T06:07:51.484Z"
             },
             {
               "$type": "Document",
@@ -957,8 +952,7 @@
               "RelativeToolTip": "SWPSolution.Application\\SWPSolution.Application.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-11T06:50:55.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T06:50:55.527Z"
             },
             {
               "$type": "Document",
@@ -970,8 +964,7 @@
               "RelativeToolTip": "SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-09T06:08:00.236Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T06:08:00.236Z"
             },
             {
               "$type": "Document",
@@ -983,8 +976,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-11T06:50:41.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T06:50:41.224Z"
             },
             {
               "$type": "Document",
@@ -1424,8 +1416,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-09T06:07:58.455Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T06:07:58.455Z"
             },
             {
               "$type": "Document",
@@ -1437,8 +1428,7 @@
               "RelativeToolTip": "SWPSolution.Data\\SWPSolution.Data.csproj",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAwBAAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-09T06:58:52.921Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T06:58:52.921Z"
             },
             {
               "$type": "Document",
@@ -1449,8 +1439,7 @@
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj",
               "RelativeToolTip": "SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-11T06:50:44.049Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-11T06:50:44.049Z"
             },
             {
               "$type": "Document",

@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "kyGNjUjvc7E=",
   "success": true,
   "projectFilePath": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
-=======
-  "dgSpecHash": "lb99DSgWqwCJiPlYaEsHw/8IlLDubMuOIaMLofoKPeZNVxMxUmz1Fvwrk8yohog/7sAdZD7QXUz7lvz43StOtg==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Utilities\\SWPSolution.Utilities.csproj",
->>>>>>> deca45cfcc4a05a2c915003a6986d586e508ec0c
   "expectedPackageFiles": [],
   "logs": []
 }
