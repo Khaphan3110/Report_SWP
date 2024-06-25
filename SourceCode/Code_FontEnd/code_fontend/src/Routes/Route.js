@@ -14,6 +14,9 @@ import Logout from "../Components/User/Logout/Logout";
 import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
 import RegisterForm from "../Components/User/Register/RegisterForm";
 import RouteAdminLayout from "../Layouts/AdminLayout/RouteAdminLayout";
+import DashBoardAdmin from "../Components/Amind/DashBoardAdmin/DashBoardAdmin";
+import PreorderAdmin from "../Components/Amind/PreorderAdmin/PreorderAdmin";
+import SettingAdmin from "../Components/Amind/SettingAdmin/SettingAdmin";
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -25,7 +28,7 @@ import RouteAdminLayout from "../Layouts/AdminLayout/RouteAdminLayout";
 //         <Route path="/register" element={<RegisterForm />} />
 //         <Route path="/authenOTP" element={<AuthenEmail />} />
 //         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
-//         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} />
+//         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} /> 
 //         <Route path="/CategoriesType" element={<ImportCategories/>} />
 
 const publicRoutes = [
@@ -49,6 +52,9 @@ const privateRoutes = [
   { path: "/admin", component: RouteAdminLayout },
   { path: "/categories", component: Categories },
   { path: "/product", component: Product },
+  { path: "/DashBoardAdmin", component: DashBoardAdmin },
+  { path: "/settingadmin", component: SettingAdmin },
+  { path: "/preorderadmin", component: PreorderAdmin },
   // { path: "/sideBar", component: SideBarAdmin },
 ];
 
