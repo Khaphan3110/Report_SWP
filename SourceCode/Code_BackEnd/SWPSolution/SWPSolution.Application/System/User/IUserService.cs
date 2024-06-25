@@ -37,7 +37,7 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request);
 
-        Task<MemberAddressVM> GetMemberAddressById(string memberId);
+        Task<List<MemberAddressVM>> GetMemberAddressById(string memberId);
 
         Task<List<MemberAddressVM>> GetAllAddresses();
 

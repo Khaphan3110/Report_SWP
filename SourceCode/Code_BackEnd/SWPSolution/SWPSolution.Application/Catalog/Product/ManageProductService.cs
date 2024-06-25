@@ -396,6 +396,43 @@ namespace SWPSolution.Application.Catalog.Product
             return true;
         }
 
+        public async Task<List<ReviewVM>> GetReviews(string memberId)
+        {
+            var reviews = _context.Reviews
+                                        .Where(m => m.MemberId == memberId)
+                                        .Select(m => new ReviewVM
+                                        {
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+
+            if (!reviews.Any())
+            {
+                throw new KeyNotFoundException($"Reviews for member ID {memberId} not found.");
+            }
+
+            return reviews;
+        }
+
+        public async Task<List<ReviewVM>> GetAllReview()
+        {
+            var review = _context.Reviews
+                                        .Select(m => new ReviewVM
+                                        {
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+            return review;
+        }
+
         public async Task<bool> DeleteReview(string memberId, string productId)
         {
             var review = _context.Reviews.FirstOrDefault(r => r.MemberId == memberId && r.ProductId == productId);

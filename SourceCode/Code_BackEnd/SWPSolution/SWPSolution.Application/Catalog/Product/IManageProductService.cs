@@ -40,6 +40,10 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<bool> AddReview(string memberId, AddReviewRequest request);
 
+        Task<List<ReviewVM>> GetReviews(string memberId);
+
+        Task<List<ReviewVM>> GetAllReview();
+
         Task<bool> DeleteReview(string memberId, string productId);
 
         Task<string> ExtractMemberIdFromTokenAsync(string token);

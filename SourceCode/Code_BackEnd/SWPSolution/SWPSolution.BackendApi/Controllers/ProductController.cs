@@ -265,6 +265,41 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet("GetReviews")]
+        public async Task<IActionResult> GetReviews([FromQuery] string jwtToken)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _manageProductService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var review = await _manageProductService.GetReviews(memberId);
+                if (review == null)
+                {
+                    return NotFound(new { message = "Review not found" });
+                }
+
+                return Ok(review);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpGet("GetAllReview")]
+        public async Task<IActionResult> GetAllReview()
+        {
+            var review = await _manageProductService.GetAllReview();
+            return Ok(review);
+        }
+
         [HttpDelete("DeleteReview")]
         public async Task<IActionResult> DeleteReview([FromQuery] string jwtToken, string productId)
         {

@@ -472,24 +472,26 @@ namespace SWPSolution.Application.System.User
 
             return true;
         }
-
-        public async Task<MemberAddressVM> GetMemberAddressById(string memberId)
+        public async Task<List<MemberAddressVM>> GetMemberAddressById(string memberId)
         {
-            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
+            var address = _context.Addresses
+                                        .Where(m => m.MemberId == memberId)
+                                        .Select(m => new MemberAddressVM
+                                        {
+                                            House_Number = m.HouseNumber,
+                                            Street_Name = m.Street,
+                                            District_Name = m.District,
+                                            City = m.City,
+                                            Region = m.Region
+                                        })
+                                        .ToList();
 
-            if (address == null)
+            if (!address.Any())
             {
                 throw new KeyNotFoundException($"Address for member ID {memberId} not found.");
             }
 
-            return new MemberAddressVM
-            {
-                House_Number = address.HouseNumber,
-                Street_Name = address.Street,
-                District_Name = address.District,
-                City = address.City,
-                Region = address.Region
-            };
+            return address;
         }
 
         public async Task<List<MemberAddressVM>> GetAllAddresses()
