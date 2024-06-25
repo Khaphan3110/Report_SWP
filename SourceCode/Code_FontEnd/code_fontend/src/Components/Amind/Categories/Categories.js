@@ -6,27 +6,21 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Papa from "papaparse";
 import ReactPaginate from "react-paginate";
-import {
-  cateGetAll,
-  importCateGories,
-} from "../../../Service/CateService/CateService";
+import { useCateGories } from "../../../Store";
 import "./Categories.css";
 export default function Categories() {
-  const [listCategories, setListCategoreis] = useState([]);
   const [listCategoriesExport, setListCategoreisExport] = useState([]);
-  const [listCategoriesImport, setListCategoreisImport] = useState([]);
-  const [stateCate, setSateCate] = useState(false);
+  // const [listCategoriesImport, setListCategoreisImport] = useState([]);
+  // const [stateCate, setSateCate] = useState(false);
   const [show, setShow] = useState(false);
-  const [stateImportCate, setStateImportCate] = useState(false);
-
-  useEffect(() => {
-    const categet = async () => {
-      const res = await cateGetAll();
-      setListCategoreis(res.data);
-      setStateImportCate(false);
-    };
-    categet();
-  }, [stateImportCate]);
+  // const [stateImportCate, setStateImportCate] = useState(false);
+  const {
+    listCategories,
+    setListCategoreis,
+    FunImportCateGories,
+    getAllCategoreis,
+    errorNumber,
+  } = useCateGories();
 
   const getCategoriesExport = async (event, done) => {
     const result = [];
@@ -52,7 +46,7 @@ export default function Categories() {
     }
   };
 
-  const handleImportFile = (event) => {
+  const handleImportFile = async (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       if (file.type !== "text/csv") {
@@ -62,7 +56,7 @@ export default function Categories() {
       Papa.parse(file, {
         // header:true,
 
-        complete: function (results) {
+        complete: async function  (results) {
           let rawCSV = results.data;
           if (rawCSV[0] && rawCSV[0].length === 5) {
             if (
@@ -86,9 +80,14 @@ export default function Categories() {
                   cateObj.source = cate[4];
                   result.push(cateObj);
                 }
-                setListCategoreisImport(result);
-                setSateCate(true);
               });
+              const res = await FunImportCateGories(result);
+              if (res) {
+                toast.success("nhập Cate thành công !!");
+              } else {
+                toast.error("nhập sản phẩm thất bại");
+              }
+              await getAllCategoreis();
             }
           }
         },
@@ -96,19 +95,19 @@ export default function Categories() {
     }
   };
 
-  useEffect(() => {
-    const res = async () => {
-      await importCateGories(listCategoriesImport);
-    };
-    res();
-    setStateImportCate(true);
-  }, [listCategoriesImport]);
-
   const [itemOffset, setItemOffset] = useState(0);
+  const [currentItems, setcurrentItems] = useState();
+  const [pageCount, setpageCount] = useState();
+  useEffect(() => {
+    if (listCategories) {
+      const endOffset = itemOffset + 11;
+      setcurrentItems(listCategories.slice(itemOffset, endOffset));
+      setpageCount(Math.ceil(listCategories.length / 11));
+    } else {
+      console.log("kh co du lieu");
+    }
+  }, [listCategories, itemOffset]);
 
-  const endOffset = itemOffset + 11;
-  const currentItems = listCategories.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(listCategories.length / 11);
   // const [ endOffset, pageCount, listOfSet ] = usePagination(listOrchil,8)
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 11) % listCategories.length;

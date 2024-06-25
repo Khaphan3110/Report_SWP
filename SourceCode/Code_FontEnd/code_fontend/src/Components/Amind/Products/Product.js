@@ -5,42 +5,17 @@ import { CSVLink } from "react-csv";
 import ReactPaginate from "react-paginate";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { cateGetAll } from "../../../Service/CateService/CateService";
-import {
-  importProduct,
-  productGetAll,
-} from "../../../Service/ProductService/ProductService";
-import "./Product.css";
 import { importImageProduct } from "../../../Service/ProductService/imageService";
+import { useCateGories, useProduct } from "../../../Store/Hooks/Hooks";
+import "./Product.css";
 export default function Categories() {
-  const [listProduct, setListProduct] = useState([]);
   const [listProductExport, setlistProductExport] = useState([]);
-  const [listProductImport, setListProductImport] = useState([]);
-  const [listCategories, setListCategoreis] = useState([]);
   const [cateGoriesID, setCateGoriesID] = useState("");
-  const [productID, setproductID] = useState("");
   const [show, setShow] = useState(false);
-  const [stateImportProduct, setStateImportProduct] = useState(false);
   const [imageFile, setImageFile] = useState([]);
-
-  useEffect(() => {
-    const getlistCate = async () => {
-      const res = await cateGetAll();
-      setListCategoreis(res.data);
-      setStateImportProduct(false);
-    };
-    getlistCate();
-  }, []);
-
-  useEffect(() => {
-    const getlistProduct = async () => {
-      const res = await productGetAll();
-      setListProduct(res.data);
-      setStateImportProduct(false);
-    };
-
-    getlistProduct();
-  }, [stateImportProduct]);
+  const { listCategories } = useCateGories();
+  const { listProduct, importProductList, getAllProductToContext } =
+    useProduct();
 
   const getProductToExport = async (event, done) => {
     const result = [];
@@ -66,7 +41,7 @@ export default function Categories() {
     }
   };
 
-  const handleImportFileProduct = (event) => {
+  const handleImportFileProduct = async (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       let file = event.target.files[0];
       if (file.type !== "text/csv") {
@@ -76,7 +51,7 @@ export default function Categories() {
       Papa.parse(file, {
         // header:true,
 
-        complete: function (results) {
+        complete: async function (results) {
           let rawCSV = results.data;
           if (rawCSV[0] && rawCSV[0].length === 5) {
             if (
@@ -101,8 +76,18 @@ export default function Categories() {
                   productObj.statusDescription = product[4];
                   result.push(productObj);
                 }
-                setListProductImport(result);
               });
+              if (cateGoriesID) {
+                console.log("day la list product", result);
+                const resImportProduct = await importProductList(result);
+                if (resImportProduct) {
+                  toast.success("nhập sản phẩm thành công ");
+                } else {
+                  toast.error("Nhập sản phẩm kh thành công");
+                }
+              } else {
+                toast.error("Chưa chọn loại sản phẩm !!!");
+              }
             }
           }
         },
@@ -111,19 +96,26 @@ export default function Categories() {
   };
 
   useEffect(() => {
-    const res = async () => {
-      await importProduct(listProductImport);
+    const getListProduct = async () => {
+      await getAllProductToContext(1, 11);
     };
-    res();
-    setStateImportProduct(true);
-  }, [listProductImport]);
+    getListProduct();
+  }, []);
 
   const [itemOffset, setItemOffset] = useState(0);
+  const [currentItems, setcurrentItems] = useState([]);
+  const [pageCount, setpageCount] = useState();
 
-  const endOffset = itemOffset + 11;
-  const currentItems = listProduct.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(listProduct.length / 11);
-  // const [ endOffset, pageCount, listOfSet ] = usePagination(listOrchil,8)
+  useEffect(() => {
+    if (listProduct && listProduct.length > 0) {
+      const endOffset = itemOffset + 11;
+      setcurrentItems(listProduct.slice(itemOffset, endOffset));
+      setpageCount(Math.ceil(listProduct.length / 11));
+    } else {
+      console.log("kh co du lieu");
+    }
+  }, [listProduct, itemOffset]);
+
   const handlePageClick = (event) => {
     const newOffset = (event.selected * 11) % listProduct.length;
     setItemOffset(newOffset);
@@ -141,15 +133,24 @@ export default function Categories() {
 
   const handleImportFileImage = async (event, productID) => {
     let image = Array.from(event.target.files);
+    // console.log("image",image)
     setImageFile(image);
     const formData = new FormData();
     imageFile.forEach((image, index) => {
       formData.append("imageFiles", image);
     });
+    // console.log("fdsa",formData)
     const resImage = await importImageProduct(productID, formData);
-    toast.success("lưu hỉnh ảnh thành công", {
-      autoClose: 1000,
-    });
+    if (resImage) {
+      toast.success("lưu hỉnh ảnh thành công", {
+        autoClose: 1000,
+      });
+    } else {
+      toast.error("lưu hỉnh ảnh KHÔNG thành công", {
+        autoClose: 1000,
+      });
+    }
+
     // 'imageFiles=@download.png;type=image/png'
   };
 
@@ -207,15 +208,17 @@ export default function Categories() {
             id="Categories"
             onChange={handleGetCateValue}
           >
-            {listCategories.map((cate, index) => {
-              return (
-                <>
-                  <option key={index} value={cate.categoriesId}>
-                    {cate.brandName}
-                  </option>
-                </>
-              );
-            })}
+            <option> Categories Type</option>
+            {listCategories &&
+              listCategories.map((cate, index) => {
+                return (
+                  <>
+                    <option key={index} value={cate.categoriesId}>
+                      {cate.brandName}
+                    </option>
+                  </>
+                );
+              })}
           </select>
         </div>
       </div>
@@ -265,7 +268,10 @@ export default function Categories() {
                       </Button>
 
                       <div className="sub-button-Product-importImage">
-                        <label htmlFor={`UpImage-${product.productId}`} className="btn btn-info">
+                        <label
+                          htmlFor={`UpImage-${product.productId}`}
+                          className="btn btn-info"
+                        >
                           <i className="fa-solid fa-file-import"></i> UpImage
                         </label>
                         <input

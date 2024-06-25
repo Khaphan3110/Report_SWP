@@ -5,3 +5,19 @@
 .sub-header-admin{
 }
 
+.user-profile{
+    display: flex;
+    justify-content: end;
+    padding-right: 30px;
+}
+
+.user-profile img{
+    height: 45px;
+    width: 45px;
+}
+
+.user-profile h5{
+    align-self: center;
+    margin: 0;
+    padding-left: 10px;
+}

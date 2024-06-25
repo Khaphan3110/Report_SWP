@@ -64,7 +64,7 @@ export const userFogotPassword = async ( PasswordReset ) => {
   }
 }
 
-export const useLoginGoogle = async ( useGoogleLogin ) => {
+export const userLoginGoogle = async ( useGoogleLogin ) => {
   try {
     const res = await request.Post("Users/google-login",useGoogleLogin, {
       headers:{

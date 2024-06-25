@@ -1,19 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
 import { StoreProvider } from "./Store";
+import CategoriesProvider from "./Store/ContextConfig/CategoriesProvider";
+import ProductProvider from "./Store/ContextConfig/ProductProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <StoreProvider>
-      <BrowserRouter>
-        <App />
-        <ToastContainer />
-      </BrowserRouter>
-    </StoreProvider>
+    <CategoriesProvider>
+      <ProductProvider>
+        <StoreProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </StoreProvider>
+      </ProductProvider>
+    </CategoriesProvider>
   </React.StrictMode>
 );
 

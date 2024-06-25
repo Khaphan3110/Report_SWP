@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
 import {
-  useLoginGoogle,
+  userLoginGoogle,
   userLogin,
 } from "../../../Service/UserService/UserService";
 import { ToastContainer, toast } from "react-toastify";
@@ -55,7 +55,7 @@ export default function LoginForm() {
         // console.log("đây là login",res.data)
         navigator("/");
       } else {
-        toast.error("tên nhập sai hoặc sai mật khẩu")
+        toast.error("tên nhập sai hoặc sai mật khẩu");
       }
     },
   });
@@ -63,29 +63,30 @@ export default function LoginForm() {
   const [userValueGoogle, setuserValueGoogle] = useState({});
   const navigate = useNavigate(); //sử dựng để điều hướng trang
   const handleLoginGoogle = async () => {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const userValue = {
-          email: result.user.email,
-          firstName: result._tokenResponse.firstName,
-          lastName: result._tokenResponse.lastName,
-        };
-        
-        setuserValueGoogle(userValue);
-        // localStorage.setItem("userToken", JSON.stringify(userValue));
-        toast.success("đăng nhập  thành công")
-        navigate("/")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const userValue = {
+        email: result.user.email,
+        firstName: result._tokenResponse.firstName,
+        lastName: result._tokenResponse.lastName,
+      };
 
-  
+      const res = await userLoginGoogle(userValue);
+      if (res) {
+        toast.success("đăng nhập  thành công");
+        navigate("/");
+      } else {
+        toast.error("đăng nhập google thất bại")
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="L-seccion">
-      <ToastContainer/>
+      <ToastContainer />
       <div className="container mx-auto">
         <div className="wraper-login-page">
           <div className="Header-login">
@@ -128,15 +129,16 @@ export default function LoginForm() {
                     <i className={iconShow} onClick={handlerOnclickIcon}></i>
                   </div>
                   <div className="button-rememberMe">
-                  <label htmlFor="rememberMe">
-                    <input
-                      type="checkbox"
-                      name="rememberMe"
-                      id="rememberMe"
-                      value={formik.values.rememberMe}
-                      onChange={formik.handleChange}
-                    />  Remember me
-                  </label>
+                    <label htmlFor="rememberMe">
+                      <input
+                        type="checkbox"
+                        name="rememberMe"
+                        id="rememberMe"
+                        value={formik.values.rememberMe}
+                        onChange={formik.handleChange}
+                      />{" "}
+                      Remember me
+                    </label>
                   </div>
                   <div className="link-Fogot-password">
                     <p>

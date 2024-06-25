@@ -106,3 +106,11 @@ CREATE SEQUENCE review_id_seq
 GO
 
 --================================================================================câu lệnh sql 
+
+select * from Categories
+delete Categories
+select * from Product
+delete Product
+
+select * from ProductImages
+select * from staff

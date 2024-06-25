@@ -1,6 +1,7 @@
 import React from "react";
 import "./HeaderAdmin.css";
 import { Col, Row } from "react-bootstrap";
+import userIcon from "../../../assets/images/account-icon.png";
 export default function HeaderAdmin() {
   return (
     <>
@@ -14,9 +15,10 @@ export default function HeaderAdmin() {
               height={53}
             />
           </Col>
-          <Col  xl={10} className="sub-header-admin">
+          <Col xl={10} className="sub-header-admin">
             <div className="user-profile">
-              <div>ha</div>
+              <img src={userIcon} alt="userImage"></img> {" "}
+              <h5>ussername</h5>
             </div>
           </Col>
         </Row>

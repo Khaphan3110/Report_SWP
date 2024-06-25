@@ -18,9 +18,9 @@ export default function Header() {
   const prevCartItemsCount = useRef(state.cartItems.length);
 
   useEffect(() => {
-    console.log(prevCartItemsCount.current + "blbal" + state.cartItems.length)
+
     const showTOOLIP = () => {
-      if (state.cartItems.length > prevCartItemsCount.current) {
+      if (state.cartItems.length >= prevCartItemsCount.current) {
        
         setShowToolip(true);
         setTimeout(() => {

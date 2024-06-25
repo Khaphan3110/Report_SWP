@@ -22,3 +22,12 @@ export const importProduct = async (Product) => {
     console.log("Error Product import ", error);
   }
 };
+
+export const getProductByPinagine = async (pageIndex,PageSize) => {
+  try {
+    const res = await request.Get(`Product/public-paging?PageIndex=${pageIndex}&PageSize=${PageSize}`)
+    return res;
+  } catch (error) {
+    console.log("Error getProduct by pageSize", error);
+  }
+}
