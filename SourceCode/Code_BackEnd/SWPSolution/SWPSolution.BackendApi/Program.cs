@@ -37,7 +37,7 @@ namespace SWPSolution.BackendApi
             //Add cros 
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
-                build.WithOrigins("https://localhost:44358/index.html").AllowAnyMethod().AllowAnyHeader();
+                build.WithOrigins("https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
             }));
              
             //Add DbContext
