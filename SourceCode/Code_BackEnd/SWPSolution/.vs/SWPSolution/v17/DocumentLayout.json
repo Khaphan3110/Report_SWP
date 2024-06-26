@@ -434,7 +434,7 @@
               "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
               "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAABYAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-10T09:31:44.653Z",
               "EditorCaption": ""
@@ -449,8 +449,7 @@
               "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
               "ViewState": "AQIAACgAAAAAAAAAAIA0wDUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-09T06:08:20.083Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-09T06:08:20.083Z"
             },
             {
               "$type": "Document",
@@ -462,8 +461,7 @@
               "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\IPublicProductService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T09:31:48.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T09:31:48.804Z"
             },
             {
               "$type": "Document",
