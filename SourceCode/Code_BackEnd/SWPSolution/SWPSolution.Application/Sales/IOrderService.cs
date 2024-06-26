@@ -21,6 +21,12 @@ namespace SWPSolution.Application.Sales
         IEnumerable<Order> GetOrdersByMemberId(string memberId);
         Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus);
         Task<string> ExtractMemberIdFromTokenAsync(string token);
+<<<<<<< HEAD
         Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
+=======
+       Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
+
+        Task SendReceiptEmailAsync(string recipientEmail, Order order);
+>>>>>>> feature/payment_controller
     }
 }

@@ -19,6 +19,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using System.Net;
+using SWPSolution.Application.System.User;
 
 namespace SWPSolution.Application.Sales
 {
@@ -207,6 +210,31 @@ namespace SWPSolution.Application.Sales
         }
 
 
+        //Emailing Receipt
+        public async Task SendReceiptEmailAsync(string memberId, Order order)
+        {
+            // Load email configuration 
+            var emailConfig = _config.GetSection("EmailConfiguration").Get<EmailVM>();
+            var emailService = new EmailService(emailConfig);
+
+            // Construct the message using the MessageVM constructor
+
+            var recipientEmail = await _context.Members.FindAsync(memberId);
+            var message = new MessageVM(
+                new List<string> { recipientEmail.Email }, // Pass recipient as a list
+                "Payment Receipt",
+                $@"
+            <h1>Payment Receipt</h1>
+            <p>Thank you for your purchase!</p>
+            <p>Order ID: {order.OrderId}</p>
+            <p>Total Amount: {order.TotalAmount}</p>
+        "
+            );
+
+            // Send the email
+            emailService.SendEmail(message);
+        }
+
 
         private string GenerateOrderDetailId()
         {
@@ -255,5 +283,12 @@ namespace SWPSolution.Application.Sales
 
             return maxAutoIncrement + 1;
         }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> feature/payment_controller
     }
 }
