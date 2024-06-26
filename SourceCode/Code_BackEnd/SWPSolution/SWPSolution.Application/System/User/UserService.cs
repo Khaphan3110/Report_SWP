@@ -413,13 +413,21 @@ namespace SWPSolution.Application.System.User
 
         public async Task<List<MemberInfoVM>> GetAllMembersAsync()
         {
-            var members = await _context.Members
+            var members =  _context.Members
                                         .Select(m => new MemberInfoVM
                                         {
+                                            MemberId = m.MemberId,
                                             UserName = m.UserName,
-                                            Email = m.Email
+                                            PassWord = m.PassWord,
+                                            Email = m.Email,
+                                            FirstName = m.FirstName,
+                                            LastName = m.LastName,
+                                            PhoneNumber = m.PhoneNumber,
+                                            LoyaltyPoints = m.LoyaltyPoints,
+                                            RegistrationDate = m.RegistrationDate,
+
                                         })
-                                        .ToListAsync();
+                                        .ToList();
             return members;
         }
 
@@ -430,11 +438,15 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
+                MemberId = member.MemberId,
                 UserName = member.UserName,
+                PassWord = member.PassWord,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                PhoneNumber = member.PhoneNumber
+                PhoneNumber = member.PhoneNumber,
+                LoyaltyPoints = member.LoyaltyPoints,
+                RegistrationDate = member.RegistrationDate,
             };
         }
 

@@ -6,25 +6,25 @@ import MileChart from '../Chart/MileChart';
 import TrackingChart from '../Chart/TrackingChart';
 import './DashBoardAdmin.css';
 
-const Dashboard = () => {
-  return (
-    <Container fluid className="dashboard-container-new">
-      <Row>
-        <Col md={2} className="sidebar-new">
-          <h2 className="text-center mt-3">MilkStore</h2>
-          <ListGroup variant="flush">
-            <ListGroup.Item as={Link} to="/dashboardadmin" className="text-black-new bg-white">Dashboard</ListGroup.Item>
-            <ListGroup.Item as={Link} to="/preorderadmin" className="text-black-new bg-white">Preorder</ListGroup.Item>
-            <ListGroup.Item as={Link} to="/settingadmin" className="text-black-new bg-white">Settings</ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={10} className="dashboard-content-new">
-          <DashboardContent />
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+// const Dashboard = () => {
+//   return (
+//     <Container fluid className="dashboard-container-new">
+//       <Row>
+//         <Col md={2} className="sidebar-new">
+//           <h2 className="text-center mt-3">MilkStore</h2>
+//           <ListGroup variant="flush">
+//             <ListGroup.Item as={Link} to="/dashboardadmin" className="text-black-new bg-white">Dashboard</ListGroup.Item>
+//             <ListGroup.Item as={Link} to="/preorderadmin" className="text-black-new bg-white">Preorder</ListGroup.Item>
+//             <ListGroup.Item as={Link} to="/settingadmin" className="text-black-new bg-white">Settings</ListGroup.Item>
+//           </ListGroup>
+//         </Col>
+//         <Col md={10} className="dashboard-content-new">
+//           <DashboardContent />
+//         </Col>
+//       </Row>
+//     </Container>
+//   );
+// };
 
 const DashboardContent = () => (
   <div className="dashboard-content-new">
@@ -99,4 +99,4 @@ const DashboardContent = () => (
   </div>
 );
 
-export default Dashboard;
+export default DashboardContent;

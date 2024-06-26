@@ -49,12 +49,11 @@ const publicRoutes = [
   
 ];
 const privateRoutes = [
-  { path: "/admin", component: RouteAdminLayout },
-  { path: "/categories", component: Categories },
-  { path: "/product", component: Product },
-  { path: "/DashBoardAdmin", component: DashBoardAdmin },
-  { path: "/settingadmin", component: SettingAdmin },
-  { path: "/preorderadmin", component: PreorderAdmin },
+  { path: "/admin", component: DashBoardAdmin },
+  { path: "/admin/categories", component: Categories },
+  { path: "/admin/product", component: Product },
+  { path: "/admin/settingadmin", component: SettingAdmin },
+  { path: "/admin/preorderadmin", component: PreorderAdmin },
   // { path: "/sideBar", component: SideBarAdmin },
 ];
 

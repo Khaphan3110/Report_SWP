@@ -42,3 +42,11 @@ export const useProduct = () => {
     addImageToProduct,
   };
 };
+
+export const useUserProfile = () => {
+  const { userProfile, setUserProfile } = useContext(UserContext);
+  return {
+    userProfile,
+    setUserProfile,
+  };
+};

@@ -35,7 +35,7 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpGet("public-paging")]
         public async Task<IActionResult> Get([FromQuery] GetPublicProductPagingRequest request)
         {
-            var products = await _publicProductService.GetAllByCategoryId(request);
+            var products = await _publicProductService.GetAllPaging(request);
             return Ok(products);
         }
 

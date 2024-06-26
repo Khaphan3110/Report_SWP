@@ -14,15 +14,18 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
-using SWPSolution.Application.Payment.VNPay;
+using SWPSolution.Application.AppPayment;
+using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.Session;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
+using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.System.Users;
 using EmailService = SWPSolution.Application.System.User.EmailService;
 using IEmailService = SWPSolution.Application.System.User.IEmailService;
+using SWPSolution.Application.Catalog.Promotion;
 
 namespace SWPSolution.BackendApi
 {
@@ -78,8 +81,10 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
-            
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
+
 
             //Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>

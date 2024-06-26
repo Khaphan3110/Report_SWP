@@ -6,6 +6,7 @@ import { productGetAll } from "../../../Service/ProductService/ProductService";
 import { Actions, useProduct } from "../../../Store";
 import { useStore } from "../../../Store";
 import { imageGetAll } from "../../../Service/ProductService/imageService";
+import HomePage from "../../../Pages/HomePage/HomePage";
 export default function CartProducts() {
 
   const [state, dispatch] = useStore();
@@ -22,6 +23,7 @@ export default function CartProducts() {
  
   return (
     <Container>
+      <HomePage/>
       <Row>
         {listProduct && listProduct.map((product, index) => {
           return (

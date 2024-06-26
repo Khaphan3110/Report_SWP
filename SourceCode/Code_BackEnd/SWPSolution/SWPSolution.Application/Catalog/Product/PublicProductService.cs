@@ -36,10 +36,17 @@ namespace SWPSolution.Application.Catalog.Product
             return data;
         }
 
-        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
+        public async Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request)
         {
-            // 1. Query with Filtering & Category Check (Optional)
-            var query = _context.Products.AsQueryable();
+
+            //1. Request Join
+            var query = from p in _context.Products
+                        join c in _context.Categories on p.CategoriesId equals c.CategoriesId
+                        join r in _context.Reviews on p.ProductId equals r.ProductId
+                        select new { p, r, c };
+            //3. Paging
+            int totalRow = await query.CountAsync();
+
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {

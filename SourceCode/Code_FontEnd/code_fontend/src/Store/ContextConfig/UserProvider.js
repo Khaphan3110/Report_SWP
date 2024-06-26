@@ -1,11 +1,12 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 import { UserContext } from "./Context"
 
 function UserProvider ({children}){
 
-    const [state, dispatch] = useReducer();
+    const [ userProfile,setUserProfile ] = useState(null);
+    
     return (
-      <UserContext.Provider value={ [state,dispatch] }>
+      <UserContext.Provider value={ { userProfile,setUserProfile} }>
        { children }
       </UserContext.Provider>
     )

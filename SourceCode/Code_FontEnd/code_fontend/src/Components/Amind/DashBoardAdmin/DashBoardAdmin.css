@@ -44,7 +44,8 @@
 }
 
 .dashboard-content-new {
-  margin-left: 210px;
+  /* margin-left: 210px; */
+  margin: 0 auto;
   padding: 15px;
 }
 

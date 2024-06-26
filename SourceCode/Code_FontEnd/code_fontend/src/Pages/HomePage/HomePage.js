@@ -44,6 +44,7 @@ export default function HomePage() {
           <img src='https://theme.hstatic.net/1000186075/1000909086/14/banner_coll_3.jpg?v=4483' alt='Promotion 6' />
         </div>
       </div>
+   
     </div>
   );
 }
