@@ -11,7 +11,7 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
 
-        //Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request);
+        Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request);
 
         Task<List<ProductViewModel>> GetAll();
     }

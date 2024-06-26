@@ -98,5 +98,7 @@ namespace SWPSolution.Application.Catalog.Product
                 Items = pagedData
             };
         }
+
+        //Task<List<ProductViewModel>> GetAll() {}
     }
 }
