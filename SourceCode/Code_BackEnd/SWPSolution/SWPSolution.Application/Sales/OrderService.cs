@@ -283,12 +283,6 @@ namespace SWPSolution.Application.Sales
 
             return maxAutoIncrement + 1;
         }
-<<<<<<< HEAD
-=======
 
-
-
-
->>>>>>> feature/payment_controller
     }
 }

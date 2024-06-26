@@ -6,15 +6,13 @@ namespace SWPSolution.Application.Catalog.Product
 {
     public interface IPublicProductService
     {
-<<<<<<< HEAD
-        Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request);
-       
-=======
+
         Task<int> GetTotalProductCountAsync();
 
         Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
 
->>>>>>> feature/preorder_controller
+        Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request);
+
         Task<List<ProductViewModel>> GetAll();
     }
 }
