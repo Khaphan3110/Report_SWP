@@ -16,12 +16,6 @@ namespace SWPSolution.Application.Catalog.Product
             _context = context;
         }
 
-
-        public async Task<int> GetTotalProductCountAsync()
-        {
-            return await _context.Products.CountAsync();
-        }
-
         public async Task<List<ProductViewModel>> GetAll()
         {
             var query = from p in _context.Products
@@ -31,30 +25,26 @@ namespace SWPSolution.Application.Catalog.Product
 
             int totalRow = await query.CountAsync();
             var data = await query.Select(x => new ProductViewModel()
-                {
-                    ProductId = x.p.ProductId,
-                    CategoriesId = x.p.CategoriesId,
-                    ProductName = x.p.ProductName,
-                    Description = x.p.Description,
-                    Price = x.p.Price,
-                    Quantity = x.p.Quantity,
-                    StatusDescription = x.p.StatusDescription,
-                    Image = x.p.Image,
-                }).ToListAsync();
+            {
+                CategoriesId = x.p.CategoriesId,
+                ProductName = x.p.ProductName,
+                Description = x.p.Description,
+                Price = x.p.Price,
+                Quantity = x.p.Quantity,
+            }).ToListAsync();
             return data;
         }
 
+        public async Task<int> GetTotalProductCountAsync()
+        {
+            return await _context.Products.CountAsync();
+        }
+
+
         public async Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request)
         {
-
-            //1. Request Join
-            var query = from p in _context.Products
-                        join c in _context.Categories on p.CategoriesId equals c.CategoriesId
-                        join r in _context.Reviews on p.ProductId equals r.ProductId
-                        select new { p, r, c };
-            //3. Paging
-            int totalRow = await query.CountAsync();
-
+            // 1. Query with Filtering & Category Check (Optional)
+            var query = _context.Products.AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -77,9 +67,7 @@ namespace SWPSolution.Application.Catalog.Product
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
-                    StatusDescription = x.p.StatusDescription,
-                    Image = x.p.Image,
-                    
+
                 })
                 .ToListAsync();
 
