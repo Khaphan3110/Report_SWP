@@ -661,3 +661,8 @@ $RECYCLE.BIN/
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Application/obj/Debug/net8.0/SWPSolution.Application.assets.cache
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Application/obj/Debug/net8.0/SWPSolution.Application.csproj.AssemblyReference.cache
 >>>>>>> b9d6210dd6b2c0fd13e8058a4ecd42aa10817e3d
+*.cache
+*.cache
+*.cs
+*.cache
+*.cache
