@@ -1,3 +1,4 @@
+﻿using SWPSolution.ViewModels.Sales;
 ﻿using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
 using SWPSolution.ViewModels.Catalog.Categories;
@@ -20,6 +21,6 @@ namespace SWPSolution.Application.Sales
         IEnumerable<Order> GetOrdersByMemberId(string memberId);
         Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus);
         Task<string> ExtractMemberIdFromTokenAsync(string token);
-       Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
+        Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
     }
 }

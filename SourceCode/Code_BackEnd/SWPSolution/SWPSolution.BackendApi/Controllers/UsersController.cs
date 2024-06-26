@@ -21,7 +21,7 @@ namespace SWPSolution.BackendApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UsersController(IUserService userService) 
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
@@ -29,17 +29,17 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpPost("authenticate")]
         [AllowAnonymous]
 
-        public async Task<IActionResult> Authenticate([FromBody]LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
         {
-            if(!ModelState.IsValid)
-            { 
+            if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
             }
             var resultToken = await _userService.Authenticate(request);
-            if(string.IsNullOrEmpty(resultToken))
-                {
+            if (string.IsNullOrEmpty(resultToken))
+            {
                 return BadRequest("Username or password is incorrect.");
-                }
+            }
             return Ok(resultToken);
         }
 
@@ -64,7 +64,7 @@ namespace SWPSolution.BackendApi.Controllers
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpGet("ResetPassword")]
         public async Task<IActionResult> ResetPassword(string token, string email)
         {
-            var model = new ResetPasswordVM {Token = token, Email = email };
+            var model = new ResetPasswordVM { Token = token, Email = email };
             return Ok(new
             {
                 model
@@ -492,68 +492,180 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-         //[Authorize]
-         //[HttpGet("GetAllStaffs")]
-         //public async Task<IActionResult> GetAllStaffs()
-         //{
-         //    var staff = await _userService.GetAllStaffs();
-         //    return Ok(staff);
-         //}
+        //Staffs stuffs
+        [HttpPost("AuthenticateStaff")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AuthenticateStaff([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var resultToken = await _userService.AuthenticateStaff(request);
+            if (string.IsNullOrEmpty(resultToken))
+            {
+                return BadRequest("Username or password is incorrect.");
+            }
+            return Ok(resultToken);
+        }
 
-         //[Authorize]
-         //[HttpGet("GetStaffs/{id}")]
-         //public async Task<IActionResult> GetStaffById(string id)
-         //{
-         //    var staff = await _userService.GetStaffById(id);
-         //    if (staff == null)
-         //    {
-         //        return NotFound(new { message = "Staff not found" });
-         //    }
-         //    return Ok(staff);
-         //}
+        [HttpPost("RegisterStaff")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterStaff([FromBody] List<RegisterRequest> requests)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _userService.RegisterStaff(requests);
+            if (!result)
+            {
+                return BadRequest("Register failed.");
+            }
+            return Ok(new { message = "New staff registered successfully" });
+        }
 
-         //[HttpPut("UpdateStaff")]
-         //public async Task<IActionResult> UpdateStaff([FromQuery] string jwtToken, [FromBody] UpdateMemberRequest request)
-         //{
-         //    if (string.IsNullOrEmpty(jwtToken))
-         //    {
-         //        return BadRequest(new { message = "Token is required." });
-         //    }
+        [Authorize]
+        [HttpGet("GetAllStaffs")]
+        public async Task<IActionResult> GetAllStaffs()
+        {
+            var staff = await _userService.GetAllStaffs();
+            return Ok(staff);
+        }
 
-         //    if (!ModelState.IsValid)
-         //    {
-         //        return BadRequest(ModelState);
-         //    }
+        [Authorize]
+        [HttpGet("GetStaffs")]
+        public async Task<IActionResult> GetStaffById(string id)
+        {
+            var staff = await _userService.GetStaffById(id);
+            if (staff == null)
+            {
+                return NotFound(new { message = "Staff not found" });
+            }
+            return Ok(staff);
+        }
 
-         //    try
-         //    {
-         //        var staffId = await _userService.ExtractMemberIdFromTokenAsync(jwtToken);
+        [HttpPost("GetStaffsByToken")]
+        public async Task<IActionResult> GetStaffsByToken([FromBody] string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
 
-         //        var result = await _userService.UpdateMemberAsync(staffId, request);
-         //        if (!result)
-         //        {
-         //            return NotFound(new { message = "Staff not found" });
-         //        }
+            try
+            {
+                var claimsPrincipal = _userService.ValidateToken(token);
+                var staffIdClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "staff_id");
 
-         //        return Ok(new { message = "Staff updated successfully" });
-         //    }
-         //    catch (SecurityTokenException ex)
-         //    {
-         //        return BadRequest(new { message = ex.Message });
-         //    }
-         //}
+                if (staffIdClaim == null)
+                {
+                    return BadRequest(new { message = "Invalid token. Staff ID not found." });
+                }
 
-         //[Authorize]
-         //[HttpDelete("DeleteStaff/{id}")]
-         //public async Task<IActionResult> DeleteStaff(string id)
-         //{
-         //    var result = await _userService.DeleteStaff(id);
-         //    if (!result)
-         //    {
-         //        return NotFound(new { message = "Staff not found" });
-         //    }
+                var staffId = staffIdClaim.Value;
+                var staff = await _userService.GetStaffById(staffId);
 
-         //    return Ok(new { message = "Staff deleted successfully" });
-         //}
+                if (staff == null)
+                {
+                    return NotFound(new { message = "Staff not found." });
+                }
+
+                return Ok(staff);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpPut("UpdateStaff/{id}")]
+        public async Task<IActionResult> UpdateStaff(string id, [FromBody] UpdateStaffRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.UpdateStaff(id, request);
+            if (!result)
+            {
+                return NotFound(new { message = "Staff not found" });
+            }
+
+            return Ok(new { message = "Staff updated successfully" });
+        }
+
+        [HttpPut("UpdateStaffByToken")]
+        public async Task<IActionResult> UpdateStaffByToken([FromQuery] string jwtToken, [FromBody] UpdateStaffRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var staffId = await _userService.ExtractStaffIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.UpdateStaff(staffId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Staff not found" });
+                }
+
+                return Ok(new { message = "Staff updated successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteStaff")]
+        public async Task<IActionResult> DeleteStaff(string id)
+        {
+            var result = await _userService.DeleteStaff(id);
+            if (!result)
+            {
+                return NotFound(new { message = "Staff not found" });
+            }
+
+            return Ok(new { message = "Staff deleted successfully" });
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteStaffByToken")]
+        public async Task<IActionResult> DeleteStaffByToken([FromQuery] string jwtToken)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _userService.ExtractStaffIdFromTokenAsync(jwtToken);
+
+                var result = await _userService.DeleteStaff(memberId);
+                if (!result)
+                {
+                    return NotFound(new { message = "Staff not found" });
+                }
+
+                return Ok(new { message = "Staff deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

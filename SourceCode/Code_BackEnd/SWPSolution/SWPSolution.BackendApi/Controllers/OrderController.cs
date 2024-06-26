@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Payment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.Session;
@@ -18,14 +19,12 @@ namespace SWPSolution.BackendApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        private readonly IConfiguration _config;
         private readonly IVnPayService _vnPayService;
         private readonly ISessionService _sessionService;
 
-        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService, ISessionService sessionService)
+        public OrderController(IOrderService orderService, IVnPayService vnPayService, ISessionService sessionService)
         {
             _orderService = orderService;
-            _config = config;
             _vnPayService = vnPayService;
             _sessionService = sessionService;
         }

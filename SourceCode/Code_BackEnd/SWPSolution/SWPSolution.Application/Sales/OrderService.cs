@@ -1,3 +1,6 @@
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SWPSolution.Data.Entities;
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -43,7 +46,7 @@ namespace SWPSolution.Application.Sales
                 OrderStatus = OrderStatus.InProgress,
                 OrderDate = DateTime.UtcNow,
                 OrderDetails = new List<OrderDetail>(),
-                
+
             };
 
             // Add the order to the context but do not save changes immediately
@@ -62,7 +65,7 @@ namespace SWPSolution.Application.Sales
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
-                    
+
                 };
 
                 // Add orderDetail to the order's collection
@@ -138,15 +141,15 @@ namespace SWPSolution.Application.Sales
                 OrderId = order.OrderId,
                 MemberId = order.MemberId,
                 PromotionId = order.PromotionId,
-                ShippingAddress =   order.ShippingAddress,
+                ShippingAddress = order.ShippingAddress,
                 TotalAmount = (double)order.TotalAmount,
                 OrderStatus = order.OrderStatus,
-                OrderDate  = (DateTime)order.OrderDate,
-                
+                OrderDate = (DateTime)order.OrderDate,
+
             };
         }
 
-        public  IEnumerable<Order> GetOrdersByMemberId(string memberId)
+        public IEnumerable<Order> GetOrdersByMemberId(string memberId)
         {
 
 
@@ -183,7 +186,7 @@ namespace SWPSolution.Application.Sales
         public async Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus)
         {
             var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
-            if(order == null) throw new SWPException("Order not found");
+            if (order == null) throw new SWPException("Order not found");
 
             order.OrderStatus = newStatus;
             await _context.SaveChangesAsync();
@@ -252,7 +255,5 @@ namespace SWPSolution.Application.Sales
 
             return maxAutoIncrement + 1;
         }
-
-
     }
 }
