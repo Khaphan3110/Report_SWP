@@ -533,3 +533,4 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\ref\SWPSolution.WebApp.dll
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\bin\Debug\net8.0\Newtonsoft.Json.dll

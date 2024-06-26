@@ -308,3 +308,4 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolut.20720310.Up2Date
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\bin\Debug\net8.0\Newtonsoft.Json.dll
