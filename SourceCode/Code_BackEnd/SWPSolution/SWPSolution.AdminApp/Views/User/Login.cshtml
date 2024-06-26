@@ -27,6 +27,12 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
+                                    @if (TempData["ErrorMessage"] != null)
+                                        {
+                                            <div class="alert alert-danger" role="alert">
+                                                @TempData["ErrorMessage"]
+                                            </div>
+                                        }
                                         <form asp-action="Login" asp-controller="User" method="post">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" asp-for="UserName" type="text" placeholder="Enter Username" />

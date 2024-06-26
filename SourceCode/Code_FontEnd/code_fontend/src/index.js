@@ -1,15 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import App from "./App";
+import { StoreProvider } from "./Store";
+import CategoriesProvider from "./Store/ContextConfig/CategoriesProvider";
+import ProductProvider from "./Store/ContextConfig/ProductProvider";
+import UserProvider from "./Store/ContextConfig/UserProvider";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
+    <CategoriesProvider>
+      <ProductProvider>
+        <UserProvider>
+        <StoreProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </StoreProvider>
+        </UserProvider>
+      </ProductProvider>
+    </CategoriesProvider>
   </React.StrictMode>
 );
 

@@ -29,7 +29,7 @@ public partial class Product
 
     public virtual ICollection<PreOrder> PreOrders { get; set; } = new List<PreOrder>();
 
-    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+    public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
 
-    public virtual ICollection<ProductImage> ProductImages { get; set; }
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 }

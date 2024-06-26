@@ -1,14 +1,10 @@
 import { Route, Routes } from "react-router-dom";
+import RouteAdminLayout from "./Layouts/AdminLayout/RouteAdminLayout";
 import DefaultLayout from "./Layouts/DefualtLayout/DefaultLayout";
 import { privateRoutes, publicRoutes } from "./Routes/Route";
-import RouteAdminLayout from "./Layouts/AdminLayout/RouteAdminLayout";
-import RouteUserLayout from "./Layouts/UserLayouts/RouteUserLayout";
-import LoginForm from "./Components/User/Login/LoginForm";
-import Header from "./Components/User/Header/Header";
-
-
 
 function App() {
+
   return (
     <>
       {/* <Header />
@@ -34,6 +30,7 @@ function App() {
       {/* <Route path="/FAQ" element={<FAQ />} /> */}
       {/* </Routes> */}
       {/* <Footer /> */}
+
       <Routes>
         {publicRoutes.map((route, index) => {
           const Layout = DefaultLayout;
@@ -51,12 +48,20 @@ function App() {
           );
         })}
 
-        {privateRoutes.map((route,index) => {
+        {privateRoutes.map((route, index) => {
           const Layout = RouteAdminLayout;
           const Page = route.component;
           return (
-            <Route key={index} path={route.path} element={ <Layout><Page/></Layout> }/>
-          )
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
         })}
       </Routes>
     </>

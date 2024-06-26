@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import "../Login/LoginForm.css";
 import { authenCodeOTP } from "../../../Service/UserService/UserService";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function AuthenEmail() {
   const navigator = useNavigate();
@@ -21,10 +22,10 @@ export default function AuthenEmail() {
     }),
 
     onSubmit: async (values) => {
-    alert("tao")
+      alert("tao");
       const resUserOTP = await authenCodeOTP(values.codeGetFormEmail);
-      if(resUserOTP.data.message == "Email confirmed successfully"){
-        alert("Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào");
+      if (resUserOTP.data.message == "Email confirmed successfully") {
+        toast.success("Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào");
         navigator("/login");
       } else {
         alert("mạng yếu đợi xíu");
@@ -34,6 +35,7 @@ export default function AuthenEmail() {
 
   return (
     <section className="L-seccion">
+      <ToastContainer />
       <div className="container mx-auto">
         <div className="wraper-login-page">
           <div className="Header-login">
@@ -44,7 +46,7 @@ export default function AuthenEmail() {
           <div className="row">
             <div className="wraper-form col-12 col-md-6 col-lg-5 offset-md-3 mx-auto">
               <div className="Forgot-form">
-                <form  onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit}>
                   <fieldset>
                     <h2>Nhập OPT nhận từ email để hoàn tất đăng ký</h2>
                     <h6>
@@ -57,11 +59,14 @@ export default function AuthenEmail() {
                         placeholder="code number"
                         name="codeGetFormEmail"
                         id="codeGetFormEmail"
-                        value={formik.values.codeGetFormEmail} 
-                        onChange={formik.handleChange}         
+                        value={formik.values.codeGetFormEmail}
+                        onChange={formik.handleChange}
                       ></input>
-                      {formik.errors.codeGetFormEmail && 
-                      <p style={{color:"red"}}>{formik.errors.codeGetFormEmail}</p> }
+                      {formik.errors.codeGetFormEmail && (
+                        <p style={{ color: "red" }}>
+                          {formik.errors.codeGetFormEmail}
+                        </p>
+                      )}
                     </div>
                     <div className="b-forgot-login">
                       <button type="submit">

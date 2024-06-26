@@ -1,0 +1,122 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "SWP_ProjectContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "EF",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "SWPSolution.ViewModels",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 1,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Address]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppRoleClaims]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUserClaims]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUserLogins]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUserRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUsers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[AppUserTokens]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Blog]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Categories]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Member]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Order]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OrderDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Payment]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PreOrder]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Product]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ProductImages]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Promotion]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Review]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[staff]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

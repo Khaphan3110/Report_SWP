@@ -1,87 +1,143 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './CartPage.css';
-
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./CartPage.css";
+import { Actions } from "../../../Store";
+import { useStore } from "../../../Store";
+import cartEmpty from "../../../assets/images/cart_empty_background.png";
 const CartPage = () => {
+  const [state, dispatch] = useStore();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
-      name: 'Combo 2 Ion Thực phẩm dinh dưỡng Meiji số 9 800g 1 - 3 tuổi',
+      name: "Combo 2 Ion Thực phẩm dinh dưỡng Meiji số 9 800g 1 - 3 tuổi",
       price: 900000,
       quantity: 1,
-      image: 'https://tse4.mm.bing.net/th?id=OIP.E1DyiEUNLJcx-UvjKKdNkwHaHa&pid=Api&P=0&h=180'
+      image:
+        "https://tse4.mm.bing.net/th?id=OIP.E1DyiEUNLJcx-UvjKKdNkwHaHa&pid=Api&P=0&h=180",
     },
     {
       id: 2,
-      name: 'Sữa bột Abbott Grow Gold số 4 900g cho trẻ 2-6 tuổi',
+      name: "Sữa bột Abbott Grow Gold số 4 900g cho trẻ 2-6 tuổi",
       price: 500000,
       quantity: 1,
-      image: 'https://bizweb.dktcdn.net/100/172/234/products/sua-bot-abbott-grow-gold-3-huong-vani-400g-1502939576-4289062-1559d640cd84f525e2cec0a2981a2b4a.jpg?v=1514607202967'
-    }
+      image:
+        "https://bizweb.dktcdn.net/100/172/234/products/sua-bot-abbott-grow-gold-3-huong-vani-400g-1502939576-4289062-1559d640cd84f525e2cec0a2981a2b4a.jpg?v=1514607202967",
+    },
   ]);
 
-  useEffect(() => {
-    // Save cart items to localStorage
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
+  // useEffect(() => {
+  //   // Save cart items to localStorage
+  //   localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  // }, [cartItems]);
 
   const handleQuantityChange = (itemId, delta) => {
-    setCartItems(cartItems.map(item =>
-      item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-    ));
+    // setCartItems(cartItems.map(item =>
+    //   item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+    // ));
   };
 
   const handleRemoveItem = (itemId) => {
-    setCartItems(cartItems.filter(item => item.id !== itemId));
+    // setCartItems(cartItems.filter(item => item.id !== itemId));
   };
 
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   return (
     <div className="cart-page container">
       {/* <div className="breadcrumb">
         <Link to="/">Trang chủ</Link> / Giỏ hàng 
       </div> */}
-      <div className="cart-container">
-        <div className="cart-content">
-          <h2>Giỏ hàng</h2>
-          {cartItems.map(item => (
-            <div className="cart-item" key={item.id}>
-              <img src={item.image} alt={item.name} />
-              <div className="cart-item-details">
-                <h3>{item.name}</h3>
-                <p className="cart-item-price">{item.price.toLocaleString()}₫</p>
-                <div className="quantity-controls">
-                  <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
-                  <input type="text" value={item.quantity} readOnly />
-                  <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+      {(() => {
+        if (state.cartItems.length !== 0) {
+          return (
+            <div className="cart-container">
+              <div className="cart-content">
+                <h2>Giỏ hàng</h2>
+                {state.cartItems.map((item, index) => (
+                  <div className="cart-item" key={index}>
+                    <img src={item.image} alt={item.productName} />
+                    <div className="cart-item-details">
+                      <h3>{item.productName}</h3>
+                      <p className="cart-item-price">
+                        {item.price.toLocaleString()}₫
+                      </p>
+                      <div className="quantity-controls-cartPage">
+                        <button
+                          onClick={() => handleQuantityChange(item.id, -1)}
+                        >
+                          -
+                        </button>
+                        <input type="text" value={item.quantity} readOnly />
+                        <button
+                          onClick={() => handleQuantityChange(item.id, 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <button
+                      className="remove-button"
+                      onClick={() =>
+                        dispatch(Actions.removeProductToCart(item))
+                      }
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <div className="payment-info">
+                <div className="invoice-option">
+                  <input type="checkbox" id="invoice" />
+                  <label htmlFor="invoice">Xuất hóa đơn công ty</label>
+                </div>
+                <div className="total-price">
+                  <span>TỔNG CỘNG: </span>
+                  <span>{state.total.toLocaleString()} ₫</span>
+                  <p>(Đã bao gồm VAT nếu có)</p>
+                </div>
+                <div className="discount-code">
+                  <span>Mã giảm giá</span>
+                  <Link to="/discount">Chọn mã giảm giá</Link>
+                </div>
+                <Link to="/checkout" className="checkout-button">
+                  Thanh Toán
+                </Link>
+                <div className="payment-methods">
+                  <h4>Hình thức thanh toán</h4>
+                  <img
+                    src="https://tse3.mm.bing.net/th?id=OIP.FsfqOWtwUfPKv44mVE60eQHaB4&pid=Api&P=0&h=180"
+                    alt="Payment Methods"
+                  />
                 </div>
               </div>
-              <button className="remove-button" onClick={() => handleRemoveItem(item.id)}>X</button>
             </div>
-          ))}
-        </div>
-        <div className="payment-info">
-          <div className="invoice-option">
-            <input type="checkbox" id="invoice" />
-            <label htmlFor="invoice">Xuất hóa đơn công ty</label>
-          </div>
-          <div className="total-price">
-            <span>TỔNG CỘNG: </span>
-            <span>{total.toLocaleString()}₫</span>
-            <span>(Đã bao gồm VAT nếu có)</span>
-          </div>
-          <div className="discount-code">
-            <span>Mã giảm giá</span>
-            <Link to="/discount">Chọn mã giảm giá</Link>
-          </div>
-          <Link to="/checkout" className="checkout-button">Thanh Toán</Link>
-          <div className="payment-methods">
-            <h4>Hình thức thanh toán</h4>
-            <img src="https://tse3.mm.bing.net/th?id=OIP.FsfqOWtwUfPKv44mVE60eQHaB4&pid=Api&P=0&h=180" alt="Payment Methods" />
-          </div>
-        </div>
-      </div>
+          );
+        } else {
+          return (
+            <div className="cart-blank">
+              <div className="cart-blank-picture">
+                <img
+                  src={cartEmpty}
+                  width={298}
+                  height={152}
+                  alt="cart_emtpy"
+                />
+              </div>
+              <h2>Giỏ hàng đang trống</h2>
+              <span>Mời ní mua đồ tiếp đi rồi quay lại</span>
+              <p>
+                <Link to={"/"} >
+                  <button className="button-cart-empty" style={{ outline: "none" }}>Mua Sắm nào</button>
+                </Link>
+              </p>
+            </div>
+          );
+        }
+      })()}
     </div>
   );
 };

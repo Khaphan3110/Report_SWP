@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -29,8 +31,17 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/Profile/Index">@User.Idesntity.Name</a></li>
+
+                    <!--<li><a class="dropdown-item" href="/Profile/Index">User.Idesntity.Name</a></li>-->
+
                         <li><a class="dropdown-item">Role: @ViewData["UserRole"]</a></li>
+
+                        <li><a class="dropdown-item" href="/Profile/Index">@User.Identity.Name</a>
+                        @foreach (var role in User.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value))
+                        {
+                                    <a class="dropdown-item" href="#">Role: @role</a>
+                        }    
+                        </li>
                         <li><hr class="dropdown-divider" /></li>
                         <form method="post" asp-controller="User" asp-action="Logout">
                             <button type="submit" class="dropdown-item">Logout</button>

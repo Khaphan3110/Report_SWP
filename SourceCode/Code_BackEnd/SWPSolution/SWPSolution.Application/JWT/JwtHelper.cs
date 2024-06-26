@@ -13,12 +13,12 @@ namespace SWPSolution.Application.JWT
     {
         private readonly IConfiguration _config;
 
-        public string ExtractMemberIdFromToken(string jwtToken, string jwtSecret, IConfiguration config)
+        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtTokenBytes = Convert.FromBase64String(jwtToken.Split('.')[1]); // Get the payload part and decode from base64
+            var jwtTokenBytes = Convert.FromBase64String(token.Split('.')[1]);
             var jwtPayload = Encoding.UTF8.GetString(jwtTokenBytes);
-            jwtSecret = _config["JWT:SigningKey"];
+            var jwtSecret = _config["JWT:SigningKey"];
 
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -30,12 +30,10 @@ namespace SWPSolution.Application.JWT
             };
 
             SecurityToken validatedToken;
-            var principal = tokenHandler.ValidateToken(jwtToken, tokenValidationParameters, out validatedToken);
-
-            // Extracting member_id claim from the token's payload
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
             var memberId = principal.FindFirst("member_id")?.Value;
 
-            return memberId;
+            return await Task.FromResult(memberId);
         }
     }
 }

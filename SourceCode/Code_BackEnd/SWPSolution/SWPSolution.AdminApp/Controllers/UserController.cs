@@ -25,6 +25,10 @@ namespace SWPSolution.AdminApp.Controllers
         public IActionResult Index()
         {
             var user = User.Identity.Name;
+            var userRoles = User.Claims
+                        .Where(c => c.Type == ClaimTypes.Role)
+                        .Select(c => c.Value)
+                        .ToList();
             return View();
         }
 
@@ -43,12 +47,12 @@ namespace SWPSolution.AdminApp.Controllers
             var userPrincipal = this.ValidateToken(token);
 
             var userRole = userPrincipal.FindFirst(ClaimTypes.Role)?.Value;
-            if (userRole != "Admin" && userRole != "Staff")
+            if (!string.Equals(userRole, "Admin", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(userRole, "Staff", StringComparison.OrdinalIgnoreCase))
             {
+                TempData["ErrorMessage"] = "You do not have permission to access this application.";
                 return RedirectToAction("Login", "User");
             }
-
-            ViewData["UserRole"] = userRole;
 
             var authProperties = new AuthenticationProperties
             {
