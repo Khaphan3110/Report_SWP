@@ -3,6 +3,7 @@ G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebAp
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.AssemblyInfoInputs.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.AssemblyInfo.cs
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.CoreCompileInputs.cache
+G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.MvcApplicationPartsAssemblyInfo.cs
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.MvcApplicationPartsAssemblyInfo.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.RazorAssemblyInfo.cache
 G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.RazorAssemblyInfo.cs
