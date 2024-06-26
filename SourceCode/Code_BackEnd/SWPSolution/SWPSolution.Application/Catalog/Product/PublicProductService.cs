@@ -16,6 +16,12 @@ namespace SWPSolution.Application.Catalog.Product
             _context = context;
         }
 
+
+        public async Task<int> GetTotalProductCountAsync()
+        {
+            return await _context.Products.CountAsync();
+        }
+
         public async Task<List<ProductViewModel>> GetAll()
         {
             var query = from p in _context.Products
@@ -32,6 +38,8 @@ namespace SWPSolution.Application.Catalog.Product
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
+                    StatusDescription = x.p.StatusDescription,
+                    Image = x.p.Image,
                 }).ToListAsync();
             return data;
         }
@@ -69,6 +77,8 @@ namespace SWPSolution.Application.Catalog.Product
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
+                    StatusDescription = x.p.StatusDescription,
+                    Image = x.p.Image,
                     
                 })
                 .ToListAsync();

@@ -40,7 +40,11 @@ namespace SWPSolution.BackendApi
             //Add cros 
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
+<<<<<<< HEAD
                 build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+=======
+                build.WithOrigins("https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+>>>>>>> feature/preorder_controller
             }));
              
             //Add DbContext

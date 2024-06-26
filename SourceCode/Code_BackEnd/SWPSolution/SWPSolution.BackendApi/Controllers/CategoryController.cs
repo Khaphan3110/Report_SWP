@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Categories;
+using SWPSolution.ViewModels.Catalog.Product;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -16,6 +17,12 @@ namespace SWPSolution.BackendApi.Controllers
         public CategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
+        }
+        [HttpGet("get-total-category")]
+        public async Task<ActionResult<int>> GetTotalProductCount()
+        {
+            var totalProducts = await _categoryService.GetTotalCategoryCountAsync();
+            return Ok(totalProducts);
         }
 
         [HttpPost("CreateCategory")]
@@ -39,6 +46,14 @@ namespace SWPSolution.BackendApi.Controllers
                 return StatusCode(500, "A problem happened while handling your request.");
 
             return Ok();
+        }
+
+
+        [HttpGet("get-paging")]
+        public async Task<IActionResult> Get([FromQuery] CategoryPagingRequest request)
+        {
+            var categories = await _categoryService.GetAllPaging(request);
+            return Ok(categories);
         }
 
         [HttpPut("UpdateCategory/{id}/category")]

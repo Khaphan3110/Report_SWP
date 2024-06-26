@@ -19,5 +19,9 @@ namespace SWPSolution.ViewModels.Catalog.Product
         public double? Price { get; set; }
 
         public string Description { get; set; }
+
+        public string StatusDescription { get; set; }
+
+        public string Image { get; set; }
     }
 }

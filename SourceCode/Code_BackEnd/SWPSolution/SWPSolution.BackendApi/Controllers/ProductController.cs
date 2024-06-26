@@ -39,6 +39,13 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("get-total-product")]
+        public async Task<ActionResult<int>> GetTotalProductCount()
+        {
+            var totalProducts = await _publicProductService.GetTotalProductCountAsync();
+            return Ok(totalProducts);
+        }
+
         [HttpGet("{productId}")]
         public async Task<IActionResult> GetById(string productId)
         {
@@ -149,7 +156,7 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpPatch  ("price/{id}/{newPrice}")]
-        public async Task<IActionResult> UpdatePrice([FromQuery]string id, float newPrice)
+        public async Task<IActionResult> UpdatePrice(string id, float newPrice)
 
 
         {
