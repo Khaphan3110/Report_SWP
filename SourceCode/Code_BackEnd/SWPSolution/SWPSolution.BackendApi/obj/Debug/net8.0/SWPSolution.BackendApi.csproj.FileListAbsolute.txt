@@ -1,7 +1,0 @@
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.AssemblyReference.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.GeneratedMSBuildEditorConfig.editorconfig
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfoInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.AssemblyInfo.cs
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.csproj.CoreCompileInputs.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.MvcApplicationPartsAssemblyInfo.cache
-G:\Project alll\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.BackendApi\obj\Debug\net8.0\SWPSolution.BackendApi.sourcelink.json
