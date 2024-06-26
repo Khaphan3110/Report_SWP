@@ -11,7 +11,6 @@ namespace SWPSolution.ViewModels.Catalog.Product
     {
         public string? Keyword { get; set; }
 
-        public string? CategoryId { get; set; }
 
     }
 }

@@ -527,9 +527,9 @@ C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSo
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\bundle\SWPSolution.WebApp.styles.css
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\scopedcss\projectbundle\SWPSolution.WebApp.bundle.scp.css
-C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.csproj.CopyComplete
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\refint\SWPSolution.WebApp.dll
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.pdb
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolution.WebApp.genruntimeconfig.cache
 C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\ref\SWPSolution.WebApp.dll
+C:\Users\khanh\source\repos\Report_SWP\SourceCode\Code_BackEnd\SWPSolution\SWPSolution.WebApp\obj\Debug\net8.0\SWPSolut.178F3EF7.Up2Date
