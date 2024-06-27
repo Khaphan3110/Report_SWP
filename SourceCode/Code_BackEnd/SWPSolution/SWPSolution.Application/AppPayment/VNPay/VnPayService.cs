@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SWPSolution.Application.AppPayment.VNPay
@@ -37,7 +38,6 @@ namespace SWPSolution.Application.AppPayment.VNPay
             vnpay.AddRequestData("vnp_OrderInfo", "Thanh toán cho đơn hàng: "+ model.OrderId);
             vnpay.AddRequestData("vnp_OrderType", "other");
             vnpay.AddRequestData("vnp_ReturnUrl", _config["VnPay:PaymentBackReturnUrl"]);
-            vnpay.AddRequestData("vnp_paymentId", model.PaymentId);
             vnpay.AddRequestData("vnp_TxnRef", tick);// Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất dùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày
 
         var paymentUrl = vnpay.CreateRequestUrl(_config["VnPay:BaseUrl"], _config["VnPay:HashSecret"]);
@@ -63,7 +63,7 @@ namespace SWPSolution.Application.AppPayment.VNPay
             var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
-            var vnp_PaymentId = vnpay.GetResponseData("vnp_paymentId");
+            var vnp_PaymentId = Regex.Match(vnp_OrderInfo, @"OR\d+").Success ? Regex.Match(vnp_OrderInfo, @"OR\d+").Value : string.Empty;
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _config["VnPay:HashSecret"]);
             if (!checkSignature)
             {

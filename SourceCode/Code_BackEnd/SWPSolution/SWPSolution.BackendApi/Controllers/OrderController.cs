@@ -148,7 +148,7 @@ namespace SWPSolution.BackendApi.Controllers
             if (existingPayment != null)
             {
                 // Update payment details
-                await _paymentService.Update(model.OrderId, paymentRequest);
+                await _paymentService.Update(paymentId, paymentRequest);
             }
             else
             {
@@ -172,12 +172,12 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { Message = "Payment failed" });
             }
 
-            var paymentId = response.PaymentId; // Adjust based on your response model
-            var payment = await _context.Payments.FindAsync(paymentId);
+            var orderId = response.PaymentId; // Adjust based on your response model
+            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
 
             if (payment == null)
             {
-                return BadRequest(new { Message = $"Payment with id {paymentId} not found" });
+                return BadRequest(new { Message = $"Payment with id {orderId} not found" });
             }
 
             payment.PaymentStatus = true;

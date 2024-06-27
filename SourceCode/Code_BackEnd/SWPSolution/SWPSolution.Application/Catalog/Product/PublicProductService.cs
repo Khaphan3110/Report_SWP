@@ -67,6 +67,8 @@ namespace SWPSolution.Application.Catalog.Product
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
+                    StatusDescription = x.p.StatusDescription,
+                    Image = x.p.Image
 
                 })
                 .ToListAsync();
