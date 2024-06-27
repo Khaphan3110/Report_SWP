@@ -396,7 +396,7 @@ namespace SWPSolution.Application.Catalog.Product
             return true;
         }
 
-        public async Task<List<ReviewVM>> GetReviews(string memberId)
+        public async Task<List<ReviewVM>> GetReviewsByMemberId(string memberId)
         {
             var reviews = _context.Reviews
                                         .Where(m => m.MemberId == memberId)
@@ -413,6 +413,50 @@ namespace SWPSolution.Application.Catalog.Product
             if (!reviews.Any())
             {
                 throw new KeyNotFoundException($"Reviews for member ID {memberId} not found.");
+            }
+
+            return reviews;
+        }
+
+        public async Task<List<ReviewVM>> GetReviewsByProductId(string productId)
+        {
+            var reviews = _context.Reviews
+                                        .Where(m => m.ProductId == productId)
+                                        .Select(m => new ReviewVM
+                                        {
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+
+            if (!reviews.Any())
+            {
+                throw new KeyNotFoundException($"Reviews for product ID {productId} not found.");
+            }
+
+            return reviews;
+        }
+
+        public async Task<List<ReviewVM>> GetReviewsByMemberIdAndProductId(string memberId, string productId)
+        {
+            var reviews = _context.Reviews
+                                        .Where(m => m.MemberId == memberId && m.ProductId == productId)
+                                        .Select(m => new ReviewVM
+                                        {
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+
+            if (!reviews.Any())
+            {
+                throw new KeyNotFoundException($"Reviews for member ID {memberId} with product ID {productId} not found.");
             }
 
             return reviews;

@@ -93,5 +93,38 @@ namespace SWPSolution.AdminApp.Controllers
 
             return principal;
         }
+
+        [HttpGet]
+        public IActionResult SearchUsers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchUsers(string keyword, int pageIndex = 1, int pageSize = 2)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                ModelState.AddModelError("", "Keyword cannot be null or empty");
+                return View();
+            }
+
+            var request = new GetUserPagingRequest
+            {
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize
+            };
+
+            var result = await _userApiClient.GetAllPaging(request);
+
+            if (result.Items == null || result.Items.Count == 0)
+            {
+                ViewBag.Message = "No records found matching the keyword.";
+            }
+
+            ViewBag.TotalRecords = result.TotalRecord;
+            return View(result.Items);
+        }
     }
 }

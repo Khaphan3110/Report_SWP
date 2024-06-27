@@ -265,9 +265,8 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-        [Authorize]
-        [HttpGet("GetReviews")]
-        public async Task<IActionResult> GetReviews([FromQuery] string jwtToken)
+        [HttpGet("GetReviewsByMemberId")]
+        public async Task<IActionResult> GetReviewsByMemberId([FromQuery] string jwtToken)
         {
             if (string.IsNullOrEmpty(jwtToken))
             {
@@ -278,7 +277,62 @@ namespace SWPSolution.BackendApi.Controllers
             {
                 var memberId = await _manageProductService.ExtractMemberIdFromTokenAsync(jwtToken);
 
-                var review = await _manageProductService.GetReviews(memberId);
+                var review = await _manageProductService.GetReviewsByMemberId(memberId);
+                if (review == null)
+                {
+                    return NotFound(new { message = "Review not found" });
+                }
+
+                return Ok(review);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("GetReviewsByProductId")]
+        public async Task<IActionResult> GetReviewsByProductId([FromQuery] string productId)
+        {
+            if (string.IsNullOrEmpty(productId))
+            {
+                return BadRequest(new { message = "ProductId is required." });
+            }
+
+            try
+            {
+                var review = await _manageProductService.GetReviewsByProductId(productId);
+                if (review == null)
+                {
+                    return NotFound(new { message = "Review not found" });
+                }
+
+                return Ok(review);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("GetReviewsByMemberIdAndProductId")]
+        public async Task<IActionResult> GetReviewsByMemberIdAndProductId([FromQuery] string jwtToken, string productId)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            if (string.IsNullOrEmpty(productId))
+            {
+                return BadRequest(new { message = "ProductId is required." });
+            }
+
+            try
+            {
+                var memberId = await _manageProductService.ExtractMemberIdFromTokenAsync(jwtToken);
+
+                var review = await _manageProductService.GetReviewsByMemberIdAndProductId(memberId, productId);
                 if (review == null)
                 {
                     return NotFound(new { message = "Review not found" });

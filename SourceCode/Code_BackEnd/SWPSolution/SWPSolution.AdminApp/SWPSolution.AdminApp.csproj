@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\User\SearchUsers.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.IdentityModel.Logging" Version="7.6.0" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
@@ -14,7 +18,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SWPSolution.Data\SWPSolution.Data.csproj" />
     <ProjectReference Include="..\SWPSolution.ViewModels\SWPSolution.ViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\User\SearchUsers.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\User\SearchUsers.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\User\SearchUsers.cshtml" />
   </ItemGroup>
 
 </Project>
