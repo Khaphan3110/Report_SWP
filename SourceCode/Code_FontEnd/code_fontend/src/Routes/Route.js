@@ -1,22 +1,27 @@
-import Categories from "../Components/Amind/Categories/Categories";
-import Product from "../Components/Amind/Products/Product";
-import AccountPage from "../Components/User/AccountPage/AccountPage";
-import AddressPage from "../Components/User/AddressPage/AddressPage";
-import AuthenEmail from "../Components/User/Authen/AuthenEmail";
-import CartPage from "../Components/User/CartPage/CartPage";
-import CartProductPage from "../Components/User/CartProducts/CartProducts";
-import CheckoutPage from "../Components/User/CheckoutPage/CheckoutPage";
-import Content from "../Components/User/Content/Content";
-import ForgotPasswordForm from "../Components/User/ForgotPassword/ForgotPasswordForm";
-import SendEmailForm from "../Components/User/ForgotPassword/SendEmailForm";
-import LoginForm from "../Components/User/Login/LoginForm";
-import Logout from "../Components/User/Logout/Logout";
-import PaymentPage from "../Components/User/PaymentPage/PaymentPage";
-import RegisterForm from "../Components/User/Register/RegisterForm";
-import RouteAdminLayout from "../Layouts/AdminLayout/RouteAdminLayout";
-import DashBoardAdmin from "../Components/Amind/DashBoardAdmin/DashBoardAdmin";
-import PreorderAdmin from "../Components/Amind/PreorderAdmin/PreorderAdmin";
-import SettingAdmin from "../Components/Amind/SettingAdmin/SettingAdmin";
+import React from "react";
+
+
+
+const Categories = React.lazy(() => import("../Components/Amind/Categories/Categories")) ;
+const Product = React.lazy(() => import("../Components/Amind/Products/Product"));
+const AccountPage = React.lazy(() => import("../Components/User/AccountPage/AccountPage"));
+const AddressPage = React.lazy(() => import("../Components/User/AddressPage/AddressPage"));
+const AuthenEmail = React.lazy(() => import("../Components/User/Authen/AuthenEmail"));
+const CartPage = React.lazy(() => import("../Components/User/CartPage/CartPage"));
+const CartProductPage = React.lazy(() => import("../Components/User/CartProducts/CartProducts"));
+const CheckoutPage = React.lazy(() => import("../Components/User/CheckoutPage/CheckoutPage"));
+const Content = React.lazy(() => import("../Components/User/Content/Content"));
+const ForgotPasswordForm = React.lazy(() => import("../Components/User/ForgotPassword/ForgotPasswordForm"));
+const SendEmailForm = React.lazy(() => import("../Components/User/ForgotPassword/SendEmailForm"));
+const LoginForm = React.lazy(() => import("../Components/User/Login/LoginForm"));
+const Logout = React.lazy(() => import("../Components/User/Logout/Logout"));
+const PaymentPage = React.lazy(() => import("../Components/User/PaymentPage/PaymentPage"));
+const RegisterForm = React.lazy(() => import("../Components/User/Register/RegisterForm"));
+const RouteAdminLayout = React.lazy(() => import("../Layouts/AdminLayout/RouteAdminLayout"));
+const DashBoardAdmin = React.lazy(() => import("../Components/Amind/DashBoardAdmin/DashBoardAdmin"));
+const PreorderAdmin = React.lazy(() => import("../Components/Amind/PreorderAdmin/PreorderAdmin"));
+const SettingAdmin = React.lazy(() => import("../Components/Amind/SettingAdmin/SettingAdmin"));
+
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -33,27 +38,26 @@ import SettingAdmin from "../Components/Amind/SettingAdmin/SettingAdmin";
 
 const publicRoutes = [
   { path: "/", component: CartProductPage },
-  { path: "/login", component: LoginForm },
-  { path: "/logout", component: Logout },
-  { path: "/register", component: RegisterForm },
-  { path: "/authenOTP", component: AuthenEmail },
-  { path: "/sendEmailForgot", component: SendEmailForm },
-  { path: "/forgotPassword", component: ForgotPasswordForm },
-  { path: "/checkout", component: CheckoutPage },
-  { path: "/payment", component: PaymentPage },
-  { path: "/authenOTP", component: AuthenEmail },
-  { path: "/addresses", component: AddressPage },
-  { path: "/account", component: AccountPage },
-  { path: "/cart", component: CartPage },
-  { path: "/content", component: Content },
+  { path: "/login", component: LoginForm ,layout:"user"},
+  { path: "/logout", component: Logout ,layout:"user"},
+  { path: "/register", component: RegisterForm ,layout:"user"},
+  { path: "/authenOTP", component: AuthenEmail ,layout:"user"},
+  { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
+  { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
   
 ];
 const privateRoutes = [
-  { path: "/admin", component: DashBoardAdmin },
-  { path: "/admin/categories", component: Categories },
-  { path: "/admin/product", component: Product },
-  { path: "/admin/settingadmin", component: SettingAdmin },
-  { path: "/admin/preorderadmin", component: PreorderAdmin },
+  { path: "/checkout", component: CheckoutPage ,layout:"user",protect:"user"},
+  { path: "/payment", component: PaymentPage ,layout:"user",protect:"user"},
+  { path: "/addresses", component: AddressPage ,layout:"user",protect:"user"},
+  { path: "/account", component: AccountPage ,layout:"user",protect:"user"},
+  { path: "/cart", component: CartPage ,layout:"user",protect:"user"},
+  { path: "/content", component: Content ,layout:"user",protect:"user"},
+  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:"admin"},
+  { path: "/admin/categories", component: Categories ,layout:"admin",protect:"admin" },
+  { path: "/admin/product", component: Product ,layout:"admin",protect:"admin"},
+  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:"admin"},
+  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:"admin"},
   // { path: "/sideBar", component: SideBarAdmin },
 ];
 

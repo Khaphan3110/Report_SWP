@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Data.Entity;
+using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -56,7 +57,8 @@ namespace SWPSolution.BackendApi.Controllers
                 OrderId = result.Order.OrderId,
                 Amount = result.Order.TotalAmount,
                 DiscountValue = 20,
-                PaymentStatus = false
+                PaymentStatus = false,
+                PaymentMethod = ""
             };
             var paymentResult = await _paymentService.Create(payment);
             if (paymentResult == null)
@@ -112,6 +114,14 @@ namespace SWPSolution.BackendApi.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var payment =  _context.Payments
+                .FirstOrDefault(p => p.OrderId == model.OrderId && p.Amount == model.TotalAmount);
+            if (payment == null)
+            {
+                // Handle the case where the payment is not found.
+                throw new Exception("Payment not found");
+            }
+            string paymentId = payment.PaymentId;
 
             var vnPayModel = new VnPaymentRequestModel
             {
@@ -119,7 +129,8 @@ namespace SWPSolution.BackendApi.Controllers
                 CreatedDate = model.OrderDate,
                 Description = $"{model.MemberId}",
                 FullName = model.MemberId,
-                OrderId = model.OrderId
+                OrderId = model.OrderId,
+                PaymentId = paymentId // Assign the PaymentId here
             };
 
             // Create or update payment
@@ -133,11 +144,11 @@ namespace SWPSolution.BackendApi.Controllers
             };
 
             // Check if payment already exists
-            var existingPayment = await _context.Payments.FindAsync(model.OrderId);
+            var existingPayment = _context.Payments.FirstOrDefault(p => p.PaymentId == paymentId);
             if (existingPayment != null)
             {
                 // Update payment details
-                await _paymentService.Update(model.OrderId, paymentRequest);
+                await _paymentService.Update(paymentId, paymentRequest);
             }
             else
             {
@@ -161,12 +172,12 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { Message = "Payment failed" });
             }
 
-            var paymentId = response.PaymentId; // Adjust based on your response model
-            var payment = await _context.Payments.FindAsync(paymentId);
+            var orderId = response.PaymentId; // Adjust based on your response model
+            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
 
             if (payment == null)
             {
-                return BadRequest(new { Message = $"Payment with id {paymentId} not found" });
+                return BadRequest(new { Message = $"Payment with id {orderId} not found" });
             }
 
             payment.PaymentStatus = true;
