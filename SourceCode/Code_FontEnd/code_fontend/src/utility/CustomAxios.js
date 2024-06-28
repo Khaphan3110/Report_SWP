@@ -16,7 +16,15 @@ export const Get = ( path,param = {},header = {}) => {
   return res
 }
 
+export const Put = (path, param = {} , header = {}) => {
+  const res = instance.put(path,param,header)
+  return res
+}
 
+export const Delete = (path, param = {} , header = {}) => {
+  const res = instance.delete(path,param,header);
+  return res
+}
 
 
 // axios.interceptors.response.use(

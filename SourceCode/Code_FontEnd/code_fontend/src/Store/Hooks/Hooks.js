@@ -44,9 +44,22 @@ export const useProduct = () => {
 };
 
 export const useUserProfile = () => {
-  const { userProfile, setUserProfile } = useContext(UserContext);
-  return {
+  const {
+    logOut,
     userProfile,
     setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
+  } = useContext(UserContext);
+  return {
+    logOut,
+    userProfile,
+    setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
   };
 };

@@ -45,6 +45,7 @@ const CartPage = () => {
     0
   );
 
+
   return (
     <div className="cart-page container">
       {/* <div className="breadcrumb">
@@ -58,7 +59,7 @@ const CartPage = () => {
                 <h2>Giỏ hàng</h2>
                 {state.cartItems.map((item, index) => (
                   <div className="cart-item" key={index}>
-                    <img src={item.image} alt={item.productName} />
+                    <img src={`https://localhost:44358/user-content/${item.images[0] ? item.images[0].imagePath : "productImage"}`} alt={item.productName} />
                     <div className="cart-item-details">
                       <h3>{item.productName}</h3>
                       <p className="cart-item-price">

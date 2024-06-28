@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./PaymentPage.css";
-import { useStore } from "../../../Store";
+import { useStore, useUserProfile } from "../../../Store";
 import { createOrder } from "../../../Service/OrderService/OrderService";
 
 const PaymentPage = () => {
@@ -9,11 +9,17 @@ const PaymentPage = () => {
   const [state] = useStore();
   const [statePaymentMethod, setstatePaymentMethod] = useState(null);
   const [formattedArray, setFormattedArray] = useState([]);
-  const [orderInfor, setOrderInfor] = useState(null)
-
+  const [orderInfor, setOrderInfor] = useState(null);
+  const {
+    userProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
+  } = useUserProfile();
   const transformArray = () => {
     const transformedArray = state.cartItems.map((item) => ({
-      productId : item.productId,
+      productId: item.productId,
       quantity: item.quantity,
       price: item.price,
     }));
@@ -28,16 +34,25 @@ const PaymentPage = () => {
   useEffect(() => {
     if (formattedArray.length > 0) {
       setOrderInfor({
-        token: localStorage.getItem("userToken").slice(1, -1),
-        shippingAddress: localStorage.getItem("shippingAdress"),
-        promotionId: "PROMO001",
+        token: userProfile.userToken,
+        shippingAddress: userProfile
+          ? userProfile.CurrentAdress.house_Number +
+            "," +
+            userProfile.CurrentAdress.street_Name +
+            "," +
+            userProfile.CurrentAdress.district_Name +
+            "," +
+            userProfile.CurrentAdress.city +
+            "," +
+            userProfile.CurrentAdress.region
+          : "kh co địa chỉ",
+        promotionId: "PR0624001",
         orderDetails: formattedArray,
         totalAmount: state.total,
       });
     }
   }, [formattedArray, state.total]);
 
-  
   const handPaymentOCD = (event) => {
     setstatePaymentMethod(event.target.value);
   };
@@ -48,13 +63,13 @@ const PaymentPage = () => {
 
   const handlePayment = async () => {
     if (statePaymentMethod === "cod") {
+      alert("chua thuc  hien xong :))))()()()");
+    } else if (statePaymentMethod === "vnpay") {
       const payMentOCD = await createOrder(orderInfor);
       if (payMentOCD) {
         alert("thanh toan thanh cong mua  hang tiep  nao");
         navigator("/");
       }
-    } else if (statePaymentMethod === "vnpay") {
-      alert("chua thuc  hien xong :))))()()()");
     }
   };
   return (
@@ -99,11 +114,16 @@ const PaymentPage = () => {
           <h2>Tóm tắt đơn hàng</h2>
           {state.cartItems.map((item, index) => (
             <div className="product-summary" key={index}>
-              <img src={item.image} alt={item.productName} />
+              <img
+                src={`https://localhost:44358/user-content/${
+                  item.images[0] ? item.images[0].imagePath : "productImage"
+                }`}
+                alt={item.productName}
+              />
               <div className="product-info">
                 <p>{item.productName}</p>
                 <p>
-                  {item.price.toLocaleString()}₫ x {item.quantity}
+                  {item.price.toLocaleString()} ₫ x {item.quantity}
                 </p>
               </div>
             </div>

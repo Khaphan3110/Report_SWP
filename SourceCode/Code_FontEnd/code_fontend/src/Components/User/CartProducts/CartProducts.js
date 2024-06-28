@@ -7,6 +7,7 @@ import { Actions, useProduct } from "../../../Store";
 import { useStore } from "../../../Store";
 import { imageGetAll } from "../../../Service/ProductService/imageService";
 import HomePage from "../../../Pages/HomePage/HomePage";
+import { ToastContainer, toast } from "react-toastify";
 export default function CartProducts() {
 
   const [state, dispatch] = useStore();
@@ -20,9 +21,15 @@ export default function CartProducts() {
   },[])
 
 
- 
+  const addToCart = (product) => {
+    dispatch(Actions.addListToCart(product))
+    toast.success("sản phẩm đã được thêm",{
+      autoClose:1000,
+    })
+  }
   return (
     <Container>
+      <ToastContainer/>
       <HomePage/>
       <Row>
         {listProduct && listProduct.map((product, index) => {
@@ -33,10 +40,10 @@ export default function CartProducts() {
                 <Card.Img variant="top" src={`https://localhost:44358/user-content/${product.images[0] ? product.images[0].imagePath : "productImage"}`} />
                 <Card.Body>
                   <Card.Title>{product.productName}</Card.Title>
-                  <Card.Text>{product.price}đ</Card.Text>
+                  <Card.Text>{product.price} đ</Card.Text>
                   <Button
                     variant="primary"
-                    onClick={() => dispatch(Actions.addListToCart(product))}
+                    onClick={() => addToCart(product)}
                   >
                     Add To cart
                   </Button>

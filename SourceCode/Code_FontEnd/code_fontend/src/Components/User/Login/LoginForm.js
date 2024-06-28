@@ -11,12 +11,14 @@ import {
   userLogin,
 } from "../../../Service/UserService/UserService";
 import { ToastContainer, toast } from "react-toastify";
+import { useUserProfile } from "../../../Store";
 
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
   const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]);
   const navigator = useNavigate();
+  const { userProfile,setUserProfile,updateUserToken } = useUserProfile()
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -51,7 +53,7 @@ export default function LoginForm() {
       const res = await userLogin(values);
 
       if (res.data) {
-        localStorage.setItem("userToken", JSON.stringify(res.data));
+        updateUserToken(res.data);
         // console.log("đây là login",res.data)
         navigator("/");
       } else {
@@ -70,9 +72,10 @@ export default function LoginForm() {
         firstName: result._tokenResponse.firstName,
         lastName: result._tokenResponse.lastName,
       };
-
+     
       const res = await userLoginGoogle(userValue);
       if (res) {
+        updateUserToken(res.data.token)
         toast.success("đăng nhập  thành công");
         navigate("/");
       } else {

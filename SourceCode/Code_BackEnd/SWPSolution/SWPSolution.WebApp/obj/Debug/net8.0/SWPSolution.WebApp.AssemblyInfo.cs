@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.WebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+304526b1b92ff0b61ca0b0c92578b2363eccb018")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec1b4196c8c1f47f7a2b7ebd4aa59b27059c7978")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.WebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.WebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

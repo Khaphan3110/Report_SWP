@@ -78,7 +78,7 @@ export default function Categories() {
                 }
               });
               if (cateGoriesID) {
-                console.log("day la list product", result);
+                // console.log("day la list product", result);
                 const resImportProduct = await importProductList(result);
                 if (resImportProduct) {
                   toast.success("nhập sản phẩm thành công ");
@@ -100,6 +100,7 @@ export default function Categories() {
       await getAllProductToContext(1, 11);
     };
     getListProduct();
+    
   }, []);
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -153,7 +154,7 @@ export default function Categories() {
 
     // 'imageFiles=@download.png;type=image/png'
   };
-
+  console.log("lít product",listProduct)
   return (
     <>
       <ToastContainer />

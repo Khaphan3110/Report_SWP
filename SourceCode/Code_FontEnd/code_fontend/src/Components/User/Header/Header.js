@@ -29,6 +29,7 @@ export default function Header() {
     showTOOLIP();
     prevCartItemsCount.current = state.cartItems.length;
   }, [state.cartItems]);
+
   return (
     <>
       <header className="header-menu">
@@ -93,7 +94,7 @@ export default function Header() {
                     ></img>
                     <div className="userAcount d-md-flex flex-column d-none ">
                       <Link to={"/account"}>Tài Khoản</Link>
-                      {userProfile ? (
+                      {userProfile.userToken && userProfile.userToken.length > 0 ? (
                         <small>
                           <Link to={"/logout"}>Đăng xuất</Link>
                         </small>

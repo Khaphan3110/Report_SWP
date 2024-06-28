@@ -5,20 +5,24 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./AccountPage.css";
 import { getUserInfor } from "../../../Service/UserService/UserService";
+import { useUserProfile } from "../../../Store";
 const AccountPage = () => {
   const navigator = useNavigate();
-  const [userInfor, setUserInfor] = useState("");
-  const [userToken, setuserToken] = useState(localStorage.getItem("userToken"));
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [address, setAddress] = useState("");
   const location = useLocation();
 
+  const {
+    userProfile,
+    setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
+  } = useUserProfile();
   useEffect(() => {
     const resUser = async () => {
-      const resUserInfor = await getUserInfor(userToken);
-      if (resUserInfor) {
-        setUserInfor(resUserInfor.data);
-      }
+     await getUserProfileByToken(userProfile.userToken);
     };
     resUser();
   }, []);
@@ -46,8 +50,8 @@ const AccountPage = () => {
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                Xin chào, {userInfor && userInfor.member.lastName}{" "}
-                {userInfor && userInfor.member.firstName}!
+                Xin chào, {userProfile && userProfile.profile.lastName}{" "}
+                {userProfile && userProfile.profile.firstName}!
               </ListGroup.Item>
               <ListGroup.Item>
                 {location.pathname === "/account" ? (
@@ -74,12 +78,21 @@ const AccountPage = () => {
             <Card.Body>
               <Card.Text>
                 <strong>Tên tài khoản:</strong>{" "}
-                {userInfor && userInfor.member.userName}
+                {userProfile && userProfile.profile.userName}
                 <br />
                 <strong>Địa chỉ:</strong> , Vietnam
+                {userProfile ? (userProfile.CurrentAdress.house_Number +
+                                "," +
+                                userProfile.CurrentAdress.street_Name +
+                                "," +
+                                userProfile.CurrentAdress.district_Name +
+                                "," +
+                                userProfile.CurrentAdress.city +
+                                "," +
+                                userProfile.CurrentAdress.region) : "kh co địa chỉ"}
                 <br />
                 <strong>Điện thoại:</strong>{" "}
-                {userInfor && userInfor.member.phoneNumber}
+                {userProfile && userProfile.profile.phoneNumber}
                 <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>

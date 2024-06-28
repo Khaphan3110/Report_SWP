@@ -294,12 +294,13 @@
 
 .num-from-Email input {
   height: 100%;
-  width: 100%;
+  width: 100% !important;
   outline: none;
   border: none;
   background-color: transparent;
   padding: 5px 20px;
   font-size: 16px;
+  margin: 0 !important;
 }
 
 .num-from-Email input::placeholder {

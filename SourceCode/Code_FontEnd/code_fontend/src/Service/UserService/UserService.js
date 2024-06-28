@@ -78,6 +78,7 @@ export const userLoginGoogle = async ( useGoogleLogin ) => {
 }
 
 export const getUserInfor = async (TokenUser) => {
+
   try {
     const res = await request.Post("Users/GetMemberByToken",TokenUser,{
       headers:{
@@ -92,11 +93,11 @@ export const getUserInfor = async (TokenUser) => {
 }
 
 export const userAddAdress = async (TokenUser,userAdress) => {
-  const token = TokenUser.slice(1,-1);
+
   try {
-    const res = await request.Post(`Users/AddAddressByToken?jwtToken=${token}`,userAdress,{
+    const res = await request.Post(`Users/AddAddressByToken?jwtToken=${TokenUser}`,userAdress,{
       headers:{
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${TokenUser}`,
         'Content-Type': 'application/json',
       }
     })
@@ -109,11 +110,11 @@ export const userAddAdress = async (TokenUser,userAdress) => {
 
 
 export const getUserAddAdress = async (TokenUser) => {
-  const token = TokenUser.slice(1,-1);
+
   try {
-    const res = await request.Get(`Users/GetAddressByToken?jwtToken=${token}`,{
+    const res = await request.Get(`Users/GetAddressByToken?jwtToken=${TokenUser}`,{
       headers:{
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${TokenUser}`,
         'Content-Type': 'application/json',
       }
     })
@@ -125,11 +126,10 @@ export const getUserAddAdress = async (TokenUser) => {
 }
 
 export const updateUserAdress = async (TokenUser,userAdress) => {
-  const token = TokenUser.slice(1,-1);
   try {
-    const res = await request.Get(`Users/UpdateAddressByToken?jwtToken=${token}`,userAdress,{
+    const res = await request.Get(`Users/UpdateAddressByToken?jwtToken=${TokenUser}`,userAdress,{
       headers:{
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${TokenUser}`,
         'Content-Type': 'application/json',
       }
     })
@@ -138,4 +138,18 @@ export const updateUserAdress = async (TokenUser,userAdress) => {
     console.log("lỗi update adress  người dùng",error)
   }
   
+}
+
+export const updatePhoneNumberOfUser = async (TokenUser,userInfor) => {
+  try {
+    const res = await request.Put(`Users/UpdateMemberByToken?jwtToken=${TokenUser}`,userInfor,{
+      headers:{
+        'Authorization': `Bearer ${TokenUser}`,
+        'Content-Type': 'application/json',
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi update user phone or username",error)
+  }
 }

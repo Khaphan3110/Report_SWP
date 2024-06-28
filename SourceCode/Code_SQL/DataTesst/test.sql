@@ -114,3 +114,15 @@ delete Product
 
 select * from ProductImages
 select * from staff
+
+select * from Promotion
+
+select * from AppUsers
+select * from [Member]
+delete [Member] where member_ID = 'MB0624003'
+delete AppUsers where id = '48CC3F76-5CCD-41FA-8FD9-F4D769794CFF'
+
+select * from [Address]
+
+select * from [Order]
+select * from OrderDetails
