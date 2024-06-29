@@ -196,6 +196,21 @@ namespace SWPSolution.Application.Sales
             return ("Update succeed!");
         }
 
+        public async Task<string> CancelOrderAsync(string orderId)
+        {
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
+            if (order == null) throw new SWPException("Order not found");
+
+            if (order.OrderStatus != OrderStatus.InProgress)
+            {
+                throw new SWPException("Only orders that are in progress can be canceled.");
+            }
+
+            order.OrderStatus = OrderStatus.Canceled;
+            await _context.SaveChangesAsync();
+            return "Order canceled successfully!";
+        }
+
         private string GenerateOrderId()
         {
             // Generate order_ID based on current month, year, and auto-increment
