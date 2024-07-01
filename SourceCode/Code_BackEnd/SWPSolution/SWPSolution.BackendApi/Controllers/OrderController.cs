@@ -1,19 +1,16 @@
 ﻿using System.Data.Entity;
-using System.Web;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-
 using SWPSolution.Application.AppPayment;
 using SWPSolution.Application.AppPayment.VNPay;
-
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.Session;
+using SWPSolution.Application.Catalog.Promotion;
 using SWPSolution.Data.Entities;
-using SWPSolution.Data.Enum;
+using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
+using System.Threading.Tasks;
 using SWPSolution.ViewModels.System.Users;
 
 namespace SWPSolution.BackendApi.Controllers
@@ -26,15 +23,23 @@ namespace SWPSolution.BackendApi.Controllers
         private readonly IVnPayService _vnPayService;
         private readonly ISessionService _sessionService;
         private readonly IPaymentService _paymentService;
+        private readonly IPromotionService _promotionService;
         private readonly SWPSolutionDBContext _context;
 
-
-        public OrderController(IOrderService orderService, IConfiguration config, IVnPayService vnPayService, ISessionService sessionService, IPaymentService paymentService, SWPSolutionDBContext context)
+        public OrderController(
+            IOrderService orderService,
+            IConfiguration config,
+            IVnPayService vnPayService,
+            ISessionService sessionService,
+            IPaymentService paymentService,
+            IPromotionService promotionService,
+            SWPSolutionDBContext context)
         {
             _orderService = orderService;
             _vnPayService = vnPayService;
             _sessionService = sessionService;
             _paymentService = paymentService;
+            _promotionService = promotionService;
             _context = context;
         }
 
@@ -52,11 +57,13 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { error = result.ErrorMessage });
             }
 
+            var discountValue = await _promotionService.GetDiscountValueByPromotionId(request.PromotionId) ?? 0;
+
             var payment = new PaymentRequest
             {
                 OrderId = result.Order.OrderId,
                 Amount = result.Order.TotalAmount,
-                DiscountValue = 20,
+                DiscountValue = discountValue,
                 PaymentStatus = false,
                 PaymentMethod = ""
             };
@@ -79,12 +86,12 @@ namespace SWPSolution.BackendApi.Controllers
             var orders = await _orderService.GetAll();
             if (orders == null)
             {
-                return NotFound(new { message = "No categories were found" });
+                return NotFound(new { message = "No orders were found" });
             }
             return Ok(orders);
         }
 
-        [HttpGet("GetOrderById")]
+        [HttpGet("GetOrderById/{orderId}")]
         public async Task<IActionResult> GetOrderById(string orderId)
         {
             var order = await _orderService.GetOrderById(orderId);
@@ -106,6 +113,20 @@ namespace SWPSolution.BackendApi.Controllers
             return NoContent();
         }
 
+        [HttpPost("cancel/{orderId}")]
+        public async Task<IActionResult> CancelOrder(string orderId)
+        {
+            try
+            {
+                var result = await _orderService.CancelOrderAsync(orderId);
+                return Ok(new { message = result });
+            }
+            catch (SWPException ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
         [Authorize]
         [HttpPost("CheckoutVNPay")]
         public async Task<IActionResult> CheckoutVNPay([FromBody] OrderVM model)
@@ -114,11 +135,10 @@ namespace SWPSolution.BackendApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var payment =  _context.Payments
+            var payment = _context.Payments
                 .FirstOrDefault(p => p.OrderId == model.OrderId && p.Amount == model.TotalAmount);
             if (payment == null)
             {
-                // Handle the case where the payment is not found.
                 throw new Exception("Payment not found");
             }
             string paymentId = payment.PaymentId;
@@ -130,33 +150,28 @@ namespace SWPSolution.BackendApi.Controllers
                 Description = $"{model.MemberId}",
                 FullName = model.MemberId,
                 OrderId = model.OrderId,
-                PaymentId = paymentId // Assign the PaymentId here
+                PaymentId = paymentId
             };
 
-            // Create or update payment
             var paymentRequest = new PaymentRequest
             {
                 OrderId = model.OrderId,
                 Amount = model.TotalAmount,
-                PaymentMethod = "VNPay", // Assuming VNPay as default or model.PaymentMethod
-                PaymentStatus = false, // Example status, adjust as per your needs
-                PaymentDate = DateTime.UtcNow // Example payment date, adjust as per your needs
+                PaymentMethod = "VNPay",
+                PaymentStatus = false,
+                PaymentDate = DateTime.UtcNow
             };
 
-            // Check if payment already exists
             var existingPayment = _context.Payments.FirstOrDefault(p => p.PaymentId == paymentId);
             if (existingPayment != null)
             {
-                // Update payment details
                 await _paymentService.Update(paymentId, paymentRequest);
             }
             else
             {
-                // Create new payment
                 await _paymentService.Create(paymentRequest);
             }
 
-            // Generate payment URL
             var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
 
             return Ok(new { PaymentUrl = paymentUrl });
@@ -172,7 +187,7 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { Message = "Payment failed" });
             }
 
-            var orderId = response.PaymentId; // Adjust based on your response model
+            var orderId = response.PaymentId;
             var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
 
             if (payment == null)
@@ -182,23 +197,18 @@ namespace SWPSolution.BackendApi.Controllers
 
             payment.PaymentStatus = true;
 
-            // Fetch the order associated with the payment
             var order = await _context.Orders.FindAsync(payment.OrderId);
             if (order == null)
             {
                 return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
             }
 
-            // Update payment status and save changes
             _context.Payments.Update(payment);
             await _context.SaveChangesAsync();
 
-            // Send the email using the _orderService (you'll need to implement this method in your OrderService)
-            await _orderService.SendReceiptEmailAsync(order.MemberId, order); // Pass the member ID and order
+            await _orderService.SendReceiptEmailAsync(order.MemberId, order);
 
             return Ok(new { Message = "Payment status updated successfully" });
         }
     }
-
 }
-

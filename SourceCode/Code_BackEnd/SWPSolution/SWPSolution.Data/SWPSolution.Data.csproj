@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SWPSolution.Utilities\SWPSolution.Utilities.csproj" />
-    <ProjectReference Include="..\SWPSolution.ViewModels\SWPSolution.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

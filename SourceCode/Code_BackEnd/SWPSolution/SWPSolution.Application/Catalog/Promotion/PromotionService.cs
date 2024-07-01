@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Promotion;
@@ -17,6 +16,7 @@ namespace SWPSolution.Application.Catalog.Promotion
         {
             _context = context;
         }
+
         public async Task<string> Create(PromotionCreateRequest request)
         {
             var promotion = new Data.Entities.Promotion()
@@ -27,7 +27,6 @@ namespace SWPSolution.Application.Catalog.Promotion
                 DiscountValue = request.DiscountValue,
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
-
             };
             _context.Promotions.Add(promotion);
             await _context.SaveChangesAsync();
@@ -45,7 +44,7 @@ namespace SWPSolution.Application.Catalog.Promotion
         {
             var promotionReturn = new List<string>();
 
-            foreach(var request in requests)
+            foreach (var request in requests)
             {
                 string generatedId = GeneratePromotionId();
                 var promotion = new Data.Entities.Promotion
@@ -55,14 +54,13 @@ namespace SWPSolution.Application.Catalog.Promotion
                     DiscountValue = request.DiscountValue,
                     StartDate = request.StartDate,
                     EndDate = request.EndDate,
-
                 };
                 _context.Promotions.Add(promotion);
-                await _context.SaveChangesAsync() ;
+                await _context.SaveChangesAsync();
 
                 var insertedPromotion = await _context.Promotions.FirstOrDefaultAsync(p => p.PromotionId == generatedId);
 
-                if(insertedPromotion == null)
+                if (insertedPromotion == null)
                 {
                     throw new InvalidOperationException("Failed to retrieve inserted promotion.");
                 }
@@ -71,13 +69,12 @@ namespace SWPSolution.Application.Catalog.Promotion
             }
 
             return promotionReturn;
-
         }
 
         public async Task<bool> Delete(string promotionId)
         {
             var promotion = await _context.Promotions.FindAsync(promotionId);
-            if (promotionId == null)
+            if (promotion == null)
                 return false;
             _context.Promotions.Remove(promotion);
             await _context.SaveChangesAsync();
@@ -112,14 +109,13 @@ namespace SWPSolution.Application.Catalog.Promotion
                 DiscountValue = promotion.DiscountValue,
                 StartDate = promotion.StartDate,
                 EndDate = promotion.EndDate,
-
             };
         }
 
         public async Task<bool> Update(string promotionId, PromotionUpdateRequest request)
         {
             var promotion = await _context.Promotions.FindAsync(promotionId);
-            if(promotion == null) return false;
+            if (promotion == null) return false;
 
             promotion.Name = request.Name;
             promotion.DiscountType = request.DiscountType;
@@ -132,13 +128,14 @@ namespace SWPSolution.Application.Catalog.Promotion
             return true;
         }
 
-
-
-
+        public async Task<int?> GetDiscountValueByPromotionId(string promotionId)
+        {
+            var promotion = await _context.Promotions.FirstOrDefaultAsync(p => p.PromotionId == promotionId);
+            return promotion?.DiscountValue;
+        }
 
         private string GeneratePromotionId()
         {
-            // Generate categories_ID based on current month, year, and auto-increment
             string month = DateTime.Now.ToString("MM");
             string year = DateTime.Now.ToString("yy");
 
@@ -151,15 +148,13 @@ namespace SWPSolution.Application.Catalog.Promotion
 
         private int GetNextAutoIncrement(string month, string year)
         {
-            // Generate the pattern for categories_ID to match in SQL query
             string pattern = $"PR{month}{year}";
 
-            // Retrieve the maximum auto-increment value from existing categories for the given month and year
             var maxAutoIncrement = _context.Promotions
                 .Where(c => c.PromotionId.StartsWith(pattern))
-                .Select(c => c.PromotionId.Substring(6, 3)) // Select substring of auto-increment part
-                .AsEnumerable() // Switch to client evaluation from this point
-                .Select(s => int.Parse(s)) // Parse string to int
+                .Select(c => c.PromotionId.Substring(6, 3))
+                .AsEnumerable()
+                .Select(s => int.Parse(s))
                 .DefaultIfEmpty(0)
                 .Max();
 

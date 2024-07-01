@@ -14,6 +14,8 @@ namespace SWPSolution.Application.Catalog.Promotion
 
         Task<List<string>> CreateMultiplePromotions(List<PromotionCreateRequest> requests);
 
+        Task<int?> GetDiscountValueByPromotionId(string promotionId);
+
         Task<bool> Update(string promotionId, PromotionUpdateRequest request);
 
         Task<bool> Delete(string promotionId);

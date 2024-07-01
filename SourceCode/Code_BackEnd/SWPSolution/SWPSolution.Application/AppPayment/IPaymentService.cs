@@ -8,9 +8,16 @@ namespace SWPSolution.Application.AppPayment
 {
     public interface IPaymentService
     {
+        // Payment creation
         Task<string> Create(PaymentRequest request);
+
+        // Payment updates
         Task<int> Update(string id, PaymentRequest request);
+
+        // Payment deletion
         Task<bool> Delete(string id);
+
+        // Payment retrieval
         Task<Payment> GetById(string id);
         Task<List<Payment>> GetAll();
     }
