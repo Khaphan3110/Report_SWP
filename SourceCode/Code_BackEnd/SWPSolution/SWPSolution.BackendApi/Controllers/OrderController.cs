@@ -80,6 +80,26 @@ namespace SWPSolution.BackendApi.Controllers
             });
         }
 
+        [HttpPut("update/{orderId}")]
+        public async Task<IActionResult> UpdateOrder(string orderId, [FromBody] OrderRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var updatedOrder = await _orderService.UpdateOrderAsync(orderId, request);
+                return Ok(updatedOrder);
+            }
+            catch (SWPException ex)
+            {
+                return NotFound(new { error = ex.Message });
+            }
+        }
+
+
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetAllOrders()
         {
