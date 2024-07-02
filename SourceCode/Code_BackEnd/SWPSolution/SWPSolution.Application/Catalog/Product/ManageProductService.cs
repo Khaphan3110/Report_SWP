@@ -124,10 +124,12 @@ namespace SWPSolution.Application.Catalog.Product
             //4. Select and projection
             var pageResult = new PageResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
+				TotalRecords = totalRow,
+				PageIndex = request.PageIndex,
+				PageSize = request.PageSize,
+				Items = data,
 
-            };
+			};
             return pageResult;
         }
 
@@ -402,6 +404,7 @@ namespace SWPSolution.Application.Catalog.Product
                                         .Where(m => m.MemberId == memberId)
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,
@@ -424,6 +427,7 @@ namespace SWPSolution.Application.Catalog.Product
                                         .Where(m => m.ProductId == productId)
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,
@@ -446,6 +450,7 @@ namespace SWPSolution.Application.Catalog.Product
                                         .Where(m => m.MemberId == memberId && m.ProductId == productId)
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,
@@ -467,6 +472,7 @@ namespace SWPSolution.Application.Catalog.Product
             var review = _context.Reviews
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,

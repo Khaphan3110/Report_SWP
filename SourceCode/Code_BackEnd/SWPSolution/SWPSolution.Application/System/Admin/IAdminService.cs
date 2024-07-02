@@ -19,6 +19,7 @@ namespace SWPSolution.Application.System.Admin
         Task<string> ExtractAdminIdFromTokenAsync(string token);
 
         Task<bool> RegisterAdmin(RegisterRequest request);
+        Task<bool> ConfirmEmail(string otp);
 
         Task<StaffInfoVM> GetAdminById(string adminId);
 

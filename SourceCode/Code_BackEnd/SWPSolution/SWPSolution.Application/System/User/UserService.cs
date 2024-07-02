@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -12,22 +11,12 @@ using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.IdentityModel.Logging;
-using System.Configuration;
-using System.Diagnostics.Metrics;
+using System.Linq;
 
 
 namespace SWPSolution.Application.System.User
@@ -417,8 +406,13 @@ namespace SWPSolution.Application.System.User
             var members = await _context.Members
                                         .Select(m => new MemberInfoVM
                                         {
+                                            Id = m.MemberId,
                                             UserName = m.UserName,
-                                            Email = m.Email
+                                            Email = m.Email,
+                                            FirstName = m.FirstName,
+                                            LastName = m.LastName,
+                                            PhoneNumber = m.PhoneNumber,
+                                            Date = m.RegistrationDate,
                                         })
                                         .ToListAsync();
             return members;
@@ -431,11 +425,13 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
+                Id = memberId,
                 UserName = member.UserName,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                PhoneNumber = member.PhoneNumber
+                PhoneNumber = member.PhoneNumber,
+                Date = member.RegistrationDate,
             };
         }
 
@@ -446,11 +442,13 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
+                Id = member.MemberId,
                 UserName = member.UserName,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
-                PhoneNumber = member.PhoneNumber
+                PhoneNumber = member.PhoneNumber,
+                Date = member.RegistrationDate,
             };
         }
 
@@ -479,6 +477,7 @@ namespace SWPSolution.Application.System.User
                                         .Where(m => m.MemberId == memberId)
                                         .Select(m => new MemberAddressVM
                                         {
+                                            Id = m.AddressId,
                                             House_Number = m.HouseNumber,
                                             Street_Name = m.Street,
                                             District_Name = m.District,
@@ -500,6 +499,7 @@ namespace SWPSolution.Application.System.User
             var address = _context.Addresses
                                         .Select(m => new MemberAddressVM
                                         {
+                                            Id = m.AddressId,
                                             House_Number = m.HouseNumber,
                                             Street_Name = m.Street,
                                             District_Name = m.District,
@@ -560,7 +560,7 @@ namespace SWPSolution.Application.System.User
 
         public async Task<bool> DeleteMemberAddress(string id)
         {
-            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == id);
+            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == id || a.AddressId == id);
             if (address == null)
                 return false;
 
@@ -845,8 +845,10 @@ namespace SWPSolution.Application.System.User
 
             return new StaffInfoVM
             {
+                Id = staffId,
                 Role = staff.Role,
                 UserName = staff.Username,
+                Password = staff.Password,
                 Email = staff.Email,
                 FullName = staff.FullName,
                 PhoneNumber = staff.Phone
@@ -858,8 +860,10 @@ namespace SWPSolution.Application.System.User
             var staff = _context.Staff
                                         .Select(m => new StaffInfoVM
                                         {
+                                            Id = m.StaffId,
                                             Role = m.Role,
                                             UserName = m.Username,
+                                            Password = m.Password,
                                             Email = m.Email,
                                             FullName = m.FullName,
                                             PhoneNumber = m.Phone
@@ -928,5 +932,59 @@ namespace SWPSolution.Application.System.User
 
             return true;
         }
-    }
+
+        public async Task<PageResult<UserVm>> GetUsersPaging(GetUserPagingRequest request)
+        {
+            var query = _context.AppUsers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.UserName.Contains(request.Keyword));
+            }
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(c => new UserVm()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    PhoneNumber = c.PhoneNumber,
+                    UserName = c.UserName,
+                    Email = c.Email,
+                }).ToListAsync();
+
+            var pageResult = new PageResult<UserVm>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+		public async Task<ApiResult<UserVm>> GetById(Guid id)
+		{
+			var user = await _userManager.FindByIdAsync(id.ToString());
+			if (user == null)
+			{
+				return new ApiErrorResult<UserVm>("User not exist");
+			}
+			var roles = await _userManager.GetRolesAsync(user);
+			var userVm = new UserVm()
+			{
+                Id = user.Id,
+                Email = user.Email,
+				PhoneNumber = user.PhoneNumber,
+				FirstName = user.FirstName,
+				LastName = user.LastName,
+				UserName = user.UserName,
+				Roles = roles
+			};
+			return new ApiSuccessResult<UserVm>(userVm);
+		}
+	}
 }

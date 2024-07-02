@@ -20,6 +20,9 @@ builder.Services.AddHttpClient();
 // Register your UserApiClient service
 builder.Services.AddTransient<IUserApiClient, UserApiClient>();
 
+// Add HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
 // Add Authentication services
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -27,6 +30,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LoginPath = "/User/Login/";
         options.AccessDeniedPath = "/User/Forbidden/";
     });
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session timeout after 30 minutes of inactivity
+});
 
 var app = builder.Build();
 
@@ -41,6 +49,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -63,10 +63,11 @@ namespace SWPSolution.Application.Catalog.Product
             //4. Select and projection
             var pageResult = new PageResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
-
-            };
+				TotalRecords = totalRow,
+				PageIndex = request.PageIndex,
+				PageSize = request.PageSize,
+				Items = data,
+			};
             return pageResult;
         }
     }

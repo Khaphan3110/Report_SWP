@@ -667,5 +667,20 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+		[Authorize]
+		[HttpGet("Paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var users = await _userService.GetUsersPaging(request);
+            return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var user = await _userService.GetById(id);
+            return Ok(user);
+        }
     }
 }

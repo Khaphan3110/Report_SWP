@@ -10,6 +10,7 @@ using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Common;
 using System.Data.Entity;
+using System.Net.Http.Headers;
 
 
 namespace SWPSolution.AdminApp.Services
@@ -17,13 +18,14 @@ namespace SWPSolution.AdminApp.Services
     public class UserApiClient : IUserApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly SWPSolutionDBContext _context;
+        private readonly IConfiguration _config;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UserApiClient(IHttpClientFactory httpClientFactory, SWPSolutionDBContext context)
+		public UserApiClient(IHttpClientFactory httpClientFactory, IConfiguration config, IHttpContextAccessor httpContextAccessor)
         {
             _httpClientFactory = httpClientFactory;
-            _context = context;
-            _context = context;
+			_httpContextAccessor = httpContextAccessor;
+			_config = config;
         }
 
         public async Task<string> Authenticate(LoginRequest request)
@@ -32,50 +34,36 @@ namespace SWPSolution.AdminApp.Services
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri("https://localhost:44358");
-            var response = await client.PostAsync("/api/Users/authenticate", httpContent);
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            var response = await client.PostAsync("/api/Users/authenticatestaff", httpContent);
             var token = await response.Content.ReadAsStringAsync();
             return token;
         }
-
-        public async Task<PageResult<UserVm>> GetAllPaging(GetUserPagingRequest request)
+        
+        public async Task<PageResult<UserVm>> GetUsersPagings(GetUserPagingRequest request)
         {
-            // 1. Query with Filtering
-            var query = _context.AppUsers.AsQueryable(); // Start from Categories table
-
-            if (!string.IsNullOrEmpty(request.Keyword))
-            {
-                // Adjust filtering to your relevant category fields
-                query = query.Where(c => c.UserName.Contains(request.Keyword) ||
-                                        c.Email.Contains(request.Keyword)
-                                       // ... other fields you want to filter on
-                                       );
-            }
-
-            // 2. Projection to UserVm (No need for joins here)
-            var userData = await query.Select(c => new UserVm
-            {
-                Id = Guid.NewGuid(),
-                FirstName = c.FirstName,
-                LastName = c.LastName,
-                PhoneNumber = c.PhoneNumber,
-                UserName = c.UserName,
-                Email = c.Email,
-            }).ToListAsync();
-
-            // 3. Paging (Same as before)
-            int totalRow = userData.Count;
-            var pagedData = userData
-                .Skip((request.PageIndex - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
-
-            // 4. Result
-            return new PageResult<UserVm>
-            {
-                TotalRecord = totalRow,
-                Items = pagedData
-            };
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/Users/paging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<PageResult<UserVm>>(body);
+            return users;
         }
-    }
+
+		public async Task<ApiResult<UserVm>> GetById(Guid id)
+		{
+			var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+			var client = _httpClientFactory.CreateClient();
+			client.BaseAddress = new Uri(_config["BaseAddress"]);
+			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+			var response = await client.GetAsync($"/api/Users/{id}");
+			var body = await response.Content.ReadAsStringAsync();
+			if (response.IsSuccessStatusCode)
+				return JsonConvert.DeserializeObject<ApiSuccessResult<UserVm>>(body);
+
+			return JsonConvert.DeserializeObject<ApiErrorResult<UserVm>>(body);
+		}
+	}
 }

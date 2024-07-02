@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.Common
 {
-    public class PagingRequestBase : RequestBase
+    public class RequestBase
     {
-        public int PageIndex { get; set; }
-
-        public int PageSize { get; set; }
-
+        public string? BearerToken { get; set; }
     }
 }
