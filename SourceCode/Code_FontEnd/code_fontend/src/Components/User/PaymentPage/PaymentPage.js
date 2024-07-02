@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./PaymentPage.css";
-import { useStore, useUserProfile } from "../../../Store";
-import { createOrder } from "../../../Service/OrderService/OrderService";
+import { Actions, useStore, useUserProfile } from "../../../Store";
+import { checkoutPay, createOrder, paymentCallBack } from "../../../Service/OrderService/OrderService";
+import { toast } from "react-toastify";
 
 const PaymentPage = () => {
   const navigator = useNavigate();
-  const [state] = useStore();
-  const [statePaymentMethod, setstatePaymentMethod] = useState(null);
+  const [state, dispatch] = useStore();
+  const [statePaymentMethod, setstatePaymentMethod] = useState("");
   const [formattedArray, setFormattedArray] = useState([]);
   const [orderInfor, setOrderInfor] = useState(null);
   const {
@@ -62,16 +63,41 @@ const PaymentPage = () => {
   };
 
   const handlePayment = async () => {
+    toast.success("blabla")
     if (statePaymentMethod === "cod") {
+
       alert("chua thuc  hien xong :))))()()()");
+
     } else if (statePaymentMethod === "vnpay") {
       const payMentOCD = await createOrder(orderInfor);
       if (payMentOCD) {
-        alert("thanh toan thanh cong mua  hang tiep  nao");
-        navigator("/");
+        console.log("order",payMentOCD.data)
+        const orderInfor = {
+          orderId: payMentOCD.data.order.orderId,
+          memberId: payMentOCD.data.order.memberId,
+          promotionId: payMentOCD.data.order.promotionId,
+          shippingAddress: payMentOCD.data.order.shippingAddress,
+          totalAmount: payMentOCD.data.order.totalAmount,
+          orderStatus: payMentOCD.data.order.orderStatus,
+          orderDate: payMentOCD.data.order.orderDate
+        }
+        const payMentVNPAY = await checkoutPay(userProfile.userToken,orderInfor);
+        if(payMentVNPAY){
+            window.open(payMentVNPAY.data.paymentUrl, '_blank');
+            dispatch(() => Actions.clearListToCart())
+        }
+        // alert("thanh toan thanh cong mua  hang tiep  nao");
+        // navigator("/");
       }
+    } else if(!statePaymentMethod){
+      toast.error("Vui lòng chọn phương thức thanh toán ",{
+        autoClose:1000,
+      })
     }
   };
+
+
+
   return (
     <div className="payment-page container">
       <div className="breadcrumb">

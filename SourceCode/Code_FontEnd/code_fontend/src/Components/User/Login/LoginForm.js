@@ -18,7 +18,7 @@ export default function LoginForm() {
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
   const [iconShow, setIconShow] = useState(["fa-solid fa-eye-slash"]);
   const navigator = useNavigate();
-  const { userProfile,setUserProfile,updateUserToken } = useUserProfile()
+  const { userProfile,setUserProfile,updateUserToken,getUserProfileByToken } = useUserProfile()
   const handlerOnclickIcon = () => {
     if (typeInputForm === "password") {
       setTypeInputForm("text");
@@ -51,13 +51,14 @@ export default function LoginForm() {
       formData.append("password", values.password);
       formData.append("rememberMe", values.rememberMe);
       const res = await userLogin(values);
-
-      if (res.data) {
+      if (res) {
         updateUserToken(res.data);
-        // console.log("đây là login",res.data)
+        getUserProfileByToken(res.data);
         navigator("/");
       } else {
-        toast.error("tên nhập sai hoặc sai mật khẩu");
+        toast.error("tên nhập sai hoặc sai mật khẩu",{
+          autoClose:1000,
+        });
       }
     },
   });
@@ -76,10 +77,13 @@ export default function LoginForm() {
       const res = await userLoginGoogle(userValue);
       if (res) {
         updateUserToken(res.data.token)
+        getUserProfileByToken(res.data.token);
         toast.success("đăng nhập  thành công");
         navigate("/");
       } else {
-        toast.error("đăng nhập google thất bại")
+        toast.error("đăng nhập google thất bại",{
+          autoClose:1000,
+        })
       }
       
     } catch (error) {

@@ -1,0 +1,27 @@
+.search-product-wraper{
+  margin-top: 20px;
+}
+
+.filter-product-search{
+  border: 1px solid #EEEEEE;
+}
+
+.filter-check-box-product{
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.filter-check-box-product input{
+  height: 24px;
+  width: 24px;
+
+}
+
+.filter-check-box-product input:checked{
+  background-color: #F05A72;
+}
+
+.filter-check-box-product p{
+  margin: 0;
+}

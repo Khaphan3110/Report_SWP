@@ -15,11 +15,11 @@ import "./AddressPage.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
-import { updatePhoneNumberOfUser } from "../../../Service/UserService/UserService";
+import { deleteUserAddress, updatePhoneNumberOfUser } from "../../../Service/UserService/UserService";
 import ReactPaginate from "react-paginate";
 const AddressPage = () => {
-  const [addresses, setAddresses] = useState([]);
-  const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
+  const [currentAddressesID, setCurrentAddressesID] = useState(null);
+  // const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
   const {
     userProfile,
     setUserProfile,
@@ -31,36 +31,46 @@ const AddressPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(null);
 
-  useEffect(() => {
-    const resUserAdress = async () => {
-      await getAllAdressByToken(userProfile.userToken);
-    };
-    resUserAdress();
-  }, []);
 
-  useEffect(() => {
-    const resUser = async () => {
-      await getUserProfileByToken(userProfile.userToken);
-    };
-    resUser();
-  }, []);
+  // const handleSaveAddress = (newAddress) => {
+  //   if (currentAddress) {
+  //     setAddresses(
+  //       addresses.map((addr) => (addr === currentAddress ? newAddress : addr))
+  //     );
+  //   } else {
+  //     setAddresses([...addresses, newAddress]);
+  //   }
+  //   setIsFormVisible(false);
+  //   setCurrentAddress(null);
+  // };
 
-  const handleSaveAddress = (newAddress) => {
-    if (currentAddress) {
-      setAddresses(
-        addresses.map((addr) => (addr === currentAddress ? newAddress : addr))
-      );
-    } else {
-      setAddresses([...addresses, newAddress]);
-    }
-    setIsFormVisible(false);
-    setCurrentAddress(null);
-  };
-
-  const handleEditAddress = (address) => {
-    setCurrentAddress(address);
+  const handleEditAddress = ( address ) => {
+    setCurrentAddressesID(address);
     setIsFormVisible(true);
   };
+
+  const handleDeleteAddress = (addressID) => {
+    if (window.confirm("bạn có chắc muốn xóa địa chỉ này không?")) {
+      const res = deleteUserAddress("AMM0724012",userProfile.userToken);
+      console.log('adress',res)
+      if(res){
+        getAllAdressByToken(userProfile.userToken);
+        toast.success("xóa thành công!",{
+          autoClose:1500,
+        })
+      } else {
+        toast.error("server đang lag đợi 5s rồi tiếp tục!!!",{
+          autoClose:1500,
+        })
+      }
+      
+  } else {
+      // User clicked "Cancel"
+      toast.error("bạn đã hủy xóa địa chỉ!",{
+        autoClose:1000,
+      })
+  }
+  }
 
   const handleAddAddress = () => {
     setCurrentAddress(null);
@@ -154,8 +164,8 @@ const AddressPage = () => {
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <Card.Body>
               <Card.Text>
-                Xin chào, {userProfile && userProfile.profile.lastName}{" "}
-                {userProfile && userProfile.profile.firstName}!
+                Xin chào, {userProfile && userProfile.profile.member.lastName}{" "}
+                {userProfile && userProfile.profile.member.firstName}!
               </Card.Text>
               <Card.Link as={Link} to="/account">
                 Thông tin tài khoản
@@ -187,8 +197,8 @@ const AddressPage = () => {
                         <Col>
                           <Card.Text>
                             <strong>Họ tên:</strong>{" "}
-                            {userProfile && userProfile.profile.lastName}{" "}
-                            {userProfile && userProfile.profile.firstName}{" "}
+                            {userProfile && userProfile.profile.member.lastName}{" "}
+                            {userProfile && userProfile.profile.member.firstName}{" "}
                             <br />
                             <strong>Địa chỉ:</strong>{" "}
                             {adress &&
@@ -203,7 +213,7 @@ const AddressPage = () => {
                                 adress.region}{" "}
                             <br />
                             <strong>Số điện thoại:</strong>{" "}
-                            {userProfile && userProfile.profile.phoneNumber}{" "}
+                            {userProfile && userProfile.profile.member.phoneNumber}{" "}
                             <br />
                           </Card.Text>
                         </Col>
@@ -225,16 +235,14 @@ const AddressPage = () => {
                           </Button>
                           <Button
                             variant="link"
-                            // onClick={() => handleEditAddress(addr)}
+                            onClick={() => handleEditAddress(adress)}
                             className="button-crud-address-page"
                           >
                             Chỉnh sửa địa chỉ
                           </Button>
                           <Button
                             variant="link"
-                            // onClick={() =>
-                            //   // setAddresses(adress.filter((a) => a !== addr))
-                            // }
+                            onClick={() => handleDeleteAddress(adress.address_ID)}
                             className="button-crud-address-page"
                           >
                             Xóa
@@ -246,10 +254,9 @@ const AddressPage = () => {
                 </>
               ) : (
                 <Card.Text>
-                  <h3>hiện kh có địa chỉ nào cả , thêm nào</h3>
+                  <h3 style={{color:"red"}}>hiện kh có địa chỉ nào cả , thêm nào</h3>
                 </Card.Text>
               )}
-              ;{/* })} */}
             </Card.Body>
           </Card>
           <ReactPaginate
@@ -270,14 +277,14 @@ const AddressPage = () => {
             breakLinkClassName="page-link"
             containerClassName="pagination"
             activeClassName="active"
+            
           />
         </Col>
       </Row>
       <AddressForm
         show={isFormVisible}
         handleClose={handleCloseForm}
-        initialData={currentAddress}
-        onSave={handleSaveAddress}
+        initialData={currentAddressesID}
       />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

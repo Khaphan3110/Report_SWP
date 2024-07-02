@@ -122,7 +122,8 @@ select * from [Member]
 delete [Member] where member_ID = 'MB0624003'
 delete AppUsers where id = '48CC3F76-5CCD-41FA-8FD9-F4D769794CFF'
 
-select * from [Address]
+select * from [Address] where address_ID = 'AMM0724011'
+delete [Address] where address_ID = 'AMM0724011'
 
 select * from [Order]
 select * from OrderDetails

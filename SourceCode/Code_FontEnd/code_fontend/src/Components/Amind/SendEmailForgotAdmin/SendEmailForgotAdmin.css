@@ -1,0 +1,62 @@
+.send-email-forgot-admin-wrapper-form{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+
+.send-email-forgot-admin-wrapper-form form{
+    width: 30%;
+}
+
+.header-send-email-forgot-admin h4{
+    margin-bottom:30px;
+}
+
+.input-forgot-admin-wrapper p{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.input-forgot-admin{
+    width: 100%;
+}
+
+.input-forgot-admin input {
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    height: 45px;
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 25px;
+}
+
+.button-send-email-admin{
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    height: 45px;
+}
+
+.button-send-email-admin p{
+    padding-top: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.link-return-loginadmin{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.link-return-loginadmin a{
+    color: black;
+    font-weight: bold;
+}
+
+.link-return-loginadmin a:hover{
+    color: blue;
+}

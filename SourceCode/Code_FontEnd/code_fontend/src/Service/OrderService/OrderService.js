@@ -26,3 +26,12 @@ export const checkoutPay = async (userToken,order) => {
     console.log("Error checkout Vnpay ", error);
   }
 }
+
+export const paymentCallBack = async () => {
+  try {
+    const res = await request.Get("Order/PaymentCallBack")
+    return res;
+  } catch (error) {
+    console.log("lỗi ở payment call back ",error)
+  }
+}

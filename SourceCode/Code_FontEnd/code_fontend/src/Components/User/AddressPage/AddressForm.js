@@ -4,8 +4,16 @@ import { Modal, Button, Form } from "react-bootstrap";
 import * as Yup from "yup";
 import { userAddAdress } from "../../../Service/UserService/UserService";
 import { toast } from "react-toastify";
+import { useUserProfile } from "../../../Store";
 const AddressForm = ({ show, handleClose, initialData, onSave }) => {
-  const [userToken, setUserToken] = useState(localStorage.getItem("userToken"));
+  const {logOut,
+    userProfile,
+    setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken} = useUserProfile();
+
   const formik = useFormik({
     initialValues: {
       //thư viện dùng để chứa dữ liệu từ formik
@@ -25,8 +33,10 @@ const AddressForm = ({ show, handleClose, initialData, onSave }) => {
     }),
 
     onSubmit: async (values) => {
-      const resAddadres = await userAddAdress(userToken, values);
+      const resAddadres = await userAddAdress(userProfile.userToken, values);
       if (resAddadres.data.message === "Address added successfully") {
+        getAllAdressByToken(userProfile.userToken);
+        handleClose();
         toast.success("thêm địa chỉ thành công", {
           autoClose: 1000,
         });
@@ -112,7 +122,7 @@ const AddressForm = ({ show, handleClose, initialData, onSave }) => {
               <p style={{ color: "red" }}>{formik.errors.region}</p>
             )}
           </Form.Group>
-          <Form.Group controlId="formDefaultAddress">
+          {/* <Form.Group controlId="formDefaultAddress">
             <Form.Check
               type="checkbox"
               name="defaultAddress"
@@ -120,7 +130,7 @@ const AddressForm = ({ show, handleClose, initialData, onSave }) => {
               // checked={formData.defaultAddress}
               // onChange={handleChange}
             />
-          </Form.Group>
+          </Form.Group> */}
           <Button variant="primary" type="submit">
             {initialData ? "Cập nhật địa chỉ" : "Thêm địa chỉ"}
           </Button>

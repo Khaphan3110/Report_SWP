@@ -1,5 +1,5 @@
 import React from "react";
-
+import { ProtectAdmin, ProtectUser } from "../Components/User/ProtectUser/ProtectUser";
 
 
 const Categories = React.lazy(() => import("../Components/Amind/Categories/Categories")) ;
@@ -21,7 +21,16 @@ const RouteAdminLayout = React.lazy(() => import("../Layouts/AdminLayout/RouteAd
 const DashBoardAdmin = React.lazy(() => import("../Components/Amind/DashBoardAdmin/DashBoardAdmin"));
 const PreorderAdmin = React.lazy(() => import("../Components/Amind/PreorderAdmin/PreorderAdmin"));
 const SettingAdmin = React.lazy(() => import("../Components/Amind/SettingAdmin/SettingAdmin"));
-
+const Success = React.lazy(() => import("../Components/User/SuccessOrNot/Success/Success"))
+const NotSuccess = React.lazy(() => import("../Components/User/SuccessOrNot/NotSuccess/NotSuccess"))
+const Refun = React.lazy(() => (import("../Components/User/Refun/Refun")))
+const Polyci = React.lazy(() => (import("../Components/User/polyci/ProcessOrder")))
+const Payment = React.lazy(() => (import("../Components/User/Payment/PaymentInfor")))
+const LoginAdmin = React.lazy(() => import("../Components/Amind/LoginRegisterAdmin/LoginRegisterAdmin"))
+const SendEmailForgotAdmin = React.lazy(() => (import("../Components/Amind/SendEmailForgotAdmin/SendEmailForgotAdmin")))
+const ResetPassWordAdmin = React.lazy(() => (import("../Components/Amind/ResetPasswordadmin/ResetPasswordadmin")))
+const AuthenRegisterAdmin = React.lazy(() => (import("../Components/Amind/AuthenRegister/AuthenRegister")))
+const SearchFilterProduct = React.lazy(() => (import("../Components/User/SearchFilterProduct/SearchFilterProduct")))
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -35,29 +44,46 @@ const SettingAdmin = React.lazy(() => import("../Components/Amind/SettingAdmin/S
 //         <Route path="/sendEmailForgot" element={<SendEmailForm />} />
 //         <Route path="/ForgotPassword" element={<ForgotPasswordForm />} /> 
 //         <Route path="/CategoriesType" element={<ImportCategories/>} />
-
 const publicRoutes = [
   { path: "/", component: CartProductPage },
+  { path: "/seachproduct", component: SearchFilterProduct,layout:"user" },
+  { path: "/authenRegisterAdmin", component: AuthenRegisterAdmin,layout:"loginOnly" },
+  { path: "/resetpasswordAdmin", component: ResetPassWordAdmin,layout:"loginOnly" },
+  { path: "/sendEmailForgotAdmin", component: SendEmailForgotAdmin,layout:"loginOnly" },
   { path: "/login", component: LoginForm ,layout:"user"},
+  { path: "/loginadmin", component: LoginAdmin,layout:"loginOnly"},
   { path: "/logout", component: Logout ,layout:"user"},
+  { path: "/payment-policy", component: Payment ,layout:"user"},
+  { path: "/policy", component: Polyci ,layout:"user"},
+  { path: "/refun", component: Refun ,layout:"user"},
   { path: "/register", component: RegisterForm ,layout:"user"},
   { path: "/authenOTP", component: AuthenEmail ,layout:"user"},
   { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
   { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
+  // { path: "/payment/success", component: Success ,layout:"user"},
+  // { path: "/payment/notsuccess", component: NotSuccess ,layout:"user"},
+  // { path: "/checkout", component: CheckoutPage ,layout:"user"},
+  // { path: "/payment", component: PaymentPage ,layout:"user"},
+  // { path: "/addresses", component: AddressPage ,layout:"user"},
+  // { path: "/account", component: AccountPage ,layout:"user"},
+  // { path: "/cart", component: CartPage ,layout:"user"},
+  // { path: "/content", component: Content ,layout:"user"},
   
 ];
 const privateRoutes = [
-  { path: "/checkout", component: CheckoutPage ,layout:"user",protect:"user"},
-  { path: "/payment", component: PaymentPage ,layout:"user",protect:"user"},
-  { path: "/addresses", component: AddressPage ,layout:"user",protect:"user"},
-  { path: "/account", component: AccountPage ,layout:"user",protect:"user"},
-  { path: "/cart", component: CartPage ,layout:"user",protect:"user"},
-  { path: "/content", component: Content ,layout:"user",protect:"user"},
-  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:"admin"},
-  { path: "/admin/categories", component: Categories ,layout:"admin",protect:"admin" },
-  { path: "/admin/product", component: Product ,layout:"admin",protect:"admin"},
-  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:"admin"},
-  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:"admin"},
+  { path: "/payment/success", component: Success ,layout:"user",protect:ProtectUser},
+  { path: "/payment/notsuccess", component: NotSuccess ,layout:"user",protect:ProtectUser},
+  { path: "/checkout", component: CheckoutPage ,layout:"user",protect:ProtectUser},
+  { path: "/payment", component: PaymentPage ,layout:"user",protect:ProtectUser},
+  { path: "/addresses", component: AddressPage ,layout:"user",protect:ProtectUser},
+  { path: "/account", component: AccountPage ,layout:"user",protect:ProtectUser},
+  { path: "/cart", component: CartPage ,layout:"user",protect:ProtectUser},
+  { path: "/content", component: Content ,layout:"user",protect:ProtectUser},
+  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectAdmin},
+  { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectAdmin },
+  { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectAdmin},
+  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectAdmin},
+  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectAdmin},
   // { path: "/sideBar", component: SideBarAdmin },
 ];
 

@@ -28,25 +28,26 @@ export default function CartProducts() {
     })
   }
   return (
-    <Container>
+    <Container style={{marginTop:"0"}}>
       <ToastContainer/>
       <HomePage/>
       <Row>
         {listProduct && listProduct.map((product, index) => {
           return (
-            <Col xl={3} key={index} className="row-product-cart">
-              <Card style={{ width: "18rem" }} className="cart-product-page">
+            <Col  key={index} className="row-product-cart">
+              <Card  className="cart-product-page">
                 {/* <Card.Img variant="top" src={listProductImage ? listProductImage[product.productId][0].imagePath : "productimage"} /> */}
-                <Card.Img variant="top" src={`https://localhost:44358/user-content/${product.images[0] ? product.images[0].imagePath : "productImage"}`} />
+                <Card.Img variant="top" src={`https://localhost:44358/user-content/${product.images[0] ? product.images[0].imagePath : "productImage"}`} className="image-cart-product-user"/>
                 <Card.Body>
-                  <Card.Title>{product.productName}</Card.Title>
-                  <Card.Text>{product.price} đ</Card.Text>
-                  <Button
+                  <Card.Text className="cart-product-text">{product.productName}</Card.Text>
+                  <Card.Text className="cart-product-text-money">{product.price.toLocaleString()} đ</Card.Text>
+                  <button
                     variant="primary"
                     onClick={() => addToCart(product)}
+                    className="button-cartProduct"
                   >
-                    Add To cart
-                  </Button>
+                   Thêm vào giỏ hàng
+                  </button>
                 </Card.Body>
               </Card>
             </Col>

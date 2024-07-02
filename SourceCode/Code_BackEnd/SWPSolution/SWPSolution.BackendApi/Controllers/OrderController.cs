@@ -162,6 +162,42 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { PaymentUrl = paymentUrl });
         }
 
+        //[HttpGet("PaymentCallBack")]
+        //public async Task<IActionResult> PaymentCallBack()
+        //{
+        //    var response = _vnPayService.PaymentExecute(Request.Query);
+
+        //    if (response == null || response.VnPayResponseCode != "00")
+        //    {
+        //        return BadRequest(new { Message = "Payment failed" });
+        //    }
+
+        //    var orderId = response.PaymentId; // Adjust based on your response model
+        //    var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
+
+        //    if (payment == null)
+        //    {
+        //        return BadRequest(new { Message = $"Payment with id {orderId} not found" });
+        //    }
+
+        //    payment.PaymentStatus = true;
+
+        //    // Fetch the order associated with the payment
+        //    var order = await _context.Orders.FindAsync(payment.OrderId);
+        //    if (order == null)
+        //    {
+        //        return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
+        //    }
+
+        //    // Update payment status and save changes
+        //    _context.Payments.Update(payment);
+        //    await _context.SaveChangesAsync();
+
+        //    // Send the email using the _orderService (you'll need to implement this method in your OrderService)
+        //    await _orderService.SendReceiptEmailAsync(order.MemberId, order); // Pass the member ID and order
+
+        //    return Ok(new { Message = "Payment status updated successfully" });
+        //}
         [HttpGet("PaymentCallBack")]
         public async Task<IActionResult> PaymentCallBack()
         {
@@ -169,7 +205,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             if (response == null || response.VnPayResponseCode != "00")
             {
-                return BadRequest(new { Message = "Payment failed" });
+                return Redirect("http://localhost:3000/payment/notsuccess");
             }
 
             var orderId = response.PaymentId; // Adjust based on your response model
@@ -196,7 +232,7 @@ namespace SWPSolution.BackendApi.Controllers
             // Send the email using the _orderService (you'll need to implement this method in your OrderService)
             await _orderService.SendReceiptEmailAsync(order.MemberId, order); // Pass the member ID and order
 
-            return Ok(new { Message = "Payment status updated successfully" });
+            return Redirect("http://localhost:3000/payment/success");
         }
     }
 

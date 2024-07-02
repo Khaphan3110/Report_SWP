@@ -20,13 +20,12 @@ const AccountPage = () => {
     updateUserToken,
     getUserProfileByToken,
   } = useUserProfile();
-  useEffect(() => {
-    const resUser = async () => {
-     await getUserProfileByToken(userProfile.userToken);
-    };
-    resUser();
-  }, []);
-
+  // useEffect(() => {
+  //   const resUser = async () => {
+  //    await getUserProfileByToken(userProfile.userToken);
+  //   };
+  //   resUser();
+  // }, []);
   const handleAddressModalClose = () => setShowAddressModal(false);
   const handleAddressModalShow = () => setShowAddressModal(true);
 
@@ -50,8 +49,8 @@ const AccountPage = () => {
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                Xin chào, {userProfile && userProfile.profile.lastName}{" "}
-                {userProfile && userProfile.profile.firstName}!
+                Xin chào, {userProfile.profile ? userProfile.profile.member.lastName : "Ho"}{" "}
+                {userProfile.profile ? userProfile.profile.member.firstName : "ten"}!
               </ListGroup.Item>
               <ListGroup.Item>
                 {location.pathname === "/account" ? (
@@ -78,10 +77,10 @@ const AccountPage = () => {
             <Card.Body>
               <Card.Text>
                 <strong>Tên tài khoản:</strong>{" "}
-                {userProfile && userProfile.profile.userName}
+                {userProfile.profile ? userProfile.profile.member.userName : "tai khoan"}
                 <br />
-                <strong>Địa chỉ:</strong> , Vietnam
-                {userProfile ? (userProfile.CurrentAdress.house_Number +
+                <strong>Địa chỉ: </strong> 
+                {userProfile.CurrentAdress ? (userProfile.CurrentAdress.house_Number +
                                 "," +
                                 userProfile.CurrentAdress.street_Name +
                                 "," +
@@ -89,10 +88,10 @@ const AccountPage = () => {
                                 "," +
                                 userProfile.CurrentAdress.city +
                                 "," +
-                                userProfile.CurrentAdress.region) : "kh co địa chỉ"}
+                                userProfile.CurrentAdress.region) : (<span style={{color:"red"}}>không có địa chỉ vui lòng thêm !!!</span>)}
                 <br />
                 <strong>Điện thoại:</strong>{" "}
-                {userProfile && userProfile.profile.phoneNumber}
+                {userProfile.profile ? userProfile.profile.member.phoneNumber : ""}
                 <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>

@@ -125,9 +125,9 @@ export const getUserAddAdress = async (TokenUser) => {
   
 }
 
-export const updateUserAdress = async (TokenUser,userAdress) => {
+export const updateUserAdress = async (addressID,newAdress,TokenUser) => {
   try {
-    const res = await request.Get(`Users/UpdateAddressByToken?jwtToken=${TokenUser}`,userAdress,{
+    const res = await request.Get(`Users/UpdateAddress/${addressID}/address`,newAdress,{
       headers:{
         'Authorization': `Bearer ${TokenUser}`,
         'Content-Type': 'application/json',
@@ -138,6 +138,20 @@ export const updateUserAdress = async (TokenUser,userAdress) => {
     console.log("lỗi update adress  người dùng",error)
   }
   
+}
+
+export const deleteUserAddress = async (addressID,TokenUser) => {
+  try {
+    const res = await request.Delete(`Users/DeleteAddress/${addressID}/address`,{
+      headers:{
+        'Authorization': `Bearer ${TokenUser}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    return res;
+  } catch (error) {
+    console.log("lỗi update address")
+  }
 }
 
 export const updatePhoneNumberOfUser = async (TokenUser,userInfor) => {

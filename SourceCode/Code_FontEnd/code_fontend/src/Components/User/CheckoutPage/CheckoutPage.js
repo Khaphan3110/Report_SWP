@@ -24,9 +24,9 @@ const CheckoutPage = () => {
       district_Name: userProfile ? userProfile.CurrentAdress.district_Name : "",
       city: userProfile ? userProfile.CurrentAdress.city : "",
       region: "Việt Nam",
-      phoneNumber: userProfile ? userProfile.profile.phoneNumber : "",
+      phoneNumber: userProfile ? userProfile.profile.member.phoneNumber : "",
       fullName: userProfile
-        ? userProfile.profile.lastName + " " + userProfile.profile.firstName
+        ? userProfile.profile.member.lastName + " " + userProfile.profile.member.firstName
         : "",
       // newSelectDate: selectDate,
     },

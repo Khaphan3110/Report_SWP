@@ -3,6 +3,7 @@ import { ADD_LISTTO_CART, REMOVE_ITEM_CART, CLEAR_CART } from "./Constant";
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem("cart")) || [],
   total: JSON.parse(localStorage.getItem("total")) || 0,
+  statusAddTocart:JSON.parse(localStorage.getItem("statusAddTocart")) || false,
 };
 
 function calculateTotal(cartItems) {
@@ -24,6 +25,7 @@ function reducer(state, action) {
         const newTotalAdd = calculateTotal(updatedCartAdd);
         localStorage.setItem('cart', JSON.stringify(updatedCartAdd));
         localStorage.setItem('total', JSON.stringify(newTotalAdd));
+        localStorage.setItem("statusAddTocart",JSON.stringify(true))
         return {cartItems: updatedCartAdd,total: newTotalAdd };
 
     case REMOVE_ITEM_CART:

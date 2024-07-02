@@ -7,13 +7,14 @@ import {
 
 function UserProvider({ children }) {
   const [userProfile, setUserProfile] = useState({
-    addresses: [],
-    CurrentAdress: {},
+    addresses: JSON.parse(localStorage.getItem("userAddresses")) || [],
+    CurrentAdress: JSON.parse(localStorage.getItem("userCurrentAddresses")) || {},
     userToken: localStorage.getItem("userToken") || "",
-    profile: {},
+    profile: JSON.parse(localStorage.getItem("userProfile")) || {},
   });
 
   const addCurrentAddress = (Address) => {
+    localStorage.setItem("userCurrentAddresses",JSON.stringify(Address));
     setUserProfile((prevState) => ({
       ...prevState,
       CurrentAdress: Address,
@@ -25,6 +26,7 @@ function UserProvider({ children }) {
       const resAddress = await getUserAddAdress(userToken);
       if (resAddress) {
         const newAddresses = resAddress.data;
+        localStorage.setItem("userAddresses",JSON.stringify(newAddresses));
         setUserProfile((prevState) => ({
           ...prevState,
           addresses: [
@@ -60,10 +62,11 @@ function UserProvider({ children }) {
   const getUserProfileByToken = async (userToken) => {
     try {
       const resUserInfor = await getUserInfor(userToken);
+      localStorage.setItem("userProfile",JSON.stringify(resUserInfor.data));
       if (resUserInfor) {
         setUserProfile((prevState) => ({
           ...prevState,
-          profile: resUserInfor.data.member,
+          profile: resUserInfor.data,
         }));
       }
       
@@ -77,7 +80,6 @@ function UserProvider({ children }) {
     const autoGet = async () => {
       if (userProfile.userToken) {
        const resAddress = await getAllAdressByToken(userProfile.userToken);
-        await getUserProfileByToken(userProfile.userToken);
         if(resAddress){
         addCurrentAddress(resAddress.data[0])
         }
