@@ -7,6 +7,8 @@ using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Categories;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Common;
 
 namespace SWPSolution.Application.Catalog.Categories
 {
@@ -123,6 +125,56 @@ namespace SWPSolution.Application.Catalog.Categories
                 })
                 .ToListAsync();
         }
+
+        public async Task<int> GetTotalCategoryCountAsync()
+        {
+            return await _context.Categories.CountAsync();
+        }
+        public async Task<PageResult<CategoriesVM>> GetAllPaging(CategoryPagingRequest request)
+        {
+            // 1. Query with Filtering
+            var query = _context.Categories.AsQueryable(); // Start from Categories table
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                // Adjust filtering to your relevant category fields
+                query = query.Where(c => c.BrandName.Contains(request.Keyword) ||
+                                        c.SubCategories.Contains(request.Keyword) 
+                                        // ... other fields you want to filter on
+                                       );
+            }
+
+            // 2. Projection to CategoriesVM (No need for joins here)
+            var categoryData = await query.Select(c => new CategoriesVM
+            {
+                CategoriesId = c.CategoriesId,
+                BrandName = c.BrandName,
+                AgeRange = c.AgeRange,
+                SubCategories = c.SubCategories,
+                PackageType = c.PackageType,
+                Source = c.Source
+            }).ToListAsync();
+
+            // 3. Paging (Same as before)
+            int totalRow = categoryData.Count;
+            var pagedData = categoryData
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            // 4. Result
+            return new PageResult<CategoriesVM>
+            {
+                TotalRecords = totalRow,
+                Items = pagedData
+            };
+        }
+
+
+
+
+
+
         private string GenerateCategoriesId()
         {
             // Generate categories_ID based on current month, year, and auto-increment

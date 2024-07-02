@@ -403,18 +403,21 @@ namespace SWPSolution.Application.System.User
 
         public async Task<List<MemberInfoVM>> GetAllMembersAsync()
         {
-            var members = await _context.Members
+            var members =  _context.Members
                                         .Select(m => new MemberInfoVM
                                         {
-                                            Id = m.MemberId,
+                                            MemberId = m.MemberId,
                                             UserName = m.UserName,
+                                            Password = m.PassWord,
                                             Email = m.Email,
                                             FirstName = m.FirstName,
                                             LastName = m.LastName,
                                             PhoneNumber = m.PhoneNumber,
-                                            Date = m.RegistrationDate,
+                                            LoyaltyPoints = m.LoyaltyPoints,
+                                            RegistrationDate = m.RegistrationDate,
+
                                         })
-                                        .ToListAsync();
+                                        .ToList();
             return members;
         }
 
@@ -425,13 +428,15 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
-                Id = memberId,
+                MemberId = member.MemberId,
                 UserName = member.UserName,
+                Password = member.PassWord,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
                 PhoneNumber = member.PhoneNumber,
-                Date = member.RegistrationDate,
+                LoyaltyPoints = member.LoyaltyPoints,
+                RegistrationDate = member.RegistrationDate,
             };
         }
 
@@ -442,13 +447,13 @@ namespace SWPSolution.Application.System.User
 
             return new MemberInfoVM
             {
-                Id = member.MemberId,
+                MemberId = member.MemberId,
                 UserName = member.UserName,
                 Email = member.Email,
                 FirstName = member.FirstName,
                 LastName = member.LastName,
                 PhoneNumber = member.PhoneNumber,
-                Date = member.RegistrationDate,
+                RegistrationDate = member.RegistrationDate,
             };
         }
 

@@ -8,7 +8,7 @@ import phoneIcon from "../../../assets/images/phoneicon.jpg";
 import shipIcon from "../../../assets/images/shippingIcon.png";
 import "./Header.css";
 import accountIcon from "../../../assets/images/account-icon.png";
-import { useStore } from "../../../Store";
+import { useStore, useUserProfile } from "../../../Store";
 import { Tooltip } from "react-tooltip";
 
 export default function Header() {
@@ -16,12 +16,10 @@ export default function Header() {
   const [showToolip, setShowToolip] = useState(false);
   const [state, dispatch] = useStore();
   const prevCartItemsCount = useRef(state.cartItems.length);
-
+  const { userProfile } = useUserProfile();
   useEffect(() => {
-    console.log(prevCartItemsCount.current + "blbal" + state.cartItems.length)
     const showTOOLIP = () => {
-      if (state.cartItems.length > prevCartItemsCount.current) {
-       
+      if (state.cartItems.length >= prevCartItemsCount.current) {
         setShowToolip(true);
         setTimeout(() => {
           setShowToolip(false);
@@ -95,9 +93,15 @@ export default function Header() {
                     ></img>
                     <div className="userAcount d-md-flex flex-column d-none ">
                       <Link to={"/account"}>Tài Khoản</Link>
-                      <small>
-                        <Link to={"/logout"}>Đăng xuất</Link>
-                      </small>
+                      {userProfile ? (
+                        <small>
+                          <Link to={"/logout"}>Đăng xuất</Link>
+                        </small>
+                      ) : (
+                        <small>
+                          <Link to={"/login"}>Đăng nhập</Link>
+                        </small>
+                      )}
                     </div>
                   </li>
                   <li className="cart">

@@ -8,13 +8,19 @@ namespace SWPSolution.ViewModels.System.Users
 {
     public class MemberInfoVM
     {
-        public string Id { get; set; }
+        public string MemberId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime? Date {  get; set; }
+
+        public decimal? LoyaltyPoints { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
+
+        
+
     }
 }

@@ -35,8 +35,15 @@ namespace SWPSolution.BackendApi.Controllers
         [HttpGet("public-paging")]
         public async Task<IActionResult> Get([FromQuery] GetPublicProductPagingRequest request)
         {
-            var products = await _publicProductService.GetAllByCategoryId(request);
+            var products = await _publicProductService.GetAllPaging(request);
             return Ok(products);
+        }
+
+        [HttpGet("get-total-product")]
+        public async Task<ActionResult<int>> GetTotalProductCount()
+        {
+            var totalProducts = await _publicProductService.GetTotalProductCountAsync();
+            return Ok(totalProducts);
         }
 
         [HttpGet("{productId}")]
@@ -149,7 +156,7 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpPatch  ("price/{id}/{newPrice}")]
-        public async Task<IActionResult> UpdatePrice([FromQuery]string id, float newPrice)
+        public async Task<IActionResult> UpdatePrice(string id, float newPrice)
 
 
         {

@@ -418,7 +418,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("member_id");
 
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("date")
                         .HasColumnName("orderDate");
 
@@ -438,7 +438,7 @@ namespace SWPSolution.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<double?>("TotalAmount")
+                    b.Property<double>("TotalAmount")
                         .HasColumnType("float");
 
                     b.HasKey("OrderId")
@@ -498,11 +498,11 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("payment_ID");
 
-                    b.Property<decimal?>("Amount")
+                    b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10, 2)")
                         .HasColumnName("amount");
 
-                    b.Property<double?>("DiscountValue")
+                    b.Property<double>("DiscountValue")
                         .HasColumnType("float")
                         .HasColumnName("discountValue");
 
@@ -512,7 +512,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("order_ID");
 
-                    b.Property<DateTime?>("PaymentDate")
+                    b.Property<DateTime>("PaymentDate")
                         .HasColumnType("date");
 
                     b.Property<string>("PaymentMethod")
@@ -520,7 +520,7 @@ namespace SWPSolution.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<bool?>("PaymentStatus")
+                    b.Property<bool>("PaymentStatus")
                         .HasColumnType("bit")
                         .HasColumnName("paymentStatus");
 

@@ -6,7 +6,11 @@ namespace SWPSolution.Application.Catalog.Product
 {
     public interface IPublicProductService
     {
-        Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+
+        Task<int> GetTotalProductCountAsync();
+
+
+        Task<PageResult<ProductViewModel>> GetAllPaging(GetPublicProductPagingRequest request);
 
         Task<List<ProductViewModel>> GetAll();
     }
