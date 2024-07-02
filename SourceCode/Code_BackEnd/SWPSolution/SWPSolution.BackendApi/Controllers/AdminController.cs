@@ -54,7 +54,26 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok();
         }
 
+        [HttpGet("ConfirmEmail")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string otp)
+        {
+            if (string.IsNullOrEmpty(otp))
+            {
+                return BadRequest(new { message = "OTP must be provied" });
+            }
+
+            var result = await _adminService.ConfirmEmail(otp);
+            if (result)
+            {
+                return Ok(new { message = "Email confirmed successfully" });
+            }
+
+            return BadRequest(new { message = "Email confirmation failed" });
+        }
+
         [HttpPost("GetAdminByToken")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAdminByToken([FromBody] string token)
         {
             if (string.IsNullOrEmpty(token))
@@ -89,6 +108,7 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpPut("UpdateAdminByToken")]
+        [AllowAnonymous]
         public async Task<IActionResult> UpdateAdminByToken([FromQuery] string jwtToken, [FromBody] UpdateAdminRequest request)
         {
             if (string.IsNullOrEmpty(jwtToken))
@@ -119,8 +139,8 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-        [Authorize]
         [HttpDelete("DeleteAdminByToken")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteAdminByToken([FromQuery] string jwtToken)
         {
             if (string.IsNullOrEmpty(jwtToken))

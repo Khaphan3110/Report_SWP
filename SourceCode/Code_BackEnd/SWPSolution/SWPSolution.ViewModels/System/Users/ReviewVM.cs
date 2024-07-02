@@ -8,6 +8,7 @@ namespace SWPSolution.ViewModels.System.Users
 {
     public class ReviewVM
     {
+        public string reviewId {  get; set; }
         public string productId {  get; set; }
         public string memberId { get; set; }
         public DateTime? dateReview {  get; set; }

@@ -84,7 +84,7 @@ namespace SWPSolution.Application.Catalog.Product
             // 4. Result
             return new PageResult<ProductViewModel>
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
                 Items = pagedData
             };
         }
@@ -128,11 +128,14 @@ namespace SWPSolution.Application.Catalog.Product
                 .ToList(); // ToList after paging for efficiency
 
             // 4. Result
-            return new PageResult<ProductViewModel>
+            var pageResult = new PageResult<ProductViewModel>
             {
-                TotalRecord = totalRow,
-                Items = pagedData
-            };
+				TotalRecords = totalRow,
+				PageIndex = request.PageIndex,
+				PageSize = request.PageSize,
+				Items = productData,
+			};
+            return pageResult;
         }
     }
 }

@@ -165,7 +165,7 @@ namespace SWPSolution.Application.Catalog.Categories
             // 4. Result
             return new PageResult<CategoriesVM>
             {
-                TotalRecord = totalRow,
+                TotalRecords = totalRow,
                 Items = pagedData
             };
         }
