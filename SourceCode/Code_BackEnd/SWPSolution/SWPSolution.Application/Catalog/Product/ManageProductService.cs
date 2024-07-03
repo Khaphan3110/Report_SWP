@@ -124,10 +124,12 @@ namespace SWPSolution.Application.Catalog.Product
             //4. Select and projection
             var pageResult = new PageResult<ProductViewModel>()
             {
-                TotalRecord = totalRow,
-                Items = data
+				TotalRecords = totalRow,
+				PageIndex = request.PageIndex,
+				PageSize = request.PageSize,
+				Items = data,
 
-            };
+			};
             return pageResult;
         }
 
@@ -396,12 +398,13 @@ namespace SWPSolution.Application.Catalog.Product
             return true;
         }
 
-        public async Task<List<ReviewVM>> GetReviews(string memberId)
+        public async Task<List<ReviewVM>> GetReviewsByMemberId(string memberId)
         {
             var reviews = _context.Reviews
                                         .Where(m => m.MemberId == memberId)
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,
@@ -418,11 +421,58 @@ namespace SWPSolution.Application.Catalog.Product
             return reviews;
         }
 
+        public async Task<List<ReviewVM>> GetReviewsByProductId(string productId)
+        {
+            var reviews = _context.Reviews
+                                        .Where(m => m.ProductId == productId)
+                                        .Select(m => new ReviewVM
+                                        {
+                                            reviewId = m.ReviewId,
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+
+            if (!reviews.Any())
+            {
+                throw new KeyNotFoundException($"Reviews for product ID {productId} not found.");
+            }
+
+            return reviews;
+        }
+
+        public async Task<List<ReviewVM>> GetReviewsByMemberIdAndProductId(string memberId, string productId)
+        {
+            var reviews = _context.Reviews
+                                        .Where(m => m.MemberId == memberId && m.ProductId == productId)
+                                        .Select(m => new ReviewVM
+                                        {
+                                            reviewId = m.ReviewId,
+                                            productId = m.ProductId,
+                                            memberId = m.MemberId,
+                                            dateReview = m.DataReview,
+                                            grade = m.Grade,
+                                            comment = m.Comment,
+                                        })
+                                        .ToList();
+
+            if (!reviews.Any())
+            {
+                throw new KeyNotFoundException($"Reviews for member ID {memberId} with product ID {productId} not found.");
+            }
+
+            return reviews;
+        }
+
         public async Task<List<ReviewVM>> GetAllReview()
         {
             var review = _context.Reviews
                                         .Select(m => new ReviewVM
                                         {
+                                            reviewId = m.ReviewId,
                                             productId = m.ProductId,
                                             memberId = m.MemberId,
                                             dateReview = m.DataReview,

@@ -125,54 +125,118 @@ namespace SWPSolution.Application.System.Admin
 
         public async Task<bool> RegisterAdmin(RegisterRequest request)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+            var existingUsers = _userManager.Users.Where(u => u.UserName == request.UserName &&
+                u.TemporaryPassword == request.Password &&
+                u.EmailConfirmed == false)
+    .ToList();
+            if (existingUsers.Any())
+            {
+                foreach (var existingUser in existingUsers)
+                {
+                    var deleteResult = await _userManager.DeleteAsync(existingUser);
+                    if (!deleteResult.Succeeded)
+                    {
+                        return false;
+                    }
+                }
+            }
 
             var user = new AppUser()
             {
+                Id = Guid.NewGuid(),
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
                 TemporaryPassword = request.Password,
-                EmailConfirmed = true,
+                EmailConfirmed = false,
             };
-
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                // Ensure the admin role exists
+                return false; // If registration fails, return false
+            }
+            var otpSent = await SendOtp(request.Email);
+            return true;
+        }
+
+        public async Task<bool> SendOtp(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return false;
+            // Generate OTP
+            var otp = new Random().Next(100000, 999999).ToString();
+            // Save OTP and expiration to database
+            user.EmailVerificationCode = otp;
+            user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+            try
+            {
+                // Send OTP via email
+                var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
+                _emailService.SendEmail(message);
+                return true;
+            }
+            catch (Exception)
+            {
+                // If email sending fails, remove the user
+                await _userManager.DeleteAsync(user);
+                return false;
+            }
+        }
+
+        public async Task<bool> ConfirmEmail(string otp)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            if (user == null) return false;
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                user.EmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.EmailVerificationExpiry = null;
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+
                 if (!await _roleManager.RoleExistsAsync("Admin"))
                 {
                     var adminRole = new AppRole { Name = "Admin", Description = "Administrator role with full permissions" };
                     await _roleManager.CreateAsync(adminRole);
                 }
-
                 // Assign the admin role to the user
                 await _userManager.AddToRoleAsync(user, "Admin");
 
                 var admin = new Staff()
                 {
-                    //StaffId = Guid.NewGuid().ToString(),
-                    StaffId = "",           // Generate a new unique ID
-                    FullName = $"{request.FirstName} {request.LastName}",
-                    Username = request.UserName,
-                    Password = request.Password,
-                    Email = request.Email,
-                    Phone = request.PhoneNumber,
-                    Role = "staffadmin"
+                            StaffId = "",
+                            FullName = $"{user.FirstName} {user.LastName}",
+                            Username = user.UserName,
+                            Password = user.TemporaryPassword,
+                            Email = user.Email,
+                            Phone = user.PhoneNumber,
+                            Role = "staffadmin"
                 };
 
                 _context.Staff.Add(admin);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
-
                 return true;
             }
-
-            await transaction.RollbackAsync();
-            return false;
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
         public async Task<StaffInfoVM> GetAdminById(string adminId)
@@ -182,8 +246,10 @@ namespace SWPSolution.Application.System.Admin
 
             return new StaffInfoVM
             {
+                Id = adminId,
                 Role = admin.Role,
                 UserName = admin.Username,
+                Password = admin.Password,
                 Email = admin.Email,
                 FullName = admin.FullName,
                 PhoneNumber = admin.Phone
@@ -324,6 +390,7 @@ namespace SWPSolution.Application.System.Admin
 
             return new BlogDetailVM
             {
+                Id = blog.BlogId,
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
@@ -418,7 +485,6 @@ namespace SWPSolution.Application.System.Admin
                 PromotionId = order.PromotionId,
                 ShippingAddress = order.ShippingAddress,
                 TotalAmount = (double)order.TotalAmount,
-            //    OrderStatus = order.OrderStatus,
                 OrderDate = (DateTime)order.OrderDate,
             };
         }
@@ -433,7 +499,6 @@ namespace SWPSolution.Application.System.Admin
                     PromotionId = order.PromotionId,
                     ShippingAddress = order.ShippingAddress,
                     TotalAmount = (double)order.TotalAmount,
-                //    OrderStatus = order.OrderStatus,
                     OrderDate = (DateTime)order.OrderDate,
                 })
                 .ToListAsync();

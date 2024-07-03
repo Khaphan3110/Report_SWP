@@ -1,27 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Data.Entities;
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using SWPSolution.Data.Entities;
-using SWPSolution.Data.Enum;
+using Microsoft.EntityFrameworkCore;
 using SWPSolution.Utilities.Exceptions;
-using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Sales;
 using SWPSolution.ViewModels.System.Users;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Net.Mail;
-using System.Net;
 using SWPSolution.Application.System.User;
+using SWPSolution.Data.Enum;
 
 namespace SWPSolution.Application.Sales
 {
@@ -154,16 +142,9 @@ namespace SWPSolution.Application.Sales
 
         public IEnumerable<Order> GetOrdersByMemberId(string memberId)
         {
-
-
-            return null;
-        }
-
-        public class PlaceOrderResult
-        {
-            public bool Success { get; set; }
-            public string ErrorMessage { get; set; }
-            public Order Order { get; set; }
+            return _context.Orders
+                .Where(o => o.MemberId == memberId)
+                .ToList();
         }
 
         public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
@@ -194,6 +175,21 @@ namespace SWPSolution.Application.Sales
             order.OrderStatus = newStatus;
             await _context.SaveChangesAsync();
             return ("Update succeed!");
+        }
+
+        public async Task<string> CancelOrderAsync(string orderId)
+        {
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
+            if (order == null) throw new SWPException("Order not found");
+
+            if (order.OrderStatus != OrderStatus.InProgress)
+            {
+                throw new SWPException("Only orders that are in progress can be canceled.");
+            }
+
+            order.OrderStatus = OrderStatus.Canceled;
+            await _context.SaveChangesAsync();
+            return "Order canceled successfully!";
         }
 
         private string GenerateOrderId()

@@ -66,5 +66,10 @@ namespace SWPSolution.Application.System.User
         Task<string> AuthenticateStaff(LoginRequest request);
 
         Task<string> ExtractStaffIdFromTokenAsync(string token);
-    }
+
+        Task<PageResult<UserVm>> GetUsersPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<UserVm>> GetById(Guid id);
+
+	}
 }

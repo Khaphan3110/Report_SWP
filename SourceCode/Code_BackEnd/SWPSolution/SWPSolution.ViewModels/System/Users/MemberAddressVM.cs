@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace SWPSolution.ViewModels.System.Users
 {
     public class MemberAddressVM
-    {
+    { 
+        public string Id { get; set; }
         public string House_Number { get; set; }
         public string Street_Name { get; set; }
         public string District_Name { get; set; }

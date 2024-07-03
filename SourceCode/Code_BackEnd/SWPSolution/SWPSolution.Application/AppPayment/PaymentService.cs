@@ -1,10 +1,8 @@
-﻿
-using SWPSolution.ViewModels.Payment;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using SWPSolution.ViewModels.Payment;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using System.Data.Entity;
@@ -15,13 +13,15 @@ namespace SWPSolution.Application.AppPayment
     {
         private readonly SWPSolutionDBContext _context;
 
-        public PaymentService(SWPSolutionDBContext context) 
+        public PaymentService(SWPSolutionDBContext context)
         {
             _context = context;
         }
+
+        // Payment creation
         public async Task<string> Create(PaymentRequest request)
         {
-            var payment = new Data.Entities.Payment
+            var payment = new Payment
             {
                 PaymentId = GeneratePaymentId(),
                 OrderId = request.OrderId,
@@ -35,10 +35,15 @@ namespace SWPSolution.Application.AppPayment
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            var insertedPayment =  _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
+            var insertedPayment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == request.OrderId);
+            if (insertedPayment == null)
+            {
+                throw new Exception("Failed to retrieve the newly inserted payment from the database.");
+            }
             return insertedPayment.PaymentId;
         }
 
+        // Payment deletion
         public async Task<bool> Delete(string id)
         {
             var payment = await _context.Payments.FindAsync(id);
@@ -49,22 +54,10 @@ namespace SWPSolution.Application.AppPayment
             return true;
         }
 
+        // Payment retrieval
         public async Task<List<Payment>> GetAll()
         {
-            var payments = _context.Payments
-                .Select(p => new Payment
-                {
-                    PaymentId = p.PaymentId,
-                    OrderId = p.OrderId,
-                    Amount = p.Amount,
-                    DiscountValue = p.DiscountValue,
-                    PaymentStatus = p.PaymentStatus,
-                    PaymentMethod = p.PaymentMethod,
-                    PaymentDate = p.PaymentDate,
-                })
-                .ToList();
-
-            return payments;
+            return _context.Payments.ToList();
         }
 
         public async Task<Payment> GetById(string id)
@@ -74,6 +67,7 @@ namespace SWPSolution.Application.AppPayment
 
             return new Payment
             {
+                PaymentId = payment.PaymentId,
                 OrderId = payment.OrderId,
                 Amount = payment.Amount,
                 DiscountValue = payment.DiscountValue,
@@ -83,12 +77,12 @@ namespace SWPSolution.Application.AppPayment
             };
         }
 
+        // Payment updates
         public async Task<int> Update(string id, PaymentRequest request)
         {
             var payment = await _context.Payments.FindAsync(id);
             if (payment == null) throw new SWPException($"Cannot find payment with id: {id}");
 
-            
             payment.Amount = request.Amount;
             payment.DiscountValue = request.DiscountValue;
             payment.PaymentStatus = request.PaymentStatus;
@@ -100,16 +94,12 @@ namespace SWPSolution.Application.AppPayment
             return await _context.SaveChangesAsync();
         }
 
-
-        //Generate id
+        // ID generation
         private string GeneratePaymentId()
         {
-            // Generate categories_ID based on current month, year, and auto-increment
             string month = DateTime.Now.ToString("MM");
             string year = DateTime.Now.ToString("yy");
-
             int autoIncrement = GetNextAutoIncrement(month, year);
-
             string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
 
             return $"PM{month}{year}{formattedAutoIncrement}";
@@ -117,15 +107,12 @@ namespace SWPSolution.Application.AppPayment
 
         private int GetNextAutoIncrement(string month, string year)
         {
-            // Generate the pattern for categories_ID to match in SQL query
             string pattern = $"PM{month}{year}";
-
-            // Retrieve the maximum auto-increment value from existing categories for the given month and year
             var maxAutoIncrement = _context.Payments
                 .Where(c => c.PaymentId.StartsWith(pattern))
-                .Select(c => c.PaymentId.Substring(6, 3)) // Select substring of auto-increment part
-                .AsEnumerable() // Switch to client evaluation from this point
-                .Select(s => int.Parse(s)) // Parse string to int
+                .Select(c => c.PaymentId.Substring(6, 3))
+                .AsEnumerable()
+                .Select(s => int.Parse(s))
                 .DefaultIfEmpty(0)
                 .Max();
 
