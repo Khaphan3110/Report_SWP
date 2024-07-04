@@ -13,9 +13,10 @@ namespace SWPSolution.Application.Sales
     {
         Task<bool> IsProductAvailable(string productId, int quantity);
         Task<PreOrder> CreatePreOrder(string productId, string memberId, int quantity);
+        Task<List<PreOrder>> GetAll();
         Task<Payment> ProcessPreOrderDeposit(string preorderId, double orderTotal);
-        Task UpdateOrderStatus(string preorderId, OrderStatus newStatus);
-        Task NotifyCustomer(string memberId, string subject, string message);
+        Task NotifyCustomer(string memberId, PreOrder preorder, string paymentUrl);
+        Task UpdateOrderStatus(string preorderId, PreOrderStatus newStatus);
         Task<PreOrder> GetPreOrder(string preorderId);
     }
 }

@@ -60,6 +60,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IPreOrderService, PreOrderService>();
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
