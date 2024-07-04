@@ -3,25 +3,25 @@ import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './SettingAdmin.css';
 
-const Setting = () => {
-  return (
-    <Container fluid className="settings">
-      <Row>
-        <Col md={2} className="sidebar-settings">
-          <h2 className="text-center mt-3">MilkStore</h2>
-          <ListGroup variant="flush">
-            <ListGroup.Item as={Link} to="/dashboardadmin" className="text-white bg-dark">Dashboard</ListGroup.Item>
-            <ListGroup.Item as={Link} to="/preorderadmin" className="text-white bg-dark">Preorder</ListGroup.Item>
-            <ListGroup.Item as={Link} to="/settingadmin" className="text-white bg-dark">Settings</ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={10} className="dashboard-content-settings">
-          <SettingAdmin />
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+// const Setting = () => {
+//   return (
+//     <Container fluid className="settings">
+//       <Row>
+//         <Col md={2} className="sidebar-settings">
+//           <h2 className="text-center mt-3">MilkStore</h2>
+//           <ListGroup variant="flush">
+//             <ListGroup.Item as={Link} to="/dashboardadmin" className="text-white bg-dark">Dashboard</ListGroup.Item>
+//             <ListGroup.Item as={Link} to="/preorderadmin" className="text-white bg-dark">Preorder</ListGroup.Item>
+//             <ListGroup.Item as={Link} to="/settingadmin" className="text-white bg-dark">Settings</ListGroup.Item>
+//           </ListGroup>
+//         </Col>
+//         <Col md={10} className="dashboard-content-settings">
+//           <SettingAdmin />
+//         </Col>
+//       </Row>
+//     </Container>
+//   );
+// };
 
 const SettingAdmin = () => {
   const handleUpdate = (event) => {
@@ -34,10 +34,7 @@ const SettingAdmin = () => {
       <h2 className="settings__title">Settings</h2>
 
       <div className="settings__top">
-        <button className="setting__btn">My Details</button>
         <button className="setting__btn active__btn">Profile</button>
-        <button className="setting__btn">Password</button>
-        <button className="setting__btn">Email</button>
         <button className="setting__btn">Notification</button>
       </div>
 
@@ -91,4 +88,4 @@ const SettingAdmin = () => {
   );
 }
 
-export default Setting;
+export default SettingAdmin;

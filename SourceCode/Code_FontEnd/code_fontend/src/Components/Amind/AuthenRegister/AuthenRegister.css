@@ -1,3 +1,9 @@
+.authen-register-admin{
+    background: url('../../../assets/images/backgroundadminpage.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .authen-register-admin-wrapper-form{
     height: 100vh;
     display: flex;
@@ -21,6 +27,7 @@
 
 .input-authen-register-admin{
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .input-authen-register-admin input {

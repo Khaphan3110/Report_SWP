@@ -38,7 +38,7 @@ export default function ResetPasswordadmin() {
     }
     )
   return (
-    <div className="reset-password-forgot-admin container">
+    <div className="reset-password-forgot-admin">
     <Row>
       <Col className="reset-password-forgot-admin-wrapper-form">
         <form onSubmit={formik.handleSubmit}>

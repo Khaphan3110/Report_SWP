@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from "yup"
 import { Col, Row } from 'react-bootstrap'
+import { AdminAuthenRegister } from '../../../Service/AdminService/AdminService'
+import { toast } from 'react-toastify'
 export default function AuthenRegister() {
     const navigator = useNavigate()
     const formik = useFormik({
@@ -15,13 +17,24 @@ export default function AuthenRegister() {
               .required("otp is required").matches(/^\d{6}$/,"only enter number and enought 6 numbers")
           }),
 
-        onSubmit: async () => {
-            navigator("/login")
+        onSubmit: async (values) => {
+            // navigator("/login")
+            try {
+              const resOTP = AdminAuthenRegister(values.OTP);
+              if(resOTP){
+                navigator("/loginadmin");
+                toast.success("Register Successfull!!!")
+              } else {
+                toast.error("OTP authen is not right please input again!")
+              }
+            } catch (error) {
+              console.log("lỗi authen")
+            }
         }
     }
     )
   return (
-    <div className="authen-register-admin container">
+    <div className="authen-register-admin">
     <Row>
       <Col className="authen-register-admin-wrapper-form">
         <form onSubmit={formik.handleSubmit}>
@@ -33,7 +46,7 @@ export default function AuthenRegister() {
             <p>OTP: </p>
             <div  className="input-authen-register-admin">
               <input
-                type="email"
+                type="text"
                 name="OTP"
                 placeholder="input otp"
                 onChange={formik.handleChange}

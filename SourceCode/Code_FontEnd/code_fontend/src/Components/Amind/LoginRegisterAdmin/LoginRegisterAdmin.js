@@ -8,14 +8,16 @@ import {
   FaAddressCard,
   FaLockOpen,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import { AdminRegister } from "../../../Service/AdminService/AdminService";
+import { AdminLogin, AdminRegister } from "../../../Service/AdminService/AdminService";
+import { useAdminProfile } from "../../../Store/Hooks/Hooks";
 const LoginRegisterAdmin = () => {
   const [action, setAction] = useState("");
-
+  const navigator = useNavigate();
+  const {getAdminProfile,updateAdminToken} = useAdminProfile();
   const registerAdmin = (e) => {
     e.preventDefault();
     setAction("active");
@@ -81,8 +83,13 @@ const LoginRegisterAdmin = () => {
         formData.append("Password", values.Password);
         formData.append("ConfirmPassword", values.ConfirmPassword);
         const resRegisterAdmin = await AdminRegister(formData);
-        if(resRegisterAdmin){
-          
+        if (resRegisterAdmin) {
+          alert("Register successfully please authe otp to complete this!");
+          navigator("/authenRegisterAdmin");
+        } else {
+          toast.error("Email was used or username was used", {
+            autoClose: 1500,
+          });
         }
       } catch (error) {
         toast.error("register not success!", {
@@ -92,27 +99,86 @@ const LoginRegisterAdmin = () => {
     },
   });
 
+  const formikLogin = useFormik({
+    initialValues: {
+      userName: "",
+      password: "",
+      rememberMe: false,
+    },
+
+    validationSchema: Yup.object({
+      userName: Yup.string().required("UserName is required!"),
+      password: Yup.string().required("password is required!")
+    }),
+
+    onSubmit: async (values) => {
+      try {
+        const resLogin = await AdminLogin(values);
+        if(resLogin){
+          //getAdminProfile,updateAdminToken
+          updateAdminToken(resLogin.data);
+          getAdminProfile(resLogin.data);
+          toast.success("dang nhap thanh cong",{
+            autoClose:1500,
+          })
+          navigator("/admin")
+        } else {
+          toast.error("wrong username or password !!",{ 
+            autoClose:1500,
+          })
+        }
+      } catch (error) {
+        console.log("error login admin")
+      }
+    },
+  });
+  
   return (
     <div className={`wrapper-LoginRegisteradmin`}>
       <ToastContainer />
       <div className={`wrapper-LoginRegisteradmin-sub ${action}`}>
         <div className="form-box login">
-          <form action="">
+          <form action="" onSubmit={formikLogin.handleSubmit}>
             <h1>Login</h1>
             <div className="input-box">
-              <input type="text" placeholder="Username" required />
+              <input
+                type="text"
+                placeholder="Username"
+                required
+                name="userName"
+                value={formikLogin.values.userName}
+                onChange={formikLogin.handleChange}
+              />
               <FaUser className="icon" />
             </div>
+            {formikLogin.errors.userName && (<span style={{color:"red"}}>{formikLogin.errors.userName}</span>)}
             <div className="input-box">
-              <input type="password" placeholder="Password" required />
+              <input
+                type="password"
+                placeholder="Password"
+                required
+                name="password"
+                value={formikLogin.values.password}
+                onChange={formikLogin.handleChange}
+              />
               <FaLock className="icon" />
             </div>
+            {formikLogin.errors.password && (<span style={{color:"red"}}>{formikLogin.errors.password}</span>)}
             <div className="remember-forgot">
               <label>
-                <input type="checkbox" /> Remember me
+                <input
+                  type="checkbox"
+                  name="userName"
+                  value={formikLogin.values.rememberMe}
+                  onChange={(e) => {
+                    formikLogin.setFieldValue("rememberMe", e.target.checked ? true : false);
+                  }}
+                />{" "}
+                Remember me
               </label>
               <Link to={"/sendEmailForgotAdmin"}>Forgot Password?</Link>
             </div>
+            {formikLogin.errors.rememberMe && (<span color="red">{formikLogin.errors.rememberMe}</span>)}
             <button type="submit">Login</button>
             <div className="registerAdmin-link">
               <p>
@@ -238,9 +304,9 @@ const LoginRegisterAdmin = () => {
               </p>
             )}
             <div className="remember-forgot">
-              <label>
+              {/* <label>
                 <input type="checkbox" /> I agree to the terms & conditions
-              </label>
+              </label> */}
             </div>
             <button type="submit">Register</button>
             <div className="registerAdmin-link">

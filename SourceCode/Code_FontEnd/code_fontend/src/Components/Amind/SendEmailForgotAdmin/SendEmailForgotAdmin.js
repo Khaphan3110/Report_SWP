@@ -21,7 +21,7 @@ export default function SendEmailForgotAdmin() {
     }
     )
   return (
-    <div className="send-email-forgot-admin container">
+    <div className="send-email-forgot-admin">
       <Row>
         <Col className="send-email-forgot-admin-wrapper-form">
           <form onSubmit={formik.handleSubmit}>

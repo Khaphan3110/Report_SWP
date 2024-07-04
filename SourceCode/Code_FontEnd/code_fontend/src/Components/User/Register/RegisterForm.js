@@ -8,8 +8,8 @@ import * as Yup from "yup";
 
 import { userRegister } from "../../../Service/UserService/UserService";
 import "./RegisterForm.css";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function RegisterForm() {
   // const [selectDate, setSelectDate] = useState(null); //dùng cho ngày tháng
   const [typeInputForm, setTypeInputForm] = useState("password"); // dùng để thay đổi type của input pasword
@@ -78,22 +78,27 @@ export default function RegisterForm() {
     }),
 
     onSubmit: async (values) => {
-      const formdata = new FormData();
-      formdata.append("FirstName", values.FirstName);
-      formdata.append("LastName", values.LastName);
-      formdata.append("Email", values.Email);
-      formdata.append("PhoneNumber", values.PhoneNumber);
-      formdata.append("UserName", values.UserName);
-      formdata.append("Password", values.Password);
-      formdata.append("ConfirmPassword", values.ConfirmPassword);
-      const reUserRegit = await userRegister(formdata);
-      if(reUserRegit){
-        alert("Chúng tôi đã gửi OTP vào mail của bạn")
-        navigate("/authenOTP");
-      } else {
-        toast.error("Email đã được sử dụng vui lòng nhập mail khác")
+      try {
+        const formdata = new FormData();
+        formdata.append("FirstName", values.FirstName);
+        formdata.append("LastName", values.LastName);
+        formdata.append("Email", values.Email);
+        formdata.append("PhoneNumber", values.PhoneNumber);
+        formdata.append("UserName", values.UserName);
+        formdata.append("Password", values.Password);
+        formdata.append("ConfirmPassword", values.ConfirmPassword);
+        const reUserRegit = await userRegister(formdata);
+        if (reUserRegit) {
+          alert("Chúng tôi đã gửi OTP vào mail của bạn");
+          navigate("/authenOTP");
+        } else {
+          toast.error(
+            "Email đã được sử dụng, tên đăng nhập vui lòng nhập cái khác"
+          );
+        }
+      } catch (error) {
+        console.log("lỗi ở register user",error)
       }
-      
     },
   });
 
@@ -105,7 +110,7 @@ export default function RegisterForm() {
 
   return (
     <section>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="container mx-auto">
         <div className="wrapper-register-page">
           <div className="header-register-page">
@@ -192,12 +197,12 @@ export default function RegisterForm() {
                     value={formik.values.Password}
                     onChange={formik.handleChange}
                   ></input>
-                 
+
                   <i className={iconShow} onClick={handlerOnclickIcon}></i>
                 </div>
                 {formik.errors.Password && (
-                    <p className="errosMsg">{formik.errors.Password}</p>
-                  )}
+                  <p className="errosMsg">{formik.errors.Password}</p>
+                )}
                 <div className="R-name">
                   <p>Nhập Lại Mật Khẩu</p>
                 </div>
@@ -247,16 +252,19 @@ export default function RegisterForm() {
                   }
                 </div> */}
                 <div className="b-Register">
-                  <button type="submit" 
-                    disabled = { 
-                      formik.errors.LastName && 
+                  <button
+                    type="submit"
+                    disabled={
+                      formik.errors.LastName &&
                       formik.errors.FirstName &&
                       formik.errors.Email &&
                       formik.errors.Password &&
                       formik.errors.ConfirmPassword &&
                       formik.errors.PhoneNumber &&
-                      formik.errors.UserName ? false : true
-                    } 
+                      formik.errors.UserName
+                        ? false
+                        : true
+                    }
                   >
                     <p>Đăng Ký</p>
                   </button>

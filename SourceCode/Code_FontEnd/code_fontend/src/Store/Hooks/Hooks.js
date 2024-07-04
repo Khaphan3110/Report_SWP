@@ -3,6 +3,7 @@ import {
   CategoriesContext,
   ProductContext,
   UserContext,
+  AdminContext,
 } from "../ContextConfig/Context";
 import { useContext } from "react";
 
@@ -61,5 +62,22 @@ export const useUserProfile = () => {
     getAllAdressByToken,
     updateUserToken,
     getUserProfileByToken,
+  };
+};
+
+export const useAdminProfile = () => {
+  const {
+    StaffProfile,
+    setStaffProfile,
+    updateAdminToken,
+    getAdminProfile,
+    logoutAdmin,
+  } = useContext(AdminContext);
+  return {
+    StaffProfile,
+    setStaffProfile,
+    updateAdminToken,
+    getAdminProfile,
+    logoutAdmin,
   };
 };

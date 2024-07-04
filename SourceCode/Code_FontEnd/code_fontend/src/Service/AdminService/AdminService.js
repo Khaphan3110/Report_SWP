@@ -17,7 +17,7 @@ export const AdminLogin = async (adminInfor) => {
     try {
       const res = await request.Post("Admin/AuthenticateAdmin",adminInfor,{
         headers:{
-            'Content-Type': 'multipart/form-data'
+           'Content-Type': 'application/json',
         }
       });
       return res;
@@ -25,3 +25,27 @@ export const AdminLogin = async (adminInfor) => {
       console.log("Error admin login", error);
     }
   };
+
+//Admin/ConfirmEmail
+export const AdminAuthenRegister = async (OTP) => {
+  try {
+    const res = await request.Get(`Admin/ConfirmEmail?otp=${OTP}`);
+    return res;
+  } catch (error) {
+    console.log("Error authen register admin", error);
+  }
+};
+
+//Admin/GetAdminByToken
+export const GetAdminInforMation = async (TokenAdmin) => {
+  try {
+    const res = await request.Post(`Admin/GetAdminByToken`,TokenAdmin,{
+      headers:{
+        'Content-Type': 'application/json',
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("Error authen register admin", error);
+  }
+};

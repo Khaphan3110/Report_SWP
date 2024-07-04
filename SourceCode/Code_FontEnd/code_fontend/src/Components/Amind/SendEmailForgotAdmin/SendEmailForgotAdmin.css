@@ -1,13 +1,22 @@
+
+
+.send-email-forgot-admin{
+    background: url('../../../assets/images/backgroundadminpage.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
 .send-email-forgot-admin-wrapper-form{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    
 }
 
 .send-email-forgot-admin-wrapper-form form{
-    width: 30%;
+    width: 25%;
 }
 
 .header-send-email-forgot-admin h4{
@@ -36,7 +45,7 @@
 
 .button-send-email-admin{
     outline: none;
-    background-color: transparent;
+    background-color: #FFFFFF;
     border: 0;
     height: 45px;
 }

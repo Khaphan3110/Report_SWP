@@ -13,6 +13,7 @@ namespace SWPSolution.Application.Sales
         // Order creation and processing
         Task<Order> CreateOrder(OrderRequest orderRequest);
         Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest);
+        Task<Order> UpdateOrderAsync(string orderId, OrderRequest orderRequest);
 
         // Order retrieval
         Task<List<Order>> GetAll();

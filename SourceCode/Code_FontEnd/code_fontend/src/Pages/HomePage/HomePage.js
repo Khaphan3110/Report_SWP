@@ -27,7 +27,7 @@ export default function HomePage() {
             <ul>
             { listCategories ? (
               listCategories.map((cate,index) => (
-                <li>
+                <li key={index}>
                 <img
                   src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"
                   alt="icon milk"

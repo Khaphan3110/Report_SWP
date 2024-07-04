@@ -9,6 +9,8 @@ namespace SWPSolution.ViewModels.Sales
 {
     public class OrderDetailRequest
     {
+        public string OrderId { get; set; }
+
         [Required]
         public string ProductId { get; set; }
 

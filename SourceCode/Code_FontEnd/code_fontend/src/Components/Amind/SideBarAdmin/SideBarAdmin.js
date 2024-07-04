@@ -24,7 +24,7 @@ export default function SideBarAdmin() {
         </Link>
       </div>
       <div className="logout-link-sidebar-admin">
-        <Link to={"/logout"} className="link-sidebar-admin">
+        <Link to={"/logoutAdmin"} className="link-sidebar-admin">
           <li className="categories-word">Logout</li>
         </Link>
       </div>

@@ -80,3 +80,7 @@
    
     margin: 0;
   }
+
+  .select-categories select{
+    display: block;
+  }

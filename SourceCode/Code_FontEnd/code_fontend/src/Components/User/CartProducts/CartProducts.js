@@ -8,17 +8,17 @@ import { useStore } from "../../../Store";
 import { imageGetAll } from "../../../Service/ProductService/imageService";
 import HomePage from "../../../Pages/HomePage/HomePage";
 import { ToastContainer, toast } from "react-toastify";
-export default function CartProducts() {
+export default function CartProducts({listProduct}) {
 
   const [state, dispatch] = useStore();
-  const  {listProduct,getAllProductToContext } = useProduct();
+  // const  {listProduct,getAllProductToContext } = useProduct();
 
-  useEffect(  () => {
-    const getProduct = async () => {
-      await getAllProductToContext(1,12)
-    }
-    getProduct(); 
-  },[])
+  // useEffect(  () => {
+  //   const getProduct = async () => {
+  //     await getAllProductToContext(1,12)
+  //   }
+  //   getProduct(); 
+  // },[])
 
 
   const addToCart = (product) => {
@@ -30,7 +30,7 @@ export default function CartProducts() {
   return (
     <Container style={{marginTop:"0"}}>
       <ToastContainer/>
-      <HomePage/>
+      {/* <HomePage/> */}
       <Row>
         {listProduct && listProduct.map((product, index) => {
           return (

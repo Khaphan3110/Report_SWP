@@ -1,5 +1,6 @@
 import React from "react";
-import { ProtectAdmin, ProtectUser } from "../Components/User/ProtectUser/ProtectUser";
+import ProtectStaff from "../Components/Amind/ProtectStaff/ProtectStaff";
+import { ProtectUser } from "../Components/User/ProtectUser/ProtectUser";
 
 
 const Categories = React.lazy(() => import("../Components/Amind/Categories/Categories")) ;
@@ -8,7 +9,7 @@ const AccountPage = React.lazy(() => import("../Components/User/AccountPage/Acco
 const AddressPage = React.lazy(() => import("../Components/User/AddressPage/AddressPage"));
 const AuthenEmail = React.lazy(() => import("../Components/User/Authen/AuthenEmail"));
 const CartPage = React.lazy(() => import("../Components/User/CartPage/CartPage"));
-const CartProductPage = React.lazy(() => import("../Components/User/CartProducts/CartProducts"));
+const CartProductPage = React.lazy(() => import("../Components/User/CartProducts/CarProductProcess"));
 const CheckoutPage = React.lazy(() => import("../Components/User/CheckoutPage/CheckoutPage"));
 const Content = React.lazy(() => import("../Components/User/Content/Content"));
 const ForgotPasswordForm = React.lazy(() => import("../Components/User/ForgotPassword/ForgotPasswordForm"));
@@ -31,6 +32,10 @@ const SendEmailForgotAdmin = React.lazy(() => (import("../Components/Amind/SendE
 const ResetPassWordAdmin = React.lazy(() => (import("../Components/Amind/ResetPasswordadmin/ResetPasswordadmin")))
 const AuthenRegisterAdmin = React.lazy(() => (import("../Components/Amind/AuthenRegister/AuthenRegister")))
 const SearchFilterProduct = React.lazy(() => (import("../Components/User/SearchFilterProduct/SearchFilterProduct")))
+const ProductDetail = React.lazy(() => (import("../Components/User/ProductDetail/ProductDetail")))
+const LogoutAdmin = React.lazy(() => (import("../Components/Amind/LogoutAdmin/LogoutAdmin")))
+
+//SettingAdmin
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
 //         <Route path="/Footer" element={<Footer />} />
@@ -47,6 +52,7 @@ const SearchFilterProduct = React.lazy(() => (import("../Components/User/SearchF
 const publicRoutes = [
   { path: "/", component: CartProductPage },
   { path: "/seachproduct", component: SearchFilterProduct,layout:"user" },
+  { path: "/productDetail/:productID", component: ProductDetail,layout:"user" },
   { path: "/authenRegisterAdmin", component: AuthenRegisterAdmin,layout:"loginOnly" },
   { path: "/resetpasswordAdmin", component: ResetPassWordAdmin,layout:"loginOnly" },
   { path: "/sendEmailForgotAdmin", component: SendEmailForgotAdmin,layout:"loginOnly" },
@@ -60,6 +66,8 @@ const publicRoutes = [
   { path: "/authenOTP", component: AuthenEmail ,layout:"user"},
   { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
   { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
+  { path: "/logoutAdmin", component: LogoutAdmin},
+  
   // { path: "/payment/success", component: Success ,layout:"user"},
   // { path: "/payment/notsuccess", component: NotSuccess ,layout:"user"},
   // { path: "/checkout", component: CheckoutPage ,layout:"user"},
@@ -79,12 +87,12 @@ const privateRoutes = [
   { path: "/account", component: AccountPage ,layout:"user",protect:ProtectUser},
   { path: "/cart", component: CartPage ,layout:"user",protect:ProtectUser},
   { path: "/content", component: Content ,layout:"user",protect:ProtectUser},
-  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectAdmin},
-  { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectAdmin },
-  { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectAdmin},
-  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectAdmin},
-  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectAdmin},
-  // { path: "/sideBar", component: SideBarAdmin },
+  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectStaff},
+  { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectStaff },
+  { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectStaff},
+  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectStaff},
+  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectStaff},
+  // { path: "/sideBar", component: SideBarAdmin },SettingAdmin
 ];
 
 export { privateRoutes, publicRoutes };
