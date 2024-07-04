@@ -190,7 +190,7 @@ ALTER TABLE dbo.Address NOCHECK CONSTRAINT fk_Address;
 DELETE FROM [Member] WHERE member_ID = 'MB0624004';
 ALTER TABLE dbo.Address CHECK CONSTRAINT fk_Address;
 --==================================================
-delete AppUsers where id = 'FA651146-68AB-4515-9BB1-3292B980B4C9'
+delete AppUsers where id = '26441BEE-D502-4DFE-9386-15FA2063BCCA'
 delete [Address] where address_ID = 'AMM0624004'
 
 select * from [Address] where address_ID = 'AMM0724011'

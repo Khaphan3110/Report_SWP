@@ -12,12 +12,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast } from "react-toastify";
-import { AdminLogin, AdminRegister } from "../../../Service/AdminService/AdminService";
+import {
+  AdminLogin,
+  AdminRegister,
+  GetAdminInforMation,
+} from "../../../Service/AdminService/AdminService";
 import { useAdminProfile } from "../../../Store/Hooks/Hooks";
 const LoginRegisterAdmin = () => {
   const [action, setAction] = useState("");
   const navigator = useNavigate();
-  const {getAdminProfile,updateAdminToken} = useAdminProfile();
+  const { getAdminProfile, updateAdminToken } = useAdminProfile();
   const registerAdmin = (e) => {
     e.preventDefault();
     setAction("active");
@@ -108,31 +112,34 @@ const LoginRegisterAdmin = () => {
 
     validationSchema: Yup.object({
       userName: Yup.string().required("UserName is required!"),
-      password: Yup.string().required("password is required!")
+      password: Yup.string().required("password is required!"),
     }),
 
     onSubmit: async (values) => {
       try {
         const resLogin = await AdminLogin(values);
-        if(resLogin){
+        if (resLogin) {
           //getAdminProfile,updateAdminToken
           updateAdminToken(resLogin.data);
-          getAdminProfile(resLogin.data);
-          toast.success("dang nhap thanh cong",{
-            autoClose:1500,
-          })
-          navigator("/admin")
+          const res = await GetAdminInforMation(resLogin.data);
+          if (res) {
+            getAdminProfile(res.data);
+          }
+          toast.success("dang nhap thanh cong", {
+            autoClose: 1500,
+          });
+          navigator("/admin");
         } else {
-          toast.error("wrong username or password !!",{ 
-            autoClose:1500,
-          })
+          toast.error("wrong username or password !!", {
+            autoClose: 1500,
+          });
         }
       } catch (error) {
-        console.log("error login admin")
+        console.log("error login admin");
       }
     },
   });
-  
+
   return (
     <div className={`wrapper-LoginRegisteradmin`}>
       <ToastContainer />
@@ -151,7 +158,11 @@ const LoginRegisterAdmin = () => {
               />
               <FaUser className="icon" />
             </div>
-            {formikLogin.errors.userName && (<span style={{color:"red"}}>{formikLogin.errors.userName}</span>)}
+            {formikLogin.errors.userName && (
+              <span style={{ color: "red" }}>
+                {formikLogin.errors.userName}
+              </span>
+            )}
             <div className="input-box">
               <input
                 type="password"
@@ -163,7 +174,11 @@ const LoginRegisterAdmin = () => {
               />
               <FaLock className="icon" />
             </div>
-            {formikLogin.errors.password && (<span style={{color:"red"}}>{formikLogin.errors.password}</span>)}
+            {formikLogin.errors.password && (
+              <span style={{ color: "red" }}>
+                {formikLogin.errors.password}
+              </span>
+            )}
             <div className="remember-forgot">
               <label>
                 <input
@@ -171,14 +186,19 @@ const LoginRegisterAdmin = () => {
                   name="userName"
                   value={formikLogin.values.rememberMe}
                   onChange={(e) => {
-                    formikLogin.setFieldValue("rememberMe", e.target.checked ? true : false);
+                    formikLogin.setFieldValue(
+                      "rememberMe",
+                      e.target.checked ? true : false
+                    );
                   }}
                 />{" "}
                 Remember me
               </label>
               <Link to={"/sendEmailForgotAdmin"}>Forgot Password?</Link>
             </div>
-            {formikLogin.errors.rememberMe && (<span color="red">{formikLogin.errors.rememberMe}</span>)}
+            {formikLogin.errors.rememberMe && (
+              <span color="red">{formikLogin.errors.rememberMe}</span>
+            )}
             <button type="submit">Login</button>
             <div className="registerAdmin-link">
               <p>

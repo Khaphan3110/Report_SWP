@@ -12,6 +12,7 @@ using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics.Metrics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -194,6 +195,7 @@ namespace SWPSolution.Application.System.Admin
         public async Task<bool> ConfirmEmail(string otp)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            int counter = 1; 
             if (user == null) return false;
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -210,15 +212,17 @@ namespace SWPSolution.Application.System.Admin
 
                 if (!await _roleManager.RoleExistsAsync("Admin"))
                 {
-                    var adminRole = new AppRole { Name = "Admin", Description = "Administrator role with full permissions" };
+                    var adminRole = new AppRole {Id = Guid.NewGuid(), Name = "Admin", Description = "Administrator role with full permissions" };
                     await _roleManager.CreateAsync(adminRole);
                 }
                 // Assign the admin role to the user
                 await _userManager.AddToRoleAsync(user, "Admin");
 
+                var adminId = GenerateAdminId(counter);
+                counter++; ;
                 var admin = new Staff()
                 {
-                            StaffId = "",
+                            StaffId = adminId,
                             FullName = $"{user.FirstName} {user.LastName}",
                             Username = user.UserName,
                             Password = user.TemporaryPassword,
@@ -237,6 +241,13 @@ namespace SWPSolution.Application.System.Admin
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        private string GenerateAdminId(int counter)
+        {
+            string prefix = "SM";
+            string datePart = DateTime.Now.ToString("MMyy");
+            return $"{prefix}{datePart}{counter:D3}";
         }
 
         public async Task<StaffInfoVM> GetAdminById(string adminId)

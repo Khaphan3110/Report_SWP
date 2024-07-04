@@ -14,16 +14,14 @@ export default function AdminProvider({ children }) {
     }));
   };
 
-  const getAdminProfile = async (TokenAdmin) => {
+  const getAdminProfile = async (adminInfor) => {
     try {
-      const res = await GetAdminInforMation(TokenAdmin);
-      localStorage.setItem("adminProfile", JSON.stringify(res.data));
-      if (res) {
+      localStorage.setItem("adminProfile", JSON.stringify(adminInfor));
+
         setStaffProfile((prevState) => ({
           ...prevState,
-          profileAdmin: res.data,
-        }));
-      }
+          profileAdmin: adminInfor,
+        }));  
     } catch (error) {
       console.log("error at getadmin profile", error);
     }

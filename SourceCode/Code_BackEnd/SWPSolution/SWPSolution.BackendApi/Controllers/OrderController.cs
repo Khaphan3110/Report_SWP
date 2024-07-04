@@ -253,10 +253,21 @@ namespace SWPSolution.BackendApi.Controllers
 
             payment.PaymentStatus = true;
 
-            var order = await _context.Orders.FindAsync(payment.OrderId);
+            var order = await _context.Orders.Include(o => o.OrderId).FirstOrDefaultAsync(o => o.OrderId == payment.OrderId);
             if (order == null)
             {
                 return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
+            }
+
+            // Update product quantities
+            foreach (var item in order.OrderDetails)
+            {
+                var product = await _context.Products.FindAsync(item.ProductId);
+                if (product != null)
+                {
+                    product.Quantity -= item.Quantity;
+                    _context.Products.Update(product);
+                }
             }
 
             _context.Payments.Update(payment);
@@ -265,6 +276,9 @@ namespace SWPSolution.BackendApi.Controllers
             await _orderService.SendReceiptEmailAsync(order.MemberId, order);
 
             return Redirect("http://localhost:3000/payment/success");
+//=======
+//            return Ok(new { Message = "Payment status updated and product quantities reduced successfully" });
+//>>>>>>> e99ea9666b310d03d18d7454d8ff4b1f584a7c28
         }
     }
 }

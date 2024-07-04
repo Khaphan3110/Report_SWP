@@ -1,5 +1,5 @@
 import React from "react";
-import ProtectStaff from "../Components/Amind/ProtectStaff/ProtectStaff";
+import {ProtectStaff,ProtectStaffRole} from "../Components/Amind/ProtectStaff/ProtectStaff";
 import { ProtectUser } from "../Components/User/ProtectUser/ProtectUser";
 
 

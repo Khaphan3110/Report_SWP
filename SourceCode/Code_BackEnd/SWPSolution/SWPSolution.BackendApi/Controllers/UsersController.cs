@@ -677,9 +677,24 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetUserIdPaging(string id)
         {
-            var user = await _userService.GetById(id);
+            var user = await _userService.GetUserIdPaging(id);
+            return Ok(user);
+        }
+
+        [Authorize]
+        [HttpGet("StaffPaging")]
+        public async Task<IActionResult> GetStaffPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var staffUsers = await _userService.GetStaffsPaging(request);
+            return Ok(staffUsers);
+        }
+
+        [HttpGet("staff/{id}")]
+        public async Task<IActionResult> GetStaffIdPaging(string id)
+        {
+            var user = await _userService.GetStaffIdPaging(id);
             return Ok(user);
         }
     }

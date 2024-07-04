@@ -130,7 +130,7 @@ namespace SWPSolution.Application.Catalog.Promotion
 
         public async Task<int?> GetDiscountValueByPromotionId(string promotionId)
         {
-            var promotion = await _context.Promotions.FirstOrDefaultAsync(p => p.PromotionId == promotionId);
+            var promotion =  _context.Promotions.FirstOrDefault(p => p.PromotionId == promotionId);
             return promotion?.DiscountValue;
         }
 

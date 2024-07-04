@@ -55,7 +55,9 @@ public partial class SWPSolutionDBContext : DbContext
 
 
 
+
         => optionsBuilder.UseSqlServer("Data Source=mssql.recs.site;Initial Catalog=SWP_Project;User ID=sa;Password=Thomas1910@;TrustServerCertificate=True");
+
 
 
 
