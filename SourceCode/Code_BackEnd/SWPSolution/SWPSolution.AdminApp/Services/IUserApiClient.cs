@@ -8,9 +8,12 @@ namespace SWPSolution.AdminApp.Services
     {
         public Task<string> Authenticate(LoginRequest request);
 
-        Task<PageResult<UserVm>> GetUsersPagings(GetUserPagingRequest request);
+        Task<PageResult<MemberInfoVM>> GetUsersPagings(GetUserPagingRequest request);
 
-        Task<ApiResult<UserVm>> GetById(Guid id);
+        Task<ApiResult<MemberInfoVM>> GetUserById(string id);
 
-	}
+        Task<PageResult<StaffInfoVM>> GetStaffsPagings(GetUserPagingRequest request);
+
+        Task<ApiResult<StaffInfoVM>> GetStaffById(string id);
+    }
 }
