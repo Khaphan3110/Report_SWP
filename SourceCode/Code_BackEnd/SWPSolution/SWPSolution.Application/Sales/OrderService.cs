@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Sales;
 using SWPSolution.ViewModels.System.Users;
-using System.Data.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using SWPSolution.Application.System.User;
@@ -35,13 +34,21 @@ namespace SWPSolution.Application.Sales
                 ShippingAddress = orderRequest.ShippingAddress,
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
-                OrderDate = DateTime.UtcNow,
                 OrderDetails = new List<OrderDetail>(),
-
             };
 
             // Add the order to the context but do not save changes immediately
             _context.Orders.Add(order);
+
+            // Validate product quantities
+            foreach (var product in orderRequest.OrderDetails)
+            {
+                var productInDb = await _context.Products.FindAsync(product.ProductId);
+                if (productInDb == null || productInDb.Quantity < product.Quantity)
+                {
+                    throw new SWPException($"Product {product.ProductId} does not have sufficient quantity.");
+                }
+            }
 
             // Save the order without waiting for it to complete
             await _context.SaveChangesAsync();
@@ -56,11 +63,11 @@ namespace SWPSolution.Application.Sales
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
-
                 };
 
                 // Add orderDetail to the order's collection
                 order.OrderDetails.Add(orderDetail);
+
 
                 // Add orderDetail to the context but do not save changes immediately
                 _context.OrderDetails.Add(orderDetail);
@@ -73,6 +80,92 @@ namespace SWPSolution.Application.Sales
             return order;
         }
 
+        public async Task<Order> UpdateOrderAsync(string orderId, OrderRequest orderRequest)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
+                var order = await _context.Orders.Include(o => o.OrderDetails)
+                                                 .FirstOrDefaultAsync(o => o.OrderId == orderId);
+                if (order == null) throw new SWPException("Order not found");
+
+                // Update order main details if not null
+                if (orderRequest.PromotionId != null)
+                {
+                    order.PromotionId = orderRequest.PromotionId;
+                }
+                if (orderRequest.ShippingAddress != null)
+                {
+                    order.ShippingAddress = orderRequest.ShippingAddress;
+                }
+                if (orderRequest.TotalAmount != null)
+                {
+                    order.TotalAmount = orderRequest.TotalAmount;
+                }
+                order.OrderStatus = OrderStatus.InProgress;
+
+                _context.Orders.Update(order);
+
+                // Update order details if not null
+                if (orderRequest.OrderDetails != null)
+                {
+                    var existingOrderDetails = order.OrderDetails.ToList();
+                    foreach (var existingDetail in existingOrderDetails)
+                    {
+                        var updatedDetail = orderRequest.OrderDetails
+                                               .FirstOrDefault(d => orderId == existingDetail.OrderId && d.ProductId == existingDetail.ProductId);
+                        if (updatedDetail != null)
+                        {
+                            // Update existing order detail
+                            existingDetail.ProductId = updatedDetail.ProductId;
+                            existingDetail.Price = updatedDetail.Price;
+                            existingDetail.Quantity = updatedDetail.Quantity;
+                        }
+                        else
+                        {
+                            // Remove order detail if it's not in the request
+                            _context.OrderDetails.Remove(existingDetail);
+                        }
+                    }
+
+                    // Add new order details
+                    foreach (var newDetail in orderRequest.OrderDetails)
+                    {
+                        if (existingOrderDetails.All(d => d.ProductId != newDetail.ProductId))
+                        {
+                            var orderDetail = new OrderDetail
+                            {
+                                OrderId = orderId,
+                                OrderDetailId = GenerateOrderDetailId(),
+                                ProductId = newDetail.ProductId,
+                                Price = newDetail.Price,
+                                Quantity = newDetail.Quantity,
+                            };
+                            // Detach any existing tracked instances
+                            var trackedEntity = _context.ChangeTracker.Entries<OrderDetail>()
+                                                        .FirstOrDefault(e => e.Entity.OrderDetailId == orderDetail.OrderDetailId);
+                            if (trackedEntity != null)
+                            {
+                                _context.Entry(trackedEntity.Entity).State = EntityState.Detached;
+                            }
+                            order.OrderDetails.Add(orderDetail);
+                            _context.OrderDetails.Add(orderDetail);
+                        }
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return order;
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
 
         public async Task<string> ExtractMemberIdFromTokenAsync(string token)
         {
@@ -114,7 +207,7 @@ namespace SWPSolution.Application.Sales
                     OrderStatus = c.OrderStatus,
                     OrderDate = c.OrderDate,
                     OrderDetails = c.OrderDetails,
-
+                    
                 })
                 .ToList();
         }

@@ -144,7 +144,33 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok();
         }
 
-        [HttpDelete("{productId}")]
+        [HttpPut("update-quantity/{productId}")]
+        public async Task<IActionResult> UpdateQuantity(string productId, [FromBody] UpdateQuantityRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await _manageProductService.UpdateQuantity(productId, request);
+                if (result > 0)
+                {
+                    return Ok(new { message = "Product quantity updated successfully" });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Failed to update product quantity" });
+                }
+            }
+            catch (SWPException ex)
+            {
+                return NotFound(new { error = ex.Message });
+            }
+        }
+
+    [HttpDelete("{productId}")]
         public async Task<IActionResult> Delete(string productId)
 
         {
