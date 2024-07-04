@@ -139,6 +139,42 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPut("ResetAdminPassword")]
+        public async Task<IActionResult> ResetAdminPassword(string email)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _adminService.ResetAdminPassword(email);
+            if (!result)
+            {
+                return NotFound(new { message = "Admin not found" });
+            }
+
+            return Ok(new { message = "OTP sent successfully" });
+        }
+
+        [Authorize]
+        [HttpPost("ConfirmAdmin")]
+        public async Task<IActionResult> ConfirmAdmin(string otp, UpdateStaffRequest request)
+        {
+            try
+            {
+                var result = await _adminService.ConfirmAdmin(otp, request);
+                if (result)
+                    return Ok(new { message = "Admin updated successfully" });
+                else
+                    return BadRequest("Failed to confirm staff or invalid OTP.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error confirming staff: {ex.Message}");
+            }
+        }
+
         [HttpDelete("DeleteAdminByToken")]
         [AllowAnonymous]
         public async Task<IActionResult> DeleteAdminByToken([FromQuery] string jwtToken)

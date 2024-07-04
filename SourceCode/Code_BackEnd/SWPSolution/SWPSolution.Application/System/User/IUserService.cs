@@ -59,6 +59,10 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> UpdateStaff(string id, UpdateStaffRequest request);
 
+        Task<bool> ResetStaffPassword(string Email);
+
+        Task<bool> ConfirmStaff(string otp, UpdateStaffRequest request);
+
         Task<bool> DeleteStaff(string staffId);
 
         Task<bool> RegisterStaff(List<RegisterRequest> requests);
