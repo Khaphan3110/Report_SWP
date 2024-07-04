@@ -124,11 +124,12 @@ const LoginRegisterAdmin = () => {
           const res = await GetAdminInforMation(resLogin.data);
           if (res) {
             getAdminProfile(res.data);
+            res.data.role ==='staffadmin' ? navigator("/admin") : navigator("/admin/product")
           }
           toast.success("dang nhap thanh cong", {
             autoClose: 1500,
           });
-          navigator("/admin");
+          
         } else {
           toast.error("wrong username or password !!", {
             autoClose: 1500,

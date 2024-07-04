@@ -52,7 +52,7 @@ function App() {
                 key={index}
                 path={route.path}
                 element={
-                  <Protect>
+                  <Protect  allowedRoles={route.allowedRoles}>
                     <Layout>
                       <Page />
                     </Layout>

@@ -87,11 +87,11 @@ const privateRoutes = [
   { path: "/account", component: AccountPage ,layout:"user",protect:ProtectUser},
   { path: "/cart", component: CartPage ,layout:"user",protect:ProtectUser},
   { path: "/content", component: Content ,layout:"user",protect:ProtectUser},
-  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectStaff},
-  { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectStaff },
-  { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectStaff},
-  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectStaff},
-  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectStaff},
+  { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
+  { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember'] },
+  { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
   // { path: "/sideBar", component: SideBarAdmin },SettingAdmin
 ];
 

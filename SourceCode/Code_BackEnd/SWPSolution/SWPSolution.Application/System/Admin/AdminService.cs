@@ -245,7 +245,7 @@ namespace SWPSolution.Application.System.Admin
 
         private string GenerateAdminId(int counter)
         {
-            string prefix = "SM";
+            string prefix = "SA";
             string datePart = DateTime.Now.ToString("MMyy");
             return $"{prefix}{datePart}{counter:D3}";
         }
