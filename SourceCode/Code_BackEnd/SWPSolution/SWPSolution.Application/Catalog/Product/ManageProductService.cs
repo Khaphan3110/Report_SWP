@@ -160,6 +160,23 @@ namespace SWPSolution.Application.Catalog.Product
             return await _context.SaveChangesAsync();
 
         }
+
+
+        public async Task<int> UpdateQuantity(string ProductId, UpdateQuantityRequest request)
+        {
+            var product = await _context.Products.FindAsync(ProductId);
+            if (product == null) throw new SWPException($"Cannot find product with id: {ProductId}");
+
+
+
+            product.Quantity = request.Quantity;
+
+            _context.Update(product);
+
+            return await _context.SaveChangesAsync();
+
+        }
+
         public async Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests)
         {
             var productIds = new List<string>();

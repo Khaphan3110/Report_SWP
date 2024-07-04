@@ -22,7 +22,7 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<bool> UpdatePrice(string productId, float newPrice);
 
-        Task<bool> UpdateQuantity(int productId, int addedQuantity);
+        Task<int> UpdateQuantity(string ProductId, UpdateQuantityRequest request);
 
         Task<int> AddImage(string productId, ProductImageCreateRequest request);
 

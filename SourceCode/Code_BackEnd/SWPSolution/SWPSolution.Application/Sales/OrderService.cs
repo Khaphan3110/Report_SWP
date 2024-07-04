@@ -34,13 +34,21 @@ namespace SWPSolution.Application.Sales
                 ShippingAddress = orderRequest.ShippingAddress,
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
-                OrderDate = DateTime.Now,
                 OrderDetails = new List<OrderDetail>(),
-
             };
 
             // Add the order to the context but do not save changes immediately
             _context.Orders.Add(order);
+
+            // Validate product quantities
+            foreach (var product in orderRequest.OrderDetails)
+            {
+                var productInDb = await _context.Products.FindAsync(product.ProductId);
+                if (productInDb == null || productInDb.Quantity < product.Quantity)
+                {
+                    throw new SWPException($"Product {product.ProductId} does not have sufficient quantity.");
+                }
+            }
 
             // Save the order without waiting for it to complete
             await _context.SaveChangesAsync();
@@ -55,11 +63,11 @@ namespace SWPSolution.Application.Sales
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
-
                 };
 
                 // Add orderDetail to the order's collection
                 order.OrderDetails.Add(orderDetail);
+
 
                 // Add orderDetail to the context but do not save changes immediately
                 _context.OrderDetails.Add(orderDetail);
@@ -106,7 +114,7 @@ namespace SWPSolution.Application.Sales
                     foreach (var existingDetail in existingOrderDetails)
                     {
                         var updatedDetail = orderRequest.OrderDetails
-                                               .FirstOrDefault(d => d.OrderId == existingDetail.OrderId && d.ProductId == existingDetail.ProductId);
+                                               .FirstOrDefault(d => orderId == existingDetail.OrderId && d.ProductId == existingDetail.ProductId);
                         if (updatedDetail != null)
                         {
                             // Update existing order detail

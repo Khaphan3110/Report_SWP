@@ -35,7 +35,7 @@ namespace SWPSolution.Application.AppPayment
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            var insertedPayment = await _context.Payments.FirstOrDefaultAsync(p => p.OrderId == request.OrderId);
+            var insertedPayment = _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
             if (insertedPayment == null)
             {
                 throw new Exception("Failed to retrieve the newly inserted payment from the database.");
