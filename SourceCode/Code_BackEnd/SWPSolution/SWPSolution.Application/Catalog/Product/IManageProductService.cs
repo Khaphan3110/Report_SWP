@@ -14,7 +14,7 @@ namespace SWPSolution.Application.Catalog.Product
         Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests);
 
 
-        Task<int> Update(ProductUpdateRequest request);
+        Task<int> Update(string productId, ProductUpdateRequest request);
 
         Task<int> Delete(string productId);
 
