@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SWPSolution.Data.Entities;
 
@@ -11,9 +12,11 @@ using SWPSolution.Data.Entities;
 namespace SWPSolution.Data.Migrations
 {
     [DbContext(typeof(SWPSolutionDBContext))]
-    partial class SWPSolutionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240705212104_createGiftDB")]
+    partial class createGiftDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

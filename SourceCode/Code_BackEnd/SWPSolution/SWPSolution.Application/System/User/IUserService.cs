@@ -71,5 +71,7 @@ namespace SWPSolution.Application.System.User
 
         Task<ApiResult<UserVm>> GetById(Guid id);
 
-	}
+        Task<bool> BuyGiftWithPointsAsync(string memberId, int giftId);
+
+    }
 }

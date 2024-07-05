@@ -991,5 +991,39 @@ namespace SWPSolution.Application.System.User
 			};
 			return new ApiSuccessResult<UserVm>(userVm);
 		}
-	}
+
+        public async Task<bool> BuyGiftWithPointsAsync(string memberId, int giftId)
+        {
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+            {
+                throw new Exception("Member not found");
+            }
+
+            var gift = await _context.Gifts.FindAsync(giftId);
+            if (gift == null)
+            {
+                throw new Exception("Gift not found");
+            }
+
+            if (member.LoyaltyPoints < gift.RequiredPoints)
+            {
+                return false; // Not enough points
+            }
+
+            member.LoyaltyPoints -= gift.RequiredPoints;
+
+            var giftPurchase = new GiftPurchase
+            {
+                MemberId = memberId,
+                GiftId = giftId,
+                PurchaseDate = DateTime.UtcNow
+            };
+            _context.GiftPurchases.Add(giftPurchase);
+
+            await _context.SaveChangesAsync();
+            return true;
+
+        }
+    }
 }

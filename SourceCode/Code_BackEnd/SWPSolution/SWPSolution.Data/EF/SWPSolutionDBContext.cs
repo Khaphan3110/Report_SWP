@@ -34,6 +34,10 @@ public partial class SWPSolutionDBContext : DbContext
 
     public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
+    public virtual DbSet<Gift> Gifts { get; set; }
+
+    public virtual DbSet<GiftPurchase> GiftPurchases { get; set; }
+
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<PreOrder> PreOrders { get; set; }
@@ -202,6 +206,40 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
+        // Configuration for Gift entity
+        modelBuilder.Entity<Gift>(entity =>
+        {
+            entity.HasKey(e => e.GiftId).HasName("PK_Gift");
+
+            entity.ToTable("Gift");
+
+            entity.Property(e => e.GiftId).HasColumnName("gift_ID");
+            entity.Property(e => e.GiftName).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.RequiredPoints)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)"); // Specify precision and scale
+        });
+
+        modelBuilder.Entity<GiftPurchase>(entity =>
+        {
+            entity.HasKey(e => e.GiftPurchaseId).HasName("PK_GiftPurchase");
+
+            entity.ToTable("GiftPurchase");
+
+            entity.Property(e => e.GiftPurchaseId).HasColumnName("giftpurchase_ID");
+            entity.Property(e => e.MemberId).IsRequired().HasMaxLength(10).IsUnicode(false).HasColumnName("member_ID");
+            entity.Property(e => e.GiftId).IsRequired().HasColumnName("gift_ID");
+            entity.Property(e => e.PurchaseDate).IsRequired().HasColumnType("datetime");
+
+            entity.HasOne(d => d.Member).WithMany(p => p.GiftPurchases)
+                .HasForeignKey(d => d.MemberId)
+                .HasConstraintName("fk_GiftPurchase_Member");
+
+            entity.HasOne(d => d.Gift).WithMany(p => p.GiftPurchases)
+                .HasForeignKey(d => d.GiftId)
+                .HasConstraintName("fk_GiftPurchase_Gift");
+        });
+
 
         modelBuilder.Entity<Order>(entity =>
         {

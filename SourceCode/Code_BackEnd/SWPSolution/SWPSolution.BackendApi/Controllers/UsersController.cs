@@ -682,5 +682,16 @@ namespace SWPSolution.BackendApi.Controllers
             var user = await _userService.GetById(id);
             return Ok(user);
         }
+
+        [HttpPost("{memberId}/buy-gift/{giftId}")]
+        public async Task<IActionResult> BuyGiftWithPoints(string memberId, int giftId)
+        {
+            var result = await _userService.BuyGiftWithPointsAsync(memberId, giftId);
+            if (!result)
+            {
+                return BadRequest("Not enough loyalty points to buy the gift.");
+            }
+            return Ok("Gift purchased successfully.");
+        }
     }
 }

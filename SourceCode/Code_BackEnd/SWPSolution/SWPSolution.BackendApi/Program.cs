@@ -27,6 +27,7 @@ using EmailService = SWPSolution.Application.System.User.EmailService;
 using IEmailService = SWPSolution.Application.System.User.IEmailService;
 using SWPSolution.Application.Catalog.Promotion;
 using SWPSolution.BackendApi.Chat;
+using SWPSolution.Application.Gift;
 
 namespace SWPSolution.BackendApi
 {
@@ -63,6 +64,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IPreOrderService, PreOrderService>();
             builder.Services.AddHostedService<PreOrderCheckAndNotifyService>();
+            builder.Services.AddScoped<IGiftService, GiftService>();
             builder.Services.AddSignalR();
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {
