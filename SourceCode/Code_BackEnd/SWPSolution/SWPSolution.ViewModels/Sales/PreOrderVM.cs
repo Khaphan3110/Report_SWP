@@ -19,7 +19,7 @@ namespace SWPSolution.ViewModels.Sales
 
         public DateTime PreorderDate { get; set; }
 
-        public double Price { get; set; }
+        public double Total { get; set; }
 
         public PreOrderStatus Status { get; set; }
     }

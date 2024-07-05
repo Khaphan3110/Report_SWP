@@ -63,7 +63,16 @@ namespace SWPSolution.Application.AppPayment.VNPay
             var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
-            var vnp_PaymentId = Regex.Match(vnp_OrderInfo, @"OR\d+").Success ? Regex.Match(vnp_OrderInfo, @"OR\d+").Value : string.Empty;
+            var vnp_PaymentId = string.Empty;
+
+            // Define the prefix to be removed
+            string prefix = "Thanh toán cho đơn hàng: ";
+
+            // Check if vnp_OrderInfo starts with the prefix and remove it
+            if (vnp_OrderInfo.StartsWith(prefix))
+            {
+                vnp_PaymentId = vnp_OrderInfo.Substring(prefix.Length);
+            }
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _config["VnPay:HashSecret"]);
             if (!checkSignature)
             {

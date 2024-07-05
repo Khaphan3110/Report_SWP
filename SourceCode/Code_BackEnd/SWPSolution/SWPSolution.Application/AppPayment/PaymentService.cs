@@ -71,6 +71,7 @@ namespace SWPSolution.Application.AppPayment
             {
                 PaymentId = payment.PaymentId,
                 OrderId = payment.OrderId,
+                PreorderId = payment.PreorderId,
                 Amount = payment.Amount,
                 DiscountValue = payment.DiscountValue,
                 PaymentStatus = payment.PaymentStatus,

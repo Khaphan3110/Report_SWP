@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
+using Azure.Core;
 
 namespace SWPSolution.Application.Catalog.Categories
 {
@@ -165,6 +166,8 @@ namespace SWPSolution.Application.Catalog.Categories
             // 4. Result
             return new PageResult<CategoriesVM>
             {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 TotalRecords = totalRow,
                 Items = pagedData
             };

@@ -19,7 +19,7 @@ public partial class PreOrder
 
     public DateTime? PreorderDate { get; set; }
 
-    public double? Price { get; set; }
+    public double Price { get; set; }
 
     public PreOrderStatus Status { get; set; }
 

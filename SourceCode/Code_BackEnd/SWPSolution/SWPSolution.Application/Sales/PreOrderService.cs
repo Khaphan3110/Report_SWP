@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using SWPSolution.Application.AppPayment;
+using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using static Org.BouncyCastle.Math.EC.ECCurve;
@@ -24,27 +26,37 @@ namespace SWPSolution.Application.Sales
         private readonly IEmailService _emailService;
         private readonly IPaymentService _paymentService;
         private readonly IConfiguration _config;
+        private readonly IVnPayService _vnPayService;
 
-        public PreOrderService(SWPSolutionDBContext context, IEmailService emailService, IPaymentService paymentService, IConfiguration config)
+        public PreOrderService(SWPSolutionDBContext context, IEmailService emailService, IPaymentService paymentService, IConfiguration config, IVnPayService vnPayService)
         {
             _context = context;
             _emailService = emailService;
             _paymentService = paymentService;
             _config = config;
+            _vnPayService = vnPayService;
         }
-        public async Task<PreOrder> CreatePreOrder(string productId, string memberId, int quantity)
+
+        public async Task<IEnumerable<PreOrder>> GetDepositedPreOrdersAsync()
         {
-            var product = await _context.Products.FindAsync(productId);
-            if (product == null || product.Quantity < quantity)
+            return  _context.PreOrders
+                .Where(p => p.Status == PreOrderStatus.Deposited)
+                .ToList();
+        }
+
+        public async Task<PreOrder> CreatePreOrder(PreOrderVM model)
+        {
+            var product = await _context.Products.FindAsync(model.ProductId);
+            if (product == null || product.Quantity < model.Quantity)
             {
                 var preOrder = new PreOrder
                 {
                     PreorderId = GeneratePreOrderId(),
-                    ProductId = productId,
-                    MemberId = memberId,
-                    Quantity = quantity,
+                    ProductId = model.ProductId,
+                    MemberId = model.MemberId,
+                    Quantity = model.Quantity,
                     PreorderDate = DateTime.UtcNow,
-                    Price = product.Price * quantity,
+                    Price = model.Total,
                     Status = PreOrderStatus.Created,
                 };
 
@@ -130,7 +142,7 @@ namespace SWPSolution.Application.Sales
 
         public async Task<Payment> ProcessPreOrderDeposit(string preorderId, double orderTotal)
         {
-            var depositAmount = orderTotal * 0.15;
+            var depositAmount = orderTotal;
             var paymentRequest = new PaymentRequest
             {
                 PreOrderId = preorderId,
@@ -145,13 +157,73 @@ namespace SWPSolution.Application.Sales
             var payment = await _paymentService.GetById(paymentId);
 
             var preorder = await _context.PreOrders.FindAsync(preorderId);
-            preorder.Status = PreOrderStatus.Deposited; // Assuming you have an enum for PreOrder status
+            preorder.Status = PreOrderStatus.Created; // Assuming you have an enum for PreOrder status
 
             _context.PreOrders.Update(preorder);
             await _context.SaveChangesAsync();
 
             return payment;
         }
+
+        //Emailing Receipt
+        public async Task SendReceiptEmailAsync(string memberId, PreOrder preorder)
+        {
+            // Load email configuration 
+            var emailConfig = _config.GetSection("EmailConfiguration").Get<EmailVM>();
+            var emailService = new EmailService(emailConfig);
+
+            // Construct the message using the MessageVM constructor
+
+            var recipientEmail = await _context.Members.FindAsync(memberId);
+            var message = new MessageVM(
+                new List<string> { recipientEmail.Email }, // Pass recipient as a list
+                "Payment Receipt",
+                $@"
+            <h1>Payment Receipt</h1>
+            <p>Thank you for your preorder purchase!</p>
+            <p>Order ID: {preorder.PreorderId}</p>
+            <p>Total Amount: {preorder.Price}</p>
+        "
+            );
+
+            // Send the email
+            emailService.SendEmail(message);
+        }
+
+        public async Task<string> CheckPreOrderAsync(string preorderId)
+        {
+            var preorder = await _context.PreOrders.FindAsync(preorderId);
+            if (preorder == null)
+            {
+                return "Preorder not found";
+            }
+
+            var product = await _context.Products.FindAsync(preorder.ProductId);
+            if (product != null && product.Quantity >= preorder.Quantity)
+            {
+                preorder.Status = PreOrderStatus.Deposited; // Update the preorder status
+                _context.PreOrders.Update(preorder);
+                await _context.SaveChangesAsync();
+
+                return "ReadyForPayment";
+            }
+
+            return "Product is not yet available";
+        }
+
+        public async Task<string> GeneratePaymentUrlAndNotifyAsync(string preorderId, HttpContext httpContext)
+        {
+            var preorder = await _context.PreOrders.FindAsync(preorderId);
+            if (preorder == null || preorder.Status != PreOrderStatus.Deposited)
+            {
+                return "Preorder not found or not ready for payment";
+            }
+
+            var paymentUrl = GeneratePaymentUrl(preorder, httpContext);
+            await NotifyCustomer(preorder.MemberId, preorder, paymentUrl);
+            return "Customer has been notified to pay the remaining balance";
+        }
+
 
         public async Task UpdateOrderStatus(string preorderId, PreOrderStatus newStatus)
         {
@@ -167,6 +239,25 @@ namespace SWPSolution.Application.Sales
             await _context.SaveChangesAsync();
         }
 
+
+
+        private string GeneratePaymentUrl(PreOrder preorder, HttpContext httpContext)
+        {
+            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == preorder.PreorderId);
+            var vnPayModel = new VnPaymentRequestModel
+            {
+                Amount = preorder.Price - payment.Amount, // Remaining amount
+                CreatedDate = DateTime.UtcNow,
+                Description = $"Payment for preorder {preorder.PreorderId}",
+                FullName = preorder.MemberId,
+                OrderId = preorder.PreorderId,
+                PaymentId = payment.PaymentId // Generate or use existing payment ID
+            };
+
+            var paymentUrl = _vnPayService.CreatePaymentUrl(httpContext, vnPayModel);
+            return paymentUrl;
+        }
+
         private string GeneratePreOrderId()
         {
             // Generate order_ID based on current month, year, and auto-increment
@@ -177,13 +268,13 @@ namespace SWPSolution.Application.Sales
 
             string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
 
-            return $"POR{month}{year}{formattedAutoIncrement}";
+            return $"PO{month}{year}{formattedAutoIncrement}";
         }
 
         private int GetNextPreOrderIdAutoIncrement(string month, string year)
         {
             // Generate the pattern for order_ID to match in SQL query
-            string pattern = $"POR{month}{year}";
+            string pattern = $"PO{month}{year}";
 
             // Retrieve the maximum auto-increment value from existing order details for the given month and year
             var maxAutoIncrement = _context.PreOrders

@@ -12,6 +12,7 @@ using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
 using System.Threading.Tasks;
 using SWPSolution.ViewModels.System.Users;
+using SWPSolution.Data.Enum;
 
 namespace SWPSolution.BackendApi.Controllers
 {
@@ -20,6 +21,7 @@ namespace SWPSolution.BackendApi.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IPreOrderService _preOrderService;
         private readonly IVnPayService _vnPayService;
         private readonly ISessionService _sessionService;
         private readonly IPaymentService _paymentService;
@@ -28,6 +30,7 @@ namespace SWPSolution.BackendApi.Controllers
 
         public OrderController(
             IOrderService orderService,
+            IPreOrderService preOrderService,
             IConfiguration config,
             IVnPayService vnPayService,
             ISessionService sessionService,
@@ -36,6 +39,7 @@ namespace SWPSolution.BackendApi.Controllers
             SWPSolutionDBContext context)
         {
             _orderService = orderService;
+            _preOrderService = preOrderService;
             _vnPayService = vnPayService;
             _sessionService = sessionService;
             _paymentService = paymentService;
@@ -208,7 +212,7 @@ namespace SWPSolution.BackendApi.Controllers
             }
 
             var orderId = response.PaymentId;
-            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
+            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId || p.PreorderId == orderId);
 
             if (payment == null)
             {
@@ -217,27 +221,55 @@ namespace SWPSolution.BackendApi.Controllers
 
             payment.PaymentStatus = true;
 
-            var order = await _context.Orders.Include(o => o.OrderId).FirstOrDefaultAsync(o => o.OrderId == payment.OrderId);
-            if (order == null)
+            var order =  _context.Orders.Include(o => o.OrderId).FirstOrDefault(o => o.OrderId == payment.OrderId);
+            var preorder =  _context.PreOrders.Include(o => o.PreorderId).FirstOrDefault(o => o.PreorderId == payment.PreorderId);
+            if (order == null && preorder == null)
             {
-                return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
+                return BadRequest(new
+                {
+                    Message = $"Order with id {(payment.OrderId != null ? payment.OrderId : payment.PreorderId)} not found"
+                });
             }
 
             // Update product quantities
-            foreach (var item in order.OrderDetails)
+            if (order != null)
             {
-                var product = await _context.Products.FindAsync(item.ProductId);
-                if (product != null)
+                foreach (var item in order.OrderDetails)
                 {
-                    product.Quantity -= item.Quantity;
-                    _context.Products.Update(product);
+                    var product = await _context.Products.FindAsync(item.ProductId);
+                    if (product != null)
+                    {
+                        product.Quantity -= item.Quantity;
+                        _context.Products.Update(product);
+                    }
                 }
             }
+            // Update product quantities for preorder
+            if (preorder != null)
+            {
+                var product = await _context.Products.FindAsync(preorder.ProductId);
+                if (product != null)
+                {
+                    product.Quantity -= preorder.Quantity;
+                    _context.Products.Update(product);
+                }
+                preorder.Status = PreOrderStatus.Deposited;
+                _context.PreOrders.Update(preorder);
+            }
+
 
             _context.Payments.Update(payment);
             await _context.SaveChangesAsync();
 
-            await _orderService.SendReceiptEmailAsync(order.MemberId, order);
+            if (order != null)
+            {
+                await _orderService.SendReceiptEmailAsync(order.MemberId, order);
+            }
+            else if (preorder != null)
+            {
+                await _preOrderService.SendReceiptEmailAsync(preorder.MemberId, preorder);
+            }
+
 
             return Ok(new { Message = "Payment status updated and product quantities reduced successfully" });
         }

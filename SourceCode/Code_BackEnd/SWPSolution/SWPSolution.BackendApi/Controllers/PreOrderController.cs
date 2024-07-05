@@ -43,7 +43,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             try
             {
-                var preOrder = await _preOrderService.CreatePreOrder(model.ProductId, model.MemberId, model.Quantity);
+                var preOrder = await _preOrderService.CreatePreOrder(model);
                 return Ok(preOrder);
             }
             catch (InvalidOperationException ex)
@@ -69,7 +69,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             try
             {
-                var payment = await _preOrderService.ProcessPreOrderDeposit(model.PreorderId, model.Price*model.Quantity);
+                var payment = await _preOrderService.ProcessPreOrderDeposit(model.PreorderId, model.Total);
                 return Ok(payment);
             }
             catch (Exception ex)
@@ -129,18 +129,18 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var preorder =  _context.PreOrders.FirstOrDefault(po => po.PreorderId == model.PreorderId && po.Price == model.Price);
+            var preorder =  _context.PreOrders.FirstOrDefault(po => po.PreorderId == model.PreorderId && po.Price == model.Total);
             if (preorder == null)
             {
                 throw new Exception("Preorder not found");
             }
 
-            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == model.PreorderId && p.Amount == model.Price*0.15);
+            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == model.PreorderId && p.Amount == model.Total);
             string paymentId = payment?.PaymentId;
 
             var vnPayModel = new VnPaymentRequestModel
             {
-                Amount = model.Price*0.15,
+                Amount = model.Total,
                 CreatedDate = model.PreorderDate,
                 Description = $"{model.MemberId}",
                 FullName = model.MemberId,
@@ -151,7 +151,7 @@ namespace SWPSolution.BackendApi.Controllers
             var paymentRequest = new PaymentRequest
             {
                 PreOrderId = model.PreorderId,
-                Amount = model.Price,
+                Amount = model.Total,
                 PaymentMethod = "VNPay",
                 PaymentStatus = false,
                 PaymentDate = DateTime.UtcNow
@@ -168,10 +168,27 @@ namespace SWPSolution.BackendApi.Controllers
 
             var paymentUrl = _vnPayService.CreatePaymentUrl(HttpContext, vnPayModel);
 
-            await _preOrderService.NotifyCustomer(preorder.MemberId, preorder, paymentUrl);
-
             return Ok(new { PaymentUrl = paymentUrl });
         }
 
+        [HttpPost("check-and-notify/{preorderId}")]
+        public async Task<IActionResult> CheckAndNotify(string preorderId)
+        {
+            var checkResult = await _preOrderService.CheckPreOrderAsync(preorderId);
+
+            if (checkResult == "Preorder not found")
+            {
+                return NotFound(new { message = checkResult });
+            }
+
+            if (checkResult == "Product is not yet available")
+            {
+                return Ok(new { message = checkResult });
+            }
+
+            var notifyResult = await _preOrderService.GeneratePaymentUrlAndNotifyAsync(preorderId, HttpContext);
+
+            return Ok(new { message = notifyResult });
+        }
     }
 }
