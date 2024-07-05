@@ -4,6 +4,9 @@ import {
   ProductContext,
   UserContext,
   AdminContext,
+  StaffManagerContext,
+  MemberManagerContext,
+  OrderManagerContext,
 } from "../ContextConfig/Context";
 import { useContext } from "react";
 
@@ -80,4 +83,19 @@ export const useAdminProfile = () => {
     getAdminProfile,
     logoutAdmin,
   };
+};
+
+export const useStaffManager = () => {
+  const { listStaff, setListStaff,getStaffPinagine } = useContext(StaffManagerContext);
+  return { listStaff, setListStaff,getStaffPinagine };
+};
+
+export const useOrderManager = () => {
+  const { listOrder, setListOrder } = useContext(OrderManagerContext);
+  return { listOrder, setListOrder };
+};
+
+export const useMemberManager = () => {
+  const { listMember, setlistMember } = useContext(MemberManagerContext);
+  return { listMember, setlistMember };
 };

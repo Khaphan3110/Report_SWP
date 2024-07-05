@@ -34,6 +34,9 @@ const AuthenRegisterAdmin = React.lazy(() => (import("../Components/Amind/Authen
 const SearchFilterProduct = React.lazy(() => (import("../Components/User/SearchFilterProduct/SearchFilterProduct")))
 const ProductDetail = React.lazy(() => (import("../Components/User/ProductDetail/ProductDetail")))
 const LogoutAdmin = React.lazy(() => (import("../Components/Amind/LogoutAdmin/LogoutAdmin")))
+const StaffManager = React.lazy(() => (import("../Components/Amind/StaffManager/StaffManager")))
+const MemberManager = React.lazy(() => (import("../Components/Amind/MemberManager/MemberManager")))
+const OrderManager = React.lazy(() => (import("../Components/Amind/OrderManager/OrderManager")))
 
 //SettingAdmin
 // <Route path="/" element={<HomePage />} />
@@ -90,8 +93,11 @@ const privateRoutes = [
   { path: "/admin", component: DashBoardAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   { path: "/admin/categories", component: Categories ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember'] },
   { path: "/admin/product", component: Product ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
-  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/settingadmin", component: SettingAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   { path: "/admin/preorderadmin", component: PreorderAdmin ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/memberManager", component: MemberManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/ordermanager", component: OrderManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  { path: "/admin/staffmanager", component: StaffManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   // { path: "/sideBar", component: SideBarAdmin },SettingAdmin
 ];
 

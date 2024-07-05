@@ -84,6 +84,8 @@ namespace SWPSolution.Application.Catalog.Product
             // 4. Result
             return new PageResult<ProductViewModel>
             {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 TotalRecords = totalRow,
                 Items = pagedData
             };

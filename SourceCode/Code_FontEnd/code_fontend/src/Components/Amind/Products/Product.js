@@ -8,6 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { importImageProduct } from "../../../Service/ProductService/imageService";
 import { useCateGories, useProduct } from "../../../Store/Hooks/Hooks";
 import "./Product.css";
+import { FaPen, FaTrash } from "react-icons/fa";
+import {
+  DeleteProduct,
+  UpdateProduct,
+  productGetAll,
+} from "../../../Service/ProductService/ProductService";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 export default function Categories() {
   const [listProductExport, setlistProductExport] = useState([]);
   const [cateGoriesID, setCateGoriesID] = useState("");
@@ -16,28 +24,36 @@ export default function Categories() {
   const { listCategories } = useCateGories();
   const { listProduct, importProductList, getAllProductToContext } =
     useProduct();
+  const [currentProduct, setCurrentProduct] = useState();
 
   const getProductToExport = async (event, done) => {
-    const result = [];
-    if (listProduct && listProduct.length > 0) {
-      result.push([
-        "productName",
-        "quantity",
-        "price",
-        "description",
-        "statusDescription",
-      ]);
-      listProduct.map((product, index) => {
-        let arr = [];
-        arr[0] = product.productName;
-        arr[1] = product.quantity;
-        arr[2] = product.price;
-        arr[3] = product.description;
-        arr[4] = product.statusDescription;
-        result.push(arr);
-      });
-      setlistProductExport(result);
-      done();
+    try {
+      const result = [];
+      const res = await productGetAll();
+      if (res.data && res.data.length > 0) {
+        result.push([
+          "productName",
+          "quantity",
+          "price",
+          "description",
+          "statusDescription",
+        ]);
+        listProduct.map((product, index) => {
+          let arr = [];
+          arr[0] = product.productName;
+          arr[1] = product.quantity;
+          arr[2] = product.price;
+          arr[3] = product.description;
+          arr[4] = product.statusDescription;
+          result.push(arr);
+        });
+        setlistProductExport(result);
+        done();
+      } else {
+        toast.error("can not export file ");
+      }
+    } catch (error) {
+      console.log("lỗi export product", error);
     }
   };
 
@@ -81,9 +97,14 @@ export default function Categories() {
                 // console.log("day la list product", result);
                 const resImportProduct = await importProductList(result);
                 if (resImportProduct) {
-                  toast.success("nhập sản phẩm thành công ");
+                  getAllProductToContext(1, 11);
+                  toast.success("nhập sản phẩm thành công ", {
+                    autoClose: 1500,
+                  });
                 } else {
-                  toast.error("Nhập sản phẩm kh thành công");
+                  toast.error("Nhập sản phẩm kh thành công", {
+                    autoClose: 1500,
+                  });
                 }
               } else {
                 toast.error("Chưa chọn loại sản phẩm !!!");
@@ -97,10 +118,9 @@ export default function Categories() {
 
   useEffect(() => {
     const getListProduct = async () => {
-      await getAllProductToContext(1, 11);
+      await getAllProductToContext(1, 7);
     };
     getListProduct();
-    
   }, []);
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -123,9 +143,25 @@ export default function Categories() {
   };
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handDeleteButton = () => {
-    alert("bạn có chắc là muốn xóa không ???");
+  const handleShow = (product) => {
+    setShow(true);
+    setCurrentProduct(product);
+  };
+  const handDeleteButton = (productID) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (confirmed) {
+      DeleteProduct(productID);
+      getAllProductToContext(1, 7);
+      toast.success("delete success!", {
+        autoClose: 1500,
+      });
+    } else {
+      toast.error("delete unsuccess!!", {
+        autoClose: 1500,
+      });
+    }
   };
 
   const handleGetCateValue = (event) => {
@@ -151,10 +187,81 @@ export default function Categories() {
         autoClose: 1000,
       });
     }
-
-    // 'imageFiles=@download.png;type=image/png'
   };
-  console.log("lít product",listProduct)
+  const formikProduct = useFormik({
+    initialValues: {
+      CategoriesId: "",
+      ProductId: "",
+      ProductName: "",
+      Quantity: "",
+      Price: "",
+      Description: "",
+      statusDescription: "",
+    },
+
+    validationSchema: Yup.object({
+      ProductName: Yup.string().required("ProductName is required"),
+      Quantity: Yup.number()
+        .typeError("Quantity must be a number")
+        .positive("Quantity must be greater than 0")
+        .integer("Quantity must be an integer")
+        .required("Quantity is required"),
+      Price: Yup.number()
+        .typeError("Price must be a number")
+        .positive("Price must be greater than 0")
+        .required("Price is required"),
+      Description: Yup.string().required("Description is required"),
+      statusDescription: Yup.string()
+        .oneOf(
+          ["còn hàng", "hết hàng"],
+          'Status description must be either "còn hàng" or "hết hàng"'
+        )
+        .required("Status description is required"),
+    }),
+
+    onSubmit: async (values) => {
+      const formProduct = new FormData();
+      formProduct.append("ProductId", values.ProductId);
+      formProduct.append("CategoriesId", values.CategoriesId);
+      formProduct.append("ProductName", values.ProductName);
+      formProduct.append("Quantity", values.Quantity);
+      formProduct.append("Description", values.Description);
+      //
+      try {
+        setShow(false);
+        const res = await UpdateProduct(formProduct);
+        if (res) {
+          getAllProductToContext(1, 8);
+          toast.success("update product successFull!", {
+            autoClose: 1500,
+          });
+        } else {
+          toast.error("Update is not success", {
+            autoClose: 1500,
+          });
+        }
+      } catch (error) {
+        console.log("lỗi ở update product page", error);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (currentProduct) {
+      console.log(currentProduct);
+      formikProduct.setValues({
+        CategoriesId: currentProduct.categoriesId,
+        ProductId: currentProduct.productId,
+        ProductName: currentProduct.productName,
+        Quantity: currentProduct.quantity,
+        Price: currentProduct.price,
+        Description: currentProduct.description,
+        statusDescription: currentProduct.statusDescription,
+      });
+    }
+  }, [currentProduct]);
+  // 'imageFiles=@download.png;type=image/png'
+
   return (
     <>
       <ToastContainer />
@@ -252,28 +359,22 @@ export default function Categories() {
                     <td>{product.description}</td>
                     <td>{product.statusDescription}</td>
                     <td>{product.categoriesId}</td>
-                    <th>
-                      <Button
-                        variant="warning"
+                    <th className="action-product-controller">
+                      <FaPen
                         className="action-button"
-                        onClick={handleShow}
-                      >
-                        Update
-                      </Button>
-                      <Button
-                        variant="danger"
+                        onClick={() => handleShow(product)}
+                      ></FaPen>
+                      <FaTrash
                         className="action-button"
-                        onClick={handDeleteButton}
-                      >
-                        Delete
-                      </Button>
+                        onClick={() => handDeleteButton(product.productId)}
+                      ></FaTrash>
 
                       <div className="sub-button-Product-importImage">
                         <label
                           htmlFor={`UpImage-${product.productId}`}
                           className="btn btn-info"
                         >
-                          <i className="fa-solid fa-file-import"></i> UpImage
+                          <i className="fa-solid fa-file-import"></i> IpImg
                         </label>
                         <input
                           type="file"
@@ -315,35 +416,100 @@ export default function Categories() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Product update</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={formikProduct.handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>ProductName</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                name="ProductName"
+                type="ProductName"
+                placeholder="ProductName"
                 autoFocus
+                value={formikProduct.values.ProductName}
+                onChange={formikProduct.handleChange}
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+            {formikProduct.errors.ProductName && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikProduct.errors.ProductName}
+              </p>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Quantity</Form.Label>
+              <Form.Control
+                name="Quantity"
+                type="Quantity"
+                placeholder="Quantity"
+                autoFocus
+                value={formikProduct.values.Quantity}
+                onChange={formikProduct.handleChange}
+              />
             </Form.Group>
+            {formikProduct.errors.Quantity && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikProduct.errors.Quantity}
+              </p>
+            )}
+            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                name="Price"
+                type="Price"
+                placeholder="Price"
+                autoFocus
+                value={formikProduct.values.Price}
+                onChange={formikProduct.handleChange}
+              />
+            </Form.Group>
+            {formikProduct.errors.Price && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikProduct.errors.Price}
+              </p>
+            )} */}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                name="Description"
+                type="Description"
+                placeholder="Description"
+                autoFocus
+                value={formikProduct.values.Description}
+                onChange={formikProduct.handleChange}
+              />
+            </Form.Group>
+            {formikProduct.errors.Description && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikProduct.errors.Description}
+              </p>
+            )}
+            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>statusDescription</Form.Label>
+              <Form.Control
+                name="statusDescription"
+                type="statusDescription"
+                placeholder="statusDescription"
+                autoFocus
+                value={formikProduct.values.statusDescription}
+                onChange={formikProduct.handleChange}
+              />
+            </Form.Group>
+            {formikProduct.errors.statusDescription && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikProduct.errors.statusDescription}
+              </p>
+            )} */}
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" type="submit">
+                Save Changes
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

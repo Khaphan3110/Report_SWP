@@ -25,6 +25,10 @@ namespace SWPSolution.Application.System.Admin
 
         Task<bool> UpdateAdmin(string id, UpdateAdminRequest request);
 
+        Task<bool> ResetAdminPassword(string Email);
+
+        Task<bool> ConfirmAdmin(string otp, UpdateStaffRequest request);
+
         Task<bool> DeleteAdmin(string adminId);
 
         ClaimsPrincipal ValidateToken(string jwtToken);

@@ -330,6 +330,83 @@ namespace SWPSolution.Application.System.Admin
 
             return true;
         }
+
+        public async Task<bool> ResetAdminPassword(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            if (user == null)
+                return false;
+
+            var otpSent = await SendOtp(Email);
+
+            return true;
+        }
+
+        public async Task<bool> ConfirmAdmin(string otp, UpdateStaffRequest request)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            if (user == null) return false;
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                user.EmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.EmailVerificationExpiry = null;
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+
+                var staff = _context.Staff.FirstOrDefault(s => s.Email == user.Email);
+                if (staff == null)
+                {
+                    return false;
+                }
+
+                // Update staff password 
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    staff.Password = request.Password;
+                }
+                _context.Staff.Update(staff);
+
+                //Update AppUser
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    var results = await _userManager.RemovePasswordAsync(user);
+                    if (results.Succeeded)
+                    {
+                        result = await _userManager.AddPasswordAsync(user, request.Password);
+                        if (!results.Succeeded)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    user.TemporaryPassword = request.Password;
+                }
+                var userUpdateResult = await _userManager.UpdateAsync(user);
+                if (!userUpdateResult.Succeeded)
+                {
+                    return false;
+                }
+                //Save all changes in one transaction
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
         public async Task<bool> DeleteAdmin(string adminId)
         {
             var admin = _context.Staff.Find(adminId);

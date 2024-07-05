@@ -20,7 +20,6 @@ function ProductProvider ({children}){
             }));
             
             setListProduct(productsWithImages);
-
           }
         } catch (error) {
           console.log("Error in fetching all products", error);

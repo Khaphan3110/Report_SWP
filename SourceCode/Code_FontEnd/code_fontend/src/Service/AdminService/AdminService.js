@@ -49,3 +49,26 @@ export const GetAdminInforMation = async (TokenAdmin) => {
     console.log("Error authen register admin", error);
   }
 };
+
+export const SendEmailResetPasswordAdmin = async (Email) => {
+  try {
+    const res = await request.Put(`Admin/ResetAdminPassword?email=${Email}`);
+    return res;
+  } catch (error) {
+    console.log("Error reset password admin", error);
+  }
+};
+
+export const ResetPasswordAdmin = async (OTP,newPasswrord) => {
+  try {
+    const res = await request.Post(`Admin/ConfirmAdmin?otp=${OTP}`,newPasswrord,{
+      headers:{
+       ' Content-Type': 'application/json',
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("Error reset password admin", error);
+  }
+};
+

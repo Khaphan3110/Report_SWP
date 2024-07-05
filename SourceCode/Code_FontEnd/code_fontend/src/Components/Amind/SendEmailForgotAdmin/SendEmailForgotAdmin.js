@@ -4,25 +4,41 @@ import { Col, Row } from "react-bootstrap";
 import * as Yup from "yup"
 import { Formik, useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
+import { SendEmailResetPasswordAdmin } from "../../../Service/AdminService/AdminService";
+import { ToastContainer, toast } from "react-toastify";
 export default function SendEmailForgotAdmin() {
     const navigator = useNavigate()
     const formik = useFormik({
         initialValues : {
-            EmailForgotAdmin:"",
+            email:"",
         },
         validationSchema: Yup.object({
-            EmailForgotAdmin: Yup.string()
+            email: Yup.string()
               .required("Email is required")
           }),
 
-        onSubmit: () => {
-            navigator("/resetpasswordAdmin")
+        onSubmit: async (values) => {
+          try {
+            const res = await SendEmailResetPasswordAdmin(values.email)
+            if(res){
+              navigator("/resetpasswordAdmin")
+            } else {
+              toast.error("Email wrong or not exit!!",{
+                autoClose:1500,
+              })
+            } 
+            
+          } catch (error) {
+            console.log("lỗi ở send email reset password",error)
+          }
+           
         }
     }
     )
   return (
     <div className="send-email-forgot-admin">
       <Row>
+      <ToastContainer/>
         <Col className="send-email-forgot-admin-wrapper-form">
           <form onSubmit={formik.handleSubmit}>
             <div className="header-send-email-forgot-admin">
@@ -33,13 +49,13 @@ export default function SendEmailForgotAdmin() {
               <div  className="input-forgot-admin">
                 <input
                   type="email"
-                  name="EmailForgotAdmin"
+                  name="email"
                   placeholder="input email"
                   onChange={formik.handleChange}
-                  value={formik.values.EmailForgotAdmin}
+                  value={formik.values.email}
                 ></input>
               </div>
-              {formik.errors.EmailForgotAdmin && (<p style={{color:"red"}}>{formik.errors.EmailForgotAdmin}</p>)}
+              {formik.errors.email && (<p style={{color:"red"}}>{formik.errors.email}</p>)}
               <div className="link-return-loginadmin">
                 <span>Return </span>
                 <Link to={"/loginadmin"}>login Page</Link>

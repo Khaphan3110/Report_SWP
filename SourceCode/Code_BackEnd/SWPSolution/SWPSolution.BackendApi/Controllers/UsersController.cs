@@ -629,6 +629,42 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
+        [HttpPut("ResetStaffPassword")]
+        public async Task<IActionResult> ResetStaffPassword(string email)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _userService.ResetStaffPassword(email);
+            if (!result)
+            {
+                return NotFound(new { message = "Staff not found" });
+            }
+
+            return Ok(new { message = "OTP sent successfully" });
+        }
+
+        [Authorize]
+        [HttpPost("ConfirmStaff")]
+        public async Task<IActionResult> ConfirmStaff(string otp, UpdateStaffRequest request)
+        {
+            try
+            {
+                var result = await _userService.ConfirmStaff(otp, request);
+                if (result)
+                    return Ok(new { message = "Staff updated successfully" });
+                else
+                    return BadRequest("Failed to confirm staff or invalid OTP.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error confirming staff: {ex.Message}");
+            }
+        }
+
+        [Authorize]
         [HttpDelete("DeleteStaff")]
         public async Task<IActionResult> DeleteStaff(string id)
         {

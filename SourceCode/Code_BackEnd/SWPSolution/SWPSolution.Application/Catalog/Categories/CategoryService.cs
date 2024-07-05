@@ -165,6 +165,8 @@ namespace SWPSolution.Application.Catalog.Categories
             // 4. Result
             return new PageResult<CategoriesVM>
             {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 TotalRecords = totalRow,
                 Items = pagedData
             };

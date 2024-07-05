@@ -8,6 +8,9 @@ import Papa from "papaparse";
 import ReactPaginate from "react-paginate";
 import { useCateGories } from "../../../Store";
 import "./Categories.css";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { DeleteCategories, UpdateCategories } from "../../../Service/CateService/CateService";
 export default function Categories() {
   const [listCategoriesExport, setListCategoreisExport] = useState([]);
   // const [listCategoriesImport, setListCategoreisImport] = useState([]);
@@ -21,10 +24,11 @@ export default function Categories() {
     getAllCategoreis,
     errorNumber,
   } = useCateGories();
-
+  const [numberPaginate,setNumberPaginate] = useState(1);
   const getCategoriesExport = async (event, done) => {
     const result = [];
-    if (listCategories && listCategories.length > 0) {
+    const res = await getAllCategoreis();
+    if (res.data && res.data.length > 0) {
       result.push([
         "categoriesId",
         "brandName",
@@ -43,6 +47,8 @@ export default function Categories() {
       });
       setListCategoreisExport(result);
       done();
+    } else {
+      toast.error("Can not export file cate")
     }
   };
 
@@ -56,7 +62,7 @@ export default function Categories() {
       Papa.parse(file, {
         // header:true,
 
-        complete: async function  (results) {
+        complete: async function (results) {
           let rawCSV = results.data;
           if (rawCSV[0] && rawCSV[0].length === 5) {
             if (
@@ -95,30 +101,85 @@ export default function Categories() {
     }
   };
 
-  const [itemOffset, setItemOffset] = useState(0);
-  const [currentItems, setcurrentItems] = useState();
-  const [pageCount, setpageCount] = useState();
-  useEffect(() => {
-    if (listCategories) {
-      const endOffset = itemOffset + 11;
-      setcurrentItems(listCategories.slice(itemOffset, endOffset));
-      setpageCount(Math.ceil(listCategories.length / 11));
-    } else {
-      console.log("kh co du lieu");
-    }
-  }, [listCategories, itemOffset]);
-
-  // const [ endOffset, pageCount, listOfSet ] = usePagination(listOrchil,8)
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 11) % listCategories.length;
-    setItemOffset(newOffset);
+    setNumberPaginate(+event.selected + 1);
   };
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handDeleteButton = () => {
-    alert("bạn có chắc là muốn xóa không ???");
+
+  const handDeleteButton = (categoriesId) => {
+    const confirmed = window.confirm("Are you sure you want to delete this category?");
+    if (confirmed) {
+      DeleteCategories(categoriesId)
+      getAllCategoreis();
+      toast.success("delete success!",{
+        autoClose:1500,
+      })
+    }
   };
+
+  const [currentCate, setCurrentcate] = useState();
+  const handleUpdateCate = (cate) => {
+    setCurrentcate(cate);
+    setShow(true);
+  };
+  const formikCategories = useFormik({
+    initialValues: {
+      categoriesId: "",
+      brandName: "",
+      ageRange: "",
+      subCategories: "",
+      packageType: "",
+      source: "",
+    },
+
+    validationSchema: Yup.object({
+      // brandName: Yup.string().required("Brand name must not be empty"),
+      ageRange: Yup.string().notOneOf(["0"], "Age range must not be 0"),
+      // subCategories: Yup.string().required("Sub-categories must not be empty"),
+      packageType: Yup.string().matches(
+        /^[^\d]*$/,
+        "Package type must not contain numbers"
+      ),
+    }),
+
+    onSubmit: async (values) => {
+        setShow(false);
+        try {
+          const res = await UpdateCategories(values.categoriesId, values);
+          if (res) {
+            getAllCategoreis();
+            toast.success("update cate successfull!", {
+              autoClose: 1500,
+            });
+          } else {
+            toast.error("update not success", {
+              autoClose: 1500,
+            });
+          }
+        
+        } catch (error) {
+          console.log("lỗi ở cate update page", error);
+        }
+    },
+  });
+
+  useEffect(() => {
+    if (currentCate) {
+      formikCategories.setValues({
+        categoriesId: currentCate.categoriesId,
+        brandName: currentCate.brandName,
+        ageRange: currentCate.ageRange,
+        subCategories: currentCate.subCategories,
+        packageType: currentCate.packageType,
+        source: currentCate.source,
+      });
+    }
+  }, [currentCate]);
+
+  useEffect(() => {
+    getAllCategoreis(numberPaginate, 8);
+  }, [numberPaginate]);
   return (
     <>
       <ToastContainer />
@@ -175,12 +236,13 @@ export default function Categories() {
               <th>ageRange</th>
               <th>subCategories</th>
               <th>packageType</th>
+              <th>source</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {currentItems &&
-              currentItems.map((cate, index) => {
+            {listCategories.items &&
+              listCategories.items.map((cate, index) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
@@ -189,18 +251,21 @@ export default function Categories() {
                     <td>{cate.ageRange}</td>
                     <td>{cate.subCategories}</td>
                     <td>{cate.packageType}</td>
+                    <td>{cate.source}</td>
                     <th>
                       <Button
                         variant="warning"
                         className="action-button"
-                        onClick={handleShow}
+                        onClick={() => handleUpdateCate(cate)}
+                        style={{border:"0",padding:"5px"}}
                       >
                         Update
                       </Button>
                       <Button
                         variant="danger"
                         className="action-button"
-                        onClick={handDeleteButton}
+                        onClick={()=>handDeleteButton(cate.categoriesId)}
+                        style={{border:"0",padding:"5px"}}
                       >
                         Delete
                       </Button>
@@ -213,11 +278,11 @@ export default function Categories() {
       </div>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="sau >"
+        nextLabel=">"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={2}
-        pageCount={pageCount}
-        previousLabel="< trước"
+        pageRangeDisplayed={3}
+        pageCount={2}
+        previousLabel="<"
         renderOnZeroPageCount={null}
         pageClassName="page-item"
         pageLinkClassName="page-link"
@@ -236,32 +301,97 @@ export default function Categories() {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={formikCategories.handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>brandName</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                type="text"
+                placeholder="brandName"
                 autoFocus
+                value={formikCategories.values.brandName}
+                onChange={formikCategories.handleChange}
+                name="brandName"
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+            {formikCategories.errors.brandName && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikCategories.errors.brandName}
+              </p>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>ageRange</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="ageRange"
+                autoFocus
+                value={formikCategories.values.ageRange}
+                onChange={formikCategories.handleChange}
+                name="ageRange"
+              />
             </Form.Group>
+            {formikCategories.errors.ageRange && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikCategories.errors.ageRange}
+              </p>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>subCategories</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="subCategories"
+                autoFocus
+                value={formikCategories.values.subCategories}
+                onChange={formikCategories.handleChange}
+                name="subCategories"
+              />
+            </Form.Group>
+            {formikCategories.errors.subCategories && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikCategories.errors.subCategories}
+              </p>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>packageType</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="packageType"
+                autoFocus
+                value={formikCategories.values.packageType}
+                onChange={formikCategories.handleChange}
+                name="packageType"
+              />
+            </Form.Group>
+            {formikCategories.errors.packageType && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikCategories.errors.packageType}
+              </p>
+            )}
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>source</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="source"
+                autoFocus
+                value={formikCategories.values.source}
+                onChange={formikCategories.handleChange}
+                name="source"
+              />
+            </Form.Group>
+            {formikCategories.errors.source && (
+              <p style={{ color: "red", margin: "0" }}>
+                {formikCategories.errors.source}
+              </p>
+            )}
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant="primary" type="submit">
+                Save Changes
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

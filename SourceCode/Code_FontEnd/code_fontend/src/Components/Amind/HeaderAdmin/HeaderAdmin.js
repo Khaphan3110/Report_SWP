@@ -35,9 +35,17 @@ export default function HeaderAdmin() {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item>
-                      <Link to={"/admin/settingadmin"} className="nav-link-profile-admin-page">Setting profile</Link>
-                    </Dropdown.Item>
+                    {StaffProfile.profileAdmin.role === "staffadmin" ? (
+                      <Dropdown.Item>
+                        <Link
+                          to={"/admin/settingadmin"}
+                          className="nav-link-profile-admin-page"
+                        >
+                          Setting profile
+                        </Link>
+                      </Dropdown.Item>
+                    ) : null}
+
                     <Dropdown.Item onClick={handLogoutAdmin}>
                       LogOut
                     </Dropdown.Item>
