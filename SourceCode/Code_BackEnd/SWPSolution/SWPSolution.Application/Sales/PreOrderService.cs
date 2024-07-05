@@ -80,6 +80,7 @@ namespace SWPSolution.Application.Sales
         public async Task<List<PreOrder>> GetAll()
         {
             return _context.PreOrders
+                .Include(c => c.Payments)
                 .Select(c => new PreOrder
                 {
                     PreorderId= c.PreorderId,
@@ -88,6 +89,19 @@ namespace SWPSolution.Application.Sales
                     Quantity = c.Quantity,
                     PreorderDate = c.PreorderDate,
                     Price = c.Price,
+                    Status = c.Status,
+                    Payments = c.Payments.Select(p => new Payment
+                    {
+                        PaymentId = p.PaymentId,
+                        OrderId = p.OrderId,
+                        PreorderId = p.PreorderId,
+                        Amount = p.Amount,
+                        DiscountValue = p.DiscountValue,
+                        PaymentStatus = p.PaymentStatus,
+                        PaymentMethod = p.PaymentMethod,
+                        PaymentDate = p.PaymentDate,
+                        
+                    }).ToList()
                 })
                 .ToList();
         }

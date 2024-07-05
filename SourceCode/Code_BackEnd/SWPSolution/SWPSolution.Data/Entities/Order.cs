@@ -4,6 +4,7 @@ using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
@@ -24,10 +25,12 @@ public partial class Order
     public DateTime OrderDate { get; set; }
 
     public virtual Member Member { get; set; }
+    [JsonIgnore]
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
+    [JsonIgnore]
 
     public virtual Promotion Promotion { get; set; }
 }

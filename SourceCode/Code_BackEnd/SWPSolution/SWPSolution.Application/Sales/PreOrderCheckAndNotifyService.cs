@@ -3,11 +3,13 @@ using System.Data.Entity;
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SWPSolution.Application.AppPayment;
 using SWPSolution.Application.AppPayment.VNPay;
+using SWPSolution.Application.Http;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
@@ -20,26 +22,28 @@ public class PreOrderCheckAndNotifyService : BackgroundService
 {
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IConfiguration _config;
-    
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
     private readonly TimeSpan _checkInterval = TimeSpan.FromMinutes(5); // Adjust as needed
 
-    public PreOrderCheckAndNotifyService(IServiceScopeFactory serviceScopeFactory, IConfiguration config)
+    public PreOrderCheckAndNotifyService(IServiceScopeFactory serviceScopeFactory, IConfiguration config, IHttpContextAccessor httpContextAccessor)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _config = config;
-        
+        _httpContextAccessor = httpContextAccessor;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await CheckAndNotifyPreOrders();
+            var simulatedHttpContext = HttpContextHelper.CreateHttpContext();
+            await CheckAndNotifyPreOrders(simulatedHttpContext);
             await Task.Delay(_checkInterval, stoppingToken);
         }
     }
 
-    private async Task CheckAndNotifyPreOrders()
+    private async Task CheckAndNotifyPreOrders(HttpContext httpContext)
     {
         using (var scope = _serviceScopeFactory.CreateScope())
         {
@@ -67,8 +71,8 @@ public class PreOrderCheckAndNotifyService : BackgroundService
                         OrderId = preorder.PreorderId,
                         PaymentId = payment.PaymentId
                     };
-
-                    var paymentUrl = vnPayService.CreatePaymentUrl(null, vnPayModel);
+                    
+                    var paymentUrl = vnPayService.CreatePaymentUrl(httpContext, vnPayModel);
                     await NotifyCustomer(preorder.MemberId, preorder, paymentUrl, emailService);
                 }
             }
