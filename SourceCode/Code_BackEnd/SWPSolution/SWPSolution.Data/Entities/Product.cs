@@ -2,7 +2,6 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
@@ -16,7 +15,7 @@ public partial class Product
 
     public int? Quantity { get; set; }
 
-    public double Price { get; set; }
+    public double? Price { get; set; }
 
     public string Description { get; set; }
 
@@ -26,10 +25,8 @@ public partial class Product
 
     public virtual Category Categories { get; set; }
 
-
-    [JsonIgnore]
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
-    [JsonIgnore]
+
     public virtual ICollection<PreOrder> PreOrders { get; set; } = new List<PreOrder>();
 
     public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();

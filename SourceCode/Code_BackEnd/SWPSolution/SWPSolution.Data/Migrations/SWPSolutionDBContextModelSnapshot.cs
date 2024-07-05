@@ -167,14 +167,9 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("AddressId")
                         .HasName("PK__Address__CAA543F0AA445DBA");
 
-                    b.HasIndex(new[] { "MemberId" }, "IX_Address_member_ID");
+                    b.HasIndex("MemberId");
 
-                    b.ToTable("Address", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_address_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.AppRole", b =>
@@ -309,7 +304,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("BlogId")
                         .HasName("PK__Blog__298A9610ECF917C0");
 
-                    b.HasIndex(new[] { "StaffId" }, "IX_Blog_staff_ID");
+                    b.HasIndex("StaffId");
 
                     b.ToTable("Blog", (string)null);
                 });
@@ -423,8 +418,6 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnName("orderDate");
 
                     b.Property<int>("OrderStatus")
-                        .HasMaxLength(10)
-                        .IsUnicode(false)
                         .HasColumnType("int")
                         .HasColumnName("orderStatus");
 
@@ -444,16 +437,16 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("OrderId")
                         .HasName("PK__Order__464665E13F0051AC");
 
-                    b.HasIndex(new[] { "PromotionId" }, "IX_Order_Promotion_ID");
+                    b.HasIndex("MemberId");
 
-                    b.HasIndex(new[] { "MemberId" }, "IX_Order_member_id");
+                    b.HasIndex("PromotionId");
 
                     b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.OrderDetail", b =>
                 {
-                    b.Property<string>("OrderDetailId")
+                    b.Property<string>("OrderdetailId")
                         .HasMaxLength(10)
                         .IsUnicode(false)
                         .HasColumnType("varchar(10)")
@@ -467,8 +460,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnName("order_ID");
 
                     b.Property<float>("Price")
-                        .HasColumnType("real")
-                        .HasColumnName("Price");
+                        .HasColumnType("real");
 
                     b.Property<string>("ProductId")
                         .IsRequired()
@@ -478,14 +470,13 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnName("product_ID");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("Quantity");
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderDetailId");
+                    b.HasKey("OrderdetailId");
 
-                    b.HasIndex(new[] { "OrderId" }, "IX_OrderDetails_OrderId");
+                    b.HasIndex("OrderId");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_OrderDetails_ProductId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -502,7 +493,7 @@ namespace SWPSolution.Data.Migrations
                         .HasColumnType("decimal(10, 2)")
                         .HasColumnName("amount");
 
-                    b.Property<double>("DiscountValue")
+                    b.Property<double?>("DiscountValue")
                         .HasColumnType("float")
                         .HasColumnName("discountValue");
 
@@ -520,14 +511,25 @@ namespace SWPSolution.Data.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<bool>("PaymentStatus")
+                    b.Property<bool?>("PaymentStatus")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasColumnName("paymentStatus");
+                        .HasColumnName("paymentStatus")
+                        .HasDefaultValueSql("(CONVERT([bit],(0)))");
+
+                    b.Property<string>("PreorderId")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(10)")
+                        .HasColumnName("preorder_ID");
 
                     b.HasKey("PaymentId")
                         .HasName("PK__Payment__ED10C4420D3DCCF4");
 
-                    b.HasIndex(new[] { "OrderId" }, "IX_Payment_order_ID");
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("PreorderId");
 
                     b.ToTable("Payment", (string)null);
                 });
@@ -563,12 +565,15 @@ namespace SWPSolution.Data.Migrations
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("PreorderId")
                         .HasName("PK__PreOrder__C55D7EA295C14F89");
 
-                    b.HasIndex(new[] { "MemberId" }, "IX_PreOrder_member_ID");
+                    b.HasIndex("MemberId");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_PreOrder_product_ID");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("PreOrder", (string)null);
                 });
@@ -614,7 +619,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("ProductId")
                         .HasName("PK__Product__470175FDED17C147");
 
-                    b.HasIndex(new[] { "CategoriesId" }, "IX_Product_categories_ID");
+                    b.HasIndex("CategoriesId");
 
                     b.ToTable("Product", (string)null);
                 });
@@ -654,7 +659,7 @@ namespace SWPSolution.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_ProductImages_ProductId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
                 });
@@ -688,12 +693,7 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("PromotionId")
                         .HasName("PK__Promotio__2C45E8433ED651C3");
 
-                    b.ToTable("Promotion", null, t =>
-                        {
-                            t.HasTrigger("trg_generate_promotion_id");
-                        });
-
-                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
+                    b.ToTable("Promotion", (string)null);
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.Review", b =>
@@ -731,9 +731,9 @@ namespace SWPSolution.Data.Migrations
                     b.HasKey("ReviewId")
                         .HasName("PK__Review__608B39D8185D9A34");
 
-                    b.HasIndex(new[] { "MemberId" }, "IX_Review_member_ID");
+                    b.HasIndex("MemberId");
 
-                    b.HasIndex(new[] { "ProductId" }, "IX_Review_product_ID");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Review", (string)null);
                 });
@@ -848,7 +848,14 @@ namespace SWPSolution.Data.Migrations
                         .HasForeignKey("OrderId")
                         .HasConstraintName("fk_Payment_order");
 
+                    b.HasOne("SWPSolution.Data.Entities.PreOrder", "PreOrder")
+                        .WithMany("Payments")
+                        .HasForeignKey("PreorderId")
+                        .HasConstraintName("FK_Payment_PreOrder");
+
                     b.Navigation("Order");
+
+                    b.Navigation("PreOrder");
                 });
 
             modelBuilder.Entity("SWPSolution.Data.Entities.PreOrder", b =>
@@ -926,6 +933,11 @@ namespace SWPSolution.Data.Migrations
                 {
                     b.Navigation("OrderDetails");
 
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("SWPSolution.Data.Entities.PreOrder", b =>
+                {
                     b.Navigation("Payments");
                 });
 

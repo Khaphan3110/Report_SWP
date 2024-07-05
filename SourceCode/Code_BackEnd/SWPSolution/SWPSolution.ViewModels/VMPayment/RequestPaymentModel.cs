@@ -8,8 +8,9 @@ namespace SWPSolution.ViewModels.Payment
 {
     public class PaymentRequest
     {
-        public string OrderId { get; set; }
+        public string? OrderId { get; set; }
 
+        public string? PreOrderId { get; set; }
         public double Amount { get; set; }
 
         public double DiscountValue { get; set; }

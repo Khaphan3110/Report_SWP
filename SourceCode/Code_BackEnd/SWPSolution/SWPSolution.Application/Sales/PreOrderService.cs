@@ -44,7 +44,8 @@ namespace SWPSolution.Application.Sales
                     MemberId = memberId,
                     Quantity = quantity,
                     PreorderDate = DateTime.UtcNow,
-                    Price = product.Price * quantity
+                    Price = product.Price * quantity,
+                    Status = PreOrderStatus.Created,
                 };
 
                 _context.PreOrders.Add(preOrder);
@@ -132,10 +133,10 @@ namespace SWPSolution.Application.Sales
             var depositAmount = orderTotal * 0.15;
             var paymentRequest = new PaymentRequest
             {
-                OrderId = preorderId,
+                PreOrderId = preorderId,
                 Amount = depositAmount,
                 DiscountValue = 0,
-                PaymentStatus = true,
+                PaymentStatus = false,
                 PaymentMethod = "VNPay", // Assuming VNPay for simplicity
                 PaymentDate = DateTime.UtcNow
             };
