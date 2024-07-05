@@ -26,6 +26,7 @@ using SWPSolution.ViewModels.System.Users;
 using EmailService = SWPSolution.Application.System.User.EmailService;
 using IEmailService = SWPSolution.Application.System.User.IEmailService;
 using SWPSolution.Application.Catalog.Promotion;
+using SWPSolution.BackendApi.Chat;
 
 namespace SWPSolution.BackendApi
 {
@@ -41,7 +42,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
 
-                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); ;
 
             }));
              
@@ -62,6 +63,7 @@ namespace SWPSolution.BackendApi
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IPreOrderService, PreOrderService>();
             builder.Services.AddHostedService<PreOrderCheckAndNotifyService>();
+            builder.Services.AddSignalR();
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -187,7 +189,7 @@ namespace SWPSolution.BackendApi
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            app.MapHub<ChatHub>("/chathub");
             app.Run();
         }
     }
