@@ -26,7 +26,7 @@ namespace SWPSolution.AdminApp.Controllers
             _userApiClient = userApiClient;
             _configuration = configuration;
         }
-        public  async Task<IActionResult> Index(string Keyword, int pageIndex = 1, int pageSize = 1)
+        public  async Task<IActionResult> Members(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
 			var sessions = HttpContext.Session.GetString("Token");
 			var user = User.Identity.Name;
@@ -42,6 +42,26 @@ namespace SWPSolution.AdminApp.Controllers
                 PageSize = pageSize,
             };
             var data = await _userApiClient.GetUsersPagings(request);
+            ViewBag.Keyword = Keyword;
+            return View(data);
+        }
+
+        public async Task<IActionResult> Staffs(string Keyword, int pageIndex = 1, int pageSize = 1)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var user = User.Identity.Name;
+            var userRoles = User.Claims
+                        .Where(c => c.Type == ClaimTypes.Role)
+                        .Select(c => c.Value)
+                        .ToList();
+            var request = new GetUserPagingRequest()
+            {
+                BearerToken = sessions,
+                Keyword = Keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
+            var data = await _userApiClient.GetStaffsPagings(request);
             ViewBag.Keyword = Keyword;
             return View(data);
         }
@@ -112,10 +132,17 @@ namespace SWPSolution.AdminApp.Controllers
         }
 
         [HttpGet]
-		public async Task<IActionResult> Details(Guid id)
+		public async Task<IActionResult> Details(string id)
 		{
-			var result = await _userApiClient.GetById(id);
+			var result = await _userApiClient.GetUserById(id);
 			return View(result.ResultObj);
 		}
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> StaffDetails(string id)
+        {
+            var result = await _userApiClient.GetStaffById(id);
+            return View(result.ResultObj);
+        }
+    }
 }

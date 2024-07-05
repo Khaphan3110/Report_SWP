@@ -40,7 +40,7 @@ namespace SWPSolution.AdminApp.Services
             return token;
         }
         
-        public async Task<PageResult<UserVm>> GetUsersPagings(GetUserPagingRequest request)
+        public async Task<PageResult<MemberInfoVM>> GetUsersPagings(GetUserPagingRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config["BaseAddress"]);
@@ -48,11 +48,11 @@ namespace SWPSolution.AdminApp.Services
             var response = await client.GetAsync($"/api/Users/paging?pageIndex=" +
                 $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
             var body = await response.Content.ReadAsStringAsync();
-            var users = JsonConvert.DeserializeObject<PageResult<UserVm>>(body);
+            var users = JsonConvert.DeserializeObject<PageResult<MemberInfoVM>>(body);
             return users;
         }
 
-		public async Task<ApiResult<UserVm>> GetById(Guid id)
+		public async Task<ApiResult<MemberInfoVM>> GetUserById(string id)
 		{
 			var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
 			var client = _httpClientFactory.CreateClient();
@@ -61,9 +61,35 @@ namespace SWPSolution.AdminApp.Services
 			var response = await client.GetAsync($"/api/Users/{id}");
 			var body = await response.Content.ReadAsStringAsync();
 			if (response.IsSuccessStatusCode)
-				return JsonConvert.DeserializeObject<ApiSuccessResult<UserVm>>(body);
+				return JsonConvert.DeserializeObject<ApiSuccessResult<MemberInfoVM>>(body);
 
-			return JsonConvert.DeserializeObject<ApiErrorResult<UserVm>>(body);
+			return JsonConvert.DeserializeObject<ApiErrorResult<MemberInfoVM>>(body);
 		}
-	}
+
+        public async Task<PageResult<StaffInfoVM>> GetStaffsPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/Users/staffpaging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var users = JsonConvert.DeserializeObject<PageResult<StaffInfoVM>>(body);
+            return users;
+        }
+
+        public async Task<ApiResult<StaffInfoVM>> GetStaffById(string id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/Users/staff/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<StaffInfoVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<StaffInfoVM>>(body);
+        }
+    }
 }

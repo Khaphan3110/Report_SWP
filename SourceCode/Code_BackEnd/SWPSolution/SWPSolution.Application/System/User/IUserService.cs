@@ -59,6 +59,10 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> UpdateStaff(string id, UpdateStaffRequest request);
 
+        Task<bool> ResetStaffPassword(string Email);
+
+        Task<bool> ConfirmStaff(string otp, UpdateStaffRequest request);
+
         Task<bool> DeleteStaff(string staffId);
 
         Task<bool> RegisterStaff(List<RegisterRequest> requests);
@@ -67,9 +71,12 @@ namespace SWPSolution.Application.System.User
 
         Task<string> ExtractStaffIdFromTokenAsync(string token);
 
-        Task<PageResult<UserVm>> GetUsersPaging(GetUserPagingRequest request);
+        Task<PageResult<MemberInfoVM>> GetUsersPaging(GetUserPagingRequest request);
 
-        Task<ApiResult<UserVm>> GetById(Guid id);
+        Task<ApiResult<MemberInfoVM>> GetUserIdPaging(string id);
 
-	}
+        Task<PageResult<StaffInfoVM>> GetStaffsPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<StaffInfoVM>> GetStaffIdPaging(string id);
+    }
 }

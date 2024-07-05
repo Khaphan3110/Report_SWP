@@ -476,10 +476,10 @@ namespace SWPSolution.Application.System.User
 
             return true;
         }
-        public async Task<List<MemberAddressVM>> GetMemberAddressById(string memberId)
+        public async Task<List<MemberAddressVM>> GetMemberAddressById(string id)
         {
             var address = _context.Addresses
-                                        .Where(m => m.MemberId == memberId)
+                                        .Where(m => m.MemberId == id || m.AddressId == id)
                                         .Select(m => new MemberAddressVM
                                         {
                                             Id = m.AddressId,
@@ -493,7 +493,7 @@ namespace SWPSolution.Application.System.User
 
             if (!address.Any())
             {
-                throw new KeyNotFoundException($"Address for member ID {memberId} not found.");
+                throw new KeyNotFoundException($"Address not found.");
             }
 
             return address;
@@ -515,9 +515,9 @@ namespace SWPSolution.Application.System.User
             return address;
         }
 
-        public async Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request)
+        public async Task<bool> UpdateMemberAddress(string id, UpdateAddressRequest request)
         {
-            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == memberId);
+            var address = _context.Addresses.FirstOrDefault(a => a.MemberId == id || a.AddressId == id);
             if (address == null) return false;
 
             if (!string.IsNullOrEmpty(request.House_Numbers))
@@ -792,7 +792,7 @@ namespace SWPSolution.Application.System.User
                         // Ensure the Staff role exists
                         if (!await _roleManager.RoleExistsAsync("Staff"))
                         {
-                            var staffRole = new AppRole { Name = "Staff", Description = "Staff role with many permissions" };
+                            var staffRole = new AppRole {Id = Guid.NewGuid(), Name = "Staff", Description = "Staff role with many permissions" };
                             await _roleManager.CreateAsync(staffRole);
                         }
 
@@ -840,7 +840,7 @@ namespace SWPSolution.Application.System.User
         {
             string prefix = "SM";
             string datePart = DateTime.Now.ToString("MMyy");
-            return $"{prefix}{datePart}{counter:D4}";
+            return $"{prefix}{datePart}{counter:D3}";
         }
 
         public async Task<StaffInfoVM> GetStaffById(string staffId)
@@ -883,7 +883,7 @@ namespace SWPSolution.Application.System.User
             var staff = _context.Staff.Find(id);
             if (staff == null)
             {
-                return false; 
+                return false;
             }
 
             // Update staff password 
@@ -925,8 +925,85 @@ namespace SWPSolution.Application.System.User
             // Save all changes in one transaction
             await _context.SaveChangesAsync();
 
+            return true;
+        }
+
+        public async Task<bool> ResetStaffPassword(string Email)
+        {
+            var user = await _userManager.FindByEmailAsync(Email);
+            if (user == null)
+                return false;
+
+            var otpSent = await SendOtp(Email);
+
             return true; 
         }
+
+        public async Task<bool> ConfirmStaff(string otp, UpdateStaffRequest request)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            if (user == null) return false;
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                user.EmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.EmailVerificationExpiry = null;
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+
+                var staff = _context.Staff.FirstOrDefault(s => s.Email == user.Email);
+                if (staff == null)
+                {
+                    return false;
+                }
+
+                // Update staff password 
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    staff.Password = request.Password;
+                }
+                _context.Staff.Update(staff);
+
+                //Update AppUser
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    var results = await _userManager.RemovePasswordAsync(user);
+                    if (results.Succeeded)
+                    {
+                        result = await _userManager.AddPasswordAsync(user, request.Password);
+                        if (!results.Succeeded)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    user.TemporaryPassword = request.Password;
+                }
+                var userUpdateResult = await _userManager.UpdateAsync(user);
+                if (!userUpdateResult.Succeeded)
+                {
+                    return false;
+                }
+                //Save all changes in one transaction
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return true;
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+        }
+
         public async Task<bool> DeleteStaff(string staffId)
         {
             var staff = _context.Staff.Find(staffId);
@@ -938,9 +1015,9 @@ namespace SWPSolution.Application.System.User
             return true;
         }
 
-        public async Task<PageResult<UserVm>> GetUsersPaging(GetUserPagingRequest request)
+        public async Task<PageResult<MemberInfoVM>> GetUsersPaging(GetUserPagingRequest request)
         {
-            var query = _context.AppUsers.AsQueryable();
+            var query = _context.Members.AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -951,9 +1028,9 @@ namespace SWPSolution.Application.System.User
 
             var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(c => new UserVm()
+                .Select(c => new MemberInfoVM()
                 {
-                    Id = c.Id,
+                    MemberId = c.MemberId,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     PhoneNumber = c.PhoneNumber,
@@ -961,7 +1038,7 @@ namespace SWPSolution.Application.System.User
                     Email = c.Email,
                 }).ToListAsync();
 
-            var pageResult = new PageResult<UserVm>
+            var pageResult = new PageResult<MemberInfoVM>
             {
                 TotalRecords = totalRow,
                 PageIndex = request.PageIndex,
@@ -971,25 +1048,78 @@ namespace SWPSolution.Application.System.User
             return pageResult;
         }
 
-		public async Task<ApiResult<UserVm>> GetById(Guid id)
+		public async Task<ApiResult<MemberInfoVM>> GetUserIdPaging(string id)
 		{
 			var user = await _userManager.FindByIdAsync(id.ToString());
 			if (user == null)
 			{
-				return new ApiErrorResult<UserVm>("User not exist");
+				return new ApiErrorResult<MemberInfoVM>("User not exist");
 			}
 			var roles = await _userManager.GetRolesAsync(user);
-			var userVm = new UserVm()
+			var userVm = new MemberInfoVM()
 			{
-                Id = user.Id,
+                MemberId = id,
                 Email = user.Email,
 				PhoneNumber = user.PhoneNumber,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				UserName = user.UserName,
-				Roles = roles
 			};
-			return new ApiSuccessResult<UserVm>(userVm);
+			return new ApiSuccessResult<MemberInfoVM>(userVm);
 		}
-	}
+
+        public async Task<PageResult<StaffInfoVM>> GetStaffsPaging(GetUserPagingRequest request)
+        {
+            var query = _context.Staff.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.Username.Contains(request.Keyword));
+            }
+
+            int totalRow = await query.CountAsync();
+
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(c => new StaffInfoVM()
+                {
+                    Id = c.StaffId,
+                    Role = c.Role,
+                    UserName = c.Username,
+                    Password = c.Password,
+                    FullName = c.FullName,
+                    Email = c.Email,
+                    PhoneNumber = c.Phone,
+                }).ToListAsync();
+
+            var pageResult = new PageResult<StaffInfoVM>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+        public async Task<ApiResult<StaffInfoVM>> GetStaffIdPaging(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return new ApiErrorResult<StaffInfoVM>("Staff not exist");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            var userVm = new StaffInfoVM()
+            {
+                Id = id,
+                UserName = user.UserName,
+                Password = user.TemporaryPassword,
+                FullName = $"{user.FirstName} {user.LastName}",
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+            };
+            return new ApiSuccessResult<StaffInfoVM>(userVm);
+        }
+    }
 }
