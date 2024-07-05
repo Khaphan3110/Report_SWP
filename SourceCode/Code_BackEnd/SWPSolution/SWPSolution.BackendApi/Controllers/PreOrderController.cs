@@ -69,7 +69,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             try
             {
-                var payment = await _preOrderService.ProcessPreOrderDeposit(model.PreorderId, model.Price);
+                var payment = await _preOrderService.ProcessPreOrderDeposit(model.PreorderId, model.Price*model.Quantity);
                 return Ok(payment);
             }
             catch (Exception ex)
@@ -135,12 +135,12 @@ namespace SWPSolution.BackendApi.Controllers
                 throw new Exception("Preorder not found");
             }
 
-            var payment = _context.Payments.FirstOrDefault(p => p.OrderId == model.PreorderId && p.Amount == model.Price);
+            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == model.PreorderId && p.Amount == model.Price*0.15);
             string paymentId = payment?.PaymentId;
 
             var vnPayModel = new VnPaymentRequestModel
             {
-                Amount = model.Price,
+                Amount = model.Price*0.15,
                 CreatedDate = model.PreorderDate,
                 Description = $"{model.MemberId}",
                 FullName = model.MemberId,
@@ -150,7 +150,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             var paymentRequest = new PaymentRequest
             {
-                OrderId = model.PreorderId,
+                PreOrderId = model.PreorderId,
                 Amount = model.Price,
                 PaymentMethod = "VNPay",
                 PaymentStatus = false,

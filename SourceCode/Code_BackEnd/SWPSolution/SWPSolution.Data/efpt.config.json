@@ -11,7 +11,7 @@
    "ProjectRootNamespace": "SWPSolution.Data",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 2,
-   "SelectedToBeGenerated": 0,
+   "SelectedToBeGenerated": 2,
    "T4TemplatePath": null,
    "Tables": [
       {
@@ -44,10 +44,6 @@
       },
       {
          "Name": "[dbo].[OrderDetails]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Payment]",
          "ObjectType": 0
       },
       {

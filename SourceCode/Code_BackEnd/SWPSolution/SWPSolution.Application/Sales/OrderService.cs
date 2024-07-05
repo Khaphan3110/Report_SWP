@@ -59,7 +59,7 @@ namespace SWPSolution.Application.Sales
                 var orderDetail = new OrderDetail
                 {
                     OrderId = orderId,
-                    OrderDetailId = GenerateOrderDetailId(),
+                    OrderdetailId = GenerateOrderDetailId(),
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
@@ -137,14 +137,14 @@ namespace SWPSolution.Application.Sales
                             var orderDetail = new OrderDetail
                             {
                                 OrderId = orderId,
-                                OrderDetailId = GenerateOrderDetailId(),
+                                OrderdetailId = GenerateOrderDetailId(),
                                 ProductId = newDetail.ProductId,
                                 Price = newDetail.Price,
                                 Quantity = newDetail.Quantity,
                             };
                             // Detach any existing tracked instances
                             var trackedEntity = _context.ChangeTracker.Entries<OrderDetail>()
-                                                        .FirstOrDefault(e => e.Entity.OrderDetailId == orderDetail.OrderDetailId);
+                                                        .FirstOrDefault(e => e.Entity.OrderdetailId == orderDetail.OrderdetailId);
                             if (trackedEntity != null)
                             {
                                 _context.Entry(trackedEntity.Entity).State = EntityState.Detached;
@@ -345,8 +345,8 @@ namespace SWPSolution.Application.Sales
 
             // Retrieve the maximum auto-increment value from existing order details for the given month and year
             var maxAutoIncrement = _context.OrderDetails
-                .Where(o => o.OrderDetailId.StartsWith(pattern))
-                .Select(o => o.OrderDetailId.Substring(6, 3)) // Select substring of auto-increment part
+                .Where(o => o.OrderdetailId.StartsWith(pattern))
+                .Select(o => o.OrderdetailId.Substring(6, 3)) // Select substring of auto-increment part
                 .AsEnumerable() // Switch to client evaluation from this point
                 .Select(s => int.Parse(s)) // Parse string to int
                 .DefaultIfEmpty(0)
