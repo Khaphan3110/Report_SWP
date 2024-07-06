@@ -209,13 +209,13 @@ namespace SWPSolution.Application.System.Admin
                     return false;
                 }
 
-                if (!await _roleManager.RoleExistsAsync("Admin"))
+                if (!await _roleManager.RoleExistsAsync("staffadmin"))
                 {
-                    var adminRole = new AppRole {Id = Guid.NewGuid(), Name = "Admin", Description = "Administrator role with full permissions" };
+                    var adminRole = new AppRole {Id = Guid.NewGuid(), Name = "staffadmin", Description = "Administrator role with full permissions" };
                     await _roleManager.CreateAsync(adminRole);
                 }
                 // Assign the admin role to the user
-                await _userManager.AddToRoleAsync(user, "Admin");
+                await _userManager.AddToRoleAsync(user, "staffadmin");
 
                 var adminId = GenerateAdminId();
                 var admin = new Staff()

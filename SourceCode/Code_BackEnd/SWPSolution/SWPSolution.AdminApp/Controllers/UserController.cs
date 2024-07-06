@@ -81,8 +81,8 @@ namespace SWPSolution.AdminApp.Controllers
             var userPrincipal = this.ValidateToken(token);
 
             var userRole = userPrincipal.FindFirst(ClaimTypes.Role)?.Value;
-            if (!string.Equals(userRole, "Admin", StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(userRole, "Staff", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(userRole, "staffadmin", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(userRole, "staffmember", StringComparison.OrdinalIgnoreCase))
             {
                 TempData["ErrorMessage"] = "You do not have permission to access this application.";
                 return RedirectToAction("Login", "User");

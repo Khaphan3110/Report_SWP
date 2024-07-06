@@ -1070,12 +1070,12 @@ namespace SWPSolution.Application.System.User
 
 		public async Task<ApiResult<MemberInfoVM>> GetUserIdPaging(string id)
 		{
-			var user = await _userManager.FindByIdAsync(id.ToString());
+			var user = await _context.Members.FindAsync(id);
 			if (user == null)
 			{
 				return new ApiErrorResult<MemberInfoVM>("User not exist");
 			}
-			var roles = await _userManager.GetRolesAsync(user);
+
 			var userVm = new MemberInfoVM()
 			{
                 MemberId = id,
@@ -1094,7 +1094,11 @@ namespace SWPSolution.Application.System.User
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.Username.Contains(request.Keyword));
+                query = query.Where(x => x.Username.Contains(request.Keyword) && x.Role == "staffmember");
+            }
+            else
+            {
+                query = query.Where(x => x.Role == "staffmember");
             }
 
             int totalRow = await query.CountAsync();
@@ -1124,20 +1128,20 @@ namespace SWPSolution.Application.System.User
 
         public async Task<ApiResult<StaffInfoVM>> GetStaffIdPaging(string id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
+            var user = await _context.Staff.FindAsync(id);
             if (user == null)
             {
                 return new ApiErrorResult<StaffInfoVM>("Staff not exist");
             }
-            var roles = await _userManager.GetRolesAsync(user);
+
             var userVm = new StaffInfoVM()
             {
                 Id = id,
-                UserName = user.UserName,
-                Password = user.TemporaryPassword,
-                FullName = $"{user.FirstName} {user.LastName}",
+                UserName = user.Username,
+                Password = user.Password,
+                FullName =user.FullName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = user.Phone,
             };
             return new ApiSuccessResult<StaffInfoVM>(userVm);
         }
