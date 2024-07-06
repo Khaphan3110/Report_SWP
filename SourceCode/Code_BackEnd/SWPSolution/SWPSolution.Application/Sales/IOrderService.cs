@@ -16,6 +16,8 @@ namespace SWPSolution.Application.Sales
         Task<Order> UpdateOrderAsync(string orderId, OrderRequest orderRequest);
 
         // Order retrieval
+        Task<(double TotalRevenueForWeek, Dictionary<DayOfWeek, double> RevenueByDay)> GetTotalRevenueForCurrentWeek();
+        Task<(int TotalOrdersForWeek, Dictionary<DayOfWeek, int> OrdersByDay)> GetTotalOrdersForCurrentWeek();
         Task<List<Order>> GetAll();
         Task<OrderVM> GetOrderById(string orderId);
         IEnumerable<Order> GetOrdersByMemberId(string memberId);

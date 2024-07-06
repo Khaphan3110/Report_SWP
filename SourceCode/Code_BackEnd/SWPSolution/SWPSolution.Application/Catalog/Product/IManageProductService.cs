@@ -32,6 +32,8 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<int> UpdateImage(string imageId, ProductImageUpdateRequest request);
 
+        Dictionary<DayOfWeek, int> GetInventoryChangesForCurrentWeek();
+
         Task<ProductImageViewModel> GetImageById(int imageId);
         
         Task<List<ProductImageViewModel>> GetListImages(string productId);

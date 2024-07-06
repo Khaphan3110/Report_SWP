@@ -107,6 +107,11 @@ namespace SWPSolution.Application.System.User
         }
 
         // Method to retrieve member_id from the member table
+
+        public async Task<int> GetTotalMemberAsync()
+        {
+            return await _context.Members.CountAsync();
+        }
         private async Task<string> GetMemberIdByUsername(string username)
         {
             // Assuming you have access to your database context

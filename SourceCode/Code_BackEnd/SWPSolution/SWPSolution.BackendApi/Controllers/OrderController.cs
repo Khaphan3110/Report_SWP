@@ -123,6 +123,20 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(order);
         }
 
+        [HttpGet("total-orders-week")]
+        public async Task<IActionResult> GetTotalOrdersForCurrentWeek()
+        {
+            var (totalOrdersForWeek, ordersByDay) = await _orderService.GetTotalOrdersForCurrentWeek();
+            return Ok(new { TotalOrdersForWeek = totalOrdersForWeek, OrdersByDay = ordersByDay });
+        }
+
+        [HttpGet("total-revenue-week")]
+        public async Task<IActionResult> GetTotalRevenueForCurrentWeek()
+        {
+            var (totalRevenueForWeek, revenueByDay) = await _orderService.GetTotalRevenueForCurrentWeek();
+            return Ok(new { TotalRevenueForWeek = totalRevenueForWeek, RevenueByDay = revenueByDay });
+        }
+
         [HttpGet("member/{memberId}")]
         public IActionResult GetOrdersByMemberId(string memberId)
         {
@@ -234,6 +248,7 @@ namespace SWPSolution.BackendApi.Controllers
             // Update product quantities
             if (order != null)
             {
+                order.OrderStatus = OrderStatus.Confirmed;
                 foreach (var item in order.OrderDetails)
                 {
                     var product = await _context.Products.FindAsync(item.ProductId);
@@ -243,6 +258,7 @@ namespace SWPSolution.BackendApi.Controllers
                         _context.Products.Update(product);
                     }
                 }
+                _context.Orders.Update(order);
             }
             // Update product quantities for preorder
             if (preorder != null)

@@ -169,6 +169,13 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(members);
         }
 
+        [HttpGet("GetTotalMember")]
+        public async Task<IActionResult> GetTotalMemberAsync()
+        {
+            var totalMembers = await _userService.GetTotalMemberAsync();
+            return Ok(totalMembers);
+        }
+
         [Authorize]
         [HttpGet("GetMember/{id}")]
         public async Task<IActionResult> GetMemberById(string id)
