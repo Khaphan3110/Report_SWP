@@ -16,16 +16,18 @@ import {
 } from "../../../Service/ProductService/ProductService";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { cateGetAllNoPaginate } from "../../../Service/CateService/CateService";
 export default function Categories() {
   const [listProductExport, setlistProductExport] = useState([]);
   const [cateGoriesID, setCateGoriesID] = useState("");
   const [show, setShow] = useState(false);
   const [imageFile, setImageFile] = useState([]);
-  const { listCategories } = useCateGories();
+  const { listCategories,getAllCategoreisNopaginate } = useCateGories();
+  const [listCate,setListCate] = useState()
   const { listProduct, importProductList, getAllProductToContext } =
     useProduct();
   const [currentProduct, setCurrentProduct] = useState();
-
+  const [pageIndex,setPageIndex] = useState(1)
   const getProductToExport = async (event, done) => {
     try {
       const result = [];
@@ -38,7 +40,7 @@ export default function Categories() {
           "description",
           "statusDescription",
         ]);
-        listProduct.map((product, index) => {
+        res.data.map((product, index) => {
           let arr = [];
           arr[0] = product.productName;
           arr[1] = product.quantity;
@@ -97,7 +99,7 @@ export default function Categories() {
                 // console.log("day la list product", result);
                 const resImportProduct = await importProductList(result);
                 if (resImportProduct) {
-                  getAllProductToContext(1, 11);
+                  getAllProductToContext(pageIndex,8);
                   toast.success("nhập sản phẩm thành công ", {
                     autoClose: 1500,
                   });
@@ -118,28 +120,13 @@ export default function Categories() {
 
   useEffect(() => {
     const getListProduct = async () => {
-      await getAllProductToContext(1, 7);
+      await getAllProductToContext(pageIndex, 8);
     };
     getListProduct();
   }, []);
 
-  const [itemOffset, setItemOffset] = useState(0);
-  const [currentItems, setcurrentItems] = useState([]);
-  const [pageCount, setpageCount] = useState();
-
-  useEffect(() => {
-    if (listProduct && listProduct.length > 0) {
-      const endOffset = itemOffset + 11;
-      setcurrentItems(listProduct.slice(itemOffset, endOffset));
-      setpageCount(Math.ceil(listProduct.length / 11));
-    } else {
-      console.log("kh co du lieu");
-    }
-  }, [listProduct, itemOffset]);
-
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * 11) % listProduct.length;
-    setItemOffset(newOffset);
+    setPageIndex(+event.selected + 1)
   };
 
   const handleClose = () => setShow(false);
@@ -153,7 +140,7 @@ export default function Categories() {
     );
     if (confirmed) {
       DeleteProduct(productID);
-      getAllProductToContext(1, 7);
+      getAllProductToContext(pageIndex, 8);
       toast.success("delete success!", {
         autoClose: 1500,
       });
@@ -229,9 +216,9 @@ export default function Categories() {
       //
       try {
         setShow(false);
-        const res = await UpdateProduct(formProduct);
+        const res = await UpdateProduct(values.ProductId,formProduct);
         if (res) {
-          getAllProductToContext(1, 8);
+          getAllProductToContext(pageIndex,8)
           toast.success("update product successFull!", {
             autoClose: 1500,
           });
@@ -261,7 +248,17 @@ export default function Categories() {
     }
   }, [currentProduct]);
   // 'imageFiles=@download.png;type=image/png'
+  useEffect(  () => {
+    const getCate = async () => {
+      const res = await cateGetAllNoPaginate()
+    setListCate(res.data)
+    }
+    getCate();
+  },[])
 
+  useEffect(() => {
+    getAllProductToContext(pageIndex,8)
+  },[pageIndex])
   return (
     <>
       <ToastContainer />
@@ -317,8 +314,8 @@ export default function Categories() {
             onChange={handleGetCateValue}
           >
             <option> Categories Type</option>
-            {listCategories &&
-              listCategories.map((cate, index) => {
+            {listCate &&
+              listCate.map((cate, index) => {
                 return (
                   <>
                     <option key={index} value={cate.categoriesId}>
@@ -347,8 +344,8 @@ export default function Categories() {
             </tr>
           </thead>
           <tbody>
-            {currentItems &&
-              currentItems.map((product, index) => {
+            {listProduct &&
+              listProduct.items.map((product, index) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
@@ -396,11 +393,12 @@ export default function Categories() {
       </div>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="sau >"
+        nextLabel=">"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={2}
-        pageCount={pageCount}
-        previousLabel="< trước"
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={listProduct.pageCount}
+        previousLabel="<"
         renderOnZeroPageCount={null}
         pageClassName="page-item"
         pageLinkClassName="page-link"

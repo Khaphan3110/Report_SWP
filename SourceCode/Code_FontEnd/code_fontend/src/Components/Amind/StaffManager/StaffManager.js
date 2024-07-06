@@ -18,7 +18,7 @@ import {
   DeleteCategories,
   UpdateCategories,
 } from "../../../Service/CateService/CateService";
-import { StaffRegister } from "../../../Service/StaffService/StaffService";
+import { deleteStaff, GetAllStaff, StaffRegister } from "../../../Service/StaffService/StaffService";
 export default function Categories() {
   const [listStaffExport, setListStaffExport] = useState([]);
   const [show, setShow] = useState(false);
@@ -35,28 +35,23 @@ export default function Categories() {
   const [sst, setSST] = useState(0);
   const getStaffExport = async (event, done) => {
     const result = [];
-    const res = {
-      data: "",
-    };
+    const res = await GetAllStaff(StaffProfile.adminToken)
     if (res && res.data.length > 0) {
       result.push([
-        "firstName",
-        "lastName",
+        "idStaff",
+        "userName",
+        "fullName",
         "email",
         "phoneNumber",
-        "userName",
-        "password",
-        "confirmPassword",
       ]);
+      console.log("staff",res.data)
       res.data.map((staff, index) => {
         let arr = [];
-        arr[0] = staff.firstName;
-        arr[1] = staff.lastName;
-        arr[2] = staff.email;
-        arr[3] = staff.phoneNumber;
-        arr[4] = staff.userName;
-        arr[5] = staff.password;
-        arr[6] = staff.confirmPassword;
+        arr[0] = staff.id;
+        arr[1] = staff.userName;
+        arr[2] = staff.fullName;
+        arr[3] = staff.email;
+        arr[4] = staff.phoneNumber;
         result.push(arr);
       });
       setListStaffExport(result);
@@ -112,7 +107,7 @@ export default function Categories() {
               } else {
                 toast.error("Register staff failed");
               }
-              await getStaffPinagine(1, 1, StaffProfile.adminToken);
+              await getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
             }
           }
         },
@@ -128,21 +123,27 @@ export default function Categories() {
 
   const handleClose = () => setShow(false);
 
-  const handDeleteButton = (categoriesId) => {
+  const handDeleteButton = (staffID) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this category?"
     );
     if (confirmed) {
-      DeleteCategories(categoriesId);
-      getAllCategoreis();
-      toast.success("delete success!", {
-        autoClose: 1500,
-      });
+      const res = deleteStaff(staffID,StaffProfile.adminToken);
+      if(res){
+        getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
+        toast.success("delete success!", {
+          autoClose: 1500,
+        });
+      } else {
+        toast.error("delete failed!", {
+          autoClose: 1500,
+        });
+      }    
     }
   };
 
   useEffect(() => {
-    getStaffPinagine(pageIndex, 1, StaffProfile.adminToken);
+    getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
   }, [pageIndex]);
   return (
     <>
@@ -237,6 +238,7 @@ export default function Categories() {
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
         pageCount={listStaff.pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}

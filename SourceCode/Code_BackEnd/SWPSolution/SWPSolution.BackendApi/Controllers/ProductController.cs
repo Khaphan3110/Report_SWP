@@ -133,11 +133,11 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest($"Failed to upload images: {ex.Message}");
             }
         }
-        [HttpPut]
-        public async Task<IActionResult> Update([FromForm] ProductUpdateRequest request)
+        [HttpPut("{productId}")]
+        public async Task<IActionResult> Update(string productId, [FromForm] ProductUpdateRequest request)
 
         {
-            var affectedResult = await _manageProductService.Update(request);
+            var affectedResult = await _manageProductService.Update(productId, request);
             if (affectedResult == 0)
                 return BadRequest();
 

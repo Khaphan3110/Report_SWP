@@ -35,3 +35,12 @@ export const paymentCallBack = async () => {
     console.log("lỗi ở payment call back ",error)
   }
 }
+
+export const GetOrderPigin = async () => {
+  try {
+    const res = await request.Get("Order/PaymentCallBack")
+    return res;
+  } catch (error) {
+    console.log("lỗi ở payment call back ",error)
+  }
+}

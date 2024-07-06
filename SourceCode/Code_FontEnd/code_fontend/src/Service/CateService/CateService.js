@@ -1,4 +1,13 @@
 import * as request from "../../utility/CustomAxios";
+export const cateGetAllNoPaginate = async () => {
+  try {
+    const res = await request.Get(`Category/GetAllCategory`);
+    return res;
+  } catch (error) {
+    console.log("Error Cate get all no paginate", error);
+  }
+};
+
 //Cate get all
 export const cateGetAll = async (pageIndex,pageSize) => {
   try {

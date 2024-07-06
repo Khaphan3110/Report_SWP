@@ -28,11 +28,30 @@ export const StaffRegister = async (listStaff,userToken) => {
   }
 };
 
-export const deleteStaff = async (staffID) => {
+export const deleteStaff = async (staffID,userToken) => {
     try {
-      const res = await request.Delete(`Users/DeleteStaff?id=${staffID}`);
+      const res = await request.Delete(`Users/DeleteStaff?id=${staffID}`,{
+        headers:{
+          'Authorization': `Bearer ${userToken}`,
+        }
+      });
       return res;
     } catch (error) {
-      console.log("Error delete staff register", error);
+      console.log("Error delete staff ", error);
     }
   };
+
+//Users/GetAllStaffs
+
+export const GetAllStaff = async (userToken) => {
+  try {
+    const res = await request.Get(`Users/GetAllStaffs`,{
+      headers:{
+        'Authorization': `Bearer ${userToken}`,
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("Error Get all staff no pagin", error);
+  }
+};

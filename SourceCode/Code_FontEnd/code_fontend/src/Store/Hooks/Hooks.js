@@ -17,12 +17,14 @@ export const useStore = () => {
 
 export const useCateGories = () => {
   const {
+    getAllCategoreisNopaginate,
     listCategories,
     setListCategoreis,
     FunImportCateGories,
     getAllCategoreis,
   } = useContext(CategoriesContext);
   return {
+    getAllCategoreisNopaginate,
     listCategories,
     setListCategoreis,
     FunImportCateGories,
@@ -36,14 +38,14 @@ export const useProduct = () => {
     setListProduct,
     getAllProductToContext,
     importProductList,
-    addImageToProduct,
+    getAllProduct
   } = useContext(ProductContext);
   return {
     listProduct,
     setListProduct,
     getAllProductToContext,
     importProductList,
-    addImageToProduct,
+    getAllProduct
   };
 };
 

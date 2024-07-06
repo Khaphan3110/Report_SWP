@@ -134,22 +134,39 @@ namespace SWPSolution.Application.Catalog.Product
         }
 
 
-        public async Task<int> Update(ProductUpdateRequest request)
+        public async Task<int> Update(string productId, ProductUpdateRequest request)
         {
-            var product = await _context.Products.FindAsync(request.ProductId);
-            if (product == null) throw new SWPException($"Cannot find product with id: {request.ProductId}");
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) throw new SWPException($"Cannot find product with id: {productId}");
 
+            if(request.ProductName != null)
+            {
+                product.ProductName = request.ProductName;
+            }
 
-           
-            product.CategoriesId = request.CategoriesId;
-            product.ProductName = request.ProductName;
-            product.Description = request.Description;
-            product.CategoriesId = request.CategoriesId;
+            if (request.Description != null)
+            {
+                product.Description = request.Description;
+            }
 
+            if (request.StatusDescription != null)
+            {
+                product.StatusDescription = request.StatusDescription;
+            }
+
+            if (request.Quantity != null)
+            {
+                product.Quantity = request.Quantity;
+            }
+
+            if (request.ThumbnailImage != null)
+            {
+                product.ProductImages = (ICollection<ProductImage>)request.ThumbnailImage;
+            }
             //Save image
             if (request.ThumbnailImage != null)
             {
-                var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.ProductId == request.ProductId);
+                var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.ProductId == productId);
                 if (thumbnailImage != null)
                 {
                     thumbnailImage.FileSize = request.ThumbnailImage.Length;

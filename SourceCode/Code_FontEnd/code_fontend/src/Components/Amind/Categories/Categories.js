@@ -10,7 +10,7 @@ import { useCateGories } from "../../../Store";
 import "./Categories.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { DeleteCategories, UpdateCategories } from "../../../Service/CateService/CateService";
+import { cateGetAllNoPaginate, DeleteCategories, UpdateCategories } from "../../../Service/CateService/CateService";
 export default function Categories() {
   const [listCategoriesExport, setListCategoreisExport] = useState([]);
   // const [listCategoriesImport, setListCategoreisImport] = useState([]);
@@ -23,26 +23,30 @@ export default function Categories() {
     FunImportCateGories,
     getAllCategoreis,
     errorNumber,
+    getAllCategoreisNopaginate
   } = useCateGories();
   const [numberPaginate,setNumberPaginate] = useState(1);
   const getCategoriesExport = async (event, done) => {
     const result = [];
-    const res = await getAllCategoreis();
+    const res = await cateGetAllNoPaginate();
     if (res.data && res.data.length > 0) {
+      
       result.push([
         "categoriesId",
         "brandName",
         "ageRange",
         "subCategories",
         "packageType",
+        "source",
       ]);
-      listCategories.map((cate, index) => {
+      res.data.map((cate, index) => {
         let arr = [];
         arr[0] = cate.categoriesId;
         arr[1] = cate.brandName;
         arr[2] = cate.ageRange;
         arr[3] = cate.subCategories;
         arr[4] = cate.packageType;
+        arr[5] = cate.source;
         result.push(arr);
       });
       setListCategoreisExport(result);
@@ -93,7 +97,7 @@ export default function Categories() {
               } else {
                 toast.error("nhập sản phẩm thất bại");
               }
-              await getAllCategoreis();
+              await getAllCategoreis(numberPaginate,8);
             }
           }
         },
@@ -111,7 +115,7 @@ export default function Categories() {
     const confirmed = window.confirm("Are you sure you want to delete this category?");
     if (confirmed) {
       DeleteCategories(categoriesId)
-      getAllCategoreis();
+      getAllCategoreis(numberPaginate, 8);
       toast.success("delete success!",{
         autoClose:1500,
       })
@@ -148,7 +152,7 @@ export default function Categories() {
         try {
           const res = await UpdateCategories(values.categoriesId, values);
           if (res) {
-            getAllCategoreis();
+            getAllCategoreis(numberPaginate, 8);
             toast.success("update cate successfull!", {
               autoClose: 1500,
             });
@@ -281,7 +285,8 @@ export default function Categories() {
         nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
-        pageCount={2}
+        marginPagesDisplayed={1}
+        pageCount={listCategories.pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}
         pageClassName="page-item"

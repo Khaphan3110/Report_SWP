@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CategoriesContext } from "./Context";
 import {
   cateGetAll,
+  cateGetAllNoPaginate,
   importCateGories,
 } from "../../Service/CateService/CateService";
 function CategoriesProvider({ children }) {
@@ -37,11 +38,24 @@ function CategoriesProvider({ children }) {
     }
   };
 
+  const getAllCategoreisNopaginate = async () => {
+    try {
+      const res = await cateGetAllNoPaginate();
+      if (res) {
+        return res;
+      }
+    } catch (error) {
+      console.log("lỗi ở get all cate!", error);
+    }
+  };
+
+
 
 
   return (
     <CategoriesContext.Provider
       value={{
+        getAllCategoreisNopaginate,
         listCategories,
         setListCategoreis,
         FunImportCateGories,

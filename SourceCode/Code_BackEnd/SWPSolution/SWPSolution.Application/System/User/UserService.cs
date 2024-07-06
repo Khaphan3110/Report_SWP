@@ -767,8 +767,6 @@ namespace SWPSolution.Application.System.User
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
 
-            int counter = 1;
-
             try
             {
                 foreach (var request in requests)
@@ -790,22 +788,21 @@ namespace SWPSolution.Application.System.User
                     if (result.Succeeded)
                     {
                         // Ensure the Staff role exists
-                        if (!await _roleManager.RoleExistsAsync("Staff"))
+                        if (!await _roleManager.RoleExistsAsync("staffmember"))
                         {
-                            var staffRole = new AppRole {Id = Guid.NewGuid(), Name = "Staff", Description = "Staff role with many permissions" };
+                            var staffRole = new AppRole {Id = Guid.NewGuid(), Name = "staffmember", Description = "Staff role with many permissions" };
                             await _roleManager.CreateAsync(staffRole);
                         }
 
                         // Assign the Staff role to the user
-                        await _userManager.AddToRoleAsync(user, "Staff");
+                        await _userManager.AddToRoleAsync(user, "staffmember");
 
                         // Generate staff ID
-                        string staffId = GenerateStaffId(counter);
-                        counter++;
+                        string generatedId = GenerateStaffId();
 
                         var staff = new Staff
                         {
-                            StaffId = staffId,
+                            StaffId = generatedId,
                             Role = "staffmember",
                             Username = request.UserName,
                             Password = request.Password,
@@ -836,11 +833,34 @@ namespace SWPSolution.Application.System.User
             }
         }
 
-        private string GenerateStaffId(int counter)
+        private string GenerateStaffId()
         {
-            string prefix = "SM";
-            string datePart = DateTime.Now.ToString("MMyy");
-            return $"{prefix}{datePart}{counter:D3}";
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"SM{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for categories_ID to match in SQL query
+            string pattern = $"SM{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing categories for the given month and year
+            var maxAutoIncrement = _context.Staff
+                .Where(c => c.StaffId.StartsWith(pattern))
+                .Select(c => c.StaffId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
 
         public async Task<StaffInfoVM> GetStaffById(string staffId)

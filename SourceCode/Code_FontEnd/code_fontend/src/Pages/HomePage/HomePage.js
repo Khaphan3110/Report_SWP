@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./HomePage.css";
 import { useCateGories } from "../../Store";
+import { cateGetAllNoPaginate } from "../../Service/CateService/CateService";
 
 export default function HomePage() {
   const slideshowRef = useRef(null);
-  const { listCategories } = useCateGories();
+  const { listCategories,getAllCategoreisNopaginate } = useCateGories();
+  const [listCate,SetListCate] = useState();
   useEffect(() => {
     const slides = slideshowRef.current.children;
     let currentSlide = 0;
@@ -19,14 +21,23 @@ export default function HomePage() {
     return () => clearInterval(slideInterval);
   }, []);
 
+  useEffect(() => {
+    const getCate = async () => {
+      const res = await cateGetAllNoPaginate();
+      SetListCate(res.data)
+    }
+    getCate()
+
+  },[])
   return (
     // <div className="homepage-custom">
       <div className="main-content-custom">
         <div className="content-wrapper-custom">
           <div className="navbar-link-header">
             <ul>
-            { listCategories ? (
-              listCategories.map((cate,index) => (
+            { listCate ? (
+              listCate.map((cate,index) => (
+                
                 <li key={index}>
                 <img
                   src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"

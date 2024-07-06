@@ -32,9 +32,9 @@ export const getProductByPinagine = async (pageIndex,PageSize) => {
   }
 }
 
-export const UpdateProduct = async (product) => {
+export const UpdateProduct = async (productID,product) => {
   try {
-    const res = await request.Put('Product',product,{
+    const res = await request.Put(`Product/${productID}`,product,{
       headers:{
         'Content-Type': 'multipart/form-data'
       }

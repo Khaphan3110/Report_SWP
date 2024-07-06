@@ -26,11 +26,13 @@ namespace SWPSolution.Application.Catalog.Product
             int totalRow = await query.CountAsync();
             var data = await query.Select(x => new ProductViewModel()
             {
+                ProductId = x.p.ProductId,
                 CategoriesId = x.p.CategoriesId,
                 ProductName = x.p.ProductName,
                 Description = x.p.Description,
                 Price = x.p.Price,
                 Quantity = x.p.Quantity,
+                StatusDescription = x.p.StatusDescription,
             }).ToListAsync();
             return data;
         }
