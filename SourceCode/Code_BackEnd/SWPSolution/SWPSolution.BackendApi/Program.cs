@@ -14,15 +14,19 @@ using NETCore.MailKit.Core;
 using SWPSolution.Application.Catalog.Categories;
 using SWPSolution.Application.Catalog.Product;
 using SWPSolution.Application.Common;
-using SWPSolution.Application.Payment.VNPay;
+using SWPSolution.Application.AppPayment;
+using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.Sales;
 using SWPSolution.Application.Session;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
+using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.System.Users;
 using EmailService = SWPSolution.Application.System.User.EmailService;
 using IEmailService = SWPSolution.Application.System.User.IEmailService;
+using SWPSolution.Application.Catalog.Promotion;
+using SWPSolution.BackendApi.Chat;
 
 namespace SWPSolution.BackendApi
 {
@@ -37,7 +41,9 @@ namespace SWPSolution.BackendApi
             //Add cros 
             builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
             {
-                build.WithOrigins("https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+
+                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); ;
+
             }));
              
             //Add DbContext
@@ -55,6 +61,9 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             builder.Services.AddTransient<IUrlHelperFactory, UrlHelperFactory>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IPreOrderService, PreOrderService>();
+            builder.Services.AddHostedService<PreOrderCheckAndNotifyService>();
+            builder.Services.AddSignalR();
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -78,8 +87,10 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
-            
+            builder.Services.AddScoped<IPromotionService, PromotionService>();
+
 
             //Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>
@@ -145,6 +156,7 @@ namespace SWPSolution.BackendApi
                     }
                 });
             });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -177,7 +189,7 @@ namespace SWPSolution.BackendApi
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
+            app.MapHub<ChatHub>("/chathub");
             app.Run();
         }
     }

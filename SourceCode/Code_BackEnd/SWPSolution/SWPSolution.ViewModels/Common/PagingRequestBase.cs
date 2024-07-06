@@ -12,6 +12,5 @@ namespace SWPSolution.ViewModels.Common
 
         public int PageSize { get; set; }
 
-
     }
 }

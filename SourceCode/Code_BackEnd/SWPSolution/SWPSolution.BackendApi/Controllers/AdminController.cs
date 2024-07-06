@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.Admin;
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.System.Users;
+using System.Security.Claims;
 namespace SWPSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
@@ -20,6 +22,22 @@ namespace SWPSolution.BackendApi.Controllers
             
         }
 
+        [HttpPost("AuthenticateAdmin")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AuthenticateAdmin([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var resultToken = await _adminService.AuthenticateAdmin(request);
+            if (string.IsNullOrEmpty(resultToken))
+            {
+                return BadRequest("Username or password is incorrect.");
+            }
+            return Ok(resultToken);
+        }
+
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterAdmin([FromForm] RegisterRequest request)
@@ -34,6 +52,118 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest("Register failed.");
             }
             return Ok();
+        }
+
+        [HttpGet("ConfirmEmail")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string otp)
+        {
+            if (string.IsNullOrEmpty(otp))
+            {
+                return BadRequest(new { message = "OTP must be provied" });
+            }
+
+            var result = await _adminService.ConfirmEmail(otp);
+            if (result)
+            {
+                return Ok(new { message = "Email confirmed successfully" });
+            }
+
+            return BadRequest(new { message = "Email confirmation failed" });
+        }
+
+        [HttpPost("GetAdminByToken")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAdminByToken([FromBody] string token)
+        {
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var claimsPrincipal = _adminService.ValidateToken(token);
+                var adminIdClaim = claimsPrincipal.Claims.FirstOrDefault(x => x.Type == "admin_id");
+
+                if (adminIdClaim == null)
+                {
+                    return BadRequest(new { message = "Invalid token. Admin ID not found." });
+                }
+
+                var adminId = adminIdClaim.Value;
+                var admin = await _adminService.GetAdminById(adminId);
+
+                if (admin == null)
+                {
+                    return NotFound(new { message = "Admin not found." });
+                }
+
+                return Ok(admin);
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPut("UpdateAdminByToken")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateAdminByToken([FromQuery] string jwtToken, [FromBody] UpdateAdminRequest request)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var adminId = await _adminService.ExtractAdminIdFromTokenAsync(jwtToken);
+
+                var result = await _adminService.UpdateAdmin(adminId, request);
+                if (!result)
+                {
+                    return NotFound(new { message = "Admin not found" });
+                }
+
+                return Ok(new { message = "Admin updated successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpDelete("DeleteAdminByToken")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteAdminByToken([FromQuery] string jwtToken)
+        {
+            if (string.IsNullOrEmpty(jwtToken))
+            {
+                return BadRequest(new { message = "Token is required." });
+            }
+
+            try
+            {
+                var memberId = await _adminService.ExtractAdminIdFromTokenAsync(jwtToken);
+
+                var result = await _adminService.DeleteAdmin(memberId);
+                if (!result)
+                {
+                    return NotFound(new { message = "Admin not found" });
+                }
+
+                return Ok(new { message = "Admin deleted successfully" });
+            }
+            catch (SecurityTokenException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpPost("RoleAssign")]

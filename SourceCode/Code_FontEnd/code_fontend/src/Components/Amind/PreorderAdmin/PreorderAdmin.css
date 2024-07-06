@@ -1,0 +1,21 @@
+.products-wrapper {
+    margin-left: 500px; 
+    padding: 20px;
+    width:100%;
+  }
+  
+  .products-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  

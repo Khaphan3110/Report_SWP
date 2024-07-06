@@ -7,9 +7,11 @@ import * as Yup from "yup";
 import { auth, provider } from "../Config/configAuthenFirebase";
 import "./LoginForm.css";
 import {
-  useLoginGoogle,
+  userLoginGoogle,
   userLogin,
 } from "../../../Service/UserService/UserService";
+import { ToastContainer, toast } from "react-toastify";
+
 export default function LoginForm() {
   const [typeInputForm, setTypeInputForm] = useState("password");
   const listIcon = ["fa-solid fa-eye-slash", "fa-solid fa-eye"];
@@ -27,30 +29,33 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      UserName: "",
-      Password: "",
-      RememberMe: false,
+      userName: "",
+      password: "",
+      rememberMe: false,
     },
 
     validationSchema: Yup.object({
-      UserName: Yup.string()
-        .required("nhập email để đăng nhập!")
+      userName: Yup.string()
+        .required("nhập tên đăng nhập!")
         .matches(/^\S+$/, "Không có khoảng trắng"),
     }),
 
     onSubmit: async (values) => {
       const formData = new FormData();
-      formData.append("UserName", values.UserName);
-      formData.append("Password", values.Password);
-      formData.append("RememberMe", values.RememberMe);
-      const res = await userLogin(formData);
+      // "userName": "haphong",
+      // "password": "Ss@12345",
+      // "rememberMe": true
+      formData.append("userName", values.userName);
+      formData.append("password", values.password);
+      formData.append("rememberMe", values.rememberMe);
+      const res = await userLogin(values);
 
-      if (res.data.token) {
-        localStorage.setItem("userToken", JSON.stringify(res.data.token));
-        // console.log("đây là login",res.data.token
+      if (res.data) {
+        localStorage.setItem("userToken", JSON.stringify(res.data));
+        // console.log("đây là login",res.data)
         navigator("/");
       } else {
-        alert("login false!");
+        toast.error("tên nhập sai hoặc sai mật khẩu");
       }
     },
   });
@@ -58,38 +63,30 @@ export default function LoginForm() {
   const [userValueGoogle, setuserValueGoogle] = useState({});
   const navigate = useNavigate(); //sử dựng để điều hướng trang
   const handleLoginGoogle = async () => {
-    signInWithPopup(auth, provider)
-      .then(async (result) => {
-        const userValue = {
-          email: result.user.email,
-          firstName: result._tokenResponse.firstName,
-          lastName: result._tokenResponse.lastName,
-        };
-        console.log(result);
-        setuserValueGoogle(userValue);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const userValue = {
+        email: result.user.email,
+        firstName: result._tokenResponse.firstName,
+        lastName: result._tokenResponse.lastName,
+      };
+
+      const res = await userLoginGoogle(userValue);
+      if (res) {
+        toast.success("đăng nhập  thành công");
+        navigate("/");
+      } else {
+        toast.error("đăng nhập google thất bại")
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
   };
-  // useEffect(() => {
-  //   if (userValueGoogle.length !== 0) {
-  //     alert("me");
-  //     const LoginGoogle = async () => {
-  //       const res = await useLoginGoogle(userValueGoogle);
-  //       if (res) {
-  //         localStorage.setItem("userToken", res.data.token);
-  //         navigate("/");
-  //       } else {
-  //         alert("login failed!!!");
-  //       }
-  //     };
-  //     LoginGoogle();
-  //   }
-  // }, [userValueGoogle]);
 
   return (
     <section className="L-seccion">
+      <ToastContainer />
       <div className="container mx-auto">
         <div className="wraper-login-page">
           <div className="Header-login">
@@ -108,14 +105,14 @@ export default function LoginForm() {
                     <div className="L-input-place">
                       <input
                         type="text"
-                        name="UserName"
+                        name="userName"
                         placeholder="Input your email"
-                        value={formik.values.UserName}
+                        value={formik.values.userName}
                         onChange={formik.handleChange}
                       ></input>
                     </div>
-                    {formik.errors.UserName && (
-                      <p className="errorMsg">{formik.errors.UserName}</p>
+                    {formik.errors.userName && (
+                      <p className="errorMsg">{formik.errors.userName}</p>
                     )}
                   </div>
                   <p>
@@ -124,22 +121,24 @@ export default function LoginForm() {
                   <div className="L-input-place">
                     <input
                       type={typeInputForm}
-                      name="Password"
+                      name="password"
                       placeholder="nhập mật khẩu của bạn"
-                      value={formik.values.Password}
+                      value={formik.values.password}
                       onChange={formik.handleChange}
                     ></input>
                     <i className={iconShow} onClick={handlerOnclickIcon}></i>
                   </div>
-                  <div className="button-rememberme">
-                    <input
-                      type="checkbox"
-                      name="RememberMe"
-                      id="RememberMe"
-                      value={formik.values.RememberMe}
-                      onChange={formik.handleChange}
-                    />
-                    <label htmlFor="RememberMe">Remember me</label>
+                  <div className="button-rememberMe">
+                    <label htmlFor="rememberMe">
+                      <input
+                        type="checkbox"
+                        name="rememberMe"
+                        id="rememberMe"
+                        value={formik.values.rememberMe}
+                        onChange={formik.handleChange}
+                      />{" "}
+                      Remember me
+                    </label>
                   </div>
                   <div className="link-Fogot-password">
                     <p>

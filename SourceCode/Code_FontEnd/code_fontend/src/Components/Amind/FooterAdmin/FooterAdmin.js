@@ -1,9 +1,11 @@
 import React from "react";
-
+import "./FooterAdmin.css"
 export default function FooterAdmin() {
   return (
     <>
-    <h2>Footer</h2>
+    <div className="footer-admin">
+    <p>CopyRight@2024</p>
+    </div>
     </>
     // <footer>
     //   <div className="d-sm-flex justify-content-center justify-content-sm-between">

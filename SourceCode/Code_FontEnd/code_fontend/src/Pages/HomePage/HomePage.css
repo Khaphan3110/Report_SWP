@@ -1,0 +1,76 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* Màu nền trang */
+}
+
+.homepage-custom {
+  display: flex;
+  justify-content: flex-end; /* Dịch chuyển toàn bộ nội dung sang bên phải */
+  padding: 20px;
+}
+
+.main-content-custom {
+  width: 100%;
+  max-width: 1200px; /* Chiều rộng tối đa của nội dung chính */
+}
+
+.content-wrapper-custom {
+  display: flex;
+  justify-content: space-between; /* Sắp xếp các phần tử trong content wrapper */
+}
+
+.main-banner-custom {
+  width: 79%; /* Đặt chiều rộng của banner */
+  margin-right: 15px; /* Khoảng cách bên phải giữa banner và promotions */
+}
+
+.slideshow-custom {
+  position: relative;
+  width: 100%;
+  height: 500px; /* Chiều cao của slideshow */
+  overflow: hidden;
+  border-radius: 5px; /* Bo góc các hình ảnh trong slideshow */
+}
+
+.slideshow-custom img {
+  width: 100%;
+  height: 100%;
+  display: none; /* Ẩn tất cả các hình ảnh */
+  object-fit: cover;
+}
+
+.slideshow-custom img:first-child {
+  display: block; /* Hiển thị hình ảnh đầu tiên */
+}
+
+.promotions-custom {
+  width: 23%; /* Đặt chiều rộng của promotions */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Sắp xếp các hình ảnh trong promotions */
+}
+
+.promotions-custom img {
+  width: 100%;
+  margin-bottom: 5px; /* Giảm khoảng cách dưới giữa các hình ảnh */
+  border-radius: 5px; /* Bo góc các hình ảnh */
+  object-fit: cover;
+}
+
+.additional-images {
+  display:flex;
+  margin-top: 20px; /* Khoảng cách trên giữa additional-images và content-wrapper */
+}
+
+.additional-images img {
+  width: 32%; /* Chia đều chiều rộng cho các hình ảnh */
+  margin-right: 10px; /* Khoảng cách phải giữa các hình ảnh */
+  border-radius: 5px; /* Bo góc các hình ảnh */
+  object-fit: cover;
+}
+
+.additional-images img:last-child {
+  margin-right: 0; /* Bỏ khoảng cách phải của hình ảnh cuối cùng */
+}

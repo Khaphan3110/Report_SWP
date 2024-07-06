@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,14 +37,39 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request);
 
-        Task<MemberAddressVM> GetMemberAddressByIdAsync(string memberId);
+        Task<List<MemberAddressVM>> GetMemberAddressById(string memberId);
 
-        Task<bool> UpdateMemberAddressAsync(string memberId, UpdateAddressRequest request);
+        Task<List<MemberAddressVM>> GetAllAddresses();
+
+        Task<bool> UpdateMemberAddress(string memberId, UpdateAddressRequest request);
 
         Task<bool> AddMemberAddressAsync(string memberId, AddAddressRequest request);
 
         Task<bool> DeleteUserAsync(string memberId);
 
-        Task<bool> DeleteMemberAddressAsync(string id);
-    }
+        Task<bool> DeleteMemberAddress(string id);
+
+       Task<string> ExtractMemberIdFromTokenAsync(string token);
+
+        ClaimsPrincipal ValidateToken(string jwtToken);
+
+        Task<StaffInfoVM> GetStaffById(string staffId);
+
+        Task<List<StaffInfoVM>> GetAllStaffs();
+
+        Task<bool> UpdateStaff(string id, UpdateStaffRequest request);
+
+        Task<bool> DeleteStaff(string staffId);
+
+        Task<bool> RegisterStaff(List<RegisterRequest> requests);
+
+        Task<string> AuthenticateStaff(LoginRequest request);
+
+        Task<string> ExtractStaffIdFromTokenAsync(string token);
+
+        Task<PageResult<UserVm>> GetUsersPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<UserVm>> GetById(Guid id);
+
+	}
 }

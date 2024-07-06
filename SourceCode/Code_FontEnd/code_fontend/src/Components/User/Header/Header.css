@@ -11,9 +11,11 @@
 .header-center form {
   display: flex;
   position: relative;
+  margin: 0;
 }
 
-.header-center input {
+
+.header-center form input {
   background-color: #f1f1f1;
 
   height: 45px;
@@ -24,6 +26,7 @@
   padding-right: 30px;
   border: 0;
   outline: none;
+  margin: 0;
 }
 
 .header-center span button {
@@ -46,6 +49,10 @@
 
 .header-right li {
   /* margin: 0 15px; */
+}
+
+.header-left-homepage a img{
+  background-color: transparent !important;
 }
 
 .contact {
@@ -113,7 +120,9 @@
 
 .cart-link .cart-quantity {
   align-self: center;
+  text-align: center;
   background-color: #fbd947;
+  width: 24px;
 }
 
 .cart-name {
@@ -122,7 +131,7 @@
   color: black;
 }
 
-.subHeader {
+.sub-Header-homepage {
   /* padding-top: 10px; */
   background-color: #f05a72;
 }
@@ -166,4 +175,15 @@
 }
 
 .shop-policy li div img {
+
 }
+
+/* .custom-tooltip{
+  background-color: #fbd947;
+} */
+
+.toolip-cart{
+  background-color: #fbd947 !important;
+  color: black !important;
+}
+

@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
+using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,9 +27,10 @@ namespace SWPSolution.Application.System.Admin
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly IConfiguration _configuration;
         private readonly IConfiguration _config;
         private readonly IEmailService _emailService;
-        public AdminService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, SWPSolutionDBContext context, IEmailService emailService) 
+        public AdminService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<AppRole> roleManager, IConfiguration config, SWPSolutionDBContext context, IEmailService emailService, IConfiguration configuration) 
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -32,57 +38,312 @@ namespace SWPSolution.Application.System.Admin
             _config = config;
             _context = context;
             _emailService = emailService;
+            _configuration = configuration;
         }
+        public async Task<string> AuthenticateAdmin(LoginRequest request)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
+            if (!result.Succeeded)
+            {
+                return null;
+            }
+
+            string adminId = await GetAdminIdByUsername(request.UserName);
+
+            var getRoles = await _userManager.GetRolesAsync(user);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Name, request.UserName),
+                new Claim("admin_id", adminId.ToString())
+            };
+
+            foreach (var role in getRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                _config["JWT:Issuer"],
+                _config["JWT:Issuer"],
+                claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<string> ExtractAdminIdFromTokenAsync(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
+            var jwtSecret = _config["JWT:SigningKey"];
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+            var adminId = principal.FindFirst("admin_id")?.Value;
+
+            return adminId;
+        }
+
+        private async Task<string> GetAdminIdByUsername(string username)
+        {
+            var admin = _context.Staff.FirstOrDefault(m => m.Username == username);
+            if (admin != null)
+            {
+                return admin.StaffId;
+            }
+            else
+            {
+                throw new SWPException("Error getting Admin ID");
+            }
+        }
+
         public async Task<bool> RegisterAdmin(RegisterRequest request)
         {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+            var existingUsers = _userManager.Users.Where(u => u.UserName == request.UserName &&
+                u.TemporaryPassword == request.Password &&
+                u.EmailConfirmed == false)
+    .ToList();
+            if (existingUsers.Any())
+            {
+                foreach (var existingUser in existingUsers)
+                {
+                    var deleteResult = await _userManager.DeleteAsync(existingUser);
+                    if (!deleteResult.Succeeded)
+                    {
+                        return false;
+                    }
+                }
+            }
 
             var user = new AppUser()
             {
+                Id = Guid.NewGuid(),
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
                 UserName = request.UserName,
-                TemporaryPassword = request.Password
+                TemporaryPassword = request.Password,
+                EmailConfirmed = false,
             };
-
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                // Ensure the admin role exists
+                return false; // If registration fails, return false
+            }
+            var otpSent = await SendOtp(request.Email);
+            return true;
+        }
+
+        public async Task<bool> SendOtp(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return false;
+            // Generate OTP
+            var otp = new Random().Next(100000, 999999).ToString();
+            // Save OTP and expiration to database
+            user.EmailVerificationCode = otp;
+            user.EmailVerificationExpiry = DateTime.Now.AddMinutes(10); // OTP expires in 10 minutes
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                return false;
+            }
+            try
+            {
+                // Send OTP via email
+                var message = new MessageVM(new string[] { user.Email }, "Confirm your email", $"<p>Your OTP is: {otp}</p>");
+                _emailService.SendEmail(message);
+                return true;
+            }
+            catch (Exception)
+            {
+                // If email sending fails, remove the user
+                await _userManager.DeleteAsync(user);
+                return false;
+            }
+        }
+
+        public async Task<bool> ConfirmEmail(string otp)
+        {
+            var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
+            if (user == null) return false;
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                user.EmailConfirmed = true;
+                user.EmailVerificationCode = null;
+                user.EmailVerificationExpiry = null;
+                var result = await _userManager.UpdateAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+
                 if (!await _roleManager.RoleExistsAsync("Admin"))
                 {
                     var adminRole = new AppRole { Name = "Admin", Description = "Administrator role with full permissions" };
                     await _roleManager.CreateAsync(adminRole);
                 }
-
                 // Assign the admin role to the user
                 await _userManager.AddToRoleAsync(user, "Admin");
 
                 var admin = new Staff()
                 {
-                    StaffId = Guid.NewGuid().ToString(), // Generate a new unique ID
-                    FullName = $"{request.FirstName} {request.LastName}",
-                    Username = request.UserName,
-                    Password = request.Password,
-                    Email = request.Email,
-                    Phone = request.PhoneNumber,
-                    Role = "Admin"
+                            StaffId = "",
+                            FullName = $"{user.FirstName} {user.LastName}",
+                            Username = user.UserName,
+                            Password = user.TemporaryPassword,
+                            Email = user.Email,
+                            Phone = user.PhoneNumber,
+                            Role = "staffadmin"
                 };
 
                 _context.Staff.Add(admin);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
-
                 return true;
             }
-
-            await transaction.RollbackAsync();
-            return false;
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
 
+        public async Task<StaffInfoVM> GetAdminById(string adminId)
+        {
+            var admin = _context.Staff.Find(adminId);
+            if (admin == null) return null;
+
+            return new StaffInfoVM
+            {
+                Id = adminId,
+                Role = admin.Role,
+                UserName = admin.Username,
+                Password = admin.Password,
+                Email = admin.Email,
+                FullName = admin.FullName,
+                PhoneNumber = admin.Phone
+            };
+        }
+
+        public async Task<bool> UpdateAdmin(string id, UpdateAdminRequest request)
+        {
+            // Find the user by id
+            var admin = _context.Staff.Find(id);
+            if (admin == null)
+            {
+                return false;
+            }
+
+            // Update admin
+            if (!string.IsNullOrEmpty(request.Password))
+            {
+                admin.Password = request.Password;
+            }
+            if (!string.IsNullOrEmpty(request.Fullname))
+            {
+                admin.FullName = request.Fullname;
+            }
+            if (!string.IsNullOrEmpty(request.Email))
+            {
+                admin.Email = request.Email;
+            }
+            if (!string.IsNullOrEmpty(request.Phone))
+            {
+                admin.Phone = request.Phone;
+            }
+            _context.Staff.Update(admin);
+
+            // Update AppUser
+            var user = await _userManager.FindByNameAsync(admin.Username);
+            if (user != null && !string.IsNullOrEmpty(request.Password))
+            {
+                if (!string.IsNullOrEmpty(request.Password))
+                {
+                    // Reset the user's password using the provided password
+
+                    var result = await _userManager.RemovePasswordAsync(user);
+                    if (result.Succeeded)
+                    {
+                        result = await _userManager.AddPasswordAsync(user, request.Password);
+                        if (!result.Succeeded)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    user.TemporaryPassword = request.Password;
+                }
+                var userUpdateResult = await _userManager.UpdateAsync(user);
+                if (!userUpdateResult.Succeeded)
+                {
+                    return false;
+                }
+            }
+
+            // Save all changes in one transaction
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        public async Task<bool> DeleteAdmin(string adminId)
+        {
+            var admin = _context.Staff.Find(adminId);
+            if (admin == null) return false;
+
+            _context.Staff.Remove(admin);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public ClaimsPrincipal ValidateToken(string jwtToken)
+        {
+            IdentityModelEventSource.ShowPII = true;
+
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidAudience = _configuration["JWT:Issuer"],
+                ValidIssuer = _configuration["JWT:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SigningKey"]))
+            };
+
+            return new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out SecurityToken validatedToken);
+        }
 
         public async Task<bool> CreateBlogAsync(string staffId, BlogCreateRequest request)
         {
@@ -129,6 +390,7 @@ namespace SWPSolution.Application.System.Admin
 
             return new BlogDetailVM
             {
+                Id = blog.BlogId,
                 Title = blog.Title,
                 Content = blog.Content,
                 Categories = blog.Categories,
@@ -222,9 +484,8 @@ namespace SWPSolution.Application.System.Admin
                 MemberId = order.MemberId,
                 PromotionId = order.PromotionId,
                 ShippingAddress = order.ShippingAddress,
-                TotalAmount = order.TotalAmount,
-            //    OrderStatus = order.OrderStatus,
-                OrderDate = order.OrderDate,
+                TotalAmount = (double)order.TotalAmount,
+                OrderDate = (DateTime)order.OrderDate,
             };
         }
 
@@ -237,9 +498,8 @@ namespace SWPSolution.Application.System.Admin
                     MemberId = order.MemberId,
                     PromotionId = order.PromotionId,
                     ShippingAddress = order.ShippingAddress,
-                    TotalAmount = order.TotalAmount,
-                //    OrderStatus = order.OrderStatus,
-                    OrderDate = order.OrderDate,
+                    TotalAmount = (double)order.TotalAmount,
+                    OrderDate = (DateTime)order.OrderDate,
                 })
                 .ToListAsync();
         }

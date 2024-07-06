@@ -10,6 +10,10 @@ using System.Text;
 using System.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using SWPSolution.ViewModels.Common;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Net.Http;
 
 namespace SWPSolution.AdminApp.Controllers
 {
@@ -17,15 +21,29 @@ namespace SWPSolution.AdminApp.Controllers
     {
         private readonly IUserApiClient _userApiClient;
         private readonly IConfiguration _configuration;
-        public UserController(IUserApiClient userApiClient, IConfiguration configuration) 
+		public UserController(IUserApiClient userApiClient, IConfiguration configuration) 
         {
             _userApiClient = userApiClient;
             _configuration = configuration;
         }
-        public IActionResult Index()
+        public  async Task<IActionResult> Index(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
-            var user = User.Identity.Name;
-            return View();
+			var sessions = HttpContext.Session.GetString("Token");
+			var user = User.Identity.Name;
+            var userRoles = User.Claims
+                        .Where(c => c.Type == ClaimTypes.Role)
+                        .Select(c => c.Value)
+                        .ToList();
+            var request = new GetUserPagingRequest()
+            {
+                BearerToken = sessions,
+                Keyword = Keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
+            var data = await _userApiClient.GetUsersPagings(request);
+            ViewBag.Keyword = Keyword;
+            return View(data);
         }
 
         [HttpGet]
@@ -43,18 +61,20 @@ namespace SWPSolution.AdminApp.Controllers
             var userPrincipal = this.ValidateToken(token);
 
             var userRole = userPrincipal.FindFirst(ClaimTypes.Role)?.Value;
-            if (userRole != "Admin" && userRole != "Staff")
+            if (!string.Equals(userRole, "Admin", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(userRole, "Staff", StringComparison.OrdinalIgnoreCase))
             {
+                TempData["ErrorMessage"] = "You do not have permission to access this application.";
                 return RedirectToAction("Login", "User");
             }
-
-            ViewData["UserRole"] = userRole;
 
             var authProperties = new AuthenticationProperties
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                 IsPersistent = true
             };
+
+            HttpContext.Session.SetString("Token", token);
 
             await HttpContext.SignInAsync
             (
@@ -69,6 +89,7 @@ namespace SWPSolution.AdminApp.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Remove("Token");
             return RedirectToAction("Login", "User");
         }
 
@@ -89,5 +110,12 @@ namespace SWPSolution.AdminApp.Controllers
 
             return principal;
         }
-    }
+
+        [HttpGet]
+		public async Task<IActionResult> Details(Guid id)
+		{
+			var result = await _userApiClient.GetById(id);
+			return View(result.ResultObj);
+		}
+	}
 }
