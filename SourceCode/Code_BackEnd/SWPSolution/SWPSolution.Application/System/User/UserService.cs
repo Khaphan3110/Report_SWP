@@ -767,8 +767,6 @@ namespace SWPSolution.Application.System.User
         {
             using var transaction = await _context.Database.BeginTransactionAsync();
 
-            int counter = 1;
-
             try
             {
                 foreach (var request in requests)
@@ -790,22 +788,21 @@ namespace SWPSolution.Application.System.User
                     if (result.Succeeded)
                     {
                         // Ensure the Staff role exists
-                        if (!await _roleManager.RoleExistsAsync("Staff"))
+                        if (!await _roleManager.RoleExistsAsync("staffmember"))
                         {
-                            var staffRole = new AppRole {Id = Guid.NewGuid(), Name = "Staff", Description = "Staff role with many permissions" };
+                            var staffRole = new AppRole {Id = Guid.NewGuid(), Name = "staffmember", Description = "Staff role with many permissions" };
                             await _roleManager.CreateAsync(staffRole);
                         }
 
                         // Assign the Staff role to the user
-                        await _userManager.AddToRoleAsync(user, "Staff");
+                        await _userManager.AddToRoleAsync(user, "staffmember");
 
                         // Generate staff ID
-                        string staffId = GenerateStaffId(counter);
-                        counter++;
+                        string generatedId = GenerateStaffId();
 
                         var staff = new Staff
                         {
-                            StaffId = staffId,
+                            StaffId = generatedId,
                             Role = "staffmember",
                             Username = request.UserName,
                             Password = request.Password,
@@ -836,11 +833,34 @@ namespace SWPSolution.Application.System.User
             }
         }
 
-        private string GenerateStaffId(int counter)
+        private string GenerateStaffId()
         {
-            string prefix = "SM";
-            string datePart = DateTime.Now.ToString("MMyy");
-            return $"{prefix}{datePart}{counter:D3}";
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"SM{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for categories_ID to match in SQL query
+            string pattern = $"SM{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing categories for the given month and year
+            var maxAutoIncrement = _context.Staff
+                .Where(c => c.StaffId.StartsWith(pattern))
+                .Select(c => c.StaffId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
 
         public async Task<StaffInfoVM> GetStaffById(string staffId)
@@ -1050,12 +1070,12 @@ namespace SWPSolution.Application.System.User
 
 		public async Task<ApiResult<MemberInfoVM>> GetUserIdPaging(string id)
 		{
-			var user = await _userManager.FindByIdAsync(id.ToString());
+			var user = await _context.Members.FindAsync(id);
 			if (user == null)
 			{
 				return new ApiErrorResult<MemberInfoVM>("User not exist");
 			}
-			var roles = await _userManager.GetRolesAsync(user);
+
 			var userVm = new MemberInfoVM()
 			{
                 MemberId = id,
@@ -1074,7 +1094,11 @@ namespace SWPSolution.Application.System.User
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.Username.Contains(request.Keyword));
+                query = query.Where(x => x.Username.Contains(request.Keyword) && x.Role == "staffmember");
+            }
+            else
+            {
+                query = query.Where(x => x.Role == "staffmember");
             }
 
             int totalRow = await query.CountAsync();
@@ -1104,20 +1128,20 @@ namespace SWPSolution.Application.System.User
 
         public async Task<ApiResult<StaffInfoVM>> GetStaffIdPaging(string id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
+            var user = await _context.Staff.FindAsync(id);
             if (user == null)
             {
                 return new ApiErrorResult<StaffInfoVM>("Staff not exist");
             }
-            var roles = await _userManager.GetRolesAsync(user);
+
             var userVm = new StaffInfoVM()
             {
                 Id = id,
-                UserName = user.UserName,
-                Password = user.TemporaryPassword,
-                FullName = $"{user.FirstName} {user.LastName}",
+                UserName = user.Username,
+                Password = user.Password,
+                FullName =user.FullName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                PhoneNumber = user.Phone,
             };
             return new ApiSuccessResult<StaffInfoVM>(userVm);
         }

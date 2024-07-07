@@ -628,8 +628,8 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut("ResetStaffPassword")]
+        [AllowAnonymous]
         public async Task<IActionResult> ResetStaffPassword(string email)
         {
             if (!ModelState.IsValid)
@@ -646,8 +646,8 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { message = "OTP sent successfully" });
         }
 
-        [Authorize]
         [HttpPost("ConfirmStaff")]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmStaff(string otp, UpdateStaffRequest request)
         {
             try

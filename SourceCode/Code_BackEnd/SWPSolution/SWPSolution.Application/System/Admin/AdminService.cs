@@ -195,7 +195,6 @@ namespace SWPSolution.Application.System.Admin
         public async Task<bool> ConfirmEmail(string otp)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.EmailVerificationCode == otp && u.EmailVerificationExpiry > DateTime.Now);
-            int counter = 1; 
             if (user == null) return false;
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
@@ -210,16 +209,15 @@ namespace SWPSolution.Application.System.Admin
                     return false;
                 }
 
-                if (!await _roleManager.RoleExistsAsync("Admin"))
+                if (!await _roleManager.RoleExistsAsync("staffadmin"))
                 {
-                    var adminRole = new AppRole {Id = Guid.NewGuid(), Name = "Admin", Description = "Administrator role with full permissions" };
+                    var adminRole = new AppRole {Id = Guid.NewGuid(), Name = "staffadmin", Description = "Administrator role with full permissions" };
                     await _roleManager.CreateAsync(adminRole);
                 }
                 // Assign the admin role to the user
-                await _userManager.AddToRoleAsync(user, "Admin");
+                await _userManager.AddToRoleAsync(user, "staffadmin");
 
-                var adminId = GenerateAdminId(counter);
-                counter++; ;
+                var adminId = GenerateAdminId();
                 var admin = new Staff()
                 {
                             StaffId = adminId,
@@ -243,11 +241,34 @@ namespace SWPSolution.Application.System.Admin
             }
         }
 
-        private string GenerateAdminId(int counter)
+        private string GenerateAdminId()
         {
-            string prefix = "SA";
-            string datePart = DateTime.Now.ToString("MMyy");
-            return $"{prefix}{datePart}{counter:D3}";
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"SA{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetNextAutoIncrement(string month, string year)
+        {
+            // Generate the pattern for categories_ID to match in SQL query
+            string pattern = $"SA{month}{year}";
+
+            // Retrieve the maximum auto-increment value from existing categories for the given month and year
+            var maxAutoIncrement = _context.Staff
+                .Where(c => c.StaffId.StartsWith(pattern))
+                .Select(c => c.StaffId.Substring(6, 3)) // Select substring of auto-increment part
+                .AsEnumerable() // Switch to client evaluation from this point
+                .Select(s => int.Parse(s)) // Parse string to int
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
 
         public async Task<StaffInfoVM> GetAdminById(string adminId)
