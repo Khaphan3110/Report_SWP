@@ -254,17 +254,17 @@ export default function RegisterForm() {
                 <div className="b-Register">
                   <button
                     type="submit"
-                    disabled={
-                      formik.errors.LastName &&
-                      formik.errors.FirstName &&
-                      formik.errors.Email &&
-                      formik.errors.Password &&
-                      formik.errors.ConfirmPassword &&
-                      formik.errors.PhoneNumber &&
-                      formik.errors.UserName
-                        ? false
-                        : true
-                    }
+                    // disabled={
+                    //   formik.errors.LastName &&
+                    //   formik.errors.FirstName &&
+                    //   formik.errors.Email &&
+                    //   formik.errors.Password &&
+                    //   formik.errors.ConfirmPassword &&
+                    //   formik.errors.PhoneNumber &&
+                    //   formik.errors.UserName
+                    //     ? false
+                    //     : true
+                    // }
                   >
                     <p>Đăng Ký</p>
                   </button>

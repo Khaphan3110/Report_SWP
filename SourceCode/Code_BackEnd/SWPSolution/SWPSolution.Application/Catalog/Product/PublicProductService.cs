@@ -20,7 +20,7 @@ namespace SWPSolution.Application.Catalog.Product
         {
             var query = from p in _context.Products
                         join c in _context.Categories on p.CategoriesId equals c.CategoriesId
-                        //join r in _context.Reviews on p.ProductId equals r.ProductId
+                       // join r in _context.Reviews on p.ProductId equals r.ProductId
                         select new { p, c };
 
             int totalRow = await query.CountAsync();
@@ -32,7 +32,7 @@ namespace SWPSolution.Application.Catalog.Product
                 Description = x.p.Description,
                 Price = x.p.Price,
                 Quantity = x.p.Quantity,
-                StatusDescription = x.p.StatusDescription,
+                StatusDescription = x.p.StatusDescription
             }).ToListAsync();
             return data;
         }

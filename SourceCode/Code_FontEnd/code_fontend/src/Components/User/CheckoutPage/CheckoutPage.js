@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useStore, useUserProfile } from "../../../Store";
 import "./CheckoutPage.css";
@@ -55,11 +55,18 @@ const CheckoutPage = () => {
     navigate("/payment");
   };
 
+  const isEmpty = (obj) =>{
+    return Object.keys(obj).length !== 0
+  }
+
   return (
     <div className="checkout-page">
       <div className="checkout-container">
         <div className="shipping-info">
+          
           <h2>Thông tin giao hàng</h2>
+          {isEmpty(userProfile.CurrentAdress) ? 
+          (
           <form onSubmit={formik.handleSubmit}>
             <div>
               <label>Họ và tên</label>
@@ -125,6 +132,10 @@ const CheckoutPage = () => {
               Tiếp tục đến phương thức thanh toán
             </button>
           </form>
+          ) 
+          : 
+          (<div style={{}}><h2>Hiện tại chưa có địa chỉ !!! Nhập tại <Link to={"/addresses"}>Đây</Link></h2></div>)}
+          
         </div>
         <div className="order-summary">
           <h2>Tóm tắt đơn hàng</h2>

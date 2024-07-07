@@ -127,7 +127,7 @@ export const getUserAddAdress = async (TokenUser) => {
 
 export const updateUserAdress = async (addressID,newAdress,TokenUser) => {
   try {
-    const res = await request.Get(`Users/UpdateAddress/${addressID}/address`,newAdress,{
+    const res = await request.Put(`Users/UpdateAddress/${addressID}/address`,newAdress,{
       headers:{
         'Authorization': `Bearer ${TokenUser}`,
         'Content-Type': 'application/json',

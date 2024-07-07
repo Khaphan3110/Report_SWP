@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
 using SWPSolution.ViewModels.System.Users;
-using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace SWPSolution.Application.System.User
 {
@@ -18,6 +16,7 @@ namespace SWPSolution.Application.System.User
         {
             _emailConfig = emailConfig;
         }
+
         public void SendEmail(MessageVM message)
         {
             var emailMessage = CreateEmailMessage(message);
@@ -30,16 +29,23 @@ namespace SWPSolution.Application.System.User
             emailMessage.From.Add(new MailboxAddress("email", _emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Content };
+
+            var bodyBuilder = new BodyBuilder
+            {
+                HtmlBody = message.Content // Set the content as HTML
+            };
+
+            emailMessage.Body = bodyBuilder.ToMessageBody();
 
             return emailMessage;
         }
+
         private void Send(MimeMessage message)
         {
             using var client = new SmtpClient();
             try
             {
-                client.Connect(_emailConfig.SmtpServer, _emailConfig.Port,true);
+                client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
                 client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
 

@@ -1,0 +1,561 @@
+{
+  "Files": [
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\005ca15b-6814-4be4-97ca-1cc2cc9bed14.png",
+      "PackagePath": "staticwebassets\\user-content\\005ca15b-6814-4be4-97ca-1cc2cc9bed14.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0b16a3b5-b449-4c64-883f-e6ca4843e0d9.png",
+      "PackagePath": "staticwebassets\\user-content\\0b16a3b5-b449-4c64-883f-e6ca4843e0d9.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0ceb8ae6-f0c0-4704-a725-c1c10093fbc3.png",
+      "PackagePath": "staticwebassets\\user-content\\0ceb8ae6-f0c0-4704-a725-c1c10093fbc3.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\0ee264ee-544d-41e4-b306-066dfd09df5e.png",
+      "PackagePath": "staticwebassets\\user-content\\0ee264ee-544d-41e4-b306-066dfd09df5e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\10b136f5-4b14-4ad8-9133-86987ebb2474.png",
+      "PackagePath": "staticwebassets\\user-content\\10b136f5-4b14-4ad8-9133-86987ebb2474.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\14d16c83-5851-4fdd-b71b-88184e2809bf.png",
+      "PackagePath": "staticwebassets\\user-content\\14d16c83-5851-4fdd-b71b-88184e2809bf.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\17ce12a3-b0e4-4ced-9b49-d1035bb2f514.png",
+      "PackagePath": "staticwebassets\\user-content\\17ce12a3-b0e4-4ced-9b49-d1035bb2f514.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\1cf01591-fa8b-4e2e-93d6-643b1d42f396.png",
+      "PackagePath": "staticwebassets\\user-content\\1cf01591-fa8b-4e2e-93d6-643b1d42f396.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\1f59620f-f45f-4fe1-90a0-5ea4d8209512.png",
+      "PackagePath": "staticwebassets\\user-content\\1f59620f-f45f-4fe1-90a0-5ea4d8209512.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\251b0d0b-f6a9-40d1-bd6f-6201314862b2.png",
+      "PackagePath": "staticwebassets\\user-content\\251b0d0b-f6a9-40d1-bd6f-6201314862b2.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\29e5aadb-3216-4241-a938-c315300f6e35.png",
+      "PackagePath": "staticwebassets\\user-content\\29e5aadb-3216-4241-a938-c315300f6e35.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\2ac9013f-5c51-4a18-898e-e2ad91560eb5.png",
+      "PackagePath": "staticwebassets\\user-content\\2ac9013f-5c51-4a18-898e-e2ad91560eb5.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\30175275-1050-4d9e-8ad2-a8fdf967fca3.png",
+      "PackagePath": "staticwebassets\\user-content\\30175275-1050-4d9e-8ad2-a8fdf967fca3.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\37238051-db51-41a8-85ad-2dc42611a7f1.png",
+      "PackagePath": "staticwebassets\\user-content\\37238051-db51-41a8-85ad-2dc42611a7f1.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\38a43c77-7e78-4df3-a5c2-ecd6e512ee51.png",
+      "PackagePath": "staticwebassets\\user-content\\38a43c77-7e78-4df3-a5c2-ecd6e512ee51.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\3d01b279-6ba3-495f-9541-045527c12726.png",
+      "PackagePath": "staticwebassets\\user-content\\3d01b279-6ba3-495f-9541-045527c12726.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\3e4750ff-09a1-40e6-ad83-9138d4ce0453.png",
+      "PackagePath": "staticwebassets\\user-content\\3e4750ff-09a1-40e6-ad83-9138d4ce0453.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\434fba68-5884-4eb6-a28b-c714f454f67a.png",
+      "PackagePath": "staticwebassets\\user-content\\434fba68-5884-4eb6-a28b-c714f454f67a.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\43ea6c99-6069-4a01-88a2-8c25810162bb.png",
+      "PackagePath": "staticwebassets\\user-content\\43ea6c99-6069-4a01-88a2-8c25810162bb.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\49830c81-146e-45cb-960b-18c5232cf4b6.png",
+      "PackagePath": "staticwebassets\\user-content\\49830c81-146e-45cb-960b-18c5232cf4b6.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\49d7b9c7-ec3c-4c1e-b7fe-b31432d7f123.png",
+      "PackagePath": "staticwebassets\\user-content\\49d7b9c7-ec3c-4c1e-b7fe-b31432d7f123.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\4c21f0f5-2482-414c-8dd2-ef77e615c0ec.png",
+      "PackagePath": "staticwebassets\\user-content\\4c21f0f5-2482-414c-8dd2-ef77e615c0ec.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\4ead5aa2-44af-405e-ab25-073e0da0480e.png",
+      "PackagePath": "staticwebassets\\user-content\\4ead5aa2-44af-405e-ab25-073e0da0480e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5060cfd9-0ae2-4568-821c-ed1199c62d40.png",
+      "PackagePath": "staticwebassets\\user-content\\5060cfd9-0ae2-4568-821c-ed1199c62d40.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5e84cc35-6dae-47fd-854b-57416c919ba3.png",
+      "PackagePath": "staticwebassets\\user-content\\5e84cc35-6dae-47fd-854b-57416c919ba3.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\5fd7ab73-6fad-41e7-bbf0-63bc40173a91.png",
+      "PackagePath": "staticwebassets\\user-content\\5fd7ab73-6fad-41e7-bbf0-63bc40173a91.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\62f18944-4272-4670-a79e-68ebdcf2f19e.png",
+      "PackagePath": "staticwebassets\\user-content\\62f18944-4272-4670-a79e-68ebdcf2f19e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6c446b6e-7b91-4c04-9c0f-116cc4ff5e37.png",
+      "PackagePath": "staticwebassets\\user-content\\6c446b6e-7b91-4c04-9c0f-116cc4ff5e37.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\6cc2173d-d79f-437c-8a9d-9bfbb50ae39f.png",
+      "PackagePath": "staticwebassets\\user-content\\6cc2173d-d79f-437c-8a9d-9bfbb50ae39f.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\716df924-d4e9-4f3f-906d-1385da9194ff.png",
+      "PackagePath": "staticwebassets\\user-content\\716df924-d4e9-4f3f-906d-1385da9194ff.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\74e93237-5493-4ed6-9667-b45eb7c0fe8e.png",
+      "PackagePath": "staticwebassets\\user-content\\74e93237-5493-4ed6-9667-b45eb7c0fe8e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\760806a4-d867-4cbd-98ac-971d6af5353b.png",
+      "PackagePath": "staticwebassets\\user-content\\760806a4-d867-4cbd-98ac-971d6af5353b.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\77d90e94-dd37-4e7f-b054-729a7ef3134e.png",
+      "PackagePath": "staticwebassets\\user-content\\77d90e94-dd37-4e7f-b054-729a7ef3134e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\7903786d-7964-42ae-854c-f608b4ffa035.png",
+      "PackagePath": "staticwebassets\\user-content\\7903786d-7964-42ae-854c-f608b4ffa035.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\7edc774f-4807-4ec8-805b-c2887229dbaa.png",
+      "PackagePath": "staticwebassets\\user-content\\7edc774f-4807-4ec8-805b-c2887229dbaa.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\803955d6-44c2-4376-bc07-34771da1c8de.png",
+      "PackagePath": "staticwebassets\\user-content\\803955d6-44c2-4376-bc07-34771da1c8de.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\827276b4-9c1c-48e9-b6e0-17bfca63e0ff.png",
+      "PackagePath": "staticwebassets\\user-content\\827276b4-9c1c-48e9-b6e0-17bfca63e0ff.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\864a59a1-4df3-4d72-b511-6acc01203ba6.png",
+      "PackagePath": "staticwebassets\\user-content\\864a59a1-4df3-4d72-b511-6acc01203ba6.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\8f49391b-b21b-4271-912f-4430e5c36cf8.png",
+      "PackagePath": "staticwebassets\\user-content\\8f49391b-b21b-4271-912f-4430e5c36cf8.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\8f493c2f-404f-4963-bd1a-5ad8b92bfa73.png",
+      "PackagePath": "staticwebassets\\user-content\\8f493c2f-404f-4963-bd1a-5ad8b92bfa73.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\904c28b4-915c-48a7-8ca4-e61f350bc11e.png",
+      "PackagePath": "staticwebassets\\user-content\\904c28b4-915c-48a7-8ca4-e61f350bc11e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9451ecf2-4712-43ab-838d-26c3b5b4b449.png",
+      "PackagePath": "staticwebassets\\user-content\\9451ecf2-4712-43ab-838d-26c3b5b4b449.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9b4d6cd1-cb38-40db-a207-38042e0f279e.png",
+      "PackagePath": "staticwebassets\\user-content\\9b4d6cd1-cb38-40db-a207-38042e0f279e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9d8029ed-a49d-4af7-86f6-bb019a7ad92e.png",
+      "PackagePath": "staticwebassets\\user-content\\9d8029ed-a49d-4af7-86f6-bb019a7ad92e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\9e6bf7b4-06cf-4ee2-bb11-0b56a3adb29f.png",
+      "PackagePath": "staticwebassets\\user-content\\9e6bf7b4-06cf-4ee2-bb11-0b56a3adb29f.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\a04a8059-c849-4edf-acda-5a295993ebb9.png",
+      "PackagePath": "staticwebassets\\user-content\\a04a8059-c849-4edf-acda-5a295993ebb9.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\a0cf50bc-506c-4595-9fab-a41c4b2853c6.png",
+      "PackagePath": "staticwebassets\\user-content\\a0cf50bc-506c-4595-9fab-a41c4b2853c6.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\a4fb8ab7-7930-49b2-bb74-7408c1f700c1.png",
+      "PackagePath": "staticwebassets\\user-content\\a4fb8ab7-7930-49b2-bb74-7408c1f700c1.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\a8b44ba9-1163-45b8-b688-588b1ee7332b.png",
+      "PackagePath": "staticwebassets\\user-content\\a8b44ba9-1163-45b8-b688-588b1ee7332b.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\aa9c2ab3-7ad8-4841-86a6-7ba58ec616c1.png",
+      "PackagePath": "staticwebassets\\user-content\\aa9c2ab3-7ad8-4841-86a6-7ba58ec616c1.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ab14a900-22b9-4a3b-a684-a880350b0951.png",
+      "PackagePath": "staticwebassets\\user-content\\ab14a900-22b9-4a3b-a684-a880350b0951.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ae88c92e-6ea6-4a97-a452-8c188ac48eaf.png",
+      "PackagePath": "staticwebassets\\user-content\\ae88c92e-6ea6-4a97-a452-8c188ac48eaf.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\b777ea72-5514-4391-ab28-72310d8f0f97.png",
+      "PackagePath": "staticwebassets\\user-content\\b777ea72-5514-4391-ab28-72310d8f0f97.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\bd7f2d9d-62dd-43e0-8f8b-4e94dc587af4.png",
+      "PackagePath": "staticwebassets\\user-content\\bd7f2d9d-62dd-43e0-8f8b-4e94dc587af4.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c66d4412-01db-41fd-82b2-be690262528a.png",
+      "PackagePath": "staticwebassets\\user-content\\c66d4412-01db-41fd-82b2-be690262528a.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\c87fcf2e-0cd0-472a-ad76-494d8b5ec483.png",
+      "PackagePath": "staticwebassets\\user-content\\c87fcf2e-0cd0-472a-ad76-494d8b5ec483.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\cc8854b2-7d53-49d0-b42c-663398032320.png",
+      "PackagePath": "staticwebassets\\user-content\\cc8854b2-7d53-49d0-b42c-663398032320.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d27e5bc9-293c-453b-a90c-7e201f1762bb.png",
+      "PackagePath": "staticwebassets\\user-content\\d27e5bc9-293c-453b-a90c-7e201f1762bb.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d2a2bcf8-37e1-4820-87cd-f3cb8c0fde50.png",
+      "PackagePath": "staticwebassets\\user-content\\d2a2bcf8-37e1-4820-87cd-f3cb8c0fde50.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d3afe0e6-3f49-45b1-9df8-7383a865ff60.png",
+      "PackagePath": "staticwebassets\\user-content\\d3afe0e6-3f49-45b1-9df8-7383a865ff60.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\d4aee513-db7f-440e-835f-1ae4c24d29fc.png",
+      "PackagePath": "staticwebassets\\user-content\\d4aee513-db7f-440e-835f-1ae4c24d29fc.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e2166656-5e3f-4b92-9b86-44376e6c1409.png",
+      "PackagePath": "staticwebassets\\user-content\\e2166656-5e3f-4b92-9b86-44376e6c1409.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e224d794-2cc0-48f0-b930-511f55428df4.png",
+      "PackagePath": "staticwebassets\\user-content\\e224d794-2cc0-48f0-b930-511f55428df4.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e7807738-cd49-499b-89a4-2118fb570ef1.png",
+      "PackagePath": "staticwebassets\\user-content\\e7807738-cd49-499b-89a4-2118fb570ef1.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\e8861ce6-c507-48a1-9627-8355a13fd1a9.png",
+      "PackagePath": "staticwebassets\\user-content\\e8861ce6-c507-48a1-9627-8355a13fd1a9.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ecace6f6-0848-4a87-8a12-7b96454dc2b0.png",
+      "PackagePath": "staticwebassets\\user-content\\ecace6f6-0848-4a87-8a12-7b96454dc2b0.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\ecb0158e-851c-436b-a2a3-42935ede5a1d.png",
+      "PackagePath": "staticwebassets\\user-content\\ecb0158e-851c-436b-a2a3-42935ede5a1d.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\efd3fa7f-5022-42e2-8ffd-eb0eefd7232a.png",
+      "PackagePath": "staticwebassets\\user-content\\efd3fa7f-5022-42e2-8ffd-eb0eefd7232a.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f039b7f3-da61-4522-b1bf-0f33a62c7a9e.png",
+      "PackagePath": "staticwebassets\\user-content\\f039b7f3-da61-4522-b1bf-0f33a62c7a9e.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\f56131d0-2f1a-46ac-a75c-69314c3f4a63.png",
+      "PackagePath": "staticwebassets\\user-content\\f56131d0-2f1a-46ac-a75c-69314c3f4a63.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\fa38b61f-bfea-448b-bb6e-eaa54d0bf2a6.png",
+      "PackagePath": "staticwebassets\\user-content\\fa38b61f-bfea-448b-bb6e-eaa54d0bf2a6.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\fb2dd60a-d476-4392-bb55-ffd21895075b.png",
+      "PackagePath": "staticwebassets\\user-content\\fb2dd60a-d476-4392-bb55-ffd21895075b.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\fc5f065e-819e-4630-b289-99a3fa98be67.png",
+      "PackagePath": "staticwebassets\\user-content\\fc5f065e-819e-4630-b289-99a3fa98be67.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\fccd81ff-6681-4369-87ec-43bd1e9f42fc.png",
+      "PackagePath": "staticwebassets\\user-content\\fccd81ff-6681-4369-87ec-43bd1e9f42fc.png"
+    },
+    {
+      "Id": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\user-content\\fe34bd39-6314-4987-a760-b3fed7025f1a.png",
+      "PackagePath": "staticwebassets\\user-content\\fe34bd39-6314-4987-a760-b3fed7025f1a.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SWPSolution.BackendApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SWPSolution.BackendApi.props",
+      "PackagePath": "build\\SWPSolution.BackendApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SWPSolution.BackendApi.props",
+      "PackagePath": "buildMultiTargeting\\SWPSolution.BackendApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SWPSolution.BackendApi.props",
+      "PackagePath": "buildTransitive\\SWPSolution.BackendApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -14,9 +14,8 @@ export default function CarProductProcess() {
       await getAllProductToContext(pageIndex, 12)
     };
     getListProduct();
-    console.log("một",listProduct.items)
+    console.log("một",listProduct)
   }, [pageIndex]);
-  console.log("hai",listProduct.items)
 
   const handlePageClick = (event) => {
     setPageIndex(+event.selected + 1)

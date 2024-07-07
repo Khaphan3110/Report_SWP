@@ -31,7 +31,7 @@ const AddressPage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [currentAddress, setCurrentAddress] = useState(null);
 
-
+  const [acting,setActing] = useState("");
   // const handleSaveAddress = (newAddress) => {
   //   if (currentAddress) {
   //     setAddresses(
@@ -75,6 +75,7 @@ const AddressPage = () => {
   const handleAddAddress = () => {
     setCurrentAddress(null);
     setIsFormVisible(true);
+    setActing("add")
   };
 
   const handleCloseForm = () => {
@@ -155,6 +156,7 @@ const AddressPage = () => {
     });
   };
 
+  
   return (
     <Container className="mt-5">
       <Row>
@@ -242,7 +244,7 @@ const AddressPage = () => {
                           </Button>
                           <Button
                             variant="link"
-                            onClick={() => handleDeleteAddress(adress.address_ID)}
+                            onClick={() => handleDeleteAddress(adress.id)}
                             className="button-crud-address-page"
                           >
                             Xóa
@@ -265,6 +267,7 @@ const AddressPage = () => {
             onPageChange={handlePageClick}
             pageRangeDisplayed={2}
             pageCount={pageCount}
+            marginPagesDisplayed={1}
             previousLabel="< trước"
             renderOnZeroPageCount={null}
             pageClassName="page-item"
@@ -285,6 +288,7 @@ const AddressPage = () => {
         show={isFormVisible}
         handleClose={handleCloseForm}
         initialData={currentAddressesID}
+        acting = {acting}
       />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

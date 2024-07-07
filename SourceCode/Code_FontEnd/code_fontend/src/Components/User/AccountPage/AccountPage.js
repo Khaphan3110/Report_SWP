@@ -40,6 +40,11 @@ const AccountPage = () => {
     navigator("/logout");
   };
 
+
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length !== 0;
+  }
+
   return (
     <Container className="mt-5">
       <ToastContainer />
@@ -80,7 +85,7 @@ const AccountPage = () => {
                 {userProfile.profile ? userProfile.profile.member.userName : "tai khoan"}
                 <br />
                 <strong>Địa chỉ: </strong> 
-                {userProfile.CurrentAdress ? (userProfile.CurrentAdress.house_Number +
+                {isEmpty(userProfile.CurrentAdress) ? (userProfile.CurrentAdress.house_Number +
                                 "," +
                                 userProfile.CurrentAdress.street_Name +
                                 "," +
@@ -88,7 +93,8 @@ const AccountPage = () => {
                                 "," +
                                 userProfile.CurrentAdress.city +
                                 "," +
-                                userProfile.CurrentAdress.region) : (<span style={{color:"red"}}>không có địa chỉ vui lòng thêm !!!</span>)}
+                                userProfile.CurrentAdress.region) : (
+                                <span style={{color:"red"}}>không có địa chỉ vui lòng thêm !!! <Link to={"/addresses"}>Đây</Link></span>)}
                 <br />
                 <strong>Điện thoại:</strong>{" "}
                 {userProfile.profile ? userProfile.profile.member.phoneNumber : ""}

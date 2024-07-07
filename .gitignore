@@ -511,15 +511,27 @@ $RECYCLE.BIN/
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/obj/Debug/net8.0/SWPSolution.ViewModels.pdb
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/obj/Debug/net8.0/SWPSolution.ViewModels.sourcelink.json
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/obj/Debug/net8.0/ref/SWPSolution.ViewModels.dll
+<<<<<<< HEAD
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/ref/SWPSolution.BackendApi.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/refint/SWPSolution.BackendApi.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/apphost.exe
+=======
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/apphost.exe
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/refint/SWPSolution.BackendApi.dll
+>>>>>>> feature/preorder_controller
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.AssemblyInfo.cs
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.AssemblyInfoInputs.cache
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.csproj.AssemblyReference.cache
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.pdb
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/SWPSolution.BackendApi.sourcelink.json
+<<<<<<< HEAD
+=======
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/obj/Debug/net8.0/ref/SWPSolution.BackendApi.dll
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/bin/Debug/net8.0/SWPSolution.Data.dll
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/bin/Debug/net8.0/SWPSolution.Data.pdb
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/ref/SWPSolution.Data.dll
+>>>>>>> feature/preorder_controller
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/refint/SWPSolution.Data.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/SWPSolution.Data.AssemblyInfo.cs
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/SWPSolution.Data.AssemblyInfoInputs.cache
@@ -529,6 +541,7 @@ $RECYCLE.BIN/
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/SWPSolution.Data.sourcelink.json
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/bin/Debug/net8.0/SWPSolution.ViewModels.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/bin/Debug/net8.0/SWPSolution.ViewModels.pdb
+<<<<<<< HEAD
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/ref/SWPSolution.Data.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/bin/Debug/net8.0/SWPSolution.Data.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/bin/Debug/net8.0/SWPSolution.Data.pdb
@@ -563,3 +576,5 @@ $RECYCLE.BIN/
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/obj/Debug/net8.0/SWPSolution.ViewModels.sourcelink.json
 /SourceCode/Code_BackEnd/SWPSolution/.vs/SWPSolution/v17/.suo
 /SourceCode/Code_BackEnd/SWPSolution/.vs/SWPSolution/v17/DocumentLayout.json
+=======
+>>>>>>> feature/preorder_controller

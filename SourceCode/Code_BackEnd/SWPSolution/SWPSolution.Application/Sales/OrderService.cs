@@ -9,6 +9,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.Catalog.Categories;
 
 namespace SWPSolution.Application.Sales
 {
@@ -35,6 +37,7 @@ namespace SWPSolution.Application.Sales
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
                 OrderDetails = new List<OrderDetail>(),
+                OrderDate = DateTime.Now
             };
 
             // Add the order to the context but do not save changes immediately
@@ -59,7 +62,7 @@ namespace SWPSolution.Application.Sales
                 var orderDetail = new OrderDetail
                 {
                     OrderId = orderId,
-                    OrderDetailId = GenerateOrderDetailId(),
+                    OrderdetailId = GenerateOrderDetailId(),
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
@@ -137,14 +140,14 @@ namespace SWPSolution.Application.Sales
                             var orderDetail = new OrderDetail
                             {
                                 OrderId = orderId,
-                                OrderDetailId = GenerateOrderDetailId(),
+                                OrderdetailId = GenerateOrderDetailId(),
                                 ProductId = newDetail.ProductId,
                                 Price = newDetail.Price,
                                 Quantity = newDetail.Quantity,
                             };
                             // Detach any existing tracked instances
                             var trackedEntity = _context.ChangeTracker.Entries<OrderDetail>()
-                                                        .FirstOrDefault(e => e.Entity.OrderDetailId == orderDetail.OrderDetailId);
+                                                        .FirstOrDefault(e => e.Entity.OrderdetailId == orderDetail.OrderdetailId);
                             if (trackedEntity != null)
                             {
                                 _context.Entry(trackedEntity.Entity).State = EntityState.Detached;
@@ -196,7 +199,11 @@ namespace SWPSolution.Application.Sales
 
         public async Task<List<Order>> GetAll()
         {
-            return _context.Orders
+            return await _context.Orders
+                .Include(c => c.Member)
+                .Include(c => c.Payments)
+                .Include(c => c.OrderDetails)
+                    .ThenInclude(od => od.Product)
                 .Select(c => new Order
                 {
                     OrderId = c.OrderId,
@@ -206,12 +213,42 @@ namespace SWPSolution.Application.Sales
                     TotalAmount = c.TotalAmount,
                     OrderStatus = c.OrderStatus,
                     OrderDate = c.OrderDate,
-                    OrderDetails = c.OrderDetails,
-                    
+                    OrderDetails = c.OrderDetails.Select(od => new OrderDetail
+                    {
+                        OrderdetailId = od.OrderdetailId,
+                        OrderId = od.OrderId,
+                        ProductId = od.ProductId,
+                        Quantity = od.Quantity,
+                        Price = od.Price,
+                        Product = new Product
+                        {
+                            ProductId = od.Product.ProductId,
+                            ProductName = od.Product.ProductName
+                        }
+                    }).ToList(),
+                    Member = new Member
+                    {
+                        MemberId = c.Member.MemberId,
+                        FirstName = c.Member.FirstName,
+                        LastName = c.Member.LastName,
+                        Email = c.Member.Email,
+                        PhoneNumber = c.Member.PhoneNumber,
+                        LoyaltyPoints = c.Member.LoyaltyPoints,
+                    },
+                    Payments = c.Payments.Select(p => new Payment
+                    {
+                        PaymentId = p.PaymentId,
+                        OrderId = p.OrderId,
+                        PreorderId = p.PreorderId,
+                        Amount = p.Amount,
+                        DiscountValue = p.DiscountValue,
+                        PaymentStatus = p.PaymentStatus,
+                        PaymentDate = p.PaymentDate,
+                        PaymentMethod = p.PaymentMethod
+                    }).ToList()
                 })
-                .ToList();
+                .ToListAsync();
         }
-
 
         public async Task<OrderVM> GetOrderById(string orderId)
         {
@@ -238,6 +275,45 @@ namespace SWPSolution.Application.Sales
             return _context.Orders
                 .Where(o => o.MemberId == memberId)
                 .ToList();
+        }
+
+        public async Task<PageResult<OrderVM>> GetOrdersPagingAsync(OrderPagingRequest request)
+        {
+            var query = _context.Orders.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(o => o.OrderId.Contains(request.Keyword) ||
+                                          o.OrderStatus.ToString().Contains(request.Keyword)||
+                                          o.Member.FirstName.Contains(request.Keyword)||
+                                          o.Member.LastName.Contains(request.Keyword)
+                                          );
+            }
+            var orders = await query.Select(o => new OrderVM
+            {
+                OrderId=o.OrderId,
+                MemberId=o.MemberId,
+                PromotionId=o.PromotionId,
+                ShippingAddress=o.ShippingAddress,
+                TotalAmount=o.TotalAmount,
+                OrderStatus = o.OrderStatus,
+                OrderDate = o.OrderDate,
+                
+            })
+                .ToListAsync();
+            int totalRow = orders.Count;
+            var pagedData = orders
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            return new PageResult<OrderVM>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRow,
+                Items = pagedData
+            };
         }
 
         public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
@@ -306,18 +382,55 @@ namespace SWPSolution.Application.Sales
             var emailConfig = _config.GetSection("EmailConfiguration").Get<EmailVM>();
             var emailService = new EmailService(emailConfig);
 
-            // Construct the message using the MessageVM constructor
+            // Retrieve the member's email address
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+            {
+                throw new Exception("Member not found");
+            }
 
-            var recipientEmail = await _context.Members.FindAsync(memberId);
+            // Ensure the order details and associated product information are loaded
+            var fullOrder = await _context.Orders
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                .FirstOrDefaultAsync(o => o.OrderId == order.OrderId);
+
+            if (fullOrder == null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            // Construct the email body with order details
+            var emailBody = $@"
+        <h1>Payment Receipt</h1>
+        <p>Thank you for your purchase!</p>
+        <p>Order ID: {fullOrder.OrderId}</p>
+        <p>Total Amount: {fullOrder.TotalAmount:C}</p>
+        <h2>Purchased Items:</h2>
+        <table border='1' cellpadding='5' cellspacing='0'>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>";
+
+            foreach (var item in fullOrder.OrderDetails)
+            {
+                emailBody += $@"
+            <tr>
+                <td>{item.Product.ProductName}</td>
+                <td>{item.Quantity}</td>
+                <td>{item.Price:C}</td>
+            </tr>";
+            }
+
+            emailBody += "</table>";
+
+            // Construct the message using the MessageVM constructor
             var message = new MessageVM(
-                new List<string> { recipientEmail.Email }, // Pass recipient as a list
+                new List<string> { member.Email }, // Pass recipient as a list
                 "Payment Receipt",
-                $@"
-            <h1>Payment Receipt</h1>
-            <p>Thank you for your purchase!</p>
-            <p>Order ID: {order.OrderId}</p>
-            <p>Total Amount: {order.TotalAmount}</p>
-        "
+                emailBody
             );
 
             // Send the email
@@ -345,8 +458,8 @@ namespace SWPSolution.Application.Sales
 
             // Retrieve the maximum auto-increment value from existing order details for the given month and year
             var maxAutoIncrement = _context.OrderDetails
-                .Where(o => o.OrderDetailId.StartsWith(pattern))
-                .Select(o => o.OrderDetailId.Substring(6, 3)) // Select substring of auto-increment part
+                .Where(o => o.OrderdetailId.StartsWith(pattern))
+                .Select(o => o.OrderdetailId.Substring(6, 3)) // Select substring of auto-increment part
                 .AsEnumerable() // Switch to client evaluation from this point
                 .Select(s => int.Parse(s)) // Parse string to int
                 .DefaultIfEmpty(0)

@@ -21,10 +21,12 @@ namespace SWPSolution.Application.AppPayment
         // Payment creation
         public async Task<string> Create(PaymentRequest request)
         {
+
             var payment = new Payment
             {
                 PaymentId = GeneratePaymentId(),
                 OrderId = request.OrderId,
+                PreorderId = request.PreOrderId,
                 Amount = request.Amount,
                 DiscountValue = request.DiscountValue,
                 PaymentStatus = request.PaymentStatus,
@@ -35,7 +37,7 @@ namespace SWPSolution.Application.AppPayment
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            var insertedPayment = _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
+            var insertedPayment =  _context.Payments.FirstOrDefault(p => p.OrderId == request.OrderId);
             if (insertedPayment == null)
             {
                 throw new Exception("Failed to retrieve the newly inserted payment from the database.");
@@ -69,6 +71,7 @@ namespace SWPSolution.Application.AppPayment
             {
                 PaymentId = payment.PaymentId,
                 OrderId = payment.OrderId,
+                PreorderId = payment.PreorderId,
                 Amount = payment.Amount,
                 DiscountValue = payment.DiscountValue,
                 PaymentStatus = payment.PaymentStatus,
@@ -89,6 +92,7 @@ namespace SWPSolution.Application.AppPayment
             payment.PaymentMethod = request.PaymentMethod;
             payment.PaymentDate = request.PaymentDate;
             payment.OrderId = request.OrderId;
+            payment.PreorderId = request.PreOrderId;
 
             _context.Payments.Update(payment);
             return await _context.SaveChangesAsync();

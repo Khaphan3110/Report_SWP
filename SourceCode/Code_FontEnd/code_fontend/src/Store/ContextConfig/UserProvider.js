@@ -29,20 +29,7 @@ function UserProvider({ children }) {
         localStorage.setItem("userAddresses",JSON.stringify(newAddresses));
         setUserProfile((prevState) => ({
           ...prevState,
-          addresses: [
-            ...prevState.addresses,
-            ...newAddresses.filter(
-              (newAddress) =>
-                !prevState.addresses.find(
-                  (existingAddress) =>
-                    existingAddress.house_Number === newAddress.house_Number &&
-                    existingAddress.street_Name === newAddress.street_Name &&
-                    existingAddress.district_Name === newAddress.district_Name &&
-                    existingAddress.city === newAddress.city &&
-                    existingAddress.region === newAddress.region
-                )
-            ),
-          ],
+          addresses: resAddress.data,
         }));
       }
       return resAddress;

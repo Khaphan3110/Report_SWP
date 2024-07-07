@@ -81,7 +81,7 @@ export default function LoginForm() {
         toast.success("đăng nhập  thành công");
         navigate("/");
       } else {
-        toast.error("đăng nhập google thất bại",{
+        toast.error("đăng nhập google thất bại hãy thử bằng một Email Khác",{
           autoClose:1000,
         })
       }

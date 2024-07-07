@@ -30,7 +30,7 @@ namespace SWPSolution.Application.AppPayment.VNPay
             vnpay.AddRequestData("vnp_Version", _config["VnPay:Version"] );
             vnpay.AddRequestData("vnp_Command", _config["VnPay:Command"]);
             vnpay.AddRequestData("vnp_TmnCode", _config["VnPay:TmnCode"]);
-            vnpay.AddRequestData("vnp_Amount", (model.Amount* 1000).ToString());//Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 100,000 VND (một trăm nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 10000000
+            vnpay.AddRequestData("vnp_Amount", (model.Amount* 100).ToString());//Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 100,000 VND (một trăm nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 10000000
             vnpay.AddRequestData("vnp_CreateDate", model.CreatedDate.ToString("yyyyMMddHHmmss"));
             vnpay.AddRequestData("vnp_CurrCode", _config["VnPay:CurrCode"]);
             vnpay.AddRequestData("vnp_IpAddr", Utils.GetIpAddress(context));
@@ -63,7 +63,16 @@ namespace SWPSolution.Application.AppPayment.VNPay
             var vnp_SecureHash = collections.FirstOrDefault(p => p.Key == "vnp_SecureHash").Value;
             var vnp_ResponseCode = vnpay.GetResponseData("vnp_ResponseCode");
             var vnp_OrderInfo = vnpay.GetResponseData("vnp_OrderInfo");
-            var vnp_PaymentId = Regex.Match(vnp_OrderInfo, @"OR\d+").Success ? Regex.Match(vnp_OrderInfo, @"OR\d+").Value : string.Empty;
+            var vnp_PaymentId = string.Empty;
+
+            // Define the prefix to be removed
+            string prefix = "Thanh toán cho đơn hàng: ";
+
+            // Check if vnp_OrderInfo starts with the prefix and remove it
+            if (vnp_OrderInfo.StartsWith(prefix))
+            {
+                vnp_PaymentId = vnp_OrderInfo.Substring(prefix.Length);
+            }
             bool checkSignature = vnpay.ValidateSignature(vnp_SecureHash, _config["VnPay:HashSecret"]);
             if (!checkSignature)
             {
