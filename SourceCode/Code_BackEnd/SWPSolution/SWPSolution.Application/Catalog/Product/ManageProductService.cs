@@ -159,9 +159,9 @@ namespace SWPSolution.Application.Catalog.Product
                 product.Quantity = request.Quantity;
             }
 
-            if (request.ThumbnailImage != null)
+            if (request.Price != null)
             {
-                product.ProductImages = (ICollection<ProductImage>)request.ThumbnailImage;
+                product.Price = request.Price;
             }
             //Save image
             //if (request.ThumbnailImage != null)
