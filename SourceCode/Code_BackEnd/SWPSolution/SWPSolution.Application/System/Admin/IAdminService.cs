@@ -39,6 +39,8 @@ namespace SWPSolution.Application.System.Admin
 
         Task<BlogDetailVM> GetBlogByIdAsync(string staffId);
 
+        Task<List<BlogDetailVM>> GetBlogByTitleAsync(string search);
+
         Task<bool> UpdateBlogAsync(string staffId, UpdateBlogRequest request);
 
         Task<bool> DeleteBlogAsync(string blogId);

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.Catalog.Blog;
 
 namespace SWPSolution.Application.Catalog.Categories
 {
@@ -109,6 +110,25 @@ namespace SWPSolution.Application.Catalog.Categories
                 PackageType = category.PackageType,
                 Source = category.Source
             };
+        }
+
+        public async Task<List<CategoriesVM>> GetByName(string search)
+        {
+            var category = await _context.Categories
+               .Where(a => a.BrandName.Contains(search))
+               .ToListAsync();
+
+            if (category == null || category.Count == 0) return null;
+
+            return category.Select(category => new CategoriesVM
+            {
+                CategoriesId = category.CategoriesId,
+                BrandName = category.BrandName,
+                AgeRange = category.AgeRange,
+                SubCategories = category.SubCategories,
+                PackageType = category.PackageType,
+                Source = category.Source
+            }).ToList();
         }
 
         public async Task<List<CategoriesVM>> GetAll()

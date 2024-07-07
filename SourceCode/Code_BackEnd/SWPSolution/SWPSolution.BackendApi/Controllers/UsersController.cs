@@ -182,6 +182,18 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [Authorize]
+        [HttpGet("GetMemberByUserName/{username}")]
+        public async Task<IActionResult> GetMemberByUsername(string username)
+        {
+            var member = await _userService.GetMemberByUserNameAsync(username);
+            if (member == null)
+            {
+                return NotFound(new { message = "Member not found" });
+            }
+            return Ok(member);
+        }
+
+        [Authorize]
         [HttpPut("UpdateMember/{id}")]
         public async Task<IActionResult> UpdateMember(string id, [FromBody] UpdateMemberRequest request)
         {
@@ -538,6 +550,18 @@ namespace SWPSolution.BackendApi.Controllers
         public async Task<IActionResult> GetStaffById(string id)
         {
             var staff = await _userService.GetStaffById(id);
+            if (staff == null)
+            {
+                return NotFound(new { message = "Staff not found" });
+            }
+            return Ok(staff);
+        }
+
+        [Authorize]
+        [HttpGet("GetStaffsByUsername")]
+        public async Task<IActionResult> GetStaffByUsername(string search)
+        {
+            var staff = await _userService.GetStaffByUsername(search);
             if (staff == null)
             {
                 return NotFound(new { message = "Staff not found" });

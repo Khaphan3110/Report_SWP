@@ -507,6 +507,24 @@ namespace SWPSolution.Application.System.Admin
             };
         }
 
+        public async Task<List<BlogDetailVM>> GetBlogByTitleAsync(string search)
+        {
+            var blogs = await _context.Blogs
+                .Where(a => a.Title.Contains(search))
+                .ToListAsync();
+
+            if (blogs == null || blogs.Count == 0) return null;
+
+            return blogs.Select(blog => new BlogDetailVM
+            {
+                Id = blog.BlogId,
+                Title = blog.Title,
+                Content = blog.Content,
+                Categories = blog.Categories,
+                DateCreate = blog.DataCreate,
+            }).ToList();
+        }
+
         public async Task<bool> UpdateBlogAsync(string staffId, UpdateBlogRequest request)
         {
             var blog = await _context.Blogs.FindAsync(staffId);
