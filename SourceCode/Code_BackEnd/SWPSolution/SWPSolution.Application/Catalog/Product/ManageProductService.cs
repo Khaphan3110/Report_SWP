@@ -164,16 +164,16 @@ namespace SWPSolution.Application.Catalog.Product
                 product.ProductImages = (ICollection<ProductImage>)request.ThumbnailImage;
             }
             //Save image
-            if (request.ThumbnailImage != null)
-            {
-                var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.ProductId == productId);
-                if (thumbnailImage != null)
-                {
-                    thumbnailImage.FileSize = request.ThumbnailImage.Length;
-                    thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
-                    _context.ProductImages.Update(thumbnailImage);
-                }
-            }
+            //if (request.ThumbnailImage != null)
+            //{
+            //    var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.ProductId == request.ProductId);
+            //    if (thumbnailImage != null)
+            //    {
+            //        thumbnailImage.FileSize = request.ThumbnailImage.Length;
+            //        thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
+            //        _context.ProductImages.Update(thumbnailImage);
+            //    }
+            //}
             return await _context.SaveChangesAsync();
 
         }
