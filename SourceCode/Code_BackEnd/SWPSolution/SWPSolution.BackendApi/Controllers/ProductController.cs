@@ -68,6 +68,17 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(products);
         }
 
+        [HttpGet("GetByProductCategory")]
+        public async Task<IActionResult> GetByProductCategory(string categoryId)
+        {
+            var products = await _manageProductService.GetByCategory(categoryId);
+            if (products == null)
+            {
+                return BadRequest("Cannot find product");
+            }
+            return Ok(products);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
 

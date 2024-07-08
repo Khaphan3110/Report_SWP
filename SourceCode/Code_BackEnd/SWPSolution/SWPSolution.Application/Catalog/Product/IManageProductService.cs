@@ -21,6 +21,8 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<List<ProductViewModel>> GetByName(string search);
 
+        Task<List<ProductViewModel>> GetByCategory(string categoryId);
+
         Task<bool> UpdatePrice(string productId, float newPrice);
 
         Task<int> UpdateQuantity(string ProductId, UpdateQuantityRequest request);

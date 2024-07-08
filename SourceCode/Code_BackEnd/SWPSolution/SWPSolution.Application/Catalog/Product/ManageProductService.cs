@@ -337,6 +337,25 @@ namespace SWPSolution.Application.Catalog.Product
             }).ToList());
         }
 
+        public async Task<List<ProductViewModel>> GetByCategory(string categoryId)
+        {
+            var products =  _context.Products
+                                 .Where(p => p.CategoriesId == categoryId)
+                                 .ToList();
+
+            if (products == null || products.Count == 0) return null;
+
+            return await Task.FromResult(products.Select(product => new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Description = product.Description,
+                Price = product.Price,
+                ProductName = product.ProductName,
+                Quantity = product.Quantity,
+                CategoriesId = product.CategoriesId,
+            }).ToList());
+        }
+
         public async Task<List<ProductImageViewModel>> GetListImages(string productId)
         {
             return  _context.ProductImages
