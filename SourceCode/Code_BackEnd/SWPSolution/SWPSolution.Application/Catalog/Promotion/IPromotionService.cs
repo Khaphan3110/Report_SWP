@@ -20,6 +20,8 @@ namespace SWPSolution.Application.Catalog.Promotion
 
         Task<PromotionVM> GetById(string productId);
 
+        Task<List<PromotionVM>> GetByName(string search);
+
         Task<List<PromotionVM>> GetAll();
         Task<int?> GetDiscountValueByPromotionId(string promotionId);
     }

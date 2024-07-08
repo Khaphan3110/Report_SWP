@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.Common;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
+using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
@@ -315,6 +316,25 @@ namespace SWPSolution.Application.Catalog.Product
                 CategoriesId = product.CategoriesId,
             };
             return productViewModel;
+        }
+
+        public async Task<List<ProductViewModel>> GetByName(string search)
+        {
+            var products = _context.Products
+                .Where(a => a.ProductName.Contains(search))
+                .ToList();
+
+            if (products == null || products.Count == 0) return null;
+
+            return await Task.FromResult(products.Select(product => new ProductViewModel
+            {
+                ProductId = product.ProductId,
+                Description = product.Description,
+                Price = product.Price,
+                ProductName = product.ProductName,
+                Quantity = product.Quantity,
+                CategoriesId = product.CategoriesId,
+            }).ToList());
         }
 
         public async Task<List<ProductImageViewModel>> GetListImages(string productId)

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using SWPSolution.Data.Entities;
+using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Promotion;
 
 namespace SWPSolution.Application.Catalog.Promotion
@@ -110,6 +111,25 @@ namespace SWPSolution.Application.Catalog.Promotion
                 StartDate = promotion.StartDate,
                 EndDate = promotion.EndDate,
             };
+        }
+
+        public async Task<List<PromotionVM>> GetByName(string search)
+        {
+            var promotions = _context.Promotions
+                .Where(p => p.Name.Contains(search))
+                .ToList();
+
+            if (promotions == null || promotions.Count == 0) return null;
+
+            return await Task.FromResult(promotions.Select(promotion => new PromotionVM
+            {
+                PromotionId = promotion.PromotionId,
+                Name = promotion.Name,
+                DiscountType = promotion.DiscountType,
+                DiscountValue = promotion.DiscountValue,
+                StartDate = promotion.StartDate,
+                EndDate = promotion.EndDate,
+            }).ToList());
         }
 
         public async Task<bool> Update(string promotionId, PromotionUpdateRequest request)
