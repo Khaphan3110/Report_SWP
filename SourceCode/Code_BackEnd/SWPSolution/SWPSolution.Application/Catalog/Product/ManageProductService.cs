@@ -647,5 +647,60 @@ namespace SWPSolution.Application.Catalog.Product
 
             return memberId;
         }
+
+        public async Task<PageResult<ProductViewModel>> GetProductsPaging(GetUserPagingRequest request)
+        {
+            var query = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.CategoriesId.Contains(request.Keyword));
+            }
+
+            int totalRow = query.Count();
+
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(product => new ProductViewModel()
+                {
+                    ProductId = product.ProductId,
+                    CategoriesId = product.CategoriesId,
+                    ProductName = product.ProductName,
+                    Quantity = product.Quantity,
+                    Price = product.Price,
+                    Description = product.Description,
+                    StatusDescription = product.StatusDescription,
+                }).ToList();
+
+            var pageResult = new PageResult<ProductViewModel>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+        public async Task<ApiResult<ProductViewModel>> GetProductIdPaging(string id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
+            {
+                return new ApiErrorResult<ProductViewModel>("Product not exist");
+            }
+
+            var productVM = new ProductViewModel()
+            {
+                ProductId = id,
+                CategoriesId = product.CategoriesId,
+                ProductName = product.ProductName,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                Description = product.Description,
+                StatusDescription = product.StatusDescription,
+            };
+            return new ApiSuccessResult<ProductViewModel>(productVM);
+        }
     }
 }

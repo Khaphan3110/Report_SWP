@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
+using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 
@@ -15,5 +16,9 @@ namespace SWPSolution.AdminApp.Services
         Task<PageResult<StaffInfoVM>> GetStaffsPagings(GetUserPagingRequest request);
 
         Task<ApiResult<StaffInfoVM>> GetStaffById(string id);
+
+        Task<PageResult<ProductViewModel>> GetProductsPagings(GetUserPagingRequest request);
+
+        Task<ApiResult<ProductViewModel>> GetProductById(string id);
     }
 }

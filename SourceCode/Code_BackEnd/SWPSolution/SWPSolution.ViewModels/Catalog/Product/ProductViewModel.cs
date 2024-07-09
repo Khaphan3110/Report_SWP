@@ -9,19 +9,12 @@ namespace SWPSolution.ViewModels.Catalog.Product
     public class ProductViewModel
     {
         public string ProductId { get; set; }
-
         public string CategoriesId { get; set; }
-
         public string ProductName { get; set; }
-
         public int? Quantity { get; set; }
-
         public double? Price { get; set; }
-
         public string Description { get; set; }
-
         public string StatusDescription { get; set; }
-
         public string Image { get; set; }
     }
 }

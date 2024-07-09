@@ -452,7 +452,7 @@ namespace SWPSolution.Application.System.User
                 .Where(a => a.UserName.Contains(search))
                 .ToListAsync();
 
-            if (member == null || member.Count == 0) return null;
+            if (member == null) return null;
 
             return member.Select(member => new MemberInfoVM
             {
@@ -914,7 +914,7 @@ namespace SWPSolution.Application.System.User
                 .Where(a => a.Username.Contains(search))
                 .ToListAsync();
 
-            if (staff == null || staff.Count == 0) return null;
+            if (staff == null) return null;
 
             return staff.Select(staff => new StaffInfoVM
             {

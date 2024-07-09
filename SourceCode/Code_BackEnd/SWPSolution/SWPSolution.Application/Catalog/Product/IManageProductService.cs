@@ -56,5 +56,9 @@ namespace SWPSolution.Application.Catalog.Product
         Task<bool> DeleteReview(string memberId, string productId);
 
         Task<string> ExtractMemberIdFromTokenAsync(string token);
+        
+        Task<PageResult<ProductViewModel>> GetProductsPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<ProductViewModel>> GetProductIdPaging(string id);
     }
 }

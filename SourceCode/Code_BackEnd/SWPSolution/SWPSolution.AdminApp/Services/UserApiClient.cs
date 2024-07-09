@@ -11,6 +11,7 @@ using SWPSolution.ViewModels.Catalog.Categories;
 using SWPSolution.ViewModels.Common;
 using System.Data.Entity;
 using System.Net.Http.Headers;
+using SWPSolution.ViewModels.Catalog.Product;
 
 
 namespace SWPSolution.AdminApp.Services
@@ -90,6 +91,32 @@ namespace SWPSolution.AdminApp.Services
                 return JsonConvert.DeserializeObject<ApiSuccessResult<StaffInfoVM>>(body);
 
             return JsonConvert.DeserializeObject<ApiErrorResult<StaffInfoVM>>(body);
+        }
+
+        public async Task<PageResult<ProductViewModel>> GetProductsPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/Product/ProductPaging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var products = JsonConvert.DeserializeObject<PageResult<ProductViewModel>>(body);
+            return products;
+        }
+
+        public async Task<ApiResult<ProductViewModel>> GetProductById(string id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/Product/product/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ProductViewModel>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<ProductViewModel>>(body);
         }
     }
 }

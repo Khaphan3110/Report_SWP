@@ -441,5 +441,20 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [Authorize]
+        [HttpGet("ProductPaging")]
+        public async Task<IActionResult> GetProductsPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var products = await _manageProductService.GetProductsPaging(request);
+            return Ok(products);
+        }
+
+        [HttpGet("product/{id}")]
+        public async Task<IActionResult> GetProductIdPaging(string id)
+        {
+            var user = await _manageProductService.GetProductIdPaging(id);
+            return Ok(user);
+        }
     }
 }
