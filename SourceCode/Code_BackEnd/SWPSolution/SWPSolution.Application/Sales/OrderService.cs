@@ -286,9 +286,7 @@ namespace SWPSolution.Application.Sales
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(o => o.OrderId.Contains(request.Keyword) ||
-                                          o.OrderStatus.ToString().Contains(request.Keyword)||
-                                          o.Member.FirstName.Contains(request.Keyword)||
-                                          o.Member.LastName.Contains(request.Keyword)
+                                          o.OrderStatus.ToString().Contains(request.Keyword)
                                           );
             }
             var orders = await query.Select(o => new OrderVM

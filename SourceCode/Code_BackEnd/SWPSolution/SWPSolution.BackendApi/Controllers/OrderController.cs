@@ -102,7 +102,16 @@ namespace SWPSolution.BackendApi.Controllers
                 return NotFound(new { error = ex.Message });
             }
         }
-
+        [HttpGet("GetOrdersPaging")]
+        public async Task<IActionResult> GetOrdersPaging([FromQuery] OrderPagingRequest request)
+        {
+            var result = await _orderService.GetOrdersPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
 
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetAllOrders()
@@ -289,5 +298,6 @@ namespace SWPSolution.BackendApi.Controllers
 
             return Ok(new { Message = "Payment status updated and product quantities reduced successfully" });
         }
+
     }
 }
