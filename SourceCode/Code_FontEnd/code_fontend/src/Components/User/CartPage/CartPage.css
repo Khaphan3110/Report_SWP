@@ -186,3 +186,8 @@
   background-color: #ff6f61;
   color: #f9f9f9;
 }
+
+.promotion-values-cart{
+  display: flex;
+  gap: 5px;
+}

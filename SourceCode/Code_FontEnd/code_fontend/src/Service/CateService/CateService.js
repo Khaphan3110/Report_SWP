@@ -53,3 +53,13 @@ export const DeleteCategories = async (categoreisID) => {
     console.log("Error Cate Delete ", error);
   }
 };
+
+
+export const getCateByID = async (categoreisID) => {
+  try {
+    const res = await request.Get(`Category/GetCategory/${categoreisID}/category`);
+    return res;
+  } catch (error) {
+    console.log("Error Cate get by id ", error);
+  }
+};

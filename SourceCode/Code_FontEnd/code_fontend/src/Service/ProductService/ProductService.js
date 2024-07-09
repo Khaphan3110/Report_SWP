@@ -55,3 +55,12 @@ export const DeleteProduct = async (productID) => {
   }
 }
 
+export const getProductID = async (productID) => {
+  try {
+    const res = await request.Get(`Product/${productID}`)
+    return res;
+  } catch (error) {
+    console.log("Error get product by id", error);
+  }
+}
+

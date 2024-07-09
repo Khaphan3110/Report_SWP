@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./SideBarAdmin.css";
-import { FaShoppingCart, FaUserSecret, FaUserTie } from "react-icons/fa";
+import { FaIdeal, FaShoppingCart, FaUserSecret, FaUserTie } from "react-icons/fa";
 export default function SideBarAdmin() {
   return (
     <ul className="side-navbar-admin">
@@ -41,6 +41,11 @@ export default function SideBarAdmin() {
         <Link to={"/admin/staffmanager"} className="link-sidebar-admin">
           <li className="categories-word">
             <FaShoppingCart  style={{color:"white"}}/> Preorder Manager
+          </li>
+        </Link>
+        <Link to={"/admin/promotion"} className="link-sidebar-admin">
+          <li className="categories-word">
+            <FaIdeal  style={{color:"white"}}/> Manager Promotion
           </li>
         </Link>
       </div>

@@ -7,6 +7,7 @@ import {
   StaffManagerContext,
   MemberManagerContext,
   OrderManagerContext,
+  PromotionManagerContext
 } from "../ContextConfig/Context";
 import { useContext } from "react";
 
@@ -101,3 +102,8 @@ export const useMemberManager = () => {
   const { listMember, setlistMember } = useContext(MemberManagerContext);
   return { listMember, setlistMember };
 };
+
+export const usePromotionManger = () => {
+  const {listPromotion,setListPromotion,getAllPromotion} = useContext(PromotionManagerContext)
+  return {listPromotion,setListPromotion,getAllPromotion}
+}

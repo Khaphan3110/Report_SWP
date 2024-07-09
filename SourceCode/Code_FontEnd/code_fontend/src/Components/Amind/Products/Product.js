@@ -17,17 +17,18 @@ import {
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { cateGetAllNoPaginate } from "../../../Service/CateService/CateService";
+import { useParams } from "react-router-dom";
 export default function Categories() {
   const [listProductExport, setlistProductExport] = useState([]);
   const [cateGoriesID, setCateGoriesID] = useState("");
   const [show, setShow] = useState(false);
   const [imageFile, setImageFile] = useState([]);
-  const { listCategories,getAllCategoreisNopaginate } = useCateGories();
-  const [listCate,setListCate] = useState()
+  const { listCategories, getAllCategoreisNopaginate } = useCateGories();
+  const [listCate, setListCate] = useState();
   const { listProduct, importProductList, getAllProductToContext } =
     useProduct();
   const [currentProduct, setCurrentProduct] = useState();
-  const [pageIndex,setPageIndex] = useState(1)
+  const [pageIndex, setPageIndex] = useState(1);
   const getProductToExport = async (event, done) => {
     try {
       const result = [];
@@ -99,7 +100,7 @@ export default function Categories() {
                 // console.log("day la list product", result);
                 const resImportProduct = await importProductList(result);
                 if (resImportProduct) {
-                  getAllProductToContext(pageIndex,8);
+                  getAllProductToContext(pageIndex, 8);
                   toast.success("nhập sản phẩm thành công ", {
                     autoClose: 1500,
                   });
@@ -126,7 +127,7 @@ export default function Categories() {
   }, []);
 
   const handlePageClick = (event) => {
-    setPageIndex(+event.selected + 1)
+    setPageIndex(+event.selected + 1);
   };
 
   const handleClose = () => setShow(false);
@@ -157,22 +158,28 @@ export default function Categories() {
 
   const handleImportFileImage = async (event, productID) => {
     let image = Array.from(event.target.files);
-    // console.log("image",image)
     setImageFile(image);
     const formData = new FormData();
-    imageFile.forEach((image, index) => {
+    image.forEach((image) => {
+      console.log("images", image.name);
       formData.append("imageFiles", image);
     });
-    // console.log("fdsa",formData)
-    const resImage = await importImageProduct(productID, formData);
-    if (resImage) {
-      toast.success("lưu hỉnh ảnh thành công", {
-        autoClose: 1000,
-      });
-    } else {
-      toast.error("lưu hỉnh ảnh KHÔNG thành công", {
-        autoClose: 1000,
-      });
+
+    try {
+      const resImage = await importImageProduct(productID, formData);
+      if (resImage) {
+        toast.success("lưu hỉnh ảnh thành công", {
+          autoClose: 1000,
+        });
+        image = [];
+      } else {
+        toast.error("lưu hỉnh ảnh KHÔNG thành công", {
+          autoClose: 1000,
+        });
+        image = [];
+      }
+    } catch (error) {
+      console.log("import images", error);
     }
   };
   const formikProduct = useFormik({
@@ -197,7 +204,9 @@ export default function Categories() {
         .typeError("Price must be a number")
         .positive("Price must be greater than 0")
         .required("Price is required"),
-      Description: Yup.string().required("Description is required"),
+      description: Yup.string()
+        .required("Description is required")
+        .matches(/^[^\d].*$/, "Description should not start with a digit"),
       statusDescription: Yup.string()
         .oneOf(
           ["còn hàng", "hết hàng"],
@@ -213,12 +222,13 @@ export default function Categories() {
       formProduct.append("ProductName", values.ProductName);
       formProduct.append("Quantity", values.Quantity);
       formProduct.append("Description", values.Description);
+      formProduct.append("StatusDescription", values.statusDescription);
       //
       try {
         setShow(false);
-        const res = await UpdateProduct(values.ProductId,formProduct);
+        const res = await UpdateProduct(values.ProductId, formProduct);
         if (res) {
-          getAllProductToContext(pageIndex,8)
+          getAllProductToContext(pageIndex, 8);
           toast.success("update product successFull!", {
             autoClose: 1500,
           });
@@ -248,17 +258,17 @@ export default function Categories() {
     }
   }, [currentProduct]);
   // 'imageFiles=@download.png;type=image/png'
-  useEffect(  () => {
+  useEffect(() => {
     const getCate = async () => {
-      const res = await cateGetAllNoPaginate()
-    setListCate(res.data)
-    }
+      const res = await cateGetAllNoPaginate();
+      setListCate(res.data);
+    };
     getCate();
-  },[])
+  }, []);
 
   useEffect(() => {
-    getAllProductToContext(pageIndex,8)
-  },[pageIndex])
+    getAllProductToContext(pageIndex, 8);
+  }, [pageIndex]);
   return (
     <>
       <ToastContainer />
@@ -315,15 +325,13 @@ export default function Categories() {
           >
             <option> Categories Type</option>
             {listCate &&
-              listCate.map((cate, index) => {
-                return (
-                  <>
-                    <option key={index} value={cate.categoriesId}>
-                      {cate.brandName}
-                    </option>
-                  </>
-                );
-              })}
+              listCate.map((cate, index) => (
+                <>
+                  <option key={index} value={cate.categoriesId}>
+                    {cate.brandName}
+                  </option>
+                </>
+              ))}
           </select>
         </div>
       </div>
@@ -450,7 +458,7 @@ export default function Categories() {
                 {formikProduct.errors.Quantity}
               </p>
             )}
-            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 name="Price"
@@ -465,24 +473,24 @@ export default function Categories() {
               <p style={{ color: "red", margin: "0" }}>
                 {formikProduct.errors.Price}
               </p>
-            )} */}
+            )}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Description</Form.Label>
+              <Form.Label>description</Form.Label>
               <Form.Control
-                name="Description"
-                type="Description"
-                placeholder="Description"
+                name="description"
+                type="text"
+                placeholder="description"
                 autoFocus
-                value={formikProduct.values.Description}
+                value={formikProduct.values.description}
                 onChange={formikProduct.handleChange}
               />
             </Form.Group>
-            {formikProduct.errors.Description && (
+            {formikProduct.errors.description && (
               <p style={{ color: "red", margin: "0" }}>
-                {formikProduct.errors.Description}
+                {formikProduct.errors.description}
               </p>
             )}
-            {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>statusDescription</Form.Label>
               <Form.Control
                 name="statusDescription"
@@ -497,7 +505,7 @@ export default function Categories() {
               <p style={{ color: "red", margin: "0" }}>
                 {formikProduct.errors.statusDescription}
               </p>
-            )} */}
+            )}
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close

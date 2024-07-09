@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./PaymentPage.css";
 import { Actions, useStore, useUserProfile } from "../../../Store";
-import { checkoutPay, createOrder, paymentCallBack } from "../../../Service/OrderService/OrderService";
-import { toast } from "react-toastify";
+import {
+  checkoutPay,
+  createOrder,
+  paymentCallBack,
+} from "../../../Service/OrderService/OrderService";
+import { toast, ToastContainer } from "react-toastify";
 
 const PaymentPage = () => {
   const navigator = useNavigate();
@@ -47,7 +51,7 @@ const PaymentPage = () => {
             "," +
             userProfile.CurrentAdress.region
           : "kh co địa chỉ",
-        promotionId: "PR0624001",
+        promotionId: state.promotion.promotions,
         orderDetails: formattedArray,
         totalAmount: state.total,
       });
@@ -63,15 +67,12 @@ const PaymentPage = () => {
   };
 
   const handlePayment = async () => {
-    toast.success("blabla")
     if (statePaymentMethod === "cod") {
-
       alert("chua thuc  hien xong :))))()()()");
-
     } else if (statePaymentMethod === "vnpay") {
       const payMentOCD = await createOrder(orderInfor);
       if (payMentOCD) {
-        console.log("order",payMentOCD.data)
+        console.log("order", payMentOCD.data);
         const orderInfor = {
           orderId: payMentOCD.data.order.orderId,
           memberId: payMentOCD.data.order.memberId,
@@ -79,27 +80,33 @@ const PaymentPage = () => {
           shippingAddress: payMentOCD.data.order.shippingAddress,
           totalAmount: payMentOCD.data.order.totalAmount,
           orderStatus: payMentOCD.data.order.orderStatus,
-          orderDate: payMentOCD.data.order.orderDate
-        }
-        const payMentVNPAY = await checkoutPay(userProfile.userToken,orderInfor);
-        if(payMentVNPAY){
-            window.open(payMentVNPAY.data.paymentUrl, '_blank');
-            dispatch(() => Actions.clearListToCart())
+          orderDate: payMentOCD.data.order.orderDate,
+        };
+        const payMentVNPAY = await checkoutPay(
+          userProfile.userToken,
+          orderInfor
+        );
+        if (payMentVNPAY) {
+          window.open(payMentVNPAY.data.paymentUrl, "_blank");
+          dispatch(() => Actions.clearListToCart());
         }
         // alert("thanh toan thanh cong mua  hang tiep  nao");
         // navigator("/");
+      } else {
+        toast.error("tạo đơn hàng không thành công", {
+          autoClose: 500,
+        });
       }
-    } else if(!statePaymentMethod){
-      toast.error("Vui lòng chọn phương thức thanh toán ",{
-        autoClose:1000,
-      })
+    } else if (!statePaymentMethod) {
+      toast.error("Vui lòng chọn phương thức thanh toán ", {
+        autoClose: 1000,
+      });
     }
   };
 
-
-
   return (
     <div className="payment-page container">
+      <ToastContainer />
       <div className="breadcrumb">
         <Link to="/">Trang chủ</Link> / Giỏ hàng / Thông tin giao hàng / Phương
         thức thanh toán
@@ -154,9 +161,11 @@ const PaymentPage = () => {
               </div>
             </div>
           ))}
-          <div className="promo-code">
-            <input type="text" placeholder="Mã giảm giá" />
-            <button>Sử dụng</button>
+          <div
+            className="promo-code"
+            style={{ color: "#ff6f61", fontWeight: "bold" }}
+          >
+            đã được khuyến mãi {state.promotion.promotionValues}% trên tổng giá
           </div>
           <div className="total-price">
             <span>Tạm tính:</span>

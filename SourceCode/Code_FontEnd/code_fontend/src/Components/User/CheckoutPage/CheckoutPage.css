@@ -136,3 +136,17 @@ input[type="text"] {
     margin-top: 20px;
   }
 }
+
+.select-discount-checkout-page{
+  height: 100%;
+  width: 100%;
+  
+}
+
+.wrapper-promotion-checkout-page{
+  display: flex;
+}
+
+.button-promotion-checkout-page{
+  
+}

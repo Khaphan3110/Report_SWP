@@ -16,12 +16,14 @@ export default function HeaderAdmin() {
       <div>
         <Row className="navbar">
           <Col xl={2} className="logo-header-admin">
-            <img
-              src="https://theme.hstatic.net/1000186075/1000909086/14/logo.png?v=4468"
-              alt="logo"
-              width={248}
-              height={53}
-            />
+            <Link to={"/"}>
+              <img
+                src="https://theme.hstatic.net/1000186075/1000909086/14/logo.png?v=4468"
+                alt="logo"
+                width={248}
+                height={53}
+              />
+            </Link>
           </Col>
           <Col xl={10} className="sub-header-admin">
             <div className="user-profile">

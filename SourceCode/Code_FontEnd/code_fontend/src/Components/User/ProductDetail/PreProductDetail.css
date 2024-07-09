@@ -169,3 +169,20 @@
     border: 1px solid #f05a72;
 
 }
+
+.footer-pre-product-detail{
+  margin-top: 50px;
+}
+
+.group-image-product-detail{
+  /* max-height: 200px; Set this to the desired height */
+  /* overflow-y: auto; Enable vertical scrolling */
+}
+
+.scrollable-images{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  /* max-height: 200px; Set this to the desired height */
+  overflow-y: auto; 
+}

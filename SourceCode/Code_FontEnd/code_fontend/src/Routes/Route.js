@@ -37,7 +37,7 @@ const LogoutAdmin = React.lazy(() => (import("../Components/Amind/LogoutAdmin/Lo
 const StaffManager = React.lazy(() => (import("../Components/Amind/StaffManager/StaffManager")))
 const MemberManager = React.lazy(() => (import("../Components/Amind/MemberManager/MemberManager")))
 const OrderManager = React.lazy(() => (import("../Components/Amind/OrderManager/OrderManager")))
-
+const PromotionManager = React.lazy(() => (import("../Components/Amind/ManagerPromotion/Promotion")))
 //SettingAdmin
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
@@ -98,7 +98,8 @@ const privateRoutes = [
   { path: "/admin/memberManager", component: MemberManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
   { path: "/admin/ordermanager", component: OrderManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
   { path: "/admin/staffmanager", component: StaffManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
-  // { path: "/sideBar", component: SideBarAdmin },SettingAdmin
+  { path: "/admin/promotion", component: PromotionManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
+  // { path: "/sideBar", component: SideBarAdmin },SettingAdmin/PromotionManager
 ];
 
 export { privateRoutes, publicRoutes };

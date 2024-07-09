@@ -13,12 +13,15 @@ function ProductProvider({ children }) {
     pageCount: 0,
   });
 
-
   const getAllProductToContext = async (pageIndex, pageSize) => {
     try {
       const resProduct = await getProductByPinagine(pageIndex, pageSize);
 
-      if (resProduct && (resProduct.status === 200 || resProduct.status === 201) && resProduct.data) {
+      if (
+        resProduct &&
+        (resProduct.status === 200 || resProduct.status === 201) &&
+        resProduct.data
+      ) {
         const items = resProduct.data.items || [];
 
         const productsWithImages = await Promise.all(
@@ -30,7 +33,10 @@ function ProductProvider({ children }) {
                 images: resImage.data || [], // Ensure images is an array
               };
             } catch (imageError) {
-              console.error(`Error fetching images for product ${product.productId}`, imageError);
+              console.error(
+                `Error fetching images for product ${product.productId}`,
+                imageError
+              );
               return {
                 ...product,
                 images: [], // Default to an empty array if there's an error
@@ -51,15 +57,13 @@ function ProductProvider({ children }) {
         });
       }
     } catch (error) {
-      console.log("Error in fetching all products", error);
+      console.error("Error in fetching all products", error);
       setListProduct({
         items: [],
         pageCount: 0,
       });
     }
   };
-
-};
 
   const importProductList = async (listProduct) => {
     try {
@@ -75,17 +79,15 @@ function ProductProvider({ children }) {
   const getAllProduct = async () => {
     try {
       const res = await productGetAll();
-      if(res){
-        return res
+      if (res) {
+        return res;
       }
     } catch (error) {
-      console.log("lỗi get all no paginate",error)
+      console.log("lỗi get all no paginate", error);
     }
   };
 
-  // useEffect(() => {
-  //     getAllProductToContext();
-  // },[listProduct])
+ 
   return (
     <ProductContext.Provider
       value={{
@@ -93,7 +95,7 @@ function ProductProvider({ children }) {
         setListProduct,
         getAllProductToContext,
         importProductList,
-        getAllProduct
+        getAllProduct,
       }}
     >
       {children}

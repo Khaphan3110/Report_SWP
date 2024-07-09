@@ -17,10 +17,9 @@ namespace SWPSolution.ViewModels.Catalog.Product
 
         public string StatusDescription { get; set; }
 
-<<<<<<< HEAD
-        public IFormFile ThumbnailImage { get; set; }
 
-=======
->>>>>>> 004a9fe0bb8fa12f69eb1c57aaf523cd2e6f9c8b
+        //public IFormFile ThumbnailImage { get; set; }
+
+
     }
 }

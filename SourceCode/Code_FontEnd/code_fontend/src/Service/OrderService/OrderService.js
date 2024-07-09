@@ -44,3 +44,13 @@ export const GetOrderPigin = async () => {
     console.log("lỗi ở payment call back ",error)
   }
 }
+
+
+export const getOrderById = async (memberToken) => {
+  try {
+    const res = await request.Get(`Order/member/${memberToken}`);
+    return res;
+  } catch (error) {
+    console.log("Error create order ", error);
+  }
+};
