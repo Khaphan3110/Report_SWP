@@ -42,7 +42,10 @@ const CartPage = () => {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-
+  const calculateTotalWithPromotin = (promotion) => {
+     let total = state.total - state.total * (1 - promotion / 100);
+     return total
+  };
   console.log("cartpage", state.cartItems);
   return (
     <div className="cart-page container">
@@ -108,11 +111,11 @@ const CartPage = () => {
                   <div className="promotion-values-cart">
                     <span>TỔNG CỘNG: </span>
                     <p style={{ margin: "0" }}>
-                      {state.total.toLocaleString()} Đ
+                      {state.total.toLocaleString()} đ
                     </p>
                   </div>
                   <span style={{ color: "#ff6f61", fontWeight: "bold" }}>
-                    đã được khuyến mãi {state.promotion.promotionValues}% trên
+                    đã được khuyến mãi {calculateTotalWithPromotin(state.promotion.promotionValues).toLocaleString()}đ trên
                     tổng giá
                   </span>
 
@@ -122,7 +125,7 @@ const CartPage = () => {
                   <span>Mã giảm giá</span>
                   <Link to="/discount">Chọn mã giảm giá</Link>
                 </div> */}
-                <Link to="/checkout" className="checkout-button">
+                <Link to="/checkout/order" className="checkout-button">
                   Thanh Toán
                 </Link>
                 <div className="payment-methods">

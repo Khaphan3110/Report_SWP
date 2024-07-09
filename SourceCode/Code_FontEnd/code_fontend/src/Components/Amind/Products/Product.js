@@ -195,27 +195,27 @@ export default function Categories() {
 
     validationSchema: Yup.object({
       ProductName: Yup.string().required("ProductName is required"),
-      Quantity: Yup.number()
+      Quantity: Yup.string()
         .typeError("Quantity must be a number")
-        .positive("Quantity must be greater than 0")
-        .integer("Quantity must be an integer")
+        .matches(/^\d+$/, "Quantity must be greater than 0")
         .required("Quantity is required"),
       Price: Yup.number()
         .typeError("Price must be a number")
         .positive("Price must be greater than 0")
         .required("Price is required"),
-      description: Yup.string()
+      Description: Yup.string()
         .required("Description is required")
         .matches(/^[^\d].*$/, "Description should not start with a digit"),
       statusDescription: Yup.string()
         .oneOf(
-          ["còn hàng", "hết hàng"],
-          'Status description must be either "còn hàng" or "hết hàng"'
+          ["còn hàng", "het hang", "chua co hang"],
+          'Status description must be either "còn hàng" or "hết hàng" or "chưa có hàng"'
         )
         .required("Status description is required"),
     }),
 
     onSubmit: async (values) => {
+      console.log("product", values);
       const formProduct = new FormData();
       formProduct.append("ProductId", values.ProductId);
       formProduct.append("CategoriesId", values.CategoriesId);
@@ -475,19 +475,19 @@ export default function Categories() {
               </p>
             )}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>description</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
-                name="description"
+                name="Description"
                 type="text"
-                placeholder="description"
+                placeholder="Description"
                 autoFocus
-                value={formikProduct.values.description}
+                value={formikProduct.values.Description}
                 onChange={formikProduct.handleChange}
               />
             </Form.Group>
-            {formikProduct.errors.description && (
+            {formikProduct.errors.Description && (
               <p style={{ color: "red", margin: "0" }}>
-                {formikProduct.errors.description}
+                {formikProduct.errors.Description}
               </p>
             )}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

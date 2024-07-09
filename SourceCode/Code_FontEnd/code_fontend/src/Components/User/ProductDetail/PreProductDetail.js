@@ -39,19 +39,20 @@ export default function PreProductDetail({ productDetail }) {
     setCurrentImage(listImages[id].imagePath);
   };
 
-
   const handAddProductTocart = () => {
-
-      // dispatch(Actions.)
-      dispatch(Actions.addListToCart(productDetail,quantity));
-      // dispatch(Actions.addProduct.)
-      toast.success("thêm sản phẩm thành công",{
-        autoClose:500,
-      })
-
+    // dispatch(Actions.)
+    dispatch(Actions.addListToCart(productDetail, quantity));
+    // dispatch(Actions.addProduct.)
+    toast.success("thêm sản phẩm thành công", {
+      autoClose: 500,
+    });
   };
 
-  console.log("list cart",state.cartItems)
+  // console.log("list cart",  state.cartItems);
+  const handleAddPreorder = () => {
+    console.log("preorder");
+  };
+  console.log("product", productDetail);
   return (
     <>
       <>
@@ -103,7 +104,12 @@ export default function PreProductDetail({ productDetail }) {
           <Col xl={6}>
             <div className="product-detail-wrapper-right">
               <h4>ProductName : {productDetail.productName}</h4>
-              <p>Thương hiệu : {productDetail.brandName}</p>
+              <p>
+                Thương hiệu :{" "}
+                <span style={{ fontWeight: "bold" }}>
+                  {productDetail.category.brandName}
+                </span>
+              </p>
               <p>Tình Trạng : {productDetail.statusDescription}</p>
               <div className="zone-charactor-wrapper">
                 <span>Giao Hàng</span>
@@ -116,7 +122,7 @@ export default function PreProductDetail({ productDetail }) {
               </p>
 
               <div className="quantity-detail-product">
-                <span>Số lượng : {currentQuantity}</span>
+                <span style={{fontWeight:"bold"}}>Số lượng : {currentQuantity}</span>
                 <div className="quantity-detail-active">
                   <p onClick={handleMinusQuantity}>
                     <FaCircleMinus />
@@ -130,12 +136,49 @@ export default function PreProductDetail({ productDetail }) {
                 </div>
               </div>
               <div className="active-product-buy-add">
-                <button
-                  className="active-product-add"
-                  onClick={handAddProductTocart}
-                >
-                  <p>Thêm vào giỏ hàng</p>
-                </button>
+                {productDetail.statusDescription !== "het hang" ? (
+                  <>
+                    <button
+                      className="active-product-add"
+                      onClick={() =>
+                        productDetail.statusDescription === "chua co hang"
+                          ? handleAddPreorder()
+                          : handAddProductTocart()
+                      }
+                    >
+                      <p>
+                        {productDetail.statusDescription === "chua co hang"
+                          ? "Mua trước sản phẩm"
+                          : "Thêm vào giỏ hàng"}
+                      </p>
+                    </button>
+                    {productDetail.statusDescription === "chua co hang" ? (
+                      <p
+                        style={{
+                          color: "red",
+                          margin: "0",
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          alignContent:"center"
+                        }}
+                      >
+                        Sản phẩm chưa có hàng
+                      </p>
+                    ) : null}
+                  </>
+                ) : (
+                  <p
+                    style={{
+                      color: "red",
+                      margin: "0",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Sản phẩm đã hết hàng
+                  </p>
+                )}
+
                 {/* <button className="active-product-add">
                     <p>Mua ngay</p>
                 </button> */}

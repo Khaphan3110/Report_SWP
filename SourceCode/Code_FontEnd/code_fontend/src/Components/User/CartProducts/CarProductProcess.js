@@ -14,7 +14,7 @@ export default function CarProductProcess() {
     const getListProduct = async () => {
       try {
         setIsLoading(true);
-        await getAllProductToContext(pageIndex, 12);
+        await getAllProductToContext(pageIndex, 15);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -23,6 +23,7 @@ export default function CarProductProcess() {
     };
     getListProduct();
   }, [pageIndex]);
+
   const handlePageClick = (event) => {
     setPageIndex(+event.selected + 1);
   };
@@ -30,52 +31,52 @@ export default function CarProductProcess() {
   return (
     <>
       <Container>
-      <HomePage />
-      {isLoading ? (
-        <div style={{ margin: "0 auto", width: "100px", color: "#FF6C89" }}>
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      ) : listProduct.items && listProduct.items.length > 0 ? (
-        <>
-         <CartProducts listProduct={listProduct.items} page={pageIndex} />
-          <div className="cart-product-painaging-home-page">
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={1}
-            pageCount={listProduct.pageCount}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
-           
-          />
-           </div>
-        </>
-      ) : (
-        <div>
-          <h2 style={{ textAlign: "center" }}>Không có Sản phẩm nào cả</h2>
-        </div>
-      )}
-    </Container>
+        <HomePage />
+        {isLoading ? (
+          <div style={{ margin: "0 auto", width: "100px", color: "#FF6C89" }}>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : listProduct.items && listProduct.items.length > 0 ? (
+          <>
+            <CartProducts listProduct={listProduct.items} page={pageIndex} />
+            <div className="cart-product-painaging-home-page">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={1}
+                pageCount={listProduct.pageCount}
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                forcePage={pageIndex - 1}
+              />
+            </div>
+          </>
+        ) : (
+          <div>
+            <h2 style={{ textAlign: "center" }}>Không có Sản phẩm nào cả</h2>
+          </div>
+        )}
+      </Container>
     </>
   );
 }

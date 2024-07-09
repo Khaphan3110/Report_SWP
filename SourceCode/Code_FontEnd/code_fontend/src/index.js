@@ -12,6 +12,7 @@ import StaffManagerProvider from "./Store/ContextConfig/StaffController";
 import MemberManagerProvider from "./Store/ContextConfig/MemberController";
 import OrderManagerProvider from "./Store/ContextConfig/OrderController";
 import PromotionProvider from "./Store/ContextConfig/PromotionProvider";
+import PreorderProvider from "./Store/ContextConfig/PreorderProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AdminProvider>
@@ -19,19 +20,21 @@ root.render(
       <React.StrictMode>
         <CategoriesProvider>
           <ProductProvider>
-            <UserProvider>
-              <StoreProvider>
-                <MemberManagerProvider>
-                  <PromotionProvider>
-                    <StaffManagerProvider>
-                      <BrowserRouter>
-                        <App />
-                      </BrowserRouter>
-                    </StaffManagerProvider>
-                  </PromotionProvider>
-                </MemberManagerProvider>
-              </StoreProvider>
-            </UserProvider>
+            <PreorderProvider>
+              <UserProvider>
+                <StoreProvider>
+                  <MemberManagerProvider>
+                    <PromotionProvider>
+                      <StaffManagerProvider>
+                        <BrowserRouter>
+                          <App />
+                        </BrowserRouter>
+                      </StaffManagerProvider>
+                    </PromotionProvider>
+                  </MemberManagerProvider>
+                </StoreProvider>
+              </UserProvider>
+            </PreorderProvider>
           </ProductProvider>
         </CategoriesProvider>
       </React.StrictMode>

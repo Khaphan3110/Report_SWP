@@ -7,6 +7,7 @@ import {
   DECREASE_QUANTITY_CART,
   ADD_TO_CART_WITH_MULTIPLE_QUANTITY,
   ADD_PROMOTION_VALUES,
+  CALCULATETOTAL,
 } from "./Constant";
 
 const initialState = {
@@ -28,16 +29,32 @@ function calculateTotal(cartItems) {
 
 function reducer(state, action) {
   switch (action.type) {
+    case CALCULATETOTAL: {
+      const getPromotion = action.payload;
+      return state.total * (1 - getPromotion / 100);
+    }
+
     case ADD_PROMOTION_VALUES: {
       const { promotionID, promotionValues } = action.payload;
-      const totalWithPromotion = state.total * (1 - promotionValues / 100); // Example: Assuming promotionValues is a discount percentage
+
+      // Tính toán total ban đầu không bao gồm khuyến mãi
+      const initialTotal = calculateTotal(state.cartItems);
+
+      // Áp dụng khuyến mãi
+      const totalWithPromotion = initialTotal * (1 - promotionValues / 100);
+
       const promotion = {
         promotions: promotionID,
         promotionValues: promotionValues,
       };
+
       localStorage.setItem("total", JSON.stringify(totalWithPromotion));
-      localStorage.setItem("promotion", JSON.stringify(promotionID));
-      return { ...state, total: totalWithPromotion, promotion: promotion };
+      localStorage.setItem("promotion", JSON.stringify(promotion));
+      return {
+        ...state,
+        total: totalWithPromotion,
+        promotion: promotion,
+      };
     }
     case INCREATE_QUANTITY_CART: {
       const { productid, quantity } = action.payload;
@@ -65,8 +82,13 @@ function reducer(state, action) {
       localStorage.setItem("cart", JSON.stringify(updatedCartIncrease));
       localStorage.setItem("total", JSON.stringify(newTotalIncrease));
       localStorage.setItem("statusAddTocart", JSON.stringify(true));
+      localStorage.setItem("promotion", JSON.stringify(state.promotion)); // Ensure promotion is saved
 
-      return { cartItems: updatedCartIncrease, total: newTotalIncrease };
+      return {
+        ...state,
+        cartItems: updatedCartIncrease,
+        total: newTotalIncrease,
+      };
     }
     case DECREASE_QUANTITY_CART: {
       const { productId, qty } = action.payload;
@@ -82,7 +104,13 @@ function reducer(state, action) {
       localStorage.setItem("cart", JSON.stringify(updatedCartDecrease));
       localStorage.setItem("total", JSON.stringify(newTotalDecrease));
       localStorage.setItem("statusAddTocart", JSON.stringify(true));
-      return { cartItems: updatedCartDecrease, total: newTotalDecrease };
+      localStorage.setItem("promotion", JSON.stringify(state.promotion)); // Ensure promotion is saved
+
+      return {
+        ...state,
+        cartItems: updatedCartDecrease,
+        total: newTotalDecrease,
+      };
     }
 
     case ADD_LISTTO_CART:
@@ -101,7 +129,9 @@ function reducer(state, action) {
       localStorage.setItem("cart", JSON.stringify(updatedCartAdd));
       localStorage.setItem("total", JSON.stringify(newTotalAdd));
       localStorage.setItem("statusAddTocart", JSON.stringify(true));
-      return { cartItems: updatedCartAdd, total: newTotalAdd };
+      localStorage.setItem("promotion", JSON.stringify(state.promotion)); // Ensure promotion is saved
+
+      return { ...state, cartItems: updatedCartAdd, total: newTotalAdd };
 
     case REMOVE_ITEM_CART:
       const productDelete = action.payload;
@@ -111,14 +141,21 @@ function reducer(state, action) {
       const newTotalRemove = calculateTotal(updatedCartRemove);
       localStorage.setItem("cart", JSON.stringify(updatedCartRemove));
       localStorage.setItem("total", JSON.stringify(newTotalRemove));
-      return { cartItems: updatedCartRemove, total: newTotalRemove };
+      localStorage.setItem("promotion", JSON.stringify(state.promotion)); // Ensure promotion is saved
+
+      return { ...state, cartItems: updatedCartRemove, total: newTotalRemove };
 
     case CLEAR_CART:
       localStorage.removeItem("cart");
       localStorage.removeItem("total");
+      localStorage.removeItem("promotion");
       return {
         cartItems: [],
         total: 0,
+        promotion: {
+          promotions: "PR0724003",
+          promotionValues: 1,
+        },
       };
     default:
       throw new Error("invalid action reducer");

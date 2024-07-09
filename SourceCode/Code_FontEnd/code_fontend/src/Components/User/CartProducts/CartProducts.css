@@ -61,10 +61,10 @@
   justify-content: center;
 }
 
-.page-link {
+/* .page-link {
   background-color: #ff6c89 !important;
   color: azure;
-}
+} */
 
 .cart-product-text:hover {
   color: #f592a2;

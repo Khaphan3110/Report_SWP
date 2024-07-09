@@ -54,3 +54,22 @@ export const getOrderById = async (memberToken) => {
     console.log("Error create order ", error);
   }
 };
+
+export const updateStatusOrder = async (orderID) => {
+  try {
+    const res = await request.Put(`Order/${orderID}/status`);
+    return res;
+  } catch (error) {
+    console.log("Error create order ", error);
+  }
+};
+
+//Order/cancel/fdsafs
+export const CancelOrder = async (orderID) => {
+  try {
+    const res = await request.Put(`Order/${orderID}/status`);
+    return res;
+  } catch (error) {
+    console.log("Error create order ", error);
+  }
+};

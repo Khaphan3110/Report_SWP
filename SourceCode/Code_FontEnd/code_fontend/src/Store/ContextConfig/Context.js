@@ -9,6 +9,7 @@ const StaffManagerContext = createContext();
 const OrderManagerContext = createContext();
 const MemberManagerContext = createContext();
 const PromotionManagerContext = createContext();
+const PreorderContext = createContext();
 
 export {
   CreateContext,
@@ -20,4 +21,5 @@ export {
   OrderManagerContext,
   MemberManagerContext,
   PromotionManagerContext,
+  PreorderContext
 };

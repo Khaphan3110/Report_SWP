@@ -366,6 +366,7 @@ namespace SWPSolution.Application.Catalog.Product
                 ProductName = product.ProductName,
                 Quantity = product.Quantity,
                 CategoriesId = product.CategoriesId,
+                StatusDescription = product.StatusDescription
             };
             return productViewModel;
         }

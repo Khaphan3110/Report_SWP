@@ -9,11 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
-<<<<<<< HEAD
-using Azure.Core;
-=======
+
 using SWPSolution.ViewModels.Catalog.Blog;
->>>>>>> 66c0a11ef1d423681e17fc5bd179f1867ef6d22f
+
 
 namespace SWPSolution.Application.Catalog.Categories
 {

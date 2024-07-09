@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import {
   Actions,
+  usePreorder,
   usePromotionManger,
   useStore,
   useUserProfile,
@@ -13,7 +14,7 @@ import { GetAllPromotion } from "../../../Service/PromotionService/PromotionServ
 const CheckoutPage = () => {
   const [state, dispatch] = useStore();
   const navigate = useNavigate();
-
+  const { Preorder, addPromotion } = usePreorder();
   const {
     userProfile,
     addCurrentAddress,
@@ -23,6 +24,9 @@ const CheckoutPage = () => {
   } = useUserProfile();
   const { listPromotion, getAllPromotion } = usePromotionManger();
   const [promotion, setPromotion] = useState([]);
+  const param = useParams();
+  const actionPram = param.action;
+
   const formik = useFormik({
     initialValues: {
       //thư viện dùng để chứa dữ liệu từ formik
@@ -61,7 +65,12 @@ const CheckoutPage = () => {
   });
 
   const handleSubmit = (event) => {
-    navigate("/payment");
+    if(actionPram === 'order'){
+      navigate("/payment/order");
+    } else {
+      navigate("/payment/preorder");
+    }
+
   };
 
   const isEmpty = (obj) => {
@@ -81,18 +90,36 @@ const CheckoutPage = () => {
 
     onSubmit: (values) => {
       console.log("promoition", values.selectedPromotion);
+
       const promotionCurrent = listPromotion.find(
         (promotion) => promotion.promotionId === values.selectedPromotion
       );
-      dispatch(
-        Actions.addPromotion(
+      if (actionPram === "order") {
+        dispatch(
+          Actions.addPromotion(
+            promotionCurrent.promotionId,
+            promotionCurrent.discountValue
+          )
+        );
+      } else {
+        addPromotion(
           promotionCurrent.promotionId,
-          promotionCurrent.discountValue
-        )
-      );
+          promotionCurrent.discountValue,
+          Preorder.preOrderProduct.price
+        );
+      }
     },
   });
 
+  const calculateTotalWithPromotin = (promotion) => {
+    return state.total - state.total * (1 - promotion / 100);
+  };
+
+  const calculateTotalPreOrderWithPromotin = (promotion) => {
+    return Preorder.totalPreOrder - Preorder.totalPreOrder * (1 - promotion / 100);
+  };
+
+  console.log("preorder", Preorder);
   return (
     <div className="checkout-page">
       <div className="checkout-container">
@@ -175,77 +202,176 @@ const CheckoutPage = () => {
         </div>
         <div className="order-summary">
           <h2>Tóm tắt đơn hàng</h2>
-          {state.cartItems.map((item, index) => (
-            <div className="product-summary" key={index}>
-              <img
-                src={`https://localhost:44358/user-content/${
-                  item.images[0] ? item.images[0].imagePath : "productImage"
-                }`}
-                alt={item.productName}
-              />
-              <div className="product-info">
-                <p>{item.productName}</p>
-                <p>
-                  {" "}
-                  {item.price.toLocaleString()}₫ x {item.quantity}
-                </p>
-              </div>
-            </div>
-          ))}
-          {listPromotion.length > 0 ? (
-            <div className="discount-code">
-              <form onSubmit={formikSelectPromotion.handleSubmit}>
-                <label>Mã giảm giá</label>
-                <div className="wrapper-promotion-checkout-page">
-                  <select
-                    style={{ height: "42px", marginRight: "5px" }}
-                    name="selectedPromotion"
-                    value={formikSelectPromotion.values.selectedPromotion}
-                    onChange={(e) => {
-                      // console.log("values", e.target.value);
-                      formikSelectPromotion.setFieldValue(
-                        "selectedPromotion",
-                        e.target.value
-                      );
-                    }}
-                    onBlur={formikSelectPromotion.handleBlur}
-                  >
-                    <option value="" label="Chọn một mã khuyến mãi" />
-                    {listPromotion.length > 0 &&
-                      listPromotion.map((promote, index) => (
-                        <option value={promote.promotionId} key={index}>
-                          {promote.name}
-                        </option>
-                      ))}
-                  </select>
-
-                  <button
-                    type="submit"
-                    className="button-promotion-checkout-page"
-                  >
-                    Áp dụng
-                  </button>
-                </div>
-                {formikSelectPromotion.touched.selectedPromotion &&
-                formikSelectPromotion.errors.selectedPromotion ? (
-                  <div className="error" style={{ color: "red", margin: "0" }}>
-                    {formikSelectPromotion.errors.selectedPromotion}
+          {actionPram === "order" ? (
+            <>
+              {state.cartItems.map((item, index) => (
+                <div className="product-summary" key={index}>
+                  <img
+                    src={`https://localhost:44358/user-content/${
+                      item.images[0] ? item.images[0].imagePath : "productImage"
+                    }`}
+                    alt={item.productName}
+                  />
+                  <div className="product-info">
+                    <p>{item.productName}</p>
+                    <p>
+                      {" "}
+                      {item.price.toLocaleString()}₫ x {item.quantity}
+                    </p>
                   </div>
-                ) : null}
-              </form>
-            </div>
-          ) : (
-            <div>
-              <p style={{ color: "#f592a2", fontWeight: "bold" }}>
-                Hiện tại chưa có khuyến mãi nào khác
-              </p>
-            </div>
-          )}
+                </div>
+              ))}
+              {listPromotion.length > 0 ? (
+                <>
+                  <div className="discount-code">
+                    <form onSubmit={formikSelectPromotion.handleSubmit}>
+                      <label>Mã giảm giá</label>
+                      <div className="wrapper-promotion-checkout-page">
+                        <select
+                          style={{ height: "42px", marginRight: "5px" }}
+                          name="selectedPromotion"
+                          value={formikSelectPromotion.values.selectedPromotion}
+                          onChange={(e) => {
+                            // console.log("values", e.target.value);
+                            formikSelectPromotion.setFieldValue(
+                              "selectedPromotion",
+                              e.target.value
+                            );
+                          }}
+                          onBlur={formikSelectPromotion.handleBlur}
+                        >
+                          <option value="" label="Chọn một mã khuyến mãi" />
+                          {listPromotion.length > 0 &&
+                            listPromotion.map((promote, index) => (
+                              <option value={promote.promotionId} key={index}>
+                                {promote.name}
+                              </option>
+                            ))}
+                        </select>
 
-          <div className="total-price">
-            <span>Tổng cộng: </span>
-            <span>{state.total.toLocaleString()} ₫</span>
-          </div>
+                        <button
+                          type="submit"
+                          className="button-promotion-checkout-page"
+                        >
+                          Áp dụng
+                        </button>
+                      </div>
+                      {formikSelectPromotion.touched.selectedPromotion &&
+                      formikSelectPromotion.errors.selectedPromotion ? (
+                        <div
+                          className="error"
+                          style={{ color: "red", margin: "0" }}
+                        >
+                          {formikSelectPromotion.errors.selectedPromotion}
+                        </div>
+                      ) : null}
+                    </form>
+                  </div>
+                  <h4 style={{ color: "#ff6f61" }}>
+                    ban đã được giảm{" "}
+                    {calculateTotalWithPromotin(
+                      state.promotion.promotionValues
+                    ).toLocaleString()}{" "}
+                    đ
+                  </h4>
+                </>
+              ) : (
+                <div>
+                  <p style={{ color: "#f592a2", fontWeight: "bold" }}>
+                    Hiện tại chưa có khuyến mãi nào khác
+                  </p>
+                </div>
+              )}
+
+              <div className="total-price">
+                <span>Tổng cộng: </span>
+                <span>{state.total.toLocaleString()} ₫</span>
+              </div>
+            </>
+          ) : (
+            <>
+                <div className="product-summary" >
+                  <img
+                    src={`https://localhost:44358/user-content/${
+                      Preorder.preOrderProduct.images[0]
+                        ? Preorder.preOrderProduct.images[0].imagePath
+                        : "productImage"
+                    }`}
+                    alt={Preorder.preOrderProduct.productName}
+                  />
+                  <div className="product-info">
+                    <p>{Preorder.preOrderProduct.productName}</p>
+                    <p> {Preorder.preOrderProduct.price.toLocaleString()}₫</p>
+                  </div>
+                </div>
+              {listPromotion.length > 0 ? (
+                <>
+                  <div className="discount-code">
+                    <form onSubmit={formikSelectPromotion.handleSubmit}>
+                      <label>Mã giảm giá</label>
+                      <div className="wrapper-promotion-checkout-page">
+                        <select
+                          style={{ height: "42px", marginRight: "5px" }}
+                          name="selectedPromotion"
+                          value={formikSelectPromotion.values.selectedPromotion}
+                          onChange={(e) => {
+                            // console.log("values", e.target.value);
+                            formikSelectPromotion.setFieldValue(
+                              "selectedPromotion",
+                              e.target.value
+                            );
+                          }}
+                          onBlur={formikSelectPromotion.handleBlur}
+                        >
+                          <option value="" label="Chọn một mã khuyến mãi" />
+                          {listPromotion.length > 0 &&
+                            listPromotion.map((promote, index) => (
+                              <option value={promote.promotionId} key={index}>
+                                {promote.name}
+                              </option>
+                            ))}
+                        </select>
+
+                        <button
+                          type="submit"
+                          className="button-promotion-checkout-page"
+                        >
+                          Áp dụng
+                        </button>
+                      </div>
+                      {formikSelectPromotion.touched.selectedPromotion &&
+                      formikSelectPromotion.errors.selectedPromotion ? (
+                        <div
+                          className="error"
+                          style={{ color: "red", margin: "0" }}
+                        >
+                          {formikSelectPromotion.errors.selectedPromotion}
+                        </div>
+                      ) : null}
+                    </form>
+                  </div>
+                  <h4 style={{ color: "#ff6f61" }}>
+                    ban đã được giảm{" "}
+                    {calculateTotalPreOrderWithPromotin(
+                      Preorder.promotionPreorder.promotionValues ? Preorder.promotionPreorder.promotionValues : 1
+                    ).toLocaleString()}{" "}
+                    đ
+                  </h4>
+                </>
+              ) : (
+                <div>
+                  <p style={{ color: "#f592a2", fontWeight: "bold" }}>
+                    Hiện tại chưa có khuyến mãi nào khác
+                  </p>
+                </div>
+              )}
+
+              <div className="total-price">
+                <span>Tổng cộng: </span>
+                <span>{Preorder.totalPreOrder.toLocaleString()} ₫</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

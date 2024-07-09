@@ -84,8 +84,8 @@ const publicRoutes = [
 const privateRoutes = [
   { path: "/payment/success", component: Success ,layout:"user",protect:ProtectUser},
   { path: "/payment/notsuccess", component: NotSuccess ,layout:"user",protect:ProtectUser},
-  { path: "/checkout", component: CheckoutPage ,layout:"user",protect:ProtectUser},
-  { path: "/payment", component: PaymentPage ,layout:"user",protect:ProtectUser},
+  { path: "/checkout/:action", component: CheckoutPage ,layout:"user",protect:ProtectUser},
+  { path: "/payment/:actionPayment", component: PaymentPage ,layout:"user",protect:ProtectUser},
   { path: "/addresses", component: AddressPage ,layout:"user",protect:ProtectUser},
   { path: "/account", component: AccountPage ,layout:"user",protect:ProtectUser},
   { path: "/cart", component: CartPage ,layout:"user",protect:ProtectUser},

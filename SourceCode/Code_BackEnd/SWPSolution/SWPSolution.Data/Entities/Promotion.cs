@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
@@ -18,6 +19,9 @@ public partial class Promotion
     public DateTime? StartDate { get; set; }
 
     public DateTime? EndDate { get; set; }
+
+    [JsonIgnore]
+    public Order order { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

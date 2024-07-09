@@ -7,7 +7,8 @@ import {
   StaffManagerContext,
   MemberManagerContext,
   OrderManagerContext,
-  PromotionManagerContext
+  PromotionManagerContext,
+  PreorderContext,
 } from "../ContextConfig/Context";
 import { useContext } from "react";
 
@@ -39,14 +40,14 @@ export const useProduct = () => {
     setListProduct,
     getAllProductToContext,
     importProductList,
-    getAllProduct
+    getAllProduct,
   } = useContext(ProductContext);
   return {
     listProduct,
     setListProduct,
     getAllProductToContext,
     importProductList,
-    getAllProduct
+    getAllProduct,
   };
 };
 
@@ -89,8 +90,9 @@ export const useAdminProfile = () => {
 };
 
 export const useStaffManager = () => {
-  const { listStaff, setListStaff,getStaffPinagine } = useContext(StaffManagerContext);
-  return { listStaff, setListStaff,getStaffPinagine };
+  const { listStaff, setListStaff, getStaffPinagine } =
+    useContext(StaffManagerContext);
+  return { listStaff, setListStaff, getStaffPinagine };
 };
 
 export const useOrderManager = () => {
@@ -104,6 +106,14 @@ export const useMemberManager = () => {
 };
 
 export const usePromotionManger = () => {
-  const {listPromotion,setListPromotion,getAllPromotion} = useContext(PromotionManagerContext)
-  return {listPromotion,setListPromotion,getAllPromotion}
-}
+  const { listPromotion, setListPromotion, getAllPromotion } = useContext(
+    PromotionManagerContext
+  );
+  return { listPromotion, setListPromotion, getAllPromotion };
+};
+
+export const usePreorder = () => {
+  const { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal } =
+    useContext(PreorderContext);
+  return { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal };
+};

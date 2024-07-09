@@ -72,3 +72,16 @@ export const ResetPasswordAdmin = async (OTP,newPasswrord) => {
   }
 };
 
+export const adminUpdate = async (adminToken,infor) => {
+  try {
+    const res = await request.Put(`Admin/UpdateAdminByToken?jwtToken=${adminToken}`,infor,{
+      headers:{
+       ' Content-Type': 'application/json',
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("Error update admin", error);
+  }
+};
+

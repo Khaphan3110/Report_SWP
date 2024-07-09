@@ -9,6 +9,7 @@ import {
   INCREATE_QUANTITY_CART,
   ADD_TO_CART_WITH_MULTIPLE_QUANTITY,
   ADD_PROMOTION_VALUES,
+  CALCULATETOTAL,
 } from "./Constant";
 
 export const addListToCart = (product, quantity) => ({
@@ -57,6 +58,11 @@ export const addtoCartMultiple = (payload) => ({
 export const addPromotion = (promotionID,promotionValues) => ({
   type: ADD_PROMOTION_VALUES,
   payload:{promotionID,promotionValues}
+});
+
+export const calculateTotal = (payload) => ({
+  type:  CALCULATETOTAL,
+  payload,
 });
 
 //ADD_PROMOTION_VALUES

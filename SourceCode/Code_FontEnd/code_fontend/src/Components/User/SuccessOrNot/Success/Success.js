@@ -6,7 +6,7 @@ import { Actions, useStore } from "../../../../Store";
 export default function Success() {
   const [state,dispatch] = useStore()
   useEffect(() => {
-    dispatch(() => Actions.clearListToCart())
+    dispatch(Actions.clearListToCart())
   },[])
   return (
     <Container>

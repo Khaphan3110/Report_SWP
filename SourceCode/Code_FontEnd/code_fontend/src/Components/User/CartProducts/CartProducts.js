@@ -3,13 +3,13 @@ import "./CartProducts.css";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { productGetAll } from "../../../Service/ProductService/ProductService";
 
-import { Actions, useProduct } from "../../../Store";
+import { Actions, usePreorder, useProduct } from "../../../Store";
 import { useStore } from "../../../Store";
 import { imageGetAll } from "../../../Service/ProductService/imageService";
 import HomePage from "../../../Pages/HomePage/HomePage";
 import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
-export default function CartProducts({ listProduct,page }) {
+import { Link, useNavigate } from "react-router-dom";
+export default function CartProducts({ listProduct, page }) {
   const [state, dispatch] = useStore();
   // const  {listProduct,getAllProductToContext } = useProduct();
 
@@ -21,11 +21,18 @@ export default function CartProducts({ listProduct,page }) {
   // },[])
 
   const [path, setPath] = useState();
+  const {addProductToPreorder} = usePreorder()
+  const navigator = useNavigate()
   const addToCart = (product) => {
-    dispatch(Actions.addListToCart(product,1));
+    dispatch(Actions.addListToCart(product, 1));
     toast.success("sản phẩm đã được thêm", {
       autoClose: 1000,
     });
+  };
+
+  const preOrderProduct = (product) => {
+    addProductToPreorder(product)
+    navigator("/checkout/preorder");
   };
   return (
     <Container style={{ marginTop: "0" }}>
@@ -54,7 +61,7 @@ export default function CartProducts({ listProduct,page }) {
                   </Link>
                   <Card.Body>
                     <Link
-                       to={`/productDetail/${product.productId}`}
+                      to={`/productDetail/${product.productId}`}
                       style={{ textDecoration: "none", color: "black" }}
                       className="link-doc-product-page"
                     >
@@ -65,13 +72,46 @@ export default function CartProducts({ listProduct,page }) {
                     <Card.Text className="cart-product-text-money">
                       {product.price.toLocaleString()} đ
                     </Card.Text>
-                    <button
-                      variant="primary"
-                      onClick={() => addToCart(product)}
-                      className="button-cartProduct"
-                    >
-                      Thêm vào giỏ hàng
-                    </button>
+                    {product.statusDescription !== "het hang" ? (
+                      <>
+                        <button
+                          variant="primary"
+                          onClick={() =>
+                            product.statusDescription === "chua co hang"
+                              ? preOrderProduct(product)
+                              : addToCart(product)
+                          }
+                          className="button-cartProduct"
+                        >
+                          {product.statusDescription === "chua co hang"
+                            ? "Mua trước sản phẩm"
+                            : "Thêm vào giỏ hàng"}
+                        </button>
+                        {product.statusDescription === "chua co hang" ? (
+                          <p
+                            style={{
+                              color: "red",
+                              margin: "0",
+                              textAlign: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            sản phẩm chưa có
+                          </p>
+                        ) : null}
+                      </>
+                    ) : (
+                      <p
+                        style={{
+                          color: "red",
+                          margin: "0",
+                          textAlign: "center",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Sản phẩm đã hết hàng
+                      </p>
+                    )}
                   </Card.Body>
                 </Card>
               </Col>
