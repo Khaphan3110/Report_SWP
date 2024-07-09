@@ -1,0 +1,64 @@
+﻿@using SWPSolution.ViewModels.Common;
+@model PageResult<SWPSolution.ViewModels.Catalog.Product.ProductViewModel> 
+
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="my-4">Products List</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <form asp-action="Products" method="get" class="form-inline">
+            <div class="input-group">
+                <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" placeholder="Search by keyword" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" onclick="window.location.href='/User/Products'" class="btn btn-dark">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Categories Id</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Status Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.CategoriesId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.StatusDescription)</td>
+                                        <td>@Html.ActionLink("Details", "StaffDetails", new { id = item.ProductId })</td>
+                                </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<nav aria-label="Page navigation" class="mt-4">
+    @await Component.InvokeAsync("Pager", Model)
+</nav>
+

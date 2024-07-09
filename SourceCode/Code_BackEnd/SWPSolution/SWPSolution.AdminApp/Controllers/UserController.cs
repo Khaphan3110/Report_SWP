@@ -66,6 +66,21 @@ namespace SWPSolution.AdminApp.Controllers
             return View(data);
         }
 
+        public async Task<IActionResult> Products(string Keyword, int pageIndex = 1, int pageSize = 1)
+        {
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest()
+            {
+                BearerToken = sessions,
+                Keyword = Keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
+            var data = await _userApiClient.GetProductsPagings(request);
+            ViewBag.Keyword = Keyword;
+            return View(data);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -142,6 +157,13 @@ namespace SWPSolution.AdminApp.Controllers
         public async Task<IActionResult> StaffDetails(string id)
         {
             var result = await _userApiClient.GetStaffById(id);
+            return View(result.ResultObj);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ProductDetails(string id)
+        {
+            var result = await _userApiClient.GetProductById(id);
             return View(result.ResultObj);
         }
     }
