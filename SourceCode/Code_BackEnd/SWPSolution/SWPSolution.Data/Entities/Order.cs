@@ -14,9 +14,9 @@ public partial class Order
 
     public string MemberId { get; set; }
 
-    public string PromotionId { get; set; }
+    public string? PromotionId { get; set; }
 
-    public string ShippingAddress { get; set; }
+    public string? ShippingAddress { get; set; }
 
     public double TotalAmount { get; set; }
 

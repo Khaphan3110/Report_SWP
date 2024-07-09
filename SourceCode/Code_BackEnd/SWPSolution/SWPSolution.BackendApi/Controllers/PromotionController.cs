@@ -32,6 +32,15 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(promotion);
         }
 
+        [HttpGet("GetPromotionByName")]
+        public async Task<IActionResult> GetByName(string search)
+        {
+            var promotion = await _promotionService.GetByName(search);
+            if (promotion == null)
+                return NotFound();
+            return Ok(promotion);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PromotionCreateRequest request)
         {

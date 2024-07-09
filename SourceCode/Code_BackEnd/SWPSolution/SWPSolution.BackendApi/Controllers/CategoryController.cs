@@ -98,6 +98,18 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(category);
         }
 
+        [HttpGet("GetCategoryByName/{name}/category")]
+        public async Task<IActionResult> GetCategoryByName(string name)
+        {
+            var category = await _categoryService.GetByName(name);
+            if (category == null)
+            {
+                return NotFound(new { Message = "Category not found." });
+            }
+
+            return Ok(category);
+        }
+
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategories()
         {

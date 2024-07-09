@@ -17,6 +17,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Logging;
 using System.Linq;
+using SWPSolution.ViewModels.Catalog.Blog;
 
 
 namespace SWPSolution.Application.System.User
@@ -438,6 +439,28 @@ namespace SWPSolution.Application.System.User
                 LoyaltyPoints = member.LoyaltyPoints,
                 RegistrationDate = member.RegistrationDate,
             };
+        }
+
+        public async Task<List<MemberInfoVM>> GetMemberByUserNameAsync(string search)
+        {
+            var member = await _context.Members
+                .Where(a => a.UserName.Contains(search))
+                .ToListAsync();
+
+            if (member == null || member.Count == 0) return null;
+
+            return member.Select(member => new MemberInfoVM
+            {
+                MemberId = member.MemberId,
+                UserName = member.UserName,
+                Password = member.PassWord,
+                Email = member.Email,
+                FirstName = member.FirstName,
+                LastName = member.LastName,
+                PhoneNumber = member.PhoneNumber,
+                LoyaltyPoints = member.LoyaltyPoints,
+                RegistrationDate = member.RegistrationDate,
+            }).ToList();
         }
 
         public async Task<MemberInfoVM> GetMemberByMailAsync(string email)
@@ -878,6 +901,26 @@ namespace SWPSolution.Application.System.User
                 FullName = staff.FullName,
                 PhoneNumber = staff.Phone
             };
+        }
+
+        public async Task<List<StaffInfoVM>> GetStaffByUsername(string search)
+        {
+            var staff = await _context.Staff
+                .Where(a => a.Username.Contains(search))
+                .ToListAsync();
+
+            if (staff == null || staff.Count == 0) return null;
+
+            return staff.Select(staff => new StaffInfoVM
+            {
+                Id = staff.StaffId,
+                Role = staff.Role,
+                UserName = staff.Username,
+                Password = staff.Password,
+                Email = staff.Email,
+                FullName = staff.FullName,
+                PhoneNumber = staff.Phone
+            }).ToList();
         }
 
         public async Task<List<StaffInfoVM>> GetAllStaffs()

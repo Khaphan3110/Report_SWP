@@ -13,12 +13,15 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<List<string>> CreateMultipleProducts(List<ListProductCreateRequest> requests);
 
-
         Task<int> Update(string productId, ProductUpdateRequest request);
 
         Task<int> Delete(string productId);
 
         Task<ProductViewModel> GetById(string productId);
+
+        Task<List<ProductViewModel>> GetByName(string search);
+
+        Task<List<ProductViewModel>> GetByCategory(string categoryId);
 
         Task<bool> UpdatePrice(string productId, float newPrice);
 

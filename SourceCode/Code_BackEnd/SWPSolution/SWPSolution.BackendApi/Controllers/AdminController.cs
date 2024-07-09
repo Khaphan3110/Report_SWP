@@ -250,6 +250,17 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(blog);
         }
 
+        [HttpGet("GetBlogByTitle/{title}")]
+        public async Task<IActionResult> GetBlogByTitle(string title)
+        {
+            var blog = await _adminService.GetBlogByTitleAsync(title);
+            if (blog == null)
+            {
+                return NotFound(new { message = "No blogs were found" });
+            }
+            return Ok(blog);
+        }
+
         [HttpPut("UpdateBlog/{id}/blog")]
         public async Task<IActionResult> UpdateBlog(string id, [FromBody] UpdateBlogRequest request)
         {

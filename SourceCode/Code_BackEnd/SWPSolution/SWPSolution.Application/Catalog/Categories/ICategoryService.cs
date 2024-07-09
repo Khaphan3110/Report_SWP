@@ -16,6 +16,7 @@ namespace SWPSolution.Application.Catalog.Categories
         Task<bool> Update(string id, CategoryUpdateRequest request);
         Task<bool> Delete(string id);
         Task<CategoriesVM> GetById(string id);
+        Task<List<CategoriesVM>> GetByName(string search);
         Task<List<CategoriesVM>> GetAll();
         Task<int> GetTotalCategoryCountAsync();
 

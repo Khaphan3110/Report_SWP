@@ -35,6 +35,8 @@ namespace SWPSolution.Application.System.User
 
         Task<MemberInfoVM> GetMemberByIdAsync(string memberId);
 
+        Task<List<MemberInfoVM>> GetMemberByUserNameAsync(string search);
+
         Task<bool> UpdateMemberAsync(string memberId, UpdateMemberRequest request);
 
         Task<List<MemberAddressVM>> GetMemberAddressById(string memberId);
@@ -54,6 +56,8 @@ namespace SWPSolution.Application.System.User
         ClaimsPrincipal ValidateToken(string jwtToken);
 
         Task<StaffInfoVM> GetStaffById(string staffId);
+
+        Task<List<StaffInfoVM>> GetStaffByUsername(string search);
 
         Task<List<StaffInfoVM>> GetAllStaffs();
 
