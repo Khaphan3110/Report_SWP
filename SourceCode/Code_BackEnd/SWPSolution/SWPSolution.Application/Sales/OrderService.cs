@@ -33,8 +33,8 @@ namespace SWPSolution.Application.Sales
             {
                 OrderId = orderId,
                 MemberId = await ExtractMemberIdFromTokenAsync(orderRequest.Token),
-                PromotionId = orderRequest.PromotionId,
-                ShippingAddress = orderRequest.ShippingAddress,
+                PromotionId = orderRequest.PromotionId,  // Nullable
+                ShippingAddress = orderRequest.ShippingAddress,  // Nullable
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
                 OrderDetails = new List<OrderDetail>(),
@@ -71,7 +71,6 @@ namespace SWPSolution.Application.Sales
 
                 // Add orderDetail to the order's collection
                 order.OrderDetails.Add(orderDetail);
-
 
                 // Add orderDetail to the context but do not save changes immediately
                 _context.OrderDetails.Add(orderDetail);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SWPSolution.Application.AppPayment;
 using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.System.User;
@@ -12,6 +13,7 @@ using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -44,7 +46,7 @@ namespace SWPSolution.Application.Sales
                 .ToList();
         }
 
-        public async Task<PreOrder> CreatePreOrder(PreOrderVM model)
+        public async Task<PreOrder> CreatePreOrder(CreatePreOrderRequest model)
         {
             var product = await _context.Products.FindAsync(model.ProductId);
             if (product == null || product.Quantity < model.Quantity)
@@ -53,7 +55,7 @@ namespace SWPSolution.Application.Sales
                 {
                     PreorderId = GeneratePreOrderId(),
                     ProductId = model.ProductId,
-                    MemberId = model.MemberId,
+                    MemberId = await ExtractMemberIdFromTokenAsync(model.Token),
                     Quantity = model.Quantity,
                     PreorderDate = DateTime.UtcNow,
                     Price = model.Total,
@@ -253,7 +255,32 @@ namespace SWPSolution.Application.Sales
             await _context.SaveChangesAsync();
         }
 
+        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtPayloadBase64Url = token.Split('.')[1];
+            var jwtPayloadBase64 = jwtPayloadBase64Url
+                                    .Replace('-', '+')
+                                    .Replace('_', '/')
+                                    .PadRight(jwtPayloadBase64Url.Length + (4 - jwtPayloadBase64Url.Length % 4) % 4, '=');
+            var jwtPayload = Encoding.UTF8.GetString(Convert.FromBase64String(jwtPayloadBase64));
+            var jwtSecret = _config["JWT:SigningKey"];
 
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            SecurityToken validatedToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+            var memberId = principal.FindFirst("member_id")?.Value;
+
+            return memberId;
+        }
 
         private string GeneratePaymentUrl(PreOrder preorder, HttpContext httpContext)
         {
