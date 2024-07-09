@@ -21,7 +21,9 @@ public partial class Promotion
     public DateTime? EndDate { get; set; }
 
     [JsonIgnore]
+
     public Order order { get; set; }
+
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

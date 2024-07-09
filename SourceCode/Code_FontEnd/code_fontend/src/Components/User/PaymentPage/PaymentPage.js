@@ -119,7 +119,7 @@ const PaymentPage = () => {
         } else if (statePaymentMethod === "vnpay") {
           const PreOrderInfor = {
             productId: Preorder.preOrderProduct.productId,
-            memberId: "MB0724001", //Preorder.preOrderProduct.productId
+            token: userProfile.userToken, //Preorder.preOrderProduct.productId
             quantity: Preorder.preOrderProduct.quantity,
             total: Preorder.totalPreOrder,
             status: 0,
@@ -138,7 +138,7 @@ const PaymentPage = () => {
               total: res.data.price - res.data.price * (1 - 15 / 100),
               status: 0,
             };
-
+            const memberID = res.data.memberId
             const resDeposit = await PreorderDeposit(preDeposit);
             console.log("api resDeposit", resDeposit.data);
             if (resDeposit) {
@@ -146,7 +146,7 @@ const PaymentPage = () => {
               const dataCheckout = {
                 preorderId: resDeposit.data.preorderId,
                 productId: Preorder.preOrderProduct.productId,
-                memberId: "MB0724001",
+                memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
                 preorderDate: DepoDate.toISOString(),
                 total: resDeposit.data.amount,

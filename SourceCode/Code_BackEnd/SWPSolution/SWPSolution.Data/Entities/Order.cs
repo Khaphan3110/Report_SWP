@@ -25,12 +25,10 @@ public partial class Order
     public DateTime OrderDate { get; set; }
 
     public virtual Member Member { get; set; }
-    
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-    
 
-    public virtual Promotion Promotion { get; set; }
+    public virtual Promotion? Promotion { get; set; }
 }

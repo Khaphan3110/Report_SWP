@@ -37,9 +37,12 @@ namespace SWPSolution.Application.AppPayment
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
-            var insertedPayment = _context.Payments.FirstOrDefault(p =>
-            (p.PreorderId == request.PreOrderId && p.Amount == request.Amount) ||
-             (p.OrderId == request.OrderId && p.Amount == request.Amount)
+
+            var insertedPayment = _context.Payments
+                .FirstOrDefault(p =>
+                    (p.PreorderId == request.PreOrderId && p.Amount == request.Amount) ||
+                    (p.OrderId == request.OrderId && p.Amount == request.Amount)
+
                 );
             if (insertedPayment == null)
             {

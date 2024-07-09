@@ -34,7 +34,7 @@ namespace SWPSolution.BackendApi.Controllers
             _preOrderService = preOrderService;
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreatePreOrder([FromBody] PreOrderVM model)
+        public async Task<IActionResult> CreatePreOrder([FromBody] CreatePreOrderRequest model)
         {
             if (!ModelState.IsValid)
             {
