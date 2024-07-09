@@ -5,6 +5,7 @@ using static SWPSolution.Application.Sales.OrderService;
 using SWPSolution.Data.Enum;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SWPSolution.ViewModels.Common;
 
 namespace SWPSolution.Application.Sales
 {
@@ -16,9 +17,12 @@ namespace SWPSolution.Application.Sales
         Task<Order> UpdateOrderAsync(string orderId, OrderRequest orderRequest);
 
         // Order retrieval
+        Task<(double TotalRevenueForWeek, Dictionary<DayOfWeek, double> RevenueByDay)> GetTotalRevenueForCurrentWeek();
+        Task<(int TotalOrdersForWeek, Dictionary<DayOfWeek, int> OrdersByDay)> GetTotalOrdersForCurrentWeek();
         Task<List<Order>> GetAll();
         Task<OrderVM> GetOrderById(string orderId);
         IEnumerable<Order> GetOrdersByMemberId(string memberId);
+        Task<PageResult<OrderVM>> GetOrdersPagingAsync(OrderPagingRequest request);
 
         // Order status management
         Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus);

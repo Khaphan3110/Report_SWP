@@ -29,6 +29,8 @@ namespace SWPSolution.Application.System.User
 
         Task<bool> TestEmail(string emailAddress);
 
+        Task<int> GetTotalMemberAsync();
+
         Task<List<MemberInfoVM>> GetAllMembersAsync();
 
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
