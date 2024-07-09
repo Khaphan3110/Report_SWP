@@ -9,6 +9,7 @@ namespace SWPSolution.ViewModels.System.Users
 {
     public class GetUserPagingRequest : PagingRequestBase
     {
+        public string BearerToken { get; set; }
         public string? Keyword { get; set; }
     }
 }
