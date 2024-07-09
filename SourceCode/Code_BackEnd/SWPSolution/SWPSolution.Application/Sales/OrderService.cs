@@ -11,6 +11,7 @@ using SWPSolution.Application.System.User;
 using SWPSolution.Data.Enum;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.Catalog.Categories;
+using System.Globalization;
 
 namespace SWPSolution.Application.Sales
 {
@@ -250,6 +251,7 @@ namespace SWPSolution.Application.Sales
                 .ToListAsync();
         }
 
+
         public async Task<OrderVM> GetOrderById(string orderId)
         {
             var order = await _context.Orders.FindAsync(orderId);
@@ -284,9 +286,7 @@ namespace SWPSolution.Application.Sales
             if (!string.IsNullOrEmpty(request.Keyword))
             {
                 query = query.Where(o => o.OrderId.Contains(request.Keyword) ||
-                                          o.OrderStatus.ToString().Contains(request.Keyword)||
-                                          o.Member.FirstName.Contains(request.Keyword)||
-                                          o.Member.LastName.Contains(request.Keyword)
+                                          o.OrderStatus.ToString().Contains(request.Keyword)
                                           );
             }
             var orders = await query.Select(o => new OrderVM
@@ -335,6 +335,110 @@ namespace SWPSolution.Application.Sales
                     ErrorMessage = ex.Message
                 };
             }
+        }
+
+        public async Task<(double TotalRevenueForWeek, Dictionary<DayOfWeek, double> RevenueByDay)> GetTotalRevenueForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the orders within the current week from the database
+            var orders = await _context.Orders
+                .Where(o => o.OrderDate >= startDateOfWeek && o.OrderDate < endDateOfWeek)
+                .ToListAsync();
+
+            // Initialize a dictionary to store total revenue for each day of the week
+            var revenueByDay = new Dictionary<DayOfWeek, double>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                revenueByDay[day] = 0;
+            }
+
+            // Group the orders by day of the week and calculate the totals in memory
+            var groupedOrders = orders
+                .GroupBy(o => o.OrderDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    TotalRevenue = g.Sum(o => o.TotalAmount)
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var orderGroup in groupedOrders)
+            {
+                revenueByDay[orderGroup.Day] = orderGroup.TotalRevenue;
+            }
+
+            // Calculate the total revenue for the week
+            double totalRevenueForWeek = orders.Sum(o => o.TotalAmount);
+
+            return (totalRevenueForWeek, revenueByDay);
+        }
+
+        public async Task<(int TotalOrdersForWeek, Dictionary<DayOfWeek, int> OrdersByDay)> GetTotalOrdersForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the orders within the current week from the database
+            var orders = await _context.Orders
+                .Where(o => o.OrderDate >= startDateOfWeek && o.OrderDate < endDateOfWeek)
+                .ToListAsync();
+
+            // Initialize a dictionary to store total orders for each day of the week
+            var ordersByDay = new Dictionary<DayOfWeek, int>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                ordersByDay[day] = 0;
+            }
+
+            // Group the orders by day of the week and calculate the totals in memory
+            var groupedOrders = orders
+                .GroupBy(o => o.OrderDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    TotalOrders = g.Count()
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var orderGroup in groupedOrders)
+            {
+                ordersByDay[orderGroup.Day] = orderGroup.TotalOrders;
+            }
+
+            // Calculate the total number of orders for the week
+            int totalOrdersForWeek = orders.Count;
+
+            return (totalOrdersForWeek, ordersByDay);
         }
         public async Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus)
         {

@@ -102,7 +102,16 @@ namespace SWPSolution.BackendApi.Controllers
                 return NotFound(new { error = ex.Message });
             }
         }
-
+        [HttpGet("GetOrdersPaging")]
+        public async Task<IActionResult> GetOrdersPaging([FromQuery] OrderPagingRequest request)
+        {
+            var result = await _orderService.GetOrdersPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
 
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetAllOrders()
@@ -121,6 +130,20 @@ namespace SWPSolution.BackendApi.Controllers
             var order = await _orderService.GetOrderById(orderId);
             if (order == null) return NotFound();
             return Ok(order);
+        }
+
+        [HttpGet("total-orders-week")]
+        public async Task<IActionResult> GetTotalOrdersForCurrentWeek()
+        {
+            var (totalOrdersForWeek, ordersByDay) = await _orderService.GetTotalOrdersForCurrentWeek();
+            return Ok(new { TotalOrdersForWeek = totalOrdersForWeek, OrdersByDay = ordersByDay });
+        }
+
+        [HttpGet("total-revenue-week")]
+        public async Task<IActionResult> GetTotalRevenueForCurrentWeek()
+        {
+            var (totalRevenueForWeek, revenueByDay) = await _orderService.GetTotalRevenueForCurrentWeek();
+            return Ok(new { TotalRevenueForWeek = totalRevenueForWeek, RevenueByDay = revenueByDay });
         }
 
         [HttpGet("member/{memberId}")]
@@ -270,6 +293,7 @@ namespace SWPSolution.BackendApi.Controllers
             // Update product quantities
             if (order != null)
             {
+                order.OrderStatus = OrderStatus.Confirmed;
                 foreach (var item in order.OrderDetails)
                 {
                     var product = await _context.Products.FindAsync(item.ProductId);
@@ -279,6 +303,7 @@ namespace SWPSolution.BackendApi.Controllers
                         _context.Products.Update(product);
                     }
                 }
+                _context.Orders.Update(order);
             }
             // Update product quantities for preorder
             if (preorder != null)
@@ -312,5 +337,6 @@ namespace SWPSolution.BackendApi.Controllers
 //            return Ok(new { Message = "Payment status updated and product quantities reduced successfully" });
 //>>>>>>> e99ea9666b310d03d18d7454d8ff4b1f584a7c28
         }
+
     }
 }

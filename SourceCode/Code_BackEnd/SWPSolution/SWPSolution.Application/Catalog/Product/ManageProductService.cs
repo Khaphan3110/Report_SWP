@@ -10,6 +10,7 @@ using SWPSolution.ViewModels.Catalog.ProductImage;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System.Data.Entity;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Text;
@@ -302,6 +303,57 @@ namespace SWPSolution.Application.Catalog.Product
         }
 
         //Task<ProductViewModel> GetById(string productId);
+
+        public Dictionary<DayOfWeek, int> GetInventoryChangesForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the order details within the current week from the database
+            var orderDetails = _context.OrderDetails
+                .Include(od => od.Order)
+                .Where(od => od.Order.OrderDate >= startDateOfWeek && od.Order.OrderDate < endDateOfWeek)
+                .ToList();
+
+            // Initialize a dictionary to store inventory changes for each day of the week
+            var inventoryChangesByDay = new Dictionary<DayOfWeek, int>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                inventoryChangesByDay[day] = 0;
+            }
+
+            // Group the order details by day of the week and calculate the totals in memory
+            var groupedOrderDetails = orderDetails
+                .Where(od => od.Order != null) // Ensure Order is not null
+                .GroupBy(od => od.Order.OrderDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    TotalChange = g.Sum(od => od.Quantity)
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var changeGroup in groupedOrderDetails)
+            {
+                inventoryChangesByDay[changeGroup.Day] = changeGroup.TotalChange;
+            }
+
+            return inventoryChangesByDay;
+        }
         public async Task<ProductViewModel> GetById(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
