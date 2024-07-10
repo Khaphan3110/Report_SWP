@@ -1,6 +1,123 @@
 ﻿USE [SWP_Project]
 GO
 
+
+ALTER TABLE Member
+ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
+GO
+
+select * from Member;
+ALTER SEQUENCE address_id_seq RESTART WITH 1;
+
+-- Tạo sequence cho address_ID
+CREATE SEQUENCE address_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 999
+    CYCLE;
+GO
+ALTER SEQUENCE member_id_seq RESTART WITH 1;
+
+
+-- Tạo bảng Address
+CREATE TABLE Address (
+    address_ID VARCHAR(10) PRIMARY KEY NOT NULL,
+    member_ID VARCHAR(10),
+    HouseNumber VARCHAR(20),
+    Street NVARCHAR(50),
+    district NVARCHAR(50),
+    City NVARCHAR(50),
+    Region NVARCHAR(50),
+    CONSTRAINT fk_Address FOREIGN KEY (member_ID) REFERENCES Member(member_ID)
+);
+GO
+
+
+
+-- Sửa trigger để sinh address_ID trực tiếp
+CREATE OR ALTER TRIGGER trg_generate_address_id
+ON Address
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @seq_value INT = NEXT VALUE FOR address_id_seq; -- Lấy giá trị tiếp theo từ sequence
+
+    -- Định dạng giá trị sequence thành số 3 chữ số
+    DECLARE @formatted_seq_value VARCHAR(3) = RIGHT('000' + CAST(@seq_value AS VARCHAR(3)), 3);
+
+    -- Kết hợp các phần để tạo address ID
+    DECLARE @generated_address_id VARCHAR(10) = CONCAT('AMM', @month, @year, @formatted_seq_value);
+
+    INSERT INTO Address (address_ID, member_ID, HouseNumber, Street, district, City, Region)
+    SELECT 
+        ISNULL(@generated_address_id, 'AMM' + @month + @year + '001'), -- Nếu không có giá trị từ sequence, sử dụng giá trị mặc định
+        member_ID,
+        HouseNumber,
+        Street,
+        district,
+        City,
+        Region
+    FROM inserted;
+END;
+GO
+
+--=============================================================================adress
+CREATE SEQUENCE member_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 999
+    CYCLE;
+GO
+
+CREATE OR ALTER TRIGGER trg_generate_member_id
+ON Member
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @seq_value INT = NEXT VALUE FOR member_id_seq; -- Lấy giá trị tiếp theo từ sequence
+
+    -- Định dạng giá trị sequence thành số 3 chữ số
+    DECLARE @formatted_seq_value VARCHAR(3) = RIGHT('000' + CAST(@seq_value AS VARCHAR(3)), 3);
+
+    -- Kết hợp các phần để tạo member ID
+    DECLARE @generated_member_id VARCHAR(10) = CONCAT('MB', @month, @year, @formatted_seq_value);
+
+    INSERT INTO Member (member_ID, FirstName, LastName, Email, PhoneNumber, LoyaltyPoints, RegistrationDate, UserName, PassWord)
+    SELECT 
+        ISNULL(@generated_member_id, 'MB' + @month + @year + '001'), -- Nếu không có giá trị từ sequence, sử dụng giá trị mặc định
+        FirstName,
+        LastName,
+        Email,
+        PhoneNumber,
+        LoyaltyPoints,
+        RegistrationDate,
+        UserName,
+        PassWord
+    FROM inserted;
+END;
+--  ràng buộc check đảm bảo rằng Email chứa ký tự @
+ALTER TABLE Member
+ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
+GO
+
+select * from Member;
+ALTER SEQUENCE address_id_seq RESTART WITH 1;
+
+-- Tạo sequence cho address_ID
+CREATE SEQUENCE address_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 999
+    CYCLE;
+GO
+--========================================================================================
 CREATE OR ALTER FUNCTION generate_blog_id()
 RETURNS VARCHAR(10)
 AS
