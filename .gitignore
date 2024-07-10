@@ -532,3 +532,5 @@ $RECYCLE.BIN/
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/obj/Debug/net8.0/SWPSolution.Data.sourcelink.json
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/bin/Debug/net8.0/SWPSolution.ViewModels.dll
 /SourceCode/Code_BackEnd/SWPSolution/SWPSolution.ViewModels/bin/Debug/net8.0/SWPSolution.ViewModels.pdb
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.BackendApi/appsettings.json
+/SourceCode/Code_BackEnd/SWPSolution/SWPSolution.Data/EF/SWPSolutionDBContext.cs
