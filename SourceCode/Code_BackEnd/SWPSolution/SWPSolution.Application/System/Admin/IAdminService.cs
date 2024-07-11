@@ -37,6 +37,8 @@ namespace SWPSolution.Application.System.Admin
 
         Task<List<Blog>> GetAllBlogsAsync();
 
+        Task<Dictionary<DayOfWeek, int>> GetUserRegistrationsForCurrentWeek();
+
         Task<BlogDetailVM> GetBlogByIdAsync(string staffId);
 
         Task<List<BlogDetailVM>> GetBlogByTitleAsync(string search);
