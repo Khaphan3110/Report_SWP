@@ -455,9 +455,11 @@ namespace SWPSolution.Application.Catalog.Product
             var product = await _context.Products.FindAsync(request.ProductId);
             if (product == null) return false;
 
+            string generatedId = GenerateReviewId();
+
             var review = new Review
             {
-                ReviewId = "",
+                ReviewId = generatedId,
                 ProductId = request.ProductId,
                 MemberId = memberId,
                 DataReview = DateTime.Now,
@@ -469,6 +471,34 @@ namespace SWPSolution.Application.Catalog.Product
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        private string GenerateReviewId()
+        {
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetReviewNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"RV{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetReviewNextAutoIncrement(string month, string year)
+        {
+            string pattern = $"RV{month}{year}";
+
+            var maxAutoIncrement = _context.Reviews
+                .Where(c => c.ReviewId.StartsWith(pattern))
+                .Select(c => c.ReviewId.Substring(6, 3)) 
+                .AsEnumerable() 
+                .Select(s => int.Parse(s)) 
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
 
         public async Task<List<ReviewVM>> GetReviewsByMemberId(string memberId)
