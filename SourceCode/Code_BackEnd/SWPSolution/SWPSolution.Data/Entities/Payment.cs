@@ -8,20 +8,24 @@ namespace SWPSolution.Data.Entities;
 
 public partial class Payment
 {
-    public string? PaymentId { get; set; }
+    public string PaymentId { get; set; }
 
     public string OrderId { get; set; }
 
+    public string PreorderId { get; set; }
+
     public double Amount { get; set; }
 
-    public double DiscountValue { get; set; }
+    public double? DiscountValue { get; set; }
 
-    public bool PaymentStatus { get; set; }
+    public bool? PaymentStatus { get; set; }
 
     public string PaymentMethod { get; set; }
 
     public DateTime PaymentDate { get; set; }
     [JsonIgnore]
-
     public virtual Order Order { get; set; }
+    [JsonIgnore]
+
+    public virtual PreOrder Preorder { get; set; }
 }

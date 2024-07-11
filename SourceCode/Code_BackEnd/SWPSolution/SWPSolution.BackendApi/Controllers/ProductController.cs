@@ -46,6 +46,13 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(totalProducts);
         }
 
+        [HttpGet("inventory-changes-week")]
+        public IActionResult GetInventoryChangesForCurrentWeek()
+        {
+            var inventoryChanges = _manageProductService.GetInventoryChangesForCurrentWeek();
+            return Ok(inventoryChanges);
+        }
+
         [HttpGet("{productId}")]
         public async Task<IActionResult> GetById(string productId)
         {

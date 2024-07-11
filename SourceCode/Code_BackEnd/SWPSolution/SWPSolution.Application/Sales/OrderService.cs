@@ -9,6 +9,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Common;
+using SWPSolution.ViewModels.Catalog.Categories;
+using System.Globalization;
 
 namespace SWPSolution.Application.Sales
 {
@@ -30,11 +33,12 @@ namespace SWPSolution.Application.Sales
             {
                 OrderId = orderId,
                 MemberId = await ExtractMemberIdFromTokenAsync(orderRequest.Token),
-                PromotionId = orderRequest.PromotionId,
-                ShippingAddress = orderRequest.ShippingAddress,
+                PromotionId = orderRequest.PromotionId,  // Nullable
+                ShippingAddress = orderRequest.ShippingAddress,  // Nullable
                 TotalAmount = orderRequest.TotalAmount,
                 OrderStatus = OrderStatus.InProgress,
                 OrderDetails = new List<OrderDetail>(),
+                OrderDate = DateTime.Now
             };
 
             // Add the order to the context but do not save changes immediately
@@ -59,7 +63,7 @@ namespace SWPSolution.Application.Sales
                 var orderDetail = new OrderDetail
                 {
                     OrderId = orderId,
-                    OrderDetailId = GenerateOrderDetailId(),
+                    OrderdetailId = GenerateOrderDetailId(),
                     ProductId = product.ProductId,
                     Price = product.Price,
                     Quantity = product.Quantity,
@@ -67,7 +71,6 @@ namespace SWPSolution.Application.Sales
 
                 // Add orderDetail to the order's collection
                 order.OrderDetails.Add(orderDetail);
-
 
                 // Add orderDetail to the context but do not save changes immediately
                 _context.OrderDetails.Add(orderDetail);
@@ -137,14 +140,14 @@ namespace SWPSolution.Application.Sales
                             var orderDetail = new OrderDetail
                             {
                                 OrderId = orderId,
-                                OrderDetailId = GenerateOrderDetailId(),
+                                OrderdetailId = GenerateOrderDetailId(),
                                 ProductId = newDetail.ProductId,
                                 Price = newDetail.Price,
                                 Quantity = newDetail.Quantity,
                             };
                             // Detach any existing tracked instances
                             var trackedEntity = _context.ChangeTracker.Entries<OrderDetail>()
-                                                        .FirstOrDefault(e => e.Entity.OrderDetailId == orderDetail.OrderDetailId);
+                                                        .FirstOrDefault(e => e.Entity.OrderdetailId == orderDetail.OrderdetailId);
                             if (trackedEntity != null)
                             {
                                 _context.Entry(trackedEntity.Entity).State = EntityState.Detached;
@@ -196,7 +199,11 @@ namespace SWPSolution.Application.Sales
 
         public async Task<List<Order>> GetAll()
         {
-            return _context.Orders
+            return await _context.Orders
+                .Include(c => c.Member)
+                .Include(c => c.Payments)
+                .Include(c => c.OrderDetails)
+                    .ThenInclude(od => od.Product)
                 .Select(c => new Order
                 {
                     OrderId = c.OrderId,
@@ -206,10 +213,41 @@ namespace SWPSolution.Application.Sales
                     TotalAmount = c.TotalAmount,
                     OrderStatus = c.OrderStatus,
                     OrderDate = c.OrderDate,
-                    OrderDetails = c.OrderDetails,
-                    
+                    OrderDetails = c.OrderDetails.Select(od => new OrderDetail
+                    {
+                        OrderdetailId = od.OrderdetailId,
+                        OrderId = od.OrderId,
+                        ProductId = od.ProductId,
+                        Quantity = od.Quantity,
+                        Price = od.Price,
+                        Product = new Product
+                        {
+                            ProductId = od.Product.ProductId,
+                            ProductName = od.Product.ProductName
+                        }
+                    }).ToList(),
+                    Member = new Member
+                    {
+                        MemberId = c.Member.MemberId,
+                        FirstName = c.Member.FirstName,
+                        LastName = c.Member.LastName,
+                        Email = c.Member.Email,
+                        PhoneNumber = c.Member.PhoneNumber,
+                        LoyaltyPoints = c.Member.LoyaltyPoints,
+                    },
+                    Payments = c.Payments.Select(p => new Payment
+                    {
+                        PaymentId = p.PaymentId,
+                        OrderId = p.OrderId,
+                        PreorderId = p.PreorderId,
+                        Amount = p.Amount,
+                        DiscountValue = p.DiscountValue,
+                        PaymentStatus = p.PaymentStatus,
+                        PaymentDate = p.PaymentDate,
+                        PaymentMethod = p.PaymentMethod
+                    }).ToList()
                 })
-                .ToList();
+                .ToListAsync();
         }
 
 
@@ -240,6 +278,63 @@ namespace SWPSolution.Application.Sales
                 .ToList();
         }
 
+        public async Task<PageResult<Order>> GetOrdersPagingAsync(OrderPagingRequest request)
+        {
+            var query = _context.Orders.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(o => o.OrderId.Contains(request.Keyword));
+            }
+
+            if (request.Status.HasValue)
+            {
+                query = query.Where(o => o.OrderStatus == request.Status);
+            }
+
+            if (!string.IsNullOrEmpty(request.MemberId))
+            {
+                query = query.Where(o => o.MemberId == request.MemberId);
+            }
+
+            var ordersQuery = query.Select(o => new Order
+            {
+                OrderId = o.OrderId,
+                MemberId = o.MemberId,
+                PromotionId = o.PromotionId,
+                ShippingAddress = o.ShippingAddress,
+                TotalAmount = o.TotalAmount,
+                OrderStatus = o.OrderStatus,
+                OrderDate = o.OrderDate,
+                OrderDetails = o.OrderDetails.Select(od => new OrderDetail
+                {
+                    OrderdetailId = od.OrderdetailId,
+                    OrderId = od.OrderId,
+                    ProductId = od.ProductId,
+                    Quantity = od.Quantity,
+                    Price = od.Price,
+                    Product = new Product
+                    {
+                        ProductId = od.Product.ProductId,
+                        ProductName = od.Product.ProductName
+                    }
+                }).ToList()
+            });
+
+            int totalRow = await query.CountAsync();
+            var pagedData = await ordersQuery
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToListAsync();
+
+            return new PageResult<Order>
+            {
+                Items = pagedData,
+                TotalRecords = totalRow
+            };
+        }
+
+
         public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
         {
             try
@@ -259,6 +354,110 @@ namespace SWPSolution.Application.Sales
                     ErrorMessage = ex.Message
                 };
             }
+        }
+
+        public async Task<(double TotalRevenueForWeek, Dictionary<DayOfWeek, double> RevenueByDay)> GetTotalRevenueForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the orders within the current week from the database
+            var orders = await _context.Orders
+                .Where(o => o.OrderDate >= startDateOfWeek && o.OrderDate < endDateOfWeek)
+                .ToListAsync();
+
+            // Initialize a dictionary to store total revenue for each day of the week
+            var revenueByDay = new Dictionary<DayOfWeek, double>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                revenueByDay[day] = 0;
+            }
+
+            // Group the orders by day of the week and calculate the totals in memory
+            var groupedOrders = orders
+                .GroupBy(o => o.OrderDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    TotalRevenue = g.Sum(o => o.TotalAmount)
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var orderGroup in groupedOrders)
+            {
+                revenueByDay[orderGroup.Day] = orderGroup.TotalRevenue;
+            }
+
+            // Calculate the total revenue for the week
+            double totalRevenueForWeek = orders.Sum(o => o.TotalAmount);
+
+            return (totalRevenueForWeek, revenueByDay);
+        }
+
+        public async Task<(int TotalOrdersForWeek, Dictionary<DayOfWeek, int> OrdersByDay)> GetTotalOrdersForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the orders within the current week from the database
+            var orders = await _context.Orders
+                .Where(o => o.OrderDate >= startDateOfWeek && o.OrderDate < endDateOfWeek)
+                .ToListAsync();
+
+            // Initialize a dictionary to store total orders for each day of the week
+            var ordersByDay = new Dictionary<DayOfWeek, int>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                ordersByDay[day] = 0;
+            }
+
+            // Group the orders by day of the week and calculate the totals in memory
+            var groupedOrders = orders
+                .GroupBy(o => o.OrderDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    TotalOrders = g.Count()
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var orderGroup in groupedOrders)
+            {
+                ordersByDay[orderGroup.Day] = orderGroup.TotalOrders;
+            }
+
+            // Calculate the total number of orders for the week
+            int totalOrdersForWeek = orders.Count;
+
+            return (totalOrdersForWeek, ordersByDay);
         }
         public async Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus)
         {
@@ -306,18 +505,55 @@ namespace SWPSolution.Application.Sales
             var emailConfig = _config.GetSection("EmailConfiguration").Get<EmailVM>();
             var emailService = new EmailService(emailConfig);
 
-            // Construct the message using the MessageVM constructor
+            // Retrieve the member's email address
+            var member = await _context.Members.FindAsync(memberId);
+            if (member == null)
+            {
+                throw new Exception("Member not found");
+            }
 
-            var recipientEmail = await _context.Members.FindAsync(memberId);
+            // Ensure the order details and associated product information are loaded
+            var fullOrder = await _context.Orders
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                .FirstOrDefaultAsync(o => o.OrderId == order.OrderId);
+
+            if (fullOrder == null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            // Construct the email body with order details
+            var emailBody = $@"
+        <h1>Payment Receipt</h1>
+        <p>Thank you for your purchase!</p>
+        <p>Order ID: {fullOrder.OrderId}</p>
+        <p>Total Amount: {fullOrder.TotalAmount:C}</p>
+        <h2>Purchased Items:</h2>
+        <table border='1' cellpadding='5' cellspacing='0'>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>";
+
+            foreach (var item in fullOrder.OrderDetails)
+            {
+                emailBody += $@"
+            <tr>
+                <td>{item.Product.ProductName}</td>
+                <td>{item.Quantity}</td>
+                <td>{item.Price:C}</td>
+            </tr>";
+            }
+
+            emailBody += "</table>";
+
+            // Construct the message using the MessageVM constructor
             var message = new MessageVM(
-                new List<string> { recipientEmail.Email }, // Pass recipient as a list
+                new List<string> { member.Email }, // Pass recipient as a list
                 "Payment Receipt",
-                $@"
-            <h1>Payment Receipt</h1>
-            <p>Thank you for your purchase!</p>
-            <p>Order ID: {order.OrderId}</p>
-            <p>Total Amount: {order.TotalAmount}</p>
-        "
+                emailBody
             );
 
             // Send the email
@@ -345,8 +581,8 @@ namespace SWPSolution.Application.Sales
 
             // Retrieve the maximum auto-increment value from existing order details for the given month and year
             var maxAutoIncrement = _context.OrderDetails
-                .Where(o => o.OrderDetailId.StartsWith(pattern))
-                .Select(o => o.OrderDetailId.Substring(6, 3)) // Select substring of auto-increment part
+                .Where(o => o.OrderdetailId.StartsWith(pattern))
+                .Select(o => o.OrderdetailId.Substring(6, 3)) // Select substring of auto-increment part
                 .AsEnumerable() // Switch to client evaluation from this point
                 .Select(s => int.Parse(s)) // Parse string to int
                 .DefaultIfEmpty(0)

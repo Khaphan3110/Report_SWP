@@ -41,6 +41,7 @@
   border-radius: 2px;
   margin-bottom: 20px;
   border-radius: 5px;
+
 }
 
 .register_input_place input {
@@ -72,6 +73,7 @@
 
 .errosMsg {
   color: red;
+  margin: 0;
 }
 
 .register_inputYear_place {
@@ -132,4 +134,12 @@
   button {
     color: azure;
   }
+}
+
+.b-Register button:disabled{
+  cursor: not-allowed;
+}
+
+.b-Register:disabled:hover{
+  cursor: not-allowed;
 }

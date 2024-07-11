@@ -17,9 +17,10 @@ export default function Header() {
   const [state, dispatch] = useStore();
   const prevCartItemsCount = useRef(state.cartItems.length);
   const { userProfile } = useUserProfile();
+  //state.statusAddTocart === true
   useEffect(() => {
     const showTOOLIP = () => {
-      if (state.cartItems.length >= prevCartItemsCount.current) {
+      if (state.cartItems.length > prevCartItemsCount.current ) {
         setShowToolip(true);
         setTimeout(() => {
           setShowToolip(false);
@@ -29,6 +30,7 @@ export default function Header() {
     showTOOLIP();
     prevCartItemsCount.current = state.cartItems.length;
   }, [state.cartItems]);
+
   return (
     <>
       <header className="header-menu">
@@ -93,7 +95,7 @@ export default function Header() {
                     ></img>
                     <div className="userAcount d-md-flex flex-column d-none ">
                       <Link to={"/account"}>Tài Khoản</Link>
-                      {userProfile ? (
+                      {userProfile.userToken && userProfile.userToken.length > 0 ? (
                         <small>
                           <Link to={"/logout"}>Đăng xuất</Link>
                         </small>
@@ -125,7 +127,7 @@ export default function Header() {
                         </span>
                       </Link>
                       {/* <Tooltip id="my-tooltip" isOpen={showToolip}></Tooltip> */}
-                      {showToolip && (
+                      {showToolip !== false && (
                         <Tooltip
                           id="my-tooltip"
                           isOpen={true}
@@ -143,14 +145,25 @@ export default function Header() {
       <div className="sub-Header-homepage">
         <div className="container wrapper-subHeader">
           <div className="toogle-nav-wrapper">
-            <div className="icon-bar btn menu-bar mr-2  p-0 d-inline-flex">
-              <span>Bar</span>
-              <span>Bar</span>
-              <span>Bar</span>
+            <div className="icon-bar-header btn menu-bar mr-2  p-0 d-inline-flex">
+            <i className="fa-solid fa-bars"></i>
             </div>
             Danh mục sản phẩm
             <div className="navigation-wrapper">
-              <nav className="navigation-wrapper h-100"></nav>
+              {/* <nav className="navigation-wrapper h-100">
+                <ul className="navbarlink-header">
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                  <li>1</li>
+                </ul>
+              </nav> */}
             </div>
           </div>
           <ul className="shop-policy">
@@ -163,7 +176,7 @@ export default function Header() {
                   height={32}
                 ></img>
               </div>
-              <a href="#">Chính sách giao hàng</a>
+              <Link to={"/policy"}>Chính sách giao hàng</Link>
             </li>
             <li>
               <div>

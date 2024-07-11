@@ -31,3 +31,36 @@ export const getProductByPinagine = async (pageIndex,PageSize) => {
     console.log("Error getProduct by pageSize", error);
   }
 }
+
+export const UpdateProduct = async (productID,product) => {
+  try {
+    const res = await request.Put(`Product/${productID}`,product,{
+      headers:{
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    return res;
+  } catch (error) {
+    console.log("Error Update product", error);
+  }
+}
+
+//Product/f
+export const DeleteProduct = async (productID) => {
+  try {
+    const res = await request.Delete(`Product/${productID}`)
+    return res;
+  } catch (error) {
+    console.log("Error delete product", error);
+  }
+}
+
+export const getProductID = async (productID) => {
+  try {
+    const res = await request.Get(`Product/${productID}`)
+    return res;
+  } catch (error) {
+    console.log("Error get product by id", error);
+  }
+}
+

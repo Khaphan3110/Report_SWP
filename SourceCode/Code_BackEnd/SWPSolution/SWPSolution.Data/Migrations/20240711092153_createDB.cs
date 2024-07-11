@@ -253,9 +253,9 @@ namespace SWPSolution.Data.Migrations
                     member_id = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     Promotion_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    TotalAmount = table.Column<double>(type: "float", nullable: true),
-                    orderStatus = table.Column<int>(type: "int", unicode: false, maxLength: 10, nullable: false),
-                    orderDate = table.Column<DateTime>(type: "date", nullable: true)
+                    TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    orderStatus = table.Column<int>(type: "int", nullable: false),
+                    orderDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -300,9 +300,10 @@ namespace SWPSolution.Data.Migrations
                     preorder_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     product_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     member_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
-                    Quantity = table.Column<int>(type: "int", nullable: true),
-                    preorderDate = table.Column<DateTime>(type: "date", nullable: true),
-                    price = table.Column<double>(type: "float", nullable: true)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    preorderDate = table.Column<DateTime>(type: "date", nullable: false),
+                    price = table.Column<double>(type: "float", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -402,15 +403,21 @@ namespace SWPSolution.Data.Migrations
                 {
                     payment_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     order_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
-                    amount = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    preorder_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
+                    amount = table.Column<double>(type: "float", nullable: false),
                     discountValue = table.Column<double>(type: "float", nullable: true),
-                    paymentStatus = table.Column<bool>(type: "bit", nullable: true),
+                    paymentStatus = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "(CONVERT([bit],(0)))"),
                     PaymentMethod = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
-                    PaymentDate = table.Column<DateTime>(type: "date", nullable: true)
+                    PaymentDate = table.Column<DateTime>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK__Payment__ED10C4420D3DCCF4", x => x.payment_ID);
+                    table.ForeignKey(
+                        name: "FK_Payment_PreOrder",
+                        column: x => x.preorder_ID,
+                        principalTable: "PreOrder",
+                        principalColumn: "preorder_ID");
                     table.ForeignKey(
                         name: "fk_Payment_order",
                         column: x => x.order_ID,
@@ -439,12 +446,12 @@ namespace SWPSolution.Data.Migrations
                 column: "Promotion_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId",
+                name: "IX_OrderDetails_order_ID",
                 table: "OrderDetails",
                 column: "order_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProductId",
+                name: "IX_OrderDetails_product_ID",
                 table: "OrderDetails",
                 column: "product_ID");
 
@@ -452,6 +459,11 @@ namespace SWPSolution.Data.Migrations
                 name: "IX_Payment_order_ID",
                 table: "Payment",
                 column: "order_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payment_preorder_ID",
+                table: "Payment",
+                column: "preorder_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PreOrder_member_ID",
@@ -521,9 +533,6 @@ namespace SWPSolution.Data.Migrations
                 name: "Payment");
 
             migrationBuilder.DropTable(
-                name: "PreOrder");
-
-            migrationBuilder.DropTable(
                 name: "ProductImages");
 
             migrationBuilder.DropTable(
@@ -531,6 +540,9 @@ namespace SWPSolution.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "staff");
+
+            migrationBuilder.DropTable(
+                name: "PreOrder");
 
             migrationBuilder.DropTable(
                 name: "Order");

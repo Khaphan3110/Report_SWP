@@ -20,17 +20,19 @@ namespace SWPSolution.Application.Catalog.Product
         {
             var query = from p in _context.Products
                         join c in _context.Categories on p.CategoriesId equals c.CategoriesId
-                        //join r in _context.Reviews on p.ProductId equals r.ProductId
+                       // join r in _context.Reviews on p.ProductId equals r.ProductId
                         select new { p, c };
 
             int totalRow = await query.CountAsync();
             var data = await query.Select(x => new ProductViewModel()
             {
+                ProductId = x.p.ProductId,
                 CategoriesId = x.p.CategoriesId,
                 ProductName = x.p.ProductName,
                 Description = x.p.Description,
                 Price = x.p.Price,
                 Quantity = x.p.Quantity,
+                StatusDescription = x.p.StatusDescription
             }).ToListAsync();
             return data;
         }
@@ -84,10 +86,13 @@ namespace SWPSolution.Application.Catalog.Product
             // 4. Result
             return new PageResult<ProductViewModel>
             {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 TotalRecords = totalRow,
                 Items = pagedData
             };
         }
+
 
         public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request)
         {
@@ -137,5 +142,6 @@ namespace SWPSolution.Application.Catalog.Product
 			};
             return pageResult;
         }
+
     }
 }

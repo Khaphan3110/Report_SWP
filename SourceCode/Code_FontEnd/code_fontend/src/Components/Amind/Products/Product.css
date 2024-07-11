@@ -52,7 +52,8 @@
   }
   
   .action-button{
-    margin-left: 10px;
+    margin-left: 5px;
+    align-self: center;
   }
   
   .pagination{
@@ -62,7 +63,7 @@
   }
   
   .stateImportProduct{
-    height: 690px;
+    /* height: 465px; */
   }
 
   .wrapper-search{
@@ -73,10 +74,18 @@
   }
 
   .sub-button-Product-importImage {
-    display: inline;
-    margin-left: 7px;
+    display: block;
+    margin-left: 5px;
   }
   .sub-button-Product-importImage label{
-   
+    padding: 0;
     margin: 0;
+  }
+
+  .select-categories select{
+    display: block;
+  }
+
+  .action-product-controller{
+    display: flex;
   }

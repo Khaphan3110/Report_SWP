@@ -7,21 +7,39 @@ import { StoreProvider } from "./Store";
 import CategoriesProvider from "./Store/ContextConfig/CategoriesProvider";
 import ProductProvider from "./Store/ContextConfig/ProductProvider";
 import UserProvider from "./Store/ContextConfig/UserProvider";
+import AdminProvider from "./Store/ContextConfig/AdminProvider";
+import StaffManagerProvider from "./Store/ContextConfig/StaffController";
+import MemberManagerProvider from "./Store/ContextConfig/MemberController";
+import OrderManagerProvider from "./Store/ContextConfig/OrderController";
+import PromotionProvider from "./Store/ContextConfig/PromotionProvider";
+import PreorderProvider from "./Store/ContextConfig/PreorderProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <CategoriesProvider>
-      <ProductProvider>
-        <UserProvider>
-        <StoreProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </StoreProvider>
-        </UserProvider>
-      </ProductProvider>
-    </CategoriesProvider>
-  </React.StrictMode>
+  <AdminProvider>
+    <OrderManagerProvider>
+      <React.StrictMode>
+        <CategoriesProvider>
+          <ProductProvider>
+            <PreorderProvider>
+              <UserProvider>
+                <StoreProvider>
+                  <MemberManagerProvider>
+                    <PromotionProvider>
+                      <StaffManagerProvider>
+                        <BrowserRouter>
+                          <App />
+                        </BrowserRouter>
+                      </StaffManagerProvider>
+                    </PromotionProvider>
+                  </MemberManagerProvider>
+                </StoreProvider>
+              </UserProvider>
+            </PreorderProvider>
+          </ProductProvider>
+        </CategoriesProvider>
+      </React.StrictMode>
+    </OrderManagerProvider>
+  </AdminProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

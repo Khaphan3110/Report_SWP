@@ -1,0 +1,51 @@
+.search-product-wraper{
+  margin-top: 3%;
+}
+
+.filter-product-search{
+ 
+  border-bottom: 1.5px solid #EEEEEE;
+  border-right: 1.5px solid #EEEEEE;
+  height: 100vh;
+}
+
+.filter-product-search h5{
+  margin-bottom: 30px;
+}
+
+.filter-check-box-product{
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.filter-check-box-product input{
+  height: 24px;
+  width: 24px;
+
+}
+
+/* .filter-check-box-product input:checked{
+  background-color: #F05A72;
+  color: #F05A72;
+} */
+
+.filter-check-box-product p{
+  margin: 0;
+}
+
+.search-product-wraper-right h4{
+  font-size: x-large;
+  margin-bottom: 50px;
+}
+
+.nav-search-fillter-right{
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  border-bottom: 1.5px solid #EEEEEE;
+  
+}
+.nav-search-fillter-right li{
+  padding: 10px;
+}

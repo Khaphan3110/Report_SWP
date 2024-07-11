@@ -1,59 +1,106 @@
 import { useEffect, useState } from "react";
-import { getProductByPinagine, importProduct, productGetAll } from "../../Service/ProductService/ProductService";
+import {
+  getProductByPinagine,
+  importProduct,
+  productGetAll,
+} from "../../Service/ProductService/ProductService";
 import { ProductContext } from "./Context";
 import { imageGetAll } from "../../Service/ProductService/imageService";
 
-function ProductProvider ({children}){
-    
-    const [listProduct, setListProduct] = useState(null);
+function ProductProvider({ children }) {
+  const [listProduct, setListProduct] = useState({
+    items: [],
+    pageCount: 0,
+  });
 
-    const getAllProductToContext = async (pageIndex, pageSize) => {
-        try {
-          const resProduct = await getProductByPinagine(pageIndex, pageSize);
-          if (resProduct && (resProduct.status === 200 || resProduct.status === 201)) {
-            const productsWithImages = await Promise.all(resProduct.data.items.map(async (product) => {
-              const resImage = await imageGetAll(product.productId); // Assuming imageGetAll fetches images by product ID
+  const getAllProductToContext = async (pageIndex, pageSize) => {
+    try {
+      const resProduct = await getProductByPinagine(pageIndex, pageSize);
+
+      if (
+        resProduct &&
+        (resProduct.status === 200 || resProduct.status === 201) &&
+        resProduct.data
+      ) {
+        const items = resProduct.data.items || [];
+
+        const productsWithImages = await Promise.all(
+          items.map(async (product) => {
+            try {
+              const resImage = await imageGetAll(product.productId);
               return {
                 ...product,
-                images: resImage.data // Adjust this based on your API response structure
+                images: resImage.data || [], // Ensure images is an array
               };
-            }));
-            
-            setListProduct(productsWithImages);
-
-          }
-        } catch (error) {
-          console.log("Error in fetching all products", error);
-        }
-      };
-
-    const importProductList = async ( listProduct ) => {
-        try {
-            const res = await importProduct(listProduct);
-            if( res || (res.status === 200 || res.status === 201)){
-                return res.status;
+            } catch (imageError) {
+              console.error(
+                `Error fetching images for product ${product.productId}`,
+                imageError
+              );
+              return {
+                ...product,
+                images: [], // Default to an empty array if there's an error
+              };
             }
-        } catch (error) {
-            console.log("loi import ",error)
-        }
-    }
+          })
+        );
 
-    const addImageToProduct = async () => {
-        try {
-            
-        } catch (error) {
-            
-        }
+        setListProduct({
+          items: productsWithImages,
+          pageCount: resProduct.data.pageCount || 0,
+        });
+      } else {
+        console.error("Unexpected response structure", resProduct);
+        setListProduct({
+          items: [],
+          pageCount: 0,
+        });
+      }
+    } catch (error) {
+      console.error("Error in fetching all products", error);
+      setListProduct({
+        items: [],
+        pageCount: 0,
+      });
     }
+  };
 
-    // useEffect(() => {
-    //     getAllProductToContext();
-    // },[listProduct])
-    return (
-        <ProductContext.Provider value={{listProduct, setListProduct,getAllProductToContext,importProductList,addImageToProduct}}>
-            {children}
-        </ProductContext.Provider>
-    )
+  const importProductList = async (listProduct) => {
+    try {
+      const res = await importProduct(listProduct);
+      if (res || res.status === 200 || res.status === 201) {
+        return res.status;
+      }
+    } catch (error) {
+      console.log("loi import ", error);
+    }
+  };
+
+  const getAllProduct = async () => {
+    try {
+      const res = await productGetAll();
+      if (res) {
+        return res;
+      }
+    } catch (error) {
+      console.log("lỗi get all no paginate", error);
+    }
+  };
+
+ 
+  return (
+    <ProductContext.Provider
+      value={{
+        listProduct,
+        setListProduct,
+        getAllProductToContext,
+        importProductList,
+        getAllProduct,
+      }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
 }
 
-export default ProductProvider ;
+export default ProductProvider;

@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import "../Login/LoginForm.css";
 import { authenCodeOTP } from "../../../Service/UserService/UserService";
 import { ToastContainer, toast } from "react-toastify";
-
+import "./AuthenEmail.css";
 export default function AuthenEmail() {
   const navigator = useNavigate();
 
@@ -22,13 +22,18 @@ export default function AuthenEmail() {
     }),
 
     onSubmit: async (values) => {
-      alert("tao");
       const resUserOTP = await authenCodeOTP(values.codeGetFormEmail);
-      if (resUserOTP.data.message == "Email confirmed successfully") {
-        toast.success("Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào");
-        navigator("/login");
+      if (resUserOTP) {
+        if (resUserOTP.data.message == "Email confirmed successfully") {
+          toast.success(
+            "Bạn đã đăng ký thành công tiến hành đăng nhập thôi nào"
+          );
+          navigator("/login");
+        } else {
+          alert("mạng yếu đợi xíu");
+        }
       } else {
-        alert("mạng yếu đợi xíu");
+        toast.error("OTP kh đúng rồi")
       }
     },
   });

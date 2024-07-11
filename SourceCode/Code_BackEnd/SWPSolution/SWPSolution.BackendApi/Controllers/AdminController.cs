@@ -139,6 +139,7 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
+
         [HttpPut("ResetAdminPassword")]
         [AllowAnonymous]
         public async Task<IActionResult> ResetAdminPassword(string email)
@@ -168,7 +169,7 @@ namespace SWPSolution.BackendApi.Controllers
                     return Ok(new { message = "Admin updated successfully" });
                 else
                     return BadRequest("Failed to confirm staff or invalid OTP.");
-            }
+            } 
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error confirming staff: {ex.Message}");

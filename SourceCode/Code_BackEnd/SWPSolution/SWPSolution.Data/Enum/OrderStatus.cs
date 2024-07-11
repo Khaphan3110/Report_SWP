@@ -8,10 +8,10 @@ namespace SWPSolution.Data.Enum
 {
     public enum OrderStatus
     {
-        Canceled,
-        InProgress,
-        Confirmed,
-        Shipping,
-        Complete
+        Canceled = -1,
+        InProgress = 0,
+        Confirmed = 1,
+        Shipping = 2,
+        Complete = 3
     }
 }

@@ -1,0 +1,37 @@
+.require-accesst-to-page{
+    height: 100vh;
+    width: 100vh;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Requrie-accesst-wrapper img{
+    margin: 0 auto;
+}
+
+/* .Requrie-accesst-wrapper{
+    width: 80%;
+    height: 80%;
+} */
+.button-require-access{
+    outline: none;
+    background-color: transparent;
+    border: 0;
+    height: 45px;
+    border: 1px solid #D50100;
+    color: #D50100;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.button-require-access p{
+    width: 100%;
+    height: 100%;
+    padding-top: 6px;
+}
+
+.button-require-access:hover{
+    background-color: #D50100;
+    color: azure;
+}
+

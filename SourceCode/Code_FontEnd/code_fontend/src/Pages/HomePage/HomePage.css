@@ -2,28 +2,32 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5; /* Màu nền trang */
+  background-color: #FFFFFF; /* Màu nền trang */
 }
 
-.homepage-custom {
-  display: flex;
-  justify-content: flex-end; /* Dịch chuyển toàn bộ nội dung sang bên phải */
-  padding: 20px;
-}
+/* .homepage-custom {
+  /* display: flex;
+  justify-content: flex-end;  */
+  /* Dịch chuyển toàn bộ nội dung sang bên phải */
+  /* padding-bottom: 20px;
+  width: 100%;
+}  */
 
 .main-content-custom {
-  width: 100%;
-  max-width: 1200px; /* Chiều rộng tối đa của nội dung chính */
+  width: 100% !important;
+  /* max-width: 1200px; Chiều rộng tối đa của nội dung chính */
+  margin-bottom: 20px;
 }
 
 .content-wrapper-custom {
-  display: flex;
-  justify-content: space-between; /* Sắp xếp các phần tử trong content wrapper */
+  display: flex !important;
+  justify-content: space-between !important; /* Sắp xếp các phần tử trong content wrapper */
 }
 
 .main-banner-custom {
   width: 79%; /* Đặt chiều rộng của banner */
   margin-right: 15px; /* Khoảng cách bên phải giữa banner và promotions */
+  padding-top: 20px;
 }
 
 .slideshow-custom {
@@ -50,6 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Sắp xếp các hình ảnh trong promotions */
+  padding-top: 20px;
 }
 
 .promotions-custom img {
@@ -57,11 +62,13 @@ body {
   margin-bottom: 5px; /* Giảm khoảng cách dưới giữa các hình ảnh */
   border-radius: 5px; /* Bo góc các hình ảnh */
   object-fit: cover;
+  height: 47%;
 }
 
 .additional-images {
   display:flex;
   margin-top: 20px; /* Khoảng cách trên giữa additional-images và content-wrapper */
+  justify-content: space-between;
 }
 
 .additional-images img {
@@ -73,4 +80,33 @@ body {
 
 .additional-images img:last-child {
   margin-right: 0; /* Bỏ khoảng cách phải của hình ảnh cuối cùng */
+}
+
+.navbar-link-header{
+  border: 0.5px solid #F6F6F6;
+  margin-right: 10px;
+  
+  
+}
+
+.navbar-link-header ul {
+  padding: 5px;
+  text-decoration: none;
+  list-style-type:  none;
+  width: 260px;
+  overflow-y: auto; 
+  height: 520px;  
+  margin: 0;
+  scrollbar-width: thin;          /* Make the scrollbar thin */
+  scrollbar-color: #F592A2 #f1f1f1;
+}
+
+.navbar-link-header ul li:hover{
+  color: #F592A2;
+}
+
+.navbar-link-header ul li {
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
 }

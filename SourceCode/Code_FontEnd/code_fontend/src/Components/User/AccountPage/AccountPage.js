@@ -5,24 +5,27 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./AccountPage.css";
 import { getUserInfor } from "../../../Service/UserService/UserService";
+import { useUserProfile } from "../../../Store";
 const AccountPage = () => {
   const navigator = useNavigate();
-  const [userInfor, setUserInfor] = useState("");
-  const [userToken, setuserToken] = useState(localStorage.getItem("userToken"));
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [address, setAddress] = useState("");
   const location = useLocation();
 
-  useEffect(() => {
-    const resUser = async () => {
-      const resUserInfor = await getUserInfor(userToken);
-      if (resUserInfor) {
-        setUserInfor(resUserInfor.data);
-      }
-    };
-    resUser();
-  }, []);
-
+  const {
+    userProfile,
+    setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
+  } = useUserProfile();
+  // useEffect(() => {
+  //   const resUser = async () => {
+  //    await getUserProfileByToken(userProfile.userToken);
+  //   };
+  //   resUser();
+  // }, []);
   const handleAddressModalClose = () => setShowAddressModal(false);
   const handleAddressModalShow = () => setShowAddressModal(true);
 
@@ -37,6 +40,11 @@ const AccountPage = () => {
     navigator("/logout");
   };
 
+
+  const isEmpty = (obj) => {
+    return Object.keys(obj).length !== 0;
+  }
+
   return (
     <Container className="mt-5">
       <ToastContainer />
@@ -46,8 +54,8 @@ const AccountPage = () => {
             <Card.Header>TRANG TÀI KHOẢN</Card.Header>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                Xin chào, {userInfor && userInfor.member.lastName}{" "}
-                {userInfor && userInfor.member.firstName}!
+                Xin chào, {userProfile.profile ? userProfile.profile.member.lastName : "Ho"}{" "}
+                {userProfile.profile ? userProfile.profile.member.firstName : "ten"}!
               </ListGroup.Item>
               <ListGroup.Item>
                 {location.pathname === "/account" ? (
@@ -74,12 +82,22 @@ const AccountPage = () => {
             <Card.Body>
               <Card.Text>
                 <strong>Tên tài khoản:</strong>{" "}
-                {userInfor && userInfor.member.userName}
+                {userProfile.profile ? userProfile.profile.member.userName : "tai khoan"}
                 <br />
-                <strong>Địa chỉ:</strong> , Vietnam
+                <strong>Địa chỉ: </strong> 
+                {isEmpty(userProfile.CurrentAdress) ? (userProfile.CurrentAdress.house_Number +
+                                "," +
+                                userProfile.CurrentAdress.street_Name +
+                                "," +
+                                userProfile.CurrentAdress.district_Name +
+                                "," +
+                                userProfile.CurrentAdress.city +
+                                "," +
+                                userProfile.CurrentAdress.region) : (
+                                <span style={{color:"red"}}>không có địa chỉ vui lòng thêm !!! <Link to={"/addresses"}>Đây</Link></span>)}
                 <br />
                 <strong>Điện thoại:</strong>{" "}
-                {userInfor && userInfor.member.phoneNumber}
+                {userProfile.profile ? userProfile.profile.member.phoneNumber : ""}
                 <br />
               </Card.Text>
               <h5>ĐƠN HÀNG CỦA BẠN</h5>

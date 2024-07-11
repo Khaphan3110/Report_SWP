@@ -18,7 +18,6 @@ export const importImageProduct = async (ProductID, image) => {
       {
         headers: {
           "Content-Type": " multipart/form-data",
-          'accept':'image/png'
         },
       }
     );

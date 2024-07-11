@@ -141,11 +141,24 @@
   display: flex;
   width: 100%;
 
-  padding: 0;
 }
 
 .toogle-nav-wrapper {
+  margin-top: 5px;
   flex: 20%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 20px 20px 0 0;
+  background-color: #FFFFFF;
+  color: #f05a72;
+  font-weight: bold;
+  position: relative;
+  padding-left: 20px;
+}
+
+.toogle-nav-wrapper i {
+  color: #f05a72;
 }
 
 .shop-policy {
@@ -185,5 +198,14 @@
 .toolip-cart{
   background-color: #fbd947 !important;
   color: black !important;
+}
+
+.navigation-wrapper{
+  position: absolute;
+  top: 30px;
+}
+
+.navbarlink-header li{
+  background-color: aquamarine;
 }
 

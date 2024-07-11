@@ -105,6 +105,68 @@ CREATE SEQUENCE review_id_seq
     CYCLE;
 GO
 
+
+
+--================================================================================triger admin
+ALTER TABLE Staff 
+ADD CONSTRAINT email_format CHECK (CHARINDEX('@', Email) > 0);
+GO
+
+CREATE OR ALTER FUNCTION generate_staff_id(@role VARCHAR(20))
+RETURNS VARCHAR(10)
+AS
+BEGIN
+    DECLARE @month CHAR(2) = FORMAT(GETDATE(), 'MM'); -- Lấy tháng hiện tại
+    DECLARE @year CHAR(2) = FORMAT(GETDATE(), 'yy');  -- Lấy năm hiện tại
+    DECLARE @auto_increment INT;
+
+    SELECT @auto_increment = MAX(CAST(SUBSTRING(staff_ID, 7, 3) AS INT))
+    FROM staff
+    WHERE SUBSTRING(staff_ID, 3, 2) = @month
+    AND SUBSTRING(staff_ID, 5, 2) = @year;
+
+    IF @auto_increment IS NULL
+        SET @auto_increment = 0;
+
+    SET @auto_increment = @auto_increment + 1;
+
+    DECLARE @formatted_auto_increment VARCHAR(3) = RIGHT('000' + CAST(@auto_increment AS VARCHAR(3)), 3);
+
+    DECLARE @generated_staff_id VARCHAR(10) = CONCAT(CASE WHEN @role = 'SM' THEN 'SM' ELSE 'SA' END, @month, @year, @formatted_auto_increment);
+
+    RETURN @generated_staff_id;
+END;
+GO
+
+CREATE TRIGGER trg_generate_staff_id
+ON staff
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @new_staff_ID VARCHAR(10);
+
+    -- Tạo ID cho từng bản ghi được chèn vào
+    INSERT INTO staff (staff_ID, role, username, password, fullName, Email, phone)
+    SELECT 
+        CASE 
+            WHEN role = 'staffmember' THEN dbo.generate_staff_id('staffmember') 
+            ELSE dbo.generate_staff_id('staffadmin') 
+        END,
+        role,
+        username,
+        password,
+        fullName,
+        Email,
+        phone
+    FROM inserted;
+END;
+GO
+
+-- Chèn dữ liệu cho staffmember
+
+ALTER SEQUENCE staff_id_seq RESTART WITH 1;
+
+
 --================================================================================câu lệnh sql 
 
 select * from Categories
@@ -114,3 +176,29 @@ delete Product
 
 select * from ProductImages
 select * from staff
+delete staff 
+select * from Promotion
+
+select * from AppUsers
+select * from [Member]
+select * from [Address]
+select * from AppRoles
+delete AppRoles
+delete [Member] where member_ID = 'MB0624004'
+--==================================================
+ALTER TABLE dbo.Address NOCHECK CONSTRAINT fk_Address;
+DELETE FROM [Member] WHERE member_ID = 'MB0624004';
+ALTER TABLE dbo.Address CHECK CONSTRAINT fk_Address;
+--==================================================
+delete AppUsers where id = 'B11AEEE8-6BAC-47F9-9058-55B5405ED722'
+delete [Address] where address_ID = 'AMM0624004'
+
+select * from [Address] where address_ID = 'AMM0724011'
+delete [Address] where address_ID = 'AMM0724011'
+
+select * from [Order]
+select * from OrderDetails
+
+select * from Payment
+select * from PreOrder
+

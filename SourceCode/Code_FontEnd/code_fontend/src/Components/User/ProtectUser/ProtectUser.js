@@ -1,14 +1,14 @@
-import React from 'react'
-import { useUserProfile } from '../../../Store'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { useUserProfile } from "../../../Store";
+import { Navigate, useNavigate } from "react-router-dom";
+import { UserContext } from "../../../Store/ContextConfig/Context";
 
-export default function ProtectUser({children}) {
-    const { userProfile } = useUserProfile();
-    const navigator = useNavigate()
-    if(!userProfile){
-        navigator("/login")
-    }
-  return (
-    {children}
-  )
+export function ProtectUser({ children }) {
+  const { userProfile,getUserProfileByToken } = useUserProfile();
+  if (!userProfile.profile.member) {
+    return <Navigate to="/login" />;
+  }
+  return children;
 }
+
+

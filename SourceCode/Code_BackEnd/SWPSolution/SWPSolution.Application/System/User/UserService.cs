@@ -16,8 +16,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Logging;
-using System.Linq;
-using SWPSolution.ViewModels.Catalog.Blog;
 
 
 namespace SWPSolution.Application.System.User
@@ -108,6 +106,11 @@ namespace SWPSolution.Application.System.User
         }
 
         // Method to retrieve member_id from the member table
+
+        public async Task<int> GetTotalMemberAsync()
+        {
+            return await _context.Members.CountAsync();
+        }
         private async Task<string> GetMemberIdByUsername(string username)
         {
             // Assuming you have access to your database context
@@ -447,7 +450,7 @@ namespace SWPSolution.Application.System.User
                 .Where(a => a.UserName.Contains(search))
                 .ToListAsync();
 
-            if (member == null || member.Count == 0) return null;
+            if (member == null) return null;
 
             return member.Select(member => new MemberInfoVM
             {
@@ -909,7 +912,7 @@ namespace SWPSolution.Application.System.User
                 .Where(a => a.Username.Contains(search))
                 .ToListAsync();
 
-            if (staff == null || staff.Count == 0) return null;
+            if (staff == null) return null;
 
             return staff.Select(staff => new StaffInfoVM
             {

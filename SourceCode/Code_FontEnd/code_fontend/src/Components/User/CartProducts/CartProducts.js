@@ -3,48 +3,120 @@ import "./CartProducts.css";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { productGetAll } from "../../../Service/ProductService/ProductService";
 
-import { Actions, useProduct } from "../../../Store";
+import { Actions, usePreorder, useProduct } from "../../../Store";
 import { useStore } from "../../../Store";
 import { imageGetAll } from "../../../Service/ProductService/imageService";
 import HomePage from "../../../Pages/HomePage/HomePage";
-export default function CartProducts() {
-
+import { ToastContainer, toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+export default function CartProducts({ listProduct, page }) {
   const [state, dispatch] = useStore();
-  const  {listProduct,getAllProductToContext } = useProduct();
+  // const  {listProduct,getAllProductToContext } = useProduct();
 
-  useEffect(  () => {
-    const getProduct = async () => {
-      await getAllProductToContext(1,12)
-    }
-    getProduct(); 
-  },[])
+  // useEffect(  () => {
+  //   const getProduct = async () => {
+  //     await getAllProductToContext(1,12)
+  //   }
+  //   getProduct();
+  // },[])
 
+  const [path, setPath] = useState();
+  const {addProductToPreorder} = usePreorder()
+  const navigator = useNavigate()
+  const addToCart = (product) => {
+    dispatch(Actions.addListToCart(product, 1));
+    toast.success("sản phẩm đã được thêm", {
+      autoClose: 1000,
+    });
+  };
 
- 
+  const preOrderProduct = (product) => {
+    addProductToPreorder(product)
+    navigator("/checkout/preorder");
+  };
   return (
-    <Container>
-      <HomePage/>
+    <Container style={{ marginTop: "0" }}>
+      <ToastContainer />
+      {/* <HomePage/> */}
       <Row>
-        {listProduct && listProduct.map((product, index) => {
-          return (
-            <Col xl={3} key={index} className="row-product-cart">
-              <Card style={{ width: "18rem" }} className="cart-product-page">
-                {/* <Card.Img variant="top" src={listProductImage ? listProductImage[product.productId][0].imagePath : "productimage"} /> */}
-                <Card.Img variant="top" src={`https://localhost:44358/user-content/${product.images[0] ? product.images[0].imagePath : "productImage"}`} />
-                <Card.Body>
-                  <Card.Title>{product.productName}</Card.Title>
-                  <Card.Text>{product.price}đ</Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => dispatch(Actions.addListToCart(product))}
+        {listProduct &&
+          listProduct.map((product, index) => {
+            return (
+              <Col key={index} className="row-product-cart">
+                <Card className="cart-product-page">
+                  {/* <Card.Img variant="top" src={listProductImage ? listProductImage[product.productId][0].imagePath : "productimage"} /> */}
+                  <Link
+                    to={`/productDetail/${product.productId}`}
+                    style={{ textDecoration: "none", color: "black" }}
                   >
-                    Add To cart
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          );
-        })}
+                    <Card.Img
+                      variant="top"
+                      src={`https://localhost:44358/user-content/${
+                        product.images[0]
+                          ? product.images[0].imagePath
+                          : "productImage"
+                      }`}
+                      className="image-cart-product-user"
+                    />
+                  </Link>
+                  <Card.Body>
+                    <Link
+                      to={`/productDetail/${product.productId}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                      className="link-doc-product-page"
+                    >
+                      <Card.Text className="cart-product-text">
+                        {product.productName}
+                      </Card.Text>
+                    </Link>
+                    <Card.Text className="cart-product-text-money">
+                      {product.price.toLocaleString()} đ
+                    </Card.Text>
+                    {product.statusDescription !== "het hang" ? (
+                      <>
+                        <button
+                          variant="primary"
+                          onClick={() =>
+                            product.statusDescription === "chua co hang"
+                              ? preOrderProduct(product)
+                              : addToCart(product)
+                          }
+                          className="button-cartProduct"
+                        >
+                          {product.statusDescription === "chua co hang"
+                            ? "Mua trước sản phẩm"
+                            : "Thêm vào giỏ hàng"}
+                        </button>
+                        {product.statusDescription === "chua co hang" ? (
+                          <p
+                            style={{
+                              color: "red",
+                              margin: "0",
+                              textAlign: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            sản phẩm chưa có
+                          </p>
+                        ) : null}
+                      </>
+                    ) : (
+                      <p
+                        style={{
+                          color: "red",
+                          margin: "0",
+                          textAlign: "center",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Sản phẩm đã hết hàng
+                      </p>
+                    )}
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
       </Row>
     </Container>
   );

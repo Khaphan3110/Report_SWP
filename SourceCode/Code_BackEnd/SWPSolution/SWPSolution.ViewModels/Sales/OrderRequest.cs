@@ -13,11 +13,13 @@ namespace SWPSolution.ViewModels.Sales
         [Required]
         public string Token { get; set; }
 
-        [Required]
+
+
         public string ShippingAddress { get; set; }
 
-        [Required]
+ 
         public string PromotionId { get; set; }
+
 
         [Required]
         public List<OrderDetailRequest> OrderDetails { get; set; }

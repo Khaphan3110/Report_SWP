@@ -3,6 +3,12 @@ import {
   CategoriesContext,
   ProductContext,
   UserContext,
+  AdminContext,
+  StaffManagerContext,
+  MemberManagerContext,
+  OrderManagerContext,
+  PromotionManagerContext,
+  PreorderContext,
 } from "../ContextConfig/Context";
 import { useContext } from "react";
 
@@ -13,12 +19,14 @@ export const useStore = () => {
 
 export const useCateGories = () => {
   const {
+    getAllCategoreisNopaginate,
     listCategories,
     setListCategoreis,
     FunImportCateGories,
     getAllCategoreis,
   } = useContext(CategoriesContext);
   return {
+    getAllCategoreisNopaginate,
     listCategories,
     setListCategoreis,
     FunImportCateGories,
@@ -32,21 +40,80 @@ export const useProduct = () => {
     setListProduct,
     getAllProductToContext,
     importProductList,
-    addImageToProduct,
+    getAllProduct,
   } = useContext(ProductContext);
   return {
     listProduct,
     setListProduct,
     getAllProductToContext,
     importProductList,
-    addImageToProduct,
+    getAllProduct,
   };
 };
 
 export const useUserProfile = () => {
-  const { userProfile, setUserProfile } = useContext(UserContext);
-  return {
+  const {
+    logOut,
     userProfile,
     setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
+  } = useContext(UserContext);
+  return {
+    logOut,
+    userProfile,
+    setUserProfile,
+    addCurrentAddress,
+    getAllAdressByToken,
+    updateUserToken,
+    getUserProfileByToken,
   };
+};
+
+export const useAdminProfile = () => {
+  const {
+    StaffProfile,
+    setStaffProfile,
+    updateAdminToken,
+    getAdminProfile,
+    logoutAdmin,
+  } = useContext(AdminContext);
+  return {
+    StaffProfile,
+    setStaffProfile,
+    updateAdminToken,
+    getAdminProfile,
+    logoutAdmin,
+  };
+};
+
+export const useStaffManager = () => {
+  const { listStaff, setListStaff, getStaffPinagine } =
+    useContext(StaffManagerContext);
+  return { listStaff, setListStaff, getStaffPinagine };
+};
+
+export const useOrderManager = () => {
+  const { listOrder, setListOrder } = useContext(OrderManagerContext);
+  return { listOrder, setListOrder };
+};
+
+export const useMemberManager = () => {
+  const { listMember, setlistMember } = useContext(MemberManagerContext);
+  return { listMember, setlistMember };
+};
+
+export const usePromotionManger = () => {
+  const { listPromotion, setListPromotion, getAllPromotion } = useContext(
+    PromotionManagerContext
+  );
+  return { listPromotion, setListPromotion, getAllPromotion };
+};
+
+export const usePreorder = () => {
+  const { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal } =
+    useContext(PreorderContext);
+  return { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal };
 };

@@ -28,27 +28,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{99
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SWPSolution.AdminApp", "SWPSolution.AdminApp\SWPSolution.AdminApp.csproj", "{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trash", "Trash", "{0EAA2BE3-8D70-46C4-B892-7CDD3809A401}"
-	ProjectSection(SolutionItems) = preProject
-		SWPSolution.Data\Entities\Address.cs = SWPSolution.Data\Entities\Address.cs
-		SWPSolution.Data\Entities\AppRole.cs = SWPSolution.Data\Entities\AppRole.cs
-		SWPSolution.Data\Entities\AppUser.cs = SWPSolution.Data\Entities\AppUser.cs
-		SWPSolution.Data\Entities\Blog.cs = SWPSolution.Data\Entities\Blog.cs
-		SWPSolution.Data\Entities\BlogImage.cs = SWPSolution.Data\Entities\BlogImage.cs
-		SWPSolution.Data\Entities\Category.cs = SWPSolution.Data\Entities\Category.cs
-		SWPSolution.Data\Entities\Member.cs = SWPSolution.Data\Entities\Member.cs
-		SWPSolution.Data\Entities\Order.cs = SWPSolution.Data\Entities\Order.cs
-		SWPSolution.Data\Entities\OrderDetail.cs = SWPSolution.Data\Entities\OrderDetail.cs
-		SWPSolution.Data\Entities\Payment.cs = SWPSolution.Data\Entities\Payment.cs
-		SWPSolution.Data\Entities\PreOrder.cs = SWPSolution.Data\Entities\PreOrder.cs
-		SWPSolution.Data\Entities\Product.cs = SWPSolution.Data\Entities\Product.cs
-		SWPSolution.Data\Entities\ProductImage.cs = SWPSolution.Data\Entities\ProductImage.cs
-		SWPSolution.Data\Entities\Promotion.cs = SWPSolution.Data\Entities\Promotion.cs
-		SWPSolution.Data\Entities\Review.cs = SWPSolution.Data\Entities\Review.cs
-		SWPSolution.Data\Entities\Staff.cs = SWPSolution.Data\Entities\Staff.cs
-		SWPSolution.Data\EF\SWPSolutionDBContext.cs = SWPSolution.Data\EF\SWPSolutionDBContext.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

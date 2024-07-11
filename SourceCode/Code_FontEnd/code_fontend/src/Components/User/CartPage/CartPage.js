@@ -31,20 +31,22 @@ const CartPage = () => {
   // }, [cartItems]);
 
   const handleQuantityChange = (itemId, delta) => {
-    // setCartItems(cartItems.map(item =>
-    //   item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-    // ));
+    dispatch(Actions.increaseQuantity(itemId, delta));
   };
 
-  const handleRemoveItem = (itemId) => {
-    // setCartItems(cartItems.filter(item => item.id !== itemId));
-  };
+  // const handleRemoveItem = (itemId) => {
+  //   // setCartItems(cartItems.filter(item => item.id !== itemId));
+  // };
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-
+  const calculateTotalWithPromotin = (promotion) => {
+     let total = state.total - state.total * (1 - promotion / 100);
+     return total
+  };
+  console.log("cartpage", state.cartItems);
   return (
     <div className="cart-page container">
       {/* <div className="breadcrumb">
@@ -58,7 +60,14 @@ const CartPage = () => {
                 <h2>Giỏ hàng</h2>
                 {state.cartItems.map((item, index) => (
                   <div className="cart-item" key={index}>
-                    <img src={item.image} alt={item.productName} />
+                    <img
+                      src={`https://localhost:44358/user-content/${
+                        item.images[0]
+                          ? item.images[0].imagePath
+                          : "productImage"
+                      }`}
+                      alt={item.productName}
+                    />
                     <div className="cart-item-details">
                       <h3>{item.productName}</h3>
                       <p className="cart-item-price">
@@ -66,13 +75,17 @@ const CartPage = () => {
                       </p>
                       <div className="quantity-controls-cartPage">
                         <button
-                          onClick={() => handleQuantityChange(item.id, -1)}
+                          onClick={() =>
+                            handleQuantityChange(item.productId, -1)
+                          }
                         >
                           -
                         </button>
                         <input type="text" value={item.quantity} readOnly />
                         <button
-                          onClick={() => handleQuantityChange(item.id, 1)}
+                          onClick={() =>
+                            handleQuantityChange(item.productId, 1)
+                          }
                         >
                           +
                         </button>
@@ -95,15 +108,24 @@ const CartPage = () => {
                   <label htmlFor="invoice">Xuất hóa đơn công ty</label>
                 </div>
                 <div className="total-price">
-                  <span>TỔNG CỘNG: </span>
-                  <span>{state.total.toLocaleString()} ₫</span>
+                  <div className="promotion-values-cart">
+                    <span>TỔNG CỘNG: </span>
+                    <p style={{ margin: "0" }}>
+                      {state.total.toLocaleString()} đ
+                    </p>
+                  </div>
+                  <span style={{ color: "#ff6f61", fontWeight: "bold" }}>
+                    đã được khuyến mãi {calculateTotalWithPromotin(state.promotion.promotionValues).toLocaleString()}đ trên
+                    tổng giá
+                  </span>
+
                   <p>(Đã bao gồm VAT nếu có)</p>
                 </div>
-                <div className="discount-code">
+                {/* <div className="discount-code">
                   <span>Mã giảm giá</span>
                   <Link to="/discount">Chọn mã giảm giá</Link>
-                </div>
-                <Link to="/checkout" className="checkout-button">
+                </div> */}
+                <Link to="/checkout/order" className="checkout-button">
                   Thanh Toán
                 </Link>
                 <div className="payment-methods">
@@ -130,8 +152,13 @@ const CartPage = () => {
               <h2>Giỏ hàng đang trống</h2>
               <span>Mời ní mua đồ tiếp đi rồi quay lại</span>
               <p>
-                <Link to={"/"} >
-                  <button className="button-cart-empty" style={{ outline: "none" }}>Mua Sắm nào</button>
+                <Link to={"/"}>
+                  <button
+                    className="button-cart-empty"
+                    style={{ outline: "none" }}
+                  >
+                    Mua Sắm nào
+                  </button>
                 </Link>
               </p>
             </div>

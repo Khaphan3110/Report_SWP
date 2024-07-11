@@ -4,16 +4,20 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url('../../../assets/images/bacground\ loginadminregister.jpg');
+    background: url('../../../assets/images/backgroundadminpage.jpg');
+    /* background-color: aquamarine; */
     background-repeat: no-repeat;
     background-size: 100%;
     border: 1px solid #fff;
 }
 
+
+
 .wrapper-LoginRegisteradmin-sub {
     position: relative;
     width: 420px;
-    height: 540px;
+    /* height: 800px; */
+    height: 100vh;
     border-radius: 10px;
     color: #333;
     display: flex;
@@ -21,6 +25,16 @@
     overflow: hidden;
     transition: height 0.2s ease;
 }
+
+.form-box {
+    display: flex;
+    align-items: center;
+}
+
+.form-box form {
+    width: 100%;
+}
+
 
 .wrapper-LoginRegisteradmin-sub .form-box {
     width: 100%;
@@ -62,7 +76,7 @@ form .input-box {
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 15px 0;
+    margin-bottom: 10px ;
 }
 
 .input-box input {
@@ -95,6 +109,7 @@ form .remember-forgot {
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
+    margin-top: 15px;
 }
 
 .remember-forgot label input {
@@ -137,4 +152,9 @@ form .registerAdmin-link, .register-link {
 
 .registerAdmin-link p a:hover, .register-link p a:hover {
     text-decoration: underline;
+}
+
+.error-register-admin-form{
+    color: red;
+    margin: 0;
 }
