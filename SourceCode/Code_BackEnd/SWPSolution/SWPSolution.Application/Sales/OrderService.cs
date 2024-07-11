@@ -329,6 +329,8 @@ namespace SWPSolution.Application.Sales
 
             return new PageResult<Order>
             {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
                 Items = pagedData,
                 TotalRecords = totalRow
             };
