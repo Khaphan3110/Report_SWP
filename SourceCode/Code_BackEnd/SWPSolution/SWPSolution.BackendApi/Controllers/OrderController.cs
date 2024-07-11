@@ -113,6 +113,17 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetTrackingOrdersPaging")]
+        public async Task<IActionResult> GetTrackingOrdersPaging([FromQuery] OrderTrackingPagingRequest request)
+        {
+            var result = await _orderService.GetTrackingOrdersPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
+
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetAllOrders()
         {

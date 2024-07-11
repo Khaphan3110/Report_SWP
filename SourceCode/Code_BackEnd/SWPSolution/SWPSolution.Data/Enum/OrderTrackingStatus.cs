@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.Data.Enum
 {
-    public enum PreOrderStatus
+    public enum OrderTrackingStatus
     {
-        Canceled=-1,
-        Created,
-        Deposited,
-        Completed
+        InProgress = 0,
+        Confirmed = 1,
+        Shipping = 2,
     }
 }

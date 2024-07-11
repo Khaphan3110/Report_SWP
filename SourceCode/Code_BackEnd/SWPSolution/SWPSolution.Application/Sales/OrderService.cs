@@ -336,8 +336,72 @@ namespace SWPSolution.Application.Sales
             };
         }
 
+        public async Task<PageResult<Order>> GetTrackingOrdersPagingAsync(OrderTrackingPagingRequest request)
+        {
+            var query = _context.Orders.AsQueryable();
 
-        public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
+            // Filter by specific OrderStatus values (0, 1, 2)
+            var allowedStatuses = new List<OrderStatus> { OrderStatus.InProgress, OrderStatus.Confirmed, OrderStatus.Shipping };
+
+            // Apply filters
+            query = query.Where(o => allowedStatuses.Contains(o.OrderStatus));
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(o => o.OrderId.Contains(request.Keyword));
+            }
+
+            if (!string.IsNullOrEmpty(request.MemberId))
+            {
+                query = query.Where(o => o.MemberId == request.MemberId);
+            }
+            if (request.Status.HasValue)
+            {
+                var statusValue = (OrderStatus)request.Status.Value; // Ensure request.Status is cast to OrderStatus
+                query = query.Where(o => o.OrderStatus == statusValue);
+            }
+
+            var ordersQuery = query.Select(o => new Order
+            {
+                OrderId = o.OrderId,
+                MemberId = o.MemberId,
+                PromotionId = o.PromotionId,
+                ShippingAddress = o.ShippingAddress,
+                TotalAmount = o.TotalAmount,
+                OrderStatus = o.OrderStatus,
+                OrderDate = o.OrderDate,
+                OrderDetails = o.OrderDetails.Select(od => new OrderDetail
+                {
+                    OrderdetailId = od.OrderdetailId,
+                    OrderId = od.OrderId,
+                    ProductId = od.ProductId,
+                    Quantity = od.Quantity,
+                    Price = od.Price,
+                    Product = new Product
+                    {
+                        ProductId = od.Product.ProductId,
+                        ProductName = od.Product.ProductName
+                    }
+                }).ToList()
+            });
+
+            int totalRow = await query.CountAsync();
+            var pagedData = await ordersQuery
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToListAsync();
+
+            return new PageResult<Order>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = pagedData,
+                TotalRecords = totalRow
+            };
+        }
+    
+
+    public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
         {
             try
             {
