@@ -1,4 +1,5 @@
-﻿using SWPSolution.ViewModels.Common;
+﻿using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace SWPSolution.ViewModels.Sales
     public class PreOrderPagingRequest : PagingRequestBase
     {
         public string? MemberId { get; set; }
+
+        public PreOrderStatus? PreOrderStatus { get; set; }
     }
 }

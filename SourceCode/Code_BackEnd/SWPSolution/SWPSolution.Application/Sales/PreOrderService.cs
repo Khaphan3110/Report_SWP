@@ -89,6 +89,10 @@ namespace SWPSolution.Application.Sales
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
+            if(request.PreOrderStatus.HasValue)
+            {
+                query = query.Where(o => o.Status == request.PreOrderStatus.Value);
+            }
 
             // Get the total number of records
             int totalRow = query.Count();
