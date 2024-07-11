@@ -36,7 +36,7 @@ export const paymentCallBack = async () => {
   }
 }
 
-export const GetOrderPigin = async () => {
+export const GetOrderPiging = async () => {
   try {
     const res = await request.Get("Order/PaymentCallBack")
     return res;

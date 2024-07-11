@@ -33,12 +33,12 @@ export default function SideBarAdmin() {
             <FaUserSecret style={{color:"white"}}/> Member Manager
           </li>
         </Link>
-        <Link to={"/admin/staffmanager"} className="link-sidebar-admin">
+        <Link to={"/admin/ordermanager"} className="link-sidebar-admin">
           <li className="categories-word">
             <FaShoppingCart  style={{color:"white"}}/> Order Manager
           </li>
         </Link>
-        <Link to={"/admin/staffmanager"} className="link-sidebar-admin">
+        <Link to={"/admin/preorderadmin"} className="link-sidebar-admin">
           <li className="categories-word">
             <FaShoppingCart  style={{color:"white"}}/> Preorder Manager
           </li>

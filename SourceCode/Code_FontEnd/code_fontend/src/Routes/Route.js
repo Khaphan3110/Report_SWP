@@ -20,7 +20,7 @@ const PaymentPage = React.lazy(() => import("../Components/User/PaymentPage/Paym
 const RegisterForm = React.lazy(() => import("../Components/User/Register/RegisterForm"));
 const RouteAdminLayout = React.lazy(() => import("../Layouts/AdminLayout/RouteAdminLayout"));
 const DashBoardAdmin = React.lazy(() => import("../Components/Amind/DashBoardAdmin/DashBoardAdmin"));
-const PreorderAdmin = React.lazy(() => import("../Components/Amind/PreorderAdmin/PreorderAdmin"));
+const PreorderAdmin = React.lazy(() => import("../Components/Amind/PreorderManager/PreorderManager"));
 const SettingAdmin = React.lazy(() => import("../Components/Amind/SettingAdmin/SettingAdmin"));
 const Success = React.lazy(() => import("../Components/User/SuccessOrNot/Success/Success"))
 const NotSuccess = React.lazy(() => import("../Components/User/SuccessOrNot/NotSuccess/NotSuccess"))
@@ -38,6 +38,8 @@ const StaffManager = React.lazy(() => (import("../Components/Amind/StaffManager/
 const MemberManager = React.lazy(() => (import("../Components/Amind/MemberManager/MemberManager")))
 const OrderManager = React.lazy(() => (import("../Components/Amind/OrderManager/OrderManager")))
 const PromotionManager = React.lazy(() => (import("../Components/Amind/ManagerPromotion/Promotion")))
+const OrderDetail = React.lazy(() => (import("../Components/User/OrderDetail/OrderDetail")))
+const OrderUser = React.lazy(() => (import("../Components/User/OrderUser/OrderUser")))
 //SettingAdmin
 // <Route path="/" element={<HomePage />} />
 //         <Route path="/Header" element={<Header />} />
@@ -70,8 +72,9 @@ const publicRoutes = [
   { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
   { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
   { path: "/logoutAdmin", component: LogoutAdmin},
-  
-  // { path: "/payment/success", component: Success ,layout:"user"},
+  // { path: "/orderDetail/:orderID", component: OrderDetail},
+  // { path: "/order", component: OrderUser},
+  // { path: "/payment/success", component: Success ,Userlayout:"user"},
   // { path: "/payment/notsuccess", component: NotSuccess ,layout:"user"},
   // { path: "/checkout", component: CheckoutPage ,layout:"user"},
   // { path: "/payment", component: PaymentPage ,layout:"user"},
@@ -99,6 +102,8 @@ const privateRoutes = [
   { path: "/admin/ordermanager", component: OrderManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
   { path: "/admin/staffmanager", component: StaffManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   { path: "/admin/promotion", component: PromotionManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
+  { path: "/orderDetail/:orderID", component: OrderDetail,layout:"user",protect:ProtectUser,allowedRoles:['staffadmin']},
+  { path: "/order", component: OrderUser,layout:"user",protect:ProtectUser,allowedRoles:['staffadmin']},
   // { path: "/sideBar", component: SideBarAdmin },SettingAdmin/PromotionManager
 ];
 
