@@ -204,6 +204,7 @@ namespace SWPSolution.Application.Sales
                 .Include(c => c.Payments)
                 .Include(c => c.OrderDetails)
                     .ThenInclude(od => od.Product)
+                    .OrderByDescending(c => c.OrderId)
                 .Select(c => new Order
                 {
                     OrderId = c.OrderId,
@@ -318,7 +319,8 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).ToList()
+                }).OrderByDescending(o => o.OrderId)
+                .ToList()
             });
 
             int totalRow = await query.CountAsync();
@@ -382,7 +384,8 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).ToList()
+                }).OrderByDescending(o => o.OrderId)
+                .ToList()
             });
 
             int totalRow = await query.CountAsync();
