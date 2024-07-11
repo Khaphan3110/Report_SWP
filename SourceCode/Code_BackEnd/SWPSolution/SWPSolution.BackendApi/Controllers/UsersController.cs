@@ -176,7 +176,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(totalMembers);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetMember/{id}")]
         public async Task<IActionResult> GetMemberById(string id)
         {
@@ -200,7 +200,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(member);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("UpdateMember/{id}")]
         public async Task<IActionResult> UpdateMember(string id, [FromBody] UpdateMemberRequest request)
         {

@@ -319,3 +319,5 @@ select * from OrderDetails
 select * from Payment
 select * from PreOrder
 
+select * from Review
+delete Review

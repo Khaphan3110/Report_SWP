@@ -11,7 +11,7 @@ using SWPSolution.Data.Entities;
 
 namespace SWPSolution.Data.Migrations
 {
-    [DbContext(typeof(SWPSolutionDBContext))]
+    [DbContext(typeof(SWPSolutionDBContextModelSnapshot))]
     [Migration("20240704191559_updateDB")]
     partial class updateDB
     {

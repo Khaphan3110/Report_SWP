@@ -8,6 +8,9 @@ import Refunt from "../../../assets/images/refun_icon_2.png";
 import Shipping from "../../../assets/images/shiping_icon_3.png";
 import "./PreProductDetail.css";
 import { toast } from "react-toastify";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
+import Typography from "@mui/material/Typography";
 export default function PreProductDetail({ productDetail }) {
   const [quantity, setquantity] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
@@ -19,6 +22,7 @@ export default function PreProductDetail({ productDetail }) {
   const [currentQuantity, setCurrentQuantity] = useState(
     productDetail.quantity
   );
+
   const handlePlusQuantity = () => {
     setquantity((preQuantiy) =>
       currentQuantity <= preQuantiy ? preQuantiy : preQuantiy + 1
@@ -122,7 +126,9 @@ export default function PreProductDetail({ productDetail }) {
               </p>
 
               <div className="quantity-detail-product">
-                <span style={{fontWeight:"bold"}}>Số lượng : {currentQuantity}</span>
+                <span style={{ fontWeight: "bold" }}>
+                  Số lượng : {currentQuantity}
+                </span>
                 <div className="quantity-detail-active">
                   <p onClick={handleMinusQuantity}>
                     <FaCircleMinus />
@@ -159,7 +165,7 @@ export default function PreProductDetail({ productDetail }) {
                           margin: "0",
                           textAlign: "center",
                           fontWeight: "bold",
-                          alignContent:"center"
+                          alignContent: "center",
                         }}
                       >
                         Sản phẩm chưa có hàng
@@ -229,6 +235,66 @@ export default function PreProductDetail({ productDetail }) {
           <div className="footer-pre-product-detail">
             <p className="header-preProductDetail">MÔ TẢ SẢN PHẨM</p>
             <p>{productDetail.description}</p>
+          </div>
+          <div className="review-from-member-buy">
+            <p className="header-preProductDetail">Đánh Giá Sản Phẩm</p>
+
+            {productDetail.review && productDetail.review.length > 0 ? (
+              productDetail.review.map((review, index) => (
+                <div className="reivew-detail-wiht-any-member" key={index}>
+                  <div style={{ padding: "10px" }}>
+                    <p className="name-reviewer">
+                      {" "}
+                      Tên : {productDetail.member.lastName}{" "}
+                      {productDetail.member.firstName}
+                    </p>
+                    <div style={{ display: "flex", gap: "5px" }}>
+                      <p style={{ margin: "0", fontWeight: "bold" }}>
+                        Đánh giá :
+                      </p>
+                      <Rating
+                        name="simple-controlled"
+                        value={review.grade}
+                      />
+                    </div>
+                    <div className="description-review">
+                      <p
+                        style={{
+                          margin: "0",
+                          fontWeight: "bold",
+                          width: "100px",
+                          flex: "1",
+                        }}
+                      >
+                        Bình luận :
+                      </p>
+                      <p
+                        style={{
+                          margin: "0",
+                          wordBreak: "break-word",
+                          flex: "14",
+                        }}
+                      >
+                        {review.comment}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div style={{ margin: "0 auto" }}>
+                <p
+                  style={{
+                    margin: "10px auto",
+                    fontWeight: "bold",
+                    fontSize: "500",
+                    textAlign: "center",
+                  }}
+                >
+                  Sản phẩm chưa có lược đánh giá nào cả
+                </p>
+              </div>
+            )}
           </div>
         </Row>
       </>

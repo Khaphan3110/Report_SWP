@@ -13,7 +13,7 @@ import {
 const initialState = {
   cartItems: JSON.parse(localStorage.getItem("cart")) || [],
   promotion: JSON.parse(localStorage.getItem("promotion")) || {
-    promotions: "PR0724003",
+    promotions: "PR0724001",
     promotionValues: 1,
   },
   total: JSON.parse(localStorage.getItem("total")) || 0,

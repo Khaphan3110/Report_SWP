@@ -186,3 +186,34 @@
   /* max-height: 200px; Set this to the desired height */
   overflow-y: auto; 
 }
+
+.review-from-member-buy{
+  background-color: white;
+  box-shadow: 0 0 10px 2px #d7d7d7;
+  border-radius: 10px;
+  /* border: 1px solid #f05a72; */
+
+}
+
+.reivew-detail-wiht-any-member{
+  /* width: 90%; */
+  margin: 1% 0;
+  border: 1px solid #f05a72;
+  border-radius: 10px;
+
+}
+
+.name-reviewer{
+  margin: 0;
+  /* margin-left: 5px; */
+  font-weight: bold;
+}
+
+.reivew-detail-discription{
+  margin-left: 25px;
+}
+
+.description-review{
+  display: flex;
+  gap: 10px;
+}

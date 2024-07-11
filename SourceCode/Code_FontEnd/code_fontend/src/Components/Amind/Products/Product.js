@@ -209,7 +209,7 @@ export default function Categories() {
       statusDescription: Yup.string()
         .oneOf(
           ["còn hàng", "het hang", "chua co hang"],
-          'Status description must be either "còn hàng" or "hết hàng" or "chưa có hàng"'
+          'Status description must be either "còn hàng" or "het hang" or "chua co hang"'
         )
         .required("Status description is required"),
     }),

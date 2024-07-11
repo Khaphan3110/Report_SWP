@@ -2,9 +2,9 @@
 #nullable disable
 using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
+
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace SWPSolution.Data.Entities;
 
@@ -14,9 +14,9 @@ public partial class Order
 
     public string MemberId { get; set; }
 
-    public string? PromotionId { get; set; }
+    public string PromotionId { get; set; }
 
-    public string? ShippingAddress { get; set; }
+    public string ShippingAddress { get; set; }
 
     public double TotalAmount { get; set; }
 
@@ -30,5 +30,5 @@ public partial class Order
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
 
-    public virtual Promotion? Promotion { get; set; }
+    public virtual Promotion Promotion { get; set; }
 }

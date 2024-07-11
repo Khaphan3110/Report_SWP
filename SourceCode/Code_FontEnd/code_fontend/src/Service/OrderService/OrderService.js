@@ -36,12 +36,12 @@ export const paymentCallBack = async () => {
   }
 }
 
-export const GetOrderPiging = async () => {
+export const GetOrderPiging = async (pageIndex,pageSize) => {
   try {
-    const res = await request.Get("Order/PaymentCallBack")
+    const res = await request.Get(`Order/GetOrdersPaging?PageIndex=${pageIndex}&PageSize=${pageSize}`)
     return res;
   } catch (error) {
-    console.log("lỗi ở payment call back ",error)
+    console.log("lỗi ở order pagin ",error)
   }
 }
 
@@ -55,21 +55,25 @@ export const getOrderById = async (memberToken) => {
   }
 };
 
-export const updateStatusOrder = async (orderID) => {
+export const updateStatusOrder = async (orderID,orderStatus) => {
   try {
-    const res = await request.Put(`Order/${orderID}/status`);
+    const res = await request.Put(`Order/${orderID}/status`,orderStatus,{
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    });
     return res;
   } catch (error) {
-    console.log("Error create order ", error);
+    console.log("Error updateStatusOrder order ", error);
   }
 };
 
 //Order/cancel/fdsafs
 export const CancelOrder = async (orderID) => {
   try {
-    const res = await request.Put(`Order/${orderID}/status`);
+    const res = await request.Put(`Order/cancel/${orderID}`);
     return res;
   } catch (error) {
-    console.log("Error create order ", error);
+    console.log("Error CancelOrder order ", error);
   }
 };

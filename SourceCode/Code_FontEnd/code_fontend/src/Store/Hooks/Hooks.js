@@ -96,8 +96,8 @@ export const useStaffManager = () => {
 };
 
 export const useOrderManager = () => {
-  const { listOrder, setListOrder } = useContext(OrderManagerContext);
-  return { listOrder, setListOrder };
+  const { listOrder, setListOrder,getOrderPagin } = useContext(OrderManagerContext);
+  return { listOrder, setListOrder,getOrderPagin };
 };
 
 export const useMemberManager = () => {

@@ -10,7 +10,7 @@ using SWPSolution.Data.Entities;
 
 namespace SWPSolution.Data.Migrations
 {
-    [DbContext(typeof(SWPSolutionDBContext))]
+    [DbContext(typeof(SWPSolutionDBContextModelSnapshot))]
     partial class SWPSolutionDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

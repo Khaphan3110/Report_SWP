@@ -60,18 +60,19 @@ const CheckoutPage = () => {
         region: values.region,
       };
       addCurrentAddress(addressCurrent);
-      navigate("/payment");
+      if(actionPram === "order"){
+        navigate("/payment/order");
+      } else {
+        navigate("/payment/preorder");
+      }
+      
     },
   });
 
-  const handleSubmit = (event) => {
-    if(actionPram === 'order'){
-      navigate("/payment/order");
-    } else {
-      navigate("/payment/preorder");
-    }
-
-  };
+  // const handleSubmit = (event) => {
+  //   console.log("action param", event.target.value)
+  //   event.target.value === "order" ?  navigate("/payment/order") :  navigate("/payment/preorder")
+  // };
 
   const isEmpty = (obj) => {
     return Object.keys(obj).length !== 0;
@@ -186,7 +187,7 @@ const CheckoutPage = () => {
               <button
                 className="continue-button"
                 type="submit"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               >
                 Tiếp tục đến phương thức thanh toán
               </button>
@@ -361,7 +362,11 @@ const CheckoutPage = () => {
               ) : (
                 <div>
                   <p style={{ color: "#f592a2", fontWeight: "bold" }}>
-                    Hiện tại chưa có khuyến mãi nào khác
+                    Hiện tại chưa có khuyến mãi nào khác 
+                    {calculateTotalPreOrderWithPromotin(
+                      Preorder.promotionPreorder.promotionValues ? Preorder.promotionPreorder.promotionValues : 1
+                    ).toLocaleString()}{" "}
+                    đ
                   </p>
                 </div>
               )}

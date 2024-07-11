@@ -167,3 +167,12 @@ export const updatePhoneNumberOfUser = async (TokenUser,userInfor) => {
     console.log("lỗi update user phone or username",error)
   }
 }
+
+export const getMemberID = async (getMemberID) => {
+  try {
+    const res = await request.Get(`Users/GetMember/${getMemberID}`);
+    return res;
+  } catch (error) {
+    console.log("lỗi update user phone or username",error)
+  }
+}

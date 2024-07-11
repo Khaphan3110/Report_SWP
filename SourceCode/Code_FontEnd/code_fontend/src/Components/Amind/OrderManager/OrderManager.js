@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 import { deleteStaff, GetAllStaff, StaffRegister } from "../../../Service/StaffService/StaffService";
 import { toast, ToastContainer } from "react-toastify";
 import Papa from "papaparse";
-import { useAdminProfile, useCateGories, useStaffManager } from "../../../Store";
+import { useAdminProfile, useCateGories, useOrderManager, useStaffManager } from "../../../Store";
 import { CSVLink } from "react-csv";
 import "../Categories/Categories.css";
 export default function OrderManager() {
@@ -21,6 +21,8 @@ export default function OrderManager() {
   const { StaffProfile } = useAdminProfile();
   const [pageIndex, setPageIndex] = useState(1);
   const [sst, setSST] = useState(0);
+
+  const {listOrder,getOrderPagin} = useOrderManager()
   const getStaffExport = async (event, done) => {
     const result = [];
     const res = await GetAllStaff(StaffProfile.adminToken);
@@ -43,60 +45,6 @@ export default function OrderManager() {
     }
   };
 
-  const handleImportFile = async (event) => {
-    if (event.target && event.target.files && event.target.files[0]) {
-      let file = event.target.files[0];
-      if (file.type !== "text/csv") {
-        toast.error("chỉ được nhập file csv");
-        return;
-      }
-      Papa.parse(file, {
-        // header:true,
-
-        complete: async function (results) {
-          let rawCSV = results.data;
-          if (rawCSV[0] && rawCSV[0].length === 7) {
-            if (
-              rawCSV[0][0] !== "firstName" ||
-              rawCSV[0][1] !== "lastName" ||
-              rawCSV[0][2] !== "email" ||
-              rawCSV[0][3] !== "phoneNumber" ||
-              rawCSV[0][4] !== "userName" ||
-              rawCSV[0][5] !== "password" ||
-              rawCSV[0][6] !== "confirmPassword"
-            ) {
-              toast.error("sai format của dữ liệu trong file!");
-            }
-            {
-              let result = [];
-              rawCSV.map((staff, index) => {
-                if (index > 0 && staff.length === 7) {
-                  let staffObj = {};
-                  staffObj.firstName = staff[0];
-                  staffObj.lastName = staff[1];
-                  staffObj.email = staff[2];
-                  staffObj.phoneNumber = staff[3];
-                  staffObj.userName = staff[4];
-                  staffObj.password = staff[5];
-                  staffObj.confirmPassword = staff[6];
-                  result.push(staffObj);
-                }
-              });
-
-              const res = await StaffRegister(result, StaffProfile.adminToken);
-              if (res) {
-                toast.success("Register staff success !!");
-              } else {
-                toast.error("Register staff failed");
-              }
-              await getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
-            }
-          }
-        },
-      });
-    }
-  };
-
   // const [ endOffset, pageCount, listOfSet ] = usePagination(listOrchil,8)
   const handlePageClick = (event) => {
     setPageIndex(+event.selected + 1);
@@ -106,23 +54,14 @@ export default function OrderManager() {
   const handleClose = () => setShow(false);
 
   const handDeleteButton = (staffID) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this category?"
-    );
-    if (confirmed) {
-      const res = deleteStaff(staffID, StaffProfile.adminToken);
-      if (res) {
-        getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
-        toast.success("delete success!", {
-          autoClose: 1500,
-        });
-      } else {
-        toast.error("delete failed!", {
-          autoClose: 1500,
-        });
-      }
-    }
+
   };
+
+  
+
+  useEffect(() => {
+    getOrderPagin(pageIndex,8);
+  },[])
 
   useEffect(() => {
     getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
@@ -138,17 +77,6 @@ export default function OrderManager() {
         </div>
 
         <div className="button-categories">
-          <div className="sub-button-categories">
-            <label htmlFor="test" className="btn btn-success">
-              <i className="fa-solid fa-file-import"></i> Import
-            </label>
-            <input
-              type="file"
-              hidden
-              id="test"
-              onChange={(event) => handleImportFile(event)}
-            />
-          </div>
           <div className="sub-button-categories">
             <CSVLink
               data={listStaffExport}
@@ -178,7 +106,7 @@ export default function OrderManager() {
           <thead>
             <tr>
               <th>stt</th>
-              <th>id</th>
+              <th>OrderID</th>
               <th>role</th>
               <th>userName</th>
               <th>password</th>
@@ -221,7 +149,7 @@ export default function OrderManager() {
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         marginPagesDisplayed={1}
-        pageCount={listStaff.pageCount}
+        pageCount={listOrder.pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}
         pageClassName="page-item"

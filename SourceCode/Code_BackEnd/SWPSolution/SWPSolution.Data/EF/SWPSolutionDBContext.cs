@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SWPSolution.Data.Entities;
+
 
 namespace SWPSolution.Data.Entities;
 
@@ -54,30 +56,32 @@ public partial class SWPSolutionDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Address>(entity =>
-        {
-            modelBuilder.Entity<AppUser>()
+        modelBuilder.Entity<AppUser>()
            .Property(u => u.EmailVerificationCode)
            .IsRequired(false);
 
-            modelBuilder.Entity<AppUser>()
-                .Property(u => u.EmailVerificationExpiry)
-                .IsRequired(false);
+        modelBuilder.Entity<AppUser>()
+            .Property(u => u.EmailVerificationExpiry)
+            .IsRequired(false);
 
-            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
-            {
-                x.UserId,
-                x.RoleId
-            });
-            ;
-            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
-            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
-            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new
+        {
+            x.UserId,
+            x.RoleId
+        });
+        ;
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+        modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
+        modelBuilder.Entity<Address>(entity =>
+        {
             entity.HasKey(e => e.AddressId).HasName("PK__Address__CAA543F0AA445DBA");
 
             entity.ToTable("Address");
+
+            entity.HasIndex(e => e.MemberId, "IX_Address_member_ID");
 
             entity.Property(e => e.AddressId)
                 .HasMaxLength(10)
@@ -127,6 +131,8 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.BlogId).HasName("PK__Blog__298A9610ECF917C0");
 
             entity.ToTable("Blog");
+
+            entity.HasIndex(e => e.StaffId, "IX_Blog_staff_ID");
 
             entity.Property(e => e.BlogId)
                 .HasMaxLength(10)
@@ -179,7 +185,7 @@ public partial class SWPSolutionDBContext : DbContext
         {
             entity.HasKey(e => e.MemberId).HasName("PK__Member__B29A816CC54BDB96");
 
-            entity.ToTable("Member", tb => tb.HasTrigger("trg_generate_member_id"));
+            entity.ToTable("Member");
 
             entity.Property(e => e.MemberId)
                 .HasMaxLength(10)
@@ -208,6 +214,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.OrderId).HasName("PK__Order__464665E13F0051AC");
 
             entity.ToTable("Order");
+
+            entity.HasIndex(e => e.PromotionId, "IX_Order_Promotion_ID");
+
+            entity.HasIndex(e => e.MemberId, "IX_Order_member_id");
 
             entity.Property(e => e.OrderId)
                 .HasMaxLength(10)
@@ -238,6 +248,10 @@ public partial class SWPSolutionDBContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
+            entity.HasIndex(e => e.OrderId, "IX_OrderDetails_order_ID");
+
+            entity.HasIndex(e => e.ProductId, "IX_OrderDetails_product_ID");
+
             entity.Property(e => e.OrderdetailId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -263,6 +277,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.PaymentId).HasName("PK__Payment__ED10C4420D3DCCF4");
 
             entity.ToTable("Payment");
+
+            entity.HasIndex(e => e.OrderId, "IX_Payment_order_ID");
+
+            entity.HasIndex(e => e.PreorderId, "IX_Payment_preorder_ID");
 
             entity.Property(e => e.PaymentId)
                 .HasMaxLength(10)
@@ -293,7 +311,7 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasForeignKey(d => d.OrderId)
                 .HasConstraintName("fk_Payment_order");
 
-            entity.HasOne(d => d.PreOrder).WithMany(p => p.Payments)
+            entity.HasOne(d => d.Preorder).WithMany(p => p.Payments)
                 .HasForeignKey(d => d.PreorderId)
                 .HasConstraintName("FK_Payment_PreOrder");
         });
@@ -303,6 +321,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.PreorderId).HasName("PK__PreOrder__C55D7EA295C14F89");
 
             entity.ToTable("PreOrder");
+
+            entity.HasIndex(e => e.MemberId, "IX_PreOrder_member_ID");
+
+            entity.HasIndex(e => e.ProductId, "IX_PreOrder_product_ID");
 
             entity.Property(e => e.PreorderId)
                 .HasMaxLength(10)
@@ -336,6 +358,8 @@ public partial class SWPSolutionDBContext : DbContext
 
             entity.ToTable("Product");
 
+            entity.HasIndex(e => e.CategoriesId, "IX_Product_categories_ID");
+
             entity.Property(e => e.ProductId)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -361,6 +385,8 @@ public partial class SWPSolutionDBContext : DbContext
 
         modelBuilder.Entity<ProductImage>(entity =>
         {
+            entity.HasIndex(e => e.ProductId, "IX_ProductImages_ProductId");
+
             entity.Property(e => e.Caption)
                 .IsRequired()
                 .HasMaxLength(200);
@@ -398,6 +424,10 @@ public partial class SWPSolutionDBContext : DbContext
             entity.HasKey(e => e.ReviewId).HasName("PK__Review__608B39D8185D9A34");
 
             entity.ToTable("Review");
+
+            entity.HasIndex(e => e.MemberId, "IX_Review_member_ID");
+
+            entity.HasIndex(e => e.ProductId, "IX_Review_product_ID");
 
             entity.Property(e => e.ReviewId)
                 .HasMaxLength(10)
