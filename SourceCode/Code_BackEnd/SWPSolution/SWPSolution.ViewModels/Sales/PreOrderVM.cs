@@ -15,6 +15,8 @@ namespace SWPSolution.ViewModels.Sales
 
         public string MemberId { get; set; }
 
+        public string ShippingAddress { get; set; }
+
         public int Quantity { get; set; }
 
         public DateTime PreorderDate { get; set; }
