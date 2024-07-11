@@ -289,24 +289,24 @@ namespace SWPSolution.Application.Sales
 
             if (request.Status.HasValue)
             {
-                query = query.Where(o => o.OrderStatus.Equals(request.Status));
+                query = query.Where(o => o.OrderStatus == request.Status);
             }
 
             if (!string.IsNullOrEmpty(request.MemberId))
             {
-                query = query.Where(o => o.MemberId.Equals(request.MemberId));
+                query = query.Where(o => o.MemberId == request.MemberId);
             }
 
-            var orders = await query.Select(o => new Order
+            var ordersQuery = query.Select(o => new Order
             {
-                OrderId=o.OrderId,
-                MemberId=o.MemberId,
-                PromotionId=o.PromotionId,
-                ShippingAddress=o.ShippingAddress,
-                TotalAmount=o.TotalAmount,
+                OrderId = o.OrderId,
+                MemberId = o.MemberId,
+                PromotionId = o.PromotionId,
+                ShippingAddress = o.ShippingAddress,
+                TotalAmount = o.TotalAmount,
                 OrderStatus = o.OrderStatus,
                 OrderDate = o.OrderDate,
-                OrderDetails = c.OrderDetails.Select(od => new OrderDetail
+                OrderDetails = o.OrderDetails.Select(od => new OrderDetail
                 {
                     OrderdetailId = od.OrderdetailId,
                     OrderId = od.OrderId,
@@ -318,23 +318,22 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
+                }).ToList()
+            });
 
-                })
-                .ToListAsync();
-            int totalRow = orders.Count;
-            var pagedData = orders
+            int totalRow = await query.CountAsync();
+            var pagedData = await ordersQuery
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .ToList();
+                .ToListAsync();
 
-            return new PageResult<OrderVM>
+            return new PageResult<Order>
             {
-                PageIndex = request.PageIndex,
-                PageSize = request.PageSize,
-                TotalRecords = totalRow,
-                Items = pagedData
+                Items = pagedData,
+                TotalRecords = totalRow
             };
         }
+
 
         public async Task<PlaceOrderResult> PlaceOrderAsync(OrderRequest orderRequest)
         {
