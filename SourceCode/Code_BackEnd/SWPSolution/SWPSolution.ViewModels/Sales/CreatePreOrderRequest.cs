@@ -13,7 +13,7 @@ namespace SWPSolution.ViewModels.Sales
 
         public string ProductId { get; set; }
 
-
+        public string ShippingAddress { get; set; }
         public int Quantity { get; set; }
 
         public DateTime PreorderDate { get; set; }

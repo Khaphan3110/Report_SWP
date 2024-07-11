@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWPSolution.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class createDB : Migration
+    public partial class updatePreoder : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -158,7 +158,7 @@ namespace SWPSolution.Data.Migrations
                     Email = table.Column<string>(type: "varchar(255)", unicode: false, maxLength: 255, nullable: true),
                     PhoneNumber = table.Column<string>(type: "varchar(20)", unicode: false, maxLength: 20, nullable: true),
                     LoyaltyPoints = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
-                    RegistrationDate = table.Column<DateTime>(type: "date", nullable: true),
+                    RegistrationDate = table.Column<DateTime>(type: "date", nullable: false),
                     UserName = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
                     PassWord = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true)
                 },
@@ -300,6 +300,7 @@ namespace SWPSolution.Data.Migrations
                     preorder_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: false),
                     product_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
                     member_ID = table.Column<string>(type: "varchar(10)", unicode: false, maxLength: 10, nullable: true),
+                    ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     preorderDate = table.Column<DateTime>(type: "date", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
