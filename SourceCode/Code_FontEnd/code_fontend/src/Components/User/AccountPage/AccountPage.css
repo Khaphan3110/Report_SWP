@@ -65,4 +65,36 @@ footer p {
   background-color: #f05a72;
 }
 
+.tracking-button-order-user-complete{
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid #1ed55b;
+  color: #1ed55b;
+  margin-bottom: 5px;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+
+.tracking-button-order-user-complete:hover{
+  color: azure;
+  background-color: #1ed55b;
+}
+
+.tracking-button-order-user-cancel{
+  padding: 3px;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid rgb(233, 40, 40);
+  color: rgb(233, 40, 40);
+  border-radius: 5px;
+}
+
+.tracking-button-order-user-cancel:hover{
+  color: azure;
+  background-color: rgb(233, 40, 40);
+}
+
 

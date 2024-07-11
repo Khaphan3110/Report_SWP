@@ -23,6 +23,7 @@ namespace SWPSolution.Application.Sales
         Task<OrderVM> GetOrderById(string orderId);
         IEnumerable<Order> GetOrdersByMemberId(string memberId);
         Task<PageResult<Order>> GetOrdersPagingAsync(OrderPagingRequest request);
+        Task<PageResult<Order>> GetTrackingOrdersPagingAsync(OrderTrackingPagingRequest request);
 
         // Order status management
         Task<string> UpdateOrderStatus(string orderId, OrderStatus newStatus);

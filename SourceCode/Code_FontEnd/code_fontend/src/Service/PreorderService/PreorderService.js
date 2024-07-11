@@ -65,3 +65,12 @@ export const updateStatusPreorder = async (productPreorder) => {
       console.log("Error checkout preorder ", error);
     }
   };
+
+  export const PreorderPagingMember = async (memberID,pageIndex,pageSize) => {
+    try {
+      const res = await request.Post(`PreOrder/GetPreOrdersPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
+      return res;
+    } catch (error) {
+      console.log("Error pagin member  preorder ", error);
+    }
+  };

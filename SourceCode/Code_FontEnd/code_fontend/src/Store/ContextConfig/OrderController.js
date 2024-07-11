@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { OrderManagerContext } from "./Context";
-import { GetOrderPiging } from "../../Service/OrderService/OrderService";
+import { GetOrderPiging, GetOrderPigingMember } from "../../Service/OrderService/OrderService";
 import { getMemberID } from "../../Service/UserService/UserService";
 
 export default function OrderManagerProvider({ children }) {
   const [listOrder, setListOrder] = useState([]);
 
-  const getOrderPagin = async (pageindex,pageSize) => {
+  const getOrderPagin = async (memberID,pageindex,pageSize) => {
     try {
-      const resOrder = await GetOrderPiging(pageindex,pageSize);
+      const resOrder = await GetOrderPigingMember(memberID,pageindex,pageSize);
       if(resOrder) {
-
         setListOrder(resOrder.data)
       }
       

@@ -54,7 +54,7 @@ export const GetOrderPiging = async (pageIndex, pageSize) => {
 export const GetOrderPigingMember = async (memberID, pageIndex, pageSize) => {
   try {
     const res = await request.Get(
-      `Order/GetOrdersPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`
+      `Order/GetTrackingOrdersPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`
     );
     return res;
   } catch (error) {

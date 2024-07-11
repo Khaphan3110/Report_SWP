@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace SWPSolution.ViewModels.Sales
 {
-    public class PreOrderPagingRequest : PagingRequestBase
+    public class OrderTrackingPagingRequest : PagingRequestBase
     {
+        public string? Keyword { get; set; }
+
         public string? MemberId { get; set; }
 
-        public PreOrderStatus? PreOrderStatus { get; set; }
+        public OrderTrackingStatus? Status { get; set; }
     }
 }
