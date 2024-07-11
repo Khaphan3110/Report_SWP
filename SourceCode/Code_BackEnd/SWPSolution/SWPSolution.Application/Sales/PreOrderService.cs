@@ -81,7 +81,7 @@ namespace SWPSolution.Application.Sales
                 .FirstOrDefault(po => po.PreorderId == preorderId);
         }
 
-        public PageResult<PreOrderVM> GetPreOrdersPaging(PreOrderPagingRequest request)
+        public async Task<PageResult<PreOrder>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
         {
             var query = _context.PreOrders.AsQueryable();
 
@@ -97,7 +97,7 @@ namespace SWPSolution.Application.Sales
             var pagedData = query
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(p => new PreOrderVM
+                .Select(p => new PreOrder
                 {
                     MemberId = p.MemberId,
                     PreorderId = p.PreorderId,
@@ -106,11 +106,11 @@ namespace SWPSolution.Application.Sales
                     ShippingAddress = p.ShippingAddress,
                     Quantity = p.Quantity,
                     Status = p.Status,
-                    Total = p.Price
+                    Price = p.Price
                 })
                 .ToList();
 
-            return new PageResult<PreOrderVM>
+            return new PageResult<PreOrder>
             {
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,

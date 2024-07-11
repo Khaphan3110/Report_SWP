@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C82A2A6A-0933-4659-A531-6D96D87FBE44}|SWPSolution.Data\\SWPSolution.Data.csproj|solutionrelative:swpsolution.data\\ef\\swpsolutiondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\sales\\preorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\preorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\sales\\ipreorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\ipreorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\sales\\preorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\sales\\preorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B252FFBD-F182-4541-8115-6B9BB9651BF5}|SWPSolution.ViewModels\\SWPSolution.ViewModels.csproj|c:\\users\\khanh\\source\\repos\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.viewmodels\\sales\\preordervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,21 +46,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1264,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IPreOrderService.cs",
-              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IPreOrderService.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\IPreOrderService.cs",
-              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IPreOrderService.cs",
-              "RelativeToolTip": "SWPSolution.Application\\Sales\\IPreOrderService.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T14:35:29.498Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -83,7 +82,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "SWPSolutionDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAA7wDYAAAC4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T14:43:17.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
+              "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAACtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-07-11T14:41:09.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IPreOrderService.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IPreOrderService.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\IPreOrderService.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IPreOrderService.cs",
+              "RelativeToolTip": "SWPSolution.Application\\Sales\\IPreOrderService.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T14:35:29.498Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "PreOrderVM.cs",
               "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Sales\\PreOrderVM.cs",
               "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Sales\\PreOrderVM.cs",
@@ -96,13 +134,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "PreOrderController.cs",
               "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
               "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
               "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAUwF4AAAAZAAAA",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAUwF4AAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T14:25:09.389Z",
               "EditorCaption": ""
@@ -115,14 +153,14 @@
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\PreOrderService.cs",
               "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\PreOrderService.cs",
               "RelativeToolTip": "SWPSolution.Application\\Sales\\PreOrderService.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAiwBkAAAAzAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T10:09:51.044Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\AdminController.cs",
@@ -153,13 +191,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAwwGwAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T14:40:14.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "OrderService.cs",
               "DocumentMoniker": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\OrderService.cs",
               "ToolTip": "C:\\Users\\khanh\\source\\repos\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
               "RelativeToolTip": "SWPSolution.Application\\Sales\\OrderService.cs",
-              "ViewState": "AQIAADcBAAAAAAAAAAAAAEoBAAANAAAA",
+              "ViewState": "AQIAABgBAAAAAAAAAAAQwBgBAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-11T09:44:00.923Z",
               "EditorCaption": ""
