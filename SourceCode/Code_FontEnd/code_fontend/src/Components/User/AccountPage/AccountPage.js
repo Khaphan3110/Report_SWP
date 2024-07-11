@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./AccountPage.css";
 import { getUserInfor } from "../../../Service/UserService/UserService";
 import { useUserProfile } from "../../../Store";
+
 const AccountPage = () => {
   const navigator = useNavigate();
   const [showAddressModal, setShowAddressModal] = useState(false);
@@ -100,7 +101,14 @@ const AccountPage = () => {
                 {userProfile.profile ? userProfile.profile.member.phoneNumber : ""}
                 <br />
               </Card.Text>
-              <h5>ĐƠN HÀNG CỦA BẠN</h5>
+              <div style={{display:"flex",justifyContent:"space-between"}}>
+              <h5 style={{alignContent:"center",margin:"0"}}>ĐƠN HÀNG CỦA BẠN</h5>
+              <div>
+                <button className="button-change-mode-tracking" >sản phẩm mua trước</button>
+                <button className="button-change-mode-tracking" >lịch sử mua hàng</button>
+              </div>
+              </div>
+              
               <table className="table">
                 <thead>
                   <tr>

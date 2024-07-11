@@ -1,54 +1,68 @@
 /* AccountPage.css */
 
-  
-  .navbar {
-    background-color: #fff;
-    border-bottom: 1px solid #dee2e6;
-  }
-  
-  .navbar-brand {
-    color:  #F05A72 !important;
-    font-weight: bold;
-  }
-  
-  .nav-link {
-    color: #000 !important;
-  }
-  
-  .container {
-    margin-top: 20px;
-  }
-  
-  .card {
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-title {
-    color:  #F05A72;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .card-text strong {
-    color:  #F05A72;
-  }
-  
-  footer {
-    background-color:  #F05A72;
-    color: #fff;
-    padding: 20px 0;
-    margin-top: 40px;
-  }
-  
-  footer p {
-    margin: 0;
-  }
-  
-  .nav-link.active {
-    font-weight: bold;
-    color:  F05A72 !important;
-  }
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+}
 
-  
+.navbar-brand {
+  color: #f05a72 !important;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #000 !important;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: #f05a72;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.card-text strong {
+  color: #f05a72;
+}
+
+footer {
+  background-color: #f05a72;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+footer p {
+  margin: 0;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: F05A72 !important;
+}
+
+.button-change-mode-tracking {
+  outline: none;
+  background-color: transparent;
+  border: 0;
+  padding: 5px;
+  margin-left: 5px;
+  border: 1px solid #f05a72;
+  border-radius: 10px;
+}
+
+.button-change-mode-tracking:hover{
+  color: white;
+  background-color: #f05a72;
+}
+
+

@@ -81,7 +81,7 @@ namespace SWPSolution.Application.Sales
                 .FirstOrDefault(po => po.PreorderId == preorderId);
         }
 
-        public async Task<PageResult<PreOrderVM>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
+        public async Task<PageResult<PreOrder>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
         {
             var query = _context.PreOrders.AsQueryable();
 
@@ -90,25 +90,27 @@ namespace SWPSolution.Application.Sales
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
 
-            var preorders = await query.Select(p => new PreOrderVM
-            {
-                MemberId = p.MemberId,
-                PreorderId = p.PreorderId,
-                PreorderDate = p.PreorderDate,
-                ProductId = p.ProductId,
-                ShippingAddress = p.ShippingAddress,
-                Quantity = p.Quantity,
-                Status = p.Status,
-                Total = p.Price
-            })
-                .ToListAsync();
-            int totalRow = preorders.Count;
-            var pagedData = preorders
+            // Get the total number of records
+            int totalRow = query.Count();
+
+            // Apply paging and select to ViewModel
+            var pagedData = query
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
+                .Select(p => new PreOrder
+                {
+                    MemberId = p.MemberId,
+                    PreorderId = p.PreorderId,
+                    PreorderDate = p.PreorderDate,
+                    ProductId = p.ProductId,
+                    ShippingAddress = p.ShippingAddress,
+                    Quantity = p.Quantity,
+                    Status = p.Status,
+                    Price = p.Price
+                })
                 .ToList();
 
-            return new PageResult<PreOrderVM>
+            return new PageResult<PreOrder>
             {
                 PageIndex = request.PageIndex,
                 PageSize = request.PageSize,
@@ -116,6 +118,7 @@ namespace SWPSolution.Application.Sales
                 Items = pagedData
             };
         }
+
 
         public async Task<List<PreOrder>> GetAll()
         {

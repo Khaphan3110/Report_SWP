@@ -10,11 +10,8 @@ export default function OrderManagerProvider({ children }) {
     try {
       const resOrder = await GetOrderPiging(pageindex,pageSize);
       if(resOrder) {
-        const resMember =  await getMemberID(resOrder.data.memberId);
-        setListOrder({
-          order: resOrder.data,
-          inforMember: resMember.data
-        })
+
+        setListOrder(resOrder.data)
       }
       
     } catch (error) {
