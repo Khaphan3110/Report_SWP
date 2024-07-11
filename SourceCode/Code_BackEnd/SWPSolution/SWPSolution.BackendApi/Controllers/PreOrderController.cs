@@ -129,7 +129,7 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var preorder =  _context.PreOrders.FirstOrDefault(po => po.PreorderId == model.PreorderId && po.Price == model.Total);
+            var preorder =  _context.Payments.FirstOrDefault(po => po.PreorderId == model.PreorderId && po.Amount == model.Total);
             if (preorder == null)
             {
                 throw new Exception("Preorder not found");
