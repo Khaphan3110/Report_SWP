@@ -89,6 +89,16 @@ namespace SWPSolution.BackendApi.Controllers
 
             return Ok(preOrder);
         }
+        [HttpGet("GetPreOrdersPaging")]
+        public async Task<IActionResult> GetPreOrdersPaging([FromQuery] PreOrderPagingRequest request)
+        {
+            var result = await _preOrderService.GetPreOrdersPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
 
         [HttpGet("GetAllPreOrders")]
         public async Task<IActionResult> GetAllOrders()

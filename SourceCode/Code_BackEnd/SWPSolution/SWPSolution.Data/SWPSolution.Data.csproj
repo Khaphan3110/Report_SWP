@@ -24,8 +24,4 @@
     <ProjectReference Include="..\SWPSolution.Utilities\SWPSolution.Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

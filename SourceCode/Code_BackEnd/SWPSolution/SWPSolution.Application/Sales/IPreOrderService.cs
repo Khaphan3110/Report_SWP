@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace SWPSolution.Application.Sales
         Task NotifyCustomer(string memberId, PreOrder preorder, string paymentUrl);
         Task UpdateOrderStatus(string preorderId, PreOrderStatus newStatus);
         Task<PreOrder> GetPreOrder(string preorderId);
+        Task<PageResult<PreOrderVM>> GetPreOrdersPagingAsync(PreOrderPagingRequest request);
         Task SendReceiptEmailAsync(string memberId, PreOrder preorder);
         Task<string> CheckPreOrderAsync(string preorderId);
         Task<string> GeneratePaymentUrlAndNotifyAsync(string preorderId, HttpContext httpContext);

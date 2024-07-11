@@ -284,10 +284,19 @@ namespace SWPSolution.Application.Sales
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(o => o.OrderId.Contains(request.Keyword) ||
-                                          o.OrderStatus.ToString().Contains(request.Keyword)
-                                          );
+                query = query.Where(o => o.OrderId.Contains(request.Keyword));
             }
+
+            if (request.Status.HasValue)
+            {
+                query = query.Where(o => o.OrderStatus.Equals(request.Status));
+            }
+
+            if (!string.IsNullOrEmpty(request.MemberId))
+            {
+                query = query.Where(o => o.MemberId.Equals(request.MemberId));
+            }
+
             var orders = await query.Select(o => new OrderVM
             {
                 OrderId=o.OrderId,

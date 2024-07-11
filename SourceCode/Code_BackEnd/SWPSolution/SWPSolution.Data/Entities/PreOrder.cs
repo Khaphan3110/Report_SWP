@@ -12,9 +12,9 @@ public partial class PreOrder
 
     public string MemberId { get; set; }
 
-    public int? Quantity { get; set; }
+    public int Quantity { get; set; }
 
-    public DateTime? PreorderDate { get; set; }
+    public DateTime PreorderDate { get; set; }
 
     public double Price { get; set; }
 
