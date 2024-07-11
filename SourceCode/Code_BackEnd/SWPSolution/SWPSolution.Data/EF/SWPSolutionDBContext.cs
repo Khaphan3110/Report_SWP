@@ -52,7 +52,9 @@ public partial class SWPSolutionDBContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+
          => optionsBuilder.UseSqlServer("Data Source=mssql.recs.site;Initial Catalog=SWP_Project;Persist Security Info=True;User ID=sa;PassWord=Thomas1910@;Trust Server Certificate=True");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -105,10 +105,10 @@ const AccountPage = () => {
                 <thead>
                   <tr>
                     <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Thành tiền</th>
-                    <th>TT thanh toán</th>
+                    <th>Ngày đặt</th>     
                     <th>TT vận chuyển</th>
+                    <th>Thành tiền</th>
+                    <th>Trạng thái đơn hàng</th>
                   </tr>
                 </thead>
                 <tbody>

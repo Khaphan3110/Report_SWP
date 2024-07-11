@@ -49,6 +49,7 @@ const CheckoutPage = () => {
       district_Name: Yup.string().required("không được bỏ trống quận!"),
       city: Yup.string().required("không được bỏ trống thành phố!"),
       region: Yup.string().required("không được bỏ trống đất nước!"),
+      phoneNumber: Yup.string().required("không được bỏ trống só điện thoại"),
     }),
 
     onSubmit: async (values) => {
@@ -60,12 +61,11 @@ const CheckoutPage = () => {
         region: values.region,
       };
       addCurrentAddress(addressCurrent);
-      if(actionPram === "order"){
+      if (actionPram === "order") {
         navigate("/payment/order");
       } else {
         navigate("/payment/preorder");
       }
-      
     },
   });
 
@@ -117,7 +117,9 @@ const CheckoutPage = () => {
   };
 
   const calculateTotalPreOrderWithPromotin = (promotion) => {
-    return Preorder.totalPreOrder - Preorder.totalPreOrder * (1 - promotion / 100);
+    return (
+      Preorder.totalPreOrder - Preorder.totalPreOrder * (1 - promotion / 100)
+    );
   };
 
   console.log("preorder", Preorder);
@@ -138,18 +140,36 @@ const CheckoutPage = () => {
                   readOnly
                 />
               </div>
+              {formik.errors.fullName && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.fullName}
+                </p>
+              )}
               <div>
                 <label>Số điện thoại</label>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  value={formik.values.phoneNumber}
-                  onChange={formik.handleChange}
-                  readOnly
-                />
+                {formik.values.phoneNumber ? (
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                    readOnly
+                  />
+                ) : (
+                  <>
+                  Bạn chưa có số điện thoại vui lòng đăng ký 
+                  <Link to={"/addresses"}> Đăng ký số điện thoại</Link>
+                  </>
+                )}
               </div>
+              {formik.errors.phoneNumber && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.phoneNumber}
+                </p>
+              )}
               <div>
                 <label>Địa chỉ</label>
+
                 <input
                   type="text"
                   name="house_Numbers"
@@ -157,6 +177,11 @@ const CheckoutPage = () => {
                   onChange={formik.handleChange}
                 />
               </div>
+              {formik.errors.house_Numbers && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.house_Numbers}
+                </p>
+              )}
               <div>
                 <label>Phường / Xã</label>
                 <input
@@ -166,6 +191,11 @@ const CheckoutPage = () => {
                   onChange={formik.handleChange}
                 />
               </div>
+              {formik.errors.street_Name && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.street_Name}
+                </p>
+              )}
               <div>
                 <label>Quận / Huyện</label>
                 <input
@@ -175,6 +205,11 @@ const CheckoutPage = () => {
                   onChange={formik.handleChange}
                 />
               </div>
+              {formik.errors.district_Name && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.district_Name}
+                </p>
+              )}
               <div>
                 <label>Tỉnh / Thành phố</label>
                 <input
@@ -184,6 +219,11 @@ const CheckoutPage = () => {
                   onChange={formik.handleChange}
                 />
               </div>
+              {formik.errors.city && (
+                <p style={{ color: "red", margin: "0" }}>
+                  {formik.errors.city}
+                </p>
+              )}
               <button
                 className="continue-button"
                 type="submit"
@@ -291,20 +331,20 @@ const CheckoutPage = () => {
             </>
           ) : (
             <>
-                <div className="product-summary" >
-                  <img
-                    src={`https://localhost:44358/user-content/${
-                      Preorder.preOrderProduct.images[0]
-                        ? Preorder.preOrderProduct.images[0].imagePath
-                        : "productImage"
-                    }`}
-                    alt={Preorder.preOrderProduct.productName}
-                  />
-                  <div className="product-info">
-                    <p>{Preorder.preOrderProduct.productName}</p>
-                    <p> {Preorder.preOrderProduct.price.toLocaleString()}₫</p>
-                  </div>
+              <div className="product-summary">
+                <img
+                  src={`https://localhost:44358/user-content/${
+                    Preorder.preOrderProduct.images[0]
+                      ? Preorder.preOrderProduct.images[0].imagePath
+                      : "productImage"
+                  }`}
+                  alt={Preorder.preOrderProduct.productName}
+                />
+                <div className="product-info">
+                  <p>{Preorder.preOrderProduct.productName}</p>
+                  <p> {Preorder.preOrderProduct.price.toLocaleString()}₫</p>
                 </div>
+              </div>
               {listPromotion.length > 0 ? (
                 <>
                   <div className="discount-code">
@@ -354,7 +394,9 @@ const CheckoutPage = () => {
                   <h4 style={{ color: "#ff6f61" }}>
                     ban đã được giảm{" "}
                     {calculateTotalPreOrderWithPromotin(
-                      Preorder.promotionPreorder.promotionValues ? Preorder.promotionPreorder.promotionValues : 1
+                      Preorder.promotionPreorder.promotionValues
+                        ? Preorder.promotionPreorder.promotionValues
+                        : 1
                     ).toLocaleString()}{" "}
                     đ
                   </h4>
@@ -362,9 +404,11 @@ const CheckoutPage = () => {
               ) : (
                 <div>
                   <p style={{ color: "#f592a2", fontWeight: "bold" }}>
-                    Hiện tại chưa có khuyến mãi nào khác 
+                    Hiện tại chưa có khuyến mãi nào khác
                     {calculateTotalPreOrderWithPromotin(
-                      Preorder.promotionPreorder.promotionValues ? Preorder.promotionPreorder.promotionValues : 1
+                      Preorder.promotionPreorder.promotionValues
+                        ? Preorder.promotionPreorder.promotionValues
+                        : 1
                     ).toLocaleString()}{" "}
                     đ
                   </p>

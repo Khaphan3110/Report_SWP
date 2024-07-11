@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e660dfa9a66d34682c51341523d154f7b418542")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7511a0a40971ea2911d5f86e09b55f83fc273caf")]
+>>>>>>> 4f0e225b5fc9350d9705bfdd06b655a617f0c9dc
 [assembly: System.Reflection.AssemblyProductAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWPSolution.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

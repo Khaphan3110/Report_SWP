@@ -60,7 +60,7 @@ const PaymentPage = () => {
           : "kh co địa chỉ",
         promotionId: state.promotion.promotions,
         orderDetails: formattedArray,
-        totalAmount: state.total,
+        totalAmount: Math.ceil(state.total),
       });
     }
   }, [formattedArray, state.total]);
@@ -82,6 +82,7 @@ const PaymentPage = () => {
           alert("chua thuc  hien xong :))))()()()");
         } else if (statePaymentMethod === "vnpay") {
           const payMentOCD = await createOrder(orderInfor);
+          console.log("orderinfor before",payMentOCD)
           if (payMentOCD) {
             console.log("order", payMentOCD.data);
             const orderInfor = {
@@ -132,7 +133,7 @@ const PaymentPage = () => {
               userProfile.CurrentAdress.region
             : "kh co địa chỉ",
             quantity: Preorder.preOrderProduct.quantity,
-            total: Preorder.totalPreOrder,
+            total: Math.ceil(Preorder.totalPreOrder),
             status: 0,
           };
           console.log("value", PreOrderInfor);
@@ -147,7 +148,7 @@ const PaymentPage = () => {
               memberId: res.data.memberId,
               quantity: res.data.quantity,
               preorderDate: newDate.toISOString(),
-              total: res.data.price - res.data.price * (1 - 15 / 100),
+              total: Math.ceil(res.data.price - res.data.price * (1 - 15 / 100)),
               status: 0,
             };
             const memberID = res.data.memberId
@@ -162,7 +163,7 @@ const PaymentPage = () => {
                 memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
                 preorderDate: DepoDate.toISOString(),
-                total: resDeposit.data.amount,
+                total: Math.ceil(resDeposit.data.amount),
                 status: 0,
               };
               const VNpaycheckout = await VnpayCheckout(dataCheckout);

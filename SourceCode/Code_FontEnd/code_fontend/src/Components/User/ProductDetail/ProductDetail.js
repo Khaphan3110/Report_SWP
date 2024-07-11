@@ -25,7 +25,9 @@ export default function ProductDetail() {
           const categoryRes = await getCateByID(productRes.data.categoriesId);
           const ProductReview = await GetReviewProduct(productId);
           if (ProductReview) {
-            const memberReview = await getMemberID(ProductReview.data[0].memberId);
+            const memberReview = await getMemberID(
+              ProductReview.data[0].memberId
+            );
             setProductDetail({
               categoriesId: productRes.data.categoriesId,
               description: productRes.data.description,
@@ -38,21 +40,22 @@ export default function ProductDetail() {
               statusDescription: productRes.data.statusDescription,
               category: categoryRes ? categoryRes.data : null,
               review: ProductReview ? ProductReview.data : null,
-              member: memberReview ? memberReview.data: null,
+              member: memberReview ? memberReview.data : null,
+            });
+          } else {
+            setProductDetail({
+              categoriesId: productRes.data.categoriesId,
+              description: productRes.data.description,
+              image: productRes.data.image,
+              images: imagesRes.data,
+              price: productRes.data.price,
+              productId: productRes.data.productId,
+              productName: productRes.data.productName,
+              quantity: productRes.data.quantity,
+              statusDescription: productRes.data.statusDescription,
+              category: categoryRes ? categoryRes.data : null,
             });
           }
-          setProductDetail({
-            categoriesId: productRes.data.categoriesId,
-            description: productRes.data.description,
-            image: productRes.data.image,
-            images: imagesRes.data,
-            price: productRes.data.price,
-            productId: productRes.data.productId,
-            productName: productRes.data.productName,
-            quantity: productRes.data.quantity,
-            statusDescription: productRes.data.statusDescription,
-            category: categoryRes ? categoryRes.data : null,
-          });
         }
       } catch (error) {
         console.error("Error fetching product details:", error);

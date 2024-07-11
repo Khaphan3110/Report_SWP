@@ -30,6 +30,7 @@ function UserProvider({ children }) {
         setUserProfile((prevState) => ({
           ...prevState,
           addresses: resAddress.data,
+          CurrentAdress:resAddress.data
         }));
       }
       return resAddress;

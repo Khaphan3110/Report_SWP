@@ -300,7 +300,9 @@ select * from AppUsers
 select * from [Member]
 select * from [Address]
 select * from AppRoles
-delete AppRoles
+delete [Address]
+delete AppUsers where Id = 'D3D41F99-9CBD-45E1-A8CD-8CA670A585B1'
+delete AppUsers
 delete [Member] where member_ID = 'MB0624004'
 --==================================================
 ALTER TABLE dbo.Address NOCHECK CONSTRAINT fk_Address;
@@ -313,11 +315,16 @@ delete [Address] where address_ID = 'AMM0624004'
 select * from [Address] where address_ID = 'AMM0724011'
 delete [Address] where address_ID = 'AMM0724011'
 
+delete [Order]
 select * from [Order]
 select * from OrderDetails
 
+select * from Promotion
+
+delete Payment
 select * from Payment
 select * from PreOrder
-
+delete PreOrder
 select * from Review
+
 delete Review
