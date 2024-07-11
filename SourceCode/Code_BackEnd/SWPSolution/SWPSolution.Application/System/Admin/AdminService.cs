@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.Metrics;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -629,6 +630,55 @@ namespace SWPSolution.Application.System.Admin
                     OrderDate = (DateTime)order.OrderDate,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<Dictionary<DayOfWeek, int>> GetUserRegistrationsForCurrentWeek()
+        {
+            var currentDate = DateTime.Now;
+            var currentCulture = CultureInfo.CurrentCulture;
+            var firstDayOfWeek = currentCulture.DateTimeFormat.FirstDayOfWeek;
+
+            // Calculate the start date of the current week
+            var startDateOfWeek = currentDate.Date;
+            while (startDateOfWeek.DayOfWeek != firstDayOfWeek)
+            {
+                startDateOfWeek = startDateOfWeek.AddDays(-1);
+            }
+
+            // Calculate the end date of the current week
+            var endDateOfWeek = startDateOfWeek.AddDays(7);
+
+            // Fetch the user registrations within the current week from the database
+            var userRegistrations = await _context.Members
+                .Where(u => u.RegistrationDate >= startDateOfWeek && u.RegistrationDate < endDateOfWeek)
+                .ToListAsync();
+
+            // Initialize a dictionary to store the number of registrations for each day of the week
+            var registrationsByDay = new Dictionary<DayOfWeek, int>();
+
+            // Populate the dictionary with all days of the week set to zero initially
+            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                registrationsByDay[day] = 0;
+            }
+
+            // Group the registrations by day of the week and calculate the totals in memory
+            var groupedRegistrations = userRegistrations
+                .GroupBy(u => u.RegistrationDate.DayOfWeek)
+                .Select(g => new
+                {
+                    Day = g.Key,
+                    RegistrationCount = g.Count()
+                })
+                .ToList();
+
+            // Populate the dictionary with the results
+            foreach (var registrationGroup in groupedRegistrations)
+            {
+                registrationsByDay[registrationGroup.Day] = registrationGroup.RegistrationCount;
+            }
+
+            return registrationsByDay;
         }
     }
 }

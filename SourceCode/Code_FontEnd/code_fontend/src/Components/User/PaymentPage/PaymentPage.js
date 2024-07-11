@@ -120,6 +120,17 @@ const PaymentPage = () => {
           const PreOrderInfor = {
             productId: Preorder.preOrderProduct.productId,
             token: userProfile.userToken, //Preorder.preOrderProduct.productId
+            shippingAddress: userProfile
+            ? userProfile.CurrentAdress.house_Number +
+              "," +
+              userProfile.CurrentAdress.street_Name +
+              "," +
+              userProfile.CurrentAdress.district_Name +
+              "," +
+              userProfile.CurrentAdress.city +
+              "," +
+              userProfile.CurrentAdress.region
+            : "kh co địa chỉ",
             quantity: Preorder.preOrderProduct.quantity,
             total: Preorder.totalPreOrder,
             status: 0,
@@ -132,6 +143,7 @@ const PaymentPage = () => {
             const preDeposit = {
               preorderId: res.data.preorderId,
               productId: res.data.productId,
+              shippingAddress:res.data.shippingAddress,
               memberId: res.data.memberId,
               quantity: res.data.quantity,
               preorderDate: newDate.toISOString(),
@@ -146,6 +158,7 @@ const PaymentPage = () => {
               const dataCheckout = {
                 preorderId: resDeposit.data.preorderId,
                 productId: Preorder.preOrderProduct.productId,
+                shippingAddress:res.data.shippingAddress,
                 memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
                 preorderDate: DepoDate.toISOString(),

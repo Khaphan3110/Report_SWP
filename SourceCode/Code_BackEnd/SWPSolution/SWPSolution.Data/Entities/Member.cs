@@ -20,7 +20,7 @@ public partial class Member
 
     public decimal? LoyaltyPoints { get; set; }
 
-    public DateTime? RegistrationDate { get; set; }
+    public DateTime RegistrationDate { get; set; }
 
     public string UserName { get; set; }
 

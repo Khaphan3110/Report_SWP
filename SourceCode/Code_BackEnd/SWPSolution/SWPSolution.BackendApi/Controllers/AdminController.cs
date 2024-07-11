@@ -359,5 +359,12 @@ namespace SWPSolution.BackendApi.Controllers
             }
             return Ok(order);
         }
+
+        [HttpGet("user-registrations-week")]
+        public async Task<IActionResult> GetUserRegistrationsForCurrentWeek()
+        {
+            var registrationsByDay = await _adminService.GetUserRegistrationsForCurrentWeek();
+            return Ok(new { RegistrationsByDay = registrationsByDay });
+        }
     }
 }

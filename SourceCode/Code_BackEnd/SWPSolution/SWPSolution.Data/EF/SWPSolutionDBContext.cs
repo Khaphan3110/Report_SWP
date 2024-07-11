@@ -52,7 +52,7 @@ public partial class SWPSolutionDBContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=mssql.recs.site;Initial Catalog=SWP_Project;Persist Security Info=True;User ID=sa;PassWord=Thomas1910@;Trust Server Certificate=True");
+         => optionsBuilder.UseSqlServer("Data Source=mssql.recs.site;Initial Catalog=SWP_Project;Persist Security Info=True;User ID=sa;PassWord=Thomas1910@;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -341,6 +341,7 @@ public partial class SWPSolutionDBContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("product_ID");
+            entity.Property(e => e.ShippingAddress).HasMaxLength(50);
 
             entity.HasOne(d => d.Member).WithMany(p => p.PreOrders)
                 .HasForeignKey(d => d.MemberId)

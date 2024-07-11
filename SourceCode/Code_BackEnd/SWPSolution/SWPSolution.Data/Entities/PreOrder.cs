@@ -12,6 +12,8 @@ public partial class PreOrder
 
     public string MemberId { get; set; }
 
+    public string ShippingAddress { get; set; }
+
     public int Quantity { get; set; }
 
     public DateTime PreorderDate { get; set; }

@@ -57,6 +57,7 @@ namespace SWPSolution.Application.Sales
                     PreorderId = GeneratePreOrderId(),
                     ProductId = model.ProductId,
                     MemberId = await ExtractMemberIdFromTokenAsync(model.Token),
+                    ShippingAddress = model.ShippingAddress,
                     Quantity = model.Quantity,
                     PreorderDate = DateTime.UtcNow,
                     Price = model.Total,
@@ -95,6 +96,7 @@ namespace SWPSolution.Application.Sales
                 PreorderId = p.PreorderId,
                 PreorderDate = p.PreorderDate,
                 ProductId = p.ProductId,
+                ShippingAddress = p.ShippingAddress,
                 Quantity = p.Quantity,
                 Status = p.Status,
                 Total = p.Price
@@ -124,6 +126,7 @@ namespace SWPSolution.Application.Sales
                     PreorderId= c.PreorderId,
                     ProductId= c.ProductId,
                     MemberId = c.MemberId,
+                    ShippingAddress = c.ShippingAddress,
                     Quantity = c.Quantity,
                     PreorderDate = c.PreorderDate,
                     Price = c.Price,
