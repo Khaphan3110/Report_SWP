@@ -278,7 +278,7 @@ namespace SWPSolution.Application.Sales
                 .ToList();
         }
 
-        public async Task<PageResult<OrderVM>> GetOrdersPagingAsync(OrderPagingRequest request)
+        public async Task<PageResult<Order>> GetOrdersPagingAsync(OrderPagingRequest request)
         {
             var query = _context.Orders.AsQueryable();
 
@@ -297,7 +297,7 @@ namespace SWPSolution.Application.Sales
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
 
-            var orders = await query.Select(o => new OrderVM
+            var orders = await query.Select(o => new Order
             {
                 OrderId=o.OrderId,
                 MemberId=o.MemberId,
@@ -306,8 +306,20 @@ namespace SWPSolution.Application.Sales
                 TotalAmount=o.TotalAmount,
                 OrderStatus = o.OrderStatus,
                 OrderDate = o.OrderDate,
-                
-            })
+                OrderDetails = c.OrderDetails.Select(od => new OrderDetail
+                {
+                    OrderdetailId = od.OrderdetailId,
+                    OrderId = od.OrderId,
+                    ProductId = od.ProductId,
+                    Quantity = od.Quantity,
+                    Price = od.Price,
+                    Product = new Product
+                    {
+                        ProductId = od.Product.ProductId,
+                        ProductName = od.Product.ProductName
+                    }
+
+                })
                 .ToListAsync();
             int totalRow = orders.Count;
             var pagedData = orders
