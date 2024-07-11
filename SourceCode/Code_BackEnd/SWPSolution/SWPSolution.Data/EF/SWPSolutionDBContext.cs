@@ -287,7 +287,6 @@ public partial class SWPSolutionDBContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("payment_ID");
             entity.Property(e => e.Amount)
-                .HasColumnType("decimal(10, 2)")
                 .HasColumnName("amount");
             entity.Property(e => e.DiscountValue).HasColumnName("discountValue");
             entity.Property(e => e.OrderId)

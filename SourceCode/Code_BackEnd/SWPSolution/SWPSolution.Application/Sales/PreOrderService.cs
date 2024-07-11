@@ -7,6 +7,7 @@ using SWPSolution.Application.AppPayment.VNPay;
 using SWPSolution.Application.System.User;
 using SWPSolution.Data.Entities;
 using SWPSolution.Data.Enum;
+using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.Payment;
 using SWPSolution.ViewModels.Sales;
 using SWPSolution.ViewModels.System.Users;
@@ -77,6 +78,41 @@ namespace SWPSolution.Application.Sales
                 .Include(po => po.Product)
                 .Include(po => po.Member)
                 .FirstOrDefault(po => po.PreorderId == preorderId);
+        }
+
+        public async Task<PageResult<PreOrderVM>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
+        {
+            var query = _context.PreOrders.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.MemberId))
+            {
+                query = query.Where(o => o.MemberId.Equals(request.MemberId));
+            }
+
+            var preorders = await query.Select(p => new PreOrderVM
+            {
+                MemberId = p.MemberId,
+                PreorderId = p.PreorderId,
+                PreorderDate = p.PreorderDate,
+                ProductId = p.ProductId,
+                Quantity = p.Quantity,
+                Status = p.Status,
+                Total = p.Price
+            })
+                .ToListAsync();
+            int totalRow = preorders.Count;
+            var pagedData = preorders
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            return new PageResult<PreOrderVM>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRow,
+                Items = pagedData
+            };
         }
 
         public async Task<List<PreOrder>> GetAll()

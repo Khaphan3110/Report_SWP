@@ -99,7 +99,7 @@ const PaymentPage = () => {
             );
             if (payMentVNPAY) {
               window.open(payMentVNPAY.data.paymentUrl, "_blank");
-              dispatch(() => Actions.clearListToCart());
+              // dispatch(() => Actions.clearListToCart());
             }
             // alert("thanh toan thanh cong mua  hang tiep  nao");
             // navigator("/");

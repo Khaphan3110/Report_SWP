@@ -317,7 +317,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 445,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -345,45 +345,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
-              "ViewState": "AQIAAJwAAAAAAAAAAAAAAKoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T07:08:43.218Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MemberInfoVM.cs",
-              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
-              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
-              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
-              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T07:07:41.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Member.cs",
-              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
-              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Member.cs",
-              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
-              "RelativeToolTip": "SWPSolution.Data\\Entities\\Member.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T07:07:37.734Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 7,
               "Title": "jquery.validate.js",
               "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
@@ -392,8 +353,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
               "ViewState": "AQIAAFAAAAAAAAAAAAAAAFsAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-11T06:36:22.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T06:36:22.545Z"
             },
             {
               "$type": "Document",
@@ -405,8 +365,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\VMPayment\\PaymentVM.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAqwBYAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T06:08:43.166Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T06:08:43.166Z"
             },
             {
               "$type": "Document",
@@ -418,8 +377,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAACRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-26T18:41:17.655Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T18:41:17.655Z"
             },
             {
               "$type": "Document",
@@ -431,8 +389,7 @@
               "RelativeToolTip": "SWPSolution.AdminApp\\Controllers\\UserController.cs",
               "ViewState": "AQIAACIAAAAAAAAAAAAAADgAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-06T09:04:07.849Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-06T09:04:07.849Z"
             },
             {
               "$type": "Document",
@@ -444,8 +401,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\Catalog\\Sales\\OrderDetailVM.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T06:39:19.116Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T06:39:19.116Z"
             },
             {
               "$type": "Document",
@@ -467,10 +423,46 @@
               "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
               "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAAADYAAAC7AAAA",
+              "ViewState": "AQIAAC4AAAAAAAAAAAA/wD0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-28T11:31:03.849Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Member.cs",
+              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeDocumentMoniker": "SWPSolution.Data\\Entities\\Member.cs",
+              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Entities\\Member.cs",
+              "RelativeToolTip": "SWPSolution.Data\\Entities\\Member.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T07:07:37.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MemberInfoVM.cs",
+              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
+              "RelativeDocumentMoniker": "SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
+              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
+              "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\MemberInfoVM.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T07:07:41.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\UsersController.cs",
+              "ViewState": "AQIAAJwAAAAAAAAAAAAAAKoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T07:08:43.218Z"
             },
             {
               "$type": "Document",
@@ -482,8 +474,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\System\\Users\\UpdateMemberRequest.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T07:07:53.39Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T07:07:53.39Z"
             },
             {
               "$type": "Document",
@@ -520,8 +511,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\Program.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAUwCUAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T09:20:34.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T09:20:34.473Z"
             },
             {
               "$type": "Document",
@@ -555,8 +545,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\Sales\\PreOrderRequest.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-26T09:09:53.546Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T09:09:53.546Z"
             },
             {
               "$type": "Document",
@@ -968,8 +957,7 @@
               "RelativeToolTip": "SWPSolution.Data\\Migrations\\SWPSolutionDBContextModelSnapshot.cs",
               "ViewState": "AQIAAGIDAAAAAAAAAIBZwG8DAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-28T08:47:28.913Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-28T08:47:28.913Z"
             },
             {
               "$type": "Document",
@@ -1037,8 +1025,7 @@
               "RelativeToolTip": "SWPSolution.Data\\efpt.config.json",
               "ViewState": "AQIAAF4AAAAAAAAAAIBJwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-28T08:33:50.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-28T08:33:50.807Z"
             },
             {
               "$type": "Document",
@@ -1157,8 +1144,7 @@
               "RelativeToolTip": "SWPSolution.ViewModels\\efpt.config.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-26T09:10:13.571Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T09:10:13.571Z"
             },
             {
               "$type": "Document",

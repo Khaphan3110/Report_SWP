@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SWPSolution.Application.JWT
 {
@@ -13,27 +11,70 @@ namespace SWPSolution.Application.JWT
     {
         private readonly IConfiguration _config;
 
-        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
+        public JwtHelper(IConfiguration config)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtTokenBytes = Convert.FromBase64String(token.Split('.')[1]);
-            var jwtPayload = Encoding.UTF8.GetString(jwtTokenBytes);
-            var jwtSecret = _config["JWT:SigningKey"];
+            _config = config;
+        }
 
-            var tokenValidationParameters = new TokenValidationParameters
+        public string GenerateToken(string memberId)
+        {
+            var jwtSecret = _config["JWT:SigningKey"];
+            var issuer = _config["JWT:Issuer"];
+            var audience = _config["JWT:Audience"];
+            var expiryMinutes = int.Parse(_config["JWT:ExpiryMinutes"]);
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
+                new Claim("member_id", memberId),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-            SecurityToken validatedToken;
-            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
-            var memberId = principal.FindFirst("member_id")?.Value;
+            var token = new JwtSecurityToken(
+                issuer,
+                audience,
+                claims,
+                expires: DateTime.Now.AddMinutes(expiryMinutes),
+                signingCredentials: credentials);
 
-            return await Task.FromResult(memberId);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<string> ExtractMemberIdFromTokenAsync(string token)
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var jwtSecret = _config["JWT:SigningKey"];
+
+                var tokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true, // Enable token expiration validation
+                    ClockSkew = TimeSpan.Zero
+                };
+
+                SecurityToken validatedToken;
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out validatedToken);
+                var memberId = principal.FindFirst("member_id")?.Value;
+
+                return await Task.FromResult(memberId);
+            }
+            catch (SecurityTokenExpiredException)
+            {
+                // Handle expired token
+                return null; // or throw a custom exception if needed
+            }
+            catch (Exception)
+            {
+                // Handle other exceptions
+                return null; // or throw a custom exception if needed
+            }
         }
     }
 }
