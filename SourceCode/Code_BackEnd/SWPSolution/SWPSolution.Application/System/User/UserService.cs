@@ -16,8 +16,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Logging;
-using System.Linq;
-using SWPSolution.ViewModels.Catalog.Blog;
 
 
 namespace SWPSolution.Application.System.User

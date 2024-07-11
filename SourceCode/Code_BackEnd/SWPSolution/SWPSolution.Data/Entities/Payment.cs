@@ -23,9 +23,9 @@ public partial class Payment
     public string PaymentMethod { get; set; }
 
     public DateTime PaymentDate { get; set; }
-
     [JsonIgnore]
     public virtual Order Order { get; set; }
     [JsonIgnore]
-    public virtual PreOrder PreOrder { get; set; }
+
+    public virtual PreOrder Preorder { get; set; }
 }
