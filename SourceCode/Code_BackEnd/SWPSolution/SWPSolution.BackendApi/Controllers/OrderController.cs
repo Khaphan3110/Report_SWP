@@ -124,6 +124,17 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetOrdersHistoryPaging")]
+        public async Task<IActionResult> GetOrdersHistoryPaging([FromQuery] OrderHistoryPagingRequest request)
+        {
+            var result = await _orderService.GetOrdersHistoryPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
+
         [HttpGet("GetAllOrders")]
         public async Task<IActionResult> GetAllOrders()
         {
@@ -165,10 +176,10 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpPut("{orderId}/status")]
-        public async Task<IActionResult> UpdateOrderStatus(string orderId, [FromBody] UpdateOrderStatusRequest request)
+        public async Task<IActionResult> UpdateOrderStatus(string orderId, OrderStatus status)
         {
-            await _orderService.UpdateOrderStatus(orderId, request.NewStatus);
-            return NoContent();
+            await _orderService.UpdateOrderStatus(orderId, status);
+            return Ok();
         }
 
         [HttpPost("cancel/{orderId}")]

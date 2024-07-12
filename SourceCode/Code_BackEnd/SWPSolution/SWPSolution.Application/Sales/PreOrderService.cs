@@ -168,6 +168,52 @@ namespace SWPSolution.Application.Sales
             };
         }
 
+
+        public async Task<PageResult<PreOrder>> GetPreOrdersHistoryPagingAsync(PreOrderHistoryPagingRequest request)
+        {
+            var query = _context.PreOrders.AsQueryable();
+
+            var allowedStatuses = new List<PreOrderStatus> { PreOrderStatus.Completed };
+
+            query = query.Where(p => allowedStatuses.Contains(p.Status));
+            if (!string.IsNullOrEmpty(request.MemberId))
+            {
+                query = query.Where(o => o.MemberId.Equals(request.MemberId));
+            }
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(o => o.Product.ProductName.Contains(request.Keyword));
+            }
+
+            // Get the total number of records
+            int totalRow = query.Count();
+
+            // Apply paging and select to ViewModel
+            var pagedData = query
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(p => new PreOrder
+                {
+                    MemberId = p.MemberId,
+                    PreorderId = p.PreorderId,
+                    PreorderDate = p.PreorderDate,
+                    ProductId = p.ProductId,
+                    ShippingAddress = p.ShippingAddress,
+                    Quantity = p.Quantity,
+                    Status = p.Status,
+                    Price = p.Price
+                }).OrderByDescending(p => p.PreorderId)
+                .ToList();
+
+            return new PageResult<PreOrder>
+            {
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                TotalRecords = totalRow,
+                Items = pagedData
+            };
+        }
+
         public async Task<List<PreOrder>> GetAll()
         {
             return _context.PreOrders

@@ -100,6 +100,17 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetPreOrdersHistoryPaging")]
+        public async Task<IActionResult> GetPreOrdersHistoryPaging([FromQuery] PreOrderHistoryPagingRequest request)
+        {
+            var result = await _preOrderService.GetPreOrdersHistoryPagingAsync(request);
+            if (result == null || result.Items.Count == 0)
+            {
+                return NotFound(new { message = "No orders were found" });
+            }
+            return Ok(result);
+        }
+
         [HttpGet("GetAllPreOrders")]
         public async Task<IActionResult> GetAllOrders()
         {
@@ -111,8 +122,8 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(orders);
         }
 
-        [HttpPost("update-status")]
-        public async Task<IActionResult> UpdateOrderStatus([FromBody] PreOrder model)
+        [HttpPut("{preorderId}/status")]
+        public async Task<IActionResult> UpdateOrderStatus(string preorderId, PreOrderStatus status)
         {
             if (!ModelState.IsValid)
             {
@@ -121,7 +132,7 @@ namespace SWPSolution.BackendApi.Controllers
 
             try
             {
-                await _preOrderService.UpdateOrderStatus(model.PreorderId, model.Status);
+                await _preOrderService.UpdateOrderStatus(preorderId, status);
                 return Ok();
             }
             catch (InvalidOperationException ex)
