@@ -34,22 +34,38 @@ namespace SWPSolution.BackendApi
     {
         public static void Main(string[] args)
         {
+            var options = new WebApplicationOptions
+            {
+                ContentRootPath = "/home/norman/SWP/net8.0/publish",
+                WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
+            };
 
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(options);
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(5000); // Replace 5000 with your desired port
+            });
+
             builder.Services.AddControllers();
 
-            //Add cros 
-            builder.Services.AddCors(p => p.AddPolicy("SWP_GROUP2", build =>
+            // Add CORS 
+            builder.Services.AddCors(options =>
             {
+                options.AddPolicy("SWP_GROUP2",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
 
-                build.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials(); ;
-
-            }));
-             
-            //Add DbContext
+            // Add DbContext
             builder.Services.AddDbContext<SWPSolutionDBContext>();
             builder.Services.Configure<DataProtectionTokenProviderOptions>(opts => opts.TokenLifespan = TimeSpan.FromHours(1));
-            //Declare DI 
+
+            // Declare DI 
             builder.Services.AddTransient<IPublicProductService, PublicProductService>();
             builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
             builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
@@ -64,14 +80,15 @@ namespace SWPSolution.BackendApi
             builder.Services.AddScoped<IPreOrderService, PreOrderService>();
             builder.Services.AddHostedService<PreOrderCheckAndNotifyService>();
             builder.Services.AddSignalR();
+
             builder.Services.AddIdentity<AppUser, AppRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             })
-    .AddEntityFrameworkStores<SWPSolutionDBContext>()
-    .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<SWPSolutionDBContext>()
+            .AddDefaultTokenProviders();
 
             builder.Services.AddDistributedMemoryCache(); // Use in-memory cache for session storage (can be replaced with other providers)
             builder.Services.AddSession(options =>
@@ -80,9 +97,10 @@ namespace SWPSolution.BackendApi
                 options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.SameSite = SameSiteMode.Strict;
             });
+
             builder.Services.AddScoped<ISessionService, SessionService>();
 
-            //Add email configs
+            // Add email configs
             var emailConfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailVM>();
             builder.Services.AddSingleton(emailConfig);
             builder.Services.AddScoped<IEmailService, EmailService>();
@@ -91,16 +109,15 @@ namespace SWPSolution.BackendApi
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
             builder.Services.AddScoped<IPromotionService, PromotionService>();
 
-
-            //Add config for required email
+            // Add config for required email
             builder.Services.Configure<IdentityOptions>(opts =>
                 opts.SignIn.RequireConfirmedEmail = true
             );
-            //Add Authentication
 
-
+            // Add Authentication
             string signingKey = builder.Configuration.GetValue<string>("JWT:SigningKey");
-            byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes( signingKey );
+            byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
+
             builder.Services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -108,7 +125,7 @@ namespace SWPSolution.BackendApi
                 option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
             {
-                options.RequireHttpsMetadata = false; 
+                options.RequireHttpsMetadata = false;
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -121,9 +138,11 @@ namespace SWPSolution.BackendApi
                     IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                 };
             });
-            // Add services to the container.
+
+            // Add services to the container
             builder.Services.AddControllersWithViews();
             builder.Services.AddControllers().AddFluentValidation();
+
             // Add Swagger services
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(option =>
@@ -133,7 +152,6 @@ namespace SWPSolution.BackendApi
 
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-
                     In = ParameterLocation.Header,
                     Description = "Please enter a valid token",
                     Name = "Authorization",
@@ -141,6 +159,7 @@ namespace SWPSolution.BackendApi
                     BearerFormat = "JWT",
                     Scheme = "Bearer"
                 });
+
                 option.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
@@ -159,7 +178,7 @@ namespace SWPSolution.BackendApi
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -180,7 +199,7 @@ namespace SWPSolution.BackendApi
             }
 
             app.UseCors("SWP_GROUP2");
-            app.UseStaticFiles();
+            app.UseStaticFiles(); // Ensure static files middleware is included here
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
@@ -189,7 +208,7 @@ namespace SWPSolution.BackendApi
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapHub<ChatHub>("/chathub");
+
             app.Run();
         }
     }
