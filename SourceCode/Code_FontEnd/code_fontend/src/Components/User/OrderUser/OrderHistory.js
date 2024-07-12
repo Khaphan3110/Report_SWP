@@ -187,7 +187,7 @@ function Row({ row, page }) {
                         <TableCell>{products.product.productName}</TableCell>
                         <TableCell>{products.product.productName}</TableCell>
                         <TableCell>{products.price.toLocaleString()}</TableCell>
-                        <TableCell><button className="button-review-order-history" onClick={handleReview}>Đánh giá</button></TableCell>
+                        <TableCell><button className="button-review-order-history" onClick={() => handleReview(products)}>Đánh giá</button></TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
