@@ -38,9 +38,11 @@ const StaffManager = React.lazy(() => (import("../Components/Amind/StaffManager/
 const MemberManager = React.lazy(() => (import("../Components/Amind/MemberManager/MemberManager")))
 const OrderManager = React.lazy(() => (import("../Components/Amind/OrderManager/OrderManager")))
 const PromotionManager = React.lazy(() => (import("../Components/Amind/ManagerPromotion/Promotion")))
+const Blog = React.lazy(() => (import("../Components/User/Blog/Blog")))
+
 //SettingAdmin
 // <Route path="/" element={<HomePage />} />
-//         <Route path="/Header" element={<Header />} />
+//         <Route path="/Header" element={<Header />} /> 
 //         <Route path="/Footer" element={<Footer />} />
 //         <Route path="/login" element={<LoginForm />} />
 //         <Route path="/account" element={<AccountPage />} />
@@ -70,6 +72,8 @@ const publicRoutes = [
   { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
   { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
   { path: "/logoutAdmin", component: LogoutAdmin},
+  { path: "/blog", component: Blog},
+
   
   // { path: "/payment/success", component: Success ,layout:"user"},
   // { path: "/payment/notsuccess", component: NotSuccess ,layout:"user"},
