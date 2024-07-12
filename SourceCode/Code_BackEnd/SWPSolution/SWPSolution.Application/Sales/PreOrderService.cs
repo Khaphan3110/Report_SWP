@@ -123,7 +123,7 @@ namespace SWPSolution.Application.Sales
             };
         }
 
-        public async Task<PageResult<PreOrder>> GetPreOrdersTrackingPagingAsync(PreOrderPagingRequest request)
+        public async Task<PageResult<PreOrder>> GetPreOrdersTrackingPagingAsync(PreOrderTrackingPagingRequest request)
         {
             var query = _context.PreOrders.AsQueryable();
 
@@ -134,9 +134,10 @@ namespace SWPSolution.Application.Sales
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
-            if (request.PreOrderStatus.HasValue)
+            if (request.Status.HasValue)
             {
-                query = query.Where(o => o.Status == request.PreOrderStatus.Value);
+                var statusValue = (PreOrderStatus)request.Status.Value; // Ensure request.Status is cast to OrderStatus
+                query = query.Where(o => o.Status == statusValue);
             }
 
             // Get the total number of records
