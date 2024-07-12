@@ -67,6 +67,8 @@ function Row({ row, page }) {
       setStatus("đang giao hàng");
     } else if (row.orderStatus === 3) {
       setStatus("đơn hàng thành công");
+    } else if(row.orderStatus === -1){
+      setStatus("đơn hàng bị hủy");
     }
   }, [row.orderStatus]);
 

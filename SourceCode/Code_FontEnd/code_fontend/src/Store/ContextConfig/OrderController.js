@@ -6,6 +6,7 @@ import { getMemberID } from "../../Service/UserService/UserService";
 export default function OrderManagerProvider({ children }) {
   const [listOrder, setListOrder] = useState([]);
   const [listHistoryOrder,setListHistoryOrder] = useState([])
+  const [listCurrentOrder,setlistCurrentOrder] = useState([])
   const getOrderPagin = async (memberID,pageindex,pageSize) => {
     try {
       const resOrder = await GetOrderPigingMember(memberID,pageindex,pageSize);
@@ -24,7 +25,7 @@ export default function OrderManagerProvider({ children }) {
 
   
   return (
-    <OrderManagerContext.Provider value={{ listOrder, setListOrder,getOrderPagin,listHistoryOrder,setListHistoryOrder }}>
+    <OrderManagerContext.Provider value={{ listOrder, setListOrder,getOrderPagin,listHistoryOrder,setListHistoryOrder,listCurrentOrder,setlistCurrentOrder }}>
       {children}
     </OrderManagerContext.Provider>
   );

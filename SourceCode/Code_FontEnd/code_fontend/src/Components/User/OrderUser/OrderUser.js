@@ -9,6 +9,7 @@ import OrderHistory from "./OrderHistory";
 import PreorderHistory from "./PreorderHistory";
 import { GetOrderPigingMemberHistory } from "../../../Service/OrderService/OrderService";
 import { getProductID } from "../../../Service/ProductService/ProductService";
+import { PreorderPagingMemberHistory } from "../../../Service/PreorderService/PreorderService";
 export default function OrderUser() {
   const {
     getOrderPagin,
@@ -69,22 +70,11 @@ export default function OrderUser() {
   React.useEffect(() => {
     const fetchHistoryPreOrder = async () => {
       try {
-        const resPreOrder = await GetOrderPigingMemberHistory(
-          userProfile.profile.member.memberId,
-          pageIndex,6
-        );
-        console.log("preorder",resPreOrder.data)
-        if (resPreOrder) {
-          const resProduct = await getProductID(
-            resPreOrder.data.items[0].productId
-          );
-          console.log("preorder product",resProduct.data)
-          setListPreOrder({
-            preorder: resPreOrder.data,
-            product: resProduct.data,
-          });
+        const resData = await PreorderPagingMemberHistory( userProfile.profile.member.memberId,pagePre,6)
+        if(resData){
+          setlistPreorderHistory(resData.data)
         } else {
-          setlistPreorderHistory({});
+          setlistPreorderHistory([])
         }
       } catch (error) {
         console.log("lỗi ở fetch data order history", error);

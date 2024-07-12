@@ -37,7 +37,10 @@ export default function PreorderHistory({ listPreorder, page }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          <Row row={listPreorder} page={page} />
+          {listPreorder.items &&
+            listPreorder.items.map((preOrder, index) => (
+              <Row row={preOrder} page={page} key={index} />
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
@@ -51,75 +54,25 @@ function Row({ row, page }) {
   const { userProfile } = useUserProfile();
   const [currentProduct, setCurrentProduct] = useState();
   useEffect(() => {
-    if (row.preorder.items[0].status === 0) {
+    if (row.status === 0) {
       setStatus("chưa thanh toán");
-    } else if (row.preorder.items[0].status === 1) {
-      setStatus("chờ sử lý");
-    } else if (row.preorder.items[0].status === 2) {
-      setStatus("đang giao hàng");
-    } else if (row.preorder.items[0].status === 3) {
+    } else if (row.status === 1) {
+      setStatus("chờ sử lý và vận chuyển");
+    } else if (row.status === 2) {
       setStatus("đơn hàng thành công");
+    } else if(row.status === -1){
+      setStatus("đơn hàng bị hủy");
     }
-  }, [row.preorder.items[0].status]);
+  }, [row.status]);
 
-  const handleComplete = async (orderID) => {
-    console.log("order", orderID);
-    const newStatus = {
-      newStatus: 3,
-    };
-    try {
-      const res = await updateStatusOrder(orderID, newStatus);
-      console.log("update", res.data);
-      if (res) {
-        await getOrderPagin(userProfile.profile.member.memberId, page, 3);
-        toast.success("đơn hàng đã hoàn thành", {
-          autoClose: 1000,
-        });
-      } else {
-        toast.error("lỗi mạng", {
-          autoClose: 1000,
-        });
-      }
-    } catch (error) {
-      console.log("lỗi complete đơn hàng", error);
-    }
-  };
-
-  const handCancelOrder = async (orderID) => {
-    console.log("order hủy", orderID);
-    const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
-    const newStatus = {
-      newStatus: 3,
-    };
-    try {
-      if (confirmed) {
-        const res = await updateStatusOrder(orderID, newStatus);
-        console.log("delete", res.data);
-        if (res) {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
-          toast.success("đơn hàng đã hủy", {
-            autoClose: 1000,
-          });
-        } else {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
-          toast.error("lỗi mạng", {
-            autoClose: 1000,
-          });
-        }
-      }
-    } catch (error) {
-      console.log("lỗi delete đơn hàng đơn hàng", error);
-    }
-  };
   console.log("item", row);
 
   const [show, setShow] = useState(false);
-  const [value, setValue] = React.useState(1);
   const handleClose = () => setShow(false);
   const handleShow = (product) => {
     setShow(true);
     setCurrentProduct(product);
-    console.log("product",product)
+    console.log("product", product);
   };
 
   const formik = useFormik({
@@ -141,39 +94,39 @@ function Row({ row, page }) {
     }),
 
     onSubmit: async (values) => {
-      console.log("values cuoi reiew",values)
+      console.log("values cuoi reiew", values);
       try {
-        setShow(false)
-        const res = await CreateReview(userProfile.userToken,values)
-        console.log("respone create",res)
-        if(res.data.message === "Review added successfully"){
-          toast.success("Đánh giá thành công",{
-            autoClose:1000,
-          })
-          formik.resetForm()
+        setShow(false);
+        const res = await CreateReview(userProfile.userToken, values);
+        console.log("respone create", res);
+        if (res.data.message === "Review added successfully") {
+          toast.success("Đánh giá thành công", {
+            autoClose: 1000,
+          });
+          formik.resetForm();
         } else {
-          toast.error("Mạng đang yếu thử lại nhé",{
-            autoClose:1000,
-          })
-          formik.resetForm()
+          toast.error("Mạng đang yếu thử lại nhé", {
+            autoClose: 1000,
+          });
+          formik.resetForm();
         }
       } catch (error) {
-        console.log("loi create review",error)
+        console.log("loi create review", error);
       }
     },
   });
 
   useEffect(() => {
-    if(currentProduct){
+    if (currentProduct) {
       formik.setValues({
-      productId: currentProduct.productId,
-      dateReview: new Date().toISOString(),
-      })
+        productId: currentProduct.productId,
+        dateReview: new Date().toISOString(),
+      });
     }
-  },[currentProduct])
+  }, [currentProduct]);
   return (
     <React.Fragment>
-      <ToastContainer/>
+      <ToastContainer />
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
@@ -184,27 +137,11 @@ function Row({ row, page }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{row.preorder.items[0].preorderId}</TableCell>
-        <TableCell>{row.preorder.items[0].preorderDate}</TableCell>
-        <TableCell>{row.preorder.items[0].shippingAddress}</TableCell>
-        <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
+        <TableCell>{row.preorderId}</TableCell>
+        <TableCell>{row.preorderDate}</TableCell>
+        <TableCell>{row.shippingAddress}</TableCell>
+        <TableCell>{row.price.toLocaleString()}</TableCell>
         <TableCell>{status}</TableCell>
-        <TableCell>
-          <button
-            onClick={() => handleComplete(row.preorder.items[0].preorderId)}
-            className="tracking-button-order-user-complete"
-          >
-            Đã Nhận Hàng
-          </button>
-          {status === "chưa thanh toán" ? (
-            <button
-              onClick={() => handleShow(row.preorder.items[0].preorderId)}
-              className="tracking-button-order-user-cancel"
-            >
-              Hủy Đơn Hàng
-            </button>
-          ) : null}
-        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -223,21 +160,23 @@ function Row({ row, page }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>{row.product.productName}</TableCell>
-                    <TableCell>{row.preorder.items[0].quantity}</TableCell>
-                    <TableCell>
-                      {row.preorder.items[0].price.toLocaleString()}
-                    </TableCell>
-                    <TableCell>
-                      <button
-                        className="button-review-Preorder-history"
-                        onClick={() => handleShow(row.product)}
-                      >
-                        Đánh giá
-                      </button>
-                    </TableCell>
-                  </TableRow>
+                  {row.product && (
+                    <TableRow>
+                      <TableCell>{row.product.productName}</TableCell>
+                      <TableCell>1</TableCell>
+                      <TableCell>
+                        {row.product.price.toLocaleString()}
+                      </TableCell>
+                      <TableCell>
+                        <button
+                          className="button-review-Preorder-history"
+                          onClick={() => handleShow(row.product)}
+                        >
+                          Đánh giá
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </Box>
@@ -254,7 +193,7 @@ function Row({ row, page }) {
               <Form.Label>
                 Đánh giá{" "}
                 <Rating
-                  style={{marginLeft: "5px"}}
+                  style={{ marginLeft: "5px" }}
                   name="grade"
                   value={formik.values.grade}
                   onChange={(event, newValue) => {

@@ -9,10 +9,10 @@ import {
 } from "recharts";
 import trackingData from "../../../assets/dummy-data/trackingData";
 
-const TrackingChart = () => {
+const TrackingChart = ({listRegisterAweek}) => {
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={trackingData}>
+      <LineChart data={listRegisterAweek}>
         <CartesianGrid strokeDasharray="0" stroke="#b7ffe913" />
         <XAxis dataKey="name" stroke="#ddd" />
         <Line

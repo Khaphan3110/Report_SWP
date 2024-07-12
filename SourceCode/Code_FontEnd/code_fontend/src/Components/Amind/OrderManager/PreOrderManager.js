@@ -1,3 +1,5 @@
+
+//PreOrderManager
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -12,14 +14,15 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./AccountPage.css";
+import "../../User/AccountPage/AccountPage.css";
 import {
   GetOrderPigingTrackingMember,
+  GetOrderPigingWithStatus,
   updateStatusOrder,
 } from "../../../Service/OrderService/OrderService";
 import { useOrderManager, useUserProfile } from "../../../Store";
 import { toast, ToastContainer } from "react-toastify";
-export default function TrackingOrder({ listOrder, page }) {
+export default function PreOrderManager({ listOrder, page }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -51,6 +54,7 @@ function Row({ row, page }) {
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
+  const {listCurrentOrder,setlistCurrentOrder} = useOrderManager()
   useEffect(() => {
     if (row.orderStatus === 0) {
       setStatus("chưa thanh toán");
@@ -69,72 +73,27 @@ function Row({ row, page }) {
       newStatus: 3,
     };
     try {
-      const res = await updateStatusOrder(orderID, 3);
+      const res = await updateStatusOrder(orderID, 2);
       if (res.status === 200) {
-        const resdata = await GetOrderPigingTrackingMember(
-          userProfile.profile.member.memberId,
-          page,
-          3
-        );
-        if (resdata) {
-          setListOrder(resdata.data);
+        const resData = await GetOrderPigingWithStatus(1, page, 6);
+        if (resData) {
+            setlistCurrentOrder(resData.data);
         } else {
-          setListOrder([]);
+            setlistCurrentOrder([]);
         }
-        toast.success("Cảm ơn đã mua hàng!!!", {
+        toast.success("the order is comfirm", {
           autoClose: 1000,
         });
       } else {
-        toast.error("mạng đó!!!", {
+        toast.error("weak network!!!", {
           autoClose: 1000,
         });
       }
     } catch (error) {
-      console.log("lỗi complete đơn hàng", error);
+      console.log("lỗi comfirm đơn hàng", error);
     }
   };
 
-  const handCancelOrder = async (orderID) => {
-    console.log("order hủy", orderID);
-    const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
-    // const newStatus = {
-    //   newStatus: 3,
-    // };
-    try {
-      if (confirmed) {
-        const res = await updateStatusOrder(orderID, -1);
-        console.log("delete", res.data);
-        if (res.status === 200) {
-          const resPaging = await GetOrderPigingTrackingMember(
-            userProfile.profile.member.memberId,
-            page,
-            3
-          );
-          if (resPaging) {
-            setListOrder(resPaging.data);
-          } else {
-            setListOrder([]);
-          }
-          toast.success("hủy đơn hàng thành công", {
-            autoClose: 1000,
-          });
-        } else {
-          toast.error("thử lại nhé mạng FPT như hạch", {
-            autoClose: 1000,
-          });
-        }
-      }
-    } catch (error) {
-      console.log("lỗi delete đơn hàng đơn hàng", error);
-    }
-  };
-
-
-  const handlePaymentAgain = () => {
-    toast.error("chưa xong cái này :()",{
-      autoClose:1000,
-    })
-  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -154,29 +113,16 @@ function Row({ row, page }) {
         <TableCell>{status}</TableCell>
         <TableCell>
           
-          {status !== "chưa thanh toán" ? 
+          {status === "chờ sử lý" &&
           (
             <button
             onClick={() => handleComplete(row.orderId)}
             className="tracking-button-order-user-complete"
           >
-            Đã Nhận Hàng
+            Confirm Order
           </button>
-          )
-           : (<button
-            onClick={() => handlePaymentAgain(row.orderId)}
-            className="tracking-button-order-user-complete"
-          >
-            Thanh Toán
-          </button>)}
-          {status === "chưa thanh toán" ? (
-            <button
-              onClick={() => handCancelOrder(row.orderId)}
-              className="tracking-button-order-user-cancel"
-            >
-              Hủy Đơn Hàng
-            </button>
-          ) : null}
+          )}
+        
         </TableCell>
       </TableRow>
       <TableRow>

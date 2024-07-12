@@ -1,3 +1,4 @@
+//PrePreorderManager
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
@@ -12,18 +13,19 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./AccountPage.css";
+import "../../User/AccountPage/AccountPage.css";
 import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
 import { useOrderManager, usePreorder, useUserProfile } from "../../../Store";
 import { toast, ToastContainer } from "react-toastify";
 import {
   PreorderPagingMember,
   PreorderPagingMemberTracking,
+  PreorderPagingMemberWithStatus,
   updateStatusPreorder,
 } from "../../../Service/PreorderService/PreorderService";
 import { getProductID } from "../../../Service/ProductService/ProductService";
 import { toHaveAttribute } from "@testing-library/jest-dom/matchers";
-export default function TrackingPreorder({ listPreorder, page }) {
+export default function PrePreorderManager({ listPreorder, page }) {
   console.log("lenght", listPreorder.items);
   return (
     <TableContainer component={Paper}>
@@ -55,7 +57,12 @@ function Row({ row, page }) {
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
-  const { listPreorder, setListPreOrder } = usePreorder();
+  const {
+    listPreorder,
+    setListPreOrder,
+    setlistCurrentPreOrder,
+    listCurrentPreOrder,
+  } = usePreorder();
   console.log("row", row);
   useEffect(() => {
     if (row.status === 0) {
@@ -68,76 +75,31 @@ function Row({ row, page }) {
   }, [row.status]);
 
   const handleComplete = async (orderID) => {
-    console.log("order", orderID);
     try {
-      const res = await updateStatusPreorder(orderID, 2);
-      console.log("update", res.data);
-      if (res) {
-        const res = await PreorderPagingMemberTracking(
-          userProfile.profile.member.memberId,
-          page,
-          3
-        );
-        // console.log("preorder respone",res.data)
-        if (res) {
-          setListPreOrder(res.data);
+      const resData = await updateStatusPreorder(orderID, 1);
+      if (resData.status === 200) {
+        const resDataPre = await PreorderPagingMemberWithStatus(1, page, 6);
+        if (resDataPre) {
+          setlistCurrentPreOrder(resDataPre.data);
         } else {
-          setListPreOrder([]);
+          setlistCurrentPreOrder({});
         }
-        toast.success("hủy đơn hàng thành công", {
-          autoClose: 1000,
-        });
+        toast.success("comfirms success",{
+            autoClose:1000,
+        })
       } else {
-        toast.error("lỗi mạng", {
-          autoClose: 1000,
-        });
+        toast.error("Weak netword try again",{
+            autoClose:1500,
+        })
       }
     } catch (error) {
-      console.log("lỗi complete đơn hàng", error);
+        console.log("error fetdata pre admin",error)
     }
   };
-
-  const handCancelOrder = async (orderID) => {
-    const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
-
-    if (confirmed) {
-      try {
-        const resStatus = await updateStatusPreorder(orderID, -1);
-        if (resStatus) {
-          const res = await PreorderPagingMemberTracking(
-            userProfile.profile.member.memberId,
-            page,
-            3
-          );
-          // console.log("preorder respone",res.data)
-          if (res) {
-            setListPreOrder(res.data);
-          } else {
-            setListPreOrder([]);
-          }
-          toast.success("hủy đơn hàng thành công", {
-            autoClose: 1000,
-          });
-        } else {
-          toast.error("mạng yếu đợi xíu", {
-            autoClose: 1000,
-          });
-        }
-      } catch (error) {
-        console.log("lỗi ở canle preorder", error);
-      }
-    }
-  };
-
-  const handlePaymentAgain = () => {
-    toast.success("chưa có xong thật",{
-      autoClose:1000,
-    })
-  }
   console.log("item", row);
+
   return (
     <React.Fragment>
-      <ToastContainer />
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
@@ -154,30 +116,14 @@ function Row({ row, page }) {
         <TableCell>{row.price.toLocaleString()}</TableCell>
         <TableCell>{status}</TableCell>
         <TableCell>
-          {status === "chưa thanh toán" ? (
-            <button
-              onClick={() => handlePaymentAgain(row.preorderId)}
-              className="tracking-button-order-user-complete"
-            >
-              Thanh Toán
-            </button>
-          ) : (
+          {status === "chờ sử lý và vận chuyển" && (
             <button
               onClick={() => handleComplete(row.preorderId)}
               className="tracking-button-order-user-complete"
             >
-              Đã Nhận Hàng
+              Confirm
             </button>
           )}
-
-          {status === "chưa thanh toán" ? (
-            <button
-              onClick={() => handCancelOrder(row.preorderId)}
-              className="tracking-button-order-user-cancel"
-            >
-              Hủy Đơn Hàng
-            </button>
-          ) : null}
         </TableCell>
       </TableRow>
       <TableRow>

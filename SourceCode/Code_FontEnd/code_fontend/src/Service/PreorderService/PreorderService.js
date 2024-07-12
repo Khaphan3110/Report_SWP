@@ -71,11 +71,29 @@ export const updateStatusPreorder = async (productPreorder,status) => {
     }
   };
 
+  export const PreorderPagingMemberTracking = async (memberID,pageIndex,pageSize) => {
+    try {
+      const res = await request.Get(`PreOrder/GetPreOrdersTrackingPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
+      return res;
+    } catch (error) {
+      console.log("Error paging tracking member  preorder ", error);
+    }
+  };
+
   export const PreorderPagingMemberHistory = async (memberID,pageIndex,pageSize) => {
     try {
       const res = await request.Get(`PreOrder/GetPreOrdersHistoryPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
       return res;
     } catch (error) {
       console.log("Error pagin member  preorder history", error);
+    }
+  };
+
+  export const PreorderPagingMemberWithStatus = async (status,pageIndex,pageSize) => {
+    try {
+      const res = await request.Get(`PreOrder/GetPreOrdersPaging?PreOrderStatus=${status}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
+      return res;
+    } catch (error) {
+      console.log("Error pagin member  preorder with status", error);
     }
   };

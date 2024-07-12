@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
-import { deleteStaff, GetAllStaff, StaffRegister } from "../../../Service/StaffService/StaffService";
-import { toast, ToastContainer } from "react-toastify";
-import Papa from "papaparse";
-import { useAdminProfile, useCateGories, useOrderManager, useStaffManager } from "../../../Store";
 import { CSVLink } from "react-csv";
+import ReactPaginate from "react-paginate";
+import { toast, ToastContainer } from "react-toastify";
+import { GetAllStaff } from "../../../Service/StaffService/StaffService";
+import {
+  useAdminProfile,
+  useCateGories,
+  useOrderManager,
+  useStaffManager,
+} from "../../../Store";
 import "../Categories/Categories.css";
+import "./OrderManager.css";
+import {
+  GetOrderPigingTrackingMember,
+  GetOrderPigingWithStatus,
+} from "../../../Service/OrderService/OrderService";
+import PreOrderManager from "./PreOrderManager";
 export default function OrderManager() {
   const [listStaffExport, setListStaffExport] = useState([]);
   const [show, setShow] = useState(false);
@@ -22,7 +32,8 @@ export default function OrderManager() {
   const [pageIndex, setPageIndex] = useState(1);
   const [sst, setSST] = useState(0);
 
-  const {listOrder,getOrderPagin} = useOrderManager()
+  const { listOrder, getOrderPagin, listCurrentOrder, setlistCurrentOrder } =
+    useOrderManager();
   const getStaffExport = async (event, done) => {
     const result = [];
     const res = await GetAllStaff(StaffProfile.adminToken);
@@ -53,19 +64,24 @@ export default function OrderManager() {
 
   const handleClose = () => setShow(false);
 
-  const handDeleteButton = (staffID) => {
-
-  };
-
-  
+  const handDeleteButton = (staffID) => {};
 
   useEffect(() => {
-    getOrderPagin(pageIndex,8);
-  },[])
-
-  useEffect(() => {
-    getStaffPinagine(pageIndex, 8, StaffProfile.adminToken);
+    const fetchDataOrderCurrent = async () => {
+      try {
+        const resData = await GetOrderPigingWithStatus(1, pageIndex, 6);
+        if (resData) {
+          setlistCurrentOrder(resData.data);
+        } else {
+          setlistCurrentOrder([]);
+        }
+      } catch (error) {
+        console.log("error current list order", error);
+      }
+    };
+    fetchDataOrderCurrent();
   }, [pageIndex]);
+
   return (
     <>
       <ToastContainer />
@@ -100,69 +116,33 @@ export default function OrderManager() {
         />
         <i className="fa-solid fa-magnifying-glass"></i>
       </div>
-
-      <div className="stateImportCate">
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>stt</th>
-              <th>OrderID</th>
-              <th>role</th>
-              <th>userName</th>
-              <th>password</th>
-              <th>fullName</th>
-              <th>email</th>
-              <th>phoneNumber</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listStaff.items &&
-              listStaff.items.map((Staff, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{Staff.id}</td>
-                  <td>{Staff.role}</td>
-                  <td>{Staff.userName}</td>
-                  <td>{Staff.password}</td>
-                  <td>{Staff.fullName}</td>
-                  <td>{Staff.email}</td>
-                  <td>{Staff.phoneNumber}</td>
-                  <td>
-                    <Button
-                      variant="danger"
-                      className="action-button"
-                      onClick={() => handDeleteButton(Staff.id)}
-                      style={{ border: "0", padding: "5px" }}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
-      </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={1}
-        pageCount={listOrder.pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-      />
+      {listCurrentOrder.items && listCurrentOrder.items.length > 0 ? (
+        <>
+        <PreOrderManager listOrder = {listCurrentOrder} page={pageIndex}/>
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={1}
+            pageCount={listCurrentOrder.pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+          />
+        </>
+      ) : (
+        <p style={{margin:"0",fontWeight:"bold",textAlign:"center"}}>There's no Order now</p>
+      )}
     </>
   );
 }

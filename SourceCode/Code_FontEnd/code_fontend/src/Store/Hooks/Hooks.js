@@ -96,9 +96,9 @@ export const useStaffManager = () => {
 };
 
 export const useOrderManager = () => {
-  const { listOrder, setListOrder, getOrderPagin,listHistoryOrder,setListHistoryOrder } =
+  const { listOrder, setListOrder, getOrderPagin,listHistoryOrder,setListHistoryOrder,listCurrentOrder,setlistCurrentOrder } =
     useContext(OrderManagerContext);
-  return { listOrder, setListOrder, getOrderPagin,listHistoryOrder,setListHistoryOrder };
+  return { listOrder, setListOrder, getOrderPagin,listHistoryOrder,setListHistoryOrder,listCurrentOrder,setlistCurrentOrder };
 };
 
 export const useMemberManager = () => {
@@ -122,7 +122,7 @@ export const usePreorder = () => {
     calculateTotal,
     listPreorder,
     setListPreOrder,
-    listPreorderHistory,setlistPreorderHistory
+    listPreorderHistory,setlistPreorderHistory,listCurrentPreOrder,setlistCurrentPreOrder
   } = useContext(PreorderContext);
   return {
     Preorder,
@@ -132,6 +132,6 @@ export const usePreorder = () => {
     calculateTotal,
     listPreorder,
     setListPreOrder,
-    listPreorderHistory,setlistPreorderHistory
+    listPreorderHistory,setlistPreorderHistory,listCurrentPreOrder,setlistCurrentPreOrder
   };
 };

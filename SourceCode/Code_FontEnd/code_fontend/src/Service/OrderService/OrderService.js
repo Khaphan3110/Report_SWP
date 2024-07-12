@@ -63,19 +63,14 @@ export const GetOrderPigingMember = async (memberID, pageIndex, pageSize) => {
 };
 
 //Order/GetOrdersPaging?MemberId=MB0724001&PageIndex=1&PageSize=12
-export const GetOrderPigingWithStatus = async (
-  status,
-  memberID,
-  pageIndex,
-  pageSize
-) => {
+export const GetOrderPigingWithStatus = async (status, pageIndex, pageSize) => {
   try {
     const res = await request.Get(
-      `Order/GetOrdersPaging?MemberId=${memberID}&Status=${status}&PageIndex=${pageIndex}&PageSize=${pageSize}`
+      `Order/GetOrdersPaging?Status=${status}&PageIndex=${pageIndex}&PageSize=${pageSize}`
     );
     return res;
   } catch (error) {
-    console.log("lỗi ở order paging complete ", error);
+    console.log("lỗi ở order paging status ", error);
   }
 };
 
@@ -90,11 +85,9 @@ export const getOrderById = async (memberToken) => {
 
 export const updateStatusOrder = async (orderID, orderStatus) => {
   try {
-    const res = await request.Put(`Order/${orderID}/status`, orderStatus, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await request.Put(
+      `Order/${orderID}/status?status=${orderStatus}`
+    );
     return res;
   } catch (error) {
     console.log("Error updateStatusOrder order ", error);
@@ -111,8 +104,11 @@ export const CancelOrder = async (orderID) => {
   }
 };
 
-
-export const GetOrderPigingMemberHistory = async (memberID, pageIndex, pageSize) => {
+export const GetOrderPigingMemberHistory = async (
+  memberID,
+  pageIndex,
+  pageSize
+) => {
   try {
     const res = await request.Get(
       `Order/GetOrdersHistoryPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`
@@ -120,5 +116,20 @@ export const GetOrderPigingMemberHistory = async (memberID, pageIndex, pageSize)
     return res;
   } catch (error) {
     console.log("lỗi ở order paging Member history ", error);
+  }
+};
+
+export const GetOrderPigingTrackingMember = async (
+  memberID,
+  pageIndex,
+  pageSize
+) => {
+  try {
+    const res = await request.Get(
+      `Order/GetTrackingOrdersPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
+    return res;
+  } catch (error) {
+    console.log("lỗi ở order paging Member tracking ", error);
   }
 };

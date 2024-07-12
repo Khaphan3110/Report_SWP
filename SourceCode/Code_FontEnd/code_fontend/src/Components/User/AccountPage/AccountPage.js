@@ -9,9 +9,10 @@ import { useOrderManager, usePreorder, useUserProfile } from "../../../Store";
 import TrackingOrder from "./TrackingOrder";
 import { Margin } from "@mui/icons-material";
 import ReactPaginate from "react-paginate";
-import { PreorderPagingMember } from "../../../Service/PreorderService/PreorderService";
+import { PreorderPagingMember, PreorderPagingMemberTracking } from "../../../Service/PreorderService/PreorderService";
 import TrackingPreorder from "./TrackingPreorder";
 import { getProductID } from "../../../Service/ProductService/ProductService";
+import { GetOrderPigingTrackingMember } from "../../../Service/OrderService/OrderService";
 const AccountPage = () => {
   const navigator = useNavigate();
   const [showAddressModal, setShowAddressModal] = useState(false);
@@ -64,22 +65,17 @@ const AccountPage = () => {
   useEffect(() => {
     const resPre = async () => {
       try {
-        const res = await PreorderPagingMember(
+        const res = await PreorderPagingMemberTracking(
           userProfile.profile.member.memberId,
           pagePre,
           3
         );
-        console.log("preorder respone",res.data)
-        if (res) {
-          const resProduct =  await getProductID(res.data.items[0].productId)
-          setListPreOrder({
-            preorder:res.data,
-            product:resProduct.data,
-          });
+        // console.log("preorder respone",res.data)
+        if(res){
+          setListPreOrder(res.data);
         } else {
-          setListPreOrder({});
+          setListPreOrder([])
         }
-        console.log("Preorder infor", res);
       } catch (error) {
         console.log("error preorder fetch data", error);
       }
@@ -87,25 +83,27 @@ const AccountPage = () => {
     resPre();
   }, [pagePre]);
   console.log("lisst pre order", listPreorder);
+
   useEffect(() => {
     const resData = async () => {
       try {
-        const res = await getOrderPagin(
+        const res = await GetOrderPigingTrackingMember(
           userProfile.profile.member.memberId,
           pageIndex,
           3
         );
         if (!res) {
           setListOrder([]);
+        } else {
+          setListOrder(res.data)
         }
       } catch (error) {
         console.log("error fetch data", error);
       }
     };
-
-    console.log("order infor", listOrder);
+    resData()
   }, [pageIndex]);
-  console.log("list order", listOrder);
+  console.log("order",listOrder)
   return (
     <Container className="mt-5">
       <ToastContainer />

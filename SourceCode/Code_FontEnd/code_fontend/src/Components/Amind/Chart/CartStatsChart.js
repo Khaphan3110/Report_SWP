@@ -9,11 +9,12 @@ import {
 } from "recharts";
 import carStaticsData from "../../../assets/dummy-data/CartStatic";
 
-const CarStatsChart = () => {
+const CarStatsChart = ({listOrderAWeek}) => {
+  console.log("order",listOrderAWeek)
   return (
     <ResponsiveContainer width="100%" height={300}>
       <AreaChart
-        data={carStaticsData}
+        data={listOrderAWeek}
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >
         <defs>
