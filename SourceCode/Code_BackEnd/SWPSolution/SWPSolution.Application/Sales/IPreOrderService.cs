@@ -22,6 +22,7 @@ namespace SWPSolution.Application.Sales
         Task UpdateOrderStatus(string preorderId, PreOrderStatus newStatus);
         Task<PreOrder> GetPreOrder(string preorderId);
         Task<PageResult<PreOrder>> GetPreOrdersPagingAsync(PreOrderPagingRequest request);
+        Task<PageResult<PreOrder>> GetPreOrdersHistoryPagingAsync(PreOrderHistoryPagingRequest request);
         Task SendReceiptEmailAsync(string memberId, PreOrder preorder);
         Task<string> CheckPreOrderAsync(string preorderId);
         Task<string> GeneratePaymentUrlAndNotifyAsync(string preorderId, HttpContext httpContext);

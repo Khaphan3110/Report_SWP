@@ -110,3 +110,15 @@ export const CancelOrder = async (orderID) => {
     console.log("Error CancelOrder order ", error);
   }
 };
+
+
+export const GetOrderPigingMemberHistory = async (memberID, pageIndex, pageSize) => {
+  try {
+    const res = await request.Get(
+      `Order/GetOrdersHistoryPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
+    return res;
+  } catch (error) {
+    console.log("lỗi ở order paging Member history ", error);
+  }
+};

@@ -185,7 +185,7 @@ const AccountPage = () => {
                 }}
               >
                 <h5 style={{ alignContent: "center", margin: "0" }}>
-                  ĐƠN HÀNG CỦA BẠN
+                 {statePage === "order" ? "ĐƠN HÀNG CỦA BẠN" : "ĐƠN HÀNG MUA TRƯỚC CỦA BẠN"} 
                 </h5>
                 <div>
                   <button

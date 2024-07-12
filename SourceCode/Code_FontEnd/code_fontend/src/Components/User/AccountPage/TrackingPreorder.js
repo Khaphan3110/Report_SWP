@@ -14,8 +14,13 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./AccountPage.css";
 import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
-import { useOrderManager, useUserProfile } from "../../../Store";
+import { useOrderManager, usePreorder, useUserProfile } from "../../../Store";
 import { toast, ToastContainer } from "react-toastify";
+import {
+  PreorderPagingMember,
+  updateStatusPreorder,
+} from "../../../Service/PreorderService/PreorderService";
+import { getProductID } from "../../../Service/ProductService/ProductService";
 export default function TrackingPreorder({ listPreorder, page }) {
   return (
     <TableContainer component={Paper}>
@@ -32,7 +37,7 @@ export default function TrackingPreorder({ listPreorder, page }) {
           </TableRow>
         </TableHead>
         <TableBody>
-              <Row row={listPreorder} page={page} />
+          <Row row={listPreorder} page={page} />
         </TableBody>
       </Table>
     </TableContainer>
@@ -40,38 +45,46 @@ export default function TrackingPreorder({ listPreorder, page }) {
 }
 
 function Row({ row, page }) {
-  const { getOrderPagin,listPreorder } = useOrderManager();
+  const { getOrderPagin } = useOrderManager();
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
-
+  const { listPreorder, setListPreOrder } = usePreorder();
   useEffect(() => {
     if (row.preorder.items[0].status === 0) {
       setStatus("chưa thanh toán");
     } else if (row.preorder.items[0].status === 1) {
-      setStatus("chờ sử lý");
+      setStatus("chờ sử lý và vận chuyển");
     } else if (row.preorder.items[0].status === 2) {
-      setStatus("đang giao hàng");
-    } else if (row.preorder.items[0].status === 3) {
       setStatus("đơn hàng thành công");
-    }
+    } 
   }, [row.preorder.items[0].status]);
 
   const handleComplete = async (orderID) => {
     console.log("order", orderID);
-    const newStatus = {
-      newStatus: 3,
-    };
     try {
-      const res = await updateStatusOrder(orderID, newStatus);
+      const res = await updateStatusPreorder(orderID, 2);
       console.log("update", res.data);
       if (res) {
-        await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+        const res = await PreorderPagingMember(
+          userProfile.profile.member.memberId,
+          page,
+          3
+        );
+        console.log("preorder respone", res.data);
+        if (res) {
+          const resProduct = await getProductID(res.data.items[0].productId);
+          setListPreOrder({
+            preorder: res.data,
+            product: resProduct.data,
+          });
+        } else {
+          setListPreOrder({});
+        }
         toast.success("đơn hàng đã hoàn thành", {
           autoClose: 1000,
         });
       } else {
-        
         toast.error("lỗi mạng", {
           autoClose: 1000,
         });
@@ -89,25 +102,43 @@ function Row({ row, page }) {
     };
     try {
       if (confirmed) {
-        const res = await updateStatusOrder(orderID, newStatus);
-        console.log("delete", res.data);
+        const res = await updateStatusPreorder(orderID, -1);
+        console.log("update", res.data);
         if (res) {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
-          toast.success("đơn hàng đã hủy", {
+          const res = await PreorderPagingMember(
+            userProfile.profile.member.memberId,
+            page,
+            3
+          );
+          console.log("preorder respone", res.data);
+          if (res) {
+            const resProduct = await getProductID(res.data.items[0].productId);
+            setListPreOrder({
+              preorder: res.data,
+              product: resProduct.data,
+            });
+          } else {
+            setListPreOrder({});
+          }
+          toast.success("đơn hàng đã được Hủy", {
             autoClose: 1000,
           });
         } else {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
           toast.error("lỗi mạng", {
             autoClose: 1000,
           });
         }
+      } else {
+        await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+        toast.error("lỗi mạng", {
+          autoClose: 1000,
+        });
       }
     } catch (error) {
       console.log("lỗi delete đơn hàng đơn hàng", error);
     }
   };
-  console.log('item',row)
+  console.log("item", row);
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -121,8 +152,7 @@ function Row({ row, page }) {
           </IconButton>
         </TableCell>
         <TableCell>{row.preorder.items[0].preorderId}</TableCell>
-        <TableCell>{row.preorder.items[0].preorderDate
-        }</TableCell>
+        <TableCell>{row.preorder.items[0].preorderDate}</TableCell>
         <TableCell>{row.preorder.items[0].shippingAddress}</TableCell>
         <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
         <TableCell>{status}</TableCell>
@@ -159,13 +189,13 @@ function Row({ row, page }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
-                      <TableRow >
-                        <TableCell>{row.product.productName}</TableCell>
-                        <TableCell>{row.preorder.items[0].quantity}</TableCell>
-                        <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
-                      </TableRow>
-                   
+                  <TableRow>
+                    <TableCell>{row.product.productName}</TableCell>
+                    <TableCell>{row.preorder.items[0].quantity}</TableCell>
+                    <TableCell>
+                      {row.preorder.items[0].price.toLocaleString()}
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

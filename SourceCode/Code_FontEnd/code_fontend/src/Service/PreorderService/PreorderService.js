@@ -26,16 +26,12 @@ export const createPreOrder = async (productPreorder) => {
 
 
 //PreOrder/update-status
-export const updateStatusPreorder = async (productPreorder) => {
+export const updateStatusPreorder = async (productPreorder,status) => {
     try {
-      const res = await request.Post(`PreOrder/create`, productPreorder, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await request.Put(`PreOrder/${productPreorder}/status?status=${status}`);
       return res;
     } catch (error) {
-      console.log("Error update status proorder  ", error);
+      console.log("Error update status prorder  ", error);
     }
   };
 
@@ -72,5 +68,14 @@ export const updateStatusPreorder = async (productPreorder) => {
       return res;
     } catch (error) {
       console.log("Error pagin member  preorder ", error);
+    }
+  };
+
+  export const PreorderPagingMemberHistory = async (memberID,pageIndex,pageSize) => {
+    try {
+      const res = await request.Get(`PreOrder/GetPreOrdersHistoryPaging?MemberId=${memberID}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
+      return res;
+    } catch (error) {
+      console.log("Error pagin member  preorder history", error);
     }
   };
