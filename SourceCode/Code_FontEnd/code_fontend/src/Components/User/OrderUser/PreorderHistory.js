@@ -12,11 +12,11 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./AccountPage.css";
+import "../AccountPage/AccountPage.css";
 import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
 import { useOrderManager, useUserProfile } from "../../../Store";
 import { toast, ToastContainer } from "react-toastify";
-export default function TrackingPreorder({ listPreorder, page }) {
+export default function PreorderHistory({ listPreorder, page }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -32,7 +32,7 @@ export default function TrackingPreorder({ listPreorder, page }) {
           </TableRow>
         </TableHead>
         <TableBody>
-              <Row row={listPreorder} page={page} />
+          <Row row={listPreorder} page={page} />
         </TableBody>
       </Table>
     </TableContainer>
@@ -40,7 +40,7 @@ export default function TrackingPreorder({ listPreorder, page }) {
 }
 
 function Row({ row, page }) {
-  const { getOrderPagin,listPreorder } = useOrderManager();
+  const { getOrderPagin, listPreorder } = useOrderManager();
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
@@ -71,7 +71,6 @@ function Row({ row, page }) {
           autoClose: 1000,
         });
       } else {
-        
         toast.error("lỗi mạng", {
           autoClose: 1000,
         });
@@ -107,7 +106,11 @@ function Row({ row, page }) {
       console.log("lỗi delete đơn hàng đơn hàng", error);
     }
   };
-  console.log('item',row)
+  console.log("item", row);
+
+  const handleReivew = () => {
+
+  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -121,8 +124,7 @@ function Row({ row, page }) {
           </IconButton>
         </TableCell>
         <TableCell>{row.preorder.items[0].preorderId}</TableCell>
-        <TableCell>{row.preorder.items[0].preorderDate
-        }</TableCell>
+        <TableCell>{row.preorder.items[0].preorderDate}</TableCell>
         <TableCell>{row.preorder.items[0].shippingAddress}</TableCell>
         <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
         <TableCell>{status}</TableCell>
@@ -156,16 +158,22 @@ function Row({ row, page }) {
                     <TableCell>Tên sản phẩm</TableCell>
                     <TableCell>Số lượng</TableCell>
                     <TableCell>Tổng Tiền đ</TableCell>
+                    <TableCell>Đánh giá</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
-                      <TableRow >
-                        <TableCell>{row.product.productName}</TableCell>
-                        <TableCell>{row.preorder.items[0].quantity}</TableCell>
-                        <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
-                      </TableRow>
-                   
+                  <TableRow>
+                    <TableCell>{row.product.productName}</TableCell>
+                    <TableCell>{row.preorder.items[0].quantity}</TableCell>
+                    <TableCell>
+                      {row.preorder.items[0].price.toLocaleString()}
+                    </TableCell>
+                    <TableCell>
+                      <button className="button-review-Preorder-history" onClick={handleReivew}>
+                        Đánh giá
+                      </button>
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>

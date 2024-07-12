@@ -52,11 +52,10 @@
               "DocumentIndex": 2,
               "Title": "SqlInternalConnection.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\.vsdbgsrc\\664138d22aba817540c87a02662fed8cbe0482f9e639514ade7ce473e99b3891\\SqlInternalConnection.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\.vsdbgsrc\\664138d22aba817540c87a02662fed8cbe0482f9e639514ade7ce473e99b3891\\SqlInternalConnection.cs [Read Only]",
+              "ToolTip": "C:\\Users\\ADMIN\\AppData\\Local\\Temp\\.vsdbgsrc\\664138d22aba817540c87a02662fed8cbe0482f9e639514ade7ce473e99b3891\\SqlInternalConnection.cs",
               "ViewState": "AQIAAHkBAAAAAAAAAAAIwIIBAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T17:41:32.888Z",
-              "EditorCaption": " [Read Only]"
+              "WhenOpened": "2024-07-11T17:41:32.888Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
               "ViewState": "AQIAAC4AAAAAAAAAAAA9wDcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-11T15:01:43.147Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-11T15:01:43.147Z"
             },
             {
               "$type": "Document",
@@ -79,7 +77,7 @@
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
               "ToolTip": "G:\\Project alll\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
               "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
-              "ViewState": "AQIAAAQAAAAAAAAAAAAIwBUAAAAAAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAIwAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-07-11T15:01:30.153Z",
               "EditorCaption": ""

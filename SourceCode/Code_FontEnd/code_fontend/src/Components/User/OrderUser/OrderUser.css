@@ -1,0 +1,26 @@
+.order-history-user{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.order-history-user h4{
+    font-weight: bold;
+    color:#f05a72;
+}
+
+.action-order-user-button{
+    outline: none;
+    background-color: transparent;
+    border: 1px solid #f05a72;
+    color: #f05a72;
+    padding: 6px;
+    margin-left: 5px;
+    border-radius: 10px;
+}
+
+.action-order-user-button:hover{
+    background-color: #f05a72;
+    color: azure;
+}
+

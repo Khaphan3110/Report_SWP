@@ -96,8 +96,9 @@ export const useStaffManager = () => {
 };
 
 export const useOrderManager = () => {
-  const { listOrder, setListOrder,getOrderPagin } = useContext(OrderManagerContext);
-  return { listOrder, setListOrder,getOrderPagin };
+  const { listOrder, setListOrder, getOrderPagin,listHistoryOrder,setListHistoryOrder } =
+    useContext(OrderManagerContext);
+  return { listOrder, setListOrder, getOrderPagin };
 };
 
 export const useMemberManager = () => {
@@ -113,7 +114,24 @@ export const usePromotionManger = () => {
 };
 
 export const usePreorder = () => {
-  const { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal } =
-    useContext(PreorderContext);
-  return { Preorder, addProductToPreorder, clearProductPreorder, addPromotion, calculateTotal };
+  const {
+    Preorder,
+    addProductToPreorder,
+    clearProductPreorder,
+    addPromotion,
+    calculateTotal,
+    listPreorder,
+    setListPreOrder,
+    listPreorderHistory,setlistPreorderHistory
+  } = useContext(PreorderContext);
+  return {
+    Preorder,
+    addProductToPreorder,
+    clearProductPreorder,
+    addPromotion,
+    calculateTotal,
+    listPreorder,
+    setListPreOrder,
+    listPreorderHistory,setlistPreorderHistory
+  };
 };

@@ -32,7 +32,7 @@ export default function TrackingOrder({ listOrder, page }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listOrder.items.length > 0 &&
+          {listOrder.items && listOrder.items.length > 0 &&
             listOrder.items.map((order, index) => (
               <Row row={order} key={index} page={page} />
             ))}
@@ -43,7 +43,7 @@ export default function TrackingOrder({ listOrder, page }) {
 }
 
 function Row({ row, page }) {
-  const { getOrderPagin } = useOrderManager();
+  const { getOrderPagin,setListOrder } = useOrderManager();
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
@@ -68,7 +68,10 @@ function Row({ row, page }) {
       const res = await updateStatusOrder(orderID, newStatus);
       console.log("update", res.data);
       if (res) {
-        await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+        const resOrder = await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+        if(!resOrder){
+          setListOrder([])
+        }
         toast.success("đơn hàng đã hoàn thành", {
           autoClose: 1000,
         });
@@ -94,12 +97,15 @@ function Row({ row, page }) {
         const res = await updateStatusOrder(orderID, newStatus);
         console.log("delete", res.data);
         if (res) {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+          const resOrder = await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+          if(!resOrder){
+            setListOrder([])
+          }
           toast.success("đơn hàng đã hủy", {
             autoClose: 1000,
           });
         } else {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+         
           toast.error("lỗi mạng", {
             autoClose: 1000,
           });

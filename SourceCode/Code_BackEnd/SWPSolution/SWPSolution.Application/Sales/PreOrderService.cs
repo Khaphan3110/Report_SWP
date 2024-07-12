@@ -111,7 +111,7 @@ namespace SWPSolution.Application.Sales
                     Quantity = p.Quantity,
                     Status = p.Status,
                     Price = p.Price
-                })
+                }).OrderByDescending(p => p.PreorderId)
                 .ToList();
 
             return new PageResult<PreOrder>
@@ -156,7 +156,7 @@ namespace SWPSolution.Application.Sales
                     Quantity = p.Quantity,
                     Status = p.Status,
                     Price = p.Price
-                })
+                }).OrderByDescending(p => p.PreorderId)
                 .ToList();
 
             return new PageResult<PreOrder>
@@ -172,6 +172,7 @@ namespace SWPSolution.Application.Sales
         {
             return _context.PreOrders
                 .Include(c => c.Payments)
+                .OrderByDescending(c => c.PreorderId)
                 .Select(c => new PreOrder
                 {
                     PreorderId= c.PreorderId,

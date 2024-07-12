@@ -102,8 +102,8 @@ const privateRoutes = [
   { path: "/admin/ordermanager", component: OrderManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
   { path: "/admin/staffmanager", component: StaffManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   { path: "/admin/promotion", component: PromotionManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
-  { path: "/orderDetail/:orderID", component: OrderDetail,layout:"user",protect:ProtectUser,allowedRoles:['staffadmin']},
-  { path: "/order", component: OrderUser,layout:"user",protect:ProtectUser,allowedRoles:['staffadmin']},
+  { path: "/orderDetail/:orderID", component: OrderDetail,layout:"user",protect:ProtectUser},
+  { path: "/order", component: OrderUser,layout:"user",protect:ProtectUser},
   // { path: "/sideBar", component: SideBarAdmin },SettingAdmin/PromotionManager
 ];
 

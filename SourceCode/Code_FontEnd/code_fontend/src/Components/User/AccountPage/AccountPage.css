@@ -98,3 +98,31 @@ footer p {
 }
 
 
+.button-review-order-history{
+  outline: none;
+  background-color: transparent;
+  color: #f05a72;
+  border: 1px solid #f05a72;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.button-review-order-history:hover{
+  color: azure;
+  background-color: #f05a72;
+}
+
+
+.button-review-Preorder-history{
+  outline: none;
+  background-color: transparent;
+  color: #f05a72;
+  border: 1px solid #f05a72;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.button-review-Preorder-history:hover{
+  color: azure;
+  background-color: #f05a72;
+}

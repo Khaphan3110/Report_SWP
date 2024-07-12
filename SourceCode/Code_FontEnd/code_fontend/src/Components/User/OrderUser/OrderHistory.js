@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+//OrderHistory
+
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -12,11 +15,12 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./AccountPage.css";
+import "../AccountPage/AccountPage.css";
 import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
 import { useOrderManager, useUserProfile } from "../../../Store";
 import { toast, ToastContainer } from "react-toastify";
-export default function TrackingPreorder({ listPreorder, page }) {
+
+export default function OrderHistory({ listOrder, page }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -32,7 +36,11 @@ export default function TrackingPreorder({ listPreorder, page }) {
           </TableRow>
         </TableHead>
         <TableBody>
-              <Row row={listPreorder} page={page} />
+          {listOrder.items &&
+            listOrder.items.length > 0 &&
+            listOrder.items.map((order, index) => (
+              <Row row={order} key={index} page={page} />
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
@@ -40,22 +48,21 @@ export default function TrackingPreorder({ listPreorder, page }) {
 }
 
 function Row({ row, page }) {
-  const { getOrderPagin,listPreorder } = useOrderManager();
+  const { getOrderPagin, setListOrder } = useOrderManager();
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
-
   useEffect(() => {
-    if (row.preorder.items[0].status === 0) {
+    if (row.orderStatus === 0) {
       setStatus("chưa thanh toán");
-    } else if (row.preorder.items[0].status === 1) {
+    } else if (row.orderStatus === 1) {
       setStatus("chờ sử lý");
-    } else if (row.preorder.items[0].status === 2) {
+    } else if (row.orderStatus === 2) {
       setStatus("đang giao hàng");
-    } else if (row.preorder.items[0].status === 3) {
+    } else if (row.orderStatus === 3) {
       setStatus("đơn hàng thành công");
     }
-  }, [row.preorder.items[0].status]);
+  }, [row.orderStatus]);
 
   const handleComplete = async (orderID) => {
     console.log("order", orderID);
@@ -66,12 +73,18 @@ function Row({ row, page }) {
       const res = await updateStatusOrder(orderID, newStatus);
       console.log("update", res.data);
       if (res) {
-        await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+        const resOrder = await getOrderPagin(
+          userProfile.profile.member.memberId,
+          page,
+          3
+        );
+        if (!resOrder) {
+          setListOrder([]);
+        }
         toast.success("đơn hàng đã hoàn thành", {
           autoClose: 1000,
         });
       } else {
-        
         toast.error("lỗi mạng", {
           autoClose: 1000,
         });
@@ -92,12 +105,18 @@ function Row({ row, page }) {
         const res = await updateStatusOrder(orderID, newStatus);
         console.log("delete", res.data);
         if (res) {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
+          const resOrder = await getOrderPagin(
+            userProfile.profile.member.memberId,
+            page,
+            3
+          );
+          if (!resOrder) {
+            setListOrder([]);
+          }
           toast.success("đơn hàng đã hủy", {
             autoClose: 1000,
           });
         } else {
-          await getOrderPagin(userProfile.profile.member.memberId, page, 3);
           toast.error("lỗi mạng", {
             autoClose: 1000,
           });
@@ -107,7 +126,10 @@ function Row({ row, page }) {
       console.log("lỗi delete đơn hàng đơn hàng", error);
     }
   };
-  console.log('item',row)
+
+  const handleReview = () => {
+
+  }
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -120,22 +142,21 @@ function Row({ row, page }) {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell>{row.preorder.items[0].preorderId}</TableCell>
-        <TableCell>{row.preorder.items[0].preorderDate
-        }</TableCell>
-        <TableCell>{row.preorder.items[0].shippingAddress}</TableCell>
-        <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
+        <TableCell>{row.orderId}</TableCell>
+        <TableCell>{row.orderDate}</TableCell>
+        <TableCell>{row.shippingAddress}</TableCell>
+        <TableCell>{row.totalAmount.toLocaleString()}</TableCell>
         <TableCell>{status}</TableCell>
         <TableCell>
           <button
-            onClick={() => handleComplete(row.preorder.items[0].preorderId)}
+            onClick={() => handleComplete(row.orderId)}
             className="tracking-button-order-user-complete"
           >
             Đã Nhận Hàng
           </button>
           {status === "chưa thanh toán" ? (
             <button
-              onClick={() => handCancelOrder(row.preorder.items[0].preorderId)}
+              onClick={() => handCancelOrder(row.orderId)}
               className="tracking-button-order-user-cancel"
             >
               Hủy Đơn Hàng
@@ -156,16 +177,19 @@ function Row({ row, page }) {
                     <TableCell>Tên sản phẩm</TableCell>
                     <TableCell>Số lượng</TableCell>
                     <TableCell>Tổng Tiền đ</TableCell>
+                    <TableCell>Đánh Giá</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-
-                      <TableRow >
-                        <TableCell>{row.product.productName}</TableCell>
-                        <TableCell>{row.preorder.items[0].quantity}</TableCell>
-                        <TableCell>{row.preorder.items[0].price.toLocaleString()}</TableCell>
+                  {row.orderDetails.length > 0 &&
+                    row.orderDetails.map((products, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{products.product.productName}</TableCell>
+                        <TableCell>{products.product.productName}</TableCell>
+                        <TableCell>{products.price.toLocaleString()}</TableCell>
+                        <TableCell><button className="button-review-order-history" onClick={handleReview}>Đánh giá</button></TableCell>
                       </TableRow>
-                   
+                    ))}
                 </TableBody>
               </Table>
             </Box>

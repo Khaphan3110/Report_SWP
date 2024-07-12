@@ -19,7 +19,8 @@ export default function PreorderProvider({ children }) {
     },
     totalPreOrder: JSON.parse(localStorage.getItem("totalPreOrder")) || 0,
   });
-
+  const [listPreorder,setListPreOrder] = useState({});
+  const [listPreorderHistory,setlistPreorderHistory] = useState({})
   const addProductToPreorder = (productPreOrder) => {
     const newProduct = {
       categoriesId: productPreOrder.categoriesId,
@@ -97,6 +98,8 @@ export default function PreorderProvider({ children }) {
         clearProductPreorder,
         addPromotion,
         calculateTotal,
+        listPreorder,setListPreOrder,
+        listPreorderHistory,setlistPreorderHistory
       }}
     >
       {children}

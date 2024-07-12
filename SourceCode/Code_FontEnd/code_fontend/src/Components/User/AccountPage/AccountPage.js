@@ -5,18 +5,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./AccountPage.css";
 import { getUserInfor } from "../../../Service/UserService/UserService";
-import { useOrderManager, useUserProfile } from "../../../Store";
+import { useOrderManager, usePreorder, useUserProfile } from "../../../Store";
 import TrackingOrder from "./TrackingOrder";
 import { Margin } from "@mui/icons-material";
 import ReactPaginate from "react-paginate";
 import { PreorderPagingMember } from "../../../Service/PreorderService/PreorderService";
 import TrackingPreorder from "./TrackingPreorder";
+import { getProductID } from "../../../Service/ProductService/ProductService";
 const AccountPage = () => {
   const navigator = useNavigate();
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [address, setAddress] = useState("");
   const location = useLocation();
-  const { getOrderPagin, listOrder } = useOrderManager();
+  const { getOrderPagin, listOrder, setListOrder } = useOrderManager();
   const {
     userProfile,
     setUserProfile,
@@ -29,8 +30,8 @@ const AccountPage = () => {
   const [statePage, setStatePage] = useState("order");
   const handleAddressModalClose = () => setShowAddressModal(false);
   const handleAddressModalShow = () => setShowAddressModal(true);
-  const [listPreorder,setListPreOrder] = useState([])
-  const [pagePre,setPagePre] = useState(1)
+  const {listPreorder,setListPreOrder} = usePreorder();
+  const [pagePre, setPagePre] = useState(1);
   const handleAddressSubmit = (event) => {
     event.preventDefault();
     // Xử lý việc nhập địa chỉ tại đây
@@ -51,32 +52,58 @@ const AccountPage = () => {
   };
 
   const handlePageClickPre = (event) => {
-    setPageIndex(+event.selected + 1);
+    setPagePre(+event.selected + 1);
     // setPageIndex(+event.selected+1)
   };
 
-
   const handStatepage = (pageCurrent) => {
-    console.log("page",pageCurrent)
-    setStatePage(pageCurrent)
-  }
+    console.log("page", pageCurrent);
+    setStatePage(pageCurrent);
+  };
 
   useEffect(() => {
     const resPre = async () => {
       try {
-        const res = await PreorderPagingMember(userProfile.profile.member.memberId,pagePre,3)
-        if(res){
-          setListPreOrder(res.data)
+        const res = await PreorderPagingMember(
+          userProfile.profile.member.memberId,
+          pagePre,
+          3
+        );
+        console.log("preorder respone",res.data)
+        if (res) {
+          const resProduct =  await getProductID(res.data.items[0].productId)
+          setListPreOrder({
+            preorder:res.data,
+            product:resProduct.data,
+          });
+        } else {
+          setListPreOrder({});
+        }
+        console.log("Preorder infor", res);
+      } catch (error) {
+        console.log("error preorder fetch data", error);
+      }
+    };
+    resPre();
+  }, [pagePre]);
+  console.log("lisst pre order", listPreorder);
+  useEffect(() => {
+    const resData = async () => {
+      try {
+        const res = await getOrderPagin(
+          userProfile.profile.member.memberId,
+          pageIndex,
+          3
+        );
+        if (!res) {
+          setListOrder([]);
         }
       } catch (error) {
-        console.log("error preorder fetch data",error)
+        console.log("error fetch data", error);
       }
-    }
-    resPre();
-  },[pagePre])
+    };
 
-  useEffect(() => {
-    getOrderPagin(userProfile.profile.member.memberId, pageIndex, 3);
+    console.log("order infor", listOrder);
   }, [pageIndex]);
   console.log("list order", listOrder);
   return (
@@ -161,93 +188,114 @@ const AccountPage = () => {
                   ĐƠN HÀNG CỦA BẠN
                 </h5>
                 <div>
-                  <button onClick={() => handStatepage(statePage === "order" ? "preorder" : "order")}className="button-change-mode-tracking">
-                    {statePage === "order" ? "Đơn Hàng" : "sản phẩm mua trước"}
+                  <button
+                    onClick={() =>
+                      handStatepage(
+                        statePage === "order" ? "preorder" : "order"
+                      )
+                    }
+                    className="button-change-mode-tracking"
+                  >
+                    {statePage === "order" ? "sản phẩm mua trước" : "Đơn Hàng"}
                   </button>
-                  <button className="button-change-mode-tracking">
+                  <Link to={"/order"} style={{textDecoration:"none"}}>
+                  <button className="button-change-mode-tracking" >
                     lịch sử mua hàng
-                  </button>
+                  </button></Link>
+                  
                 </div>
               </div>
-              {listOrder.items ? (
+
                 <>
                   {statePage === "order" ? (
                     <>
-                      <TrackingOrder listOrder={listOrder} page={pageIndex} />
-                      <div
-                        style={{
-                          marginTop: "5px",
-                          display: "flex",
-                          justifyContent: "end",
-                        }}
-                      >
-                        <ReactPaginate
-                          breakLabel="..."
-                          nextLabel=">"
-                          onPageChange={handlePageClick}
-                          pageRangeDisplayed={3}
-                          marginPagesDisplayed={1}
-                          pageCount={listOrder.pageCount}
-                          previousLabel="<"
-                          renderOnZeroPageCount={null}
-                          pageClassName="page-item"
-                          pageLinkClassName="page-link"
-                          previousClassName="page-item"
-                          previousLinkClassName="page-link"
-                          nextClassName="page-item"
-                          nextLinkClassName="page-link"
-                          breakClassName="page-item"
-                          breakLinkClassName="page-link"
-                          containerClassName="pagination"
-                          activeClassName="active"
-                        />
-                      </div>
+                      {listOrder.items && listOrder.items.length > 0 ? (
+                        <>
+                          <TrackingOrder
+                            listOrder={listOrder}
+                            page={pageIndex}
+                          />
+                          <div
+                            style={{
+                              marginTop: "5px",
+                              display: "flex",
+                              justifyContent: "end",
+                            }}
+                          >
+                            <ReactPaginate
+                              breakLabel="..."
+                              nextLabel=">"
+                              onPageChange={handlePageClick}
+                              pageRangeDisplayed={3}
+                              marginPagesDisplayed={1}
+                              pageCount={listOrder.pageCount}
+                              previousLabel="<"
+                              renderOnZeroPageCount={null}
+                              pageClassName="page-item"
+                              pageLinkClassName="page-link"
+                              previousClassName="page-item"
+                              previousLinkClassName="page-link"
+                              nextClassName="page-item"
+                              nextLinkClassName="page-link"
+                              breakClassName="page-item"
+                              breakLinkClassName="page-link"
+                              containerClassName="pagination"
+                              activeClassName="active"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <p style={{ fontWeight: "bold", margin: "0",textAlign:'center' }}>
+                          Hiện tại chưa có đơn hàng
+                        </p>
+                      )}
                     </>
                   ) : (
                     <>
-                      <TrackingPreorder listPreorder={listPreorder} page={pagePre} />
-                      <div
-                        style={{
-                          marginTop: "5px",
-                          display: "flex",
-                          justifyContent: "end",
-                        }}
-                      >
-                        <ReactPaginate
-                          breakLabel="..."
-                          nextLabel=">"
-                          onPageChange={handlePageClick}
-                          pageRangeDisplayed={3}
-                          marginPagesDisplayed={1}
-                          pageCount={listPreorder.pageCount}
-                          previousLabel="<"
-                          renderOnZeroPageCount={null}
-                          pageClassName="page-item"
-                          pageLinkClassName="page-link"
-                          previousClassName="page-item"
-                          previousLinkClassName="page-link"
-                          nextClassName="page-item"
-                          nextLinkClassName="page-link"
-                          breakClassName="page-item"
-                          breakLinkClassName="page-link"
-                          containerClassName="pagination"
-                          activeClassName="active"
-                        />
-                      </div>
+                      {isEmpty(listPreorder) ? (
+                        <>
+                          <TrackingPreorder
+                            listPreorder={listPreorder}
+                            page={pagePre}
+                          />
+                          <div
+                            style={{
+                              marginTop: "5px",
+                              display: "flex",
+                              justifyContent: "end",
+                            }}
+                          >
+                            <ReactPaginate
+                              breakLabel="..."
+                              nextLabel=">"
+                              onPageChange={handlePageClickPre}
+                              pageRangeDisplayed={3}
+                              marginPagesDisplayed={1}
+                              pageCount={listPreorder.pageCount}
+                              previousLabel="<"
+                              renderOnZeroPageCount={null}
+                              pageClassName="page-item"
+                              pageLinkClassName="page-link"
+                              previousClassName="page-item"
+                              previousLinkClassName="page-link"
+                              nextClassName="page-item"
+                              nextLinkClassName="page-link"
+                              breakClassName="page-item"
+                              breakLinkClassName="page-link"
+                              containerClassName="pagination"
+                              activeClassName="active"
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <p style={{ fontWeight: "bold", margin: "0",textAlign: "center" }}>
+                          Hiện tại chưa có đơn hàng
+                        </p>
+                      )}
                     </>
                   )}
                 </>
-              ) : (
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    margin: "0",
-                    textAlign: "center",
-                  }}
-                >
-                  Hiện tại chưa có đơn hàng nào
-                </p>
-              )}
+
 
               {/* <table className="table">
                 <thead>
