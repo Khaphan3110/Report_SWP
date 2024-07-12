@@ -83,7 +83,9 @@ namespace SWPSolution.Application.Sales
 
         public async Task<PageResult<PreOrder>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
         {
-            var query = _context.PreOrders.AsQueryable();
+            var query = _context.PreOrders
+                .Include(o => o.Product)
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(request.MemberId))
             {
@@ -110,7 +112,16 @@ namespace SWPSolution.Application.Sales
                     ShippingAddress = p.ShippingAddress,
                     Quantity = p.Quantity,
                     Status = p.Status,
-                    Price = p.Price
+                    Price = p.Price,
+                    Product = new Product
+                    {
+                        ProductId = p.ProductId,
+                        ProductName = p.Product.ProductName,
+                        Price = p.Product.Price,
+                        CategoriesId = p.Product.CategoriesId,
+                        ProductImages = p.Product.ProductImages,
+                    }
+                    
                 }).OrderByDescending(p => p.PreorderId)
                 .ToList();
 
@@ -123,9 +134,11 @@ namespace SWPSolution.Application.Sales
             };
         }
 
-        public async Task<PageResult<PreOrder>> GetPreOrdersTrackingPagingAsync(PreOrderPagingRequest request)
+        public async Task<PageResult<PreOrder>> GetPreOrdersTrackingPagingAsync(PreOrderTrackingPagingRequest request)
         {
-            var query = _context.PreOrders.AsQueryable();
+            var query = _context.PreOrders
+                .Include(o => o.Product)
+                .AsQueryable();
 
             var allowedStatuses = new List<PreOrderStatus> { PreOrderStatus.Created, PreOrderStatus.Deposited };
 
@@ -134,9 +147,10 @@ namespace SWPSolution.Application.Sales
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
-            if (request.PreOrderStatus.HasValue)
+            if (request.Status.HasValue)
             {
-                query = query.Where(o => o.Status == request.PreOrderStatus.Value);
+                var statusValue = (PreOrderStatus)request.Status.Value; // Ensure request.Status is cast to OrderStatus
+                query = query.Where(o => o.Status == statusValue);
             }
 
             // Get the total number of records
@@ -155,7 +169,15 @@ namespace SWPSolution.Application.Sales
                     ShippingAddress = p.ShippingAddress,
                     Quantity = p.Quantity,
                     Status = p.Status,
-                    Price = p.Price
+                    Price = p.Price,
+                    Product = new Product
+                    {
+                        ProductId = p.ProductId,
+                        ProductName = p.Product.ProductName,
+                        Price = p.Product.Price,
+                        CategoriesId = p.Product.CategoriesId,
+                        ProductImages = p.Product.ProductImages,
+                    }
                 }).OrderByDescending(p => p.PreorderId)
                 .ToList();
 
@@ -171,7 +193,9 @@ namespace SWPSolution.Application.Sales
 
         public async Task<PageResult<PreOrder>> GetPreOrdersHistoryPagingAsync(PreOrderHistoryPagingRequest request)
         {
-            var query = _context.PreOrders.AsQueryable();
+            var query = _context.PreOrders
+                .Include(o => o.Product)
+                .AsQueryable();
 
             var allowedStatuses = new List<PreOrderStatus> { PreOrderStatus.Completed };
 
@@ -201,7 +225,15 @@ namespace SWPSolution.Application.Sales
                     ShippingAddress = p.ShippingAddress,
                     Quantity = p.Quantity,
                     Status = p.Status,
-                    Price = p.Price
+                    Price = p.Price,
+                    Product = new Product
+                    {
+                        ProductId = p.ProductId,
+                        ProductName = p.Product.ProductName,
+                        Price = p.Product.Price,
+                        CategoriesId = p.Product.CategoriesId,
+                        ProductImages = p.Product.ProductImages,
+                    }
                 }).OrderByDescending(p => p.PreorderId)
                 .ToList();
 
@@ -218,6 +250,7 @@ namespace SWPSolution.Application.Sales
         {
             return _context.PreOrders
                 .Include(c => c.Payments)
+                .Include(o => o.Product)
                 .OrderByDescending(c => c.PreorderId)
                 .Select(c => new PreOrder
                 {
@@ -240,7 +273,15 @@ namespace SWPSolution.Application.Sales
                         PaymentMethod = p.PaymentMethod,
                         PaymentDate = p.PaymentDate,
                         
-                    }).ToList()
+                    }).ToList(),
+                    Product = new Product
+                    {
+                        ProductId = c.ProductId,
+                        ProductName = c.Product.ProductName,
+                        Price = c.Product.Price,
+                        CategoriesId = c.Product.CategoriesId,
+                        ProductImages = c.Product.ProductImages,
+                    }
                 })
                 .ToList();
         }

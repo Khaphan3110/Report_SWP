@@ -38,11 +38,16 @@ const StaffManager = React.lazy(() => (import("../Components/Amind/StaffManager/
 const MemberManager = React.lazy(() => (import("../Components/Amind/MemberManager/MemberManager")))
 const OrderManager = React.lazy(() => (import("../Components/Amind/OrderManager/OrderManager")))
 const PromotionManager = React.lazy(() => (import("../Components/Amind/ManagerPromotion/Promotion")))
+<<<<<<< HEAD
 const OrderDetail = React.lazy(() => (import("../Components/User/OrderDetail/OrderDetail")))
 const OrderUser = React.lazy(() => (import("../Components/User/OrderUser/OrderUser")))
+=======
+const Blog = React.lazy(() => (import("../Components/User/Blog/Blog")))
+
+>>>>>>> f7151eb20797f833ad41d9bc00abc058d69d000d
 //SettingAdmin
 // <Route path="/" element={<HomePage />} />
-//         <Route path="/Header" element={<Header />} />
+//         <Route path="/Header" element={<Header />} /> 
 //         <Route path="/Footer" element={<Footer />} />
 //         <Route path="/login" element={<LoginForm />} />
 //         <Route path="/account" element={<AccountPage />} />
@@ -72,9 +77,16 @@ const publicRoutes = [
   { path: "/sendEmailForgot", component: SendEmailForm ,layout:"user"},
   { path: "/forgotPassword", component: ForgotPasswordForm ,layout:"user"},
   { path: "/logoutAdmin", component: LogoutAdmin},
+<<<<<<< HEAD
   // { path: "/orderDetail/:orderID", component: OrderDetail},
   // { path: "/order", component: OrderUser},
   // { path: "/payment/success", component: Success ,Userlayout:"user"},
+=======
+  { path: "/blog", component: Blog},
+
+  
+  // { path: "/payment/success", component: Success ,layout:"user"},
+>>>>>>> f7151eb20797f833ad41d9bc00abc058d69d000d
   // { path: "/payment/notsuccess", component: NotSuccess ,layout:"user"},
   // { path: "/checkout", component: CheckoutPage ,layout:"user"},
   // { path: "/payment", component: PaymentPage ,layout:"user"},
