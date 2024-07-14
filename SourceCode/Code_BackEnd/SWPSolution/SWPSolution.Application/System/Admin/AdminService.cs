@@ -488,7 +488,7 @@ namespace SWPSolution.Application.System.Admin
                 Categories = blog.Categories,
                 DataCreate = blog.DataCreate,
                 StaffId = blog.StaffId
-            }).ToList();
+            }).OrderByDescending(m => m.BlogId).ToList();
 
             return blogDetails;
         }
@@ -629,6 +629,7 @@ namespace SWPSolution.Application.System.Admin
                     TotalAmount = (double)order.TotalAmount,
                     OrderDate = (DateTime)order.OrderDate,
                 })
+                .OrderByDescending(m => m.OrderId)
                 .ToListAsync();
         }
 

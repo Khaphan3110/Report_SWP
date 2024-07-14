@@ -34,13 +34,13 @@ namespace SWPSolution.BackendApi
     {
         public static void Main(string[] args)
         {
-            var options = new WebApplicationOptions
-            {
-                ContentRootPath = "/home/norman/SWP/net8.0/publish",
-                WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
-            };
+            var builder = WebApplication.CreateBuilder(args);
+            //     {
+            //         ContentRootPath = "/home/norman/SWP/net8.0/publish",
+            //        WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
+            //   };
 
-            var builder = WebApplication.CreateBuilder(options);
+            builder.Services.AddControllers();
 
             builder.WebHost.ConfigureKestrel(options =>
             {

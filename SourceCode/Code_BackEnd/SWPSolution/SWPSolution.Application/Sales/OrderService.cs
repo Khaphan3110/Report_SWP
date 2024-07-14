@@ -226,7 +226,7 @@ namespace SWPSolution.Application.Sales
                             ProductId = od.Product.ProductId,
                             ProductName = od.Product.ProductName
                         }
-                    }).ToList(),
+                    }).OrderByDescending(m => m.OrderdetailId).ToList(),
                     Member = new Member
                     {
                         MemberId = c.Member.MemberId,
@@ -246,8 +246,9 @@ namespace SWPSolution.Application.Sales
                         PaymentStatus = p.PaymentStatus,
                         PaymentDate = p.PaymentDate,
                         PaymentMethod = p.PaymentMethod
-                    }).ToList()
+                    }).OrderByDescending(m => m.PaymentId).ToList()
                 })
+                .OrderByDescending(m => m.OrderId)
                 .ToListAsync();
         }
 

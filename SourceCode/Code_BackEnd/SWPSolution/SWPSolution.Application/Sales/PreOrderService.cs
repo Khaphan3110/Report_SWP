@@ -273,7 +273,7 @@ namespace SWPSolution.Application.Sales
                         PaymentMethod = p.PaymentMethod,
                         PaymentDate = p.PaymentDate,
                         
-                    }).ToList(),
+                    }).OrderByDescending(m => m.PaymentId).ToList(),
                     Product = new Product
                     {
                         ProductId = c.ProductId,
@@ -283,6 +283,7 @@ namespace SWPSolution.Application.Sales
                         ProductImages = c.Product.ProductImages,
                     }
                 })
+                .OrderByDescending(m => m.PreorderId)
                 .ToList();
         }
 

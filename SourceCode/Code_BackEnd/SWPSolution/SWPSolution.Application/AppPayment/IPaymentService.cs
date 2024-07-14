@@ -19,6 +19,6 @@ namespace SWPSolution.Application.AppPayment
 
         // Payment retrieval
         Task<Payment> GetById(string id);
-        Task<List<Payment>> GetAll();
+        Task<List<PaymentVM>> GetAll();
     }
 }

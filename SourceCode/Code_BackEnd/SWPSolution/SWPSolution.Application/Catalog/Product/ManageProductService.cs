@@ -122,7 +122,9 @@ namespace SWPSolution.Application.Catalog.Product
                     Description = x.p.Description,
                     Price = x.p.Price,
                     Quantity = x.p.Quantity,
-                }).ToListAsync();
+                })
+                .OrderByDescending(m => m.CategoriesId)
+                .ToListAsync();
             //4. Select and projection
             var pageResult = new PageResult<ProductViewModel>()
             {
@@ -635,6 +637,7 @@ namespace SWPSolution.Application.Catalog.Product
                                             grade = m.Grade,
                                             comment = m.Comment,
                                         })
+                                        .OrderByDescending(m => m.reviewId)
                                         .ToList();
             return review;
         }
@@ -700,7 +703,7 @@ namespace SWPSolution.Application.Catalog.Product
                     Price = product.Price,
                     Description = product.Description,
                     StatusDescription = product.StatusDescription,
-                }).ToList();
+                }).OrderByDescending(m => m.ProductId).ToList();
 
             var pageResult = new PageResult<ProductViewModel>
             {
