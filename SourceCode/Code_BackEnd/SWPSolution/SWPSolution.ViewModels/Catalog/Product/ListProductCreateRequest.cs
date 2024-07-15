@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SWPSolution.Data.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,6 @@ namespace SWPSolution.ViewModels.Catalog.Product
 
         public string Description { get; set; }
 
-        public string StatusDescription { get; set; }
+        public ProductStatus? StatusDescription { get; set; }
     }
 }

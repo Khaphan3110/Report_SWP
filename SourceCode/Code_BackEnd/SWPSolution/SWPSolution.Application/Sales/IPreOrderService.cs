@@ -14,7 +14,7 @@ namespace SWPSolution.Application.Sales
     public interface IPreOrderService
     {
         Task<IEnumerable<PreOrder>> GetDepositedPreOrdersAsync();
-        Task<bool> IsProductAvailable(string productId, int quantity);
+        Task<bool> IsProductAvailable(string productId);
         Task<PreOrder> CreatePreOrder(CreatePreOrderRequest model);
         Task<List<PreOrder>> GetAll();
         Task<Payment> ProcessPreOrderDeposit(string preorderId, double orderTotal);
