@@ -61,7 +61,7 @@ const Blog = React.lazy(() => (import("../Components/User/Blog/Blog")))
 //         <Route path="/CategoriesType" element={<ImportCategories/>} />
 const publicRoutes = [
   { path: "/", component: CartProductPage },
-  { path: "/seachproduct", component: SearchFilterProduct,layout:"user" },
+  { path: "/seachproduct/:search", component: SearchFilterProduct,layout:"user" },
   { path: "/productDetail/:productID", component: ProductDetail,layout:"user" },
   { path: "/authenRegisterAdmin", component: AuthenRegisterAdmin,layout:"loginOnly" },
   { path: "/resetpasswordAdmin", component: ResetPassWordAdmin,layout:"loginOnly" },
