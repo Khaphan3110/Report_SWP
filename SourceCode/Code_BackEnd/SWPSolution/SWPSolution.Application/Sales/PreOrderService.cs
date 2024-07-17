@@ -193,7 +193,7 @@ namespace SWPSolution.Application.Sales
         {
             var query = _context.PreOrders
                 .Include(o => o.Product)
-                .Where(p => new List<PreOrderStatus> { PreOrderStatus.Completed }.Contains(p.Status))
+                .Where(p => new List<PreOrderStatus> { PreOrderStatus.Completed, PreOrderStatus.Canceled }.Contains(p.Status))
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(request.MemberId))
