@@ -94,6 +94,7 @@ namespace SWPSolution.Application.Catalog.Promotion
                     StartDate = p.StartDate,
                     EndDate = p.EndDate,
                 })
+                .OrderByDescending(m => m.PromotionId)
                 .ToList();
         }
 

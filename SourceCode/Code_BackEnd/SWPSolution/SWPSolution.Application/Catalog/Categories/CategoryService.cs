@@ -145,6 +145,7 @@ namespace SWPSolution.Application.Catalog.Categories
                     PackageType = c.PackageType,
                     Source = c.Source
                 })
+                .OrderByDescending(m => m.CategoriesId)
                 .ToListAsync();
         }
 

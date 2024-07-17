@@ -42,15 +42,16 @@ namespace SWPSolution.Application.Sales
 
         public async Task<IEnumerable<PreOrder>> GetDepositedPreOrdersAsync()
         {
-            return  _context.PreOrders
+            return _context.PreOrders
                 .Where(p => p.Status == PreOrderStatus.Deposited)
+                .OrderByDescending(p => p.PreorderId) // Added ordering
                 .ToList();
         }
 
         public async Task<PreOrder> CreatePreOrder(CreatePreOrderRequest model)
         {
             var product = await _context.Products.FindAsync(model.ProductId);
-            if (product == null || product.Quantity < model.Quantity)
+            if (product == null || product.StatusDescription == ProductStatus.NotAvailable)
             {
                 var preOrder = new PreOrder
                 {
@@ -75,10 +76,12 @@ namespace SWPSolution.Application.Sales
 
         public async Task<PreOrder> GetPreOrder(string preorderId)
         {
-            return _context.PreOrders
+            return await _context.PreOrders
                 .Include(po => po.Product)
                 .Include(po => po.Member)
-                .FirstOrDefault(po => po.PreorderId == preorderId);
+                .Where(po => po.PreorderId == preorderId)
+                .OrderByDescending(po => po.PreorderId) // Ordering
+                .FirstOrDefaultAsync();
         }
 
         public async Task<PageResult<PreOrder>> GetPreOrdersPagingAsync(PreOrderPagingRequest request)
@@ -91,16 +94,15 @@ namespace SWPSolution.Application.Sales
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
-            if(request.PreOrderStatus.HasValue)
+            if (request.PreOrderStatus.HasValue)
             {
                 query = query.Where(o => o.Status == request.PreOrderStatus.Value);
             }
 
-            // Get the total number of records
             int totalRow = query.Count();
 
-            // Apply paging and select to ViewModel
-            var pagedData = query
+            var pagedData = await query
+                .OrderByDescending(p => p.PreorderId) // Ordering
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(p => new PreOrder
@@ -121,9 +123,8 @@ namespace SWPSolution.Application.Sales
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
                     }
-                    
-                }).OrderByDescending(p => p.PreorderId)
-                .ToList();
+                })
+                .ToListAsync();
 
             return new PageResult<PreOrder>
             {
@@ -138,26 +139,23 @@ namespace SWPSolution.Application.Sales
         {
             var query = _context.PreOrders
                 .Include(o => o.Product)
+                .Where(p => new List<PreOrderStatus> { PreOrderStatus.Created, PreOrderStatus.Deposited }.Contains(p.Status))
                 .AsQueryable();
 
-            var allowedStatuses = new List<PreOrderStatus> { PreOrderStatus.Created, PreOrderStatus.Deposited };
-
-            query = query.Where(p => allowedStatuses.Contains(p.Status));
             if (!string.IsNullOrEmpty(request.MemberId))
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
             }
             if (request.Status.HasValue)
             {
-                var statusValue = (PreOrderStatus)request.Status.Value; // Ensure request.Status is cast to OrderStatus
+                var statusValue = (PreOrderStatus)request.Status.Value;
                 query = query.Where(o => o.Status == statusValue);
             }
 
-            // Get the total number of records
             int totalRow = query.Count();
 
-            // Apply paging and select to ViewModel
-            var pagedData = query
+            var pagedData = await query
+                .OrderByDescending(p => p.PreorderId) // Ordering
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(p => new PreOrder
@@ -178,8 +176,8 @@ namespace SWPSolution.Application.Sales
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
                     }
-                }).OrderByDescending(p => p.PreorderId)
-                .ToList();
+                })
+                .ToListAsync();
 
             return new PageResult<PreOrder>
             {
@@ -195,11 +193,9 @@ namespace SWPSolution.Application.Sales
         {
             var query = _context.PreOrders
                 .Include(o => o.Product)
+                .Where(p => new List<PreOrderStatus> { PreOrderStatus.Completed }.Contains(p.Status))
                 .AsQueryable();
 
-            var allowedStatuses = new List<PreOrderStatus> { PreOrderStatus.Completed };
-
-            query = query.Where(p => allowedStatuses.Contains(p.Status));
             if (!string.IsNullOrEmpty(request.MemberId))
             {
                 query = query.Where(o => o.MemberId.Equals(request.MemberId));
@@ -209,11 +205,10 @@ namespace SWPSolution.Application.Sales
                 query = query.Where(o => o.Product.ProductName.Contains(request.Keyword));
             }
 
-            // Get the total number of records
             int totalRow = query.Count();
 
-            // Apply paging and select to ViewModel
-            var pagedData = query
+            var pagedData = await query
+                .OrderByDescending(p => p.PreorderId) // Ordering
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(p => new PreOrder
@@ -234,8 +229,8 @@ namespace SWPSolution.Application.Sales
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
                     }
-                }).OrderByDescending(p => p.PreorderId)
-                .ToList();
+                })
+                .ToListAsync();
 
             return new PageResult<PreOrder>
             {
@@ -248,14 +243,14 @@ namespace SWPSolution.Application.Sales
 
         public async Task<List<PreOrder>> GetAll()
         {
-            return _context.PreOrders
+            return await _context.PreOrders
                 .Include(c => c.Payments)
                 .Include(o => o.Product)
-                .OrderByDescending(c => c.PreorderId)
+                .OrderByDescending(c => c.PreorderId) // Ordering
                 .Select(c => new PreOrder
                 {
-                    PreorderId= c.PreorderId,
-                    ProductId= c.ProductId,
+                    PreorderId = c.PreorderId,
+                    ProductId = c.ProductId,
                     MemberId = c.MemberId,
                     ShippingAddress = c.ShippingAddress,
                     Quantity = c.Quantity,
@@ -272,8 +267,9 @@ namespace SWPSolution.Application.Sales
                         PaymentStatus = p.PaymentStatus,
                         PaymentMethod = p.PaymentMethod,
                         PaymentDate = p.PaymentDate,
-                        
-                    }).ToList(),
+                    })
+                    .OrderByDescending(m => m.PaymentId) // Ordering
+                    .ToList(),
                     Product = new Product
                     {
                         ProductId = c.ProductId,
@@ -283,13 +279,13 @@ namespace SWPSolution.Application.Sales
                         ProductImages = c.Product.ProductImages,
                     }
                 })
-                .ToList();
+                .ToListAsync();
         }
 
-        public async Task<bool> IsProductAvailable(string productId, int quantity)
+        public async Task<bool> IsProductAvailable(string productId)
         {
             var product = await _context.Products.FindAsync(productId);
-            return product != null && product.Quantity >= quantity;
+            return product.StatusDescription == ProductStatus.InStock;
         }
 
         public async Task NotifyCustomer(string memberId, PreOrder preorder, string paymentUrl)
@@ -393,7 +389,7 @@ namespace SWPSolution.Application.Sales
             }
 
             var product = await _context.Products.FindAsync(preorder.ProductId);
-            if (product != null && product.Quantity >= preorder.Quantity)
+            if (product != null && product.StatusDescription== ProductStatus.NotAvailable)
             {
                 preorder.Status = PreOrderStatus.Deposited; // Update the preorder status
                 _context.PreOrders.Update(preorder);

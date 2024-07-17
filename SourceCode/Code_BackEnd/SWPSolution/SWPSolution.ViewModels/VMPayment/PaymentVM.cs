@@ -14,9 +14,9 @@ namespace SWPSolution.ViewModels.Payment
 
         public double Amount { get; set; }
 
-        public double DiscountValue { get; set; }
+        public double? DiscountValue { get; set; }
 
-        public bool PaymentStatus { get; set; }
+        public bool? PaymentStatus { get; set; }
 
         public string PaymentMethod { get; set; }
 

@@ -6,6 +6,7 @@ using SWPSolution.ViewModels.Payment;
 using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using System.Data.Entity;
+using SWPSolution.ViewModels.Catalog.Promotion;
 
 namespace SWPSolution.Application.AppPayment
 {
@@ -63,9 +64,21 @@ namespace SWPSolution.Application.AppPayment
         }
 
         // Payment retrieval
-        public async Task<List<Payment>> GetAll()
+        public async Task<List<PaymentVM>> GetAll()
         {
-            return _context.Payments.ToList();
+            return _context.Payments
+                .Select(p => new PaymentVM
+                {
+                    PaymentId = p.PaymentId,
+                    OrderId = p.OrderId,
+                    Amount = p.Amount,
+                    DiscountValue = p.DiscountValue,
+                    PaymentDate = p.PaymentDate,
+                    PaymentMethod = p.PaymentMethod,
+                    PaymentStatus = p.PaymentStatus,
+                })
+                .OrderByDescending(m => m.PaymentId)
+                .ToList();
         }
 
         public async Task<Payment> GetById(string id)

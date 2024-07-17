@@ -421,6 +421,7 @@ namespace SWPSolution.Application.System.User
                                             RegistrationDate = m.RegistrationDate,
 
                                         })
+                                        .OrderByDescending(m => m.MemberId)
                                         .ToList();
             return members;
         }
@@ -537,6 +538,7 @@ namespace SWPSolution.Application.System.User
                                             City = m.City,
                                             Region = m.Region
                                         })
+                                        .OrderByDescending(m => m.Id)
                                         .ToList();
             return address;
         }
@@ -939,6 +941,7 @@ namespace SWPSolution.Application.System.User
                                             FullName = m.FullName,
                                             PhoneNumber = m.Phone
                                         })
+                                        .OrderByDescending(m => m.Id)
                                         .ToList();
             return staff;
         }
@@ -1102,7 +1105,7 @@ namespace SWPSolution.Application.System.User
                     PhoneNumber = c.PhoneNumber,
                     UserName = c.UserName,
                     Email = c.Email,
-                }).ToListAsync();
+                }).OrderByDescending(m => m.MemberId).ToListAsync();
 
             var pageResult = new PageResult<MemberInfoVM>
             {
@@ -1160,7 +1163,7 @@ namespace SWPSolution.Application.System.User
                     FullName = c.FullName,
                     Email = c.Email,
                     PhoneNumber = c.Phone,
-                }).ToListAsync();
+                }).OrderByDescending(m => m.Id).ToListAsync();
 
             var pageResult = new PageResult<StaffInfoVM>
             {

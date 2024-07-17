@@ -36,6 +36,20 @@ namespace SWPSolution.BackendApi
         {
 
             var builder = WebApplication.CreateBuilder(args);
+            //     {
+            //         ContentRootPath = "/home/norman/SWP/net8.0/publish",
+            //        WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
+            //   };
+
+            builder.Services.AddControllers();
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.ListenAnyIP(5000); // Replace 5000 with your desired port
+            });
+
+
+             builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllers();
 
             //Add cros 

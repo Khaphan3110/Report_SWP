@@ -92,12 +92,13 @@ export default function Categories() {
                   productObj.quantity = product[1];
                   productObj.price = product[2];
                   productObj.description = product[3];
-                  productObj.statusDescription = product[4];
+                  // productObj.statusDescription = product[4];
+                  productObj.statusDescription = parseInt(product[4], 10);
                   result.push(productObj);
                 }
               });
               if (cateGoriesID) {
-                // console.log("day la list product", result);
+                console.log("day la list product", result);
                 const resImportProduct = await importProductList(result);
                 if (resImportProduct) {
                   getAllProductToContext(pageIndex, 8);
@@ -190,7 +191,7 @@ export default function Categories() {
       Quantity: "",
       Price: "",
       Description: "",
-      statusDescription: "",
+      statusDescription: 1,
     },
 
     validationSchema: Yup.object({
@@ -206,23 +207,21 @@ export default function Categories() {
       Description: Yup.string()
         .required("Description is required")
         .matches(/^[^\d].*$/, "Description should not start with a digit"),
-      statusDescription: Yup.string()
-        .oneOf(
-          ["còn hàng", "het hang", "chua co hang"],
-          'Status description must be either "còn hàng" or "het hang" or "chua co hang"'
-        )
-        .required("Status description is required"),
+      // statusDescription: Yup.string().required("Status description is required"),
     }),
 
     onSubmit: async (values) => {
-      console.log("product", values);
+      console.log("product", values.statusDescription);
       const formProduct = new FormData();
       formProduct.append("ProductId", values.ProductId);
       formProduct.append("CategoriesId", values.CategoriesId);
       formProduct.append("ProductName", values.ProductName);
       formProduct.append("Quantity", values.Quantity);
       formProduct.append("Description", values.Description);
-      formProduct.append("StatusDescription", values.statusDescription);
+      formProduct.append(
+        "StatusDescription",
+        values.statusDescription ? values.statusDescription : 1
+      );
       //
       try {
         setShow(false);
@@ -269,6 +268,7 @@ export default function Categories() {
   useEffect(() => {
     getAllProductToContext(pageIndex, 8);
   }, [pageIndex]);
+
   return (
     <>
       <ToastContainer />
@@ -280,17 +280,21 @@ export default function Categories() {
         </div>
 
         <div className="button-Product">
-          <div className="sub-button-Product">
-            <label htmlFor="test" className="btn btn-success">
-              <i className="fa-solid fa-file-import"></i> Import
-            </label>
-            <input
-              type="file"
-              hidden
-              id="test"
-              onChange={(event) => handleImportFileProduct(event)}
-            />
-          </div>
+          {cateGoriesID && cateGoriesID.trim() !== "" ? (
+            <div className="sub-button-Product">
+              <label htmlFor="test" className="btn btn-success">
+                <i className="fa-solid fa-file-import"></i> Import
+              </label>
+              <input
+                type="file"
+                hidden
+                id="test"
+                onChange={(event) => handleImportFileProduct(event)}
+              />
+            </div>
+          ) : (
+            <h4 style={{ color: "red" }}>Choose Categories</h4>
+          )}
 
           <div className="sub-button-Product">
             <CSVLink
@@ -317,13 +321,15 @@ export default function Categories() {
           <i className="fa-solid fa-magnifying-glass"></i>
         </div>
         <div className="select-categories">
-          <label htmlFor="Categories">Choose Categories Before Import</label>
+          <label htmlFor="Categories" style={{ fontWeight: "bold" }}>
+            Choose Categories Before Import
+          </label>
           <select
             title="Categories"
             id="Categories"
             onChange={handleGetCateValue}
           >
-            <option> Categories Type</option>
+            <option value={""}> Categories Type</option>
             {listCate &&
               listCate.map((cate, index) => (
                 <>
@@ -353,49 +359,53 @@ export default function Categories() {
           </thead>
           <tbody>
             {listProduct &&
-              listProduct.items.map((product, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{product.productId}</td>
-                    <td>{product.productName}</td>
-                    <td>{product.quantity}</td>
-                    <td>{product.price}</td>
-                    <td>{product.description}</td>
-                    <td>{product.statusDescription}</td>
-                    <td>{product.categoriesId}</td>
-                    <th className="action-product-controller">
-                      <FaPen
-                        className="action-button"
-                        onClick={() => handleShow(product)}
-                      ></FaPen>
-                      <FaTrash
-                        className="action-button"
-                        onClick={() => handDeleteButton(product.productId)}
-                      ></FaTrash>
+              listProduct.items.map((product, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{product.productId}</td>
+                  <td>{product.productName}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.price}</td>
+                  <td>{product.description}</td>
+                  <td>
+                    {product.statusDescription === 1
+                      ? "In Stock"
+                      : product.statusDescription === 0
+                      ? "Out Of Stock"
+                      : "Not Stock Yet"}
+                  </td>
+                  <td>{product.categoriesId}</td>
+                  <th className="action-product-controller">
+                    <FaPen
+                      className="action-button"
+                      onClick={() => handleShow(product)}
+                    ></FaPen>
+                    <FaTrash
+                      className="action-button"
+                      onClick={() => handDeleteButton(product.productId)}
+                    ></FaTrash>
 
-                      <div className="sub-button-Product-importImage">
-                        <label
-                          htmlFor={`UpImage-${product.productId}`}
-                          className="btn btn-info"
-                        >
-                          <i className="fa-solid fa-file-import"></i> IpImg
-                        </label>
-                        <input
-                          type="file"
-                          hidden
-                          accept="image/png"
-                          multiple
-                          id={`UpImage-${product.productId}`}
-                          onChange={(event) =>
-                            handleImportFileImage(event, product.productId)
-                          }
-                        />
-                      </div>
-                    </th>
-                  </tr>
-                );
-              })}
+                    <div className="sub-button-Product-importImage">
+                      <label
+                        htmlFor={`UpImage-${product.productId}`}
+                        className="btn btn-info"
+                      >
+                        <i className="fa-solid fa-file-import"></i> IpImg
+                      </label>
+                      <input
+                        type="file"
+                        hidden
+                        accept="image/png"
+                        multiple
+                        id={`UpImage-${product.productId}`}
+                        onChange={(event) =>
+                          handleImportFileImage(event, product.productId)
+                        }
+                      />
+                    </div>
+                  </th>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </div>
@@ -492,14 +502,16 @@ export default function Categories() {
             )}
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>statusDescription</Form.Label>
-              <Form.Control
+              <Form.Select
                 name="statusDescription"
-                type="statusDescription"
-                placeholder="statusDescription"
-                autoFocus
-                value={formikProduct.values.statusDescription}
+                aria-label="Default select example"
                 onChange={formikProduct.handleChange}
-              />
+                value={formikProduct.values.statusDescription}
+              >
+                <option value={1}>in Stock</option>
+                <option value={0}>out Of Stock</option>
+                <option value={-1}>no stock yet</option>
+              </Form.Select>
             </Form.Group>
             {formikProduct.errors.statusDescription && (
               <p style={{ color: "red", margin: "0" }}>

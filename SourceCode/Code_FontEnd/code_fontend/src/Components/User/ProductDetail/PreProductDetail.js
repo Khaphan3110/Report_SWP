@@ -114,7 +114,14 @@ export default function PreProductDetail({ productDetail }) {
                   {productDetail.category.brandName}
                 </span>
               </p>
-              <p>Tình Trạng : {productDetail.statusDescription}</p>
+              <p>
+                Tình Trạng :{" "}
+                {productDetail.statusDescription === 1
+                  ? "Còn hàng"
+                  : productDetail.statusDescription === 0
+                  ? "Hết Hàng"
+                  : "Chưa có hàng"}
+              </p>
               <div className="zone-charactor-wrapper">
                 <span>Giao Hàng</span>
                 <div className="zone-charactor-wrapper-detail">
@@ -142,23 +149,23 @@ export default function PreProductDetail({ productDetail }) {
                 </div>
               </div>
               <div className="active-product-buy-add">
-                {productDetail.statusDescription !== "het hang" ? (
+                {productDetail.statusDescription !== 0 ? (
                   <>
                     <button
                       className="active-product-add"
                       onClick={() =>
-                        productDetail.statusDescription === "chua co hang"
+                        productDetail.statusDescription === -1
                           ? handleAddPreorder()
                           : handAddProductTocart()
                       }
                     >
                       <p>
-                        {productDetail.statusDescription === "chua co hang"
+                        {productDetail.statusDescription === -1
                           ? "Mua trước sản phẩm"
                           : "Thêm vào giỏ hàng"}
                       </p>
                     </button>
-                    {productDetail.statusDescription === "chua co hang" ? (
+                    {productDetail.statusDescription === -1 ? (
                       <p
                         style={{
                           color: "red",
@@ -252,10 +259,7 @@ export default function PreProductDetail({ productDetail }) {
                       <p style={{ margin: "0", fontWeight: "bold" }}>
                         Đánh giá :
                       </p>
-                      <Rating
-                        name="simple-controlled"
-                        value={review.grade}
-                      />
+                      <Rating  name="read-only" value={review.grade} />
                     </div>
                     <div className="description-review">
                       <p
