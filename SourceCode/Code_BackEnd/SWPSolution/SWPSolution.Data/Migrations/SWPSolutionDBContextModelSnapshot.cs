@@ -17,7 +17,7 @@ namespace SWPSolution.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -609,11 +609,9 @@ namespace SWPSolution.Data.Migrations
                     b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("StatusDescription")
-                        .HasMaxLength(50)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("statusDescription");
+                    b.Property<int?>("StatusDescription")
+                        .HasColumnType("int")
+                        .HasColumnName("StatusDescription");
 
                     b.HasKey("ProductId")
                         .HasName("PK__Product__470175FDED17C147");

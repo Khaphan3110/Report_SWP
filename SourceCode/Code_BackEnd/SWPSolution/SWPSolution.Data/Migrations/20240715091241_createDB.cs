@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SWPSolution.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class updatePreoder : Migration
+    public partial class createDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -210,7 +210,7 @@ namespace SWPSolution.Data.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    statusDescription = table.Column<string>(type: "varchar(50)", unicode: false, maxLength: 50, nullable: true),
+                    StatusDescription = table.Column<int>(type: "int", nullable: true),
                     image = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

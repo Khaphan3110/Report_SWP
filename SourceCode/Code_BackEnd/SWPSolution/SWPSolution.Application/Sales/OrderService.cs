@@ -204,7 +204,6 @@ namespace SWPSolution.Application.Sales
                 .Include(c => c.Payments)
                 .Include(c => c.OrderDetails)
                     .ThenInclude(od => od.Product)
-                    .OrderByDescending(c => c.OrderId)
                 .Select(c => new Order
                 {
                     OrderId = c.OrderId,
@@ -226,7 +225,7 @@ namespace SWPSolution.Application.Sales
                             ProductId = od.Product.ProductId,
                             ProductName = od.Product.ProductName
                         }
-                    }).OrderByDescending(m => m.OrderdetailId).ToList(),
+                    }).OrderByDescending(od => od.OrderdetailId).ToList(),
                     Member = new Member
                     {
                         MemberId = c.Member.MemberId,
@@ -246,16 +245,19 @@ namespace SWPSolution.Application.Sales
                         PaymentStatus = p.PaymentStatus,
                         PaymentDate = p.PaymentDate,
                         PaymentMethod = p.PaymentMethod
-                    }).OrderByDescending(m => m.PaymentId).ToList()
+                    }).OrderByDescending(p => p.PaymentId).ToList()
                 })
-                .OrderByDescending(m => m.OrderId)
+                .OrderByDescending(c => c.OrderId)
                 .ToListAsync();
         }
 
 
         public async Task<OrderVM> GetOrderById(string orderId)
         {
-            var order = await _context.Orders.FindAsync(orderId);
+            var order = await _context.Orders
+                .Include(o => o.OrderDetails)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
             if (order == null)
             {
                 return null;
@@ -269,7 +271,6 @@ namespace SWPSolution.Application.Sales
                 TotalAmount = (double)order.TotalAmount,
                 OrderStatus = order.OrderStatus,
                 OrderDate = (DateTime)order.OrderDate,
-
             };
         }
 
@@ -277,6 +278,7 @@ namespace SWPSolution.Application.Sales
         {
             return _context.Orders
                 .Where(o => o.MemberId == memberId)
+                .OrderByDescending(o => o.OrderId) // Sort by OrderId
                 .ToList();
         }
 
@@ -320,9 +322,9 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(o => o.OrderId)
-                .ToList()
-            });
+                }).OrderByDescending(od => od.OrderdetailId).ToList()
+            })
+            .OrderByDescending(o => o.OrderId); // Sort by OrderId
 
             int totalRow = await query.CountAsync();
             var pagedData = await ordersQuery
@@ -385,12 +387,13 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(o => o.OrderId)
+                })
                 .ToList()
             });
 
             int totalRow = await query.CountAsync();
             var pagedData = await ordersQuery
+                .OrderByDescending(o => o.OrderId)
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
@@ -450,12 +453,13 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(o => o.OrderId)
+                })
                 .ToList()
             });
 
             int totalRow = await query.CountAsync();
             var pagedData = await ordersQuery
+                .OrderByDescending(o => o.OrderId)
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();

@@ -53,9 +53,9 @@ namespace SWPSolution.BackendApi.Controllers
         }
 
         [HttpGet("availability")]
-        public async Task<IActionResult> IsProductAvailable(string productId, int quantity)
+        public async Task<IActionResult> IsProductAvailable(string productId)
         {
-            var isAvailable = await _preOrderService.IsProductAvailable(productId, quantity);
+            var isAvailable = await _preOrderService.IsProductAvailable(productId);
             return Ok(isAvailable);
         }
 

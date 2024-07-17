@@ -15,6 +15,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Text;
 using static Org.BouncyCastle.Math.EC.ECCurve;
+using SWPSolution.Data.Enum;
 
 namespace SWPSolution.Application.Catalog.Product
 {
@@ -143,7 +144,7 @@ namespace SWPSolution.Application.Catalog.Product
             var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new SWPException($"Cannot find product with id: {productId}");
 
-            if(request.ProductName != null)
+            if (request.ProductName != null)
             {
                 product.ProductName = request.ProductName;
             }
@@ -153,33 +154,22 @@ namespace SWPSolution.Application.Catalog.Product
                 product.Description = request.Description;
             }
 
-            if (request.StatusDescription != null)
+            if (request.StatusDescription.HasValue)
             {
-                product.StatusDescription = request.StatusDescription;
+                product.StatusDescription = request.StatusDescription.Value; // Update to handle nullable enum
             }
 
-            if (request.Quantity != null)
+            if (request.Quantity.HasValue)
             {
-                product.Quantity = request.Quantity;
+                product.Quantity = request.Quantity.Value;
             }
 
-            if (request.Price != null)
+            if (request.Price.HasValue)
             {
-                product.Price = request.Price;
+                product.Price = request.Price.Value;
             }
-            //Save image
-            //if (request.ThumbnailImage != null)
-            //{
-            //    var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.ProductId == request.ProductId);
-            //    if (thumbnailImage != null)
-            //    {
-            //        thumbnailImage.FileSize = request.ThumbnailImage.Length;
-            //        thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
-            //        _context.ProductImages.Update(thumbnailImage);
-            //    }
-            //}
+
             return await _context.SaveChangesAsync();
-
         }
 
 
@@ -734,6 +724,57 @@ namespace SWPSolution.Application.Catalog.Product
                 StatusDescription = product.StatusDescription,
             };
             return new ApiSuccessResult<ProductViewModel>(productVM);
+        }
+
+        public async Task<PageResult<ReviewVM>> GetReviewsPaging(GetUserPagingRequest request)
+        {
+            var query = _context.Reviews.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.ProductId.Contains(request.Keyword));
+            }
+
+            int totalRow = query.Count();
+
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(review => new ReviewVM()
+                {
+                    reviewId = review.ReviewId,
+                    productId = review.ProductId,
+                    memberId = review.MemberId,
+                    grade = review.Grade,
+                }).OrderByDescending(m => m.reviewId).ToList();
+
+            var pageResult = new PageResult<ReviewVM>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+        public async Task<ApiResult<ReviewVM>> GetReviewIdPaging(string id)
+        {
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
+            {
+                return new ApiErrorResult<ReviewVM>("Review not exist");
+            }
+
+            var reviewVM = new ReviewVM()
+            {
+                reviewId = review.ReviewId,
+                productId = review.ProductId,
+                memberId = review.MemberId,
+                dateReview = review.DataReview,
+                grade = review.Grade,
+                comment = review.Comment,
+            };
+            return new ApiSuccessResult<ReviewVM>(reviewVM);
         }
     }
 }
