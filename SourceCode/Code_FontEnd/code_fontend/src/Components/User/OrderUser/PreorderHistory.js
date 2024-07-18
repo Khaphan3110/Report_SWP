@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Rating } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,18 +12,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "../AccountPage/AccountPage.css";
-import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
-import { useOrderManager, useUserProfile } from "../../../Store";
-import { toast, ToastContainer } from "react-toastify";
-import { Button, Form, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { Rating } from "@mui/material";
 import { CreateReview } from "../../../Service/ReviewService/ReviewService";
+import { useOrderManager, useUserProfile } from "../../../Store";
+import "../AccountPage/AccountPage.css";
 export default function PreorderHistory({ listPreorder, page }) {
   return (
     <TableContainer component={Paper}>
@@ -126,7 +125,7 @@ function Row({ row, page }) {
   }, [currentProduct]);
   return (
     <React.Fragment>
-      <ToastContainer />
+     
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
