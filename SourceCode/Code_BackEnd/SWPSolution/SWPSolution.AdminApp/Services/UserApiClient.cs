@@ -118,5 +118,31 @@ namespace SWPSolution.AdminApp.Services
 
             return JsonConvert.DeserializeObject<ApiErrorResult<ProductViewModel>>(body);
         }
+
+        public async Task<PageResult<ReviewVM>> GetReviewsPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", request.BearerToken);
+            var response = await client.GetAsync($"/api/Product/ReviewPaging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var reviews = JsonConvert.DeserializeObject<PageResult<ReviewVM>>(body);
+            return reviews;
+        }
+
+        public async Task<ApiResult<ReviewVM>> GetReviewById(string id)
+        {
+            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
+            var response = await client.GetAsync($"/api/Product/review/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<ReviewVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<ReviewVM>>(body);
+        }
     }
 }

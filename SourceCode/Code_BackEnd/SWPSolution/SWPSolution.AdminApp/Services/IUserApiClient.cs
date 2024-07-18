@@ -20,5 +20,9 @@ namespace SWPSolution.AdminApp.Services
         Task<PageResult<ProductViewModel>> GetProductsPagings(GetUserPagingRequest request);
 
         Task<ApiResult<ProductViewModel>> GetProductById(string id);
+
+        Task<PageResult<ReviewVM>> GetReviewsPagings(GetUserPagingRequest request);
+
+        Task<ApiResult<ReviewVM>> GetReviewById(string id);
     }
 }

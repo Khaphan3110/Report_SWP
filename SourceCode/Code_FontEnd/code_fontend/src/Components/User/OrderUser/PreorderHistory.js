@@ -64,14 +64,17 @@ function Row({ row, page }) {
     }
   }, [row.status]);
 
-  console.log("item", row);
+  // console.log("item", row);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = (product) => {
     setShow(true);
     setCurrentProduct(product);
-    console.log("product", product);
+    formik.setValues({
+      productId: product.productId,
+      dateReview: new Date().toISOString(),
+    });
   };
 
   const formik = useFormik({
@@ -84,12 +87,12 @@ function Row({ row, page }) {
 
     validationSchema: Yup.object({
       grade: Yup.number()
-        .min(1, "Grade must be greater than 0")
-        .required("Required"),
+        .min(1, "tệ nhất hãy cho 1 sao nhé")
+        .required("đừng bỏ trống"),
       comment: Yup.string()
-        .min(4, "Comment must be at least 4 characters")
-        .matches(/^[^\d].*$/, "Comment must not start with a digit")
-        .required("Required"),
+        .min(4, "ít nhất cũng ghi được 4 từ đi mà")
+        .matches(/^[^\d].*$/, "có cái bình luận nào bắt đầu bằng số không")
+        .required("đừng bỏ trống"),
     }),
 
     onSubmit: async (values) => {
@@ -115,14 +118,14 @@ function Row({ row, page }) {
     },
   });
 
-  useEffect(() => {
-    if (currentProduct) {
-      formik.setValues({
-        productId: currentProduct.productId,
-        dateReview: new Date().toISOString(),
-      });
-    }
-  }, [currentProduct]);
+  // useEffect(() => {
+  //   if (currentProduct) {
+  //     formik.setValues({
+  //       productId: currentProduct.productId,
+  //       dateReview: new Date().toISOString(),
+  //     });
+  //   }
+  // }, [currentProduct]);
   return (
     <React.Fragment>
      

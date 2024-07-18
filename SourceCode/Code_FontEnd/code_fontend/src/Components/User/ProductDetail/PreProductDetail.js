@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Col, Row, Spinner } from "react-bootstrap";
+import Rating from "@mui/material/Rating";
+import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import { FaCircleMinus, FaCirclePlus } from "react-icons/fa6";
-import { useLocation } from "react-router-dom";
-import { Actions, useProduct, useStore } from "../../../Store";
+import { toast } from "react-toastify";
+import { Actions, useStore } from "../../../Store";
 import Payment from "../../../assets/images/policy_icon_1.jpg";
 import Refunt from "../../../assets/images/refun_icon_2.png";
 import Shipping from "../../../assets/images/shiping_icon_3.png";
 import "./PreProductDetail.css";
-import { toast } from "react-toastify";
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
 export default function PreProductDetail({ productDetail }) {
   const [quantity, setquantity] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
@@ -247,44 +244,47 @@ export default function PreProductDetail({ productDetail }) {
             <p className="header-preProductDetail">Đánh Giá Sản Phẩm</p>
 
             {productDetail.review && productDetail.review.length > 0 ? (
-              productDetail.review.map((review, index) => (
-                <div className="reivew-detail-wiht-any-member" key={index}>
-                  <div style={{ padding: "10px" }}>
-                    <p className="name-reviewer">
-                      {" "}
-                      Tên : {productDetail.member.lastName}{" "}
-                      {productDetail.member.firstName}
-                    </p>
-                    <div style={{ display: "flex", gap: "5px" }}>
-                      <p style={{ margin: "0", fontWeight: "bold" }}>
-                        Đánh giá :
+              <>
+                {productDetail.review.map((review, index) => (
+                  <div className="reivew-detail-wiht-any-member" key={index}>
+                    <div style={{ padding: "10px" }}>
+                      <p className="name-reviewer">
+                        {" "}
+                        Tên : {productDetail.member.lastName}{" "}
+                        {productDetail.member.firstName}
                       </p>
-                      <Rating  name="read-only" value={review.grade} />
-                    </div>
-                    <div className="description-review">
-                      <p
-                        style={{
-                          margin: "0",
-                          fontWeight: "bold",
-                          width: "100px",
-                          flex: "1",
-                        }}
-                      >
-                        Bình luận :
-                      </p>
-                      <p
-                        style={{
-                          margin: "0",
-                          wordBreak: "break-word",
-                          flex: "14",
-                        }}
-                      >
-                        {review.comment}
-                      </p>
+                      <div style={{ display: "flex", gap: "5px" }}>
+                        <p style={{ margin: "0", fontWeight: "bold" }}>
+                          Đánh giá :
+                        </p>
+                        <Rating name="read-only" value={review.grade} />
+                      </div>
+                      <div className="description-review">
+                        <p
+                          style={{
+                            margin: "0",
+                            fontWeight: "bold",
+                            width: "100px",
+                            flex: "1",
+                          }}
+                        >
+                          Bình luận :
+                        </p>
+                        <p
+                          style={{
+                            margin: "0",
+                            wordBreak: "break-word",
+                            flex: "14",
+                          }}
+                        >
+                          {review.comment}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))}
+                <h5 style={{ textAlign: "center" }} className="click-see-more-product">Xem thêm....</h5>
+              </>
             ) : (
               <div style={{ margin: "0 auto" }}>
                 <p
