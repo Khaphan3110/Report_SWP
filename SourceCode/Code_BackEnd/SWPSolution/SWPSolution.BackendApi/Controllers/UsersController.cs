@@ -735,7 +735,6 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-		[Authorize]
 		[HttpGet("Paging")]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request)
         {
@@ -750,7 +749,6 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(user);
         }
 
-        [Authorize]
         [HttpGet("StaffPaging")]
         public async Task<IActionResult> GetStaffPaging([FromQuery] GetUserPagingRequest request)
         {
