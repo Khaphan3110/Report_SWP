@@ -102,8 +102,8 @@ export const useOrderManager = () => {
 };
 
 export const useMemberManager = () => {
-  const { listMember, setlistMember } = useContext(MemberManagerContext);
-  return { listMember, setlistMember };
+  const { listMember, setlistMember,getMemberPagingController } = useContext(MemberManagerContext);
+  return { listMember, setlistMember,getMemberPagingController };
 };
 
 export const usePromotionManger = () => {

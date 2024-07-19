@@ -25,27 +25,27 @@ export default function SideBarAdmin() {
         </Link>
         <Link to={"/admin/staffmanager"} className="link-sidebar-admin">
           <li className="categories-word">
-            <FaUserTie style={{color:"white"}}/> Staff Manager
+            <FaUserTie style={{color:"white"}}/> Staff management
           </li>
         </Link>
-        <Link to={"/admin/staffmanager"} className="link-sidebar-admin">
+        <Link to={"/admin/memberManager"} className="link-sidebar-admin">
           <li className="categories-word">
-            <FaUserSecret style={{color:"white"}}/> Member Manager
+            <FaUserSecret style={{color:"white"}}/> Member management
           </li>
         </Link>
         <Link to={"/admin/ordermanager"} className="link-sidebar-admin">
           <li className="categories-word">
-            <FaShoppingCart  style={{color:"white"}}/> Order Manager
+            <FaShoppingCart  style={{color:"white"}}/> Order management
           </li>
         </Link>
         <Link to={"/admin/preorderadmin"} className="link-sidebar-admin">
           <li className="categories-word">
-            <FaShoppingCart  style={{color:"white"}}/> Preorder Manager
+            <FaShoppingCart  style={{color:"white"}}/> Preorder management
           </li>
         </Link>
         <Link to={"/admin/promotion"} className="link-sidebar-admin">
           <li className="categories-word">
-            <FaIdeal  style={{color:"white"}}/> Manager Promotion
+            <FaIdeal  style={{color:"white"}}/>  Promotion management
           </li>
         </Link>
       </div>

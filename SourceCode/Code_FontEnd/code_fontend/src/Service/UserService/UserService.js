@@ -176,3 +176,39 @@ export const getMemberID = async (getMemberID) => {
     console.log("lỗi update user phone or username",error)
   }
 }
+
+
+export const getMemberPaging = async (pageIndex,pageSize) => {
+  try {
+    const res = await request.Get(`Users/Paging?PageIndex=${pageIndex}&PageSize=${pageSize}`);
+    return res;
+  } catch (error) {
+    console.log("lỗi get  paging Member",error)
+  }
+}
+
+export const DeleteMember = async (MemberID,tokenAdmin) => {
+  try {
+    const res = await request.Delete(`Users/DeleteMember/${MemberID}`,{
+      headers:{
+        'Authorization': `Bearer ${tokenAdmin}`,
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi Delete Member",error)
+  }
+}
+
+export const GetAllMember = async (TokenUser) => {
+  try {
+    const res = await request.Get(`Users/GetAllMembers`,{
+      headers:{
+        'Authorization': `Bearer ${TokenUser}`,
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi Delete Member",error)
+  }
+}
