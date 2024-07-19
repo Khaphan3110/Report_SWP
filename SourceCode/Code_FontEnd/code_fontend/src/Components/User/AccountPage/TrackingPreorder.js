@@ -167,12 +167,19 @@ function Row({ row, page }) {
             >
               Thanh Toán
             </button>
-          ) : (
+          ) : row.product.statusDescription !== -1 ? (
             <button
               onClick={() => handleComplete(row.preorderId)}
               className="tracking-button-order-user-complete"
             >
               Đã Nhận Hàng
+            </button>
+          ) : (
+            <button
+              // onClick={() => handleComplete(row.preorderId)}
+              className="tracking-button-order-user-complete"
+            >
+             Chưa có hàng
             </button>
           )}
 
@@ -205,7 +212,7 @@ function Row({ row, page }) {
                   {row.product && (
                     <TableRow>
                       <TableCell>{row.product.productName}</TableCell>
-                      <TableCell>1</TableCell>
+                      <TableCell>{row.product.quantity}</TableCell>
                       <TableCell>
                         {row.product.price.toLocaleString()}
                       </TableCell>

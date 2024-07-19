@@ -28,7 +28,6 @@ namespace SWPSolution.AdminApp.Controllers
         }
         public  async Task<IActionResult> Members(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
-			var sessions = HttpContext.Session.GetString("Token");
 			var user = User.Identity.Name;
             var userRoles = User.Claims
                         .Where(c => c.Type == ClaimTypes.Role)
@@ -36,7 +35,6 @@ namespace SWPSolution.AdminApp.Controllers
                         .ToList();
             var request = new GetUserPagingRequest()
             {
-                BearerToken = sessions,
                 Keyword = Keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
@@ -48,7 +46,6 @@ namespace SWPSolution.AdminApp.Controllers
 
         public async Task<IActionResult> Staffs(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
-            var sessions = HttpContext.Session.GetString("Token");
             var user = User.Identity.Name;
             var userRoles = User.Claims
                         .Where(c => c.Type == ClaimTypes.Role)
@@ -56,7 +53,6 @@ namespace SWPSolution.AdminApp.Controllers
                         .ToList();
             var request = new GetUserPagingRequest()
             {
-                BearerToken = sessions,
                 Keyword = Keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
@@ -68,10 +64,8 @@ namespace SWPSolution.AdminApp.Controllers
 
         public async Task<IActionResult> Products(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
-            var sessions = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
             {
-                BearerToken = sessions,
                 Keyword = Keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,
@@ -83,10 +77,8 @@ namespace SWPSolution.AdminApp.Controllers
 
         public async Task<IActionResult> Reviews(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
-            var sessions = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
             {
-                BearerToken = sessions,
                 Keyword = Keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize,

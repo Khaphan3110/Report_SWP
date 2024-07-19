@@ -214,6 +214,7 @@
 
 .toogle-nav-wrapper-content {
   position: relative;
+  cursor: pointer;
 }
 
 .navbar-link-header-header {
@@ -244,12 +245,49 @@
 }
 
 .navbar-link-header-header {
+  background-color: #ffffff;
   position: absolute;
+  display: none;
+  z-index: 1000;
+}
+
+.toogle-nav-wrapper-content:hover .navbar-link-header-header {
+  display: block;
+}
+
+.toogle-nav-wrapper-content:hover .toogle-nav-wrapper-content-wrapper {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
   display: none;
 }
 
-.toogle-nav-wrapper:hover {
-  navbar-link-header-header {
-    display: block;
-  }
+ .toogle-nav-wrapper{
+  height: 45px;
 }
+
+.toogle-nav-wrapper-content:hover .toogle-nav-wrapper-content{
+  position: absolute;
+  top: 80px;
+  left: 110px;
+  display: none;
+}
+
+
+/* .wrapper-subHeader{
+  background-color: #b2adad;
+  position: fixed;
+  top: 0px;
+
+} */
+/* .toogle-container-header{
+  /* background-color: #b2adad;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%; */
+/* } */

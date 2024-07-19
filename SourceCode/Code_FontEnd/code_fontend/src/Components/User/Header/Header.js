@@ -154,33 +154,44 @@ export default function Header() {
       </header>
       <div className="sub-Header-homepage">
         <div className="container wrapper-subHeader">
-          <div className="toogle-nav-wrapper-content">
-            <div className="toogle-nav-wrapper">
-              <div className="icon-bar-header btn menu-bar mr-2  p-0 d-inline-flex">
-                <i className="fa-solid fa-bars"></i>
+          <div className="toogle-nav-wrapper-content-wrapper">
+            <div className="toogle-nav-wrapper-content">
+              <div className="toogle-nav-wrapper">
+                <div className="icon-bar-header btn menu-bar mr-2  p-0 d-inline-flex">
+                  <i className="fa-solid fa-bars"></i>
+                </div>
+                <h6
+                  style={{
+                    margin: "0",
+                    paddingLeft: "10px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Danh mục sản phẩm
+                </h6>
               </div>
-              <h6
-                style={{ margin: "0", paddingLeft: "10px", fontWeight: "bold" }}
-              >
-                Danh mục sản phẩm
-              </h6>
-            </div>
-            <div className="navbar-link-header-header">
-              <ul>
-                {listCate
-                  ? listCate.map((cate, index) => (
-                      <li key={index} className="cate-type-product">
-                        <img
-                          src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"
-                          alt="icon milk"
-                          width={24}
-                          height={24}
-                        ></img>{" "}
-                        {cate.brandName}
-                      </li>
-                    ))
-                  : "danh sách sản phẩm"}
-              </ul>
+              <div className="navbar-link-header-header">
+                <ul>
+                  {listCate
+                    ? listCate.map((cate, index) => (
+                        <Link
+                          to={`/seachproduct/${cate.brandName}`}
+                          style={{ color: "black", textDecoration: "none" }}
+                        >
+                          <li key={index} className="cate-type-product">
+                            <img
+                              src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"
+                              alt="icon milk"
+                              width={24}
+                              height={24}
+                            ></img>{" "}
+                            {cate.brandName}
+                          </li>
+                        </Link>
+                      ))
+                    : "danh sách sản phẩm"}
+                </ul>
+              </div>
             </div>
           </div>
           <ul className="shop-policy">
