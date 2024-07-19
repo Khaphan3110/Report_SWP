@@ -175,6 +175,7 @@ namespace SWPSolution.Application.Sales
                         Price = p.Product.Price,
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
+                        StatusDescription = p.Product.StatusDescription,
                     }
                 })
                 .ToList();
