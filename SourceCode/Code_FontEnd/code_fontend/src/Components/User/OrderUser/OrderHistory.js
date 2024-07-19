@@ -1,10 +1,13 @@
 import React from "react";
 //OrderHistory
 
-import { useEffect, useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Rating } from "@mui/material";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,19 +15,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "../AccountPage/AccountPage.css";
-import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
-import { useOrderManager, useUserProfile } from "../../../Store";
-import { toast, ToastContainer } from "react-toastify";
-import { Button, Form, Modal } from "react-bootstrap";
-import { Rating } from "@mui/material";
-import { productGetAll } from "../../../Service/ProductService/ProductService";
 import { useFormik } from "formik";
-import * as Yup from "yup"
+import { useEffect, useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
 import { CreateReview } from "../../../Service/ReviewService/ReviewService";
+import { useOrderManager, useUserProfile } from "../../../Store";
+import "../AccountPage/AccountPage.css";
 export default function OrderHistory({ listOrder, page }) {
   return (
     <TableContainer component={Paper}>
@@ -67,21 +65,24 @@ function Row({ row, page }) {
       setStatus("đang giao hàng");
     } else if (row.orderStatus === 3) {
       setStatus("đơn hàng thành công");
-    } else if(row.orderStatus === -1){
+    } else if (row.orderStatus === -1) {
       setStatus("đơn hàng bị hủy");
     }
   }, [row.orderStatus]);
-
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = (product) => {
     setShow(true);
-    setCurrentProduct(product)
-    console.log("product review",product)
-  }
-  
+    setCurrentProduct(product);
+    // console.log("product review",product)
+    formik.setValues({
+      productId: product.productId,
+      dateReview: new Date().toISOString(),
+    });
+  };
+
   const formik = useFormik({
     initialValues: {
       productId: "",
@@ -92,48 +93,47 @@ function Row({ row, page }) {
 
     validationSchema: Yup.object({
       grade: Yup.number()
-        .min(1, "Grade must be greater than 0")
-        .required("Required"),
+        .min(1, "tệ nhất hãy cho 1 sao nhé")
+        .required("đừng bỏ trống"),
       comment: Yup.string()
-        .min(4, "Comment must be at least 4 characters")
-        .matches(/^[^\d].*$/, "Comment must not start with a digit")
-        .required("Required"),
+        .min(4, "ít nhất cũng ghi được 4 từ đi mà")
+        .matches(/^[^\d].*$/, "có cái bình luận nào bắt đầu bằng số không")
+        .required("đừng bỏ trống"),
     }),
 
     onSubmit: async (values) => {
-      console.log("values cuoi reiew",values)
+      console.log("values cuoi reiew order", values);
       try {
-        setShow(false)
-        const res = await CreateReview(userProfile.userToken,values)
-        console.log("respone create",res)
-        if(res.data.message === "Review added successfully"){
-          toast.success("Đánh giá thành công",{
-            autoClose:1000,
-          })
-          formik.resetForm()
+        setShow(false);
+        const res = await CreateReview(userProfile.userToken, values);
+        console.log("respone create", res);
+        if (res.data.message === "Review added successfully") {
+          toast.success("Đánh giá thành công", {
+            autoClose: 1000,
+          });
+          formik.resetForm();
         } else {
-          toast.error("Mạng đang yếu thử lại nhé",{
-            autoClose:1000,
-          })
-          formik.resetForm()
+          toast.error("Mạng đang yếu thử lại nhé", {
+            autoClose: 1000,
+          });
+          formik.resetForm();
         }
       } catch (error) {
-        console.log("loi create review",error)
+        console.log("loi create review", error);
       }
     },
   });
 
-  useEffect(() => {
-    if(currentProduct){
-      formik.setValues({
-      productId: currentProduct.productId,
-      dateReview: new Date().toISOString(),
-      })
-    }
-  },[currentProduct])
+  // useEffect(() => {
+  //   if(currentProduct){
+  //     formik.setValues({
+  //     productId: currentProduct.productId,
+  //     dateReview: new Date().toISOString(),
+  //     })
+  //   }
+  // },[currentProduct])
   return (
     <React.Fragment>
-      <ToastContainer/>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
@@ -189,7 +189,14 @@ function Row({ row, page }) {
                         <TableCell>{products.product.productName}</TableCell>
                         <TableCell>{products.quantity}</TableCell>
                         <TableCell>{products.price.toLocaleString()}</TableCell>
-                        <TableCell><button className="button-review-order-history" onClick={() => handleShow(products)}>Đánh giá</button></TableCell>
+                        <TableCell>
+                          <button
+                            className="button-review-order-history"
+                            onClick={() => handleShow(products)}
+                          >
+                            Đánh giá
+                          </button>
+                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
@@ -208,7 +215,7 @@ function Row({ row, page }) {
               <Form.Label>
                 Đánh giá{" "}
                 <Rating
-                  style={{marginLeft: "5px"}}
+                  style={{ marginLeft: "5px" }}
                   name="grade"
                   value={formik.values.grade}
                   onChange={(event, newValue) => {

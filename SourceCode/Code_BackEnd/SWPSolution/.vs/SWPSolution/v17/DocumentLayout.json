@@ -7,27 +7,27 @@
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\product\\manageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.adminapp\\views\\user\\reviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\views\\user\\reviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\views\\user\\reviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.adminapp\\services\\userapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\services\\userapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\services\\userapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.adminapp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.application\\catalog\\product\\imanageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.application\\catalog\\product\\imanageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A3F6E671-A8AA-486B-A490-BF1690D62710}|SWPSolution.Application\\SWPSolution.Application.csproj|solutionrelative:swpsolution.application\\catalog\\product\\imanageproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|d:\\university\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.adminapp\\services\\iuserapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\swpsolution.adminapp\\services\\iuserapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CE41C67-BB67-43C3-8DC7-369DA9E166BC}|SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj|solutionrelative:swpsolution.adminapp\\services\\iuserapiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -90,8 +90,7 @@
               "RelativeToolTip": "SWPSolution.AdminApp\\Views\\User\\Reviews.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-19T14:52:44.788Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:52:44.788Z"
             },
             {
               "$type": "Document",
@@ -103,8 +102,7 @@
               "RelativeToolTip": "SWPSolution.AdminApp\\Services\\IUserApiClient.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAkwBcAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:17:28.923Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:17:28.923Z"
             },
             {
               "$type": "Document",
@@ -116,8 +114,7 @@
               "RelativeToolTip": "SWPSolution.AdminApp\\Services\\UserApiClient.cs",
               "ViewState": "AQIAAFUAAAAAAAAAAAAkwF8AAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:17:28.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:17:28.475Z"
             },
             {
               "$type": "Document",
@@ -129,8 +126,7 @@
               "RelativeToolTip": "SWPSolution.AdminApp\\Controllers\\UserController.cs",
               "ViewState": "AQIAAEcAAAAAAAAAAAAswE0AAABhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:17:23.41Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:17:23.41Z"
             },
             {
               "$type": "Document",
@@ -142,8 +138,7 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\ProductController.cs",
               "ViewState": "AQIAALkBAAAAAAAAAAAAAMIBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:17:44.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:17:44.558Z"
             },
             {
               "$type": "Document",
@@ -155,8 +150,7 @@
               "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\IManageProductService.cs",
               "ViewState": "AQIAADYAAAAAAAAAAAAcwEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:17:13.655Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:17:13.655Z"
             },
             {
               "$type": "Document",
@@ -166,7 +160,7 @@
               "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
               "ToolTip": "D:\\University\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
               "RelativeToolTip": "SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
-              "ViewState": "AQIAAOoCAAAAAAAAAADwv7UCAAA2AAAA",
+              "ViewState": "AQIAACoDAAAAAAAAAAAiwLUCAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-19T12:13:36.355Z",
               "EditorCaption": ""

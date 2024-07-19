@@ -217,3 +217,11 @@
   display: flex;
   gap: 10px;
 }
+
+.click-see-more-product{
+  cursor: pointer;
+}
+
+.click-see-more-product:hover{
+  color: #f05a72;
+}
