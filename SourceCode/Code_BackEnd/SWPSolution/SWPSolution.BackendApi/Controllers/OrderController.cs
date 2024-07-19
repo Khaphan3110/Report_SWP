@@ -195,6 +195,56 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(new { error = ex.Message });
             }
         }
+        [Authorize]
+        [HttpPost("CheckoutCOD")]
+        public async Task<IActionResult> CheckoutCOD([FromBody] OrderVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var payment = _context.Payments
+                            .FirstOrDefault(p => p.OrderId == model.OrderId && p.Amount == model.TotalAmount);
+            if (payment == null)
+            {
+                throw new Exception("Payment not found");
+            }
+
+            string paymentId = payment.PaymentId;
+            var paymentRequest = new PaymentRequest
+            {
+                OrderId = model.OrderId,
+                Amount = model.TotalAmount,
+                PaymentMethod = "COD",
+                PaymentStatus = true,
+                PaymentDate = DateTime.UtcNow
+            };
+
+            var existingPayment = _context.Payments.FirstOrDefault(p => p.PaymentId == paymentId);
+            if (existingPayment != null)
+            {
+                await _paymentService.Update(paymentId, paymentRequest);
+            }
+            else
+            {
+                await _paymentService.Create(paymentRequest);
+            }
+
+            // Update the order status to "confirmed"
+            var order = _context.Orders.FirstOrDefault(o => o.OrderId == model.OrderId);
+            if (order == null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            order.OrderStatus = OrderStatus.Confirmed; // Assuming OrderStatus is your enum and Confirmed is a valid status
+            _context.Orders.Update(order);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Order confirmed and payment processed successfully." });
+        }
+
 
         [Authorize]
         [HttpPost("CheckoutVNPay")]
@@ -246,42 +296,7 @@ namespace SWPSolution.BackendApi.Controllers
             return Ok(new { PaymentUrl = paymentUrl });
         }
 
-        //[HttpGet("PaymentCallBack")]
-        //public async Task<IActionResult> PaymentCallBack()
-        //{
-        //    var response = _vnPayService.PaymentExecute(Request.Query);
 
-        //    if (response == null || response.VnPayResponseCode != "00")
-        //    {
-        //        return BadRequest(new { Message = "Payment failed" });
-        //    }
-
-        //    var orderId = response.PaymentId; // Adjust based on your response model
-        //    var payment = _context.Payments.FirstOrDefault(p => p.OrderId == orderId);
-
-        //    if (payment == null)
-        //    {
-        //        return BadRequest(new { Message = $"Payment with id {orderId} not found" });
-        //    }
-
-        //    payment.PaymentStatus = true;
-
-        //    // Fetch the order associated with the payment
-        //    var order = await _context.Orders.FindAsync(payment.OrderId);
-        //    if (order == null)
-        //    {
-        //        return BadRequest(new { Message = $"Order with id {payment.OrderId} not found" });
-        //    }
-
-        //    // Update payment status and save changes
-        //    _context.Payments.Update(payment);
-        //    await _context.SaveChangesAsync();
-
-        //    // Send the email using the _orderService (you'll need to implement this method in your OrderService)
-        //    await _orderService.SendReceiptEmailAsync(order.MemberId, order); // Pass the member ID and order
-
-        //    return Ok(new { Message = "Payment status updated successfully" });
-        //}
         [HttpGet("PaymentCallBack")]
         public async Task<IActionResult> PaymentCallBack()
         {
