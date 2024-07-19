@@ -1,5 +1,5 @@
 ﻿@using SWPSolution.ViewModels.Common;
-@model PageResult<SWPSolution.ViewModels.Catalog.Product.ProductViewModel> 
+@model PageResult<SWPSolution.ViewModels.Catalog.Product.ProductViewModel>
 
 @{
     ViewData["Title"] = "Products";
@@ -10,12 +10,12 @@
 
 <div class="card mb-4">
     <div class="card-header">
-        <form asp-action="Products" method="get" class="form-inline">
+        <form asp-action="ProductsByCate" method="get" class="form-inline">
             <div class="input-group">
                 <input type="text" value="@ViewBag.Keyword" name="keyword" class="form-control" placeholder="Search by keyword" />
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Search</button>
-                    <button type="button" onclick="window.location.href='/User/Products'" class="btn btn-dark">Reset</button>
+                    <button type="button" onclick="window.location.href='/User/ProductsByCate'" class="btn btn-dark">Reset</button>
                 </div>
             </div>
         </form>
@@ -41,16 +41,16 @@
                 <tbody>
                     @foreach (var item in Model.Items)
                     {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.CategoriesId)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.StatusDescription)</td>
-                                        <td>@Html.ActionLink("Details", "StaffDetails", new { id = item.ProductId })</td>
-                                </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CategoriesId)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StatusDescription)</td>
+                            <td>@Html.ActionLink("Details", "ProductDetails", new { id = item.ProductId })</td>
+                        </tr>
                     }
                 </tbody>
             </table>
