@@ -60,5 +60,9 @@ namespace SWPSolution.Application.Catalog.Product
         Task<PageResult<ProductViewModel>> GetProductsPaging(GetUserPagingRequest request);
 
         Task<ApiResult<ProductViewModel>> GetProductIdPaging(string id);
+
+        Task<PageResult<ReviewVM>> GetReviewsPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<ReviewVM>> GetReviewIdPaging(string id);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model SWPSolution.ViewModels.System.Users.StaffInfoVM
+﻿@model SWPSolution.ViewModels.System.Users.ReviewVM
 
 @{
     ViewData["Title"] = "Title";
@@ -13,28 +13,22 @@
             <div class="col-md-12">
                 <dl class="row">
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.FullName)
+                        @Html.DisplayNameFor(model => model.reviewId)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.FullName)
+                        @Html.DisplayFor(model => model.productId)
                     </dd>
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                        @Html.DisplayNameFor(model => model.memberId)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.PhoneNumber)
+                        @Html.DisplayFor(model => model.dateReview)
                     </dd>
                     <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.UserName)
+                        @Html.DisplayNameFor(model => model.grade)
                     </dt>
                     <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.UserName)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Email)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.Email)
+                        @Html.DisplayFor(model => model.comment)
                     </dd>
                 </dl>
             </div>

@@ -387,12 +387,13 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(o => o.OrderId)
+                })
                 .ToList()
             });
 
             int totalRow = await query.CountAsync();
             var pagedData = await ordersQuery
+                .OrderByDescending(o => o.OrderId)
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
@@ -452,12 +453,13 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(o => o.OrderId)
+                })
                 .ToList()
             });
 
             int totalRow = await query.CountAsync();
             var pagedData = await ordersQuery
+                .OrderByDescending(o => o.OrderId)
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();

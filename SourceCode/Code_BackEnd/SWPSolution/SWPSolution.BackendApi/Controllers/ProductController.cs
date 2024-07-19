@@ -442,7 +442,6 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("ProductPaging")]
         public async Task<IActionResult> GetProductsPaging([FromQuery] GetUserPagingRequest request)
         {
@@ -454,6 +453,20 @@ namespace SWPSolution.BackendApi.Controllers
         public async Task<IActionResult> GetProductIdPaging(string id)
         {
             var user = await _manageProductService.GetProductIdPaging(id);
+            return Ok(user);
+        }
+
+        [HttpGet("ReviewPaging")]
+        public async Task<IActionResult> GetReviewsPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var reviews = await _manageProductService.GetReviewsPaging(request);
+            return Ok(reviews);
+        }
+
+        [HttpGet("review/{id}")]
+        public async Task<IActionResult> GetReviewIdPaging(string id)
+        {
+            var user = await _manageProductService.GetReviewIdPaging(id);
             return Ok(user);
         }
     }
