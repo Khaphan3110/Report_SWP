@@ -17,7 +17,9 @@ namespace SWPSolution.AdminApp.Services
 
         Task<ApiResult<StaffInfoVM>> GetStaffById(string id);
 
-        Task<PageResult<ProductViewModel>> GetProductsPagings(GetUserPagingRequest request);
+        Task<PageResult<ProductViewModel>> GetProductsNamePagings(GetUserPagingRequest request);
+
+        Task<PageResult<ProductViewModel>> GetProductsCatePagings(GetUserPagingRequest request);
 
         Task<ApiResult<ProductViewModel>> GetProductById(string id);
 

@@ -671,13 +671,47 @@ namespace SWPSolution.Application.Catalog.Product
             return memberId;
         }
 
-        public async Task<PageResult<ProductViewModel>> GetProductsPaging(GetUserPagingRequest request)
+        public async Task<PageResult<ProductViewModel>> GetProductsNamePaging(GetUserPagingRequest request)
         {
             var query = _context.Products.AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
-                query = query.Where(x => x.CategoriesId.Contains(request.Keyword));
+                query = query.Where(x => x.ProductName.Contains(request.Keyword));
+            }
+
+            int totalRow = query.Count();
+
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(product => new ProductViewModel()
+                {
+                    ProductId = product.ProductId,
+                    CategoriesId = product.CategoriesId,
+                    ProductName = product.ProductName,
+                    Quantity = product.Quantity,
+                    Price = product.Price,
+                    Description = product.Description,
+                    StatusDescription = product.StatusDescription,
+                }).OrderByDescending(m => m.ProductId).ToList();
+
+            var pageResult = new PageResult<ProductViewModel>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+        public async Task<PageResult<ProductViewModel>> GetProductsCatePaging(GetUserPagingRequest request)
+        {
+            var query = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.CategoriesId.Equals(request.Keyword));
             }
 
             int totalRow = query.Count();
