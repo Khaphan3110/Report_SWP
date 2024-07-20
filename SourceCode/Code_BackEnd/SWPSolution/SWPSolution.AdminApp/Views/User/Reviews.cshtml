@@ -32,6 +32,8 @@
                         <th>Product Id</th>
                         <th>Member Id</th>
                         <th>Grade</th>
+                        <th>Comment</th>
+                        <th>Date Review</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -43,6 +45,8 @@
                             <td>@Html.DisplayFor(modelItem => item.productId)</td>
                             <td>@Html.DisplayFor(modelItem => item.memberId)</td>
                             <td>@Html.DisplayFor(modelItem => item.grade)</td>
+                            <td>@Html.DisplayFor(modelItem => item.comment)</td>
+                            <td>@Html.DisplayFor(modelItem => item.dateReview)</td>
                             <td>@Html.ActionLink("Details", "ReviewDetails", new { id = item.reviewId })</td>
                         </tr>
                     }
