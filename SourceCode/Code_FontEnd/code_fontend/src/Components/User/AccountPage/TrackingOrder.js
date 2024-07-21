@@ -78,12 +78,16 @@ function Row({ row, page }) {
         );
         if (resdata) {
           setListOrder(resdata.data);
+          toast.success("Cảm ơn đã mua hàng!!!", {
+            autoClose: 1000,
+          });
         } else {
           setListOrder([]);
+          toast.success("Cảm ơn đã mua hàng!!!", {
+            autoClose: 1000,
+          });
         }
-        toast.success("Cảm ơn đã mua hàng!!!", {
-          autoClose: 1000,
-        });
+        
       } else {
         toast.error("mạng đó!!!", {
           autoClose: 1000,
@@ -95,7 +99,6 @@ function Row({ row, page }) {
   };
 
   const handCancelOrder = async (orderID) => {
-    console.log("order hủy", orderID);
     const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
     // const newStatus = {
     //   newStatus: 3,
@@ -112,12 +115,16 @@ function Row({ row, page }) {
           );
           if (resPaging) {
             setListOrder(resPaging.data);
+            toast.success("hủy đơn hàng thành công", {
+              autoClose: 1000,
+            });
           } else {
             setListOrder([]);
+            toast.success("hủy đơn hàng thành công", {
+              autoClose: 1000,
+            });
           }
-          toast.success("hủy đơn hàng thành công", {
-            autoClose: 1000,
-          });
+          
         } else {
           toast.error("thử lại nhé mạng FPT như hạch", {
             autoClose: 1000,

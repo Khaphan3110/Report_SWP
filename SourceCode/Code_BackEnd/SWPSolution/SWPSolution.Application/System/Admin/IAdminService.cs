@@ -2,6 +2,7 @@
 using SWPSolution.Data.Entities;
 using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Categories;
+using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -56,5 +57,9 @@ namespace SWPSolution.Application.System.Admin
         Task<OrderVM> GetOrderById(string id);
 
         Task<List<OrderVM>> GetAllOrder();
+
+        Task<PageResult<BlogDetailVM>> GetBlogsPaging(GetUserPagingRequest request);
+
+        Task<ApiResult<BlogDetailVM>> GetBlogIdPaging(string id);
     }
 }

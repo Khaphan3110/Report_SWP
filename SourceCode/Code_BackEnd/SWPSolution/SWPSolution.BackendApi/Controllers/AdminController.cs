@@ -366,5 +366,21 @@ namespace SWPSolution.BackendApi.Controllers
             var registrationsByDay = await _adminService.GetUserRegistrationsForCurrentWeek();
             return Ok(new { RegistrationsByDay = registrationsByDay });
         }
+
+        [HttpGet("BlogPaging")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBlogsPaging([FromQuery] GetUserPagingRequest request)
+        {
+            var blogs = await _adminService.GetBlogsPaging(request);
+            return Ok(blogs);
+        }
+
+        [HttpGet("blog/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBlogIdPaging(string id)
+        {
+            var user = await _adminService.GetBlogIdPaging(id);
+            return Ok(user);
+        }
     }
 }

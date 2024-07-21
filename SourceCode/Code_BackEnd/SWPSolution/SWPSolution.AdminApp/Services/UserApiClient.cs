@@ -12,6 +12,7 @@ using SWPSolution.ViewModels.Common;
 using System.Data.Entity;
 using System.Net.Http.Headers;
 using SWPSolution.ViewModels.Catalog.Product;
+using SWPSolution.ViewModels.Catalog.Blog;
 
 
 namespace SWPSolution.AdminApp.Services
@@ -54,10 +55,8 @@ namespace SWPSolution.AdminApp.Services
 
 		public async Task<ApiResult<MemberInfoVM>> GetUserById(string id)
 		{
-			var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
 			var client = _httpClientFactory.CreateClient();
 			client.BaseAddress = new Uri(_config["BaseAddress"]);
-			client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
 			var response = await client.GetAsync($"/api/Users/{id}");
 			var body = await response.Content.ReadAsStringAsync();
 			if (response.IsSuccessStatusCode)
@@ -79,10 +78,8 @@ namespace SWPSolution.AdminApp.Services
 
         public async Task<ApiResult<StaffInfoVM>> GetStaffById(string id)
         {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var response = await client.GetAsync($"/api/Users/staff/{id}");
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -91,11 +88,22 @@ namespace SWPSolution.AdminApp.Services
             return JsonConvert.DeserializeObject<ApiErrorResult<StaffInfoVM>>(body);
         }
 
-        public async Task<PageResult<ProductViewModel>> GetProductsPagings(GetUserPagingRequest request)
+        public async Task<PageResult<ProductViewModel>> GetProductsNamePagings(GetUserPagingRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config["BaseAddress"]);
-            var response = await client.GetAsync($"/api/Product/ProductPaging?pageIndex=" +
+            var response = await client.GetAsync($"/api/Product/ProductNamePaging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var products = JsonConvert.DeserializeObject<PageResult<ProductViewModel>>(body);
+            return products;
+        }
+
+        public async Task<PageResult<ProductViewModel>> GetProductsCatePagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            var response = await client.GetAsync($"/api/Product/ProductCatePaging?pageIndex=" +
                 $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
             var body = await response.Content.ReadAsStringAsync();
             var products = JsonConvert.DeserializeObject<PageResult<ProductViewModel>>(body);
@@ -104,10 +112,8 @@ namespace SWPSolution.AdminApp.Services
 
         public async Task<ApiResult<ProductViewModel>> GetProductById(string id)
         {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var response = await client.GetAsync($"/api/Product/product/{id}");
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -129,16 +135,37 @@ namespace SWPSolution.AdminApp.Services
 
         public async Task<ApiResult<ReviewVM>> GetReviewById(string id)
         {
-            var sessions = _httpContextAccessor.HttpContext.Session.GetString("Token");
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_config["BaseAddress"]);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", sessions);
             var response = await client.GetAsync($"/api/Product/review/{id}");
             var body = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
                 return JsonConvert.DeserializeObject<ApiSuccessResult<ReviewVM>>(body);
 
             return JsonConvert.DeserializeObject<ApiErrorResult<ReviewVM>>(body);
+        }
+
+        public async Task<PageResult<BlogDetailVM>> GetBlogsPagings(GetUserPagingRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            var response = await client.GetAsync($"/api/Admin/BlogPaging?pageIndex=" +
+                $"{request.PageIndex}&pageSize={request.PageSize}&keyword={request.Keyword}");
+            var body = await response.Content.ReadAsStringAsync();
+            var blogs = JsonConvert.DeserializeObject<PageResult<BlogDetailVM>>(body);
+            return blogs;
+        }
+
+        public async Task<ApiResult<BlogDetailVM>> GetBlogById(string id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_config["BaseAddress"]);
+            var response = await client.GetAsync($"/api/Admin/blog/{id}");
+            var body = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+                return JsonConvert.DeserializeObject<ApiSuccessResult<BlogDetailVM>>(body);
+
+            return JsonConvert.DeserializeObject<ApiErrorResult<BlogDetailVM>>(body);
         }
     }
 }

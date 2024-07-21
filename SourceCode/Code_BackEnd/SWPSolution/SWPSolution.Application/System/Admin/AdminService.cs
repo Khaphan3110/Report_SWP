@@ -8,6 +8,7 @@ using SWPSolution.Data.Entities;
 using SWPSolution.Utilities.Exceptions;
 using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Categories;
+using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
 using System;
 using System.Collections.Generic;
@@ -460,9 +461,11 @@ namespace SWPSolution.Application.System.Admin
             var staff = await _context.Staff.FindAsync(staffId);
             if (staff == null) return false;
 
+            string generatedId = GenerateBlogId();
+
             var blog = new Blog
             {
-                BlogId = "",
+                BlogId = generatedId,
                 Title = request.Title,
                 Content = request.Content,
                 Categories = request.Categories,
@@ -474,6 +477,34 @@ namespace SWPSolution.Application.System.Admin
             await _context.SaveChangesAsync();
 
             return true;
+        }
+
+        private string GenerateBlogId()
+        {
+            // Generate categories_ID based on current month, year, and auto-increment
+            string month = DateTime.Now.ToString("MM");
+            string year = DateTime.Now.ToString("yy");
+
+            int autoIncrement = GetBlogNextAutoIncrement(month, year);
+
+            string formattedAutoIncrement = autoIncrement.ToString().PadLeft(3, '0');
+
+            return $"BL{month}{year}{formattedAutoIncrement}";
+        }
+
+        private int GetBlogNextAutoIncrement(string month, string year)
+        {
+            string pattern = $"BL{month}{year}";
+
+            var maxAutoIncrement = _context.Blogs
+                .Where(c => c.BlogId.StartsWith(pattern))
+                .Select(c => c.BlogId.Substring(6, 3))
+                .AsEnumerable()
+                .Select(s => int.Parse(s))
+                .DefaultIfEmpty(0)
+                .Max();
+
+            return maxAutoIncrement + 1;
         }
 
         public async Task<List<Blog>> GetAllBlogsAsync()
@@ -680,6 +711,59 @@ namespace SWPSolution.Application.System.Admin
             }
 
             return registrationsByDay;
+        }
+
+        public async Task<PageResult<BlogDetailVM>> GetBlogsPaging(GetUserPagingRequest request)
+        {
+            var query = _context.Blogs.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.StaffId.Contains(request.Keyword));
+            }
+
+            int totalRow = query.Count();
+
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(blog => new BlogDetailVM()
+                {
+                    Id = blog.BlogId,
+                    Title = blog.Title,
+                    Content = blog.Content,
+                    Categories = blog.Categories,
+                    DateCreate = blog.DataCreate,
+                    StaffId = blog.StaffId,
+                }).OrderByDescending(m => m.Id).ToList();
+
+            var pageResult = new PageResult<BlogDetailVM>
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data,
+            };
+            return pageResult;
+        }
+
+        public async Task<ApiResult<BlogDetailVM>> GetBlogIdPaging(string id)
+        {
+            var blog = await _context.Blogs.FindAsync(id);
+            if (blog == null)
+            {
+                return new ApiErrorResult<BlogDetailVM>("Blog not exist");
+            }
+
+            var blogVm = new BlogDetailVM()
+            {
+                Id = blog.BlogId,
+                Title = blog.Title,
+                Content = blog.Content,
+                Categories = blog.Categories,
+                DateCreate = blog.DataCreate,
+                StaffId = blog.StaffId,
+            };
+            return new ApiSuccessResult<BlogDetailVM>(blogVm);
         }
     }
 }

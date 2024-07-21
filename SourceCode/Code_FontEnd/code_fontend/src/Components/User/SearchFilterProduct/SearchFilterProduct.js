@@ -2,8 +2,11 @@ import React from "react";
 import "./SearchFilterProduct.css";
 import { Col, Container, Row } from "react-bootstrap";
 import CartProducts from "../CartProducts/CartProducts";
+import { useParams } from "react-router-dom";
 export default function SearchFilterProduct() {
   const list = [];
+  const paramSearch = useParams();
+  console.log("param search",paramSearch)
   return (
     <Container className="search-product-wraper">
       <Row style={{height:"100vh"}}>
