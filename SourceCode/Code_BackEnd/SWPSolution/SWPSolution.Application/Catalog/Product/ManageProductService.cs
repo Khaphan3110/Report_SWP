@@ -779,6 +779,8 @@ namespace SWPSolution.Application.Catalog.Product
                     productId = review.ProductId,
                     memberId = review.MemberId,
                     grade = review.Grade,
+                    comment = review.Comment,
+                    dateReview = review.DataReview,
                 }).OrderByDescending(m => m.reviewId).ToList();
 
             var pageResult = new PageResult<ReviewVM>

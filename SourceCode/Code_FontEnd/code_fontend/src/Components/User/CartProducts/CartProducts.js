@@ -9,6 +9,7 @@ import { imageGetAll } from "../../../Service/ProductService/imageService";
 import HomePage from "../../../Pages/HomePage/HomePage";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { urlImage } from "../../../utility/CustomAxios";
 export default function CartProducts({ listProduct, page }) {
   const [state, dispatch] = useStore();
   // const  {listProduct,getAllProductToContext } = useProduct();
@@ -53,7 +54,7 @@ export default function CartProducts({ listProduct, page }) {
                   >
                     <Card.Img
                       variant="top"
-                      src={`https://localhost:44358/user-content/${
+                      src={`${urlImage}/${
                         product.images[0]
                           ? product.images[0].imagePath
                           : "productImage"

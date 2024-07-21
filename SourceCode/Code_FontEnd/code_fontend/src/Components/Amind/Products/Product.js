@@ -196,10 +196,11 @@ export default function Categories() {
 
     validationSchema: Yup.object({
       ProductName: Yup.string().required("ProductName is required"),
-      Quantity: Yup.string()
-        .typeError("Quantity must be a number")
-        .matches(/^\d+$/, "Quantity must be greater than 0")
-        .required("Quantity is required"),
+      Quantity: Yup.number()
+      .typeError("Quantity must be a number")
+      .integer("Quantity must be an integer")
+      .min(2, "Quantity must be greater than 1")
+      .required("Quantity is required"),
       Price: Yup.number()
         .typeError("Price must be a number")
         .positive("Price must be greater than 0")

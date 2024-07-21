@@ -10,7 +10,9 @@ import "../Categories/Categories.css";
 import { cateGetAllNoPaginate } from '../../../Service/CateService/CateService';
 import * as Yup from "yup"
 import { useFormik } from 'formik';
-import { createBlog, DeleteBlog, updateBlog } from '../../../Service/BlogService/BlogService';
+import { createBlog, DeleteBlog, GetblogPaging, updateBlog } from '../../../Service/BlogService/BlogService';
+import { FaRegTrashAlt, FaEyeDropper } from "react-icons/fa";
+import "./BlogManagement.css"
 export default function BlogManagement() {
     const [show, setShow] = useState(false);
     const [pageIndex, setPageindex] = useState(1)
@@ -18,6 +20,8 @@ export default function BlogManagement() {
     const { StaffProfile } = useAdminProfile()
     const [listCategories, setlistCategories] = useState()
     const [currentCate, setCurrentCate] = useState()
+    const [listblog, setListBlog] = useState()
+    const [statusAction, setStatusAction] = useState()
     const handlePageClickPre = (event) => {
         setPageindex(+event.selected + 1);
         // setPageIndex(+event.selected+1)
@@ -37,23 +41,7 @@ export default function BlogManagement() {
         resCate();
     }, [])
 
-    const handDeleteButton = async (memberID) => {
-        try {
-            const res = await DeleteMember(memberID, StaffProfile.adminToken)
-            if (res) {
-                await getMemberPagingController(pageIndex, 6);
-                toast.success("Delete success !!", {
-                    autoClose: 1000,
-                })
-            } else {
-                toast.error("Delete is failed!!!", {
-                    autoClose: 1000
-                })
-            }
-        } catch (error) {
-            console.log("error delete member", error)
-        }
-    }
+
 
     const handChooseCategories = (event) => {
         // console.log("even",event.target.value)
@@ -63,10 +51,25 @@ export default function BlogManagement() {
 
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (action) => {
+        if (action === 'import') {
+            setStatusAction("import")
+            setShow(true)
+        } else {
+            formikCreate.setValues({
+                Title: action.title,
+                Content: action.content,
+                categories: action.categories,
+                blogID: action.id
+            })
+            setShow(true)
+        }
+
+    };
 
     const formikCreate = useFormik({
         initialValues: {
+            blogID:"",
             Title: "",
             Content: "",
             Categories: "",
@@ -86,72 +89,94 @@ export default function BlogManagement() {
 
         onSubmit: async (values) => {
             setShow(false)
-            try {
-                const form = new FormData()
-                form.append("Title", values.Title)
-                form.append("Content", values.Content)
-                form.append("Categories", values.Categories)
-                const resCreate = await createBlog(StaffProfile.profileAdmin.id, StaffProfile.adminToken, form)
-                if (resCreate) {
-                    formikCreate.resetForm();
-                    toast.success("create blog success!", {
-                        autoClose: 1000,
-                    })
-                } else {
-                    formikCreate.resetForm();
-                    toast.error("create blog failed!,try choose cate again", {
-                        autoClose: 1000,
-                    })
+            if (statusAction === "import") {
+                try {
+                    const form = new FormData()
+                    form.append("Title", values.Title)
+                    form.append("Content", values.Content)
+                    form.append("Categories", values.Categories)
+                    const resCreate = await createBlog(StaffProfile.profileAdmin.id, StaffProfile.adminToken, form)
+                    if (resCreate) {
+                        formikCreate.resetForm();
+                        getBlogPaging(pageIndex, 7);
+                        toast.success("create blog success!", {
+                            autoClose: 1000,
+                        })
+                    } else {
+                        formikCreate.resetForm();
+                        toast.error("create blog failed!,try choose cate again", {
+                            autoClose: 1000,
+                        })
+                    }
+                } catch (error) {
+                    console.log("create blog error", error)
                 }
-            } catch (error) {
-                console.log("create blog error", error)
+            } else {
+                try {
+                    const res = await updateBlog(values.blogID, StaffProfile.adminToken, values)
+                    if (res) {
+                        formikCreate.resetForm();
+                        getBlogPaging(pageIndex, 7);
+                        toast.success("update blog success!", {
+                            autoClose: 1000,
+                        })
+                    } else {
+                        formikCreate.resetForm();
+                        toast.error("update blog failed", {
+                            autoClose: 1000,
+                        })
+                    }
+                } catch (error) {
+                    console.log("error at update blog", error)
+                }
             }
 
         }
     })
 
 
-    const formikUpdate = useFormik({
-        initialValues: {
-            Title: "",
-            Content: "",
-            Categories: "",
-        },
+    // const formikUpdate = useFormik({
+    //     initialValues: {
+    //         Title: "",
+    //         Content: "",
+    //         Categories: "",
+    //     },
 
-        validationSchema: Yup.object({
-            Title: Yup.string()
-                .min(5, "Title must be at least 5 characters long")
-                .matches(/^(?![0-9])[\p{L}\s]+$/u, "Title cannot start with a number and must only contain letters and spaces.")
-                .required("Title is required"),
-            Content: Yup.string()
-                .min(5, "Content must be at least 5 characters long")
-                .max(255, "Content cannot exceed 255 characters")
-                .matches(/^(?![0-9])[\p{L}\s]+$/u, "Content cannot start with a number and must only contain letters and spaces.")
-                .required("Content is required")
-        }),
+    //     validationSchema: Yup.object({
+    //         Title: Yup.string()
+    //             .min(5, "Title must be at least 5 characters long")
+    //             .matches(/^(?![0-9])[\p{L}\s]+$/u, "Title cannot start with a number and must only contain letters and spaces.")
+    //             .required("Title is required"),
+    //         Content: Yup.string()
+    //             .min(5, "Content must be at least 5 characters long")
+    //             .max(255, "Content cannot exceed 255 characters")
+    //             .matches(/^(?![0-9])[\p{L}\s]+$/u, "Content cannot start with a number and must only contain letters and spaces.")
+    //             .required("Content is required")
+    //     }),
 
-        onSubmit: async (values) => {
-            setShow(false)
-            try {
-                const form = "bla"
-                const resUpdate = await updateBlog(StaffProfile.profileAdmin.id, StaffProfile.adminToken, form)
-                if (resUpdate) {
-                    formikCreate.resetForm();
-                    toast.success("create blog success!", {
-                        autoClose: 1000,
-                    })
-                } else {
-                    formikCreate.resetForm();
-                    toast.error("create blog failed!,try choose cate again", {
-                        autoClose: 1000,
-                    })
-                }
-            } catch (error) {
-                console.log("create blog error", error)
-            }
+    //     onSubmit: async (values) => {
+    //         setShow(false)
+    //         try {
+    //             const form = "bla"
+    //             const resUpdate = await updateBlog(StaffProfile.profileAdmin.id, StaffProfile.adminToken, form)
+    //             if (resUpdate) {
+    //                 formikCreate.resetForm();
+    //                 getBlogPaging(pageIndex,7);
+    //                 toast.success("create blog success!", {
+    //                     autoClose: 1000,
+    //                 })
+    //             } else {
+    //                 formikCreate.resetForm();
+    //                 toast.error("create blog failed!,try choose cate again", {
+    //                     autoClose: 1000,
+    //                 })
+    //             }
+    //         } catch (error) {
+    //             console.log("create blog error", error)
+    //         }
 
-        }
-    })
+    //     }
+    // })
 
 
     const deleteBlog = async (blogID) => {
@@ -159,11 +184,13 @@ export default function BlogManagement() {
         try {
             const Comfirm = window.confirm("Are you sure to delete this blog!!!")
             if (Comfirm) {
-                const resDelete = await DeleteBlog(blogID);
+                const resDelete = await DeleteBlog(blogID, StaffProfile.adminToken);
                 if (resDelete.status === 200) {
+                    getBlogPaging(pageIndex, 7)
                     toast.success("delete blog success!", {
                         autoClose: 1000,
                     })
+
                 } else {
                     toast.error("delete blog failed!", {
                         autoClose: 1000,
@@ -175,7 +202,22 @@ export default function BlogManagement() {
             console.log("errot delete blog", error)
         }
     }
-    // console.log('staff',StaffProfile)
+
+    const getBlogPaging = async () => {
+        try {
+            const res = await GetblogPaging(pageIndex, 7);
+            if (res) {
+                setListBlog(res.data)
+            }
+        } catch (error) {
+            console.log("get blog paging error", error)
+        }
+    }
+
+    useEffect(() => {
+        getBlogPaging();
+    }, [pageIndex])
+    // console.log("lisst blog", listblog)
     return (
         <>
             <ToastContainer />
@@ -186,7 +228,7 @@ export default function BlogManagement() {
                     <h4>List Members</h4>
                 </div>
                 {currentCate ? (
-                    <div onClick={handleShow} className="button-categories" style={{ marginRight: "10px" }}  >
+                    <div onClick={() => handleShow("import")} className="button-categories" style={{ marginRight: "10px" }}  >
                         <p className="btn btn-success" >Create Blog</p>
                     </div>
                 ) : (<h5 style={{ color: "red", fontWeight: "bold", marginRight: "10px" }}>Choose cate before create</h5>)}
@@ -220,38 +262,40 @@ export default function BlogManagement() {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th>stt</th>
-                            <th>MemberID</th>
-                            <th>email</th>
-                            <th>phoneNumber</th>
-                            <th>lastName</th>
-                            <th>firstName</th>
-                            <th>userName</th>
-
+                            <th>id</th>
+                            <th>staffId</th>
+                            <th>categories</th>
+                            <th>title</th>
+                            <th>content</th>
+                            <th>dateCreate</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {listMember && listMember.items.length > 0 ? (
-                            listMember.items.map((member, index) => (
+                        {listblog && listblog.items.length > 0 ? (
+                            listblog.items.map((blog, index) => (
                                 <tr key={index}>
-                                    <td>{index}</td>
-                                    <td>{member.memberId}</td>
-                                    <td>{member.email}</td>
-                                    <td>{member.phoneNumber ? member.phoneNumber : ("chưa đăng ký SDT")}</td>
-                                    <td>{member.lastName}</td>
-                                    <td>{member.firstName}</td>
-                                    <td>{member.userName}</td>
+                                    <td>{blog.id}</td>
+                                    <td>{blog.staffId}</td>
+                                    <td>{blog.categories}</td>
+                                    <td>{blog.title}</td>
+                                    <td>{blog.content}</td>
+                                    <td>{blog.dateCreate}</td>
+                                    <td >
+                                        <FaEyeDropper
+                                            variant="warming"
+                                            className="action-button button-crud-blog"
+                                            onClick={() => handleShow(blog)}
 
-                                    <th>
-                                        <Button
-                                            variant="danger"
-                                            className="action-button"
-                                            onClick={() => handDeleteButton(member.memberId)}
                                         >
-                                            Delete
-                                        </Button>
-                                    </th>
+                                        </FaEyeDropper>
+                                        <FaRegTrashAlt
+                                            variant="danger"
+                                            className="action-button button-crud-blog"
+                                            onClick={() => deleteBlog(blog.id)}
+                                        >
+                                        </FaRegTrashAlt>
+                                    </td>
                                 </tr>
                             ))
                         ) : (null)}
@@ -264,7 +308,7 @@ export default function BlogManagement() {
                     nextLabel="sau >"
                     onPageChange={handlePageClickPre}
                     pageRangeDisplayed={2}
-                    pageCount={listMember.items}
+                    pageCount={listblog ? listblog.pageCount : null}
                     marginPagesDisplayed={1}
                     previousLabel="< trước"
                     renderOnZeroPageCount={null}
@@ -329,7 +373,6 @@ export default function BlogManagement() {
 
                     </Form>
                 </Modal.Body>
-
             </Modal>
         </>
     )

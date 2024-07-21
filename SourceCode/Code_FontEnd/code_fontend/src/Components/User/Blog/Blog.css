@@ -111,10 +111,10 @@
     margin-right: 0;
 }
 
-.blog_mom-side-articles, .blog_new-articles-row {
+/* .blog_mom-side-articles, .blog_new-articles-row {
     display: flex;
     flex-direction: column;
-}
+} */
 
 .blog_side-article {
     display: flex;
@@ -154,7 +154,7 @@
 }
 
 .blog_new-articles {
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
 }
 

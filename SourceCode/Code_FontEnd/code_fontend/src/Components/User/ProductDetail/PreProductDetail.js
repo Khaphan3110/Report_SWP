@@ -10,6 +10,7 @@ import Shipping from "../../../assets/images/shiping_icon_3.png";
 import "./PreProductDetail.css";
 import { getProductReviewPaging } from "../../../Service/ProductService/ProductService";
 import { useNavigate } from "react-router-dom";
+import { urlImage } from "../../../utility/CustomAxios";
 export default function PreProductDetail({ productDetail }) {
   const [quantity, setquantity] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
@@ -133,7 +134,7 @@ export default function PreProductDetail({ productDetail }) {
           <Col xl={6}>
             <div className="product-detail-image">
               <img
-                src={`https://localhost:44358/user-content/${currentImage ? currentImage : "productImage"
+                src={`${urlImage}${currentImage ? currentImage : "productImage"
                   }`}
                 alt="product_image"
                 width={560}
@@ -156,7 +157,7 @@ export default function PreProductDetail({ productDetail }) {
                           onClick={() => handleChangeBorderColor(index)}
                         >
                           <img
-                            src={`https://localhost:44358/user-content/${item.imagePath ? item.imagePath : "productImage"
+                            src={`${urlImage}${item.imagePath ? item.imagePath : "productImage"
                               }`}
                             alt="imagedetail"
                             width={100}

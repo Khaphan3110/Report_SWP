@@ -4,6 +4,7 @@ import "./CartPage.css";
 import { Actions } from "../../../Store";
 import { useStore } from "../../../Store";
 import cartEmpty from "../../../assets/images/cart_empty_background.png";
+import { urlImage } from "../../../utility/CustomAxios";
 const CartPage = () => {
   const [state, dispatch] = useStore();
   const [cartItems, setCartItems] = useState([
@@ -61,7 +62,7 @@ const CartPage = () => {
                 {state.cartItems.map((item, index) => (
                   <div className="cart-item" key={index}>
                     <img
-                      src={`https://localhost:44358/user-content/${
+                      src={`${urlImage}${
                         item.images[0]
                           ? item.images[0].imagePath
                           : "productImage"

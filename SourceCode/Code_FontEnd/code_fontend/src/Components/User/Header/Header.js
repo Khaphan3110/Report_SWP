@@ -175,7 +175,7 @@ export default function Header() {
                   {listCate
                     ? listCate.map((cate, index) => (
                         <Link
-                          to={`/seachproduct/${cate.brandName}`}
+                          to={`/seachproduct/${cate.categoriesId}`}
                           style={{ color: "black", textDecoration: "none" }}
                         >
                           <li key={index} className="cate-type-product">

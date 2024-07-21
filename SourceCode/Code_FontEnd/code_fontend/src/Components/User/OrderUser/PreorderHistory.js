@@ -165,7 +165,7 @@ function Row({ row, page }) {
                   {row.product && (
                     <TableRow>
                       <TableCell>{row.product.productName}</TableCell>
-                      <TableCell>1</TableCell>
+                      <TableCell>{row.quantity}</TableCell>
                       <TableCell>
                         {row.product.price.toLocaleString()}
                       </TableCell>

@@ -11,6 +11,8 @@ import {
 } from "../../../Store";
 import "./CheckoutPage.css";
 import { GetAllPromotion } from "../../../Service/PromotionService/PromotionService";
+import { urlImage } from "../../../utility/CustomAxios";
+
 const CheckoutPage = () => {
   const [state, dispatch] = useStore();
   const navigate = useNavigate();
@@ -248,7 +250,7 @@ const CheckoutPage = () => {
               {state.cartItems.map((item, index) => (
                 <div className="product-summary" key={index}>
                   <img
-                    src={`https://localhost:44358/user-content/${
+                    src={`${urlImage}/${
                       item.images[0] ? item.images[0].imagePath : "productImage"
                     }`}
                     alt={item.productName}
@@ -333,7 +335,7 @@ const CheckoutPage = () => {
             <>
               <div className="product-summary">
                 <img
-                  src={`https://localhost:44358/user-content/${
+                  src={`${urlImage}${
                     Preorder.preOrderProduct.images[0]
                       ? Preorder.preOrderProduct.images[0].imagePath
                       : "productImage"

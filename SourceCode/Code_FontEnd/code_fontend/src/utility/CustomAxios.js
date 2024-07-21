@@ -3,9 +3,8 @@ import axios from "axios";
   
  const instance = axios.create({
   baseURL: "https://localhost:44358/api/",
-  
 });
-
+export const urlImage = "https://localhost:44358/user-content/";
 export const Post = ( path,param = {},header = {}) => {
      const res = instance.post(path,param,header);
      return res

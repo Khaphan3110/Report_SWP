@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./HomePage.css";
 import { useCateGories } from "../../Store";
 import { cateGetAllNoPaginate } from "../../Service/CateService/CateService";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const slideshowRef = useRef(null);
@@ -28,6 +29,7 @@ export default function HomePage() {
     };
     getCate();
   }, []);
+  // console.log("cate",listCate)
   return (
     // <div className="homepage-custom">
     <div className="main-content-custom">
@@ -36,6 +38,7 @@ export default function HomePage() {
           <ul>
             {listCate
               ? listCate.map((cate, index) => (
+                <Link to={`/seachproduct/${cate.categoriesId}`} style={{textDecoration:"none",color:"black"}}>
                   <li key={index}>
                     <img
                       src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"
@@ -45,6 +48,7 @@ export default function HomePage() {
                     ></img>{" "}
                     {cate.brandName}
                   </li>
+                  </Link>
                 ))
               : "danh sách sản phẩm"}
           </ul>

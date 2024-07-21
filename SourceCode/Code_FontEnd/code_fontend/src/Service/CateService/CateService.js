@@ -72,3 +72,12 @@ export const getCateByProductID = async (categoreisID) => {
     console.log("Error Cate get by id product ", error);
   }
 };
+
+export const GetProductByCatePaging = async (categoreisID,pageIndex,pageSize) => {
+  try {
+    const res = await request.Get(`Product/ProductCatePaging?Keyword=${categoreisID}&PageIndex=${pageIndex}&PageSize=${pageSize}`);
+    return res;
+  } catch (error) {
+    console.log("Error Cate get by id product paging ", error);
+  }
+};

@@ -15,7 +15,7 @@ import {
   VnpayCheckout,
 } from "../../../Service/PreorderService/PreorderService";
 import { TableCell, TableRow } from "@mui/material";
-
+import { urlImage } from "../../../utility/CustomAxios";
 const PaymentPage = () => {
   const navigator = useNavigate();
   const [state, dispatch] = useStore();
@@ -78,8 +78,8 @@ const PaymentPage = () => {
   };
 
   const handlePayment = async () => {
-    alert("vô");
-    console.log("action", actionPayment);
+    // alert("vô");
+    // console.log("action", actionPayment);
     try {
       if (actionPayment === "order") {
         if (statePaymentMethod === "cod") {
@@ -96,7 +96,7 @@ const PaymentPage = () => {
                 orderStatus: resCreateOrder.data.order.orderStatus,
                 orderDate: resCreateOrder.data.order.orderDate,
               };
-              const paymentOCD = await OCDPayment(orderInforPayment,userProfile.userToken);
+              const paymentOCD = await OCDPayment(orderInforPayment, userProfile.userToken);
               if (paymentOCD.status === 200) {
                 navigator("/payment/success")
               } else {
@@ -117,7 +117,7 @@ const PaymentPage = () => {
               memberId: payMentOCD.data.order.memberId,
               promotionId: payMentOCD.data.order.promotionId,
               shippingAddress: payMentOCD.data.order.shippingAddress,
-              totalAmount: payMentOCD.data.order.totalAmount,
+              totalAmount: Math.ceil(payMentOCD.data.order.totalAmount),
               orderStatus: payMentOCD.data.order.orderStatus,
               orderDate: payMentOCD.data.order.orderDate,
             };
@@ -142,31 +142,37 @@ const PaymentPage = () => {
           });
         }
       } else if (actionPayment === 'PreorderAgain') {
-        if(statePaymentMethod === "cod"){
-            toast.error("chỉ được chọn Vn pay với đơn đặt trước",{
-              autoClose:1000,
-            })
-        } else if(statePaymentMethod === "vnpay"){
+        if (statePaymentMethod === "cod") {
+          toast.error("chỉ được chọn Vn pay với đơn đặt trước", {
+            autoClose: 1000,
+          })
+        } else if (statePaymentMethod === "vnpay") {
           try {
-            const PreorderAgain = {
-              ...preOrderAgain,
-              preorderDate: new Date().toISOString
+            const PreorderAgainDepoti = {
+              preorderId: preOrderAgain.preorderId,
+              productId: preOrderAgain.productId,
+              memberId:preOrderAgain.memberId,
+              shippingAddress: preOrderAgain.shippingAddress,
+              quantity: preOrderAgain.quantity,
+              preorderDate: new Date().toISOString,
+              total: Math.ceil(preOrderAgain.total),
+              status: preOrderAgain.status
             }
-  
-            const resDeposit = await PreorderDeposit(PreorderAgain);
+            console.log("data preorderbefore deposit", PreorderAgainDepoti)
+            const resDeposit = await PreorderDeposit(PreorderAgainDepoti);
             const memberID = userProfile.profile.member.memberId
-            console.log("data preorder", PreorderAgain)
+            console.log("data preorder", resDeposit)
             if (resDeposit) {
               const DepoDate = new Date()
               const dataCheckout = {
-                preorderId: resDeposit.data.preorderId,
-                productId: PreorderAgain.products.productId,
-                shippingAddress: PreorderAgain.shippingAddress,
-                memberId: memberID,
-                quantity: PreorderAgain.quantity,
+                preorderId: preOrderAgain.preorderId,
+                productId: preOrderAgain.productId,
+                shippingAddress: preOrderAgain.shippingAddress,
+                memberId: preOrderAgain.memberId,
+                quantity: preOrderAgain.quantity,
                 preorderDate: DepoDate.toISOString(),
-                total: Math.ceil(resDeposit.data.amount),
-                status: 0,
+                total: Math.ceil(resDeposit.data.amount) < 20000 ? Math.ceil(resDeposit.data.amount) * 100 : Math.ceil(resDeposit.data.amount),
+                status: preOrderAgain.status,
               };
               const VNpaycheckout = await VnpayCheckout(dataCheckout);
               if (VNpaycheckout) {
@@ -182,15 +188,15 @@ const PaymentPage = () => {
             autoClose: 1000,
           });
         }
-        
+
       } else if (actionPayment === 'orderAgain') {
         if (statePaymentMethod === "cod") {
-          const paymentOCD = await OCDPayment(orderAgain,userProfile.userToken);
-              if (paymentOCD.status === 200) {
-                navigator("/payment/success")
-              } else {
-                navigator("/payment/notsuccess")
-              }
+          const paymentOCD = await OCDPayment(orderAgain, userProfile.userToken);
+          if (paymentOCD.status === 200) {
+            navigator("/payment/success")
+          } else {
+            navigator("/payment/notsuccess")
+          }
         } else if (statePaymentMethod === "vnpay") {
           try {
             const Order = {
@@ -214,8 +220,8 @@ const PaymentPage = () => {
         }
       } else {
         if (statePaymentMethod === "cod") {
-          toast.error("với đơn đặt trước chọn vnpay nhen",{
-            autoClose:1000,
+          toast.error("với đơn đặt trước chọn vnpay nhen", {
+            autoClose: 1000,
           })
         } else if (statePaymentMethod === "vnpay") {
           const PreOrderInfor = {
@@ -263,7 +269,7 @@ const PaymentPage = () => {
                 memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
                 preorderDate: DepoDate.toISOString(),
-                total: Math.ceil(resDeposit.data.amount),
+                total: Math.ceil(resDeposit.data.amount) < 20000 ? Math.ceil(resDeposit.data.amount) * 100 : Math.ceil(resDeposit.data.amount),
                 status: 0,
               };
               const VNpaycheckout = await VnpayCheckout(dataCheckout);
@@ -338,7 +344,7 @@ const PaymentPage = () => {
               {state.cartItems.map((item, index) => (
                 <div className="product-summary" key={index}>
                   <img
-                    src={`https://localhost:44358/user-content/${item.images[0] ? item.images[0].imagePath : "productImage"
+                    src={`${urlImage}${item.images[0] ? item.images[0].imagePath : "productImage"
                       }`}
                     alt={item.productName}
                   />
@@ -444,7 +450,7 @@ const PaymentPage = () => {
             <>
               <div className="product-summary">
                 <img
-                  src={`https://localhost:44358/user-content/${Preorder.preOrderProduct.images[0]
+                  src={`${urlImage}${Preorder.preOrderProduct.images[0]
                     ? Preorder.preOrderProduct.images[0].imagePath
                     : "productImage"
                     }`}

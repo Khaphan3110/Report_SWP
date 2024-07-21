@@ -52,3 +52,13 @@ export const updateBlog = async (blogID,staffToken,blogContent) => {
       console.log("Error getALL  Blog", error);
     }
   };
+
+  
+  export const GetblogPaging = async (pageIndex,pageSize) => {
+    try {
+      const res = await request.Get(`Admin/BlogPaging?PageIndex=${pageIndex}&PageSize=${pageSize}`);
+      return res;
+    } catch (error) {
+      console.log("Error get paging  Blog", error);
+    }
+  };

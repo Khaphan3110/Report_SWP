@@ -53,7 +53,7 @@ function Row({ row, page }) {
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
-  const { listPreorder, setListPreOrder,addPreorderAgain,preOrderAgain } = usePreorder();
+  const { listPreorder, setListPreOrder, addPreorderAgain, preOrderAgain } = usePreorder();
   console.log("row", row);
   useEffect(() => {
     if (row.status === 0) {
@@ -101,7 +101,6 @@ function Row({ row, page }) {
 
   const handCancelOrder = async (orderID) => {
     const confirmed = window.confirm("Bạn có chắc chắn muốn xóa đơn hàng này?");
-
     if (confirmed) {
       try {
         const resStatus = await updateStatusPreorder(orderID, -1);
@@ -137,13 +136,13 @@ function Row({ row, page }) {
 
   const navigator = useNavigate()
   const handlePaymentAgain = (Preorder) => {
-   try {
-    console.log("dàdddddddddddddđ",Preorder)
-    addPreorderAgain(Preorder)
-    navigator("/payment/PreorderAgain")
-   } catch (error) {
-    console.log("error at tracking preorder again",error)
-   }
+    try {
+      console.log("dàdddddddddddddđ", Preorder)
+      addPreorderAgain(Preorder)
+      navigator("/payment/PreorderAgain")
+    } catch (error) {
+      console.log("error at tracking preorder again", error)
+    }
   }
   console.log("preordernew", row);
   return (
@@ -173,7 +172,7 @@ function Row({ row, page }) {
             >
               Thanh Toán
             </button>
-          ) : row.product.statusDescription !== -1 ? (
+          ) : row.product.statusDescription === 1 ? (
             <button
               onClick={() => handleComplete(row.preorderId)}
               className="tracking-button-order-user-complete"
@@ -218,7 +217,7 @@ function Row({ row, page }) {
                   {row.product && (
                     <TableRow>
                       <TableCell>{row.product.productName}</TableCell>
-                      <TableCell>{row.product.quantity}</TableCell>
+                      <TableCell>{row.quantity}</TableCell>
                       <TableCell>
                         {row.product.price.toLocaleString()}
                       </TableCell>
