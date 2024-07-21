@@ -161,13 +161,13 @@ namespace SWPSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var preorder =  _context.Payments.FirstOrDefault(po => po.PreorderId == model.PreorderId && po.Amount == model.Total);
+            var preorder =  _context.Payments.FirstOrDefault(po => po.PreorderId == model.PreorderId);
             if (preorder == null)
             {
                 throw new Exception("Preorder not found");
             }
 
-            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == model.PreorderId && p.Amount == model.Total);
+            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == model.PreorderId);
             string paymentId = payment?.PaymentId;
 
             var vnPayModel = new VnPaymentRequestModel

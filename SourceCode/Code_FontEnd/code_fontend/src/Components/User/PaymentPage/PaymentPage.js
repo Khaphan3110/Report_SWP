@@ -405,8 +405,8 @@ const PaymentPage = () => {
               </div>
 
               <div className="total-price final-total">
-                <span>Tổng cộng: </span>
-                <span>{preOrderAgain.totalAmountBefore.toLocaleString()} ₫</span>
+                <span>Tổng cộng trả trước: </span>
+                <span>{preOrderAgain.total.toLocaleString()} ₫</span>
               </div>
             </>
           ) : actionPayment === "orderAgain" ? (
@@ -479,8 +479,8 @@ const PaymentPage = () => {
               </div>
 
               <div className="total-price final-total">
-                <span>Tổng cộng: </span>
-                <span>{Preorder.totalPreOrder.toLocaleString()} ₫</span>
+                <span>Tổng cộng trả trước: </span>
+                <span>{Math.ceil(Preorder.totalPreOrder * (15/100)).toLocaleString()} ₫</span>
               </div>
             </>
           )}

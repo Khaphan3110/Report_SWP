@@ -59,6 +59,7 @@ const AddressForm = ({ show, handleClose, initialData, acting }) => {
           );
 
           if (resAddadres.data.message === "Address added successfully") {
+            addCurrentAddress(values)
             getAllAdressByToken(userProfile.userToken);
             toast.success("thêm địa chỉ thành công", {
               autoClose: 1000,

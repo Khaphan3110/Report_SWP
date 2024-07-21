@@ -49,12 +49,12 @@ const AddressPage = () => {
     setIsFormVisible(true);
   };
 
-  const handleDeleteAddress = (addressID) => {
+  const handleDeleteAddress = async (addressID) => {
     if (window.confirm("bạn có chắc muốn xóa địa chỉ này không?")) {
-      const res = deleteUserAddress("AMM0724012",userProfile.userToken);
+      const res = deleteUserAddress(addressID,userProfile.userToken);
       console.log('adress',res)
-      if(res){
-        getAllAdressByToken(userProfile.userToken);
+      if(res === 200){
+         await getAllAdressByToken(userProfile.userToken);
         toast.success("xóa thành công!",{
           autoClose:1500,
         })

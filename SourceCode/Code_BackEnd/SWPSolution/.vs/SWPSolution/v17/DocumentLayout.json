@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|d:\\studies\\project_all\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\controllers\\preordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|d:\\studies\\project_all\\report_swp\\sourcecode\\code_backend\\swpsolution\\swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{863A6393-19AC-4B3A-8DE1-1005565A8C0A}|SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj|solutionrelative:swpsolution.backendapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -128,11 +132,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1264,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
+              "Title": "PreOrderController.cs",
+              "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
+              "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
+              "ToolTip": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
+              "RelativeToolTip": "SWPSolution.BackendApi\\Controllers\\PreOrderController.cs",
+              "ViewState": "AQIAAJQAAAAAAAAAAAAAAKkAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-21T16:45:11.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "SWPSolution.AdminApp\\Controllers\\UserController.cs",
@@ -144,7 +161,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.json",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.json",
@@ -152,12 +169,11 @@
               "RelativeToolTip": "SWPSolution.BackendApi\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-07-19T14:15:41.016Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T14:15:41.016Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SWPSolutionDBContext.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
               "RelativeDocumentMoniker": "SWPSolution.Data\\EF\\SWPSolutionDBContext.cs",
@@ -169,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "PreOrderTrackingStatus.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Enum\\PreOrderTrackingStatus.cs",
               "RelativeDocumentMoniker": "SWPSolution.Data\\Enum\\PreOrderTrackingStatus.cs",
@@ -181,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "PreOrderStatus.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Enum\\PreOrderStatus.cs",
               "RelativeDocumentMoniker": "SWPSolution.Data\\Enum\\PreOrderStatus.cs",
@@ -193,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Program.cs",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Program.cs",
@@ -206,18 +222,17 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PhysicalFileProvider.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\.vsdbgsrc\\ced84bc11c4ff699f21439ccd26e231b76ee17ca54a0ba329fe80a837704daee\\PhysicalFileProvider.cs",
               "ToolTip": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\.vsdbgsrc\\ced84bc11c4ff699f21439ccd26e231b76ee17ca54a0ba329fe80a837704daee\\PhysicalFileProvider.cs",
               "ViewState": "AQIAAFsAAAAAAAAAAAApwGsAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-21T15:31:05.111Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-21T15:31:05.111Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SqlInternalConnection.cs",
               "DocumentMoniker": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\.vsdbgsrc\\664138d22aba817540c87a02662fed8cbe0482f9e639514ade7ce473e99b3891\\SqlInternalConnection.cs",
               "ToolTip": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\.vsdbgsrc\\664138d22aba817540c87a02662fed8cbe0482f9e639514ade7ce473e99b3891\\SqlInternalConnection.cs",
@@ -227,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "PublicProductService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\PublicProductService.cs",
@@ -239,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "SWPSolution.Data.csproj",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\SWPSolution.Data.csproj",
               "RelativeDocumentMoniker": "SWPSolution.Data\\SWPSolution.Data.csproj",
@@ -251,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SWPSolution.WebApp\\appsettings.Development.json",
@@ -263,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ManageProductService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\ManageProductService.cs",
@@ -275,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ProductStatus.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Enum\\ProductStatus.cs",
               "RelativeDocumentMoniker": "SWPSolution.Data\\Enum\\ProductStatus.cs",
@@ -287,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "IManageProductService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Catalog\\Product\\IManageProductService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Catalog\\Product\\IManageProductService.cs",
@@ -299,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "PagingRequestBase.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.ViewModels\\Common\\PagingRequestBase.cs",
               "RelativeDocumentMoniker": "SWPSolution.ViewModels\\Common\\PagingRequestBase.cs",
@@ -311,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\appsettings.json",
               "RelativeDocumentMoniker": "SWPSolution.AdminApp\\appsettings.json",
@@ -323,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\Program.cs",
               "RelativeDocumentMoniker": "SWPSolution.WebApp\\Program.cs",
@@ -335,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\appsettings.json",
               "RelativeDocumentMoniker": "SWPSolution.WebApp\\appsettings.json",
@@ -347,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\appsettings.Development.json",
@@ -359,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\Program.cs",
               "RelativeDocumentMoniker": "SWPSolution.AdminApp\\Program.cs",
@@ -371,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "efpt.config.json",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\efpt.config.json",
               "RelativeDocumentMoniker": "SWPSolution.Data\\efpt.config.json",
@@ -383,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "SWPSolution.BackendApi.csproj",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\SWPSolution.BackendApi.csproj",
@@ -395,7 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "SWPSolution.AdminApp.csproj",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj",
               "RelativeDocumentMoniker": "SWPSolution.AdminApp\\SWPSolution.AdminApp.csproj",
@@ -407,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "SWPSolution.WebApp.csproj",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
               "RelativeDocumentMoniker": "SWPSolution.WebApp\\SWPSolution.WebApp.csproj",
@@ -419,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "PreOrderService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\PreOrderService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\PreOrderService.cs",
@@ -431,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "IOrderService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\IOrderService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\IOrderService.cs",
@@ -443,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "HttpContext.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Http\\HttpContext.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Http\\HttpContext.cs",
@@ -455,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "OrderStatus.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Data\\Enum\\OrderStatus.cs",
               "RelativeDocumentMoniker": "SWPSolution.Data\\Enum\\OrderStatus.cs",
@@ -467,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "OrderService.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.Application\\Sales\\OrderService.cs",
               "RelativeDocumentMoniker": "SWPSolution.Application\\Sales\\OrderService.cs",
@@ -480,7 +495,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "OrderController.cs",
               "DocumentMoniker": "D:\\Studies\\Project_all\\Report_SWP\\SourceCode\\Code_BackEnd\\SWPSolution\\SWPSolution.BackendApi\\Controllers\\OrderController.cs",
               "RelativeDocumentMoniker": "SWPSolution.BackendApi\\Controllers\\OrderController.cs",

@@ -14,7 +14,7 @@ function UserProvider({ children }) {
   });
 
   const addCurrentAddress = (Address) => {
-    localStorage.setItem("userCurrentAddresses",JSON.stringify(Address));
+    localStorage.setItem("userCurrentAddresses", JSON.stringify(Address));
     setUserProfile((prevState) => ({
       ...prevState,
       CurrentAdress: Address,
@@ -26,11 +26,19 @@ function UserProvider({ children }) {
       const resAddress = await getUserAddAdress(userToken);
       if (resAddress) {
         const newAddresses = resAddress.data;
-        localStorage.setItem("userAddresses",JSON.stringify(newAddresses));
+        localStorage.setItem("userAddresses", JSON.stringify(newAddresses));
         setUserProfile((prevState) => ({
           ...prevState,
           addresses: resAddress.data,
-          CurrentAdress:resAddress.data
+          CurrentAdress: resAddress.data
+        }));
+      } else {
+        localStorage.setItem("userAddresses", JSON.stringify([]));
+        localStorage.setItem("userCurrentAddresses", JSON.stringify(null));
+        setUserProfile((prevState) => ({
+          ...prevState,
+          addresses: [],
+          currentAddress: null,
         }));
       }
       return resAddress;
@@ -50,32 +58,32 @@ function UserProvider({ children }) {
   const getUserProfileByToken = async (userToken) => {
     try {
       const resUserInfor = await getUserInfor(userToken);
-      localStorage.setItem("userProfile",JSON.stringify(resUserInfor.data));
+      localStorage.setItem("userProfile", JSON.stringify(resUserInfor.data));
       if (resUserInfor) {
         setUserProfile((prevState) => ({
           ...prevState,
           profile: resUserInfor.data,
         }));
       }
-      
+
       return resUserInfor;
     } catch (error) {
       console.log("loi lay profile user", error);
     }
   };
 
-  useEffect(  () => {
+  useEffect(() => {
     const autoGet = async () => {
       if (userProfile.userToken) {
-       const resAddress = await getAllAdressByToken(userProfile.userToken);
-        if(resAddress){
-        addCurrentAddress(resAddress.data[0])
+        const resAddress = await getAllAdressByToken(userProfile.userToken);
+        if (resAddress) {
+          addCurrentAddress(resAddress.data[0])
         }
       }
     }
     autoGet();
-  }, [userProfile.userToken]);
-  
+  }, [userProfile.userToken,userProfile.addresses]);
+
   const logOut = () => {
     localStorage.clear();
     setUserProfile({
