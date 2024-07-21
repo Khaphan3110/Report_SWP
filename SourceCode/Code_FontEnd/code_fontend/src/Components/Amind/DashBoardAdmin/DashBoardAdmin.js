@@ -216,7 +216,7 @@ export default function DashboardContent() {
         <Col>
           <Card className="card-new">
             <Card.Body>
-              <Card.Title>Order is create /d</Card.Title>
+              <Card.Title>Order is created /d</Card.Title>
               <Card.Text>
                 <CarStatsChart listOrderAWeek={ListTotalOrderAweek} />
               </Card.Text>

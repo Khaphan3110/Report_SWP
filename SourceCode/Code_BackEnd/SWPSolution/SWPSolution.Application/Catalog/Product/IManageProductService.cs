@@ -57,7 +57,9 @@ namespace SWPSolution.Application.Catalog.Product
 
         Task<string> ExtractMemberIdFromTokenAsync(string token);
         
-        Task<PageResult<ProductViewModel>> GetProductsPaging(GetUserPagingRequest request);
+        Task<PageResult<ProductViewModel>> GetProductsNamePaging(GetUserPagingRequest request);
+
+        Task<PageResult<ProductViewModel>> GetProductsCatePaging(GetUserPagingRequest request);
 
         Task<ApiResult<ProductViewModel>> GetProductIdPaging(string id);
 

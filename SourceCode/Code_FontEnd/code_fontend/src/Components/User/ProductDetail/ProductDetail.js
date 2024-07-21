@@ -75,7 +75,7 @@ export default function ProductDetail() {
         <PreProductDetail productDetail={products} />
       ) : (
         <div>
-          <h2 style={{ textAlign: "center", color: "#f05a72" }}></h2>
+          <h2 style={{ textAlign: "center", color: "#f05a72" }}>sản phẩm bị lỗi</h2>
         </div>
       )}
     </Container>

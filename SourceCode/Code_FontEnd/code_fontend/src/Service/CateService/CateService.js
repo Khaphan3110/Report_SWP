@@ -63,3 +63,12 @@ export const getCateByID = async (categoreisID) => {
     console.log("Error Cate get by id ", error);
   }
 };
+
+export const getCateByProductID = async (categoreisID) => {
+  try {
+    const res = await request.Get(`Product/GetByProductCategory?categoryId=${categoreisID}`);
+    return res;
+  } catch (error) {
+    console.log("Error Cate get by id product ", error);
+  }
+};

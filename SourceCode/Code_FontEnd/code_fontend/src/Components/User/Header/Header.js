@@ -10,6 +10,7 @@ import "./Header.css";
 import accountIcon from "../../../assets/images/account-icon.png";
 import { useStore, useUserProfile } from "../../../Store";
 import { Tooltip } from "react-tooltip";
+import { cateGetAllNoPaginate } from "../../../Service/CateService/CateService";
 
 export default function Header() {
   const userInfor = JSON.parse(localStorage.getItem("userValue"));
@@ -17,10 +18,11 @@ export default function Header() {
   const [state, dispatch] = useStore();
   const prevCartItemsCount = useRef(state.cartItems.length);
   const { userProfile } = useUserProfile();
+  const [listCate, SetListCate] = useState();
   //state.statusAddTocart === true
   useEffect(() => {
     const showTOOLIP = () => {
-      if (state.cartItems.length > prevCartItemsCount.current ) {
+      if (state.cartItems.length > prevCartItemsCount.current) {
         setShowToolip(true);
         setTimeout(() => {
           setShowToolip(false);
@@ -31,6 +33,13 @@ export default function Header() {
     prevCartItemsCount.current = state.cartItems.length;
   }, [state.cartItems]);
 
+  useEffect(() => {
+    const getCate = async () => {
+      const res = await cateGetAllNoPaginate();
+      SetListCate(res.data);
+    };
+    getCate();
+  }, []);
   return (
     <>
       <header className="header-menu">
@@ -95,7 +104,8 @@ export default function Header() {
                     ></img>
                     <div className="userAcount d-md-flex flex-column d-none ">
                       <Link to={"/account"}>Tài Khoản</Link>
-                      {userProfile.userToken && userProfile.userToken.length > 0 ? (
+                      {userProfile.userToken &&
+                      userProfile.userToken.length > 0 ? (
                         <small>
                           <Link to={"/logout"}>Đăng xuất</Link>
                         </small>
@@ -144,26 +154,44 @@ export default function Header() {
       </header>
       <div className="sub-Header-homepage">
         <div className="container wrapper-subHeader">
-          <div className="toogle-nav-wrapper">
-            <div className="icon-bar-header btn menu-bar mr-2  p-0 d-inline-flex">
-            <i className="fa-solid fa-bars"></i>
-            </div>
-            Danh mục sản phẩm
-            <div className="navigation-wrapper">
-              {/* <nav className="navigation-wrapper h-100">
-                <ul className="navbarlink-header">
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
-                  <li>1</li>
+          <div className="toogle-nav-wrapper-content-wrapper">
+            <div className="toogle-nav-wrapper-content">
+              <div className="toogle-nav-wrapper">
+                <div className="icon-bar-header btn menu-bar mr-2  p-0 d-inline-flex">
+                  <i className="fa-solid fa-bars"></i>
+                </div>
+                <h6
+                  style={{
+                    margin: "0",
+                    paddingLeft: "10px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Danh mục sản phẩm
+                </h6>
+              </div>
+              <div className="navbar-link-header-header">
+                <ul>
+                  {listCate
+                    ? listCate.map((cate, index) => (
+                        <Link
+                          to={`/seachproduct/${cate.brandName}`}
+                          style={{ color: "black", textDecoration: "none" }}
+                        >
+                          <li key={index} className="cate-type-product">
+                            <img
+                              src="https://theme.hstatic.net/1000186075/1000909086/14/menu_icon_1.png?v=4490"
+                              alt="icon milk"
+                              width={24}
+                              height={24}
+                            ></img>{" "}
+                            {cate.brandName}
+                          </li>
+                        </Link>
+                      ))
+                    : "danh sách sản phẩm"}
                 </ul>
-              </nav> */}
+              </div>
             </div>
           </div>
           <ul className="shop-policy">
@@ -193,7 +221,7 @@ export default function Header() {
               <div>
                 <img src={blogImage} alt="blog" width={32} height={32}></img>
               </div>
-              <a href="#">Blog nhà milk</a>
+              <Link to={"/blog"}>Blog nhà milk</Link>
             </li>
           </ul>
         </div>

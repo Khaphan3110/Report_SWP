@@ -28,6 +28,7 @@ export default function CarProductProcess() {
     setPageIndex(+event.selected + 1);
   };
 
+  
   return (
     <>
       <Container>

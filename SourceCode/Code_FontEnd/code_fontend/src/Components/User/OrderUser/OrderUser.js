@@ -10,6 +10,7 @@ import PreorderHistory from "./PreorderHistory";
 import { GetOrderPigingMemberHistory } from "../../../Service/OrderService/OrderService";
 import { getProductID } from "../../../Service/ProductService/ProductService";
 import { PreorderPagingMemberHistory } from "../../../Service/PreorderService/PreorderService";
+import { ToastContainer } from "react-toastify";
 export default function OrderUser() {
   const {
     getOrderPagin,
@@ -88,6 +89,7 @@ export default function OrderUser() {
   return (
     <Container style={{ marginBottom: "1%", marginTop: "1%" }}>
       <Row>
+      <ToastContainer/>
         <Col>
           <div className="order-history-user">
             <h4>

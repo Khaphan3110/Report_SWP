@@ -106,7 +106,7 @@ const CheckoutPage = () => {
         addPromotion(
           promotionCurrent.promotionId,
           promotionCurrent.discountValue,
-          Preorder.preOrderProduct.price
+          Preorder.totalPreOrder
         );
       }
     },
@@ -262,7 +262,7 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               ))}
-              {listPromotion.length > 0 ? (
+              {listPromotion && listPromotion.length > 0 ? (
                 <>
                   <div className="discount-code">
                     <form onSubmit={formikSelectPromotion.handleSubmit}>
@@ -282,7 +282,7 @@ const CheckoutPage = () => {
                           onBlur={formikSelectPromotion.handleBlur}
                         >
                           <option value="" label="Chọn một mã khuyến mãi" />
-                          {listPromotion.length > 0 &&
+                          {listPromotion && listPromotion.length > 0 &&
                             listPromotion.map((promote, index) => (
                               <option value={promote.promotionId} key={index}>
                                 {promote.name}
@@ -341,11 +341,11 @@ const CheckoutPage = () => {
                   alt={Preorder.preOrderProduct.productName}
                 />
                 <div className="product-info">
-                  <p>{Preorder.preOrderProduct.productName}</p>
-                  <p> {Preorder.preOrderProduct.price.toLocaleString()}₫</p>
+                  <p>{Preorder.preOrderProduct.productName}  </p>
+                  <p> {Preorder.preOrderProduct.price.toLocaleString()}₫  x{Preorder.preOrderProduct.quantity}</p>
                 </div>
               </div>
-              {listPromotion.length > 0 ? (
+              {listPromotion && listPromotion.length > 0 ? (
                 <>
                   <div className="discount-code">
                     <form onSubmit={formikSelectPromotion.handleSubmit}>
@@ -365,7 +365,7 @@ const CheckoutPage = () => {
                           onBlur={formikSelectPromotion.handleBlur}
                         >
                           <option value="" label="Chọn một mã khuyến mãi" />
-                          {listPromotion.length > 0 &&
+                          {listPromotion && listPromotion.length > 0 &&
                             listPromotion.map((promote, index) => (
                               <option value={promote.promotionId} key={index}>
                                 {promote.name}

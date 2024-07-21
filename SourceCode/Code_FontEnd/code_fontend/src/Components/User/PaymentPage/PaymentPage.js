@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import "./PaymentPage.css";
-import { Actions, usePreorder, useStore, useUserProfile } from "../../../Store";
+import { Actions, useOrderManager, usePreorder, useStore, useUserProfile } from "../../../Store";
 import {
   checkoutPay,
   createOrder,
+  OCDPayment,
   paymentCallBack,
 } from "../../../Service/OrderService/OrderService";
 import { toast, ToastContainer } from "react-toastify";
@@ -21,6 +22,8 @@ const PaymentPage = () => {
   const [statePaymentMethod, setstatePaymentMethod] = useState("");
   const [formattedArray, setFormattedArray] = useState([]);
   const [orderInfor, setOrderInfor] = useState(null);
+  const { orderAgain } = useOrderManager()
+  const { preOrderAgain } = usePreorder()
   const {
     userProfile,
     addCurrentAddress,
@@ -50,14 +53,14 @@ const PaymentPage = () => {
         token: userProfile.userToken,
         shippingAddress: userProfile
           ? userProfile.CurrentAdress.house_Number +
-            "," +
-            userProfile.CurrentAdress.street_Name +
-            "," +
-            userProfile.CurrentAdress.district_Name +
-            "," +
-            userProfile.CurrentAdress.city +
-            "," +
-            userProfile.CurrentAdress.region
+          "," +
+          userProfile.CurrentAdress.street_Name +
+          "," +
+          userProfile.CurrentAdress.district_Name +
+          "," +
+          userProfile.CurrentAdress.city +
+          "," +
+          userProfile.CurrentAdress.region
           : "kh co địa chỉ",
         promotionId: state.promotion.promotions,
         orderDetails: formattedArray,
@@ -80,13 +83,36 @@ const PaymentPage = () => {
     try {
       if (actionPayment === "order") {
         if (statePaymentMethod === "cod") {
-          alert("chua thuc  hien xong :))))()()()");
+          // alert("chua thuc  hien xong :))))()()()");
+          try {
+            const resCreateOrder = await createOrder(orderInfor);
+            if (resCreateOrder) {
+              const orderInforPayment = {
+                orderId: resCreateOrder.data.order.orderId,
+                memberId: resCreateOrder.data.order.memberId,
+                promotionId: resCreateOrder.data.order.promotionId,
+                shippingAddress: resCreateOrder.data.order.shippingAddress,
+                totalAmount: resCreateOrder.data.order.totalAmount,
+                orderStatus: resCreateOrder.data.order.orderStatus,
+                orderDate: resCreateOrder.data.order.orderDate,
+              };
+              const paymentOCD = await OCDPayment(orderInforPayment,userProfile.userToken);
+              if (paymentOCD.status === 200) {
+                navigator("/payment/success")
+              } else {
+                navigator("/payment/notsuccess")
+              }
+            }
+          } catch (error) {
+            console.log("error at COD order", error)
+          }
+
         } else if (statePaymentMethod === "vnpay") {
           const payMentOCD = await createOrder(orderInfor);
-          console.log("orderinfor before",payMentOCD)
+          console.log("orderinfor before", payMentOCD)
           if (payMentOCD) {
             console.log("order", payMentOCD.data);
-            const orderInfor = {
+            const orderInforPayment = {
               orderId: payMentOCD.data.order.orderId,
               memberId: payMentOCD.data.order.memberId,
               promotionId: payMentOCD.data.order.promotionId,
@@ -97,7 +123,7 @@ const PaymentPage = () => {
             };
             const payMentVNPAY = await checkoutPay(
               userProfile.userToken,
-              orderInfor
+              orderInforPayment
             );
             if (payMentVNPAY) {
               window.open(payMentVNPAY.data.paymentUrl, "_blank");
@@ -115,15 +141,88 @@ const PaymentPage = () => {
             autoClose: 1000,
           });
         }
+      } else if (actionPayment === 'PreorderAgain') {
+        if(statePaymentMethod === "cod"){
+            toast.error("chỉ được chọn Vn pay với đơn đặt trước",{
+              autoClose:1000,
+            })
+        } else if(statePaymentMethod === "vnpay"){
+          try {
+            const PreorderAgain = {
+              ...preOrderAgain,
+              preorderDate: new Date().toISOString
+            }
+  
+            const resDeposit = await PreorderDeposit(PreorderAgain);
+            const memberID = userProfile.profile.member.memberId
+            console.log("data preorder", PreorderAgain)
+            if (resDeposit) {
+              const DepoDate = new Date()
+              const dataCheckout = {
+                preorderId: resDeposit.data.preorderId,
+                productId: PreorderAgain.products.productId,
+                shippingAddress: PreorderAgain.shippingAddress,
+                memberId: memberID,
+                quantity: PreorderAgain.quantity,
+                preorderDate: DepoDate.toISOString(),
+                total: Math.ceil(resDeposit.data.amount),
+                status: 0,
+              };
+              const VNpaycheckout = await VnpayCheckout(dataCheckout);
+              if (VNpaycheckout) {
+                const url = VNpaycheckout.data.paymentUrl
+                window.open(url, "_blank");
+              }
+            }
+          } catch (error) {
+            console.log("error at payment preorder again", error)
+          }
+        } else if (!statePaymentMethod) {
+          toast.error("Vui lòng chọn phương thức thanh toán VNpay", {
+            autoClose: 1000,
+          });
+        }
+        
+      } else if (actionPayment === 'orderAgain') {
+        if (statePaymentMethod === "cod") {
+          const paymentOCD = await OCDPayment(orderAgain,userProfile.userToken);
+              if (paymentOCD.status === 200) {
+                navigator("/payment/success")
+              } else {
+                navigator("/payment/notsuccess")
+              }
+        } else if (statePaymentMethod === "vnpay") {
+          try {
+            const Order = {
+              ...orderAgain,
+              orderDate: new Date().toISOString()
+            }
+            const payMentVNPAYOrderAgain = await checkoutPay(
+              userProfile.userToken,
+              Order
+            );
+            if (payMentVNPAYOrderAgain) {
+              window.open(payMentVNPAYOrderAgain.data.paymentUrl, "_blank");
+            }
+          } catch (error) {
+            console.log("error at payment order again", error)
+          }
+        } else if (!statePaymentMethod) {
+          toast.error("Vui lòng chọn phương thức thanh toán", {
+            autoClose: 1000,
+          });
+        }
       } else {
         if (statePaymentMethod === "cod") {
-          alert("chua thuc  hien xong :))))()()()");
+          toast.error("với đơn đặt trước chọn vnpay nhen",{
+            autoClose:1000,
+          })
         } else if (statePaymentMethod === "vnpay") {
           const PreOrderInfor = {
             productId: Preorder.preOrderProduct.productId,
             token: userProfile.userToken, //Preorder.preOrderProduct.productId
             shippingAddress: userProfile
-            ? userProfile.CurrentAdress.house_Number +
+              ? userProfile.CurrentAdress.house_Number +
               "," +
               userProfile.CurrentAdress.street_Name +
               "," +
@@ -132,7 +231,7 @@ const PaymentPage = () => {
               userProfile.CurrentAdress.city +
               "," +
               userProfile.CurrentAdress.region
-            : "kh co địa chỉ",
+              : "kh co địa chỉ",
             quantity: Preorder.preOrderProduct.quantity,
             total: Math.ceil(Preorder.totalPreOrder),
             status: 0,
@@ -145,7 +244,7 @@ const PaymentPage = () => {
             const preDeposit = {
               preorderId: res.data.preorderId,
               productId: res.data.productId,
-              shippingAddress:res.data.shippingAddress,
+              shippingAddress: res.data.shippingAddress,
               memberId: res.data.memberId,
               quantity: res.data.quantity,
               preorderDate: newDate.toISOString(),
@@ -160,7 +259,7 @@ const PaymentPage = () => {
               const dataCheckout = {
                 preorderId: resDeposit.data.preorderId,
                 productId: Preorder.preOrderProduct.productId,
-                shippingAddress:res.data.shippingAddress,
+                shippingAddress: res.data.shippingAddress,
                 memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
                 preorderDate: DepoDate.toISOString(),
@@ -168,14 +267,14 @@ const PaymentPage = () => {
                 status: 0,
               };
               const VNpaycheckout = await VnpayCheckout(dataCheckout);
-              if(VNpaycheckout){
+              if (VNpaycheckout) {
                 const url = VNpaycheckout.data.paymentUrl
                 window.open(url, "_blank");
               }
             }
           }
         } else if (!statePaymentMethod) {
-          toast.error("Vui lòng chọn phương thức thanh toán ", {
+          toast.error("Vui lòng chọn phương thức thanh toán vnpay", {
             autoClose: 1000,
           });
         }
@@ -195,7 +294,8 @@ const PaymentPage = () => {
       Preorder.totalPreOrder - Preorder.totalPreOrder * (1 - promotion / 100)
     );
   };
-
+  // console.log("memberID",userProfile)
+  // console.log("ddddddddddddddđ",preOrderAgain.total)
   return (
     <div className="payment-page container">
       <ToastContainer />
@@ -238,9 +338,8 @@ const PaymentPage = () => {
               {state.cartItems.map((item, index) => (
                 <div className="product-summary" key={index}>
                   <img
-                    src={`https://localhost:44358/user-content/${
-                      item.images[0] ? item.images[0].imagePath : "productImage"
-                    }`}
+                    src={`https://localhost:44358/user-content/${item.images[0] ? item.images[0].imagePath : "productImage"
+                      }`}
                     alt={item.productName}
                   />
                   <div className="product-info">
@@ -271,15 +370,84 @@ const PaymentPage = () => {
                 <span>{state.total.toLocaleString()} ₫</span>
               </div>
             </>
+          ) : actionPayment === "PreorderAgain" ? (
+            <>
+              {preOrderAgain.products ? (
+                <div className="product-summary">
+                  <div className="product-info" >
+                    <p style={{ fontWeight: "bold" }}>{preOrderAgain.products.productName}</p>
+                    <p>{preOrderAgain.products.price.toLocaleString()} ₫  x{preOrderAgain.quantity}</p>
+                  </div>
+                </div>
+              ) : (null)}
+
+              <div
+                className="promo-code"
+                style={{ color: "#ff6f61", fontWeight: "bold" }}
+              >
+                đã được khuyến mãi{" "}
+                {calculateTotalPreOrderWithPromotin(
+                  Preorder.promotionPreorder.promotionValues
+                    ? Preorder.promotionPreorder.promotionValues
+                    : 1
+                ).toLocaleString()}
+                % trên tổng giá
+              </div>
+              <div className="total-price">
+                <span>Tạm tính:</span>
+                <span>{preOrderAgain.totalAmountBefore.toLocaleString()}₫</span>
+              </div>
+
+              <div className="total-price final-total">
+                <span>Tổng cộng: </span>
+                <span>{preOrderAgain.totalAmountBefore.toLocaleString()} ₫</span>
+              </div>
+            </>
+          ) : actionPayment === "orderAgain" ? (
+
+            <>
+              {orderAgain.product && orderAgain.product.length > 0 ? (
+                orderAgain.product.map((product, index) => (
+                  <div className="product-summary">
+                    <div className="product-info" key={index}>
+                      <p style={{ fontWeight: "bold" }}>{product.product.productName}</p>
+                      <p>{product.price.toLocaleString()} ₫  x{product.quantity}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (null)}
+
+              <div
+                className="promo-code"
+                style={{ color: "#ff6f61", fontWeight: "bold" }}
+              >
+                đã được khuyến mãi{" "}
+                {calculateTotalPreOrderWithPromotin(
+                  Preorder.promotionPreorder.promotionValues
+                    ? Preorder.promotionPreorder.promotionValues
+                    : 1
+                ).toLocaleString()}
+                % trên tổng giá
+              </div>
+              <div className="total-price">
+                <span>Tạm tính:</span>
+                <span>{orderAgain.totalAmount.toLocaleString()}₫</span>
+              </div>
+
+              <div className="total-price final-total">
+                <span>Tổng cộng: </span>
+                <span>{orderAgain.totalAmount.toLocaleString()} ₫</span>
+              </div>
+            </>
+
           ) : (
             <>
               <div className="product-summary">
                 <img
-                  src={`https://localhost:44358/user-content/${
-                    Preorder.preOrderProduct.images[0]
-                      ? Preorder.preOrderProduct.images[0].imagePath
-                      : "productImage"
-                  }`}
+                  src={`https://localhost:44358/user-content/${Preorder.preOrderProduct.images[0]
+                    ? Preorder.preOrderProduct.images[0].imagePath
+                    : "productImage"
+                    }`}
                   alt={Preorder.preOrderProduct.productName}
                 />
                 <div className="product-info">

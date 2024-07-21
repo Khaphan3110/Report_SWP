@@ -133,3 +133,17 @@ export const GetOrderPigingTrackingMember = async (
     console.log("lỗi ở order paging Member tracking ", error);
   }
 };
+
+export const OCDPayment = async (orderInfor,UserToken) => {
+  try {
+    const res = await request.Post(`Order/CheckoutCOD`,orderInfor,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${UserToken}`,
+      }
+    });
+    return res;
+  } catch (error) {
+    console.log("lỗi ở order OCD payment ", error);
+  }
+};

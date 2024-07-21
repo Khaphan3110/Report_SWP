@@ -442,10 +442,17 @@ namespace SWPSolution.BackendApi.Controllers
             }
         }
 
-        [HttpGet("ProductPaging")]
-        public async Task<IActionResult> GetProductsPaging([FromQuery] GetUserPagingRequest request)
+        [HttpGet("ProductNamePaging")]
+        public async Task<IActionResult> GetProductsNamePaging([FromQuery] GetUserPagingRequest request)
         {
-            var products = await _manageProductService.GetProductsPaging(request);
+            var products = await _manageProductService.GetProductsNamePaging(request);
+            return Ok(products);
+        }
+
+        [HttpGet("ProductCatePaging")]
+        public async Task<IActionResult> GetProductsCatePaging([FromQuery] GetUserPagingRequest request)
+        {
+            var products = await _manageProductService.GetProductsCatePaging(request);
             return Ok(products);
         }
 

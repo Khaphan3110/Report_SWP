@@ -31,18 +31,20 @@ export default function CartProducts({ listProduct, page }) {
   };
 
   const preOrderProduct = (product) => {
-    addProductToPreorder(product)
+    addProductToPreorder(product,1)
     navigator("/checkout/preorder");
   };
+
+  // console.log("image",listProduct)
   return (
     <Container style={{ marginTop: "0" }}>
       <ToastContainer />
       {/* <HomePage/> */}
       <Row>
         {listProduct &&
-          listProduct.map((product, index) => {
-            return (
-              <Col key={index} className="row-product-cart">
+          listProduct.map((product, index) => (
+              product.images.length  > 0 ? (
+                <Col key={index} className="row-product-cart">
                 <Card className="cart-product-page">
                   {/* <Card.Img variant="top" src={listProductImage ? listProductImage[product.productId][0].imagePath : "productimage"} /> */}
                   <Link
@@ -72,22 +74,22 @@ export default function CartProducts({ listProduct, page }) {
                     <Card.Text className="cart-product-text-money">
                       {product.price.toLocaleString()} đ
                     </Card.Text>
-                    {product.statusDescription !== "het hang" ? (
+                    {product.statusDescription !== 0 ? (
                       <>
                         <button
                           variant="primary"
                           onClick={() =>
-                            product.statusDescription === "chua co hang"
+                            product.statusDescription === -1
                               ? preOrderProduct(product)
                               : addToCart(product)
                           }
                           className="button-cartProduct"
                         >
-                          {product.statusDescription === "chua co hang"
+                          {product.statusDescription === -1
                             ? "Mua trước sản phẩm"
                             : "Thêm vào giỏ hàng"}
                         </button>
-                        {product.statusDescription === "chua co hang" ? (
+                        {product.statusDescription === -1 ? (
                           <p
                             style={{
                               color: "red",
@@ -115,8 +117,11 @@ export default function CartProducts({ listProduct, page }) {
                   </Card.Body>
                 </Card>
               </Col>
-            );
-          })}
+              ) : (
+                // <p style={{color:"red",margin:"0"}}>Chỉ sản phẩm có hình mới được hiển thị</p>
+               null
+              )
+          ))}
       </Row>
     </Container>
   );

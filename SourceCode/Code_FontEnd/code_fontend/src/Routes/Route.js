@@ -41,7 +41,7 @@ const PromotionManager = React.lazy(() => (import("../Components/Amind/ManagerPr
 
 const OrderDetail = React.lazy(() => (import("../Components/User/OrderDetail/OrderDetail")))
 const OrderUser = React.lazy(() => (import("../Components/User/OrderUser/OrderUser")))
-
+const BlogManagement = React.lazy(() => import("../Components/Amind/BlogManagement/BlogManagement"))
 const Blog = React.lazy(() => (import("../Components/User/Blog/Blog")))
 
 
@@ -61,7 +61,7 @@ const Blog = React.lazy(() => (import("../Components/User/Blog/Blog")))
 //         <Route path="/CategoriesType" element={<ImportCategories/>} />
 const publicRoutes = [
   { path: "/", component: CartProductPage },
-  { path: "/seachproduct", component: SearchFilterProduct,layout:"user" },
+  { path: "/seachproduct/:search", component: SearchFilterProduct,layout:"user" },
   { path: "/productDetail/:productID", component: ProductDetail,layout:"user" },
   { path: "/authenRegisterAdmin", component: AuthenRegisterAdmin,layout:"loginOnly" },
   { path: "/resetpasswordAdmin", component: ResetPassWordAdmin,layout:"loginOnly" },
@@ -116,7 +116,8 @@ const privateRoutes = [
   { path: "/admin/promotion", component: PromotionManager ,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin']},
   { path: "/orderDetail/:orderID", component: OrderDetail,layout:"user",protect:ProtectUser},
   { path: "/order", component: OrderUser,layout:"user",protect:ProtectUser},
-  // { path: "/sideBar", component: SideBarAdmin },SettingAdmin/PromotionManager
+  { path: "/admin/blog", component: BlogManagement,layout:"admin",protect:ProtectStaff,allowedRoles:['staffadmin','staffmember']},
+  // { path: "/sideBar", component: SideBarAdmin },SettingAdmin/PromotionManager BlogManagement
 ];
 
 export { privateRoutes, publicRoutes };

@@ -64,3 +64,12 @@ export const getProductID = async (productID) => {
   }
 }
 
+//Product/ReviewPaging?Keyword=PM0724005&PageIndex=1&PageSize=5
+export const getProductReviewPaging = async (productID,pageIndex,pageSize) => {
+  try {
+    const res = await request.Get(`Product/ReviewPaging?Keyword=${productID}&PageIndex=${pageIndex}&PageSize=${pageSize}`)
+    return res;
+  } catch (error) {
+    console.log("Error get product by id paging", error);
+  }
+}

@@ -153,7 +153,7 @@ function reducer(state, action) {
         cartItems: [],
         total: 0,
         promotion: {
-          promotions: "PR0724003",
+          promotions: "PR0724001",
           promotionValues: 1,
         },
       };

@@ -62,7 +62,7 @@ namespace SWPSolution.AdminApp.Controllers
             return View(data);
         }
 
-        public async Task<IActionResult> Products(string Keyword, int pageIndex = 1, int pageSize = 1)
+        public async Task<IActionResult> ProductsByName(string Keyword, int pageIndex = 1, int pageSize = 1)
         {
             var request = new GetUserPagingRequest()
             {
@@ -70,7 +70,20 @@ namespace SWPSolution.AdminApp.Controllers
                 PageIndex = pageIndex,
                 PageSize = pageSize,
             };
-            var data = await _userApiClient.GetProductsPagings(request);
+            var data = await _userApiClient.GetProductsNamePagings(request);
+            ViewBag.Keyword = Keyword;
+            return View(data);
+        }
+
+        public async Task<IActionResult> ProductsByCate(string Keyword, int pageIndex = 1, int pageSize = 1)
+        {
+            var request = new GetUserPagingRequest()
+            {
+                Keyword = Keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
+            var data = await _userApiClient.GetProductsCatePagings(request);
             ViewBag.Keyword = Keyword;
             return View(data);
         }

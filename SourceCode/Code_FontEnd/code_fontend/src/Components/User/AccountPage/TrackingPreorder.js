@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,22 +11,18 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import "./AccountPage.css";
-import { updateStatusOrder } from "../../../Service/OrderService/OrderService";
+import React, { useEffect, useState } from "react";
 import { useOrderManager, usePreorder, useUserProfile } from "../../../Store";
-import { toast, ToastContainer } from "react-toastify";
+import "./AccountPage.css";
+
+import { toast } from "react-toastify";
 import {
-  PreorderPagingMember,
   PreorderPagingMemberTracking,
-  updateStatusPreorder,
+  updateStatusPreorder
 } from "../../../Service/PreorderService/PreorderService";
-import { getProductID } from "../../../Service/ProductService/ProductService";
-import { toHaveAttribute } from "@testing-library/jest-dom/matchers";
+import { useNavigate } from "react-router-dom";
 export default function TrackingPreorder({ listPreorder, page }) {
-  console.log("lenght", listPreorder.items);
+  // console.log("lenght", listPreorder.items);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -55,7 +53,7 @@ function Row({ row, page }) {
   const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState();
   const { userProfile } = useUserProfile();
-  const { listPreorder, setListPreOrder } = usePreorder();
+  const { listPreorder, setListPreOrder,addPreorderAgain,preOrderAgain } = usePreorder();
   console.log("row", row);
   useEffect(() => {
     if (row.status === 0) {
@@ -71,8 +69,8 @@ function Row({ row, page }) {
     console.log("order", orderID);
     try {
       const res = await updateStatusPreorder(orderID, 2);
-      console.log("update", res.data);
-      if (res) {
+      // console.log("update", res.data);
+      if (res.status === 200) {
         const res = await PreorderPagingMemberTracking(
           userProfile.profile.member.memberId,
           page,
@@ -81,12 +79,16 @@ function Row({ row, page }) {
         // console.log("preorder respone",res.data)
         if (res) {
           setListPreOrder(res.data);
+          toast.success("hủy đơn hàng thành công", {
+            autoClose: 1000,
+          });
         } else {
           setListPreOrder([]);
+          toast.success("hủy đơn hàng thành công", {
+            autoClose: 1000,
+          });
         }
-        toast.success("hủy đơn hàng thành công", {
-          autoClose: 1000,
-        });
+
       } else {
         toast.error("lỗi mạng", {
           autoClose: 1000,
@@ -103,7 +105,7 @@ function Row({ row, page }) {
     if (confirmed) {
       try {
         const resStatus = await updateStatusPreorder(orderID, -1);
-        if (resStatus) {
+        if (resStatus.status === 200) {
           const res = await PreorderPagingMemberTracking(
             userProfile.profile.member.memberId,
             page,
@@ -112,12 +114,16 @@ function Row({ row, page }) {
           // console.log("preorder respone",res.data)
           if (res) {
             setListPreOrder(res.data);
+            toast.success("hủy đơn hàng thành công", {
+              autoClose: 1000,
+            });
           } else {
             setListPreOrder([]);
+            toast.success("hủy đơn hàng thành công", {
+              autoClose: 1000,
+            });
           }
-          toast.success("hủy đơn hàng thành công", {
-            autoClose: 1000,
-          });
+
         } else {
           toast.error("mạng yếu đợi xíu", {
             autoClose: 1000,
@@ -129,16 +135,22 @@ function Row({ row, page }) {
     }
   };
 
-  const handlePaymentAgain = () => {
-    toast.success("chưa có xong thật",{
-      autoClose:1000,
-    })
+  const navigator = useNavigate()
+  const handlePaymentAgain = (Preorder) => {
+   try {
+    console.log("dàdddddddddddddđ",Preorder)
+    addPreorderAgain(Preorder)
+    navigator("/payment/PreorderAgain")
+   } catch (error) {
+    console.log("error at tracking preorder again",error)
+   }
   }
-  console.log("item", row);
+  console.log("preordernew", row);
   return (
     <React.Fragment>
-      <ToastContainer />
+
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -152,21 +164,28 @@ function Row({ row, page }) {
         <TableCell>{row.preorderDate}</TableCell>
         <TableCell>{row.shippingAddress}</TableCell>
         <TableCell>{row.price.toLocaleString()}</TableCell>
-        <TableCell>{status}</TableCell>
+        <TableCell>{row.product.statusDescription === -1 ? "Chưa có hàng" : status}</TableCell>
         <TableCell>
           {status === "chưa thanh toán" ? (
             <button
-              onClick={() => handlePaymentAgain(row.preorderId)}
+              onClick={() => handlePaymentAgain(row)}
               className="tracking-button-order-user-complete"
             >
               Thanh Toán
             </button>
-          ) : (
+          ) : row.product.statusDescription !== -1 ? (
             <button
               onClick={() => handleComplete(row.preorderId)}
               className="tracking-button-order-user-complete"
             >
               Đã Nhận Hàng
+            </button>
+          ) : (
+            <button
+              // onClick={() => handleComplete(row.preorderId)}
+              className="tracking-button-order-user-complete"
+            >
+              Chưa có hàng
             </button>
           )}
 
@@ -199,7 +218,7 @@ function Row({ row, page }) {
                   {row.product && (
                     <TableRow>
                       <TableCell>{row.product.productName}</TableCell>
-                      <TableCell>1</TableCell>
+                      <TableCell>{row.product.quantity}</TableCell>
                       <TableCell>
                         {row.product.price.toLocaleString()}
                       </TableCell>
