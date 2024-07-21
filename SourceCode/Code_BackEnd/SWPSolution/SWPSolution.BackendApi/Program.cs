@@ -49,7 +49,7 @@ namespace SWPSolution.BackendApi
             });
 
 
-             builder = WebApplication.CreateBuilder(args);
+            builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllers();
 
             //Add cros 
@@ -199,10 +199,9 @@ namespace SWPSolution.BackendApi
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
-
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                            name: "default",
+                            pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapHub<ChatHub>("/chathub");
             app.Run();
         }

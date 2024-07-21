@@ -139,6 +139,7 @@ namespace SWPSolution.Application.Sales
         {
             var query = _context.PreOrders
                 .Include(o => o.Product)
+                .Include(o => o.Payments)
                 .Where(p => new List<PreOrderStatus> { PreOrderStatus.Created, PreOrderStatus.Deposited }.Contains(p.Status))
                 .AsQueryable();
 
@@ -176,7 +177,19 @@ namespace SWPSolution.Application.Sales
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
                         StatusDescription = p.Product.StatusDescription,
-                    }
+                    },
+                    Payments = p.Payments.Select(pay => new Payment
+                    {
+                        PaymentId = pay.PaymentId,
+                        OrderId = pay.OrderId,
+                        PreorderId = pay.PreorderId,
+                        Amount = pay.Amount,
+                        DiscountValue = pay.DiscountValue,
+                        PaymentStatus = pay.PaymentStatus,
+                        PaymentDate = pay.PaymentDate,
+                        PaymentMethod = pay.PaymentMethod
+                    }).ToList()
+
                 })
                 .ToList();
 
@@ -194,6 +207,7 @@ namespace SWPSolution.Application.Sales
         {
             var query = _context.PreOrders
                 .Include(o => o.Product)
+                .Include(o => o.Payments)
                 .Where(p => new List<PreOrderStatus> { PreOrderStatus.Completed, PreOrderStatus.Canceled }.Contains(p.Status))
                 .AsQueryable();
 
@@ -229,7 +243,18 @@ namespace SWPSolution.Application.Sales
                         Price = p.Product.Price,
                         CategoriesId = p.Product.CategoriesId,
                         ProductImages = p.Product.ProductImages,
-                    }
+                    },
+                    Payments = p.Payments.Select(pay => new Payment
+                    {
+                        PaymentId = pay.PaymentId,
+                        OrderId = pay.OrderId,
+                        PreorderId = pay.PreorderId,
+                        Amount = pay.Amount,
+                        DiscountValue = pay.DiscountValue,
+                        PaymentStatus = pay.PaymentStatus,
+                        PaymentDate = pay.PaymentDate,
+                        PaymentMethod = pay.PaymentMethod
+                    }).ToList()
                 })
                 .ToList();
 
@@ -459,15 +484,21 @@ namespace SWPSolution.Application.Sales
 
         private string GeneratePaymentUrl(PreOrder preorder, HttpContext httpContext)
         {
-            var payment = _context.Payments.FirstOrDefault(p => p.PreorderId == preorder.PreorderId);
+            // Find all payments with PaymentStatus = true for the given preorder
+            var payment = _context.Payments
+                .FirstOrDefault(p => p.PreorderId == preorder.PreorderId && p.PaymentStatus == true);
+
+            // Calculate the remaining amount
+            var remainingAmount = payment != null ? preorder.Price - payment.Amount : preorder.Price;
+
             var vnPayModel = new VnPaymentRequestModel
             {
-                Amount = preorder.Price - payment.Amount, // Remaining amount
+                Amount = remainingAmount, // Remaining amount
                 CreatedDate = DateTime.UtcNow,
                 Description = $"Payment for preorder {preorder.PreorderId}",
                 FullName = preorder.MemberId,
                 OrderId = preorder.PreorderId,
-                PaymentId = payment.PaymentId // Generate or use existing payment ID
+                PaymentId = payment.PaymentId // Use the first payment's ID or 0 if no payments exist
             };
 
             var paymentUrl = _vnPayService.CreatePaymentUrl(httpContext, vnPayModel);

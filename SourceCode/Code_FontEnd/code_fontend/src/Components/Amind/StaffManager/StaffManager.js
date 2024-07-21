@@ -199,7 +199,7 @@ export default function Categories() {
               <th>id</th>
               <th>role</th>
               <th>userName</th>
-              <th>password</th>
+              {/* <th>password</th> */}
               <th>fullName</th>
               <th>email</th>
               <th>phoneNumber</th>
@@ -214,7 +214,7 @@ export default function Categories() {
                   <td>{Staff.id}</td>
                   <td>{Staff.role}</td>
                   <td>{Staff.userName}</td>
-                  <td>{Staff.password}</td>
+                  {/* <td>{Staff.password}</td> */}
                   <td>{Staff.fullName}</td>
                   <td>{Staff.email}</td>
                   <td>{Staff.phoneNumber}</td>

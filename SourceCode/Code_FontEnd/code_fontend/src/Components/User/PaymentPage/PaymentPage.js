@@ -263,8 +263,8 @@ const PaymentPage = () => {
             if (resDeposit) {
               const DepoDate = new Date()
               const dataCheckout = {
-                preorderId: resDeposit.data.preorderId,
-                productId: Preorder.preOrderProduct.productId,
+                preorderId: preDeposit.preorderId,
+                productId: preDeposit.productId,
                 shippingAddress: res.data.shippingAddress,
                 memberId: memberID,
                 quantity: Preorder.preOrderProduct.quantity,
