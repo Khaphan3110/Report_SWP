@@ -79,6 +79,7 @@ namespace SWPSolution.Application.Catalog.Product
             int totalRow = productData.Count;
 
             var pagedData = productData
+                .OrderByDescending(p => p.ProductId)
                 .Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToList(); // ToList after paging for efficiency

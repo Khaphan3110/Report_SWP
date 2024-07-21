@@ -34,11 +34,11 @@ namespace SWPSolution.BackendApi
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-            //     {
-            //         ContentRootPath = "/home/norman/SWP/net8.0/publish",
-            //        WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
-            //   };
+            var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+            {
+                ContentRootPath = "/home/norman/SWP/net8.0/publish",
+                WebRootPath = "/home/norman/SWP/net8.0/publish/wwwroot"
+            });
 
             builder.Services.AddControllers();
 
@@ -179,27 +179,29 @@ namespace SWPSolution.BackendApi
             var app = builder.Build();
 
             // Configure the HTTP request pipeline
-            if (app.Environment.IsDevelopment())
+            app.UseDeveloperExceptionPage();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
             {
-                app.UseDeveloperExceptionPage();
-                // Enable middleware to serve generated Swagger as a JSON endpoint.
-                app.UseSwagger();
-                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-                // specifying the Swagger JSON endpoint.
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                    c.RoutePrefix = string.Empty;  // Set Swagger UI at the root of the application
-                });
-            }
-            else
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;  // Set Swagger UI at the root of the application
+            });
+
+            // Serve static files
+            app.UseStaticFiles();
+
+            // Configure default file mapping
+            app.UseDefaultFiles(new DefaultFilesOptions
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+                DefaultFileNames = new List<string> { "index.html" }
+            });
 
             app.UseCors("SWP_GROUP2");
-            app.UseStaticFiles(); // Ensure static files middleware is included here
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

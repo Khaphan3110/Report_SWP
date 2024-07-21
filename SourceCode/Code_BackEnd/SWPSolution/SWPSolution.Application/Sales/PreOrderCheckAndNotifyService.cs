@@ -56,22 +56,27 @@ public class PreOrderCheckAndNotifyService : BackgroundService
 
             foreach (var preorder in preOrders)
             {
-                
                 var checkResult = await preOrderService.CheckPreOrderAsync(preorder.PreorderId);
 
                 if (checkResult == "ReadyForPayment")
                 {
-                    var payment = context.Payments.FirstOrDefault(p => p.PreorderId == preorder.PreorderId);
+                    // Find the payment with PaymentStatus = true for the given preorder
+                    var payment = context.Payments
+                        .FirstOrDefault(p => p.PreorderId == preorder.PreorderId && p.PaymentStatus == true);
+
+                    // Calculate the remaining amount
+                    var remainingAmount = payment != null ? preorder.Price - payment.Amount : preorder.Price;
+
                     var vnPayModel = new VnPaymentRequestModel
                     {
-                        Amount = preorder.Price,
+                        Amount = remainingAmount, // Remaining amount
                         CreatedDate = DateTime.UtcNow,
                         Description = $"{preorder.MemberId}",
                         FullName = preorder.MemberId,
                         OrderId = preorder.PreorderId,
-                        PaymentId = payment.PaymentId
+                        PaymentId = payment?.PaymentId ?? string.Empty // Use the payment's ID or an empty string if no payment exists
                     };
-                    
+
                     var paymentUrl = vnPayService.CreatePaymentUrl(httpContext, vnPayModel);
                     await NotifyCustomer(preorder.MemberId, preorder, paymentUrl, emailService);
                 }

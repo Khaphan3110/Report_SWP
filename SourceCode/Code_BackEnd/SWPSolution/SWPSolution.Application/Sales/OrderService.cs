@@ -204,6 +204,7 @@ namespace SWPSolution.Application.Sales
                 .Include(c => c.Payments)
                 .Include(c => c.OrderDetails)
                     .ThenInclude(od => od.Product)
+                        .Include(c => c.Promotion)
                 .Select(c => new Order
                 {
                     OrderId = c.OrderId,
@@ -245,7 +246,16 @@ namespace SWPSolution.Application.Sales
                         PaymentStatus = p.PaymentStatus,
                         PaymentDate = p.PaymentDate,
                         PaymentMethod = p.PaymentMethod
-                    }).OrderByDescending(p => p.PaymentId).ToList()
+                    }).OrderByDescending(p => p.PaymentId).ToList(),
+                    Promotion = new Promotion
+                    {
+                        PromotionId = c.Promotion.PromotionId,
+                        Name = c.Promotion.Name,
+                        DiscountType = c.Promotion.DiscountType,
+                        DiscountValue = c.Promotion.DiscountValue,
+                        StartDate = c.Promotion.StartDate,
+                        EndDate = c.Promotion.EndDate
+                    }
                 })
                 .OrderByDescending(c => c.OrderId)
                 .ToListAsync();
@@ -284,7 +294,9 @@ namespace SWPSolution.Application.Sales
 
         public async Task<PageResult<Order>> GetOrdersPagingAsync(OrderPagingRequest request)
         {
-            var query = _context.Orders.AsQueryable();
+            var query = _context.Orders
+                .Include(o => o.Promotion) // Include Promotion
+                .AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Keyword))
             {
@@ -322,7 +334,16 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                }).OrderByDescending(od => od.OrderdetailId).ToList()
+                }).OrderByDescending(od => od.OrderdetailId).ToList(),
+                Promotion = new Promotion
+                {
+                    PromotionId = o.Promotion.PromotionId,
+                    Name = o.Promotion.Name,
+                    DiscountType = o.Promotion.DiscountType,
+                    DiscountValue = o.Promotion.DiscountValue,
+                    StartDate = o.Promotion.StartDate,
+                    EndDate = o.Promotion.EndDate
+                }
             })
             .OrderByDescending(o => o.OrderId); // Sort by OrderId
 
@@ -343,7 +364,9 @@ namespace SWPSolution.Application.Sales
 
         public async Task<PageResult<Order>> GetTrackingOrdersPagingAsync(OrderTrackingPagingRequest request)
         {
-            var query = _context.Orders.AsQueryable();
+            var query = _context.Orders
+                .Include(o => o.Promotion) // Include Promotion
+                .AsQueryable();
 
             // Filter by specific OrderStatus values (0, 1, 2)
             var allowedStatuses = new List<OrderStatus> { OrderStatus.InProgress, OrderStatus.Confirmed, OrderStatus.Shipping };
@@ -387,8 +410,16 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                })
-                .ToList()
+                }).OrderByDescending(od => od.OrderdetailId).ToList(),
+                Promotion = new Promotion
+                {
+                    PromotionId = o.Promotion.PromotionId,
+                    Name = o.Promotion.Name,
+                    DiscountType = o.Promotion.DiscountType,
+                    DiscountValue = o.Promotion.DiscountValue,
+                    StartDate = o.Promotion.StartDate,
+                    EndDate = o.Promotion.EndDate
+                }
             });
 
             int totalRow = await query.CountAsync();
@@ -406,6 +437,7 @@ namespace SWPSolution.Application.Sales
                 TotalRecords = totalRow
             };
         }
+
 
         public async Task<PageResult<Order>> GetOrdersHistoryPagingAsync(OrderHistoryPagingRequest request)
         {
@@ -453,8 +485,18 @@ namespace SWPSolution.Application.Sales
                         ProductId = od.Product.ProductId,
                         ProductName = od.Product.ProductName
                     }
-                })
-                .ToList()
+                }).OrderByDescending(od => od.OrderdetailId)
+                .ToList(),
+                Promotion = new Promotion
+                {
+                    PromotionId = o.Promotion.PromotionId,
+                    Name = o.Promotion.Name,
+                    DiscountType = o.Promotion.DiscountType,
+                    DiscountValue = o.Promotion.DiscountValue,
+                    StartDate = o.Promotion.StartDate,
+                    EndDate = o.Promotion.EndDate
+                }
+
             });
 
             int totalRow = await query.CountAsync();
