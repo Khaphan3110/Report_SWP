@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
+using SWPSolution.ViewModels.Catalog.Blog;
 using SWPSolution.ViewModels.Catalog.Product;
 using SWPSolution.ViewModels.Common;
 using SWPSolution.ViewModels.System.Users;
@@ -26,5 +27,9 @@ namespace SWPSolution.AdminApp.Services
         Task<PageResult<ReviewVM>> GetReviewsPagings(GetUserPagingRequest request);
 
         Task<ApiResult<ReviewVM>> GetReviewById(string id);
+
+        Task<PageResult<BlogDetailVM>> GetBlogsPagings(GetUserPagingRequest request);
+
+        Task<ApiResult<BlogDetailVM>> GetBlogById(string id);
     }
 }

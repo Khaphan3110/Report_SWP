@@ -17,5 +17,6 @@ namespace SWPSolution.ViewModels.Catalog.Blog
 
         public DateTime? DateCreate { get; set; }
 
+        public string StaffId { get; set; }
     }
 }

@@ -101,6 +101,19 @@ namespace SWPSolution.AdminApp.Controllers
             return View(data);
         }
 
+        public async Task<IActionResult> Blogs(string Keyword, int pageIndex = 1, int pageSize = 1)
+        {
+            var request = new GetUserPagingRequest()
+            {
+                Keyword = Keyword,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+            };
+            var data = await _userApiClient.GetBlogsPagings(request);
+            ViewBag.Keyword = Keyword;
+            return View(data);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Login()
         {
@@ -191,6 +204,13 @@ namespace SWPSolution.AdminApp.Controllers
         public async Task<IActionResult> ReviewDetails(string id)
         {
             var result = await _userApiClient.GetReviewById(id);
+            return View(result.ResultObj);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BlogDetails(string id)
+        {
+            var result = await _userApiClient.GetBlogById(id);
             return View(result.ResultObj);
         }
     }
